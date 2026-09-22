@@ -1,1 +1,11 @@
 Library/
+<<<<<<< HEAD
+Assets/Editor/QLDATNTracker_*.cs
+Assets/Editor/QLDATNTracker_*.cs.meta
+Assets/Editor/QLDATNSceneTracker.cs
+Assets/Editor/QLDATNSceneTracker.cs.meta
+Assets/Editor/QLDATNSceneTracker.cs.download
+=======
+qldatn-vscode-install_*.mjs
+qldatn-vscode-install_*.ps1
+>>>>>>> 0b04a64636ade19e2326e97e404ed0254d927011
