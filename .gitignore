@@ -1,4 +1,8 @@
 Library/
+Temp/
+Obj/
+Logs/
+UserSettings/
 <<<<<<< HEAD
 Assets/Editor/QLDATNTracker_*.cs
 Assets/Editor/QLDATNTracker_*.cs.meta
