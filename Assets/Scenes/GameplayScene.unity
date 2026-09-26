@@ -316,7 +316,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -8.84, z: 0}
-  m_LocalScale: {x: 5.3, y: 2.06, z: 1}
+  m_LocalScale: {x: 0.28, y: 0.06, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1168716415}
@@ -370,7 +370,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -415,7 +415,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207.67, y: 50}
+  m_SizeDelta: {x: 533.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433048014
 MonoBehaviour:
@@ -578,10 +578,10 @@ MonoBehaviour:
   - {fileID: 1207294087}
   input: {fileID: 443643779}
   laneColors:
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0.15939808, b: 1, a: 0}
-  - {r: 1, g: 0.9938592, b: 0, a: 0}
-  - {r: 0.032838583, g: 1, b: 0, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &443643777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +721,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207.67, y: 50}
+  m_SizeDelta: {x: 533.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &526296765
 MonoBehaviour:
@@ -857,8 +857,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -813, y: 421.00006}
-  m_SizeDelta: {x: 207.67, y: 50}
+  m_AnchoredPosition: {x: -691, y: 421.00006}
+  m_SizeDelta: {x: 533.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &702269747
 MonoBehaviour:
@@ -1124,7 +1124,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -8.84, z: 0}
-  m_LocalScale: {x: 5.3, y: 2.06, z: 1}
+  m_LocalScale: {x: 0.28, y: 0.06, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 11542758}
@@ -1178,7 +1178,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1348,8 +1348,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -804, y: 470}
-  m_SizeDelta: {x: 207.67, y: 50}
+  m_AnchoredPosition: {x: -682, y: 470}
+  m_SizeDelta: {x: 533.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939561461
 MonoBehaviour:
@@ -1478,7 +1478,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -8.84, z: 0}
-  m_LocalScale: {x: 5.3, y: 2.06, z: 1}
+  m_LocalScale: {x: 0.28, y: 0.06, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1703029447}
@@ -1532,7 +1532,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1641,7 +1641,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1661,7 +1661,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -8.84, z: 0}
-  m_LocalScale: {x: 5.3, y: 2.06, z: 1}
+  m_LocalScale: {x: 0.28, y: 0.06, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1508890092}
@@ -2119,7 +2119,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207.67, y: 50}
+  m_SizeDelta: {x: 533.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025360695
 MonoBehaviour:
