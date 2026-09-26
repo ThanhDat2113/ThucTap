@@ -3,47 +3,68 @@ guid: b251a1edc1f1f49b5b69f5d4b072af4a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9114789695211296444
-    second: mainmenu_0
+      213: -6103103370486679026
+    second: Title_Logo
   - first:
-      213: -8054865279968501609
-    second: mainmenu_1
+      213: 6397677834276575781
+    second: Banner_BatLayGiaiDieu
   - first:
-      213: -5774990045771971401
-    second: mainmenu_2
+      213: -3077093452977493694
+    second: Icon_Settings
   - first:
-      213: -3160372554668190018
-    second: mainmenu_3
+      213: 8179870172331640929
+    second: Icon_Music
   - first:
-      213: -2840503266302287447
-    second: mainmenu_4
+      213: 5095636120898689989
+    second: Neon_Note_Pink
   - first:
-      213: 1498323129810221274
-    second: mainmenu_5
+      213: 8329689992205213494
+    second: Neon_Arrow_Blue
   - first:
-      213: 5613635897686940153
-    second: mainmenu_6
+      213: 5590812321122488476
+    second: Neon_Arrow_Pink
   - first:
-      213: -2882201594256399190
-    second: mainmenu_7
+      213: 8024262822479653896
+    second: Neon_Note_Cyan
   - first:
-      213: 4910890396801463544
-    second: mainmenu_8
+      213: -7375848100912651813
+    second: Button_BatDau
   - first:
-      213: 1320110883486698121
-    second: mainmenu_9
+      213: 7976476543999531679
+    second: Button_ThanhTich
   - first:
-      213: 2925197999122325432
-    second: mainmenu_10
+      213: 7729839778929183892
+    second: Button_CaiDat
   - first:
-      213: 9101200126957728920
-    second: mainmenu_11
+      213: 7593678048260396965
+    second: Button_Thoat
   - first:
-      213: -6517231138567731741
-    second: mainmenu_12
+      213: 8200935751131167038
+    second: Characters_Main
   - first:
-      213: 220513050390839741
-    second: mainmenu_13
+      213: -9150727134254045237
+    second: Poster_MusicMakesUsStronger
+  - first:
+      213: -3532624825991510708
+    second: Chibi_Boy
+  - first:
+      213: 605079105066071611
+    second: Chibi_Girl
+  - first:
+      213: 2212394311357981476
+    second: BG_Room
+  - first:
+      213: -7664257455546355779
+    second: BG_Corridor
+  - first:
+      213: 737584899754296579
+    second: Prop_Speakers
+  - first:
+      213: -8708491150114472390
+    second: Prop_SprayCan
+  - first:
+      213: 4076524371935726812
+    second: Logo_Crown_Splash
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -204,309 +225,463 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mainmenu_0
+      name: Title_Logo
       rect:
         serializedVersion: 2
-        x: 0
-        y: 668
-        width: 615
-        height: 345
+        x: 30
+        y: 1178
+        width: 589
+        height: 328
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4492a8e7013c18180800000000000000
-      internalID: -9114789695211296444
+      spriteID: 0efaa6f6d16b4dab96e3b47883e5a188
+      internalID: -6103103370486679026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_1
+      name: Banner_BatLayGiaiDieu
       rect:
         serializedVersion: 2
-        x: 830
-        y: 879
-        width: 319
-        height: 117
+        x: 650
+        y: 1396
+        width: 298
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 790a9d154be573090800000000000000
-      internalID: -8054865279968501609
+      spriteID: 251a720b181ec958d22b53fb1ca0d7ee
+      internalID: 6397677834276575781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_2
+      name: Icon_Settings
       rect:
         serializedVersion: 2
-        x: 1224
+        x: 980
+        y: 1395
+        width: 104
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42a998c2cef74bd5f69862b3a8e06a11
+      internalID: -3077093452977493694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icon_Music
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 1397
+        width: 103
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6108a43a95bc84710e9744f7338d9526
+      internalID: 8179870172331640929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neon_Note_Pink
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 1400
+        width: 52
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5dbd0da0d56b74629d07ef39f94c357
+      internalID: 5095636120898689989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neon_Arrow_Blue
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 1396
+        width: 90
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 369f8452ea0099735c768ea301184dac
+      internalID: 8329689992205213494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neon_Arrow_Pink
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 1412
+        width: 73
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c1062462f8e964dc2041ac3e60972fe
+      internalID: 5590812321122488476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neon_Note_Cyan
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1412
+        width: 42
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08ec45ce85e85b6f6681bae94bc84f78
+      internalID: 8024262822479653896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_BatDau
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1009
+        width: 400
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dba1dc2b3bb9a399a57aa0b600c63c1b
+      internalID: -7375848100912651813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_ThanhTich
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 864
+        width: 364
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fda53d42723b26e988aca30dc8aa944
+      internalID: 7976476543999531679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_CaiDat
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 707
+        width: 354
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940cc21153e8456befd802449f33eede
+      internalID: 7729839778929183892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Thoat
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 560
+        width: 355
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5173eadf32962694341593b3cb2909f
+      internalID: 7593678048260396965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters_Main
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 584
+        width: 608
+        height: 532
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e79f97f9d93cf71dc83ed061b674875
+      internalID: 8200935751131167038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poster_MusicMakesUsStronger
+      rect:
+        serializedVersion: 2
+        x: 1140
         y: 863
-        width: 138
-        height: 137
+        width: 240
+        height: 273
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b4485c862d1bdfa0800000000000000
-      internalID: -5774990045771971401
+      spriteID: cb67426e27160281cd531478d44bd159
+      internalID: -9150727134254045237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_3
+      name: Chibi_Boy
       rect:
         serializedVersion: 2
-        x: 1336
-        y: 983
-        width: 7
-        height: 9
+        x: 1420
+        y: 969
+        width: 153
+        height: 147
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb6db19e7e91424d0800000000000000
-      internalID: -3160372554668190018
+      spriteID: 4cc50cfa6f98f9ced30add1b8a0f9c15
+      internalID: -3532624825991510708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_4
+      name: Chibi_Girl
       rect:
         serializedVersion: 2
-        x: 494
-        y: 309
-        width: 629
-        height: 581
+        x: 1610
+        y: 903
+        width: 162
+        height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a127b434518498d0800000000000000
-      internalID: -2840503266302287447
+      spriteID: 3b76797e3dac650802ff69eb118300aa
+      internalID: 605079105066071611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_5
+      name: BG_Room
       rect:
         serializedVersion: 2
-        x: 1374
-        y: 845
-        width: 123
-        height: 134
+        x: 30
+        y: 231
+        width: 640
+        height: 225
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad8f617b2fc1bc410800000000000000
-      internalID: 1498323129810221274
+      spriteID: 24639687e700b41e8f726aaba68a7d52
+      internalID: 2212394311357981476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_6
+      name: BG_Corridor
       rect:
         serializedVersion: 2
-        x: 12
-        y: 13
-        width: 651
-        height: 664
+        x: 700
+        y: 231
+        width: 334
+        height: 225
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f9d20c4b14a7ed40800000000000000
-      internalID: 5613635897686940153
+      spriteID: bd2f057f7316a3957f1c064fa4e04b10
+      internalID: -7664257455546355779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_7
+      name: Prop_Speakers
       rect:
         serializedVersion: 2
-        x: 1098
-        y: 523
-        width: 127
-        height: 319
+        x: 1060
+        y: 204
+        width: 182
+        height: 252
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa4684babec5008d0800000000000000
-      internalID: -2882201594256399190
+      spriteID: 03058cf58e6d3c0abd707f6518794db7
+      internalID: 737584899754296579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_8
+      name: Prop_SprayCan
       rect:
         serializedVersion: 2
-        x: 1244
-        y: 527
-        width: 249
-        height: 291
+        x: 1270
+        y: 273
+        width: 75
+        height: 183
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f47a300cccf62440800000000000000
-      internalID: 4910890396801463544
+      spriteID: 3a3ecb4370392587cdb6196c96caabd8
+      internalID: -8708491150114472390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mainmenu_9
+      name: Logo_Crown_Splash
       rect:
         serializedVersion: 2
-        x: 0
-        y: 469
-        width: 5
-        height: 15
+        x: 1375
+        y: 274
+        width: 172
+        height: 182
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 98a0a52bad9f15210800000000000000
-      internalID: 1320110883486698121
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mainmenu_10
-      rect:
-        serializedVersion: 2
-        x: 1144
-        y: 249
-        width: 361
-        height: 268
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8bf9e53f414689820800000000000000
-      internalID: 2925197999122325432
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mainmenu_11
-      rect:
-        serializedVersion: 2
-        x: 684
-        y: 13
-        width: 536
-        height: 277
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8943e059b45fd4e70800000000000000
-      internalID: 9101200126957728920
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mainmenu_12
-      rect:
-        serializedVersion: 2
-        x: 1229
-        y: 31
-        width: 89
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e54e8a2fc42e85a0800000000000000
-      internalID: -6517231138567731741
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mainmenu_13
-      rect:
-        serializedVersion: 2
-        x: 1330
-        y: 18
-        width: 189
-        height: 228
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: db142e4737b6f0300800000000000000
-      internalID: 220513050390839741
+      spriteID: dc8c736351b99238fb3cb3c548e87835
+      internalID: 4076524371935726812
       vertices: []
       indices: 
       edges: []
@@ -515,30 +690,37 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
-    indices: 
+    indices: 0000000000000000
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mainmenu_0: -9114789695211296444
-      mainmenu_1: -8054865279968501609
-      mainmenu_10: 2925197999122325432
-      mainmenu_11: 9101200126957728920
-      mainmenu_12: -6517231138567731741
-      mainmenu_13: 220513050390839741
-      mainmenu_2: -5774990045771971401
-      mainmenu_3: -3160372554668190018
-      mainmenu_4: -2840503266302287447
-      mainmenu_5: 1498323129810221274
-      mainmenu_6: 5613635897686940153
-      mainmenu_7: -2882201594256399190
-      mainmenu_8: 4910890396801463544
-      mainmenu_9: 1320110883486698121
+      BG_Corridor: -7664257455546355779
+      BG_Room: 2212394311357981476
+      Banner_BatLayGiaiDieu: 6397677834276575781
+      Button_BatDau: -7375848100912651813
+      Button_CaiDat: 7729839778929183892
+      Button_ThanhTich: 7976476543999531679
+      Button_Thoat: 7593678048260396965
+      Characters_Main: 8200935751131167038
+      Chibi_Boy: -3532624825991510708
+      Chibi_Girl: 605079105066071611
+      Icon_Music: 8179870172331640929
+      Icon_Settings: -3077093452977493694
+      Logo_Crown_Splash: 4076524371935726812
+      Neon_Arrow_Blue: 8329689992205213494
+      Neon_Arrow_Pink: 5590812321122488476
+      Neon_Note_Cyan: 8024262822479653896
+      Neon_Note_Pink: 5095636120898689989
+      Poster_MusicMakesUsStronger: -9150727134254045237
+      Prop_Speakers: 737584899754296579
+      Prop_SprayCan: -8708491150114472390
+      Title_Logo: -6103103370486679026
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
