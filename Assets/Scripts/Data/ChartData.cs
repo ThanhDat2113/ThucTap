@@ -3,32 +3,35 @@ using UnityEngine;
 
 namespace RhythmGame
 {
-    /// <summary>
-    /// Chart của 1 bài hát, lưu dưới dạng asset (.asset) trong project.
-    /// Sau này bạn có thể viết thêm 1 importer đọc JSON/MIDI rồi
-    /// tạo ra ChartData bằng code, hoặc chỉnh tay trực tiếp trong Inspector.
-    /// Chuột phải trong Project window -> Create -> RhythmGame -> Chart Data.
-    /// </summary>
     [CreateAssetMenu(fileName = "NewChart", menuName = "RhythmGame/Chart Data")]
     public class ChartData : ScriptableObject
     {
         public string songName = "Untitled";
-        public AudioClip audioClip;         // để trống ở giai đoạn prototype, gắn sau khi có nhạc
+        [Header("Audio")]
+        public AudioClip audioClip;
+        public float musicStartDelay = 0f;
         public float bpm = 120f;
         public int laneCount = 4;
         public float firstNoteOffset = 0.5f;
 
         public List<NoteData> notes = new List<NoteData>();
 
-        /// <summary>Sinh chart ngẫu nhiên để test khi chưa có chart thật.</summary>
+        public float SecondsPerBeat => 60f / bpm;
+
+        public float BeatToTime(float beat) => firstNoteOffset + beat * SecondsPerBeat;
+
+        public void AddNoteAtBeat(float beat, int lane, NoteType type = NoteType.Tap, float holdBeats = 0f)
+        {
+            notes.Add(new NoteData(beat, lane, type, holdBeats));
+        }
+
         [ContextMenu("Generate Test Chart")]
         public void GenerateTestChart()
         {
             notes.Clear();
             var rng = new System.Random(1);
-            float beat = 60f / bpm;
-            float t = firstNoteOffset;
             int prev = -1;
+            float beat = 0f;
 
             for (int i = 0; i < 50; i++)
             {
@@ -36,8 +39,8 @@ namespace RhythmGame
                 do { lane = rng.Next(0, laneCount); } while (lane == prev);
                 prev = lane;
 
-                notes.Add(new NoteData(t, lane));
-                t += rng.NextDouble() < 0.3 ? beat * 0.5f : beat;
+                AddNoteAtBeat(beat, lane);
+                beat += rng.NextDouble() < 0.3 ? 0.5f : 1f;
             }
         }
     }

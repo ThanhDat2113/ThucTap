@@ -12,25 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
   m_Name: ChartData
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
-  songName: Untitled
-  audioClip: {fileID: 0}
+  songName: Digital Days
+  audioClip: {fileID: 8300000, guid: 1a2fac4d7362261488716c54e156324e, type: 3}
+  musicStartDelay: 0.2
   bpm: 120
   laneCount: 4
-  firstNoteOffset: 0.5
+  firstNoteOffset: 0
   notes:
-  - time: 0
+  - beat: 0
     lane: 0
     type: 0
-    holdDuration: 0
-  - time: 0.25
-    lane: 1
+    holdBeats: 0
+  - beat: 1
+    lane: 0
     type: 0
-    holdDuration: 0
-  - time: 0.5
-    lane: 2
+    holdBeats: 0
+  - beat: 2
+    lane: 0
     type: 0
-    holdDuration: 0
-  - time: 0.75
-    lane: 3
+    holdBeats: 0
+  - beat: 3
+    lane: 0
     type: 0
-    holdDuration: 0
+    holdBeats: 0
+  - beat: 4
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 5
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 6
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 7
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 8
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 9
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 10
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 11
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 12
+    lane: 0
+    type: 0
+    holdBeats: 0

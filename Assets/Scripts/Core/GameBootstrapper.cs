@@ -63,11 +63,22 @@ namespace RhythmGame
             judgement.spawner = spawner;
             judgement.input = input;
 
+            var audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 0f; // 2D sound
+            judgement.audioSource = audioSource;
+            // Gán SFX clip ở đây nếu đã có asset: judgement.perfectSfx = ...
+
             GameManager gm = gameObject.AddComponent<GameManager>();
             gm.spawner = spawner;
             gm.judgement = judgement;
             gm.input = input;
             gm.chart = chartOverride != null ? chartOverride : BuildTestChart();
+
+            var musicSource = gameObject.AddComponent<AudioSource>();
+            musicSource.playOnAwake = false;
+            musicSource.spatialBlend = 0f; // 2D sound
+            gm.musicSource = musicSource;
 
             ReceptorFlasher flasher = gameObject.AddComponent<ReceptorFlasher>();
             flasher.receptors = receptors;

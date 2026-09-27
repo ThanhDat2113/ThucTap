@@ -22,6 +22,7 @@ namespace RhythmGame
 
         [Header("Chart")]
         public ChartData chart;
+        public AudioSource musicSource;
 
         [Header("Countdown")]
         public float countdownSeconds = 3f;
@@ -31,6 +32,8 @@ namespace RhythmGame
         public float CountdownRemaining { get; private set; }
 
         public System.Action<GameState> OnStateChanged;
+
+        Coroutine playMusicRoutine;
 
         void Start()
         {
@@ -45,7 +48,10 @@ namespace RhythmGame
 
         public void Restart()
         {
+            if (musicSource != null) musicSource.Stop();
+            if (playMusicRoutine != null) StopCoroutine(playMusicRoutine);
             spawner.Begin(chart);
+            SongTime = 0f;
             CountdownRemaining = countdownSeconds;
             SetState(GameState.Countdown);
         }
@@ -64,7 +70,7 @@ namespace RhythmGame
             CountdownRemaining -= Time.deltaTime;
             if (CountdownRemaining > 0f) return;
 
-            SongTime = chart.notes.Count > 0 ? chart.notes[0].time - spawner.TravelTime : 0f;
+            SongTime = chart.notes.Count > 0 ? chart.BeatToTime(chart.notes[0].beat) - spawner.TravelTime : 0f;
             SetState(GameState.Playing);
         }
 
@@ -83,6 +89,20 @@ namespace RhythmGame
         {
             State = s;
             OnStateChanged?.Invoke(s);
+            if (s == GameState.Playing) playMusicRoutine = StartCoroutine(PlayMusicDelayed());
+        }
+
+        System.Collections.IEnumerator PlayMusicDelayed()
+        {
+            float delay = chart != null ? chart.musicStartDelay : 0f;
+            if (delay > 0f) yield return new WaitForSeconds(delay);
+
+            if (musicSource != null && chart != null && chart.audioClip != null)
+            {
+                musicSource.clip = chart.audioClip;
+                musicSource.time = 0f;
+                musicSource.Play();
+            }
         }
     }
 }
