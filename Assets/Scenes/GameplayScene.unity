@@ -617,10 +617,13 @@ MonoBehaviour:
   perfectWindow: 0.045
   goodWindow: 0.09
   missWindow: 0.14
+  holdCompletePoints: 100
+  holdReleaseTolerance: 0.12
   perfectSfx: {fileID: 8300000, guid: 9c9476d4569185b45aa8240a6f5f9789, type: 3}
   goodSfx: {fileID: 8300000, guid: 9c9476d4569185b45aa8240a6f5f9789, type: 3}
   badSfx: {fileID: 8300000, guid: 9c9476d4569185b45aa8240a6f5f9789, type: 3}
   missSfx: {fileID: 0}
+  holdCompleteSfx: {fileID: 8300000, guid: 9c9476d4569185b45aa8240a6f5f9789, type: 3}
   audioSource: {fileID: 1212483326}
 --- !u!114 &443643779
 MonoBehaviour:

@@ -3,12 +3,6 @@ using TMPro;
 
 namespace RhythmGame
 {
-    /// <summary>
-    /// Chỉ đọc dữ liệu từ GameManager/JudgementSystem qua event rồi cập nhật
-    /// TextMeshPro. Không tự tính điểm, không tự biết luật chấm điểm.
-    /// Dùng kiểu TMP_Text (lớp cơ sở) để field này nhận được cả
-    /// TextMeshProUGUI (trong Canvas) lẫn TextMeshPro (3D, nếu sau này cần).
-    /// </summary>
     public class UIController : MonoBehaviour
     {
         [Header("Refs")]
@@ -54,12 +48,13 @@ namespace RhythmGame
             maxCombo = Mathf.Max(maxCombo, combo);
             UpdateScoreUI();
 
-            judgeText.text = j.ToString().ToUpper();
+            judgeText.text = j == Judgement.HoldComplete ? "HOLD!" : j.ToString().ToUpper();
             judgeText.color = j switch
             {
                 Judgement.Perfect => Color.yellow,
                 Judgement.Good => Color.green,
                 Judgement.Bad => new Color(1f, 0.6f, 0.2f),
+                Judgement.HoldComplete => Color.cyan,
                 _ => Color.red
             };
             judgeTimer = 0.5f;

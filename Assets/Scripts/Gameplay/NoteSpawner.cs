@@ -11,8 +11,10 @@ namespace RhythmGame
         public Color[] laneColors;
 
         [Header("Layout (kéo Transform để chỉnh trực quan trong Scene view)")]
+        [Tooltip("Kéo Transform của receptor vào đây để lấy vị trí Y trực quan. Để trống thì dùng hitLineY bên dưới.")]
         public Transform hitLineReference;
         public float hitLineY = -3.3f;
+        [Tooltip("Kéo 1 Transform đặt ở mép trên màn hình vào đây. Để trống thì dùng spawnY bên dưới.")]
         public Transform spawnLineReference;
         public float spawnY = 5.5f;
         public float scrollSpeed = 7f;
@@ -51,7 +53,7 @@ namespace RhythmGame
                 float laneX = laneAnchors[n.Data.lane].position.x;
                 n.UpdatePosition(songTime, laneX, HitLineY, scrollSpeed);
 
-                if (n.transform.position.y < killY)
+                if (n.TopY < killY)
                 {
                     active.RemoveAt(i);
                     pool.Release(n);
@@ -63,7 +65,8 @@ namespace RhythmGame
         {
             NoteView n = pool.Get();
             float timeSeconds = chart.BeatToTime(data.beat);
-            n.Setup(data, timeSeconds, laneColors[data.lane % laneColors.Length]);
+            float holdSeconds = data.type == NoteType.Hold ? data.holdBeats * chart.SecondsPerBeat : 0f;
+            n.Setup(data, timeSeconds, holdSeconds, laneColors[data.lane % laneColors.Length]);
             n.transform.position = new Vector3(laneAnchors[data.lane].position.x, SpawnY, 0f);
             active.Add(n);
         }
