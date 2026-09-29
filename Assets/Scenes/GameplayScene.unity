@@ -597,7 +597,7 @@ MonoBehaviour:
   spawner: {fileID: 443643780}
   judgement: {fileID: 443643778}
   input: {fileID: 443643779}
-  chart: {fileID: 11400000, guid: 664eb9d61deb6ad429bfff209990aca1, type: 2}
+  chart: {fileID: 11400000, guid: 88bca099114a6134cac0b8471e798eed, type: 2}
   musicSource: {fileID: 1212483326}
   countdownSeconds: 3
 --- !u!114 &443643778
