@@ -6,8 +6,11 @@ namespace RhythmGame
     /// <summary>
     /// Chỉ đọc dữ liệu từ GameManager/JudgementSystem qua event rồi cập nhật
     /// TextMeshPro. Không tự tính điểm, không tự biết luật chấm điểm.
-    /// Dùng kiểu TMP_Text (lớp cơ sở) để field này nhận được cả
-    /// TextMeshProUGUI (trong Canvas) lẫn TextMeshPro (3D, nếu sau này cần).
+    ///
+    /// GHI CHÚ: phần hiển thị chữ "PERFECT/GOOD/BAD/MISS" đã chuyển sang cho
+    /// JudgementPopup (gắn trên object JudgeText) phụ trách toàn bộ animation.
+    /// UIController ở đây chỉ còn lo Score, Combo, Countdown, Message — không
+    /// đụng vào judgeText nữa để tránh 2 script cùng ghi đè lên 1 Text.
     /// </summary>
     public class UIController : MonoBehaviour
     {
@@ -17,13 +20,11 @@ namespace RhythmGame
 
         [Header("UI Elements (kéo thả trong Inspector)")]
         public TMP_Text countdownText;
-        public TMP_Text judgeText;
         public TMP_Text scoreText;
         public TMP_Text comboText;
         public TMP_Text messageText;
 
         int score, combo, maxCombo;
-        float judgeTimer;
 
         void Start()
         {
@@ -54,15 +55,7 @@ namespace RhythmGame
             maxCombo = Mathf.Max(maxCombo, combo);
             UpdateScoreUI();
 
-            judgeText.text = j.ToString().ToUpper();
-            judgeText.color = j switch
-            {
-                Judgement.Perfect => Color.yellow,
-                Judgement.Good => Color.green,
-                Judgement.Bad => new Color(1f, 0.6f, 0.2f),
-                _ => Color.red
-            };
-            judgeTimer = 0.5f;
+            // Chữ PERFECT/GOOD/BAD/MISS giờ do JudgementPopup lo (xem VfxBinder).
         }
 
         void UpdateScoreUI()
@@ -77,14 +70,6 @@ namespace RhythmGame
             countdownText.gameObject.SetActive(counting);
             if (counting)
                 countdownText.text = Mathf.CeilToInt(gameManager.CountdownRemaining).ToString();
-
-            if (judgeTimer > 0f)
-            {
-                judgeTimer -= Time.deltaTime;
-                var c = judgeText.color;
-                c.a = Mathf.Clamp01(judgeTimer / 0.3f);
-                judgeText.color = c;
-            }
         }
     }
 }

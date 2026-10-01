@@ -192,11 +192,22 @@ namespace RhythmGame
             TMP_Text messageText = MakeText(canvasGO.transform, "Message", 70, TextAlignmentOptions.Center,
                                              new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1000, 300));
 
+            // Chữ PERFECT/GOOD/BAD/MISS do JudgementPopup lo (gắn trên chính object judgeText),
+            // nối qua VfxBinder — UIController không còn giữ judgeText nữa.
+            var popup = judgeText.gameObject.AddComponent<JudgementPopup>();
+            popup.label = judgeText;
+
+            var vfx = gameObject.AddComponent<VfxBinder>();
+            vfx.input = GetComponent<InputHandler>();
+            vfx.judgementSystem = judgement;
+            vfx.judgementPopup = popup;
+            // vfx.beams: Bootstrapper không tự tạo LaneBeam, gán tay nếu muốn có cột sáng
+            // khi chạy bằng Bootstrapper.
+
             var ui = gameObject.AddComponent<UIController>();
             ui.gameManager = gm;
             ui.judgement = judgement;
             ui.countdownText = countdownText;
-            ui.judgeText = judgeText;
             ui.scoreText = scoreText;
             ui.comboText = comboText;
             ui.messageText = messageText;

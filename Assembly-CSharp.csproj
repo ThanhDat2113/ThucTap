@@ -43,23 +43,31 @@
     <UnityVersion>6000.3.10f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\Admin\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.3.1\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\Admin\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.3.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity 6000.3.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity 6000.3.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity 6000.3.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\VFX\BeatPulse.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteSpawner.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteView.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NotePool.cs" />
+    <Compile Include="Assets\VFX\SideStreaks.cs" />
+    <Compile Include="Assets\VFX\VfxBinder.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ReceptorFlasher.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Core\ChartRecorder.cs" />
     <Compile Include="Assets\VFX\LaneBeam.cs" />
     <Compile Include="Assets\Scripts\Core\GameBootstrapper.cs" />
+    <Compile Include="Assets\VFX\AudioSpectrumBars.cs" />
     <Compile Include="Assets\Scripts\Gameplay\JudgementSystem.cs" />
     <Compile Include="Assets\Scripts\Data\NoteData.cs" />
     <Compile Include="Assets\VFX\SpeedLines.cs" />
+    <Compile Include="Assets\VFX\BackgroundExtras.cs" />
+    <Compile Include="Assets\VFX\WorldBackgroundGradient.cs" />
+    <Compile Include="Assets\VFX\HitEffect.cs" />
+    <Compile Include="Assets\VFX\JudgementPopup.cs" />
     <Compile Include="Assets\Scripts\Core\GameManager.cs" />
     <Compile Include="Assets\Scripts\Input\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Data\ChartData.cs" />
