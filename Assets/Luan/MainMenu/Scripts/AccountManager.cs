@@ -205,6 +205,13 @@ namespace Luan.MainMenu
             CheckCachedSession();
         }
 
+        [ContextMenu("🗑️ XÓA DỮ LIỆU ĐĂNG NHẬP ĐÃ LƯU (Clear Saved Session)")]
+        public void ContextClearSavedSession()
+        {
+            Logout();
+            Debug.Log("[AccountManager] Đã xóa toàn bộ session và tài khoản đã lưu trên máy này! Lần sau vào game sẽ như mới.");
+        }
+
         private void LoadRememberedCredentials()
         {
             bool remember = PlayerPrefs.GetInt(PrefsRememberMeKey, 0) == 1;
