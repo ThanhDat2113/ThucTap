@@ -1,5 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SongListController : MonoBehaviour
 {
@@ -7,11 +9,26 @@ public class SongListController : MonoBehaviour
     [SerializeField] private SongItemUI itemPrefab;
     [SerializeField] private List<SongData> songs;
     [SerializeField] private MusicManager musicManager;
+    [SerializeField] private AudioClip ambientBgm;
+
+    [Header("Start game")]
+    [SerializeField] private Button playButton;
+    [SerializeField] private string gameplaySceneName = "Gameplay";
 
     private readonly List<SongItemUI> spawnedItems = new List<SongItemUI>();
 
     private void Start()
     {
+        // MusicManager duoc giu tu scene truoc (DontDestroyOnLoad) -> dung ban dang song
+        if (MusicManager.Instance != null)
+            musicManager = MusicManager.Instance;
+
+        if (playButton != null)
+        {
+            playButton.interactable = false;
+            playButton.onClick.AddListener(StartGame);
+        }
+
         BuildList();
     }
 
@@ -22,6 +39,7 @@ public class SongListController : MonoBehaviour
         spawnedItems.Clear();
 
         string savedName = musicManager.GetSavedSongName();
+        bool foundSaved = false;
 
         foreach (SongData song in songs)
         {
@@ -29,9 +47,15 @@ public class SongListController : MonoBehaviour
             item.Setup(song, this);
             spawnedItems.Add(item);
 
-            if (song.name == savedName)
+            if (!foundSaved && song.name == savedName)
+            {
                 SelectSong(song, item);
+                foundSaved = true;
+            }
         }
+
+        if (!foundSaved)
+            musicManager.PlayMusic(ambientBgm);
     }
 
     public void SelectSong(SongData song, SongItemUI selectedItem)
@@ -40,5 +64,14 @@ public class SongListController : MonoBehaviour
             item.SetSelected(item == selectedItem);
 
         musicManager.Play(song);
+
+        if (playButton != null)
+            playButton.interactable = musicManager.CurrentSong != null;
+    }
+
+    public void StartGame()
+    {
+        if (musicManager.CurrentSong == null) return;
+        SceneManager.LoadScene(gameplaySceneName);
     }
 }

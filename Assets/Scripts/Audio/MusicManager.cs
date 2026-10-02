@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
@@ -19,10 +19,21 @@ public class MusicManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        // Giu ca object goc (AudioManagers) qua cac scene - DontDestroyOnLoad chi co tac dung voi object goc
+        DontDestroyOnLoad(transform.root.gameObject);
 
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
+    }
+
+    public void PlayMusic(AudioClip clip, bool loop = true)
+    {
+        if (clip == null) return;
+        if (audioSource.clip == clip && audioSource.isPlaying) return;
+
+        audioSource.clip = clip;
+        audioSource.loop = loop;
+        audioSource.Play();
     }
 
     public void Play(SongData song)
@@ -30,10 +41,7 @@ public class MusicManager : MonoBehaviour
         if (song == null || song.clip == null) return;
 
         CurrentSong = song;
-        audioSource.clip = song.clip;
-        audioSource.loop = true;
-        audioSource.Play();
-
+        PlayMusic(song.clip, true);
         PlayerPrefs.SetString(SelectedSongKey, song.name);
     }
 
