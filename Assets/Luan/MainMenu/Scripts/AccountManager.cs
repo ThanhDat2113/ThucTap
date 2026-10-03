@@ -92,6 +92,35 @@ namespace Luan.MainMenu
         public string SessionTicket;
     }
 
+    [Serializable]
+    internal class PlayFabTitleInfo
+    {
+        public string DisplayName;
+    }
+
+    [Serializable]
+    internal class PlayFabUserAccountInfo
+    {
+        public string PlayFabId;
+        public string Username;
+        public PlayFabTitleInfo TitleInfo;
+    }
+
+    [Serializable]
+    internal class PlayFabGetAccountInfoResult
+    {
+        public PlayFabUserAccountInfo AccountInfo;
+    }
+
+    [Serializable]
+    internal class PlayFabGetAccountInfoResponse
+    {
+        public int code;
+        public string status;
+        public PlayFabGetAccountInfoResult data;
+        public string errorMessage;
+    }
+
     #endregion
 
     /// <summary>
@@ -180,6 +209,7 @@ namespace Luan.MainMenu
 
         public PlayFabUserData CurrentUser => _currentUser;
         public bool IsLoggedIn => _currentUser != null && !string.IsNullOrEmpty(_currentUser.sessionTicket);
+        public string PlayFabTitleId => playFabTitleId;
 
         // Sự kiện thông báo khi đăng nhập / đăng xuất
         public static event Action<PlayFabUserData> OnLoginSuccess;
@@ -296,11 +326,17 @@ namespace Luan.MainMenu
         /// </summary>
         public void SwitchToRegister()
         {
-            if (_isBusy) return;
+            if (_isBusy)
+            {
+                Debug.LogWarning("[AccountManager] Đang bận xử lý request PlayFab, không thể chuyển tab!");
+                return;
+            }
 
             PlaySound(switchSound);
             ClearFeedbacks();
             ClearInputs();
+
+            Debug.Log($"[AccountManager] SwitchToRegister: loginPanel={loginPanel}, registerPanel={registerPanel}");
 
             if (loginPanel != null && registerPanel != null)
             {
@@ -310,6 +346,10 @@ namespace Luan.MainMenu
             {
                 registerPanel.Show();
             }
+            else
+            {
+                Debug.LogError("[AccountManager] registerPanel đang là NULL trong Inspector của AccountManager!");
+            }
         }
 
         /// <summary>
@@ -317,11 +357,17 @@ namespace Luan.MainMenu
         /// </summary>
         public void SwitchToLogin()
         {
-            if (_isBusy) return;
+            if (_isBusy)
+            {
+                Debug.LogWarning("[AccountManager] Đang bận xử lý request PlayFab, không thể chuyển tab!");
+                return;
+            }
 
             PlaySound(switchSound);
             ClearFeedbacks();
             ClearInputs();
+
+            Debug.Log($"[AccountManager] SwitchToLogin: loginPanel={loginPanel}, registerPanel={registerPanel}");
 
             if (registerPanel != null && loginPanel != null)
             {
@@ -330,6 +376,10 @@ namespace Luan.MainMenu
             else if (loginPanel != null)
             {
                 loginPanel.Show();
+            }
+            else
+            {
+                Debug.LogError("[AccountManager] loginPanel đang là NULL trong Inspector của AccountManager!");
             }
         }
 
@@ -402,41 +452,7 @@ namespace Luan.MainMenu
                     PlayFabLoginResponse res = JsonUtility.FromJson<PlayFabLoginResponse>(req.downloadHandler.text);
                     if (res != null && res.data != null)
                     {
-                        string savedDisplayName = PlayerPrefs.GetString(PrefsDisplayNameKey, username);
-
-                        _currentUser = new PlayFabUserData
-                        {
-                            playFabId = res.data.PlayFabId,
-                            sessionTicket = res.data.SessionTicket,
-                            username = username,
-                            displayName = string.IsNullOrEmpty(savedDisplayName) ? username : savedDisplayName
-                        };
-
-                        // Lưu session và thông tin nếu người chơi tick "Nhớ mật khẩu"
-                        bool remember = rememberPasswordToggle == null || rememberPasswordToggle.isOn;
-                        if (remember)
-                        {
-                            PlayerPrefs.SetInt(PrefsRememberMeKey, 1);
-                            PlayerPrefs.SetString(PrefsCachedPasswordKey, password);
-                            PlayerPrefs.SetString(PrefsPlayFabIdKey, res.data.PlayFabId);
-                            PlayerPrefs.SetString(PrefsSessionTicketKey, res.data.SessionTicket);
-                            PlayerPrefs.SetString(PrefsUsernameKey, username);
-                            PlayerPrefs.SetString(PrefsDisplayNameKey, _currentUser.displayName);
-                        }
-                        else
-                        {
-                            PlayerPrefs.SetInt(PrefsRememberMeKey, 0);
-                            PlayerPrefs.DeleteKey(PrefsCachedPasswordKey);
-                            PlayerPrefs.DeleteKey(PrefsSessionTicketKey);
-                            PlayerPrefs.DeleteKey(PrefsPlayFabIdKey);
-                        }
-                        PlayerPrefs.Save();
-
-                        ShowLoginFeedback($"Đăng nhập thành công! Chào {_currentUser.displayName}", Color.green);
-                        PlaySound(successSound);
-
-                        // Đợi 0.6 giây để người chơi thấy thông báo, sau đó chạy animation ẩn panel và báo cho MainMenu hiện 3 nút lên
-                        StartCoroutine(DelayedCloseAndNotifySuccess(0.6f));
+                        yield return FetchAccountInfoRoutine(res.data.SessionTicket, res.data.PlayFabId, username, password);
                     }
                     else
                     {
@@ -449,6 +465,94 @@ namespace Luan.MainMenu
                     HandlePlayFabError(req.downloadHandler.text, req.error, isLogin: true);
                 }
             }
+        }
+
+        private IEnumerator FetchAccountInfoRoutine(string sessionTicket, string playFabId, string username, string password)
+        {
+            string url = $"https://{playFabTitleId}.playfabapi.com/Client/GetAccountInfo";
+            string realDisplayName = username;
+
+            using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
+            {
+                string reqJson = $"{{\"PlayFabId\":\"{playFabId}\"}}";
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(reqJson);
+                req.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                req.downloadHandler = new DownloadHandlerBuffer();
+                req.SetRequestHeader("Content-Type", "application/json");
+                req.SetRequestHeader("X-Authorization", sessionTicket);
+
+                yield return req.SendWebRequest();
+
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    try
+                    {
+                        PlayFabGetAccountInfoResponse accRes = JsonUtility.FromJson<PlayFabGetAccountInfoResponse>(req.downloadHandler.text);
+                        if (accRes != null && accRes.data != null && accRes.data.AccountInfo != null)
+                        {
+                            if (accRes.data.AccountInfo.TitleInfo != null && !string.IsNullOrEmpty(accRes.data.AccountInfo.TitleInfo.DisplayName))
+                            {
+                                realDisplayName = accRes.data.AccountInfo.TitleInfo.DisplayName;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogWarning($"[AccountManager] Không thể parse DisplayName từ PlayFab: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[AccountManager] GetAccountInfo thất bại: {req.downloadHandler.text}");
+                }
+            }
+
+            // Fallback lưu trữ cục bộ theo username nếu PlayFab chưa kịp cập nhật hoặc rỗng
+            string localCachedDisplayName = PlayerPrefs.GetString(PrefsDisplayNameKey + "_" + username, "");
+            if ((string.IsNullOrEmpty(realDisplayName) || realDisplayName == username) && !string.IsNullOrEmpty(localCachedDisplayName))
+            {
+                realDisplayName = localCachedDisplayName;
+                // Đồng bộ ngược lại lên server PlayFab nếu server bị thiếu
+                StartCoroutine(UpdateDisplayNameRoutine(sessionTicket, realDisplayName));
+            }
+            else if (!string.IsNullOrEmpty(realDisplayName))
+            {
+                PlayerPrefs.SetString(PrefsDisplayNameKey + "_" + username, realDisplayName);
+            }
+
+            _currentUser = new PlayFabUserData
+            {
+                playFabId = playFabId,
+                sessionTicket = sessionTicket,
+                username = username,
+                displayName = realDisplayName
+            };
+
+            // Lưu session và thông tin nếu người chơi tick "Nhớ mật khẩu"
+            bool remember = rememberPasswordToggle == null || rememberPasswordToggle.isOn;
+            if (remember)
+            {
+                PlayerPrefs.SetInt(PrefsRememberMeKey, 1);
+                PlayerPrefs.SetString(PrefsCachedPasswordKey, password);
+                PlayerPrefs.SetString(PrefsPlayFabIdKey, playFabId);
+                PlayerPrefs.SetString(PrefsSessionTicketKey, sessionTicket);
+                PlayerPrefs.SetString(PrefsUsernameKey, username);
+                PlayerPrefs.SetString(PrefsDisplayNameKey, realDisplayName);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(PrefsRememberMeKey, 0);
+                PlayerPrefs.DeleteKey(PrefsCachedPasswordKey);
+                PlayerPrefs.DeleteKey(PrefsSessionTicketKey);
+                PlayerPrefs.DeleteKey(PrefsPlayFabIdKey);
+            }
+            PlayerPrefs.Save();
+
+            ShowLoginFeedback("Đăng nhập thành công!", Color.green);
+            PlaySound(successSound);
+
+            // Đợi 0.6 giây để người chơi thấy thông báo, sau đó chạy animation ẩn panel và báo cho MainMenu hiện 3 nút lên
+            StartCoroutine(DelayedCloseAndNotifySuccess(0.6f));
         }
 
         private IEnumerator DelayedCloseAndNotifySuccess(float delay)
@@ -494,6 +598,12 @@ namespace Luan.MainMenu
             if (string.IsNullOrEmpty(displayName))
             {
                 displayName = username;
+            }
+            else if (displayName.Length < 3 || displayName.Length > 25)
+            {
+                ShowRegisterFeedback("Tên hiển thị phải từ 3 đến 25 ký tự!", Color.red);
+                PlaySound(errorSound);
+                return;
             }
 
             if (string.IsNullOrEmpty(password))
@@ -574,6 +684,7 @@ namespace Luan.MainMenu
 
                         // Lưu tên hiển thị
                         PlayerPrefs.SetString(PrefsDisplayNameKey, displayName);
+                        PlayerPrefs.SetString(PrefsDisplayNameKey + "_" + username, displayName);
                         PlayerPrefs.Save();
 
                         // Cập nhật Display Name lên PlayFab server
@@ -624,6 +735,15 @@ namespace Luan.MainMenu
                 req.SetRequestHeader("X-Authorization", sessionTicket);
 
                 yield return req.SendWebRequest();
+
+                if (req.result == UnityWebRequest.Result.Success)
+                {
+                    Debug.Log($"[AccountManager] Cập nhật DisplayName '{displayName}' lên PlayFab thành công!");
+                }
+                else
+                {
+                    Debug.LogWarning($"[AccountManager] Cập nhật DisplayName thất bại: {req.downloadHandler.text}");
+                }
             }
         }
 
