@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: NewSong
   m_EditorClassIdentifier: Assembly-CSharp::SongData
   songName: Come My Way
+  artist: "S\u01A1n T\xF9ng M-TP"
   clip: {fileID: 8300000, guid: ce5cb4f94577d344d8bbdab96a195382, type: 3}
   coverArt: {fileID: 1027025850834469293, guid: eb1c208e392e3794aa7bac6a5644eb7b, type: 3}
   difficulty: 3
+  bpm: 0

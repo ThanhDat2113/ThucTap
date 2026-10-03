@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,9 @@ public class SongListController : MonoBehaviour
     [SerializeField] private MusicManager musicManager;
     [SerializeField] private AudioClip ambientBgm;
 
-    [Header("Start game")]
+    [Header("Detail + start game")]
+    [SerializeField] private SongDetailPanel detailPanel;
+    [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Button playButton;
     [SerializeField] private string gameplaySceneName = "Gameplay";
 
@@ -39,23 +42,31 @@ public class SongListController : MonoBehaviour
         spawnedItems.Clear();
 
         string savedName = musicManager.GetSavedSongName();
-        bool foundSaved = false;
+        int selectedIndex = -1;
 
-        foreach (SongData song in songs)
+        for (int i = 0; i < songs.Count; i++)
         {
+            SongData song = songs[i];
             SongItemUI item = Instantiate(itemPrefab, content);
-            item.Setup(song, this);
+            item.Setup(song, this, i);
             spawnedItems.Add(item);
 
-            if (!foundSaved && song.name == savedName)
+            if (selectedIndex < 0 && song.name == savedName)
             {
                 SelectSong(song, item);
-                foundSaved = true;
+                selectedIndex = i;
             }
         }
 
-        if (!foundSaved)
+        if (selectedIndex < 0)
+        {
             musicManager.PlayMusic(ambientBgm);
+            if (detailPanel != null) detailPanel.ShowEmpty();
+        }
+        else
+        {
+            StartCoroutine(ScrollToIndex(selectedIndex));
+        }
     }
 
     public void SelectSong(SongData song, SongItemUI selectedItem)
@@ -65,13 +76,35 @@ public class SongListController : MonoBehaviour
 
         musicManager.Play(song);
 
+        if (detailPanel != null)
+            detailPanel.Show(song);
+
         if (playButton != null)
             playButton.interactable = musicManager.CurrentSong != null;
     }
 
     public void StartGame()
     {
-        if (musicManager.CurrentSong == null) return;
+        SongData song = musicManager.CurrentSong;
+        if (song == null) return;
+
+        GameSession.SelectedSong = song;
+        SongStats.IncrementPlayCount(song);
         SceneManager.LoadScene(gameplaySceneName);
+    }
+
+    // Cuon danh sach toi bai da chon lan truoc
+    private IEnumerator ScrollToIndex(int index)
+    {
+        yield return null;
+        if (scrollRect == null || spawnedItems.Count <= 1) yield break;
+        Canvas.ForceUpdateCanvases();
+        float contentH = scrollRect.content.rect.height;
+        float viewH = scrollRect.viewport.rect.height;
+        if (contentH <= viewH) yield break;
+        var itemRt = (RectTransform)spawnedItems[index].transform;
+        float itemCenter = -itemRt.anchoredPosition.y;
+        float target = Mathf.Clamp(itemCenter - viewH * 0.5f, 0f, contentH - viewH);
+        scrollRect.verticalNormalizedPosition = 1f - target / (contentH - viewH);
     }
 }

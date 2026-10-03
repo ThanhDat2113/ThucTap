@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: NewSong 2
   m_EditorClassIdentifier: Assembly-CSharp::SongData
   songName: "L\u1EA1c Tr\xF4i"
+  artist: "S\u01A1n T\xF9ng M-TP"
   clip: {fileID: 8300000, guid: 075ec273e7ba82344951cb7800ab5a88, type: 3}
   coverArt: {fileID: -9144814465567412023, guid: f105d0fca68c1a246afda9dac776ee5a, type: 3}
   difficulty: 3
+  bpm: 0
