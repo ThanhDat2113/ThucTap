@@ -84,6 +84,7 @@ namespace Luan.MainMenu
         private List<Vector2> _originalElementPositions = new List<Vector2>();
         private bool _isInitialized = false;
         private bool _isOpen = false;
+        private bool _hasStarted = false;
 
         public bool IsOpen => _isOpen;
         public CanvasGroup CanvasGroup => _canvasGroup;
@@ -96,6 +97,12 @@ namespace Luan.MainMenu
 
         private void Start()
         {
+            if (_hasStarted) return;
+            _hasStarted = true;
+
+            // Nếu panel đã được chủ động mở từ trước (qua Show/ShowImmediate), không để Start() đè HideImmediate() lên
+            if (_isOpen) return;
+
             if (playAnimOnStart)
             {
                 // Bắt đầu từ trạng thái ẩn rồi lướt vào mượt mà để bạn xem thử animation!
@@ -131,8 +138,18 @@ namespace Luan.MainMenu
             _rectTransform = GetComponent<RectTransform>();
             _canvasGroup = GetComponent<CanvasGroup>();
 
+            if (_canvasGroup == null)
+            {
+                _canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
+
             _originalPosition = _rectTransform.anchoredPosition;
             _originalScale = _rectTransform.localScale;
+
+            if (_originalScale == Vector3.zero || _originalScale.sqrMagnitude < 0.001f)
+            {
+                _originalScale = Vector3.one;
+            }
 
             // Nếu danh sách staggeredElements chưa có, tự động lấy các RectTransform con trực tiếp
             if (staggeredElements == null || staggeredElements.Count == 0)
@@ -182,6 +199,7 @@ namespace Luan.MainMenu
         /// </summary>
         public void Show(Action onComplete = null)
         {
+            _hasStarted = true;
             InitIfNeeded();
 
             if (!gameObject.activeSelf)
@@ -212,6 +230,7 @@ namespace Luan.MainMenu
         /// </summary>
         public void Hide(Action onComplete = null)
         {
+            _hasStarted = true;
             InitIfNeeded();
 
             if (!gameObject.activeSelf && !_isOpen)
@@ -263,6 +282,7 @@ namespace Luan.MainMenu
         /// </summary>
         public void ShowImmediate()
         {
+            _hasStarted = true;
             InitIfNeeded();
             if (_currentAnimRoutine != null) StopCoroutine(_currentAnimRoutine);
 
@@ -293,6 +313,7 @@ namespace Luan.MainMenu
         /// </summary>
         public void HideImmediate()
         {
+            _hasStarted = true;
             InitIfNeeded();
             if (_currentAnimRoutine != null) StopCoroutine(_currentAnimRoutine);
 
@@ -334,6 +355,8 @@ namespace Luan.MainMenu
                 return;
             }
 
+            // Đưa target panel lên trên cùng Canvas để luôn hiển thị rõ ràng trên panel cũ
+            targetPanel.transform.SetAsLastSibling();
             Hide();
             targetPanel.Show(onComplete);
         }

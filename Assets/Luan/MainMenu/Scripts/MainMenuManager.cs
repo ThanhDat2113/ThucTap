@@ -24,6 +24,9 @@ namespace Luan.MainMenu
         [Tooltip("Panel chính chứa các nút Bắt đầu, Cài đặt, Thành tích...")]
         [SerializeField] private UIPanelAnimator mainMenuPanel;
 
+        [Tooltip("Panel Thông tin người dùng (UserInfo) - trượt cùng lúc với 3 nút MainMenu")]
+        [SerializeField] private UIPanelAnimator userInfoPanel;
+
         [Tooltip("Panel Cài Đặt (Tùy chọn)")]
         [SerializeField] private UIPanelAnimator settingsPanel;
 
@@ -34,12 +37,22 @@ namespace Luan.MainMenu
         [SerializeField] private AccountManager accountManager;
 
         [Header("--- Hiển Thị Thông Tin Người Chơi (User Info) ---")]
-        [Tooltip("Text chào mừng người chơi (TextMeshPro)")]
+        [Tooltip("Text hiển thị tên người chơi trong khung UserInfo (TMP)")]
+        [SerializeField] private TMP_Text userNameTMP;
+
+        [Tooltip("Độ dài tối đa của tên trước khi thêm '...' để không bị tràn khung hay xuống dòng")]
+        [Range(4, 25)]
+        [SerializeField] private int maxNameLength = 12;
+
+        [Tooltip("Nút Đăng Xuất (Logout Button)")]
+        [SerializeField] private Button logoutButton;
+
+        [Tooltip("Text chào mừng người chơi (Tùy chọn, TextMeshPro)")]
         [SerializeField] private TMP_Text userGreetingTMP;
         [Tooltip("Text chào mừng người chơi (Legacy UI Text)")]
         [SerializeField] private Text userGreetingLegacy;
 
-        [Tooltip("Nút mở Đăng nhập / Tài khoản")]
+        [Tooltip("Nút mở Đăng nhập / Tài khoản (Tùy chọn)")]
         [SerializeField] private Button accountButton;
         [Tooltip("Text trên nút Account (ví dụ: 'Đăng Nhập' khi chưa login, hoặc Username khi đã login)")]
         [SerializeField] private TMP_Text accountButtonTMP;
@@ -77,6 +90,11 @@ namespace Luan.MainMenu
             {
                 accountManager = FindFirstObjectByType<AccountManager>();
             }
+
+            if (logoutButton != null)
+            {
+                logoutButton.onClick.AddListener(OnLogoutClicked);
+            }
         }
 
         private void OnEnable()
@@ -100,13 +118,11 @@ namespace Luan.MainMenu
 
             bool hasSession = accountManager != null && accountManager.IsLoggedIn;
 
-            // Nếu người chơi chưa đăng nhập: Ẩn 3 nút Menu chính và hiện bảng Đăng nhập trước
+            // Nếu người chơi chưa đăng nhập: Ẩn 3 nút Menu chính và UserInfo, hiện bảng Đăng nhập trước
             if (showLoginOnStart && !hasSession)
             {
-                if (mainMenuPanel != null)
-                {
-                    mainMenuPanel.HideImmediate();
-                }
+                if (mainMenuPanel != null) mainMenuPanel.HideImmediate();
+                if (userInfoPanel != null) userInfoPanel.HideImmediate();
 
                 if (accountManager != null)
                 {
@@ -115,10 +131,12 @@ namespace Luan.MainMenu
             }
             else
             {
-                // Nếu đã đăng nhập sẵn rồi: Hiện 3 nút menu chính
-                if (mainMenuPanel != null)
+                // Nếu đã đăng nhập sẵn rồi: Hiện 3 nút menu chính và UserInfo
+                if (mainMenuPanel != null) mainMenuPanel.ShowImmediate();
+                if (userInfoPanel != null)
                 {
-                    mainMenuPanel.ShowImmediate();
+                    if (hasSession) userInfoPanel.ShowImmediate();
+                    else userInfoPanel.HideImmediate();
                 }
             }
         }
@@ -161,13 +179,23 @@ namespace Luan.MainMenu
         {
             PlayButtonClickSound();
 
+            if (mainMenuPanel != null && mainMenuPanel.IsOpen)
+            {
+                mainMenuPanel.Hide();
+            }
+
+            if (userInfoPanel != null && userInfoPanel.IsOpen)
+            {
+                userInfoPanel.Hide();
+            }
+
             if (settingsPanel != null)
             {
                 settingsPanel.Show();
             }
             else
             {
-                Debug.Log("[MainMenuManager] Bấm Cài Đặt (Chưa gán settingsPanel trong Inspector)");
+                Debug.LogWarning("[MainMenuManager] Bấm Cài Đặt nhưng chưa gán settingsPanel trong Inspector!");
             }
         }
 
@@ -177,6 +205,16 @@ namespace Luan.MainMenu
         public void OnThanhTichClicked()
         {
             PlayButtonClickSound();
+
+            if (mainMenuPanel != null && mainMenuPanel.IsOpen)
+            {
+                mainMenuPanel.Hide();
+            }
+
+            if (userInfoPanel != null && userInfoPanel.IsOpen)
+            {
+                userInfoPanel.Hide();
+            }
 
             if (leaderboardPanel != null)
             {
@@ -198,6 +236,11 @@ namespace Luan.MainMenu
             if (mainMenuPanel != null && mainMenuPanel.IsOpen)
             {
                 mainMenuPanel.Hide();
+            }
+
+            if (userInfoPanel != null && userInfoPanel.IsOpen)
+            {
+                userInfoPanel.Hide();
             }
 
             if (accountManager != null)
@@ -232,9 +275,34 @@ namespace Luan.MainMenu
                 accountManager.CloseAuth();
             }
 
+            // Hiện lại 3 nút Main Menu
             if (mainMenuPanel != null && !mainMenuPanel.IsOpen)
             {
                 mainMenuPanel.Show();
+            }
+
+            // Hiện lại khung UserInfo nếu đã đăng nhập
+            bool loggedIn = accountManager != null && accountManager.IsLoggedIn;
+            if (loggedIn && userInfoPanel != null && !userInfoPanel.IsOpen)
+            {
+                userInfoPanel.Show();
+            }
+        }
+
+        /// <summary>
+        /// Gắn vào nút "ĐĂNG XUẤT" (Logout Button).
+        /// </summary>
+        public void OnLogoutClicked()
+        {
+            PlayButtonClickSound();
+
+            if (accountManager != null)
+            {
+                accountManager.Logout();
+            }
+            else if (AccountManager.Instance != null)
+            {
+                AccountManager.Instance.Logout();
             }
         }
 
@@ -261,10 +329,15 @@ namespace Luan.MainMenu
         {
             UpdateUserDisplay();
 
-            // Đăng nhập thành công: Hiện MainMenu (3 nút) lên mượt mà bằng Animation!
+            // Đăng nhập thành công: Hiện MainMenu (3 nút) và khung UserInfo trượt cùng lúc!
             if (mainMenuPanel != null && !mainMenuPanel.IsOpen)
             {
                 mainMenuPanel.Show();
+            }
+
+            if (userInfoPanel != null && !userInfoPanel.IsOpen)
+            {
+                userInfoPanel.Show();
             }
         }
 
@@ -277,10 +350,15 @@ namespace Luan.MainMenu
         {
             UpdateUserDisplay();
 
-            // Đăng xuất: Ẩn 3 nút và mở lại bảng Đăng nhập
+            // Đăng xuất: Ẩn 3 nút MainMenu và ẩn UserInfo, mở lại bảng Đăng nhập
             if (mainMenuPanel != null && mainMenuPanel.IsOpen)
             {
                 mainMenuPanel.Hide();
+            }
+
+            if (userInfoPanel != null && userInfoPanel.IsOpen)
+            {
+                userInfoPanel.Hide();
             }
 
             if (accountManager != null)
@@ -289,10 +367,25 @@ namespace Luan.MainMenu
             }
         }
 
+        /// <summary>
+        /// Cắt ngắn tên nếu quá dài để không bị đẩy xuống dòng và thêm '...'
+        /// </summary>
+        private string FormatDisplayName(string rawName)
+        {
+            if (string.IsNullOrEmpty(rawName)) return string.Empty;
+
+            string trimmed = rawName.Trim();
+            if (trimmed.Length > maxNameLength)
+            {
+                return trimmed.Substring(0, maxNameLength) + "...";
+            }
+            return trimmed;
+        }
+
         public void UpdateUserDisplay()
         {
             bool loggedIn = accountManager != null && accountManager.IsLoggedIn;
-            string displayName = "Khách";
+            string displayName = "";
 
             if (loggedIn && accountManager.CurrentUser != null)
             {
@@ -301,12 +394,22 @@ namespace Luan.MainMenu
                     : accountManager.CurrentUser.username;
             }
 
-            string greetingText = loggedIn ? $"Xin chào, {displayName}!" : "Chưa đăng nhập";
+            string formattedName = FormatDisplayName(displayName);
 
+            // 1. Hiển thị tên người chơi trong khung UserInfo
+            if (userNameTMP != null)
+            {
+                userNameTMP.textWrappingMode = TextWrappingModes.NoWrap; // Không bao giờ tự động xuống dòng
+                userNameTMP.overflowMode = TextOverflowModes.Ellipsis; // Đảm bảo TMP thêm ... nếu chạm biên RectTransform
+                userNameTMP.text = formattedName;
+            }
+
+            // 2. Text chào mừng hoặc text trên nút cũ (nếu có dùng)
+            string greetingText = loggedIn ? formattedName : "";
             if (userGreetingTMP != null) userGreetingTMP.text = greetingText;
             if (userGreetingLegacy != null) userGreetingLegacy.text = greetingText;
 
-            string btnText = loggedIn ? displayName : "Đăng Nhập";
+            string btnText = loggedIn ? formattedName : "Đăng Nhập";
             if (accountButtonTMP != null) accountButtonTMP.text = btnText;
             if (accountButtonLegacy != null) accountButtonLegacy.text = btnText;
         }
