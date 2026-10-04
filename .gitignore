@@ -79,3 +79,7 @@ Assets/Editor/QLDATNSceneTracker.cs.meta
 Assets/Editor/QLDATNSceneTracker.cs.download
 qldatn-vscode-install_*.mjs
 qldatn-vscode-install_*.ps1
+
+# Android native build cache
+/.utmp/
+/.cxx/

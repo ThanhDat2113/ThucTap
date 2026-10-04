@@ -103,6 +103,11 @@ namespace Luan.MainMenu
                 accountManager = FindFirstObjectByType<AccountManager>();
             }
 
+            if (!TryGetComponent<VideoOptimizationManager>(out _))
+            {
+                gameObject.AddComponent<VideoOptimizationManager>();
+            }
+
             if (logoutButton != null)
             {
                 logoutButton.onClick.AddListener(OnLogoutClicked);
@@ -195,11 +200,24 @@ namespace Luan.MainMenu
                     accountManager.CloseAccountPanel();
                 }
 
-                if (mainMenuPanel != null) mainMenuPanel.ShowImmediate();
+                // Chạy animation xuất hiện mượt mà cho MainMenu và UserInfo khi vừa vào / back về
+                if (mainMenuPanel != null)
+                {
+                    mainMenuPanel.HideImmediate();
+                    mainMenuPanel.Show();
+                }
+
                 if (userInfoPanel != null)
                 {
-                    if (hasSession) userInfoPanel.ShowImmediate();
-                    else userInfoPanel.HideImmediate();
+                    if (hasSession)
+                    {
+                        userInfoPanel.HideImmediate();
+                        userInfoPanel.Show();
+                    }
+                    else
+                    {
+                        userInfoPanel.HideImmediate();
+                    }
                 }
             }
         }
