@@ -204,7 +204,7 @@ namespace Luan.MainMenu
         private const string PrefsRememberMeKey = "PLAYFAB_REMEMBER_ME";
         private const string PrefsCachedPasswordKey = "PLAYFAB_CACHED_PASSWORD";
 
-        private PlayFabUserData _currentUser = null;
+        private static PlayFabUserData _currentUser = null;
         private bool _isBusy = false;
 
         public PlayFabUserData CurrentUser => _currentUser;
@@ -227,12 +227,22 @@ namespace Luan.MainMenu
                 Destroy(gameObject);
                 return;
             }
+
+            // Phục hồi session ngay trong Awake để khi MainMenuManager.Start() chạy đã có session sẵn
+            CheckCachedSession();
         }
 
         private void Start()
         {
             LoadRememberedCredentials();
-            CheckCachedSession();
+
+            // Nếu người chơi đã có session đăng nhập rồi, tự động đóng hết các popup auth
+            if (IsLoggedIn)
+            {
+                if (accountContainerPanel != null) accountContainerPanel.HideImmediate();
+                if (loginPanel != null) loginPanel.HideImmediate();
+                if (registerPanel != null) registerPanel.HideImmediate();
+            }
         }
 
         [ContextMenu("🗑️ XÓA DỮ LIỆU ĐĂNG NHẬP ĐÃ LƯU (Clear Saved Session)")]
@@ -528,23 +538,23 @@ namespace Luan.MainMenu
                 displayName = realDisplayName
             };
 
-            // Lưu session và thông tin nếu người chơi tick "Nhớ mật khẩu"
+            // Luôn lưu phiên đăng nhập hiện tại để không bị mất khi chuyển qua lại các Scene
+            PlayerPrefs.SetString(PrefsPlayFabIdKey, playFabId);
+            PlayerPrefs.SetString(PrefsSessionTicketKey, sessionTicket);
+            PlayerPrefs.SetString(PrefsUsernameKey, username);
+            PlayerPrefs.SetString(PrefsDisplayNameKey, realDisplayName);
+
+            // Lưu mật khẩu tự điền nếu người chơi chọn "Nhớ mật khẩu"
             bool remember = rememberPasswordToggle == null || rememberPasswordToggle.isOn;
             if (remember)
             {
                 PlayerPrefs.SetInt(PrefsRememberMeKey, 1);
                 PlayerPrefs.SetString(PrefsCachedPasswordKey, password);
-                PlayerPrefs.SetString(PrefsPlayFabIdKey, playFabId);
-                PlayerPrefs.SetString(PrefsSessionTicketKey, sessionTicket);
-                PlayerPrefs.SetString(PrefsUsernameKey, username);
-                PlayerPrefs.SetString(PrefsDisplayNameKey, realDisplayName);
             }
             else
             {
                 PlayerPrefs.SetInt(PrefsRememberMeKey, 0);
                 PlayerPrefs.DeleteKey(PrefsCachedPasswordKey);
-                PlayerPrefs.DeleteKey(PrefsSessionTicketKey);
-                PlayerPrefs.DeleteKey(PrefsPlayFabIdKey);
             }
             PlayerPrefs.Save();
 
@@ -833,13 +843,16 @@ namespace Luan.MainMenu
 
         private void CheckCachedSession()
         {
-            // Chỉ tự động khôi phục phiên đăng nhập nếu người chơi có tick "Ghi nhớ"
-            bool remember = PlayerPrefs.GetInt(PrefsRememberMeKey, 0) == 1;
-            if (!remember) return;
+            // 1. Nếu đã có _currentUser trong bộ nhớ tĩnh rồi (vừa từ scene khác quay lại)
+            if (_currentUser != null && !string.IsNullOrEmpty(_currentUser.sessionTicket))
+            {
+                return;
+            }
 
+            // 2. Phục hồi từ PlayerPrefs nếu có phiên đăng nhập đã lưu
             if (PlayerPrefs.HasKey(PrefsSessionTicketKey) && PlayerPrefs.HasKey(PrefsUsernameKey))
             {
-                string ticket = PlayerPrefs.GetString(PrefsSessionTicketKey);
+                string ticket = PlayerPrefs.GetString(PrefsSessionTicketKey, "");
                 string playFabId = PlayerPrefs.GetString(PrefsPlayFabIdKey, "");
                 string username = PlayerPrefs.GetString(PrefsUsernameKey, "");
                 string displayName = PlayerPrefs.GetString(PrefsDisplayNameKey, username);
@@ -929,7 +942,13 @@ namespace Luan.MainMenu
 
         private void PlaySound(AudioClip clip)
         {
-            if (audioSource != null && clip != null)
+            if (clip == null) return;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX(clip);
+            }
+            else if (audioSource != null)
             {
                 audioSource.PlayOneShot(clip);
             }

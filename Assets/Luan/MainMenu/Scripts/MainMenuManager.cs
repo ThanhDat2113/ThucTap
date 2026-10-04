@@ -63,11 +63,14 @@ namespace Luan.MainMenu
         [SerializeField] private bool showLoginOnStart = false;
 
         [Header("--- Cấu Hình Trò Chơi (Game Settings) ---")]
+        [Tooltip("Nút Bắt Đầu chơi (Play Button) - Tự động tìm nếu để trống")]
+        [SerializeField] private Button playButton;
+
         [Tooltip("Có bắt buộc người chơi phải Đăng nhập tài khoản PlayFab trước khi BẮT ĐẦU chơi không?")]
         [SerializeField] private bool requireLoginToPlay = false;
 
-        [Tooltip("Tên Scene tiếp theo khi bấm BẮT ĐẦU (ví dụ: 'GamePlay' hoặc 'SongSelect')")]
-        [SerializeField] private string playSceneName = "";
+        [Tooltip("Tên Scene tiếp theo khi bấm BẮT ĐẦU (ví dụ: 'Thuan_SongList')")]
+        [SerializeField] private string playSceneName = "Thuan_SongList";
 
         [Header("--- Âm Thanh (Audio SFX) ---")]
         [SerializeField] private AudioSource audioSource;
@@ -86,6 +89,15 @@ namespace Luan.MainMenu
                 return;
             }
 
+#if UNITY_ANDROID || UNITY_IOS
+            // Khóa màn hình ngang (Landscape), chặn hoàn toàn màn hình dọc (Portrait)
+            Screen.autorotateToPortrait = false;
+            Screen.autorotateToPortraitUpsideDown = false;
+            Screen.autorotateToLandscapeLeft = true;
+            Screen.autorotateToLandscapeRight = true;
+            Screen.orientation = ScreenOrientation.AutoRotation;
+#endif
+
             if (accountManager == null)
             {
                 accountManager = FindFirstObjectByType<AccountManager>();
@@ -94,6 +106,45 @@ namespace Luan.MainMenu
             if (logoutButton != null)
             {
                 logoutButton.onClick.AddListener(OnLogoutClicked);
+            }
+
+            // Tự động tìm ButtonPlay nếu chưa kéo thả vào Inspector
+            if (playButton == null)
+            {
+                var allButtons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                foreach (var b in allButtons)
+                {
+                    if (b != null && (b.name == "ButtonPlay" || b.name == "ButtonBatDau"))
+                    {
+                        playButton = b;
+                        break;
+                    }
+                }
+            }
+
+            if (playButton != null)
+            {
+                playButton.onClick.RemoveListener(OnBatDauClicked);
+                playButton.onClick.AddListener(OnBatDauClicked);
+            }
+
+            // Tự động tải âm thanh mặc định nếu chưa gán trong Inspector
+            if (buttonClickSound == null)
+            {
+                buttonClickSound = Resources.Load<AudioClip>("Audio/select_001");
+#if UNITY_EDITOR
+                if (buttonClickSound == null)
+                    buttonClickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/select_001.wav");
+#endif
+            }
+
+            if (startGameSound == null || (startGameSound != null && startGameSound.name == "menu"))
+            {
+                startGameSound = Resources.Load<AudioClip>("Audio/confirmation_001");
+#if UNITY_EDITOR
+                if (startGameSound == null || startGameSound.name == "menu")
+                    startGameSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/confirmation_001.wav");
+#endif
             }
         }
 
@@ -114,6 +165,13 @@ namespace Luan.MainMenu
 
         private void Start()
         {
+            SetupButtonSounds();
+
+            if (accountManager == null)
+            {
+                accountManager = AccountManager.Instance != null ? AccountManager.Instance : FindFirstObjectByType<AccountManager>();
+            }
+
             UpdateUserDisplay();
 
             bool hasSession = accountManager != null && accountManager.IsLoggedIn;
@@ -131,7 +189,12 @@ namespace Luan.MainMenu
             }
             else
             {
-                // Nếu đã đăng nhập sẵn rồi: Hiện 3 nút menu chính và UserInfo
+                // Nếu đã đăng nhập sẵn rồi (hoặc vừa từ SongList back về):
+                if (accountManager != null)
+                {
+                    accountManager.CloseAccountPanel();
+                }
+
                 if (mainMenuPanel != null) mainMenuPanel.ShowImmediate();
                 if (userInfoPanel != null)
                 {
@@ -148,7 +211,18 @@ namespace Luan.MainMenu
         /// </summary>
         public void OnBatDauClicked()
         {
-            PlayButtonClickSound();
+            if (startGameSound != null)
+            {
+                PlaySound(startGameSound);
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayConfirmSound();
+            }
+            else
+            {
+                PlayButtonClickSound();
+            }
 
             // Nếu cài đặt bắt buộc đăng nhập mà chưa đăng nhập PlayFab -> mở bảng đăng nhập
             if (requireLoginToPlay && (accountManager == null || !accountManager.IsLoggedIn))
@@ -158,18 +232,10 @@ namespace Luan.MainMenu
                 return;
             }
 
-            PlaySound(startGameSound);
-
-            // Chuyển sang scene chơi game nếu có cấu hình
-            if (!string.IsNullOrEmpty(playSceneName))
-            {
-                Debug.Log($"[MainMenuManager] Đang tải Scene trò chơi: {playSceneName}");
-                SceneManager.LoadScene(playSceneName);
-            }
-            else
-            {
-                Debug.Log("[MainMenuManager] BẮT ĐẦU GAME! (Chưa cấu hình playSceneName)");
-            }
+            // Chuyển sang scene bài hát (mặc định Thuan_SongList)
+            string targetScene = !string.IsNullOrEmpty(playSceneName) ? playSceneName : "Thuan_SongList";
+            Debug.Log($"[MainMenuManager] Đang tải Scene trò chơi: {targetScene}");
+            SceneManager.LoadScene(targetScene);
         }
 
         /// <summary>
@@ -258,7 +324,7 @@ namespace Luan.MainMenu
         /// </summary>
         public void BackToMainMenu()
         {
-            PlayButtonClickSound();
+            PlayCloseSound();
 
             if (settingsPanel != null && settingsPanel.IsOpen)
             {
@@ -294,7 +360,7 @@ namespace Luan.MainMenu
         /// </summary>
         public void OnLogoutClicked()
         {
-            PlayButtonClickSound();
+            PlayCloseSound();
 
             if (accountManager != null)
             {
@@ -418,14 +484,86 @@ namespace Luan.MainMenu
 
         #region Audio Helpers
 
+        private void SetupButtonSounds()
+        {
+            // Tự động tìm tất cả các nút Button trong Canvas để gắn âm thanh phản hồi
+            Button[] allButtons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var btn in allButtons)
+            {
+                if (btn == null) continue;
+
+                // Các nút chính đã có hàm xử lý trong MainMenuManager thì không gắn để tránh trùng lặp âm
+                if (btn == logoutButton || btn == playButton) continue;
+                string btnName = btn.name;
+                if (btnName.Contains("BatDau") || btnName.Contains("Play") || btnName.Contains("CaiDat") || btnName.Contains("ThanhTich"))
+                    continue;
+
+                // Nếu nút chưa có component âm thanh thì tự động gắn UIButtonSound
+                if (btn.GetComponent<UIButtonSound>() == null)
+                {
+                    UIButtonSound btnSound = btn.gameObject.AddComponent<UIButtonSound>();
+                    string lower = btnName.ToLower();
+                    if (lower.Contains("close") || lower.Contains("dong") || lower.Contains("back") || lower.Contains("thoat") || lower.Contains("huy"))
+                    {
+                        btnSound.SetSoundType(ButtonSoundType.Close);
+                    }
+                    else if (lower.Contains("confirm") || lower.Contains("xacnhan"))
+                    {
+                        btnSound.SetSoundType(ButtonSoundType.Confirm);
+                    }
+                    else
+                    {
+                        btnSound.SetSoundType(ButtonSoundType.Select);
+                    }
+                }
+            }
+        }
+
         private void PlayButtonClickSound()
         {
-            PlaySound(buttonClickSound);
+            if (buttonClickSound != null)
+            {
+                PlaySound(buttonClickSound);
+            }
+            else if (AudioManager.Instance != null && AudioManager.Instance.ButtonSelectClip != null)
+            {
+                PlaySound(AudioManager.Instance.ButtonSelectClip);
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySelectSound();
+            }
+        }
+
+        private void PlayCloseSound()
+        {
+            if (AudioManager.Instance != null && AudioManager.Instance.ButtonCloseClip != null)
+            {
+                PlaySound(AudioManager.Instance.ButtonCloseClip);
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayCloseSound();
+            }
+            else
+            {
+                PlayButtonClickSound();
+            }
         }
 
         private void PlaySound(AudioClip clip)
         {
-            if (audioSource != null && clip != null)
+            if (clip == null) return;
+
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.PlaySFX(clip);
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX(clip);
+            }
+            else if (audioSource != null)
             {
                 audioSource.PlayOneShot(clip);
             }

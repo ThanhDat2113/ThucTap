@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Luan/Scenes/MainMenu.unity
+    guid: a27483f2ec01c4f3ea2fa1a9cbf9ae54
+  - enabled: 0
     path: Assets/Thuan/Scenes/Thuan_MainMenu.unity
     guid: 5aab904ce8668ec4eb037666b4bbc240
   - enabled: 1

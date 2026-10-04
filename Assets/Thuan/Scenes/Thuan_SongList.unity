@@ -5745,7 +5745,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Thuan_MainMenu
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2106628317
@@ -5797,6 +5797,10 @@ PrefabInstance:
     - target: {fileID: 5741391792980388834, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
       propertyPath: m_Name
       value: AudioManagers
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741391792980388834, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
       propertyPath: m_LocalPosition.x

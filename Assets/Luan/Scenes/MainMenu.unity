@@ -5034,7 +5034,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 644210192}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458258149}
+        m_TargetAssemblyTypeName: Luan.MainMenu.MainMenuManager, Assembly-CSharp
+        m_MethodName: OnBatDauClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &644210192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8253,6 +8265,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1977568391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1094988362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5741391792980388834, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_Name
+      value: AudioManagers
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1077.4485
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 502.17166
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043903923178845433, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d8252e0a56c05b24796079c1c399fd43, type: 3}
 --- !u!1 &1134194271
 GameObject:
   m_ObjectHideFlags: 0
@@ -9363,7 +9432,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -11383,6 +11452,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394604619}
   m_CullTransparentMesh: 1
+--- !u!1 &1406354687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406354689}
+  - component: {fileID: 1406354688}
+  m_Layer: 0
+  m_Name: BMGController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1406354688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406354687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae04be84e340a34fb34a4d82d0f7ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneBackgroundMusic
+  bgmClip: {fileID: 8300000, guid: 01c52dbad1c65544588d1de7cfef1e35, type: 3}
+--- !u!4 &1406354689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406354687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1077.4485, y: 502.17166, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1409286932
 GameObject:
   m_ObjectHideFlags: 0
@@ -11963,11 +12077,12 @@ MonoBehaviour:
   accountButtonTMP: {fileID: 0}
   accountButtonLegacy: {fileID: 0}
   showLoginOnStart: 1
+  playButton: {fileID: 644210191}
   requireLoginToPlay: 0
-  playSceneName: 
+  playSceneName: Thuan_SongList
   audioSource: {fileID: 0}
-  buttonClickSound: {fileID: 0}
-  startGameSound: {fileID: 0}
+  buttonClickSound: {fileID: 8300000, guid: 3fd5400c2cda4d14895852a0a29b4ad5, type: 3}
+  startGameSound: {fileID: 8300000, guid: 12db13ef6984d90459a02b3802abad65, type: 3}
 --- !u!4 &1458258150
 Transform:
   m_ObjectHideFlags: 0
@@ -17637,3 +17752,5 @@ SceneRoots:
   - {fileID: 1977568391}
   - {fileID: 586634076}
   - {fileID: 1458258150}
+  - {fileID: 1094988362}
+  - {fileID: 1406354689}
