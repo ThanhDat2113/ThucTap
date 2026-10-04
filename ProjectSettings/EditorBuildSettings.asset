@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Thuan/Scenes/Thuan_MainMenu.unity
     guid: 5aab904ce8668ec4eb037666b4bbc240
   - enabled: 1
-    path: Assets/Scenes/SongList.unity
+    path: Assets/Thuan/Scenes/Thuan_SongList.unity
     guid: 73c4c3f22ece52c43ad3072ca07e4afc
   - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
+    path: Assets/Thuan/Scenes/Thuan_Gameplay.unity
     guid: 8c42b87bc6f5aa34a818ab7c363aa8a6
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity

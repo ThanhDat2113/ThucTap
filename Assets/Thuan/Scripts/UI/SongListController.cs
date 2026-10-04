@@ -16,7 +16,7 @@ public class SongListController : MonoBehaviour
     [SerializeField] private SongDetailPanel detailPanel;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Button playButton;
-    [SerializeField] private string gameplaySceneName = "Gameplay";
+    [SerializeField] private string gameplaySceneName = "Thuan_Gameplay";
 
     private readonly List<SongItemUI> spawnedItems = new List<SongItemUI>();
 
