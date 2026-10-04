@@ -117,60 +117,41 @@ namespace Luan.MainMenu
         /// </summary>
         public void SyncSlidersFromAudioManager()
         {
+            float master = PlayerPrefs.GetFloat("SETTINGS_MASTER_VOL", 1f);
+            float music = PlayerPrefs.GetFloat("SETTINGS_MUSIC_VOL", 0.8f);
+            float sfx = PlayerPrefs.GetFloat("SETTINGS_SFX_VOL", 1f);
+
             if (AudioManager.Instance != null)
             {
-                float master = AudioManager.Instance.MasterVolume;
-                float music = AudioManager.Instance.MusicVolume;
-                float sfx = AudioManager.Instance.SFXVolume;
-
-                if (masterSlider != null)
-                {
-                    masterSlider.SetValueWithoutNotify(master);
-                    if (masterFillImage != null) masterFillImage.fillAmount = master;
-                    UpdatePercentText(masterPercentTMP, masterPercentLegacy, master);
-                }
-
-                if (musicSlider != null)
-                {
-                    musicSlider.SetValueWithoutNotify(music);
-                    if (musicFillImage != null) musicFillImage.fillAmount = music;
-                    UpdatePercentText(musicPercentTMP, musicPercentLegacy, music);
-                }
-
-                if (sfxSlider != null)
-                {
-                    sfxSlider.SetValueWithoutNotify(sfx);
-                    if (sfxFillImage != null) sfxFillImage.fillAmount = sfx;
-                    UpdatePercentText(sfxPercentTMP, sfxPercentLegacy, sfx);
-                }
+                master = AudioManager.Instance.MasterVolume;
+                music = AudioManager.Instance.MusicVolume;
+                sfx = AudioManager.Instance.SFXVolume;
             }
             else
             {
-                // Fallback nếu chưa có AudioManager trong scene (lấy từ PlayerPrefs)
-                float master = PlayerPrefs.GetFloat("SETTINGS_MASTER_VOL", 1f);
-                float music = PlayerPrefs.GetFloat("SETTINGS_MUSIC_VOL", 0.8f);
-                float sfx = PlayerPrefs.GetFloat("SETTINGS_SFX_VOL", 1f);
+                if (MusicManager.Instance != null) music = MusicManager.Instance.Volume;
+                if (SFXManager.Instance != null) sfx = SFXManager.Instance.Volume;
+            }
 
-                if (masterSlider != null)
-                {
-                    masterSlider.SetValueWithoutNotify(master);
-                    if (masterFillImage != null) masterFillImage.fillAmount = master;
-                    UpdatePercentText(masterPercentTMP, masterPercentLegacy, master);
-                }
+            if (masterSlider != null)
+            {
+                masterSlider.SetValueWithoutNotify(master);
+                if (masterFillImage != null) masterFillImage.fillAmount = master;
+                UpdatePercentText(masterPercentTMP, masterPercentLegacy, master);
+            }
 
-                if (musicSlider != null)
-                {
-                    musicSlider.SetValueWithoutNotify(music);
-                    if (musicFillImage != null) musicFillImage.fillAmount = music;
-                    UpdatePercentText(musicPercentTMP, musicPercentLegacy, music);
-                }
+            if (musicSlider != null)
+            {
+                musicSlider.SetValueWithoutNotify(music);
+                if (musicFillImage != null) musicFillImage.fillAmount = music;
+                UpdatePercentText(musicPercentTMP, musicPercentLegacy, music);
+            }
 
-                if (sfxSlider != null)
-                {
-                    sfxSlider.SetValueWithoutNotify(sfx);
-                    if (sfxFillImage != null) sfxFillImage.fillAmount = sfx;
-                    UpdatePercentText(sfxPercentTMP, sfxPercentLegacy, sfx);
-                }
+            if (sfxSlider != null)
+            {
+                sfxSlider.SetValueWithoutNotify(sfx);
+                if (sfxFillImage != null) sfxFillImage.fillAmount = sfx;
+                UpdatePercentText(sfxPercentTMP, sfxPercentLegacy, sfx);
             }
         }
 
@@ -178,14 +159,13 @@ namespace Luan.MainMenu
 
         private void OnMasterSliderChanged(float value)
         {
+            value = Mathf.Clamp01(value);
+            AudioListener.volume = value;
+            PlayerPrefs.SetFloat("SETTINGS_MASTER_VOL", value);
+
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.SetMasterVolume(value);
-            }
-            else
-            {
-                AudioListener.volume = value;
-                PlayerPrefs.SetFloat("SETTINGS_MASTER_VOL", value);
             }
 
             if (masterFillImage != null) masterFillImage.fillAmount = value;
@@ -194,6 +174,13 @@ namespace Luan.MainMenu
 
         private void OnMusicSliderChanged(float value)
         {
+            value = Mathf.Clamp01(value);
+
+            if (MusicManager.Instance != null)
+            {
+                MusicManager.Instance.SetVolume(value);
+            }
+
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.SetMusicVolume(value);
@@ -209,20 +196,45 @@ namespace Luan.MainMenu
 
         private void OnSFXSliderChanged(float value)
         {
+            value = Mathf.Clamp01(value);
+
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.SetVolume(value);
+            }
+
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.SetSFXVolume(value);
-
-                // Giới hạn tần suất phát âm thanh test khi rê chuột kéo slider (0.15s / lần)
-                if (sfxTestClip != null && Time.unscaledTime - _lastSfxTestTime > 0.15f)
-                {
-                    _lastSfxTestTime = Time.unscaledTime;
-                    AudioManager.Instance.PlaySFX(sfxTestClip);
-                }
             }
             else
             {
                 PlayerPrefs.SetFloat("SETTINGS_SFX_VOL", value);
+            }
+
+            // Giới hạn tần suất phát âm thanh test khi kéo thanh SFX Slider (0.15s / lần)
+            if (Time.unscaledTime - _lastSfxTestTime > 0.15f)
+            {
+                _lastSfxTestTime = Time.unscaledTime;
+                if (sfxTestClip != null)
+                {
+                    if (SFXManager.Instance != null)
+                    {
+                        SFXManager.Instance.PlaySFX(sfxTestClip);
+                    }
+                    else if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlaySFX(sfxTestClip);
+                    }
+                }
+                else if (SFXManager.Instance != null && AudioManager.Instance != null && AudioManager.Instance.ButtonSelectClip != null)
+                {
+                    SFXManager.Instance.PlaySFX(AudioManager.Instance.ButtonSelectClip);
+                }
+                else if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlaySelectSound();
+                }
             }
 
             if (sfxFillImage != null) sfxFillImage.fillAmount = value;
@@ -240,10 +252,33 @@ namespace Luan.MainMenu
 
         private void OnResetDefaultClicked()
         {
+            AudioListener.volume = 1f;
+            PlayerPrefs.SetFloat("SETTINGS_MASTER_VOL", 1f);
+
+            if (MusicManager.Instance != null)
+            {
+                MusicManager.Instance.SetVolume(0.8f);
+            }
+            else
+            {
+                PlayerPrefs.SetFloat("SETTINGS_MUSIC_VOL", 0.8f);
+            }
+
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.SetVolume(1f);
+            }
+            else
+            {
+                PlayerPrefs.SetFloat("SETTINGS_SFX_VOL", 1f);
+            }
+
             if (AudioManager.Instance != null)
             {
+                AudioManager.Instance.PlaySelectSound();
                 AudioManager.Instance.ResetToDefault();
             }
+
             SyncSlidersFromAudioManager();
         }
 

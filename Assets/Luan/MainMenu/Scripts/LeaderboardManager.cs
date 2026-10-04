@@ -737,9 +737,14 @@ namespace Luan.MainMenu
 
         private void PlayButtonClickSound()
         {
-            if (audioSource != null && buttonClickSound != null)
+            if (buttonClickSound != null)
             {
-                audioSource.PlayOneShot(buttonClickSound);
+                if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(buttonClickSound);
+                else if (audioSource != null) audioSource.PlayOneShot(buttonClickSound);
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayCloseSound();
             }
         }
 
