@@ -11,7 +11,13 @@ public class GameplayScreen : MonoBehaviour
 
     private void Start()
     {
-        SongData song = MusicManager.Instance != null ? MusicManager.Instance.CurrentSong : null;
+        SongData song = GameSession.SelectedSong;
+        if (song == null && MusicManager.Instance != null)
+            song = MusicManager.Instance.CurrentSong;
+
+        // Bam PLAY o man chon bai -> bai hat bat dau phat tu dau tai day
+        if (song != null && MusicManager.Instance != null)
+            MusicManager.Instance.PlaySongFromStart(song);
 
         if (song == null)
         {

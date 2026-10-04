@@ -58,9 +58,11 @@ public class SongListController : MonoBehaviour
             }
         }
 
+        // Man chon bai luon phat nhac nen; bai hat chi phat khi bam PLAY
+        musicManager.PlayMusic(ambientBgm);
+
         if (selectedIndex < 0)
         {
-            musicManager.PlayMusic(ambientBgm);
             if (detailPanel != null) detailPanel.ShowEmpty();
         }
         else
@@ -74,7 +76,7 @@ public class SongListController : MonoBehaviour
         foreach (SongItemUI item in spawnedItems)
             item.SetSelected(item == selectedItem);
 
-        musicManager.Play(song);
+        musicManager.SelectSong(song);
 
         if (detailPanel != null)
             detailPanel.Show(song);
