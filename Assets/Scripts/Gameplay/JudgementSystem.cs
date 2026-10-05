@@ -9,6 +9,7 @@ namespace RhythmGame
         [Header("Refs")]
         public NoteSpawner spawner;
         public InputHandler input;
+        public HealthSystem healthSystem;
 
         [Header("Timing window (giây)")]
         public float perfectWindow = 0.045f;
@@ -69,6 +70,7 @@ namespace RhythmGame
                     n.PlayMissVisual();
                     OnJudged?.Invoke(Judgement.Miss, 0, false);
                     PlaySfx(Judgement.Miss);
+                    healthSystem?.ApplyJudgement(Judgement.Miss);
                 }
             }
         }
@@ -96,6 +98,7 @@ namespace RhythmGame
 
             PlaySfx(judgement);
             OnJudged?.Invoke(judgement, points, true);
+            healthSystem?.ApplyJudgement(judgement);
         }
 
         void HandleRelease(int lane)
@@ -116,6 +119,7 @@ namespace RhythmGame
                 holding.BreakHold();
                 OnJudged?.Invoke(Judgement.Miss, 0, false);
                 PlaySfx(Judgement.Miss);
+                healthSystem?.ApplyJudgement(Judgement.Miss);
             }
         }
 
@@ -124,6 +128,7 @@ namespace RhythmGame
             spawner.ReleaseNote(n);
             PlaySfx(Judgement.HoldComplete);
             OnJudged?.Invoke(Judgement.HoldComplete, holdCompletePoints, true);
+            healthSystem?.ApplyJudgement(Judgement.HoldComplete);
         }
 
         void PlaySfx(Judgement j)

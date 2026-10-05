@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace RhythmGame
 {
-    public enum GameState { Countdown, Playing, Finished }
+    public enum GameState { Countdown, Playing, Finished, Failed }
 
     /// <summary>
-    /// Điều phối state machine (Countdown -> Playing -> Finished) và giữ
+    /// Điều phối state machine (Countdown -> Playing -> Finished/Failed) và giữ
     /// đồng hồ bài hát (SongTime). Mọi thứ khác (spawn, judgement, UI)
     /// đều đi theo SongTime này, không tự đếm thời gian riêng.
     ///
@@ -19,6 +19,7 @@ namespace RhythmGame
         public NoteSpawner spawner;
         public JudgementSystem judgement;
         public InputHandler input;
+        public HealthSystem healthSystem;
 
         [Header("Chart")]
         public ChartData chart;
@@ -34,16 +35,19 @@ namespace RhythmGame
         public System.Action<GameState> OnStateChanged;
 
         Coroutine playMusicRoutine;
+        bool clearNotesPending;
 
         void Start()
         {
             input.OnRestartPressed += Restart;
+            if (healthSystem != null) healthSystem.OnHealthDepleted.AddListener(OnHealthDepleted);
             Restart();
         }
 
         void OnDestroy()
         {
             if (input != null) input.OnRestartPressed -= Restart;
+            if (healthSystem != null) healthSystem.OnHealthDepleted.RemoveListener(OnHealthDepleted);
         }
 
         public void Restart()
@@ -53,11 +57,19 @@ namespace RhythmGame
             spawner.Begin(chart);
             SongTime = 0f;
             CountdownRemaining = countdownSeconds;
+            clearNotesPending = false;
+            if (healthSystem != null) healthSystem.ResetHealth();
             SetState(GameState.Countdown);
         }
 
         void Update()
         {
+            if (clearNotesPending)
+            {
+                clearNotesPending = false;
+                spawner.ClearActive();
+            }
+
             switch (State)
             {
                 case GameState.Countdown: TickCountdown(); break;
@@ -82,7 +94,23 @@ namespace RhythmGame
             spawner.Tick(SongTime);
             judgement.CheckMisses();
 
-            if (spawner.Finished) SetState(GameState.Finished);
+            // CheckMisses có thể làm cạn máu -> chuyển sang Failed giữa chừng,
+            // lúc này đã kết thúc lượt chơi nên không được ghi đè bằng Finished.
+            if (State == GameState.Playing && spawner.Finished) SetState(GameState.Finished);
+        }
+
+        void OnHealthDepleted()
+        {
+            if (State != GameState.Playing) return;
+
+            // Hết máu -> kết thúc lượt chơi: dừng nhạc và dừng hẳn gameplay.
+            if (musicSource != null) musicSource.Stop();
+
+            // Hoãn xoá note tới frame sau: OnHealthDepleted được gọi từ giữa vòng
+            // lặp CheckMisses, xoá list lúc đó sẽ làm vỡ vòng lặp đang duyệt.
+            clearNotesPending = true;
+
+            SetState(GameState.Failed);
         }
 
         void SetState(GameState s)

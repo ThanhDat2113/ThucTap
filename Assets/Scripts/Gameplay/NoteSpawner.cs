@@ -89,5 +89,15 @@ namespace RhythmGame
             active.Remove(n);
             pool.Release(n);
         }
+
+        /// <summary>
+        /// Xoá sạch note đang trên màn hình (dùng khi kết thúc lượt chơi vì hết máu).
+        /// Không đụng tới nextIndex nên nếu Restart sau đó vẫn chạy lại từ đầu.
+        /// </summary>
+        public void ClearActive()
+        {
+            foreach (var n in active) pool.Release(n);
+            active.Clear();
+        }
     }
 }

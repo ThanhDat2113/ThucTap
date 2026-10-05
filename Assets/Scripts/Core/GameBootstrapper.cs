@@ -31,6 +31,20 @@ namespace RhythmGame
         public float hitLineY = -3.3f;
         public float scrollSpeed = 7f;
 
+        [Header("Máu (nhân vật)")]
+        [Tooltip("Máu tối đa. Về 0 là thua, lượt chơi kết thúc.")]
+        public float maxHealth = 100f;
+        [Tooltip("Máu hồi khi bấm trúng note (Perfect).")]
+        public float perfectHeal = 2f;
+        [Tooltip("Máu hồi khi bấm trúng note (Good).")]
+        public float goodHeal = 1.5f;
+        [Tooltip("Máu hồi khi bấm trúng note (Bad).")]
+        public float badHeal = 0.5f;
+        [Tooltip("Máu hồi khi giữ xong hold note.")]
+        public float holdCompleteHeal = 1f;
+        [Tooltip("Máu mất mỗi lần miss note.")]
+        public float missDamage = 8f;
+
         static readonly Color[] LaneColors =
         {
             new Color(0.76f, 0.29f, 0.60f),
@@ -59,9 +73,19 @@ namespace RhythmGame
 
             InputHandler input = gameObject.AddComponent<InputHandler>();
 
+            HealthSystem health = gameObject.AddComponent<HealthSystem>();
+            health.maxHealth = maxHealth;
+            health.perfectHeal = perfectHeal;
+            health.goodHeal = goodHeal;
+            health.badHeal = badHeal;
+            health.holdCompleteHeal = holdCompleteHeal;
+            health.missDamage = missDamage;
+            health.SetHealth(maxHealth);
+
             JudgementSystem judgement = gameObject.AddComponent<JudgementSystem>();
             judgement.spawner = spawner;
             judgement.input = input;
+            judgement.healthSystem = health;
 
             var audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
@@ -73,6 +97,7 @@ namespace RhythmGame
             gm.spawner = spawner;
             gm.judgement = judgement;
             gm.input = input;
+            gm.healthSystem = health;
             gm.chart = chartOverride != null ? chartOverride : BuildTestChart();
 
             var musicSource = gameObject.AddComponent<AudioSource>();
@@ -85,7 +110,7 @@ namespace RhythmGame
             flasher.input = input;
             flasher.laneColors = LaneColors;
 
-            BuildUI(gm, judgement);
+            BuildUI(gm, judgement, health);
         }
 
         void SetupCamera()
@@ -170,7 +195,7 @@ namespace RhythmGame
             return Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1f);
         }
 
-        void BuildUI(GameManager gm, JudgementSystem judgement)
+        void BuildUI(GameManager gm, JudgementSystem judgement, HealthSystem health)
         {
             var canvasGO = new GameObject("Canvas");
             canvasGO.transform.SetParent(transform);
@@ -188,18 +213,90 @@ namespace RhythmGame
             TMP_Text scoreText = MakeText(canvasGO.transform, "Score", 40, TextAlignmentOptions.TopLeft,
                                            new Vector2(0f, 1f), new Vector2(150, -40), new Vector2(400, 60));
             TMP_Text comboText = MakeText(canvasGO.transform, "Combo", 40, TextAlignmentOptions.TopLeft,
-                                           new Vector2(0f, 1f), new Vector2(150, -90), new Vector2(400, 60));
+                                          new Vector2(0f, 1f), new Vector2(150, -90), new Vector2(400, 60));
             TMP_Text messageText = MakeText(canvasGO.transform, "Message", 70, TextAlignmentOptions.Center,
                                              new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1000, 300));
+
+            BuildHealthBar(canvasGO.transform, health);
 
             var ui = gameObject.AddComponent<UIController>();
             ui.gameManager = gm;
             ui.judgement = judgement;
+            ui.healthSystem = health;
             ui.countdownText = countdownText;
             ui.judgeText = judgeText;
             ui.scoreText = scoreText;
             ui.comboText = comboText;
             ui.messageText = messageText;
+        }
+
+        void BuildHealthBar(Transform parent, HealthSystem health)
+        {
+            var sprite = MakeWhiteSprite();
+
+            // Root: thanh nằm giữa cạnh trên, rộng 700px cao 34px.
+            var root = new GameObject("HealthBar");
+            root.transform.SetParent(parent, false);
+            var rt = root.AddComponent<RectTransform>();
+            rt.anchorMin = new Vector2(0.5f, 1f);
+            rt.anchorMax = new Vector2(0.5f, 1f);
+            rt.pivot = new Vector2(0.5f, 1f);
+            rt.anchoredPosition = new Vector2(0f, -30f);
+            rt.sizeDelta = new Vector2(700f, 34f);
+
+            // Nền thanh: giãn hết khung.
+            Image bg = MakeImage("Background", rt, sprite, new Color(0f, 0f, 0f, 0.65f));
+            var bgRect = bg.rectTransform;
+            bgRect.anchorMin = Vector2.zero;
+            bgRect.anchorMax = Vector2.one;
+            bgRect.pivot = new Vector2(0.5f, 0.5f);
+            bgRect.offsetMin = Vector2.zero;
+            bgRect.offsetMax = Vector2.zero;
+
+            // Lớp ghost: phần máu vừa mất, tụt xuống chậm để thấy rõ.
+            // Neo bám cạnh trái, bề rộng = anchorMax.x * bề rộng cha -> co từ phải sang trái.
+            Image ghostImg = MakeImage("Ghost", rt, sprite, new Color(1f, 1f, 1f, 0.35f));
+            RectTransform ghostRect = SetupBarRect(ghostImg.rectTransform, 26f);
+
+            // Lớp máu chính.
+            Image fillImg = MakeImage("Fill", rt, sprite, Color.green);
+            RectTransform fillRect = SetupBarRect(fillImg.rectTransform, 26f);
+
+            TMP_Text label = MakeText(rt, "Label", 24, TextAlignmentOptions.Center,
+                                       new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(700f, 34f));
+
+            var bar = root.AddComponent<HealthBar>();
+            bar.Bind(health, ghostRect, fillRect, fillImg, label);
+        }
+
+        /// <summary>
+        /// Layout cho lớp thanh: neo trái (x=0) tới neo phải (x=1), cao cố định,
+        /// canh giữa theo trục Y. Đổi anchorMax.x để co giãn từ phải sang trái.
+        /// </summary>
+        RectTransform SetupBarRect(RectTransform r, float height)
+        {
+            r.anchorMin = new Vector2(0f, 0.5f);
+            r.anchorMax = new Vector2(1f, 0.5f);
+            r.pivot = new Vector2(0f, 0.5f);
+            r.sizeDelta = new Vector2(0f, height);
+            r.anchoredPosition = Vector2.zero;
+            return r;
+        }
+
+        Image MakeImage(string name, Transform parent, Sprite sprite, Color color)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var rt = go.AddComponent<RectTransform>();
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = Vector2.zero;
+            rt.sizeDelta = new Vector2(690f, 26f);
+
+            var img = go.AddComponent<Image>();
+            img.sprite = sprite;
+            img.color = color;
+            return img;
         }
 
         TMP_Text MakeText(Transform parent, string name, float fontSize, TextAlignmentOptions alignment,
