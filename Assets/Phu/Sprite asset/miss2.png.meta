@@ -1,0 +1,954 @@
+fileFormatVersion: 2
+guid: 3c0655bea8904b54bab492190ccd6382
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9054761311564131315
+    second: miss2_0
+  - first:
+      213: -2285602190812150775
+    second: miss2_1
+  - first:
+      213: 4988758414682667130
+    second: miss2_2
+  - first:
+      213: -3180378441829137563
+    second: miss2_3
+  - first:
+      213: 4865450759224628293
+    second: miss2_4
+  - first:
+      213: 1895354327946974391
+    second: miss2_5
+  - first:
+      213: -320376380275874449
+    second: miss2_6
+  - first:
+      213: -50604812601236133
+    second: miss2_7
+  - first:
+      213: 319561809822138471
+    second: miss2_8
+  - first:
+      213: -2876908690255981831
+    second: miss2_9
+  - first:
+      213: 2245222033518996415
+    second: miss2_10
+  - first:
+      213: 2022357650158233973
+    second: miss2_11
+  - first:
+      213: 3115234438324842172
+    second: miss2_12
+  - first:
+      213: -7493019951000393312
+    second: miss2_13
+  - first:
+      213: 1824315327074824323
+    second: miss2_14
+  - first:
+      213: 6732829759309229176
+    second: miss2_15
+  - first:
+      213: -6473760019327867559
+    second: miss2_16
+  - first:
+      213: -558798861476349327
+    second: miss2_17
+  - first:
+      213: -5923940572207773593
+    second: miss2_18
+  - first:
+      213: -6376804246171382730
+    second: miss2_19
+  - first:
+      213: -3353748692572885257
+    second: miss2_20
+  - first:
+      213: -6973516006134464740
+    second: miss2_21
+  - first:
+      213: 8021900034951674338
+    second: miss2_22
+  - first:
+      213: -309212519197115864
+    second: miss2_23
+  - first:
+      213: -8235854661767090113
+    second: miss2_24
+  - first:
+      213: -2225328386709903811
+    second: miss2_25
+  - first:
+      213: -402832685207043024
+    second: miss2_26
+  - first:
+      213: 3430006389009896516
+    second: miss2_27
+  - first:
+      213: 5104644480141352826
+    second: miss2_28
+  - first:
+      213: 4230578404291541227
+    second: miss2_29
+  - first:
+      213: -5451479245146852180
+    second: miss2_30
+  - first:
+      213: 704762919446019861
+    second: miss2_31
+  - first:
+      213: -9150086105057462563
+    second: miss2_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: miss2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 447
+        width: 158
+        height: 249
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d041542bf86075280800000000000000
+      internalID: -9054761311564131315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 419
+        width: 172
+        height: 279
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90489c6cae8e740e0800000000000000
+      internalID: -2285602190812150775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_2
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 411
+        width: 163
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a78b669b851ab3540800000000000000
+      internalID: 4988758414682667130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_3
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 446
+        width: 157
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 563c67358a60dd3d0800000000000000
+      internalID: -3180378441829137563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_4
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 399
+        width: 197
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5441dbfefad858340800000000000000
+      internalID: 4865450759224628293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_5
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 433
+        width: 189
+        height: 261
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b457c028b6ad4a10800000000000000
+      internalID: 1895354327946974391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_6
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 385
+        width: 208
+        height: 293
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f652b3b216bcd8bf0800000000000000
+      internalID: -320376380275874449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_7
+      rect:
+        serializedVersion: 2
+        x: 1321
+        y: 435
+        width: 198
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b556af8e0373c4ff0800000000000000
+      internalID: -50604812601236133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_8
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 446
+        width: 202
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 760ca3ed5cf4f6400800000000000000
+      internalID: 319561809822138471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_9
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 417
+        width: 190
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f2de0ae9ca2318d0800000000000000
+      internalID: -2876908690255981831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_10
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 445
+        width: 212
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbba7c53b81a82f10800000000000000
+      internalID: 2245222033518996415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 194
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 579a972619bd01c10800000000000000
+      internalID: 2022357650158233973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_12
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 250
+        width: 205
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbe6a6867398b3b20800000000000000
+      internalID: 3115234438324842172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_13
+      rect:
+        serializedVersion: 2
+        x: 1955
+        y: 256
+        width: 198
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a9e4b5ed02730890800000000000000
+      internalID: -7493019951000393312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_14
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 11
+        width: 189
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3807894df15415910800000000000000
+      internalID: 1824315327074824323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_15
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 178
+        width: 177
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87c2ec87ef0df6d50800000000000000
+      internalID: 6732829759309229176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_16
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 198
+        width: 199
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95526d6df859826a0800000000000000
+      internalID: -6473760019327867559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_17
+      rect:
+        serializedVersion: 2
+        x: 1807
+        y: 9
+        width: 163
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17a3fc8656fbe38f0800000000000000
+      internalID: -558798861476349327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_18
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 254
+        width: 223
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 768080b9f6fe9cda0800000000000000
+      internalID: -5923940572207773593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_20
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 252
+        width: 217
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fe234145571571d0800000000000000
+      internalID: -3353748692572885257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_21
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 250
+        width: 214
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1fbad2c328193f90800000000000000
+      internalID: -6973516006134464740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_22
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 254
+        width: 214
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e9fcf67493835f60800000000000000
+      internalID: 8021900034951674338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_23
+      rect:
+        serializedVersion: 2
+        x: 1526
+        y: 262
+        width: 215
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82af6212ad475bbf0800000000000000
+      internalID: -309212519197115864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_25
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 12
+        width: 176
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3620916f9b0e11e0800000000000000
+      internalID: -2225328386709903811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_26
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 11
+        width: 209
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 034415e9ec9d86af0800000000000000
+      internalID: -402832685207043024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_27
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 0
+        width: 156
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 444514a43a4d99f20800000000000000
+      internalID: 3430006389009896516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_28
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 10
+        width: 168
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7fdb7feb1757d640800000000000000
+      internalID: 5104644480141352826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_29
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 12
+        width: 167
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be87c36e4a806ba30800000000000000
+      internalID: 4230578404291541227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_30
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 166
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca47b9c72847854b0800000000000000
+      internalID: -5451479245146852180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_31
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 0
+        width: 182
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51f72782422d7c900800000000000000
+      internalID: 704762919446019861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_32
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 0
+        width: 185
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd6ffcbaa2d540180800000000000000
+      internalID: -9150086105057462563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miss2_33
+      rect:
+        serializedVersion: 2
+        x: 1993
+        y: 4
+        width: 161
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994f33c0ae05f004e898182f89738a74
+      internalID: -75745519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 71053b275794e414d9cdc00970635a85
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      miss2_0: -9054761311564131315
+      miss2_1: -2285602190812150775
+      miss2_10: 2245222033518996415
+      miss2_11: 2022357650158233973
+      miss2_12: 3115234438324842172
+      miss2_13: -7493019951000393312
+      miss2_14: 1824315327074824323
+      miss2_15: 6732829759309229176
+      miss2_16: -6473760019327867559
+      miss2_17: -558798861476349327
+      miss2_18: -5923940572207773593
+      miss2_19: -6376804246171382730
+      miss2_2: 4988758414682667130
+      miss2_20: -3353748692572885257
+      miss2_21: -6973516006134464740
+      miss2_22: 8021900034951674338
+      miss2_23: -309212519197115864
+      miss2_24: -8235854661767090113
+      miss2_25: -2225328386709903811
+      miss2_26: -402832685207043024
+      miss2_27: 3430006389009896516
+      miss2_28: 5104644480141352826
+      miss2_29: 4230578404291541227
+      miss2_3: -3180378441829137563
+      miss2_30: -5451479245146852180
+      miss2_31: 704762919446019861
+      miss2_32: -9150086105057462563
+      miss2_33: -75745519
+      miss2_4: 4865450759224628293
+      miss2_5: 1895354327946974391
+      miss2_6: -320376380275874449
+      miss2_7: -50604812601236133
+      miss2_8: 319561809822138471
+      miss2_9: -2876908690255981831
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
