@@ -206,7 +206,7 @@ MonoBehaviour:
   maxAlpha: 0.75
   fadeInSpeed: 40
   fadeOutSpeed: 5
-  padGlow: {fileID: 0}
+  padGlow: {fileID: 958283369}
   padGlowColor: {r: 1, g: 1, b: 1, a: 1}
   padPunchScale: 1.12
   beamMaterial: {fileID: 0}
@@ -548,7 +548,7 @@ MonoBehaviour:
   maxAlpha: 0.75
   fadeInSpeed: 40
   fadeOutSpeed: 5
-  padGlow: {fileID: 0}
+  padGlow: {fileID: 269285539}
   padGlowColor: {r: 1, g: 1, b: 1, a: 1}
   padPunchScale: 1.12
   beamMaterial: {fileID: 0}
@@ -994,7 +994,7 @@ MonoBehaviour:
   maxAlpha: 0.75
   fadeInSpeed: 40
   fadeOutSpeed: 5
-  padGlow: {fileID: 0}
+  padGlow: {fileID: 1207294087}
   padGlowColor: {r: 1, g: 1, b: 1, a: 1}
   padPunchScale: 1.12
   beamMaterial: {fileID: 0}
@@ -1667,6 +1667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 862901828}
+  - component: {fileID: 862901829}
   m_Layer: 0
   m_Name: Lanes
   m_TagString: Untagged
@@ -1693,6 +1694,27 @@ Transform:
   - {fileID: 1508890092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862901829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862901827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d529b2de5cc5546ada42b209f0d03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadNeonEdge
+  lanesRoot: {fileID: 0}
+  coreColor: {r: 1, g: 1, b: 1, a: 1}
+  glowColor: {r: 0.3, g: 0.9, b: 1, a: 0.55}
+  farAlpha: 0
+  coreWidth: 0.06
+  glowWidth: 0.35
+  pulseAmount: 0.15
+  pulseSpeed: 3
+  recomputeEveryFrame: 0
 --- !u!1 &873340427
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,7 +2901,7 @@ MonoBehaviour:
   maxAlpha: 0.75
   fadeInSpeed: 40
   fadeOutSpeed: 5
-  padGlow: {fileID: 0}
+  padGlow: {fileID: 837932951}
   padGlowColor: {r: 1, g: 1, b: 1, a: 1}
   padPunchScale: 1.12
   beamMaterial: {fileID: 0}

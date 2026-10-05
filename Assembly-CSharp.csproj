@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\Gameplay\ReceptorFlasher.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Core\ChartRecorder.cs" />
+    <Compile Include="Assets\VFX\RoadNeonEdge.cs" />
     <Compile Include="Assets\VFX\LaneBeam.cs" />
     <Compile Include="Assets\Scripts\Core\GameBootstrapper.cs" />
     <Compile Include="Assets\VFX\AudioSpectrumBars.cs" />
