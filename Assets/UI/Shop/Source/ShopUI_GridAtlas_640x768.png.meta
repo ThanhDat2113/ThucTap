@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: dca7be01df54bb64fafc2dc30fbb9e2e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3502178116103896260
+    second: ShopUI_GridAtlas_640x768_0
+  - first:
+      213: 5570874954786336124
+    second: ShopUI_GridAtlas_640x768_1
+  - first:
+      213: 9220976902015930756
+    second: ShopUI_GridAtlas_640x768_2
+  - first:
+      213: 4994361091144225661
+    second: ShopUI_GridAtlas_640x768_3
+  - first:
+      213: -4054050895261926646
+    second: ShopUI_GridAtlas_640x768_4
+  - first:
+      213: -3715549106972834359
+    second: ShopUI_GridAtlas_640x768_5
+  - first:
+      213: 6832320566234859391
+    second: ShopUI_GridAtlas_640x768_6
+  - first:
+      213: 5324663128799217556
+    second: ShopUI_GridAtlas_640x768_7
+  - first:
+      213: -6893651593260138444
+    second: ShopUI_GridAtlas_640x768_8
+  - first:
+      213: 2911784419750460733
+    second: ShopUI_GridAtlas_640x768_9
+  - first:
+      213: -4549675125735613666
+    second: ShopUI_GridAtlas_640x768_10
+  - first:
+      213: -5412328686692329988
+    second: ShopUI_GridAtlas_640x768_11
+  - first:
+      213: 6804515873198069629
+    second: ShopUI_GridAtlas_640x768_12
+  - first:
+      213: -2122840491180313963
+    second: ShopUI_GridAtlas_640x768_13
+  - first:
+      213: -1679313167659921612
+    second: ShopUI_GridAtlas_640x768_14
+  - first:
+      213: -1886089951064078517
+    second: ShopUI_GridAtlas_640x768_15
+  - first:
+      213: -1608509966038401476
+    second: ShopUI_GridAtlas_640x768_16
+  - first:
+      213: 4782199661691072380
+    second: ShopUI_GridAtlas_640x768_17
+  - first:
+      213: 5346137962704680435
+    second: ShopUI_GridAtlas_640x768_18
+  - first:
+      213: 88434451675702765
+    second: ShopUI_GridAtlas_640x768_19
+  - first:
+      213: 7332986024933339
+    second: ShopUI_GridAtlas_640x768_20
+  - first:
+      213: -4994342741612200107
+    second: ShopUI_GridAtlas_640x768_21
+  - first:
+      213: -3589438825926843302
+    second: ShopUI_GridAtlas_640x768_22
+  - first:
+      213: 5298688251013892565
+    second: ShopUI_GridAtlas_640x768_23
+  - first:
+      213: 9015752680313141465
+    second: ShopUI_GridAtlas_640x768_24
+  - first:
+      213: -2040623812805968122
+    second: ShopUI_GridAtlas_640x768_25
+  - first:
+      213: -7692321594026008340
+    second: ShopUI_GridAtlas_640x768_26
+  - first:
+      213: -4108246578028363481
+    second: ShopUI_GridAtlas_640x768_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_0
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 4084
+        width: 490
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ccf486f07c3a9030800000000000000
+      internalID: 3502178116103896260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_1
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 4132
+        width: 137
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7de8207149bf4d40800000000000000
+      internalID: 5570874954786336124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_2
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 4150
+        width: 328
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 481ddb633ad77ff70800000000000000
+      internalID: 9220976902015930756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_3
+      rect:
+        serializedVersion: 2
+        x: 2083
+        y: 4138
+        width: 314
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d731fad73f88f4540800000000000000
+      internalID: 4994361091144225661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_4
+      rect:
+        serializedVersion: 2
+        x: 2828
+        y: 4160
+        width: 104
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0bfe86a03e1db7c0800000000000000
+      internalID: -4054050895261926646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_5
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 3397
+        width: 103
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c54d55e5c7bf6cc0800000000000000
+      internalID: -3715549106972834359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_6
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 3299
+        width: 258
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7746061b5741de50800000000000000
+      internalID: 6832320566234859391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_7
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 3149
+        width: 364
+        height: 614
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49782b487e005e940800000000000000
+      internalID: 5324663128799217556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_8
+      rect:
+        serializedVersion: 2
+        x: 2122
+        y: 3323
+        width: 235
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4308c6a6664d450a0800000000000000
+      internalID: -6893651593260138444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_9
+      rect:
+        serializedVersion: 2
+        x: 2762
+        y: 3324
+        width: 236
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3d3eb1a08cb86820800000000000000
+      internalID: 2911784419750460733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_10
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 2646
+        width: 350
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1b191f049e4cd0c0800000000000000
+      internalID: -4549675125735613666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_11
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 2646
+        width: 335
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf51c063cbb83e4b0800000000000000
+      internalID: -5412328686692329988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_12
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 2646
+        width: 335
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d775a72822f7e6e50800000000000000
+      internalID: 6804515873198069629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_13
+      rect:
+        serializedVersion: 2
+        x: 2124
+        y: 2563
+        width: 231
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592b16012d72a82e0800000000000000
+      internalID: -2122840491180313963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_14
+      rect:
+        serializedVersion: 2
+        x: 2762
+        y: 2563
+        width: 235
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43f8ef64291e1b8e0800000000000000
+      internalID: -1679313167659921612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_15
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 1795
+        width: 235
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b474464be2343d5e0800000000000000
+      internalID: -1886089951064078517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_16
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1878
+        width: 335
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3efa9845bc6da9e0800000000000000
+      internalID: -1608509966038401476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_17
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 1878
+        width: 335
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7fe6105149cd5240800000000000000
+      internalID: 4782199661691072380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_18
+      rect:
+        serializedVersion: 2
+        x: 2072
+        y: 1879
+        width: 335
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f53e3be62c413a40800000000000000
+      internalID: 5346137962704680435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_19
+      rect:
+        serializedVersion: 2
+        x: 2799
+        y: 1838
+        width: 162
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de5690e4aae2a3100800000000000000
+      internalID: 88434451675702765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_20
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 1082
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd7b82bdf4d0a1000800000000000000
+      internalID: 7332986024933339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_21
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1106
+        width: 94
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55f77a7dcb780bab0800000000000000
+      internalID: -4994342741612200107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_22
+      rect:
+        serializedVersion: 2
+        x: 1543
+        y: 1088
+        width: 114
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a54a2adc760cf2ec0800000000000000
+      internalID: -3589438825926843302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_23
+      rect:
+        serializedVersion: 2
+        x: 2188
+        y: 1108
+        width: 104
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9083104e8b88940800000000000000
+      internalID: 5298688251013892565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_24
+      rect:
+        serializedVersion: 2
+        x: 2827
+        y: 1107
+        width: 106
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d837d49b436e1d70800000000000000
+      internalID: 9015752680313141465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_25
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 340
+        width: 105
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f3f75347f3ea3e0800000000000000
+      internalID: -2040623812805968122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_26
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 320
+        width: 118
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce0630214426f3590800000000000000
+      internalID: -7692321594026008340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopUI_GridAtlas_640x768_27
+      rect:
+        serializedVersion: 2
+        x: 1405
+        y: 335
+        width: 389
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 721c7e2f0839cf6c0800000000000000
+      internalID: -4108246578028363481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ShopUI_GridAtlas_640x768_0: 3502178116103896260
+      ShopUI_GridAtlas_640x768_1: 5570874954786336124
+      ShopUI_GridAtlas_640x768_10: -4549675125735613666
+      ShopUI_GridAtlas_640x768_11: -5412328686692329988
+      ShopUI_GridAtlas_640x768_12: 6804515873198069629
+      ShopUI_GridAtlas_640x768_13: -2122840491180313963
+      ShopUI_GridAtlas_640x768_14: -1679313167659921612
+      ShopUI_GridAtlas_640x768_15: -1886089951064078517
+      ShopUI_GridAtlas_640x768_16: -1608509966038401476
+      ShopUI_GridAtlas_640x768_17: 4782199661691072380
+      ShopUI_GridAtlas_640x768_18: 5346137962704680435
+      ShopUI_GridAtlas_640x768_19: 88434451675702765
+      ShopUI_GridAtlas_640x768_2: 9220976902015930756
+      ShopUI_GridAtlas_640x768_20: 7332986024933339
+      ShopUI_GridAtlas_640x768_21: -4994342741612200107
+      ShopUI_GridAtlas_640x768_22: -3589438825926843302
+      ShopUI_GridAtlas_640x768_23: 5298688251013892565
+      ShopUI_GridAtlas_640x768_24: 9015752680313141465
+      ShopUI_GridAtlas_640x768_25: -2040623812805968122
+      ShopUI_GridAtlas_640x768_26: -7692321594026008340
+      ShopUI_GridAtlas_640x768_27: -4108246578028363481
+      ShopUI_GridAtlas_640x768_3: 4994361091144225661
+      ShopUI_GridAtlas_640x768_4: -4054050895261926646
+      ShopUI_GridAtlas_640x768_5: -3715549106972834359
+      ShopUI_GridAtlas_640x768_6: 6832320566234859391
+      ShopUI_GridAtlas_640x768_7: 5324663128799217556
+      ShopUI_GridAtlas_640x768_8: -6893651593260138444
+      ShopUI_GridAtlas_640x768_9: 2911784419750460733
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
