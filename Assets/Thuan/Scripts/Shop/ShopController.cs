@@ -34,6 +34,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private Button buyButton;
     [SerializeField] private GameObject ownedLabel;
     [SerializeField] private TMP_Text messageText;
+    [SerializeField] private ShopConfirmDialog confirmDialog;
 
     [Header("Audio")]
     [SerializeField] private AudioClip buyClip;
@@ -103,12 +104,26 @@ public class ShopController : MonoBehaviour
         ShowDetail(card != null ? card.Item : null);
     }
 
+    // Bam BUY / gio hang: kiem tra tien roi hien hop xac nhan
     public void BuySelected()
     {
         if (selected == null) return;
         var item = selected.Item;
         if (Wallet.IsOwned(item.Id)) return;
 
+        if (Wallet.Get(item.currency) < item.price)
+        {
+            PlayClip(failClip);
+            ShowMessage(item.currency == CurrencyType.Coin ? "NOT ENOUGH COINS" : "NOT ENOUGH GEMS", new Color(1f, 0.3f, 0.45f));
+            return;
+        }
+
+        if (confirmDialog != null) confirmDialog.Show(item, () => CompletePurchase(item));
+        else CompletePurchase(item);
+    }
+
+    private void CompletePurchase(ShopItemData item)
+    {
         if (Wallet.TryBuy(item))
         {
             PlayClip(buyClip);
@@ -120,7 +135,7 @@ public class ShopController : MonoBehaviour
             ShowMessage(item.currency == CurrencyType.Coin ? "NOT ENOUGH COINS" : "NOT ENOUGH GEMS", new Color(1f, 0.3f, 0.45f));
         }
         foreach (var c in cards) c.Refresh();
-        ShowDetail(item);
+        if (selected != null) ShowDetail(selected.Item);
     }
 
     private void ShowDetail(ShopItemData item)
