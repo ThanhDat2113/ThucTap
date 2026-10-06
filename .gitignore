@@ -83,3 +83,4 @@ qldatn-vscode-install_*.ps1
 # Android native build cache
 /.utmp/
 /.cxx/
+.qldatn/
