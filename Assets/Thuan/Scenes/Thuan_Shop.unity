@@ -995,7 +995,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 320
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fcced91df37638e44848537f96bc34a5, type: 2}
   m_sharedMaterial: {fileID: -4122273433491615156, guid: fcced91df37638e44848537f96bc34a5, type: 2}
@@ -3498,8 +3498,8 @@ MonoBehaviour:
   ownedLabel: {fileID: 1144315078}
   messageText: {fileID: 118760308}
   confirmDialog: {fileID: 756596116}
-  buyClip: {fileID: 8300000, guid: 12db13ef6984d90459a02b3802abad65, type: 3}
-  failClip: {fileID: 8300000, guid: eead91489824dca468aa334bfe954e2f, type: 3}
+  buyClip: {fileID: 8300000, guid: ff0fd47e16a936244a47b672d12f6a87, type: 3}
+  failClip: {fileID: 0}
   tabClip: {fileID: 8300000, guid: 3fd5400c2cda4d14895852a0a29b4ad5, type: 3}
 --- !u!4 &1117866911
 Transform:
@@ -6109,7 +6109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12,450
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fcced91df37638e44848537f96bc34a5, type: 2}
   m_sharedMaterial: {fileID: -4122273433491615156, guid: fcced91df37638e44848537f96bc34a5, type: 2}

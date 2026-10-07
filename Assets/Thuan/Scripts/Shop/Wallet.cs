@@ -4,8 +4,8 @@ using UnityEngine;
 // Vi tien cua nguoi choi + do da mua, luu bang PlayerPrefs
 public static class Wallet
 {
-    public const int StartCoins = 999999;
-    public const int StartGems = 999999;
+    public const int StartCoins = 0;
+    public const int StartGems = 0;
 
     private const string CoinKey = "wallet_coins";
     private const string GemKey = "wallet_gems";
