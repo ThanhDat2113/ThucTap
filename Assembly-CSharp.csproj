@@ -71,6 +71,7 @@
     <Compile Include="Assets\VFX\JudgementPopup.cs" />
     <Compile Include="Assets\Scripts\Core\GameManager.cs" />
     <Compile Include="Assets\Scripts\Input\InputHandler.cs" />
+    <Compile Include="Assets\VFX\NapGameManager.cs" />
     <Compile Include="Assets\Scripts\Data\ChartData.cs" />
   </ItemGroup>
   <ItemGroup>
