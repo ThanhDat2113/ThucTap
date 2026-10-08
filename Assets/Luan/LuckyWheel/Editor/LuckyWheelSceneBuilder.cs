@@ -75,6 +75,7 @@ namespace Luan.LuckyWheel.Editor
 
             var footer = AddGroup(canvasGo.transform, "Footer");
             AddImage(footer, "BonusProgress", "BonusProgress.png", new Vector2(288, 845), new Vector2(555, 126), false);
+            InstallEditablePanels(canvasGo.transform);
 
             new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
             EditorSceneManager.SaveScene(scene, "Assets/Luan/Scenes/LuckyWheel.unity");
@@ -258,6 +259,227 @@ namespace Luan.LuckyWheel.Editor
             EditorSceneManager.MarkSceneDirty(controller.gameObject.scene);
             EditorSceneManager.SaveScene(controller.gameObject.scene);
             Debug.Log("LuckyWheel now uses separate transparent inner-disc and fixed-rim sprites.");
+        }
+
+        [MenuItem("Tools/Luan/Make Four Lucky Wheel Panels Editable")]
+        public static void MakeFourPanelsEditable()
+        {
+            if (EditorApplication.isPlaying)
+            {
+                Debug.LogWarning("Stop Play Mode before editing LuckyWheel panels.");
+                return;
+            }
+
+            var canvas = Object.FindFirstObjectByType<Canvas>();
+            if (canvas == null || canvas.transform.Find("TopBar/Currencies") == null ||
+                canvas.transform.Find("RightPanel/FeaturedRewards") == null ||
+                canvas.transform.Find("RightPanel/SpinInfo") == null ||
+                canvas.transform.Find("Footer/BonusProgress") == null)
+            {
+                Debug.LogError("Open the LuckyWheel scene with all four photographed panels first.");
+                return;
+            }
+
+            InstallEditablePanels(canvas.transform);
+            EditorSceneManager.MarkSceneDirty(canvas.gameObject.scene);
+            EditorSceneManager.SaveScene(canvas.gameObject.scene);
+            AssetDatabase.SaveAssets();
+            Debug.Log("The four photographed LuckyWheel panels now have editable icons, text and values.");
+        }
+
+        [MenuItem("Tools/Luan/Reset Lucky Wheel Panel Values To Zero")]
+        public static void ResetPanelValuesToZero()
+        {
+            if (EditorApplication.isPlaying) return;
+            var data = Object.FindFirstObjectByType<Luan.LuckyWheel.LuckyWheelEditablePanels>();
+            if (data == null) return;
+            data.ResetVisibleValues();
+            EditorUtility.SetDirty(data);
+            EditorSceneManager.MarkSceneDirty(data.gameObject.scene);
+            EditorSceneManager.SaveScene(data.gameObject.scene);
+        }
+
+        private static void InstallEditablePanels(Transform canvas)
+        {
+            var currency = canvas.Find("TopBar/Currencies") as RectTransform;
+            var featured = canvas.Find("RightPanel/FeaturedRewards") as RectTransform;
+            var spin = canvas.Find("RightPanel/SpinInfo") as RectTransform;
+            var bonus = canvas.Find("Footer/BonusProgress") as RectTransform;
+            if (currency == null || featured == null || spin == null || bonus == null) return;
+
+            var boldFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset");
+            var displayFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset");
+            var headingFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Thuan/UI/Fonts/Bangers SDF.asset");
+            if (boldFont == null) boldFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
+            if (displayFont == null) displayFont = boldFont;
+            if (headingFont == null) headingFont = displayFont;
+
+            InstallPanelBase(currency, "Currencies_EditableBase.png", 2.2f);
+            var currencyContent = EnsureContent(currency);
+            AddPanelIcon(currencyContent, "CoinIcon", new Vector2(.10f, .5f), new Vector2(.13f, .7f));
+            AddPanelText(currencyContent, "CoinPlus", "+", boldFont, new Vector2(.19f, .5f), new Vector2(.06f, .55f), 21f, Color.white);
+            AddPanelText(currencyContent, "CoinValue", "0", boldFont, new Vector2(.29f, .5f), new Vector2(.24f, .6f), 24f, Color.white);
+            AddPanelIcon(currencyContent, "DiamondIcon", new Vector2(.59f, .5f), new Vector2(.13f, .7f));
+            AddPanelText(currencyContent, "DiamondPlus", "+", boldFont, new Vector2(.68f, .5f), new Vector2(.06f, .55f), 21f, Color.white);
+            AddPanelText(currencyContent, "DiamondValue", "0", boldFont, new Vector2(.79f, .5f), new Vector2(.24f, .6f), 24f, Color.white);
+
+            InstallPanelBase(featured, "FeaturedRewards_EditableBase.png", 1f);
+            var featuredContent = EnsureContent(featured);
+            var featuredHeading = AddPanelText(featuredContent, "Heading", "PHẦN THƯỞNG NỔI BẬT", headingFont,
+                new Vector2(.43f, .16f), new Vector2(.64f, .13f), 24f, Color.white);
+            featuredHeading.font = headingFont;
+            featuredHeading.fontSharedMaterial = headingFont.material;
+            featuredHeading.outlineWidth = .12f;
+            featuredHeading.rectTransform.localEulerAngles = new Vector3(0f, 0f, 4f);
+            for (var i = 0; i < 3; i++)
+            {
+                var card = EnsureChild(featuredContent, $"Reward{i + 1}");
+                var x = .19f + i * .31f;
+                var iconY = i == 0 ? .52f : i == 1 ? .45f : .49f;
+                AddPanelIcon(card, "Icon", new Vector2(x, iconY), new Vector2(.27f, .43f));
+                AddPanelText(card, "Title", i == 1 ? "Skin" : i == 0 ? "Nhân vật" : "Rương quà", boldFont,
+                    new Vector2(x, .78f), new Vector2(.27f, .09f), 19f, Color.white);
+                AddPanelText(card, "Subtitle", i == 1 ? "Bóng Đêm" : i == 0 ? "Ánh Sao" : "Cao Cấp", boldFont,
+                    new Vector2(x, .85f), new Vector2(.27f, .08f), 17f, new Color(.73f, .90f, 1f));
+            }
+
+            InstallPanelBase(spin, "SpinInfo_EditableBase.png", 1f);
+            var spinContent = EnsureContent(spin);
+            AddPanelIcon(spinContent, "TicketIcon", new Vector2(.14f, .34f), new Vector2(.17f, .5f));
+            AddPanelText(spinContent, "SpinCaption", "Lượt quay:", boldFont, new Vector2(.4f, .32f),
+                new Vector2(.32f, .26f), 25f, Color.white);
+            AddPanelText(spinContent, "SpinCount", "0", displayFont, new Vector2(.62f, .31f),
+                new Vector2(.1f, .31f), 40f, new Color(1f, .92f, .08f));
+            AddPanelIconReplacingText(spinContent, "InfoIcon", new Vector2(.88f, .31f), new Vector2(.09f, .28f));
+            AddPanelIconReplacingText(spinContent, "CalendarIcon", new Vector2(.12f, .74f), new Vector2(.09f, .28f));
+            AddPanelText(spinContent, "FreeSpinText", "0 lượt miễn phí mỗi ngày", boldFont, new Vector2(.5f, .73f),
+                new Vector2(.62f, .27f), 19f, new Color(.53f, .78f, 1f));
+
+            InstallPanelBase(bonus, "BonusProgress_EditableBase.png", 1.65f);
+            var bonusContent = EnsureContent(bonus);
+            AddPanelIcon(bonusContent, "GiftIcon", new Vector2(.12f, .52f), new Vector2(.13f, .72f));
+            AddPanelText(bonusContent, "BonusDescription", "Quay thêm 80 lần để nhận quà đặc biệt!", boldFont,
+                new Vector2(.49f, .32f), new Vector2(.6f, .3f), 17f, Color.white);
+            var fill = AddPanelIcon(bonusContent, "ProgressFill", new Vector2(.225f, .59f), new Vector2(.5f, .12f));
+            fill.sprite = null;
+            fill.color = new Color(.02f, .82f, 1f, .95f);
+            var fillRect = fill.rectTransform;
+            fillRect.pivot = new Vector2(0f, .5f);
+            fillRect.anchoredPosition = new Vector2(-bonus.rect.width * .275f, -bonus.rect.height * .09f);
+            AddPanelText(bonusContent, "ProgressLabel", "0/80", boldFont,
+                new Vector2(.5f, .65f), new Vector2(.22f, .2f), 20f, Color.white);
+            AddPanelIcon(bonusContent, "ChestIcon", new Vector2(.87f, .49f), new Vector2(.16f, .75f));
+
+            var data = canvas.GetComponent<Luan.LuckyWheel.LuckyWheelEditablePanels>();
+            if (data == null)
+            {
+                data = canvas.gameObject.AddComponent<Luan.LuckyWheel.LuckyWheelEditablePanels>();
+                data.SetDefaultSprites(
+                    LoadSprite("ModularItems/09_GoldLarge.png"), LoadSprite("ModularItems/02_Diamond.png"),
+                    LoadSprite("TicketOne_Clean.png"), LoadSprite("ModularItems/05_PremiumChest.png"),
+                    LoadSprite("ModularItems/05_PremiumChest.png"), LoadSprite("ModularItems/10_CharacterPink.png"),
+                    LoadSprite("ModularItems/04_Jacket.png"), LoadSprite("ModularItems/05_PremiumChest.png"));
+            }
+            ConfigureSprite(Root + "BonusGift_Editable.png");
+            ConfigureSprite(Root + "Calendar_Editable.png");
+            ConfigureSprite(Root + "Info_Editable.png");
+            data.SetDetailIcons(LoadSprite("BonusGift_Editable.png"), LoadSprite("Calendar_Editable.png"), LoadSprite("Info_Editable.png"));
+            data.Refresh();
+            EditorUtility.SetDirty(data);
+        }
+
+        private static Sprite LoadSprite(string file) => AssetDatabase.LoadAssetAtPath<Sprite>(Root + file);
+
+        private static void InstallPanelBase(RectTransform panel, string file, float heightFactor)
+        {
+            ConfigureSprite(Root + file);
+            var original = panel.GetComponent<Image>();
+            if (original != null)
+            {
+                original.sprite = LoadSprite(file);
+                original.enabled = false;
+                EditorUtility.SetDirty(original);
+            }
+            var baseImage = AddPanelIcon(panel, "EditableBase", new Vector2(.5f, .5f), new Vector2(1f, heightFactor));
+            baseImage.sprite = LoadSprite(file);
+            baseImage.preserveAspect = false;
+            baseImage.transform.SetAsFirstSibling();
+        }
+
+        private static RectTransform EnsureContent(RectTransform panel) => EnsureChild(panel, "EditableContent");
+
+        private static RectTransform EnsureChild(Transform parent, string name)
+        {
+            var existing = parent.Find(name) as RectTransform;
+            if (existing != null) return existing;
+            var rect = new GameObject(name, typeof(RectTransform)).GetComponent<RectTransform>();
+            rect.SetParent(parent, false);
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = rect.offsetMax = Vector2.zero;
+            return rect;
+        }
+
+        private static Image AddPanelIcon(Transform parent, string name, Vector2 center, Vector2 size)
+        {
+            var existing = parent.Find(name)?.GetComponent<Image>();
+            if (existing != null)
+            {
+                PlacePanelElement(existing.rectTransform, parent, center, size);
+                return existing;
+            }
+            var image = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image)).GetComponent<Image>();
+            image.transform.SetParent(parent, false);
+            PlacePanelElement(image.rectTransform, parent, center, size);
+            image.preserveAspect = true;
+            image.raycastTarget = false;
+            return image;
+        }
+
+        private static Image AddPanelIconReplacingText(Transform parent, string name, Vector2 center, Vector2 size)
+        {
+            var existing = parent.Find(name);
+            if (existing != null && existing.GetComponent<Image>() == null)
+                Object.DestroyImmediate(existing.gameObject);
+            return AddPanelIcon(parent, name, center, size);
+        }
+
+        private static TextMeshProUGUI AddPanelText(Transform parent, string name, string value, TMP_FontAsset font,
+            Vector2 center, Vector2 size, float fontSize, Color color)
+        {
+            var existing = parent.Find(name)?.GetComponent<TextMeshProUGUI>();
+            if (existing != null)
+            {
+                PlacePanelElement(existing.rectTransform, parent, center, size);
+                existing.fontSize = fontSize * Scale;
+                existing.fontSizeMax = fontSize * Scale;
+                existing.fontSizeMin = fontSize * Scale * .68f;
+                return existing;
+            }
+            var label = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
+            label.transform.SetParent(parent, false);
+            PlacePanelElement(label.rectTransform, parent, center, size);
+            label.text = value;
+            label.font = font;
+            label.fontStyle = FontStyles.Bold;
+            label.fontSize = fontSize * Scale;
+            label.enableAutoSizing = true;
+            label.fontSizeMin = fontSize * Scale * .68f;
+            label.fontSizeMax = fontSize * Scale;
+            label.alignment = TextAlignmentOptions.Center;
+            label.color = color;
+            label.outlineColor = new Color32(12, 4, 28, 255);
+            label.outlineWidth = .25f;
+            label.raycastTarget = false;
+            return label;
+        }
+
+        private static void PlacePanelElement(RectTransform rect, Transform parent, Vector2 center, Vector2 size)
+        {
+            var panelSize = ((RectTransform)parent).rect.size;
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(.5f, .5f);
+            rect.anchoredPosition = new Vector2((center.x - .5f) * panelSize.x, (.5f - center.y) * panelSize.y);
+            rect.sizeDelta = new Vector2(size.x * panelSize.x, size.y * panelSize.y);
         }
 
         private static void InstallSeparateWheelArt(Transform wheelArea, RectTransform wheel)
