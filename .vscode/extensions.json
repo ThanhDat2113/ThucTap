@@ -1,13 +1,6 @@
 {
-    "<<<<<<<HEADrecommendations": [
-        "qldatn.qldatn-tracker"
-    ],
-    "=======recommendations": [
-        "visualstudiotoolsforunity.vstuc",
-        "qldatn.qldatn-tracker"
-    ],
-    "": ">>>>>>>0b04a64636ade19e2326e97e404ed0254d927011",
     "recommendations": [
+        "qldatn.qldatn-tracker",
         "visualstudiotoolsforunity.vstuc"
     ]
 }
