@@ -585,7 +585,7 @@ namespace Luan.LuckyWheel.Editor
 
             var purchase = right.GetComponent<Luan.LuckyWheel.LuckyWheelPurchaseUI>();
             if (purchase == null) purchase = right.gameObject.AddComponent<Luan.LuckyWheel.LuckyWheelPurchaseUI>();
-            purchase.Configure(one, ten, discount);
+            purchase.Configure(one, ten, discount, badge != null ? badge.gameObject : null);
         }
 
         private static Image AddSolidPanel(Transform parent, string name, Vector2 center, Vector2 size, Color color)

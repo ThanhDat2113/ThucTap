@@ -25,6 +25,8 @@ namespace Luan.LuckyWheel
         [SerializeField] private Button spinCenterButton;
         [SerializeField] private Button spinX1Button;
         [SerializeField] private Button spinX10Button;
+        [SerializeField] private LuckyWheelPurchaseUI purchaseUI;
+        [SerializeField] private LuckyWheelEditablePanels panels;
 
         [Header("Spin animation")]
         [SerializeField, Min(0.25f)] private float spinDuration = 5.5f;
@@ -34,22 +36,26 @@ namespace Luan.LuckyWheel
         [SerializeField] private List<Prize> prizes = new List<Prize>();
 
         [Header("Runtime item layout")]
-        [SerializeField] private float iconRadius = 275f;
-        [SerializeField] private float labelRadius = 180f;
-        [SerializeField] private Vector2 iconSize = new Vector2(100f, 100f);
-        [SerializeField] private Vector2 labelSize = new Vector2(110f, 42f);
+        [SerializeField] private float slotRadius = 245f;
+        [SerializeField] private float iconOffsetY = 36f;
+        [SerializeField] private float labelOffsetY = -36f;
+        [SerializeField] private Vector2 iconSize = new Vector2(80f, 80f);
+        [SerializeField] private Vector2 labelSize = new Vector2(82f, 32f);
         [SerializeField] private TMP_FontAsset itemFont;
         [SerializeField] private Material itemFontMaterial;
 
         [Header("Item orientation")]
-        [Tooltip("Nếu bật: Các icon và chữ luôn giữ hướng thẳng đứng khi mâm quay (chuyển động kiểu cabin đu quay). Nếu tắt: Các icon và chữ quay dính liền theo nan quạt.")]
-        [SerializeField] private bool keepItemsUpright = true;
+        [Tooltip("Nếu bật: Các icon và chữ luôn giữ hướng thẳng đứng khi mâm quay (chuyển động kiểu cabin đu quay). Nếu tắt: Các icon và chữ quay dính liền theo nan quạt (căn giữa hoàn hảo, chuẩn phong cách game).")]
+        [SerializeField] private bool keepItemsUpright = false;
 
         [Header("Events")]
+        public UnityEvent<Prize> onSinglePrizeWon = new UnityEvent<Prize>();
+        public UnityEvent<List<Prize>> onTenPrizesWon = new UnityEvent<List<Prize>>();
         public UnityEvent<string> onPrizeWon = new UnityEvent<string>();
         public UnityEvent onSpinSequenceFinished = new UnityEvent();
 
         public bool IsSpinning { get; private set; }
+        public int CurrentSpinCount { get; private set; }
         public IReadOnlyList<Prize> Prizes => prizes;
         public bool KeepItemsUpright
         {
@@ -58,7 +64,7 @@ namespace Luan.LuckyWheel
             {
                 keepItemsUpright = value;
                 if (wheel != null && !IsSpinning)
-                    KeepItemViewsUpright(keepItemsUpright ? wheel.localEulerAngles.z : 0f);
+                    KeepItemViewsUpright(wheel.localEulerAngles.z);
             }
         }
 
@@ -66,17 +72,26 @@ namespace Luan.LuckyWheel
         {
             spinDuration = 5.5f;
             minimumTurns = 4;
-            iconRadius = 275f;
-            labelRadius = 180f;
-            iconSize = new Vector2(100f, 100f);
-            labelSize = new Vector2(110f, 42f);
-            keepItemsUpright = true;
+            slotRadius = 245f;
+            iconOffsetY = 36f;
+            labelOffsetY = -36f;
+            iconSize = new Vector2(80f, 80f);
+            labelSize = new Vector2(82f, 32f);
+            keepItemsUpright = false;
         }
 
         private void Awake()
         {
             ResolveReferences();
-            RebuildItemViews();
+            if (wheel != null) wheel.localRotation = Quaternion.identity;
+
+            // Giữ nguyên thiết kế UI trong Scene của bạn, không tự ý xóa và tạo lại khi Play Mode!
+            var runtimeItems = wheel != null ? wheel.Find("RuntimeItems") : null;
+            if (runtimeItems == null || runtimeItems.childCount == 0)
+            {
+                RebuildItemViews();
+            }
+
             spinCenterButton?.onClick.AddListener(SpinOnce);
             spinX1Button?.onClick.AddListener(SpinOnce);
             spinX10Button?.onClick.AddListener(SpinTenTimes);
@@ -91,31 +106,107 @@ namespace Luan.LuckyWheel
 
         public void SpinOnce()
         {
-            if (!IsSpinning) StartCoroutine(SpinSequence(1));
+            if (IsSpinning) return;
+
+            ResolveReferences();
+            int cost = purchaseUI != null ? purchaseUI.PriceForOne : 50;
+
+            if (panels != null && !panels.HasEnoughDiamonds(cost))
+            {
+                Debug.LogWarning($"[LuckyWheel] Không đủ kim cương để quay x1! Cần {cost}, hiện có {panels.DiamondBalance}");
+                return;
+            }
+
+            if (panels != null)
+            {
+                panels.TrySpendDiamonds(cost);
+            }
+
+            StartCoroutine(SpinOnceRoutine());
         }
 
         public void SpinTenTimes()
         {
-            if (!IsSpinning) StartCoroutine(SpinSequence(10));
+            if (IsSpinning) return;
+
+            ResolveReferences();
+            int cost = purchaseUI != null ? purchaseUI.CurrentPriceForTen : 400;
+
+            if (panels != null && !panels.HasEnoughDiamonds(cost))
+            {
+                Debug.LogWarning($"[LuckyWheel] Không đủ kim cương để quay x10! Cần {cost}, hiện có {panels.DiamondBalance}");
+                return;
+            }
+
+            if (panels != null)
+            {
+                panels.TrySpendDiamonds(cost);
+            }
+
+            if (purchaseUI != null && !purchaseUI.IsFirstTenDiscountUsed)
+            {
+                purchaseUI.ConsumeFirstTenDiscount();
+            }
+
+            StartCoroutine(SpinTenTimesRoutine());
         }
 
-        private IEnumerator SpinSequence(int count)
+        private IEnumerator SpinOnceRoutine()
         {
             if (wheel == null || prizes.Count == 0) yield break;
             IsSpinning = true;
+            CurrentSpinCount = 1;
             SetButtonsInteractable(false);
 
-            for (var i = 0; i < count; i++)
+            var prizeIndex = PickWeightedPrize();
+            var prizeWon = prizes[prizeIndex];
+
+            yield return SpinToPrize(prizeIndex);
+
+            if (panels != null)
             {
-                var prizeIndex = PickWeightedPrize();
-                yield return SpinToPrize(prizeIndex);
-                onPrizeWon.Invoke(prizes[prizeIndex].id);
-                if (i < count - 1) yield return new WaitForSecondsRealtime(0.25f);
+                panels.AddSpinCount(1);
+                panels.AddBonusProgress(1);
             }
+
+            onSinglePrizeWon.Invoke(prizeWon);
+            onPrizeWon.Invoke(prizeWon.id);
+            onSpinSequenceFinished.Invoke();
 
             SetButtonsInteractable(true);
             IsSpinning = false;
+        }
+
+        private IEnumerator SpinTenTimesRoutine()
+        {
+            if (wheel == null || prizes.Count == 0) yield break;
+            IsSpinning = true;
+            CurrentSpinCount = 10;
+            SetButtonsInteractable(false);
+
+            var wonPrizes = new List<Prize>(10);
+            for (var i = 0; i < 10; i++)
+            {
+                var idx = PickWeightedPrize();
+                wonPrizes.Add(prizes[idx]);
+            }
+
+            var displayPrizeIndex = prizes.IndexOf(wonPrizes[0]);
+            if (displayPrizeIndex < 0) displayPrizeIndex = 0;
+
+            yield return SpinToPrize(displayPrizeIndex);
+
+            if (panels != null)
+            {
+                panels.AddSpinCount(10);
+                panels.AddBonusProgress(10);
+            }
+
+            onTenPrizesWon.Invoke(wonPrizes);
             onSpinSequenceFinished.Invoke();
+
+            SetButtonsInteractable(true);
+            IsSpinning = false;
         }
 
         private IEnumerator SpinToPrize(int prizeIndex)
@@ -164,12 +255,26 @@ namespace Luan.LuckyWheel
             if (spinX10Button != null) spinX10Button.interactable = value;
         }
 
-        private void ResolveReferences()
+        public void ResolveReferences()
         {
             if (wheel == null) wheel = transform.Find("Wheel") as RectTransform;
             if (spinCenterButton == null) spinCenterButton = transform.Find("SpinCenterButton")?.GetComponent<Button>();
-            if (spinX1Button == null) spinX1Button = transform.root.Find("RightPanel/SpinX1Button")?.GetComponent<Button>();
-            if (spinX10Button == null) spinX10Button = transform.root.Find("RightPanel/SpinX10Button")?.GetComponent<Button>();
+            if (spinX1Button == null)
+            {
+                var btn = transform.root.Find("RightPanel/SpinX1Button");
+                if (btn == null && transform.parent != null)
+                    btn = transform.parent.Find("RightPanel/SpinX1Button");
+                if (btn != null) spinX1Button = btn.GetComponent<Button>();
+            }
+            if (spinX10Button == null)
+            {
+                var btn = transform.root.Find("RightPanel/SpinX10Button");
+                if (btn == null && transform.parent != null)
+                    btn = transform.parent.Find("RightPanel/SpinX10Button");
+                if (btn != null) spinX10Button = btn.GetComponent<Button>();
+            }
+            if (purchaseUI == null) purchaseUI = FindFirstObjectByType<LuckyWheelPurchaseUI>();
+            if (panels == null) panels = FindFirstObjectByType<LuckyWheelEditablePanels>();
         }
 
         public void SetDefaultPrizes(Sprite[] icons, TMP_FontAsset font, Material fontMaterial = null)
@@ -212,29 +317,27 @@ namespace Luan.LuckyWheel
             container.sizeDelta = Vector2.zero;
 
             for (var i = 0; i < prizes.Count; i++) CreateItemView(container, prizes[i], i);
-            KeepItemViewsUpright(keepItemsUpright ? wheel.localEulerAngles.z : 0f);
+            KeepItemViewsUpright(wheel.localEulerAngles.z);
         }
 
         private void OnValidate()
         {
-            if (wheel != null && !IsSpinning)
+            if (wheel != null && !IsSpinning && keepItemsUpright)
             {
-                KeepItemViewsUpright(keepItemsUpright ? wheel.localEulerAngles.z : 0f);
+                KeepItemViewsUpright(wheel.localEulerAngles.z);
             }
         }
 
         private void KeepItemViewsUpright(float wheelAngle)
         {
+            if (!keepItemsUpright) return;
             var container = wheel == null ? null : wheel.Find("RuntimeItems");
             if (container == null) return;
-            var targetRot = Quaternion.Euler(0f, 0f, -wheelAngle);
+
             for (var i = 0; i < container.childCount; i++)
             {
                 var slot = container.GetChild(i);
-                for (var c = 0; c < slot.childCount; c++)
-                {
-                    slot.GetChild(c).localRotation = targetRot;
-                }
+                slot.localRotation = Quaternion.Euler(0f, 0f, -wheelAngle);
             }
         }
 
@@ -247,7 +350,8 @@ namespace Luan.LuckyWheel
             var slot = new GameObject($"Item_{index + 1:00}_{prize.id}", typeof(RectTransform)).GetComponent<RectTransform>();
             slot.SetParent(container, false);
             slot.anchorMin = slot.anchorMax = slot.pivot = new Vector2(0.5f, 0.5f);
-            slot.anchoredPosition = Vector2.zero;
+            slot.anchoredPosition = direction * slotRadius;
+            slot.localRotation = Quaternion.Euler(0f, 0f, -angle);
             slot.sizeDelta = Vector2.zero;
 
             var iconGo = new GameObject("Icon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
@@ -255,8 +359,9 @@ namespace Luan.LuckyWheel
             iconRect.SetParent(slot, false);
             iconRect.pivot = new Vector2(0.5f, 0.5f);
             iconRect.anchorMin = iconRect.anchorMax = new Vector2(0.5f, 0.5f);
-            iconRect.anchoredPosition = direction * iconRadius;
+            iconRect.anchoredPosition = new Vector2(0f, iconOffsetY);
             iconRect.sizeDelta = iconSize;
+            iconRect.localRotation = Quaternion.identity;
             var image = iconGo.GetComponent<Image>();
             image.sprite = prize.icon;
             image.preserveAspect = true;
@@ -266,8 +371,9 @@ namespace Luan.LuckyWheel
             var labelRect = labelGo.GetComponent<RectTransform>();
             labelRect.SetParent(slot, false);
             labelRect.anchorMin = labelRect.anchorMax = labelRect.pivot = new Vector2(0.5f, 0.5f);
-            labelRect.anchoredPosition = direction * labelRadius;
+            labelRect.anchoredPosition = new Vector2(0f, labelOffsetY);
             labelRect.sizeDelta = labelSize;
+            labelRect.localRotation = Quaternion.identity;
             var text = labelGo.GetComponent<TextMeshProUGUI>();
             text.text = prize.displayName;
             text.font = itemFont;
@@ -282,7 +388,8 @@ namespace Luan.LuckyWheel
             {
                 text.fontMaterial.EnableKeyword("OUTLINE_ON");
                 text.fontMaterial.SetColor(ShaderUtilities.ID_OutlineColor, new Color(0.04f, 0.01f, 0.08f, 1f));
-                text.fontMaterial.SetFloat(ShaderUtilities.ID_OutlineWidth, 0.28f);
+                text.fontMaterial.SetFloat(ShaderUtilities.ID_OutlineWidth, 0.32f);
+                text.fontMaterial.SetFloat(ShaderUtilities.ID_FaceDilate, 0f);
                 text.fontMaterial.EnableKeyword("UNDERLAY_ON");
                 text.fontMaterial.SetColor(ShaderUtilities.ID_UnderlayColor, new Color(0f, 0f, 0f, 0.85f));
                 text.fontMaterial.SetFloat(ShaderUtilities.ID_UnderlayOffsetX, 0.35f);
@@ -291,14 +398,18 @@ namespace Luan.LuckyWheel
                 text.fontMaterial.SetFloat(ShaderUtilities.ID_UnderlaySoftness, 0.15f);
             }
 
-            text.fontSize = 18f;
+            text.fontSize = 15f;
             text.fontStyle = FontStyles.Bold;
             text.alignment = TextAlignmentOptions.Center;
             text.color = Color.white;
             text.lineSpacing = -10f;
+            text.enableWordWrapping = false;
             text.enableAutoSizing = true;
-            text.fontSizeMin = 14f;
-            text.fontSizeMax = 20f;
+            text.fontSizeMin = 10f;
+            text.fontSizeMax = 16f;
+            text.overflowMode = TextOverflowModes.Ellipsis;
+            text.margin = Vector4.zero;
+            text.extraPadding = true;
             text.raycastTarget = false;
         }
 

@@ -9,6 +9,11 @@ namespace Luan.LuckyWheel
     [ExecuteAlways]
     public sealed class LuckyWheelEditablePanels : MonoBehaviour
     {
+        private const string PrefsDiamondKey = "LUCKY_WHEEL_DIAMONDS";
+        private const string PrefsCoinKey = "LUCKY_WHEEL_COINS";
+        private const string PrefsSpinCountKey = "LUCKY_WHEEL_SPIN_COUNT";
+        private const string PrefsBonusProgressKey = "LUCKY_WHEEL_BONUS_PROGRESS";
+
         [Serializable]
         public sealed class FeaturedReward
         {
@@ -40,6 +45,10 @@ namespace Luan.LuckyWheel
         [SerializeField] private Sprite bonusGiftIcon;
         [SerializeField] private Sprite bonusChestIcon;
 
+        [Header("Test settings")]
+        [Tooltip("Khi bật: Mỗi lần vào Play Mode sẽ tự động đặt lại 1.000 kim cương, 5.000 vàng, 0 lượt quay để dễ test.")]
+        [SerializeField] private bool resetOnPlayMode = true;
+
         private static readonly CultureInfo Vietnamese = CultureInfo.GetCultureInfo("vi-VN");
 
         public int CoinBalance => coinBalance;
@@ -47,6 +56,148 @@ namespace Luan.LuckyWheel
         public int SpinCount => spinCount;
         public int BonusProgress => bonusProgress;
         public int BonusTarget => bonusTarget;
+
+        private void Awake()
+        {
+            if (Application.isPlaying)
+            {
+                if (resetOnPlayMode)
+                {
+                    PlayerPrefs.DeleteKey(PrefsDiamondKey);
+                    PlayerPrefs.DeleteKey(PrefsCoinKey);
+                    PlayerPrefs.DeleteKey(PrefsSpinCountKey);
+                    PlayerPrefs.DeleteKey(PrefsBonusProgressKey);
+                    PlayerPrefs.Save();
+
+                    diamondBalance = 1000;
+                    coinBalance = 5000;
+                    spinCount = 0;
+                    bonusProgress = 0;
+                }
+                else
+                {
+                    if (PlayerPrefs.HasKey(PrefsDiamondKey))
+                    {
+                        diamondBalance = PlayerPrefs.GetInt(PrefsDiamondKey);
+                    }
+                    else
+                    {
+                        if (diamondBalance <= 0) diamondBalance = 1000;
+                        PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
+                        PlayerPrefs.Save();
+                    }
+
+                    if (PlayerPrefs.HasKey(PrefsCoinKey))
+                    {
+                        coinBalance = PlayerPrefs.GetInt(PrefsCoinKey);
+                    }
+                    else
+                    {
+                        if (coinBalance <= 0) coinBalance = 5000;
+                        PlayerPrefs.SetInt(PrefsCoinKey, coinBalance);
+                        PlayerPrefs.Save();
+                    }
+
+                    if (PlayerPrefs.HasKey(PrefsSpinCountKey))
+                    {
+                        spinCount = PlayerPrefs.GetInt(PrefsSpinCountKey);
+                    }
+
+                    if (PlayerPrefs.HasKey(PrefsBonusProgressKey))
+                    {
+                        bonusProgress = PlayerPrefs.GetInt(PrefsBonusProgressKey);
+                    }
+                }
+            }
+            Refresh();
+        }
+
+        public bool HasEnoughDiamonds(int amount)
+        {
+            return diamondBalance >= amount;
+        }
+
+        public bool TrySpendDiamonds(int amount)
+        {
+            if (diamondBalance < amount) return false;
+            diamondBalance -= amount;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+            return true;
+        }
+
+        public void AddDiamonds(int amount)
+        {
+            if (amount <= 0) return;
+            diamondBalance += amount;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+        }
+
+        public void AddCoins(int amount)
+        {
+            if (amount <= 0) return;
+            coinBalance += amount;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsCoinKey, coinBalance);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+        }
+
+        public void AddSpinCount(int count)
+        {
+            if (count <= 0) return;
+            spinCount += count;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsSpinCountKey, spinCount);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+        }
+
+        public void AddBonusProgress(int amount)
+        {
+            if (amount <= 0) return;
+            bonusProgress = Mathf.Min(bonusTarget, bonusProgress + amount);
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsBonusProgressKey, bonusProgress);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+        }
+
+        [ContextMenu("Add 1000 Diamonds")]
+        public void DebugAddDiamonds() => AddDiamonds(1000);
+
+        [ContextMenu("Reset Balance (1000 Diamonds, 5000 Coins)")]
+        public void ResetBalanceToDefault()
+        {
+            diamondBalance = 1000;
+            coinBalance = 5000;
+            spinCount = 0;
+            bonusProgress = 0;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsDiamondKey, 1000);
+                PlayerPrefs.SetInt(PrefsCoinKey, 5000);
+                PlayerPrefs.SetInt(PrefsSpinCountKey, 0);
+                PlayerPrefs.SetInt(PrefsBonusProgressKey, 0);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+        }
 
         public void ResetVisibleValues()
         {
@@ -56,6 +207,14 @@ namespace Luan.LuckyWheel
             freeSpinsPerDay = 0;
             bonusProgress = 0;
             bonusTarget = 80;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsDiamondKey, 0);
+                PlayerPrefs.SetInt(PrefsCoinKey, 0);
+                PlayerPrefs.SetInt(PrefsSpinCountKey, 0);
+                PlayerPrefs.SetInt(PrefsBonusProgressKey, 0);
+                PlayerPrefs.Save();
+            }
             Refresh();
         }
 
@@ -63,12 +222,23 @@ namespace Luan.LuckyWheel
         {
             coinBalance = Mathf.Max(0, coins);
             diamondBalance = Mathf.Max(0, diamonds);
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
+                PlayerPrefs.SetInt(PrefsCoinKey, coinBalance);
+                PlayerPrefs.Save();
+            }
             Refresh();
         }
 
         public void SetSpinCount(int count)
         {
             spinCount = Mathf.Max(0, count);
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsSpinCountKey, spinCount);
+                PlayerPrefs.Save();
+            }
             Refresh();
         }
 
@@ -76,6 +246,11 @@ namespace Luan.LuckyWheel
         {
             bonusTarget = Mathf.Max(1, target);
             bonusProgress = Mathf.Clamp(progress, 0, bonusTarget);
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetInt(PrefsBonusProgressKey, bonusProgress);
+                PlayerPrefs.Save();
+            }
             Refresh();
         }
 
@@ -153,9 +328,10 @@ namespace Luan.LuckyWheel
             var fill = transform.Find("Footer/BonusProgress/EditableContent/ProgressFill")?.GetComponent<Image>();
             if (fill != null)
             {
-                var rect = fill.rectTransform;
-                var width = ((RectTransform)rect.parent).rect.width * .50f;
-                rect.sizeDelta = new Vector2(width * Mathf.Clamp01((float)bonusProgress / Mathf.Max(1, bonusTarget)), rect.sizeDelta.y);
+                fill.type = Image.Type.Filled;
+                fill.fillMethod = Image.FillMethod.Horizontal;
+                fill.fillOrigin = 0;
+                fill.fillAmount = Mathf.Clamp01((float)bonusProgress / Mathf.Max(1, bonusTarget));
             }
         }
 
