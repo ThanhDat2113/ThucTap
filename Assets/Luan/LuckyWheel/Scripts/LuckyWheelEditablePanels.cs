@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Luan.LuckyWheel
@@ -11,7 +12,8 @@ namespace Luan.LuckyWheel
     {
         private const string PrefsDiamondKey = "LUCKY_WHEEL_DIAMONDS";
         private const string PrefsCoinKey = "LUCKY_WHEEL_COINS";
-        private const string PrefsSpinCountKey = "LUCKY_WHEEL_SPIN_COUNT";
+        private const string PrefsTicketsKey = "LUCKY_WHEEL_TICKETS";
+        private const string PrefsDailyFreeDateKey = "LUCKY_WHEEL_DAILY_FREE_CLAIM_DATE";
         private const string PrefsBonusProgressKey = "LUCKY_WHEEL_BONUS_PROGRESS";
 
         [Serializable]
@@ -33,8 +35,9 @@ namespace Luan.LuckyWheel
         [SerializeField] private FeaturedReward[] featuredRewards = new FeaturedReward[3];
 
         [Header("Spin information")]
-        [SerializeField, Min(0)] private int spinCount;
-        [SerializeField, Min(0)] private int freeSpinsPerDay;
+        [FormerlySerializedAs("spinCount")]
+        [SerializeField, Min(0)] private int ticketCount;
+        [SerializeField, Min(0)] private int freeSpinsPerDay = 1;
         [SerializeField] private Sprite spinTicketIcon;
         [SerializeField] private Sprite informationIcon;
         [SerializeField] private Sprite calendarIcon;
@@ -46,14 +49,20 @@ namespace Luan.LuckyWheel
         [SerializeField] private Sprite bonusChestIcon;
 
         [Header("Test settings")]
-        [Tooltip("Khi bật: Mỗi lần vào Play Mode sẽ tự động đặt lại 1.000 kim cương, 5.000 vàng, 0 lượt quay để dễ test.")]
+        [Tooltip("Khi bật: Mỗi lần vào Play Mode sẽ tự động đặt lại 1.000 kim cương, 5.000 vàng, 1 lượt quay free hàng ngày, 0 vé để dễ test.")]
         [SerializeField] private bool resetOnPlayMode = true;
 
         private static readonly CultureInfo Vietnamese = CultureInfo.GetCultureInfo("vi-VN");
+        private bool hasDailyFreeSpin;
 
         public int CoinBalance => coinBalance;
         public int DiamondBalance => diamondBalance;
-        public int SpinCount => spinCount;
+        public int TicketCount => ticketCount;
+        public bool HasDailyFreeSpin => hasDailyFreeSpin;
+        public int TotalAvailableSpins => (hasDailyFreeSpin ? 1 : 0) + ticketCount;
+        public int SpinCount => TotalAvailableSpins;
+        public bool HasFreeSpinForOne => TotalAvailableSpins >= 1;
+        public bool HasFreeSpinForTen => TotalAvailableSpins >= 10;
         public int BonusProgress => bonusProgress;
         public int BonusTarget => bonusTarget;
 
@@ -65,13 +74,16 @@ namespace Luan.LuckyWheel
                 {
                     PlayerPrefs.DeleteKey(PrefsDiamondKey);
                     PlayerPrefs.DeleteKey(PrefsCoinKey);
-                    PlayerPrefs.DeleteKey(PrefsSpinCountKey);
+                    PlayerPrefs.DeleteKey(PrefsTicketsKey);
+                    PlayerPrefs.DeleteKey(PrefsDailyFreeDateKey);
+                    PlayerPrefs.DeleteKey("LUCKY_WHEEL_SPIN_COUNT");
                     PlayerPrefs.DeleteKey(PrefsBonusProgressKey);
                     PlayerPrefs.Save();
 
                     diamondBalance = 1000;
                     coinBalance = 5000;
-                    spinCount = 0;
+                    ticketCount = 0;
+                    hasDailyFreeSpin = true;
                     bonusProgress = 0;
                 }
                 else
@@ -98,10 +110,18 @@ namespace Luan.LuckyWheel
                         PlayerPrefs.Save();
                     }
 
-                    if (PlayerPrefs.HasKey(PrefsSpinCountKey))
+                    if (PlayerPrefs.HasKey(PrefsTicketsKey))
                     {
-                        spinCount = PlayerPrefs.GetInt(PrefsSpinCountKey);
+                        ticketCount = PlayerPrefs.GetInt(PrefsTicketsKey);
                     }
+                    else if (PlayerPrefs.HasKey("LUCKY_WHEEL_SPIN_COUNT"))
+                    {
+                        ticketCount = PlayerPrefs.GetInt("LUCKY_WHEEL_SPIN_COUNT");
+                    }
+
+                    string lastClaimDate = PlayerPrefs.GetString(PrefsDailyFreeDateKey, string.Empty);
+                    string today = DateTime.Today.ToString("yyyy-MM-dd");
+                    hasDailyFreeSpin = (lastClaimDate != today);
 
                     if (PlayerPrefs.HasKey(PrefsBonusProgressKey))
                     {
@@ -110,6 +130,7 @@ namespace Luan.LuckyWheel
                 }
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
         }
 
         public bool HasEnoughDiamonds(int amount)
@@ -127,6 +148,7 @@ namespace Luan.LuckyWheel
                 PlayerPrefs.Save();
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
             return true;
         }
 
@@ -140,6 +162,7 @@ namespace Luan.LuckyWheel
                 PlayerPrefs.Save();
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
         }
 
         public void AddCoins(int amount)
@@ -154,16 +177,62 @@ namespace Luan.LuckyWheel
             Refresh();
         }
 
-        public void AddSpinCount(int count)
+        public void AddTickets(int amount)
         {
-            if (count <= 0) return;
-            spinCount += count;
+            if (amount <= 0) return;
+            ticketCount += amount;
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsSpinCountKey, spinCount);
+                PlayerPrefs.SetInt(PrefsTicketsKey, ticketCount);
                 PlayerPrefs.Save();
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
+        }
+
+        public void AddSpinCount(int count) => AddTickets(count);
+
+        public bool ConsumeFreeSpins(int count)
+        {
+            if (TotalAvailableSpins < count) return false;
+
+            var remaining = count;
+            if (hasDailyFreeSpin && remaining > 0)
+            {
+                hasDailyFreeSpin = false;
+                remaining--;
+                if (Application.isPlaying)
+                {
+                    PlayerPrefs.SetString(PrefsDailyFreeDateKey, DateTime.Today.ToString("yyyy-MM-dd"));
+                }
+            }
+
+            if (remaining > 0)
+            {
+                ticketCount = Mathf.Max(0, ticketCount - remaining);
+                if (Application.isPlaying)
+                {
+                    PlayerPrefs.SetInt(PrefsTicketsKey, ticketCount);
+                }
+            }
+
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.Save();
+            }
+
+            Refresh();
+            NotifyPurchaseUIRefresh();
+            return true;
+        }
+
+        public void NotifyPurchaseUIRefresh()
+        {
+            var purchaseUI = FindFirstObjectByType<LuckyWheelPurchaseUI>();
+            if (purchaseUI != null)
+            {
+                purchaseUI.Refresh();
+            }
         }
 
         public void AddBonusProgress(int amount)
@@ -181,29 +250,67 @@ namespace Luan.LuckyWheel
         [ContextMenu("Add 1000 Diamonds")]
         public void DebugAddDiamonds() => AddDiamonds(1000);
 
+        [ContextMenu("Test: Add 1 Ticket")]
+        public void DebugAddOneTicket() => AddTickets(1);
+
+        [ContextMenu("Test: Add 10 Tickets (Test Free x10)")]
+        public void DebugAddTenTickets() => AddTickets(10);
+
+        [ContextMenu("Test: Reset to 0 Free Spins")]
+        public void DebugSetZeroFreeSpins()
+        {
+            hasDailyFreeSpin = false;
+            ticketCount = 0;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.SetString(PrefsDailyFreeDateKey, DateTime.Today.ToString("yyyy-MM-dd"));
+                PlayerPrefs.SetInt(PrefsTicketsKey, 0);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+            NotifyPurchaseUIRefresh();
+        }
+
+        [ContextMenu("Test: Give Daily Free Spin (1 Free)")]
+        public void DebugGiveDailyFreeSpin()
+        {
+            hasDailyFreeSpin = true;
+            if (Application.isPlaying)
+            {
+                PlayerPrefs.DeleteKey(PrefsDailyFreeDateKey);
+                PlayerPrefs.Save();
+            }
+            Refresh();
+            NotifyPurchaseUIRefresh();
+        }
+
         [ContextMenu("Reset Balance (1000 Diamonds, 5000 Coins)")]
         public void ResetBalanceToDefault()
         {
             diamondBalance = 1000;
             coinBalance = 5000;
-            spinCount = 0;
+            ticketCount = 0;
+            hasDailyFreeSpin = true;
             bonusProgress = 0;
             if (Application.isPlaying)
             {
                 PlayerPrefs.SetInt(PrefsDiamondKey, 1000);
                 PlayerPrefs.SetInt(PrefsCoinKey, 5000);
-                PlayerPrefs.SetInt(PrefsSpinCountKey, 0);
+                PlayerPrefs.SetInt(PrefsTicketsKey, 0);
+                PlayerPrefs.DeleteKey(PrefsDailyFreeDateKey);
                 PlayerPrefs.SetInt(PrefsBonusProgressKey, 0);
                 PlayerPrefs.Save();
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
         }
 
         public void ResetVisibleValues()
         {
             coinBalance = 0;
             diamondBalance = 0;
-            spinCount = 0;
+            ticketCount = 0;
+            hasDailyFreeSpin = false;
             freeSpinsPerDay = 0;
             bonusProgress = 0;
             bonusTarget = 80;
@@ -211,11 +318,13 @@ namespace Luan.LuckyWheel
             {
                 PlayerPrefs.SetInt(PrefsDiamondKey, 0);
                 PlayerPrefs.SetInt(PrefsCoinKey, 0);
-                PlayerPrefs.SetInt(PrefsSpinCountKey, 0);
+                PlayerPrefs.SetInt(PrefsTicketsKey, 0);
+                PlayerPrefs.DeleteKey(PrefsDailyFreeDateKey);
                 PlayerPrefs.SetInt(PrefsBonusProgressKey, 0);
                 PlayerPrefs.Save();
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
         }
 
         public void SetBalances(int coins, int diamonds)
@@ -233,13 +342,14 @@ namespace Luan.LuckyWheel
 
         public void SetSpinCount(int count)
         {
-            spinCount = Mathf.Max(0, count);
+            ticketCount = Mathf.Max(0, count);
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsSpinCountKey, spinCount);
+                PlayerPrefs.SetInt(PrefsTicketsKey, ticketCount);
                 PlayerPrefs.Save();
             }
             Refresh();
+            NotifyPurchaseUIRefresh();
         }
 
         public void SetBonusProgress(int progress, int target)
@@ -313,7 +423,7 @@ namespace Luan.LuckyWheel
                 }
             }
 
-            SetText("RightPanel/SpinInfo/EditableContent/SpinCount", spinCount.ToString(Vietnamese));
+            SetText("RightPanel/SpinInfo/EditableContent/SpinCount", TotalAvailableSpins.ToString(Vietnamese));
             SetText("RightPanel/SpinInfo/EditableContent/FreeSpinText", $"{freeSpinsPerDay} lượt miễn phí mỗi ngày");
             SetSprite("RightPanel/SpinInfo/EditableContent/TicketIcon", spinTicketIcon);
             SetSprite("RightPanel/SpinInfo/EditableContent/InfoIcon", informationIcon);

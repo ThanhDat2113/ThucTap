@@ -109,17 +109,33 @@ namespace Luan.LuckyWheel
             if (IsSpinning) return;
 
             ResolveReferences();
+            bool isFree = panels != null && panels.HasFreeSpinForOne;
             int cost = purchaseUI != null ? purchaseUI.PriceForOne : 50;
 
-            if (panels != null && !panels.HasEnoughDiamonds(cost))
+            if (!isFree)
             {
-                Debug.LogWarning($"[LuckyWheel] Không đủ kim cương để quay x1! Cần {cost}, hiện có {panels.DiamondBalance}");
-                return;
+                if (panels != null && !panels.HasEnoughDiamonds(cost))
+                {
+                    Debug.LogWarning($"[LuckyWheel] Không đủ kim cương để quay x1! Cần {cost}, hiện có {panels.DiamondBalance}");
+                    return;
+                }
+
+                if (panels != null)
+                {
+                    panels.TrySpendDiamonds(cost);
+                }
+            }
+            else
+            {
+                if (panels != null)
+                {
+                    panels.ConsumeFreeSpins(1);
+                }
             }
 
-            if (panels != null)
+            if (purchaseUI != null)
             {
-                panels.TrySpendDiamonds(cost);
+                purchaseUI.Refresh();
             }
 
             StartCoroutine(SpinOnceRoutine());
@@ -130,22 +146,38 @@ namespace Luan.LuckyWheel
             if (IsSpinning) return;
 
             ResolveReferences();
+            bool isFree = panels != null && panels.HasFreeSpinForTen;
             int cost = purchaseUI != null ? purchaseUI.CurrentPriceForTen : 400;
 
-            if (panels != null && !panels.HasEnoughDiamonds(cost))
+            if (!isFree)
             {
-                Debug.LogWarning($"[LuckyWheel] Không đủ kim cương để quay x10! Cần {cost}, hiện có {panels.DiamondBalance}");
-                return;
+                if (panels != null && !panels.HasEnoughDiamonds(cost))
+                {
+                    Debug.LogWarning($"[LuckyWheel] Không đủ kim cương để quay x10! Cần {cost}, hiện có {panels.DiamondBalance}");
+                    return;
+                }
+
+                if (panels != null)
+                {
+                    panels.TrySpendDiamonds(cost);
+                }
+
+                if (purchaseUI != null && !purchaseUI.IsFirstTenDiscountUsed)
+                {
+                    purchaseUI.ConsumeFirstTenDiscount();
+                }
+            }
+            else
+            {
+                if (panels != null)
+                {
+                    panels.ConsumeFreeSpins(10);
+                }
             }
 
-            if (panels != null)
+            if (purchaseUI != null)
             {
-                panels.TrySpendDiamonds(cost);
-            }
-
-            if (purchaseUI != null && !purchaseUI.IsFirstTenDiscountUsed)
-            {
-                purchaseUI.ConsumeFirstTenDiscount();
+                purchaseUI.Refresh();
             }
 
             StartCoroutine(SpinTenTimesRoutine());
@@ -165,7 +197,6 @@ namespace Luan.LuckyWheel
 
             if (panels != null)
             {
-                panels.AddSpinCount(1);
                 panels.AddBonusProgress(1);
             }
 
@@ -198,7 +229,6 @@ namespace Luan.LuckyWheel
 
             if (panels != null)
             {
-                panels.AddSpinCount(10);
                 panels.AddBonusProgress(10);
             }
 

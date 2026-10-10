@@ -176,7 +176,7 @@ namespace Luan.LuckyWheel
                     }
                     else if (p.id.Contains("ticket"))
                     {
-                        panels.AddSpinCount(p.amount);
+                        panels.AddTickets(p.amount);
                     }
                 }
             }
