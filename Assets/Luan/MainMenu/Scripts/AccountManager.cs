@@ -190,6 +190,13 @@ namespace Luan.MainMenu
         [SerializeField] private TMP_Text regFeedbackTMP;
         [SerializeField] private Text regFeedbackLegacy;
 
+        [Header("--- Hỗ Trợ Bàn Phím Di Động (Mobile Keyboard) ---")]
+        [Tooltip("Tự động nâng panel lên khi mở bàn phím ảo trên điện thoại để không bị che")]
+        [SerializeField] private bool autoAdjustForMobileKeyboard = true;
+
+        [Tooltip("Khoảng cách nâng LoginPanel lên khi bàn phím mở (pixel)")]
+        [SerializeField] private float mobileKeyboardLiftOffset = 220f;
+
         [Header("--- Âm Thanh (Audio SFX - Tùy chọn) ---")]
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip successSound;
@@ -235,6 +242,13 @@ namespace Luan.MainMenu
         private void Start()
         {
             LoadRememberedCredentials();
+
+            // Tự động gắn bộ điều chỉnh vị trí để không bị bàn phím ảo che trên điện thoại
+            if (autoAdjustForMobileKeyboard)
+            {
+                SetupKeyboardAdjuster(loginPanel, mobileKeyboardLiftOffset);
+                SetupKeyboardAdjuster(registerPanel, mobileKeyboardLiftOffset + 30f);
+            }
 
             // Nếu người chơi đã có session đăng nhập rồi, tự động đóng hết các popup auth
             if (IsLoggedIn)
@@ -306,6 +320,8 @@ namespace Luan.MainMenu
         /// </summary>
         public void CloseAccountPanel(Action onComplete = null)
         {
+            ResetKeyboardAdjusters();
+
             if (accountContainerPanel != null)
             {
                 accountContainerPanel.Hide();
@@ -342,6 +358,7 @@ namespace Luan.MainMenu
                 return;
             }
 
+            ResetKeyboardAdjusters();
             PlaySound(switchSound);
             ClearFeedbacks();
             ClearInputs();
@@ -373,6 +390,7 @@ namespace Luan.MainMenu
                 return;
             }
 
+            ResetKeyboardAdjusters();
             PlaySound(switchSound);
             ClearFeedbacks();
             ClearInputs();
@@ -390,6 +408,31 @@ namespace Luan.MainMenu
             else
             {
                 Debug.LogError("[AccountManager] loginPanel đang là NULL trong Inspector của AccountManager!");
+            }
+        }
+
+        private void SetupKeyboardAdjuster(UIPanelAnimator panel, float offset)
+        {
+            if (panel == null) return;
+            MobileKeyboardAdjuster adjuster = panel.GetComponent<MobileKeyboardAdjuster>();
+            if (adjuster == null)
+            {
+                adjuster = panel.gameObject.AddComponent<MobileKeyboardAdjuster>();
+            }
+            adjuster.SetLiftOffset(offset);
+        }
+
+        private void ResetKeyboardAdjusters()
+        {
+            if (loginPanel != null)
+            {
+                var adj = loginPanel.GetComponent<MobileKeyboardAdjuster>();
+                if (adj != null) adj.ResetImmediate();
+            }
+            if (registerPanel != null)
+            {
+                var adj = registerPanel.GetComponent<MobileKeyboardAdjuster>();
+                if (adj != null) adj.ResetImmediate();
             }
         }
 
