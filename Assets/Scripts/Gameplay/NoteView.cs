@@ -21,6 +21,10 @@ namespace RhythmGame
         [Tooltip("Sorting order của đuôi so với đầu note.")]
         public int tailSortingOffset = 1;
 
+        [Header("Visual Effects")]
+        [Tooltip("Component hiệu ứng visual (glow, pulse, particles). Tự lấy nếu không gán.")]
+        public NoteVisuals visuals;
+
         public NoteData Data { get; private set; }
         public float TimeSeconds { get; private set; }
         public float HoldSeconds { get; private set; }
@@ -32,10 +36,12 @@ namespace RhythmGame
 
         SpriteRenderer sr;
         Color baseColor;
+        int currentLane = 0;
 
         void Awake()
         {
             sr = GetComponent<SpriteRenderer>();
+            if (visuals == null) visuals = GetComponent<NoteVisuals>();
         }
 
         public void Setup(NoteData data, float timeSeconds, float holdSeconds, Color color)
@@ -48,6 +54,12 @@ namespace RhythmGame
             color.a = 1f;
             baseColor = color;
             sr.color = color;
+            currentLane = data.lane;
+
+            if (visuals != null)
+            {
+                visuals.Initialize(currentLane, color);
+            }
 
             if (IsHold)
             {
@@ -85,6 +97,14 @@ namespace RhythmGame
 
         public void MarkJudged() => Judged = true;
 
+        public void PlayHitEffect(Judgement judgement, Vector3 position)
+        {
+            if (visuals != null)
+            {
+                visuals.PlayHitEffect(judgement, position);
+            }
+        }
+
         public void BeginHold()
         {
             Holding = true;
@@ -100,6 +120,11 @@ namespace RhythmGame
 
         public void PlayMissVisual()
         {
+            if (visuals != null)
+            {
+                visuals.PlayMissEffect();
+            }
+
             Color c = baseColor * 0.5f;
             c.a = 0.5f;
             sr.color = c;

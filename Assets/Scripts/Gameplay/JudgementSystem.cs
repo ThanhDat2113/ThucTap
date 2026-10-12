@@ -97,6 +97,8 @@ namespace RhythmGame
             else if (diff <= goodWindow) { judgement = Judgement.Good; points = 100; }
             else { judgement = Judgement.Bad; points = 50; }
 
+            note.PlayHitEffect(judgement, note.transform.position);
+
             if (note.IsHold) note.BeginHold();
             else spawner.ReleaseNote(note);
 
@@ -135,6 +137,8 @@ namespace RhythmGame
             else if (diff <= holdTailBadWindow) { tailJudgement = Judgement.Bad; tailPoints = 50; }
             else { tailJudgement = Judgement.Miss; tailPoints = 0; }
 
+            holding.PlayHitEffect(tailJudgement, holding.transform.position);
+
             // Release the note
             spawner.ReleaseNote(holding);
 
@@ -146,6 +150,7 @@ namespace RhythmGame
 
         void CompleteHold(NoteView n)
         {
+            n.PlayHitEffect(Judgement.HoldComplete, n.transform.position);
             spawner.ReleaseNote(n);
             PlaySfx(Judgement.HoldComplete);
             OnJudged?.Invoke(Judgement.HoldComplete, holdCompletePoints, true);

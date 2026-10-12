@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1351199569750083661}
   - component: {fileID: 3144366743854711261}
   - component: {fileID: 5382954670329626363}
+  - component: {fileID: 2311442274747404014}
   m_Layer: 0
   m_Name: Note
   m_TagString: Untagged
@@ -104,3 +105,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66100d26b3b52f2488d52ca4d3db97ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.NoteView
+  body: {fileID: 0}
+  bodyWidthRatio: 0.5
+  bodyAlpha: 0.6
+  bodySortingOffset: 0
+  tail: {fileID: 0}
+  tailScale: 1
+  tailSortingOffset: 1
+  visuals: {fileID: 0}
+--- !u!114 &2311442274747404014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035931259274577025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3a21e141059df49bf33d5c4886c569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.NoteVisuals
+  glowRenderer: {fileID: 0}
+  glowIntensity: 1.5
+  pulseSpeed: 3
+  pulseScale: 1.15
+  enableTrail: 1
+  trailLifetime: 0.15
+  trailWidth: 0.3
+  burstParticleCount: 20
+  burstParticleSize: 0.15
+  burstParticleLifetime: 0.5
+  burstSpeed: 5
+  laneColors:
+  - {r: 0.76, g: 0.29, b: 0.6, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.07, g: 0.98, b: 0.02, a: 1}
+  - {r: 0.98, g: 0.22, b: 0.25, a: 1}

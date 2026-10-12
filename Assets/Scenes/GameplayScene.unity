@@ -418,6 +418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269285538}
   - component: {fileID: 269285539}
+  - component: {fileID: 269285540}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -499,6 +500,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &269285540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269285537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaffec79f19e331489a2059c09d5b056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ReceptorVisuals
+  glowRenderer: {fileID: 0}
+  idleGlowAlpha: 0.3
+  pressGlowAlpha: 0.9
+  glowPulseSpeed: 2
+  glowPulseScale: 1.1
+  pressScale: 0.85
+  pressSpeed: 20
+  releaseSpeed: 8
+  burstParticleCount: 15
+  burstParticleSize: 0.2
+  burstParticleLifetime: 0.4
+  burstSpeed: 4
+  laneColors:
+  - {r: 0.76, g: 0.29, b: 0.6, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.07, g: 0.98, b: 0.02, a: 1}
+  - {r: 0.98, g: 0.22, b: 0.25, a: 1}
+  syncWithBackground: 1
+  bgPulseIntensity: 0.15
 --- !u!1 &285523868
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +801,7 @@ GameObject:
   - component: {fileID: 443643783}
   - component: {fileID: 443643785}
   - component: {fileID: 443643784}
+  - component: {fileID: 443643786}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -825,7 +858,14 @@ MonoBehaviour:
   - {fileID: 958283369}
   - {fileID: 1207294087}
   input: {fileID: 443643779}
+  judgement: {fileID: 0}
+  visuals: []
   pressedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  laneColors:
+  - {r: 0.76, g: 0.29, b: 0.6, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.07, g: 0.98, b: 0.02, a: 1}
+  - {r: 0.98, g: 0.22, b: 0.25, a: 1}
 --- !u!114 &443643777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,6 +1055,28 @@ MonoBehaviour:
   ghostSpeed: 2.2
   dangerThreshold: 0.25
   pulseSpeed: 6
+--- !u!114 &443643786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443643774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1140ad94b393ce142a0807b1ee6eae49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ReceptorPulse
+  bpm: 120
+  firstBeatOffset: 0
+  pulseScale: 1.25
+  pulseAlpha: 0.6
+  returnSpeed: 10
+  receptorGlows: []
+  baseScales: []
+  baseColors: []
+  songStartDspTime: 0
+  lastBeat: -1
 --- !u!1 &517027979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,6 +1713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 837932950}
   - component: {fileID: 837932951}
+  - component: {fileID: 837932952}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -1732,6 +1795,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &837932952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837932949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaffec79f19e331489a2059c09d5b056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ReceptorVisuals
+  glowRenderer: {fileID: 0}
+  idleGlowAlpha: 0.3
+  pressGlowAlpha: 0.9
+  glowPulseSpeed: 2
+  glowPulseScale: 1.1
+  pressScale: 0.85
+  pressSpeed: 20
+  releaseSpeed: 8
+  burstParticleCount: 15
+  burstParticleSize: 0.2
+  burstParticleLifetime: 0.4
+  burstSpeed: 4
+  laneColors:
+  - {r: 0.76, g: 0.29, b: 0.6, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.07, g: 0.98, b: 0.02, a: 1}
+  - {r: 0.98, g: 0.22, b: 0.25, a: 1}
+  syncWithBackground: 1
+  bgPulseIntensity: 0.15
 --- !u!1 &862901827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,6 +2099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 958283368}
   - component: {fileID: 958283369}
+  - component: {fileID: 958283370}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -2086,6 +2181,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &958283370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958283367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaffec79f19e331489a2059c09d5b056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ReceptorVisuals
+  glowRenderer: {fileID: 0}
+  idleGlowAlpha: 0.3
+  pressGlowAlpha: 0.9
+  glowPulseSpeed: 2
+  glowPulseScale: 1.1
+  pressScale: 0.85
+  pressSpeed: 20
+  releaseSpeed: 8
+  burstParticleCount: 15
+  burstParticleSize: 0.2
+  burstParticleLifetime: 0.4
+  burstSpeed: 4
+  laneColors:
+  - {r: 0.76, g: 0.29, b: 0.6, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.07, g: 0.98, b: 0.02, a: 1}
+  - {r: 0.98, g: 0.22, b: 0.25, a: 1}
+  syncWithBackground: 1
+  bgPulseIntensity: 0.15
 --- !u!1 &1133791183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,6 +2347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1207294088}
   - component: {fileID: 1207294087}
+  - component: {fileID: 1207294089}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -2302,6 +2429,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1508890092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1207294089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207294086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaffec79f19e331489a2059c09d5b056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ReceptorVisuals
+  glowRenderer: {fileID: 0}
+  idleGlowAlpha: 0.3
+  pressGlowAlpha: 0.9
+  glowPulseSpeed: 2
+  glowPulseScale: 1.1
+  pressScale: 0.85
+  pressSpeed: 20
+  releaseSpeed: 8
+  burstParticleCount: 15
+  burstParticleSize: 0.2
+  burstParticleLifetime: 0.4
+  burstSpeed: 4
+  laneColors:
+  - {r: 0.76, g: 0.29, b: 0.6, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.07, g: 0.98, b: 0.02, a: 1}
+  - {r: 0.98, g: 0.22, b: 0.25, a: 1}
+  syncWithBackground: 1
+  bgPulseIntensity: 0.15
 --- !u!1 &1212483325
 GameObject:
   m_ObjectHideFlags: 0
