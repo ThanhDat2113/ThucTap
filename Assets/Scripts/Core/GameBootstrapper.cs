@@ -45,6 +45,11 @@ namespace RhythmGame
         [Tooltip("Máu mất mỗi lần miss note.")]
         public float missDamage = 8f;
 
+        /// <summary>Chữ PERFECT/GOOD/BAD/MISS do JudgementPopup đảm nhiệm (UIController không còn viết vào judgeText).</summary>
+        JudgementPopup judgePopup;
+        /// <summary>Giữ reference để huỷ đăng ký event khi object bị xoá.</summary>
+        JudgementSystem judgement;
+
         static readonly Color[] LaneColors =
         {
             new Color(0.76f, 0.29f, 0.60f),
@@ -82,7 +87,7 @@ namespace RhythmGame
             health.missDamage = missDamage;
             health.SetHealth(maxHealth);
 
-            JudgementSystem judgement = gameObject.AddComponent<JudgementSystem>();
+            judgement = gameObject.AddComponent<JudgementSystem>();
             judgement.spawner = spawner;
             judgement.input = input;
             judgement.healthSystem = health;
@@ -108,7 +113,6 @@ namespace RhythmGame
             ReceptorFlasher flasher = gameObject.AddComponent<ReceptorFlasher>();
             flasher.receptors = receptors;
             flasher.input = input;
-            flasher.laneColors = LaneColors;
 
             BuildUI(gm, judgement, health);
         }
@@ -219,15 +223,27 @@ namespace RhythmGame
 
             BuildHealthBar(canvasGO.transform, health);
 
+            judgePopup = judgeText.gameObject.AddComponent<JudgementPopup>();
+            judgePopup.label = judgeText;
+            judgement.OnJudged += HandleJudgedPopup;
+
             var ui = gameObject.AddComponent<UIController>();
             ui.gameManager = gm;
             ui.judgement = judgement;
-            ui.healthSystem = health;
             ui.countdownText = countdownText;
-            ui.judgeText = judgeText;
             ui.scoreText = scoreText;
             ui.comboText = comboText;
             ui.messageText = messageText;
+        }
+
+        void OnDestroy()
+        {
+            if (judgement != null) judgement.OnJudged -= HandleJudgedPopup;
+        }
+
+        void HandleJudgedPopup(Judgement j, int points, bool isHit)
+        {
+            if (judgePopup != null) judgePopup.Show(j);
         }
 
         void BuildHealthBar(Transform parent, HealthSystem health)
@@ -254,7 +270,8 @@ namespace RhythmGame
             bgRect.offsetMax = Vector2.zero;
 
             // Lớp ghost: phần máu vừa mất, tụt xuống chậm để thấy rõ.
-            // Neo bám cạnh trái, bề rộng = anchorMax.x * bề rộng cha -> co từ phải sang trái.
+            // HealthBar tự đo lúc Bind rồi rút ngắn sizeDelta.x (giữ cạnh
+            // trái) -> cả ghost và fill đều co từ phải sang trái.
             Image ghostImg = MakeImage("Ghost", rt, sprite, new Color(1f, 1f, 1f, 0.35f));
             RectTransform ghostRect = SetupBarRect(ghostImg.rectTransform, 26f);
 
@@ -270,8 +287,9 @@ namespace RhythmGame
         }
 
         /// <summary>
-        /// Layout cho lớp thanh: neo trái (x=0) tới neo phải (x=1), cao cố định,
-        /// canh giữa theo trục Y. Đổi anchorMax.x để co giãn từ phải sang trái.
+        /// Layout cho lớp thanh: giãn hết chiều ngang cha, cao cố định,
+        /// canh giữa theo trục Y. HealthBar sẽ đo bề rộng lúc Bind rồi
+        /// rút ngắn sizeDelta.x (giữ cạnh trái) -> thanh co từ phải sang trái.
         /// </summary>
         RectTransform SetupBarRect(RectTransform r, float height)
         {

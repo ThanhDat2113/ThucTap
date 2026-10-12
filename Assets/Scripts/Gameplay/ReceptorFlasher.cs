@@ -2,20 +2,37 @@ using UnityEngine;
 
 namespace RhythmGame
 {
-    /// <summary>Sáng receptor lên khi người chơi đang giữ phím lane tương ứng.</summary>
+    /// <summary>
+    /// Giữ nguyên màu receptor đã đặt trong scene (không đụng tới
+    /// thiết lập hiện tại); khi người chơi đang giữ phím lane
+    /// (nhấn) thì receptor đổi sang màu xám (pressedColor).
+    /// </summary>
     public class ReceptorFlasher : MonoBehaviour
     {
         public SpriteRenderer[] receptors;
         public InputHandler input;
-        public Color[] laneColors;
+
+        [Tooltip("Màu receptor khi đang giữ phím (nhấn).")]
+        public Color pressedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+        // Màu receptor lúc bắt đầu play — lấy đúng màu đang đặt
+        // trong scene để giữ nguyên khi chưa nhấn.
+        Color[] idleColors;
+
+        void Start()
+        {
+            idleColors = new Color[receptors != null ? receptors.Length : 0];
+            for (int i = 0; i < idleColors.Length; i++)
+                idleColors[i] = receptors[i] != null ? receptors[i].color : Color.white;
+        }
 
         void Update()
         {
-            for (int l = 0; l < receptors.Length; l++)
+            if (input == null) return;
+            for (int l = 0; l < idleColors.Length; l++)
             {
-                Color dim = laneColors[l] * 0.35f;
-                dim.a = 1f;
-                receptors[l].color = input.IsHeld(l) ? laneColors[l] : dim;
+                if (receptors[l] == null) continue;
+                receptors[l].color = input.IsHeld(l) ? pressedColor : idleColors[l];
             }
         }
     }

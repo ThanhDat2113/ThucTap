@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Luan.MainMenu
@@ -209,28 +208,6 @@ namespace Luan.MainMenu
                     Destroy(_bgCam.gameObject);
                 else
                     DestroyImmediate(_bgCam.gameObject);
-            }
-        }
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void InitRuntimeAutoEnforce()
-        {
-            SceneManager.sceneLoaded += (scene, mode) =>
-            {
-                EnforceOnMainCamera();
-            };
-            EnforceOnMainCamera();
-        }
-
-        private static void EnforceOnMainCamera()
-        {
-            Camera mainCam = Camera.main;
-            if (mainCam != null)
-            {
-                if (!mainCam.TryGetComponent<AspectRatioEnforcer>(out _))
-                {
-                    mainCam.gameObject.AddComponent<AspectRatioEnforcer>();
-                }
             }
         }
     }

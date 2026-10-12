@@ -21,6 +21,10 @@ namespace RhythmGame
         public int holdCompletePoints = 100;
         [Tooltip("Nhả phím sớm hơn đuôi tối đa bao nhiêu giây vẫn tính là giữ xong.")]
         public float holdReleaseTolerance = 0.12f;
+        [Tooltip("Cửa sổ Perfect/Good/Bad cho việc nhả đuôi hold (giây).")]
+        public float holdTailPerfectWindow = 0.045f;
+        public float holdTailGoodWindow = 0.09f;
+        public float holdTailBadWindow = 0.14f;
 
         [Header("SFX")]
         public AudioClip perfectSfx;
@@ -110,17 +114,34 @@ namespace RhythmGame
             }
             if (holding == null) return;
 
-            if (songTime >= holding.TailTimeSeconds - holdReleaseTolerance)
-            {
-                CompleteHold(holding);
-            }
-            else
+            float tailTime = holding.TailTimeSeconds;
+            float diff = songTime - tailTime;
+
+            // Released too early -> break hold, count as miss
+            if (diff < -holdReleaseTolerance)
             {
                 holding.BreakHold();
                 OnJudged?.Invoke(Judgement.Miss, 0, false);
                 PlaySfx(Judgement.Miss);
                 healthSystem?.ApplyJudgement(Judgement.Miss);
+                return;
             }
+
+            // Judge tail release timing
+            Judgement tailJudgement;
+            int tailPoints;
+            if (diff <= holdTailPerfectWindow) { tailJudgement = Judgement.Perfect; tailPoints = 300; }
+            else if (diff <= holdTailGoodWindow) { tailJudgement = Judgement.Good; tailPoints = 100; }
+            else if (diff <= holdTailBadWindow) { tailJudgement = Judgement.Bad; tailPoints = 50; }
+            else { tailJudgement = Judgement.Miss; tailPoints = 0; }
+
+            // Release the note
+            spawner.ReleaseNote(holding);
+
+            // Award hold complete bonus + tail judgement
+            PlaySfx(tailJudgement);
+            OnJudged?.Invoke(tailJudgement, holdCompletePoints + tailPoints, tailJudgement != Judgement.Miss);
+            healthSystem?.ApplyJudgement(tailJudgement);
         }
 
         void CompleteHold(NoteView n)

@@ -13,6 +13,14 @@ namespace RhythmGame
         [Tooltip("Sorting order của thân so với đầu note.")]
         public int bodySortingOffset = 0;
 
+        [Header("Tail marker")]
+        [Tooltip("Sprite cho đuôi hold note (đánh dấu thời điểm thả). Để trống thì tự tạo từ sprite của đầu note.")]
+        public SpriteRenderer tail;
+        [Tooltip("Kích thước đuôi so với đầu note.")]
+        [Range(0.3f, 1.5f)] public float tailScale = 1f;
+        [Tooltip("Sorting order của đuôi so với đầu note.")]
+        public int tailSortingOffset = 1;
+
         public NoteData Data { get; private set; }
         public float TimeSeconds { get; private set; }
         public float HoldSeconds { get; private set; }
@@ -46,10 +54,16 @@ namespace RhythmGame
                 EnsureBody();
                 body.gameObject.SetActive(true);
                 SetBodyColor(bodyAlpha);
+
+                EnsureTail();
+                tail.gameObject.SetActive(true);
+                SetTailColor(1f);
+                tailScale = 1f; // force match head width
             }
-            else if (body != null)
+            else
             {
-                body.gameObject.SetActive(false);
+                if (body != null) body.gameObject.SetActive(false);
+                if (tail != null) tail.gameObject.SetActive(false);
             }
         }
 
@@ -65,6 +79,7 @@ namespace RhythmGame
                 float tailY = hitLineY + (TailTimeSeconds - songTime) * scrollSpeed;
                 TopY = Mathf.Max(headY, tailY);
                 UpdateBody(headY, tailY);
+                UpdateTail(tailY);
             }
         }
 
@@ -74,6 +89,7 @@ namespace RhythmGame
         {
             Holding = true;
             SetBodyColor(0.9f);
+            SetTailColor(0.9f);
         }
 
         public void BreakHold()
@@ -88,11 +104,20 @@ namespace RhythmGame
             c.a = 0.5f;
             sr.color = c;
 
-            if (IsHold && body != null)
+            if (IsHold)
             {
-                Color b = baseColor * 0.5f;
-                b.a = 0.3f;
-                body.color = b;
+                if (body != null)
+                {
+                    Color b = baseColor * 0.5f;
+                    b.a = 0.3f;
+                    body.color = b;
+                }
+                if (tail != null)
+                {
+                    Color t = baseColor * 0.5f;
+                    t.a = 0.3f;
+                    tail.color = t;
+                }
             }
         }
 
@@ -108,10 +133,28 @@ namespace RhythmGame
             body.sortingOrder = sr.sortingOrder + bodySortingOffset;
         }
 
+        void EnsureTail()
+        {
+            if (tail != null) return;
+
+            var go = new GameObject("HoldTail");
+            go.transform.SetParent(transform, false);
+            tail = go.AddComponent<SpriteRenderer>();
+            tail.sprite = sr.sprite;
+            tail.sortingLayerID = sr.sortingLayerID;
+            tail.sortingOrder = sr.sortingOrder + tailSortingOffset;
+        }
+
         void SetBodyColor(float alpha)
         {
             if (body == null) return;
             body.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+        }
+
+        void SetTailColor(float alpha)
+        {
+            if (tail == null) return;
+            tail.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
         }
 
         void UpdateBody(float headY, float tailY)
@@ -127,6 +170,19 @@ namespace RhythmGame
 
             body.transform.localScale = new Vector3(sx, sy, 1f);
             body.transform.localPosition = new Vector3(0f, (length * 0.5f) / parentScaleY, 0f);
+        }
+
+        void UpdateTail(float tailY)
+        {
+            if (tail == null) return;
+
+            float headWorldWidth = sr.bounds.size.x;
+            Vector2 tailSize = tail.sprite != null ? (Vector2)tail.sprite.bounds.size : Vector2.one;
+            float parentScaleX = Mathf.Max(transform.lossyScale.x, 0.0001f);
+            float s = (headWorldWidth * tailScale) / (tailSize.x * parentScaleX);
+            tail.transform.localScale = new Vector3(s, s, 1f);
+
+            tail.transform.position = new Vector3(transform.position.x, tailY, 0f);
         }
     }
 }

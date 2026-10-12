@@ -8,19 +8,37 @@ namespace RhythmGame
     /// Thanh máu hiển thị trên UI. Nhận giá trị chuẩn hoá (0..1) từ
     /// HealthSystem.OnHealthChanged.
     ///
-    /// Thanh co giãn bằng cách đổi anchorMax.x (neo bám cạnh trái) nên máu
-    /// thu dần từ phải sang trái. Không dùng Image.Type.Filled vì sprite trắng
-    /// tạo bằng code không có border nên fill không vẽ được.
+    /// Code chỉ làm một việc: RÚT NGẮN hình ảnh theo HP. Mọi thứ khác
+    /// (sprite, màu, vị trí, kích thước, anchor, pivot) đều do bạn đặt
+    /// trong scene. Code tự đo trạng thái "đầy" (HP=100%) lúc Awake/Bind
+    /// rồi rút ngắn bề rộng, giữ nguyên CẠNH TRÁI nên máu luôn thu dần
+    /// TỪ PHẢI SANG TRÁI. HP = 0 -> bề rộng = 0 -> hình ảnh thu lại hết.
     ///
-    /// Có 2 lớp: "ghost" (trắng mờ) đứng sau, hiện phần máu vừa mất rồi mới
-    /// tụt xuống — giúp người chơi nhìn thấy rõ vừa bị trừ bao nhiêu.
+    /// Cách rút:
+    ///   - Có fillRect: đổi sizeDelta.x (kèm bù anchoredPosition.x theo
+    ///     pivot để cạnh trái đứng yên). Hoạt động với mọi kiểu
+    ///     anchor/pivot đã đặt trong scene, không ghi đè lên chúng.
+    ///   - Chỉ có fillImage (không có fillRect): dùng fillAmount. Khi đó
+    ///     đặt Image Type = Filled, Fill Method = Horizontal,
+    ///     Fill Origin = Left để thanh rút từ phải sang trái.
+    ///
+    /// Có 2 lớp: "ghost" (trắng mờ) đứng sau, hiện phần máu vừa mất rồi
+    /// mới tụt xuống — giúp người chơi nhìn thấy rõ vừa bị trừ bao nhiêu.
+    /// Ghost rút bằng cơ chế như lớp fill.
     /// </summary>
     public class HealthBar : MonoBehaviour
     {
         [Header("Refs")]
         public HealthSystem healthSystem;
+        [Tooltip("RectTransform lớp ghost. Để trống thì tắt hiệu ứng ghost.")]
         public RectTransform ghostRect;
+        [Tooltip("RectTransform lớp máu chính. Code chỉ rút ngắn bề rộng " +
+                 "(sizeDelta.x) và giữ cạnh trái đứng yên -> máu rút từ " +
+                 "phải sang trái; HP = 0 thì hình ảnh thu lại hết.")]
         public RectTransform fillRect;
+        [Tooltip("Image lớp máu chính (đổi màu theo HP). Chỉ dùng khi không " +
+                 "có fillRect: lúc đó đặt Image Type = Filled, Fill Method " +
+                 "= Horizontal, Fill Origin = Left.")]
         public Image fillImage;
         public TMP_Text healthText;
 
@@ -45,9 +63,15 @@ namespace RhythmGame
         float target = 1f;  // giá trị đích
         float pulseTimer;
 
+        // Trạng thái "đầy" (HP = 100%) đo được lúc Awake/Bind.
+        bool fillCaptured, ghostCaptured;
+        float fillFullWidth, fillBaseX, fillPivotX;
+        float ghostFullWidth, ghostBaseX, ghostPivotX;
+
         void Awake()
         {
             current = ghost = target = 1f;
+            CaptureRects();
             Apply(current);
             ApplyGhost(ghost);
         }
@@ -76,6 +100,8 @@ namespace RhythmGame
             fillRect = fillTransform;
             fillImage = fillImg;
             healthText = text;
+
+            CaptureRects();
 
             if (healthSystem != null)
             {
@@ -128,13 +154,61 @@ namespace RhythmGame
             if (fillImage != null) fillImage.color = c;
         }
 
+        /// <summary>
+        /// Đo trạng thái "đầy" của thanh (bề rộng, vị trí, pivot).
+        /// Anchor X dạng giãn (anchorMin.x != anchorMax.x) được chuyển về
+        /// dạng điểm ở cạnh trái, giữ nguyên vị trí hiển thị, để việc
+        /// rút ngắn sau này chỉ cần đổi sizeDelta.x.
+        /// </summary>
+        void CaptureRects()
+        {
+            fillCaptured = Capture(fillRect, out fillFullWidth, out fillBaseX, out fillPivotX);
+            ghostCaptured = Capture(ghostRect, out ghostFullWidth, out ghostBaseX, out ghostPivotX);
+        }
+
+        bool Capture(RectTransform r, out float fullWidth, out float baseX, out float pivotX)
+        {
+            fullWidth = 0f;
+            baseX = 0f;
+            pivotX = 0.5f;
+            if (r == null) return false;
+
+            float spread = r.anchorMax.x - r.anchorMin.x;
+            if (spread > 0.0001f)
+            {
+                // Neo giãn -> neo điểm ở cạnh trái hiện tại; bù sizeDelta
+                // và anchoredPosition để hình ảnh không nhảy chỗ.
+                float pw = ParentWidth(r);
+                r.anchorMax = new Vector2(r.anchorMin.x, r.anchorMax.y);
+                r.sizeDelta = new Vector2(r.sizeDelta.x + spread * pw, r.sizeDelta.y);
+                r.anchoredPosition = new Vector2(
+                    r.anchoredPosition.x + r.pivot.x * spread * pw,
+                    r.anchoredPosition.y);
+            }
+
+            fullWidth = r.rect.width;
+            baseX = r.anchoredPosition.x;
+            pivotX = r.pivot.x;
+            return fullWidth > 0f;
+        }
+
+        static float ParentWidth(RectTransform r)
+        {
+            RectTransform p = r.parent as RectTransform;
+            return p != null ? p.rect.width : 0f;
+        }
+
+        /// <summary>
+        /// Rút ngắn hình ảnh: bề rộng = fullWidth * HP. Cạnh trái đứng
+        /// yên (bù anchoredPosition theo pivot) nên máu rút từ phải sang
+        /// trái; HP = 0 -> bề rộng bằng 0 -> hình ảnh thu lại hết.
+        /// </summary>
         void Apply(float v)
         {
-            if (fillRect != null)
+            v = Mathf.Clamp01(v);
+            if (fillCaptured)
             {
-                var max = fillRect.anchorMax;
-                max.x = Mathf.Clamp01(v);
-                fillRect.anchorMax = max;
+                Shorten(fillRect, v, fillFullWidth, fillBaseX, fillPivotX);
             }
             else if (fillImage != null)
             {
@@ -144,12 +218,18 @@ namespace RhythmGame
 
         void ApplyGhost(float v)
         {
-            if (ghostRect != null)
+            if (ghostCaptured)
             {
-                var max = ghostRect.anchorMax;
-                max.x = Mathf.Clamp01(v);
-                ghostRect.anchorMax = max;
+                Shorten(ghostRect, v, ghostFullWidth, ghostBaseX, ghostPivotX);
             }
+        }
+
+        static void Shorten(RectTransform r, float v, float fullWidth, float baseX, float pivotX)
+        {
+            float w = fullWidth * v;
+            r.sizeDelta = new Vector2(w, r.sizeDelta.y);
+            // Bù vị trí theo pivot để cạnh trái của ảnh không dịch chuyển.
+            r.anchoredPosition = new Vector2(baseX + pivotX * (w - fullWidth), r.anchoredPosition.y);
         }
 
         Color ColorFor(float v)
