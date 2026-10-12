@@ -58,7 +58,11 @@
     <Compile Include="Assets\Scripts\Gameplay\NotePool.cs" />
     <Compile Include="Assets\VFX\SideStreaks.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundGradient.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundRain.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundPetals.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundWinterGradient.cs" />
+    <Compile Include="Assets\VFX\Background\WorldBackgroundSelector.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundSynthwave.cs" />
     <Compile Include="Assets\VFX\VfxBinder.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundFireflies.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ReceptorFlasher.cs" />
@@ -69,17 +73,21 @@
     <Compile Include="Assets\VFX\World\WorldBackgroundNightGradient.cs" />
     <Compile Include="Assets\Scripts\Core\GameBootstrapper.cs" />
     <Compile Include="Assets\VFX\AudioSpectrumBars.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundBokeh.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundMountains.cs" />
+    <Compile Include="Assets\VFX\World\WorldBackgroundGradientPro.cs" />
     <Compile Include="Assets\Scripts\Gameplay\JudgementSystem.cs" />
     <Compile Include="Assets\Scripts\Data\NoteData.cs" />
     <Compile Include="Assets\VFX\SpeedLines.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundSnow.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundAurora.cs" />
     <Compile Include="Assets\VFX\HitEffect.cs" />
     <Compile Include="Assets\VFX\JudgementPopup.cs" />
     <Compile Include="Assets\Scripts\Core\GameManager.cs" />
     <Compile Include="Assets\Scripts\Input\InputHandler.cs" />
     <Compile Include="Assets\VFX\NapGameManager.cs" />
-    <Compile Include="Assets\VFX\Background\BackgroundExtras.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundSkyGradient.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundExtras.cs" />
     <Compile Include="Assets\Scripts\Data\ChartData.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1376,9 +1376,8 @@ GameObject:
   - component: {fileID: 772989724}
   - component: {fileID: 772989723}
   - component: {fileID: 772989726}
-  - component: {fileID: 772989729}
   - component: {fileID: 772989731}
-  - component: {fileID: 772989730}
+  - component: {fileID: 772989732}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1504,46 +1503,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &772989729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772989722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6bfca111950c440bde22082d85b81d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SideStreaks
-  count: 24
-  tint: {r: 1, g: 1, b: 1, a: 0.5}
-  centerGapRatio: 0.42
-  angleDeg: 14
-  lengthRange: {x: 2, y: 6}
-  thickness: 0.1
-  speedRange: {x: 6, y: 14}
-  distance: 40
---- !u!114 &772989730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772989722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee26ab493ab951a45a6cd3354a27e7a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BackgroundClouds
-  cloudCount: 8
-  cloudColor: {r: 1, g: 1, b: 1, a: 0.55}
-  cloudWidthRange: {x: 0.25, y: 0.7}
-  driftSpeedRange: {x: 0.3, y: 1.2}
-  verticalRange: {x: 0, y: 0.9}
-  direction: 1
-  shapeVariants: 3
-  cloudDistance: 44
 --- !u!114 &772989731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,16 +1512,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 772989722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c39f6d7b518b4a4a90b6f7262420f59, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e67bcb340ec5a1458c668d24abb20a3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSkyGradient
-  topColor: {r: 0.2, g: 0.5, b: 0.92, a: 1}
-  middleColor: {r: 0.55, g: 0.8, b: 0.98, a: 1}
-  bottomColor: {r: 1, g: 0.88, b: 0.72, a: 1}
+  m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundGradientPro
+  preset: 6
+  topColor: {r: 0.45, g: 0.15, b: 0.55, a: 1}
+  middleColor: {r: 0.7, g: 0.2, b: 0.6, a: 1}
+  bottomColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}
   middlePosition: 0.5
+  vignette: 0.35
+  breathe: 0.05
+  breatheSpeed: 0.6
   distance: 60
   overscan: 1.15
   resolution: 128
+  textureWidth: 64
+--- !u!114 &772989732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772989722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d026163250599a478726c8bda994bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSelector
+  scene: 6
+  includeGradient: 1
+  cleanLeftovers: 1
 --- !u!1 &837932949
 GameObject:
   m_ObjectHideFlags: 0
