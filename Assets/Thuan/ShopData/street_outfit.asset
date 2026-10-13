@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe08a2b557c1842b41d03ab785f7cc, type: 3}
+  m_Name: street_outfit
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
+  displayName: Street Outfit
+  description: 'Fresh street threads.
+
+    Step on stage in style!'
+  category: 0
+  currency: 1
+  price: 800
+  isHot: 0
+  cardSprite: {fileID: 21300000, guid: 6f8e6e93f595cd443ae96880023fbfef, type: 3}
+  cardOwnedSprite: {fileID: 21300000, guid: 3e5abd7fd322b4d4b833c6eb9a0f3499, type: 3}
+  artSprite: {fileID: 21300000, guid: e3116888deee0e84696fc3737b000d61, type: 3}
+  priceRect: {x: 0.3103, y: 0.0545, z: 0.625, w: 0.2218}
+  cartRect: {x: 0.6681, y: 0.0467, z: 0.931, w: 0.2218}

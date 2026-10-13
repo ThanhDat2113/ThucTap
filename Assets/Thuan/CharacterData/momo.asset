@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bf39b5fc0cb1c42a8f9678bafa2515, type: 3}
+  m_Name: momo
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  displayName: MOMO
+  title: THE BUBBLE POP
+  description: 'Bubblegum, pink hair and pure chaos.
+
+    She pops every beat
+
+    like
+    a bubble.'
+  tags:
+  - SINGER
+  - CUTE
+  - STYLE
+  quote: '"POP GOES THE BEAT"'
+  vocal: 8
+  style: 9
+  power: 5
+  speed: 8
+  cardSprite: {fileID: 21300000, guid: a0cf42456019950468ce4473ff8adeed, type: 3}
+  fullArt: {fileID: 0}
+  posterSprite: {fileID: 21300000, guid: df094bbbd5c52cf4bb3f91c553e15a31, type: 3}
+  previewClip: {fileID: 0}
+  unlocked: 1
