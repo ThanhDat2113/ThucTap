@@ -1,0 +1,229 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
+  m_Name: Data 2
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
+  songName: 
+  audioClip: {fileID: 8300000, guid: 9458e05d03c07b34b94fc269f2c25563, type: 3}
+  musicStartDelay: 1
+  bpm: 120
+  laneCount: 4
+  firstNoteOffset: 0
+  notes:
+  - beat: 8.837334
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 8.837334
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 9.008
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 9.050667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 9.306666
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 9.349334
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 9.477333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 9.562667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 9.648
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 9.733334
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 9.904
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 9.904
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 9.989333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 10.16
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 10.330667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 10.586667
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 10.586667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 10.672
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 10.970667
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 10.970667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 11.141334
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 11.184
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 11.269333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 11.312
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 11.44
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 11.525333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 11.610666
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 11.653334
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 11.824
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 11.909333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 12.08
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 12.08
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 12.250667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 12.250667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 16.090666
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 16.261333
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 16.346666
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 16.474667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 16.602667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 16.688
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 16.858667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 16.901333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 17.029333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 17.072
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 17.2
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 17.285334
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 17.370667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 17.456
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 17.626667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 17.669333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 17.754667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 17.797333
+    lane: 0
+    type: 0
+    holdBeats: 0

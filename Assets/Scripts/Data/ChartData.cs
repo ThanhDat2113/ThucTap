@@ -39,8 +39,17 @@ namespace RhythmGame
                 do { lane = rng.Next(0, laneCount); } while (lane == prev);
                 prev = lane;
 
-                AddNoteAtBeat(beat, lane);
-                beat += rng.NextDouble() < 0.3 ? 0.5f : 1f;
+                if (rng.NextDouble() < 0.2)
+                {
+                    float holdBeats = rng.NextDouble() < 0.5 ? 1f : 2f;
+                    AddNoteAtBeat(beat, lane, NoteType.Hold, holdBeats);
+                    beat += holdBeats + 0.5f; // note tiếp theo chỉ xuất hiện sau khi hold kết thúc
+                }
+                else
+                {
+                    AddNoteAtBeat(beat, lane);
+                    beat += rng.NextDouble() < 0.3 ? 0.5f : 1f;
+                }
             }
         }
     }
