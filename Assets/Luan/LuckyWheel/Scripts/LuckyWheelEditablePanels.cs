@@ -55,6 +55,8 @@ namespace Luan.LuckyWheel
         private static readonly CultureInfo Vietnamese = CultureInfo.GetCultureInfo("vi-VN");
         private bool hasDailyFreeSpin;
 
+        public static LuckyWheelEditablePanels Instance { get; private set; }
+
         public int CoinBalance => coinBalance;
         public int DiamondBalance => diamondBalance;
         public int TicketCount => ticketCount;
@@ -66,10 +68,84 @@ namespace Luan.LuckyWheel
         public int BonusProgress => bonusProgress;
         public int BonusTarget => bonusTarget;
 
+        /// <summary>
+        /// Kiểm tra xem người chơi còn lượt quay miễn phí hay không (dùng cho MainMenu, QuickMenu, v.v.).
+        /// </summary>
+        public static bool CheckHasFreeSpin()
+        {
+            if (Instance != null)
+            {
+                return Instance.HasFreeSpinForOne;
+            }
+
+            // 1. Kiểm tra vé quay (ticketCount) lưu trong PlayerPrefs
+            int tickets = PlayerPrefs.GetInt(PrefsTicketsKey, 0);
+            if (tickets <= 0 && PlayerPrefs.HasKey("LUCKY_WHEEL_SPIN_COUNT"))
+            {
+                tickets = PlayerPrefs.GetInt("LUCKY_WHEEL_SPIN_COUNT", 0);
+            }
+            if (tickets > 0) return true;
+
+            // 2. Kiểm tra lượt quay hàng ngày (mỗi ngày 1 lượt nếu chưa nhận hôm nay)
+            string lastClaimDate = PlayerPrefs.GetString(PrefsDailyFreeDateKey, string.Empty);
+            string today = DateTime.Today.ToString("yyyy-MM-dd");
+            return lastClaimDate != today;
+        }
+
+        /// <summary>
+        /// Định dạng số dư tiền tệ:
+        /// - Dưới 10.000: hiển thị đầy đủ (ví dụ: 5.000, 1.100, 9.999).
+        /// - Từ 10.000 trở lên: tính theo k (ví dụ: 10k, 10.5k, 100k, 999k).
+        /// - Từ 1.000.000 trở lên: tính theo M (ví dụ: 1M, 1.5M, 10M).
+        /// - Từ 1.000.000.000 trở lên: tính theo B (ví dụ: 1B, 1.5B).
+        /// </summary>
+        public static string FormatCurrency(long value)
+        {
+            if (value < 0) return "-" + FormatCurrency(-value);
+            if (value < 10000)
+            {
+                return value.ToString("N0", Vietnamese);
+            }
+
+            if (value < 1_000_000)
+            {
+                double k = value / 1000.0;
+                if (k >= 999.95) return "1M";
+                string formatted = k >= 100
+                    ? Math.Floor(k).ToString("0", CultureInfo.InvariantCulture)
+                    : k.ToString("0.#", CultureInfo.InvariantCulture);
+                return formatted + "k";
+            }
+
+            if (value < 1_000_000_000)
+            {
+                double m = value / 1_000_000.0;
+                if (m >= 999.95) return "1B";
+                string formatted = m >= 100
+                    ? Math.Floor(m).ToString("0", CultureInfo.InvariantCulture)
+                    : m.ToString("0.#", CultureInfo.InvariantCulture);
+                return formatted + "M";
+            }
+
+            double b = value / 1_000_000_000.0;
+            string formattedB = b >= 100
+                ? Math.Floor(b).ToString("0", CultureInfo.InvariantCulture)
+                : b.ToString("0.#", CultureInfo.InvariantCulture);
+            return formattedB + "B";
+        }
+
+        public static string FormatCurrency(int value) => FormatCurrency((long)value);
+
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
+        }
+
         private void Awake()
         {
             if (Application.isPlaying)
             {
+                Instance = this;
                 if (resetOnPlayMode)
                 {
                     PlayerPrefs.DeleteKey(PrefsDiamondKey);
@@ -404,8 +480,8 @@ namespace Luan.LuckyWheel
 
         public void Refresh()
         {
-            SetText("TopBar/Currencies/EditableContent/CoinValue", coinBalance.ToString("N0", Vietnamese));
-            SetText("TopBar/Currencies/EditableContent/DiamondValue", diamondBalance.ToString("N0", Vietnamese));
+            SetText("TopBar/Currencies/EditableContent/CoinValue", FormatCurrency(coinBalance));
+            SetText("TopBar/Currencies/EditableContent/DiamondValue", FormatCurrency(diamondBalance));
             SetSprite("TopBar/Currencies/EditableContent/CoinIcon", coinIcon);
             SetSprite("TopBar/Currencies/EditableContent/DiamondIcon", diamondIcon);
 

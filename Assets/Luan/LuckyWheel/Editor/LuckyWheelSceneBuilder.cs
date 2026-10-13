@@ -44,7 +44,7 @@ namespace Luan.LuckyWheel.Editor
 
             var topBar = AddGroup(canvasGo.transform, "TopBar");
             AddButton(topBar, "BackButton", "BackButton.png", new Vector2(48, 51), new Vector2(74, 76));
-            AddImage(topBar, "PageTitle", "PageTitle.png", new Vector2(174, 48), new Vector2(205, 67), false);
+            AddButton(topBar, "PageTitle", "PageTitle.png", new Vector2(174, 48), new Vector2(205, 67));
             AddImage(topBar, "Currencies", "Currencies.png", new Vector2(1397, 45), new Vector2(406, 70), false);
             AddButton(topBar, "SettingsButton", "SettingsButton.png", new Vector2(1620, 46), new Vector2(68, 70));
 

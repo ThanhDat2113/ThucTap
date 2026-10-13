@@ -90,6 +90,46 @@ namespace Luan.MainMenu
         public CanvasGroup CanvasGroup => _canvasGroup;
         public RectTransform RectTransform => _rectTransform;
 
+        public TransitionType PanelTransitionType
+        {
+            get => transitionType;
+            set => transitionType = value;
+        }
+
+        public SlideDirection PanelSlideDirection
+        {
+            get => slideDirection;
+            set => slideDirection = value;
+        }
+
+        public float Duration
+        {
+            get => duration;
+            set => duration = value;
+        }
+
+        public void ConfigureSlide(TransitionType type, SlideDirection direction, float animDuration = 0.4f, float distance = 800f)
+        {
+            transitionType = type;
+            slideDirection = direction;
+            duration = animDuration;
+            slideDistance = distance;
+        }
+
+        public void SetOriginalPosition(Vector2 pos)
+        {
+            InitIfNeeded();
+            _originalPosition = pos;
+        }
+
+        public void RefreshOriginalPosition()
+        {
+            if (_rectTransform != null)
+            {
+                _originalPosition = _rectTransform.anchoredPosition;
+            }
+        }
+
         private void Awake()
         {
             InitIfNeeded();
@@ -596,6 +636,13 @@ namespace Luan.MainMenu
 
             if (_rectTransform != null)
             {
+                var canvas = _rectTransform.GetComponentInParent<Canvas>();
+                if (canvas != null && canvas.transform is RectTransform cr)
+                {
+                    screenWidth = Mathf.Max(screenWidth, cr.rect.width);
+                    screenHeight = Mathf.Max(screenHeight, cr.rect.height);
+                }
+
                 float rectW = _rectTransform.rect.width > 0 ? _rectTransform.rect.width : screenWidth;
                 float rectH = _rectTransform.rect.height > 0 ? _rectTransform.rect.height : screenHeight;
                 screenWidth = Mathf.Max(screenWidth, rectW);

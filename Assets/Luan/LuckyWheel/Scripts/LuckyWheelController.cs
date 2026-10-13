@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -95,6 +96,15 @@ namespace Luan.LuckyWheel
             spinCenterButton?.onClick.AddListener(SpinOnce);
             spinX1Button?.onClick.AddListener(SpinOnce);
             spinX10Button?.onClick.AddListener(SpinTenTimes);
+
+            var backBtn = GameObject.Find("BackButton")?.GetComponent<Button>();
+            if (backBtn != null)
+            {
+                backBtn.onClick.RemoveListener(OnBackToMainMenuClicked);
+                backBtn.onClick.AddListener(OnBackToMainMenuClicked);
+            }
+
+            BindBackButton();
         }
 
         private void OnDestroy()
@@ -102,6 +112,83 @@ namespace Luan.LuckyWheel
             spinCenterButton?.onClick.RemoveListener(SpinOnce);
             spinX1Button?.onClick.RemoveListener(SpinOnce);
             spinX10Button?.onClick.RemoveListener(SpinTenTimes);
+
+            UnbindBackButton();
+        }
+
+        private void BindBackButton()
+        {
+            // Hỗ trợ cả nút mũi tên BackButton và badge chữ "QUAY LẠI" (PageTitle)
+            var candidates = new[] { "BackButton", "PageTitle", "BtnBack", "ButtonBack", "QuayLai" };
+            foreach (var name in candidates)
+            {
+                var go = GameObject.Find(name);
+                if (go == null)
+                {
+                    var topBar = GameObject.Find("TopBar");
+                    if (topBar != null)
+                    {
+                        var child = topBar.transform.Find(name);
+                        if (child != null) go = child.gameObject;
+                    }
+                }
+
+                if (go != null)
+                {
+                    var img = go.GetComponent<Image>();
+                    if (img != null) img.raycastTarget = true;
+
+                    var btn = go.GetComponent<Button>();
+                    if (btn == null)
+                    {
+                        btn = go.AddComponent<Button>();
+                        if (img != null)
+                        {
+                            btn.targetGraphic = img;
+                            btn.transition = Selectable.Transition.ColorTint;
+                            var colors = btn.colors;
+                            colors.highlightedColor = new Color(1.12f, 1.12f, 1.12f, 1f);
+                            colors.pressedColor = new Color(0.78f, 0.78f, 0.78f, 1f);
+                            btn.colors = colors;
+                        }
+                    }
+
+                    btn.onClick.RemoveListener(OnBackToMainMenuClicked);
+                    btn.onClick.AddListener(OnBackToMainMenuClicked);
+                }
+            }
+        }
+
+        private void UnbindBackButton()
+        {
+            var candidates = new[] { "BackButton", "PageTitle", "BtnBack", "ButtonBack", "QuayLai" };
+            foreach (var name in candidates)
+            {
+                var go = GameObject.Find(name);
+                if (go == null)
+                {
+                    var topBar = GameObject.Find("TopBar");
+                    if (topBar != null)
+                    {
+                        var child = topBar.transform.Find(name);
+                        if (child != null) go = child.gameObject;
+                    }
+                }
+
+                if (go != null)
+                {
+                    var btn = go.GetComponent<Button>();
+                    if (btn != null)
+                    {
+                        btn.onClick.RemoveListener(OnBackToMainMenuClicked);
+                    }
+                }
+            }
+        }
+
+        public void OnBackToMainMenuClicked()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
 
         public void SpinOnce()

@@ -1,0 +1,558 @@
+fileFormatVersion: 2
+guid: 4779b8504eb2f4653b51e41358149185
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6005626059806764916
+    second: MucLuc_0
+  - first:
+      213: 6052974896309973882
+    second: MucLuc_1
+  - first:
+      213: -5181273563495763380
+    second: MucLuc_2
+  - first:
+      213: -8663512103339242275
+    second: MucLuc_3
+  - first:
+      213: 6183745938644660496
+    second: MucLuc_4
+  - first:
+      213: 3014294292407545399
+    second: MucLuc_5
+  - first:
+      213: 5283134128548255575
+    second: MucLuc_6
+  - first:
+      213: -6855422894535119689
+    second: MucLuc_7
+  - first:
+      213: -8817267496715086154
+    second: MucLuc_8
+  - first:
+      213: -593013693759805217
+    second: MucLuc_9
+  - first:
+      213: -4141663736452736762
+    second: MucLuc_10
+  - first:
+      213: 1382983604196849986
+    second: MucLuc_11
+  - first:
+      213: 7062514742351705466
+    second: MucLuc_12
+  - first:
+      213: -8234452921265803500
+    second: MucLuc_13
+  - first:
+      213: -8777794971009323537
+    second: MucLuc_14
+  - first:
+      213: -6610061371403924298
+    second: MucLuc_15
+  - first:
+      213: -8188491576557357662
+    second: MucLuc_16
+  - first:
+      213: -3672118298552757327
+    second: MucLuc_17
+  - first:
+      213: -8111084531084496141
+    second: MucLuc_18
+  - first:
+      213: 1222085861535120668
+    second: MucLuc_19
+  - first:
+      213: 1978721016586098823
+    second: MucLuc_20
+  - first:
+      213: 8006733721859099889
+    second: MucLuc_21
+  - first:
+      213: 9012544207236555378
+    second: MucLuc_22
+  - first:
+      213: -7884513047799057177
+    second: MucLuc_23
+  - first:
+      213: -8674928941016682534
+    second: MucLuc_24
+  - first:
+      213: 5823558776090295167
+    second: MucLuc_25
+  - first:
+      213: 5167502492107278123
+    second: MucLuc_26
+  - first:
+      213: 2004589241053586821
+    second: MucLuc_27
+  - first:
+      213: 8871849592909288659
+    second: MucLuc_28
+  - first:
+      213: 2056867870583175547
+    second: MucLuc_29
+  - first:
+      213: -4181771280873308528
+    second: MucLuc_30
+  - first:
+      213: 7845865405473784430
+    second: MucLuc_31
+  - first:
+      213: -4750156439388277480
+    second: MucLuc_32
+  - first:
+      213: 7781334787008220385
+    second: MucLuc_33
+  - first:
+      213: 495672304479356928
+    second: MucLuc_34
+  - first:
+      213: 8819318477372753779
+    second: MucLuc_35
+  - first:
+      213: -1012074976141371550
+    second: MucLuc_36
+  - first:
+      213: 2524885648276482123
+    second: MucLuc_37
+  - first:
+      213: -8623687770113035588
+    second: MucLuc_38
+  - first:
+      213: 1628838992490039648
+    second: MucLuc_39
+  - first:
+      213: -2298623888821185236
+    second: MucLuc_40
+  - first:
+      213: 5259531338164780377
+    second: MucLuc_41
+  - first:
+      213: 6887946078075372330
+    second: MucLuc_42
+  - first:
+      213: -5458578136206409491
+    second: MucLuc_43
+  - first:
+      213: 7745157255900279028
+    second: MucLuc_44
+  - first:
+      213: -4755664700607786239
+    second: MucLuc_45
+  - first:
+      213: 4098043258976869748
+    second: MucLuc_46
+  - first:
+      213: 6757524542734530345
+    second: MucLuc_47
+  - first:
+      213: -8400306315081907310
+    second: MucLuc_48
+  - first:
+      213: -4394257414113413985
+    second: MucLuc_49
+  - first:
+      213: 7579321680610353767
+    second: MucLuc_50
+  - first:
+      213: 4597967050487589089
+    second: MucLuc_51
+  - first:
+      213: 1956507657240292586
+    second: MucLuc_52
+  - first:
+      213: 3395934558516097401
+    second: MucLuc_53
+  - first:
+      213: 1879197873897061584
+    second: MucLuc_54
+  - first:
+      213: 7174442348424347646
+    second: Shop
+  - first:
+      213: 3838318795275561306
+    second: Menu
+  - first:
+      213: -1127803940300388072
+    second: Character
+  - first:
+      213: -7107850802571956375
+    second: LuckyWheel
+  - first:
+      213: 8499332137328812122
+    second: Daily
+  - first:
+      213: -7306855669053604407
+    second: Dot
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shop
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 525
+        width: 496
+        height: 446
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eff3a57dd4db09360800000000000000
+      internalID: 7174442348424347646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Menu
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 531
+        width: 447
+        height: 418
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59ea17ab92744530800000000000000
+      internalID: 3838318795275561306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 515
+        width: 470
+        height: 462
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8190c1aaa4c3950f0800000000000000
+      internalID: -1127803940300388072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LuckyWheel
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 44
+        width: 510
+        height: 465
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96f2934aa57db5d90800000000000000
+      internalID: -7107850802571956375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daily
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 48
+        width: 485
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a50ab892c81b3f570800000000000000
+      internalID: 8499332137328812122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dot
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 124
+        width: 268
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cdb20d7b75d89a90800000000000000
+      internalID: -7306855669053604407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Character: -1127803940300388072
+      Daily: 8499332137328812122
+      Dot: -7306855669053604407
+      LuckyWheel: -7107850802571956375
+      Menu: 3838318795275561306
+      MucLuc_0: 6005626059806764916
+      MucLuc_1: 6052974896309973882
+      MucLuc_10: -4141663736452736762
+      MucLuc_11: 1382983604196849986
+      MucLuc_12: 7062514742351705466
+      MucLuc_13: -8234452921265803500
+      MucLuc_14: -8777794971009323537
+      MucLuc_15: -6610061371403924298
+      MucLuc_16: -8188491576557357662
+      MucLuc_17: -3672118298552757327
+      MucLuc_18: -8111084531084496141
+      MucLuc_19: 1222085861535120668
+      MucLuc_2: -5181273563495763380
+      MucLuc_20: 1978721016586098823
+      MucLuc_21: 8006733721859099889
+      MucLuc_22: 9012544207236555378
+      MucLuc_23: -7884513047799057177
+      MucLuc_24: -8674928941016682534
+      MucLuc_25: 5823558776090295167
+      MucLuc_26: 5167502492107278123
+      MucLuc_27: 2004589241053586821
+      MucLuc_28: 8871849592909288659
+      MucLuc_29: 2056867870583175547
+      MucLuc_3: -8663512103339242275
+      MucLuc_30: -4181771280873308528
+      MucLuc_31: 7845865405473784430
+      MucLuc_32: -4750156439388277480
+      MucLuc_33: 7781334787008220385
+      MucLuc_34: 495672304479356928
+      MucLuc_35: 8819318477372753779
+      MucLuc_36: -1012074976141371550
+      MucLuc_37: 2524885648276482123
+      MucLuc_38: -8623687770113035588
+      MucLuc_39: 1628838992490039648
+      MucLuc_4: 6183745938644660496
+      MucLuc_40: -2298623888821185236
+      MucLuc_41: 5259531338164780377
+      MucLuc_42: 6887946078075372330
+      MucLuc_43: -5458578136206409491
+      MucLuc_44: 7745157255900279028
+      MucLuc_45: -4755664700607786239
+      MucLuc_46: 4098043258976869748
+      MucLuc_47: 6757524542734530345
+      MucLuc_48: -8400306315081907310
+      MucLuc_49: -4394257414113413985
+      MucLuc_5: 3014294292407545399
+      MucLuc_50: 7579321680610353767
+      MucLuc_51: 4597967050487589089
+      MucLuc_52: 1956507657240292586
+      MucLuc_53: 3395934558516097401
+      MucLuc_54: 1879197873897061584
+      MucLuc_6: 5283134128548255575
+      MucLuc_7: -6855422894535119689
+      MucLuc_8: -8817267496715086154
+      MucLuc_9: -593013693759805217
+      Shop: 7174442348424347646
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -34,6 +34,9 @@ namespace Luan.MainMenu
         [Tooltip("Panel Thành Tích / Bảng xếp hạng (Tùy chọn)")]
         [SerializeField] private UIPanelAnimator leaderboardPanel;
 
+        [Tooltip("Nút / Panel Mục Lục (QuickMenu) - ẩn hiện và trượt cùng lúc với UserInfo và 3 nút MainMenu")]
+        [SerializeField] private UIPanelAnimator quickMenuPanel;
+
         [Tooltip("Tham chiếu trực tiếp tới AccountManager (nếu để trống script sẽ tự tìm)")]
         [SerializeField] private AccountManager accountManager;
 
@@ -122,6 +125,7 @@ namespace Luan.MainMenu
             }
 
             FindLogoIfNeeded();
+            FindQuickMenuIfNeeded();
 
             if (!TryGetComponent<VideoOptimizationManager>(out _))
             {
@@ -225,6 +229,9 @@ namespace Luan.MainMenu
                 }
             }
 
+            // Tự động tìm và gán QuickMenu nếu chưa kéo trong Inspector
+            FindQuickMenuIfNeeded();
+
             UpdateUserDisplay();
 
             bool hasSession = accountManager != null && accountManager.IsLoggedIn;
@@ -241,11 +248,12 @@ namespace Luan.MainMenu
                 SetLogoPositionImmediate(logoRightPosition);
             }
 
-            // Nếu người chơi chưa đăng nhập: Ẩn 3 nút Menu chính và UserInfo, hiện bảng Đăng nhập trước
+            // Nếu người chơi chưa đăng nhập: Ẩn 3 nút Menu chính, UserInfo và QuickMenu, hiện bảng Đăng nhập trước
             if (showLoginOnStart && !hasSession)
             {
                 if (mainMenuPanel != null) mainMenuPanel.HideImmediate();
                 if (userInfoPanel != null) userInfoPanel.HideImmediate();
+                if (quickMenuPanel != null) quickMenuPanel.HideImmediate();
 
                 if (accountManager != null)
                 {
@@ -260,7 +268,7 @@ namespace Luan.MainMenu
                     accountManager.CloseAccountPanel();
                 }
 
-                // Chạy animation xuất hiện mượt mà cho MainMenu và UserInfo khi vừa vào / back về
+                // Chạy animation xuất hiện mượt mà cho MainMenu và UserInfo, QuickMenu khi vừa vào / back về
                 if (mainMenuPanel != null)
                 {
                     mainMenuPanel.HideImmediate();
@@ -277,6 +285,19 @@ namespace Luan.MainMenu
                     else
                     {
                         userInfoPanel.HideImmediate();
+                    }
+                }
+
+                if (quickMenuPanel != null)
+                {
+                    if (hasSession || !requireLoginToPlay)
+                    {
+                        quickMenuPanel.HideImmediate();
+                        quickMenuPanel.Show();
+                    }
+                    else
+                    {
+                        quickMenuPanel.HideImmediate();
                     }
                 }
             }
@@ -333,6 +354,11 @@ namespace Luan.MainMenu
                 userInfoPanel.Hide();
             }
 
+            if (quickMenuPanel != null && quickMenuPanel.IsOpen)
+            {
+                quickMenuPanel.Hide();
+            }
+
             if (settingsPanel != null)
             {
                 settingsPanel.Show();
@@ -363,6 +389,11 @@ namespace Luan.MainMenu
                 userInfoPanel.Hide();
             }
 
+            if (quickMenuPanel != null && quickMenuPanel.IsOpen)
+            {
+                quickMenuPanel.Hide();
+            }
+
             if (leaderboardPanel != null)
             {
                 leaderboardPanel.Show();
@@ -388,6 +419,11 @@ namespace Luan.MainMenu
             if (userInfoPanel != null && userInfoPanel.IsOpen)
             {
                 userInfoPanel.Hide();
+            }
+
+            if (quickMenuPanel != null && quickMenuPanel.IsOpen)
+            {
+                quickMenuPanel.Hide();
             }
 
             if (accountManager != null)
@@ -441,6 +477,12 @@ namespace Luan.MainMenu
                 userInfoPanel.Show();
             }
 
+            // Hiện lại nút QuickMenu trượt cùng lúc với UserInfo
+            if ((loggedIn || !requireLoginToPlay) && quickMenuPanel != null && !quickMenuPanel.IsOpen)
+            {
+                quickMenuPanel.Show();
+            }
+
             // Khi quay lại Menu chính: Đưa Logo trượt mượt mà về lại vị trí ban đầu bên trái
             SlideLogoToPosition(logoLeftPosition);
         }
@@ -488,7 +530,7 @@ namespace Luan.MainMenu
             // Đăng nhập thành công: Trượt Logo mượt mà về vị trí bên trái!
             SlideLogoToPosition(logoLeftPosition);
 
-            // Hiện MainMenu (3 nút) và khung UserInfo trượt cùng lúc!
+            // Hiện MainMenu (3 nút) và khung UserInfo, QuickMenu trượt cùng lúc!
             if (mainMenuPanel != null && !mainMenuPanel.IsOpen)
             {
                 mainMenuPanel.Show();
@@ -497,6 +539,11 @@ namespace Luan.MainMenu
             if (userInfoPanel != null && !userInfoPanel.IsOpen)
             {
                 userInfoPanel.Show();
+            }
+
+            if (quickMenuPanel != null && !quickMenuPanel.IsOpen)
+            {
+                quickMenuPanel.Show();
             }
         }
 
@@ -512,7 +559,7 @@ namespace Luan.MainMenu
             // Đăng xuất: Trượt Logo mượt mà sang vị trí bên phải để nhường không gian bên trái cho bảng Đăng nhập/Đăng ký!
             SlideLogoToPosition(logoRightPosition);
 
-            // Ẩn 3 nút MainMenu và ẩn UserInfo, mở lại bảng Đăng nhập
+            // Ẩn 3 nút MainMenu, ẩn UserInfo và QuickMenu, mở lại bảng Đăng nhập
             if (mainMenuPanel != null && mainMenuPanel.IsOpen)
             {
                 mainMenuPanel.Hide();
@@ -521,6 +568,11 @@ namespace Luan.MainMenu
             if (userInfoPanel != null && userInfoPanel.IsOpen)
             {
                 userInfoPanel.Hide();
+            }
+
+            if (quickMenuPanel != null && quickMenuPanel.IsOpen)
+            {
+                quickMenuPanel.Hide();
             }
 
             if (accountManager != null)
@@ -695,6 +747,40 @@ namespace Luan.MainMenu
             }
         }
 
+        private void FindQuickMenuIfNeeded()
+        {
+            if (quickMenuPanel == null)
+            {
+                var qmGO = GameObject.Find("QuickMenu");
+                if (qmGO == null)
+                {
+                    var allRects = FindObjectsByType<RectTransform>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                    foreach (var r in allRects)
+                    {
+                        if (r != null && r.name == "QuickMenu")
+                        {
+                            qmGO = r.gameObject;
+                            break;
+                        }
+                    }
+                }
+
+                if (qmGO != null)
+                {
+                    quickMenuPanel = qmGO.GetComponent<UIPanelAnimator>();
+                    if (quickMenuPanel == null)
+                    {
+                        if (qmGO.GetComponent<CanvasGroup>() == null)
+                        {
+                            qmGO.AddComponent<CanvasGroup>();
+                        }
+                        quickMenuPanel = qmGO.AddComponent<UIPanelAnimator>();
+                        quickMenuPanel.ConfigureSlide(UIPanelAnimator.TransitionType.SlideHorizontal, UIPanelAnimator.SlideDirection.FromRight, 0.4f);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Trượt Logo mượt mà đến vị trí mục tiêu theo đường cong gia tốc.
         /// </summary>
@@ -760,6 +846,7 @@ namespace Luan.MainMenu
         private void OnValidate()
         {
             FindLogoIfNeeded();
+            FindQuickMenuIfNeeded();
         }
 
         [ContextMenu("Logo/Lưu vị trí hiện tại làm Vị Trí Bên Phải (Right)")]
