@@ -28,7 +28,7 @@ namespace Luan.MainMenu.Editor
                 "1. Bạn kéo Logo trên Scene View sang góc bên phải theo ý muốn (hoặc nhập số vào Logo Right Position bên trên).\n" +
                 "2. Bấm '📌 Lưu Hiện Tại Làm [Bên Phải]' để lưu lại tọa độ đó.\n" +
                 "3. Bấm '👉 Xem Trước Bên Phải' hoặc '👈 Xem Trước Bên Trái' để kiểm tra nhanh trong Scene.\n" +
-                "4. Khi vào game: Logo sẽ ở bên phải; sau khi đăng nhập thành công sẽ trượt về bên trái; khi đăng xuất sẽ trượt về bên phải.",
+                "4. Khi vào game: Logo sẽ ở bên phải; sau khi đăng nhập thành công sẽ trượt về bên trái; khi đăng xuất hoặc khi mở Cài Đặt sẽ trượt sang bên phải (đóng Cài Đặt sẽ trượt về bên trái).",
                 MessageType.Info);
 
             EditorGUILayout.Space(4);

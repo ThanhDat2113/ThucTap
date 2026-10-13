@@ -179,6 +179,13 @@ namespace Luan.MainMenu
             AccountManager.OnLoginSuccess += HandleLoginSuccess;
             AccountManager.OnRegisterSuccess += HandleRegisterSuccess;
             AccountManager.OnLogout += HandleLogout;
+
+            // Lắng nghe sự kiện mở / đóng bảng Cài Đặt để tự động trượt Logo tương ứng
+            if (settingsPanel != null)
+            {
+                settingsPanel.onShowStarted.AddListener(SlideLogoToRight);
+                settingsPanel.onHideStarted.AddListener(SlideLogoToLeft);
+            }
         }
 
         private void OnDisable()
@@ -186,6 +193,12 @@ namespace Luan.MainMenu
             AccountManager.OnLoginSuccess -= HandleLoginSuccess;
             AccountManager.OnRegisterSuccess -= HandleRegisterSuccess;
             AccountManager.OnLogout -= HandleLogout;
+
+            if (settingsPanel != null)
+            {
+                settingsPanel.onShowStarted.RemoveListener(SlideLogoToRight);
+                settingsPanel.onHideStarted.RemoveListener(SlideLogoToLeft);
+            }
         }
 
         private void Start()
@@ -195,6 +208,21 @@ namespace Luan.MainMenu
             if (accountManager == null)
             {
                 accountManager = AccountManager.Instance != null ? AccountManager.Instance : FindFirstObjectByType<AccountManager>();
+            }
+
+            // Tự động tìm SettingsPanel nếu chưa gán trong Inspector
+            if (settingsPanel == null)
+            {
+                var sm = FindFirstObjectByType<SettingsManager>();
+                if (sm != null)
+                {
+                    settingsPanel = sm.GetComponent<UIPanelAnimator>();
+                    if (settingsPanel != null)
+                    {
+                        settingsPanel.onShowStarted.AddListener(SlideLogoToRight);
+                        settingsPanel.onHideStarted.AddListener(SlideLogoToLeft);
+                    }
+                }
             }
 
             UpdateUserDisplay();
@@ -313,6 +341,9 @@ namespace Luan.MainMenu
             {
                 Debug.LogWarning("[MainMenuManager] Bấm Cài Đặt nhưng chưa gán settingsPanel trong Inspector!");
             }
+
+            // Mở Cài Đặt: Logo trượt mượt mà sang vị trí bên phải
+            SlideLogoToPosition(logoRightPosition);
         }
 
         /// <summary>
@@ -410,15 +441,8 @@ namespace Luan.MainMenu
                 userInfoPanel.Show();
             }
 
-            // Đưa Logo về đúng vị trí tương ứng trạng thái
-            if (loggedIn)
-            {
-                SlideLogoToPosition(logoLeftPosition);
-            }
-            else
-            {
-                SlideLogoToPosition(logoRightPosition);
-            }
+            // Khi quay lại Menu chính: Đưa Logo trượt mượt mà về lại vị trí ban đầu bên trái
+            SlideLogoToPosition(logoLeftPosition);
         }
 
         /// <summary>

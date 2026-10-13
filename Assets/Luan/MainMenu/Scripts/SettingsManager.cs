@@ -301,6 +301,12 @@ namespace Luan.MainMenu
             {
                 gameObject.SetActive(true);
             }
+
+            // Khi mở Cài Đặt: Logo trượt mượt mà sang bên phải
+            if (MainMenuManager.Instance != null)
+            {
+                MainMenuManager.Instance.SlideLogoToRight();
+            }
         }
 
         /// <summary>
@@ -319,9 +325,10 @@ namespace Luan.MainMenu
                 gameObject.SetActive(false);
             }
 
-            // Hiện lại 3 nút ngoài Main Menu
+            // Hiện lại 3 nút ngoài Main Menu và trượt Logo về lại vị trí bên trái
             if (MainMenuManager.Instance != null)
             {
+                MainMenuManager.Instance.SlideLogoToLeft();
                 MainMenuManager.Instance.BackToMainMenu();
             }
         }
