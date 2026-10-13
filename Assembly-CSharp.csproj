@@ -50,51 +50,123 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\VFX\Background\BackgroundNightSky.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundForestGradient.cs" />
     <Compile Include="Assets\VFX\BeatPulse.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Thuan\Scripts\Audio\SceneBackgroundMusic.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundClouds.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteSpawner.cs" />
+    <Compile Include="Assets\Thuan\Scripts\Audio\MusicManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteView.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NotePool.cs" />
     <Compile Include="Assets\VFX\SideStreaks.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\UIPasswordToggle.cs" />
+    <Compile Include="Assets\Thuan\Scripts\Core\GameSession.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundGradient.cs" />
+    <Compile Include="Assets\Thuan\Scripts\UI\SongDetailPanel.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundRain.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundPetals.cs" />
+    <Compile Include="Assets\Luan\LuckyWheel\Scripts\LuckyWheelSliceGraphic.cs" />
+    <Compile Include="Assets\Thuan\Scripts\UI\GameplayScreen.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\LeaderboardManager.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundWinterGradient.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\VFX\Background\WorldBackgroundSelector.cs" />
+    <Compile Include="Assets\Thuan\Scripts\UI\SongItemUI.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundSynthwave.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\UIElementAnimator.cs" />
     <Compile Include="Assets\VFX\VfxBinder.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundFireflies.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ReceptorFlasher.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Core\ChartRecorder.cs" />
+    <Compile Include="Assets\Scripts\Core\PauseManager.cs" />
+    <Compile Include="Assets\Luan\LuckyWheel\Scripts\LuckyWheelEditablePanels.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\VFX\RoadNeonEdge.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\AudioManager.cs" />
     <Compile Include="Assets\VFX\LaneBeam.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundNightGradient.cs" />
-    <Compile Include="Assets\Scripts\Core\GameBootstrapper.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\MainMenuManager.cs" />
+    <Compile Include="Assets\Thuan\Scripts\UI\SceneLoader.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\UIButtonSound.cs" />
     <Compile Include="Assets\VFX\AudioSpectrumBars.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundBokeh.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Luan\LuckyWheel\Scripts\LuckyWheelController.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundMountains.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundGradientPro.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Gameplay\JudgementSystem.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Data\NoteData.cs" />
     <Compile Include="Assets\VFX\SpeedLines.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundSnow.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\AccountManager.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundAurora.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\VFX\NoteVisuals.cs" />
+    <Compile Include="Assets\Thuan\Scripts\UI\SongListController.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\AspectRatioEnforcer.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\VideoOptimizationManager.cs" />
+    <Compile Include="Assets\Thuan\Scripts\UI\ButtonSFX.cs" />
+    <Compile Include="Assets\Thuan\Scripts\Audio\SongData.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\SettingsManager.cs" />
+    <Compile Include="Assets\Thuan\Scripts\Core\SongStats.cs" />
+    <Compile Include="Assets\VFX\ReceptorVisuals.cs" />
     <Compile Include="Assets\VFX\HitEffect.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\VFX\JudgementPopup.cs" />
     <Compile Include="Assets\Scripts\Core\GameManager.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\UIVideoElement.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
+    <Compile Include="Assets\Luan\LuckyWheel\Scripts\LuckyWheelPurchaseUI.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Input\InputHandler.cs" />
     <Compile Include="Assets\VFX\NapGameManager.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\UIPanelAnimator.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundSkyGradient.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundExtras.cs" />
     <Compile Include="Assets\Scripts\Data\ChartData.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\Scripts\Core\HealthSystem.cs" />
+    <Compile Include="Assets\Thuan\Scripts\Audio\SFXManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\Thuan\UI\Fonts\Bangers-OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Unity - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - AFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\UI\Fonts\Bangers-OFL.txt" />
@@ -115,6 +187,7 @@
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -667,6 +740,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
@@ -1297,6 +1374,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="MCPForUnity.Runtime">
+      <HintPath>Library\ScriptAssemblies\MCPForUnity.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -1353,8 +1434,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+    <Reference Include="MCPForUnity.Editor">
+      <HintPath>Library\ScriptAssemblies\MCPForUnity.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
@@ -1363,6 +1444,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Mathematics">

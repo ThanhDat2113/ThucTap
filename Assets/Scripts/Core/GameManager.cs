@@ -41,17 +41,22 @@ namespace RhythmGame
         {
             input.OnRestartPressed += Restart;
             if (healthSystem != null) healthSystem.OnHealthDepleted.AddListener(OnHealthDepleted);
+            // Nút "Chơi lại" trong menu pause sẽ gọi Restart() này thay vì load lại cả scene
+            if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = Restart;
             Restart();
         }
 
         void OnDestroy()
         {
+            if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = null;
             if (input != null) input.OnRestartPressed -= Restart;
             if (healthSystem != null) healthSystem.OnHealthDepleted.RemoveListener(OnHealthDepleted);
         }
 
         public void Restart()
         {
+            // Đang pause mà Restart (phím R hoặc nút trong menu pause) -> bỏ pause trước
+            if (PauseManager.Instance != null) PauseManager.Instance.ForceUnpause();
             if (musicSource != null) musicSource.Stop();
             if (playMusicRoutine != null) StopCoroutine(playMusicRoutine);
             spawner.Begin(chart);
@@ -116,6 +121,9 @@ namespace RhythmGame
         void SetState(GameState s)
         {
             State = s;
+            // Chỉ cho pause khi đang đếm ngược hoặc đang chơi (không pause ở màn Finished/Failed)
+            if (PauseManager.Instance != null)
+                PauseManager.Instance.canPause = s == GameState.Countdown || s == GameState.Playing;
             OnStateChanged?.Invoke(s);
             if (s == GameState.Playing) playMusicRoutine = StartCoroutine(PlayMusicDelayed());
         }

@@ -43,10 +43,14 @@ namespace RhythmGame
         {
             input.OnLanePressed += HandlePress;
             input.OnLaneReleased += HandleRelease;
+            if (PauseManager.Instance != null)
+                PauseManager.Instance.onResume.AddListener(OnGameResumed);
         }
 
         void OnDestroy()
         {
+            if (PauseManager.Instance != null)
+                PauseManager.Instance.onResume.RemoveListener(OnGameResumed);
             if (input == null) return;
             input.OnLanePressed -= HandlePress;
             input.OnLaneReleased -= HandleRelease;
@@ -56,6 +60,7 @@ namespace RhythmGame
 
         public void CheckMisses()
         {
+            if (PauseManager.IsPaused) return;
             var notes = spawner.ActiveNotes;
             for (int i = notes.Count - 1; i >= 0; i--)
             {
@@ -81,6 +86,7 @@ namespace RhythmGame
 
         void HandlePress(int lane)
         {
+            if (PauseManager.IsPaused) return;
             OnLaneActivated?.Invoke(lane);
 
             NoteView note = spawner.FindClosestUnjudged(lane, songTime);
@@ -109,6 +115,7 @@ namespace RhythmGame
 
         void HandleRelease(int lane)
         {
+            if (PauseManager.IsPaused) return;
             NoteView holding = null;
             foreach (var n in spawner.ActiveNotes)
             {
@@ -146,6 +153,25 @@ namespace RhythmGame
             PlaySfx(tailJudgement);
             OnJudged?.Invoke(tailJudgement, holdCompletePoints + tailPoints, tailJudgement != Judgement.Miss);
             healthSystem?.ApplyJudgement(tailJudgement);
+        }
+
+        /// <summary>
+        /// Gọi khi hết pause. Nếu người chơi nhả phím trong lúc pause thì hold note bị đứt
+        /// (nếu không, hold sẽ tự chạy tới hết đuôi và được tính hoàn thành miễn phí).
+        /// </summary>
+        public void OnGameResumed()
+        {
+            var notes = spawner.ActiveNotes;
+            for (int i = notes.Count - 1; i >= 0; i--)
+            {
+                NoteView n = notes[i];
+                if (!n.Holding || input.IsHeld(n.Data.lane)) continue;
+
+                n.BreakHold();
+                OnJudged?.Invoke(Judgement.Miss, 0, false);
+                PlaySfx(Judgement.Miss);
+                healthSystem?.ApplyJudgement(Judgement.Miss);
+            }
         }
 
         void CompleteHold(NoteView n)

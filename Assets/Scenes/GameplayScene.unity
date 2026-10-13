@@ -1067,16 +1067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1140ad94b393ce142a0807b1ee6eae49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ReceptorPulse
-  bpm: 120
-  firstBeatOffset: 0
-  pulseScale: 1.25
-  pulseAlpha: 0.6
-  returnSpeed: 10
-  receptorGlows: []
-  baseScales: []
-  baseColors: []
-  songStartDspTime: 0
-  lastBeat: -1
 --- !u!1 &517027979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,7 +1641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e67bcb340ec5a1458c668d24abb20a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundGradientPro
-  preset: 6
+  preset: 1
   topColor: {r: 0.45, g: 0.15, b: 0.55, a: 1}
   middleColor: {r: 0.7, g: 0.2, b: 0.6, a: 1}
   bottomColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}
@@ -1675,7 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d026163250599a478726c8bda994bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSelector
-  scene: 6
+  scene: 1
   includeGradient: 1
   cleanLeftovers: 1
 --- !u!1 &837932949
@@ -3176,6 +3166,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1766202751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1766202752}
+  - component: {fileID: 1766202753}
+  m_Layer: 0
+  m_Name: PauseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1766202752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766202751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1023.9809, y: 515.4931, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766202753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766202751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c27e617efeaa8ed40bc3c9edc8bdca70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  canPause: 1
+  countdownSeconds: 0
+  showPauseButton: 1
+  pauseButtonPosition: {x: -30, y: -30}
+  pauseOnFocusLost: 1
+  menuSceneName: 
+  font: {fileID: 12800000, guid: 38624bbe44c61d94b8b09c014def0c60, type: 3}
+  dimColor: {r: 0, g: 0, b: 0, a: 0.7}
+  buttonColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  onPause:
+    m_PersistentCalls:
+      m_Calls: []
+  onResume:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1778707731
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,3 +3881,4 @@ SceneRoots:
   - {fileID: 2018538454}
   - {fileID: 1133791185}
   - {fileID: 1765228440}
+  - {fileID: 1766202752}
