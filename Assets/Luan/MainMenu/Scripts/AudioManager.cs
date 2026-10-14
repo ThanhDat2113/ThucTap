@@ -55,6 +55,16 @@ namespace Luan.MainMenu
         [Tooltip("Âm thanh đóng / quay lại / rê chuột (rollover2.wav)")]
         [SerializeField] private AudioClip buttonCloseClip;
 
+        [Header("--- Vòng Quay May Mắn (Lucky Wheel Audio) ---")]
+        [Tooltip("Âm thanh vòng quay đang quay (wheel_spin.wav)")]
+        [SerializeField] private AudioClip wheelSpinClip;
+
+        [Tooltip("Âm thanh kim chạm nan quạt vòng quay (wheel_tick.wav)")]
+        [SerializeField] private AudioClip wheelTickClip;
+
+        [Tooltip("Âm thanh trúng thưởng vòng quay (wheel_win.wav hoặc daily_claim.wav)")]
+        [SerializeField] private AudioClip wheelWinClip;
+
         [Header("--- Mức Âm Lượng Mặc Định (0.0 đến 1.0) ---")]
         [Range(0f, 1f)] [SerializeField] private float defaultMasterVolume = 1f;
         [Range(0f, 1f)] [SerializeField] private float defaultMusicVolume = 0.8f;
@@ -72,6 +82,9 @@ namespace Luan.MainMenu
         public AudioClip ButtonSelectClip => buttonSelectClip;
         public AudioClip ButtonConfirmClip => buttonConfirmClip;
         public AudioClip ButtonCloseClip => buttonCloseClip;
+        public AudioClip WheelSpinClip => wheelSpinClip;
+        public AudioClip WheelTickClip => wheelTickClip;
+        public AudioClip WheelWinClip => wheelWinClip;
 
         // Sự kiện thông báo khi âm lượng thay đổi (để UI hoặc các hệ thống khác cập nhật)
         public static event Action<float, float, float> OnVolumeChanged;
@@ -141,6 +154,41 @@ namespace Luan.MainMenu
                 if (bgmClip == null)
                     bgmClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/BGM/menu.wav");
 #endif
+            }
+
+            if (wheelSpinClip == null)
+            {
+                wheelSpinClip = Resources.Load<AudioClip>("Audio/wheel_spin");
+#if UNITY_EDITOR
+                if (wheelSpinClip == null)
+                    wheelSpinClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/wheel_spin.wav");
+#endif
+            }
+
+            if (wheelTickClip == null)
+            {
+                wheelTickClip = Resources.Load<AudioClip>("Audio/wheel_tick");
+#if UNITY_EDITOR
+                if (wheelTickClip == null)
+                    wheelTickClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/wheel_tick.wav");
+#endif
+            }
+
+            if (wheelWinClip == null)
+            {
+                wheelWinClip = Resources.Load<AudioClip>("Audio/wheel_win");
+#if UNITY_EDITOR
+                if (wheelWinClip == null)
+                    wheelWinClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/wheel_win.wav");
+#endif
+                if (wheelWinClip == null)
+                {
+                    wheelWinClip = Resources.Load<AudioClip>("Audio/daily_claim");
+#if UNITY_EDITOR
+                    if (wheelWinClip == null)
+                        wheelWinClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/daily_claim.wav");
+#endif
+                }
             }
         }
 
@@ -346,6 +394,43 @@ namespace Luan.MainMenu
             if (buttonCloseClip != null)
             {
                 PlaySFX(buttonCloseClip, volumeScale);
+            }
+        }
+
+        /// <summary>
+        /// Phát âm thanh vòng quay may mắn đang quay (wheel_spin.wav).
+        /// </summary>
+        public void PlayWheelSpin(float volumeScale = 1f)
+        {
+            if (wheelSpinClip != null)
+            {
+                PlaySFX(wheelSpinClip, volumeScale);
+            }
+        }
+
+        /// <summary>
+        /// Phát âm thanh kim chạm nan quạt vòng quay (wheel_tick.wav).
+        /// </summary>
+        public void PlayWheelTick(float volumeScale = 1f)
+        {
+            if (wheelTickClip != null)
+            {
+                PlaySFX(wheelTickClip, volumeScale);
+            }
+        }
+
+        /// <summary>
+        /// Phát âm thanh trúng thưởng vòng quay (wheel_win.wav).
+        /// </summary>
+        public void PlayWheelWin(float volumeScale = 1f)
+        {
+            if (wheelWinClip != null)
+            {
+                PlaySFX(wheelWinClip, volumeScale);
+            }
+            else if (buttonConfirmClip != null)
+            {
+                PlaySFX(buttonConfirmClip, volumeScale);
             }
         }
 
