@@ -74,6 +74,7 @@ public class SFXManager : MonoBehaviour
             sfxSource.volume = _volume;
         }
         PlayerPrefs.SetFloat(PrefsSfxVolKey, _volume);
+        PlayerPrefs.Save();
     }
 
     public void PlaySFX(AudioClip clip)

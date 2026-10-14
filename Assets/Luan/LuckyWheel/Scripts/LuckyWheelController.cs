@@ -49,6 +49,16 @@ namespace Luan.LuckyWheel
         [Tooltip("Nếu bật: Các icon và chữ luôn giữ hướng thẳng đứng khi mâm quay (chuyển động kiểu cabin đu quay). Nếu tắt: Các icon và chữ quay dính liền theo nan quạt (căn giữa hoàn hảo, chuẩn phong cách game).")]
         [SerializeField] private bool keepItemsUpright = false;
 
+        [Header("Audio settings")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip spinSound;
+        [SerializeField] private AudioClip tickSound;
+        [SerializeField] private AudioClip winSound;
+        [SerializeField] private AudioClip buttonClickSound;
+        [SerializeField] private AudioClip backClickSound;
+
+        private AudioSource spinAudioSource;
+
         [Header("Events")]
         public UnityEvent<Prize> onSinglePrizeWon = new UnityEvent<Prize>();
         public UnityEvent<List<Prize>> onTenPrizesWon = new UnityEvent<List<Prize>>();
@@ -84,6 +94,8 @@ namespace Luan.LuckyWheel
         private void Awake()
         {
             ResolveReferences();
+            InitAudio();
+            SetupAllButtonSounds();
             if (wheel != null) wheel.localRotation = Quaternion.identity;
 
             // Giữ nguyên thiết kế UI trong Scene của bạn, không tự ý xóa và tạo lại khi Play Mode!
@@ -105,6 +117,19 @@ namespace Luan.LuckyWheel
             }
 
             BindBackButton();
+        }
+
+        private void Start()
+        {
+            EnsureAudioListener();
+            InitAudio();
+            SetupAllButtonSounds();
+
+            // Đảm bảo nhạc nền BGM tiếp tục phát trong LuckyWheel theo đúng âm lượng đã lưu
+            if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayBGM();
+            }
         }
 
         private void OnDestroy()
@@ -188,6 +213,13 @@ namespace Luan.LuckyWheel
 
         public void OnBackToMainMenuClicked()
         {
+            PlayBackClickSound();
+            StartCoroutine(DelayLoadMainMenu());
+        }
+
+        private IEnumerator DelayLoadMainMenu()
+        {
+            yield return new WaitForSecondsRealtime(0.12f);
             SceneManager.LoadScene("MainMenu");
         }
 
@@ -336,6 +368,9 @@ namespace Luan.LuckyWheel
             var target = current + minimumTurns * 360f + delta;
 
             var elapsed = 0f;
+            float lastAngle = current;
+            float accumulatedAngle = 0f;
+
             while (elapsed < spinDuration)
             {
                 elapsed += Time.unscaledDeltaTime;
@@ -344,11 +379,298 @@ namespace Luan.LuckyWheel
                 var angle = Mathf.LerpUnclamped(current, target, eased);
                 wheel.localRotation = Quaternion.Euler(0f, 0f, angle);
                 if (keepItemsUpright) KeepItemViewsUpright(angle);
+
+                float angleDelta = Mathf.Abs(angle - lastAngle);
+                accumulatedAngle += angleDelta;
+                if (accumulatedAngle >= segmentAngle)
+                {
+                    PlayTickSound();
+                    accumulatedAngle = Mathf.Repeat(accumulatedAngle, segmentAngle);
+                }
+                lastAngle = angle;
+
                 yield return null;
             }
             wheel.localRotation = Quaternion.Euler(0f, 0f, target);
             if (keepItemsUpright) KeepItemViewsUpright(target);
+
+            // Final tick right on the target winning slot
+            PlayTickSound();
+            yield return new WaitForSecondsRealtime(0.12f);
+
+            // Play celebratory win sound
+            PlayWinSound();
         }
+
+        #region Audio Setup & Helpers
+
+        private void EnsureAudioListener()
+        {
+            var listener = FindFirstObjectByType<AudioListener>();
+            if (listener == null)
+            {
+                var cam = Camera.main != null ? Camera.main : FindFirstObjectByType<Camera>();
+                if (cam != null)
+                {
+                    listener = cam.gameObject.AddComponent<AudioListener>();
+                }
+                else
+                {
+                    listener = gameObject.AddComponent<AudioListener>();
+                }
+            }
+            if (listener != null)
+            {
+                listener.enabled = true;
+            }
+
+            AudioListener.pause = false;
+            float masterVol = Luan.MainMenu.AudioManager.Instance != null
+                ? Luan.MainMenu.AudioManager.Instance.MasterVolume
+                : PlayerPrefs.GetFloat("SETTINGS_MASTER_VOL", 1f);
+            AudioListener.volume = Mathf.Clamp01(masterVol);
+        }
+
+        private void InitAudio()
+        {
+            EnsureAudioListener();
+
+            if (audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                }
+            }
+            if (audioSource != null)
+            {
+                audioSource.playOnAwake = false;
+                audioSource.loop = false;
+                audioSource.spatialBlend = 0f; // 100% 2D cho UI sound
+                audioSource.mute = false;
+            }
+
+            if (spinAudioSource == null)
+            {
+                var spinObj = transform.Find("SpinAudioSource");
+                if (spinObj == null)
+                {
+                    var go = new GameObject("SpinAudioSource");
+                    go.transform.SetParent(transform);
+                    spinAudioSource = go.AddComponent<AudioSource>();
+                }
+                else
+                {
+                    spinAudioSource = spinObj.GetComponent<AudioSource>();
+                }
+            }
+            if (spinAudioSource != null)
+            {
+                spinAudioSource.playOnAwake = false;
+                spinAudioSource.loop = false;
+                spinAudioSource.spatialBlend = 0f; // 100% 2D
+                spinAudioSource.mute = false;
+            }
+
+            if (spinSound == null)
+            {
+                spinSound = Resources.Load<AudioClip>("Audio/wheel_spin");
+#if UNITY_EDITOR
+                if (spinSound == null)
+                    spinSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/wheel_spin.wav");
+#endif
+            }
+
+            if (tickSound == null)
+            {
+                tickSound = Resources.Load<AudioClip>("Audio/wheel_tick");
+#if UNITY_EDITOR
+                if (tickSound == null)
+                    tickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/wheel_tick.wav");
+#endif
+            }
+
+            if (winSound == null)
+            {
+                winSound = Resources.Load<AudioClip>("Audio/wheel_win");
+#if UNITY_EDITOR
+                if (winSound == null)
+                    winSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/wheel_win.wav");
+#endif
+                if (winSound == null)
+                {
+                    winSound = Resources.Load<AudioClip>("Audio/daily_claim");
+#if UNITY_EDITOR
+                    if (winSound == null)
+                        winSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/daily_claim.wav");
+#endif
+                }
+            }
+
+            if (buttonClickSound == null)
+            {
+                buttonClickSound = Resources.Load<AudioClip>("Audio/select_001");
+#if UNITY_EDITOR
+                if (buttonClickSound == null)
+                    buttonClickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/select_001.wav");
+#endif
+            }
+
+            if (backClickSound == null)
+            {
+                backClickSound = Resources.Load<AudioClip>("Audio/rollover2");
+#if UNITY_EDITOR
+                if (backClickSound == null)
+                    backClickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/rollover2.wav");
+#endif
+            }
+        }
+
+        private void SetupAllButtonSounds()
+        {
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var btn in buttons)
+            {
+                if (btn == null) continue;
+                string btnName = btn.gameObject.name.ToLowerInvariant();
+
+                // Gỡ các listener cũ nếu có để tránh phát âm thanh trùng lặp
+                btn.onClick.RemoveListener(PlayBackClickSound);
+                btn.onClick.RemoveListener(PlayConfirmClickSound);
+                btn.onClick.RemoveListener(PlayButtonClickSound);
+
+                // Gắn component UIButtonSound duy nhất để phát âm thanh chuẩn theo hệ thống AudioManager
+                var sound = btn.GetComponent<Luan.MainMenu.UIButtonSound>();
+                if (sound == null)
+                {
+                    sound = btn.gameObject.AddComponent<Luan.MainMenu.UIButtonSound>();
+                    if (btnName.Contains("back") || btnName.Contains("quaylai") || btnName.Contains("close"))
+                    {
+                        sound.SetSoundType(Luan.MainMenu.ButtonSoundType.Close);
+                    }
+                    else if (btnName.Contains("spin") || btnName.Contains("claim") || btnName.Contains("confirm"))
+                    {
+                        sound.SetSoundType(Luan.MainMenu.ButtonSoundType.Confirm);
+                    }
+                    else
+                    {
+                        sound.SetSoundType(Luan.MainMenu.ButtonSoundType.Select);
+                    }
+                }
+            }
+        }
+
+        private void PlayAudio(AudioClip clip, float volume = 1f)
+        {
+            if (clip == null) return;
+            float sfxVol = Luan.MainMenu.AudioManager.Instance != null
+                ? Luan.MainMenu.AudioManager.Instance.SFXVolume
+                : PlayerPrefs.GetFloat("SETTINGS_SFX_VOL", 1f);
+
+            if (sfxVol <= 0.001f) return;
+
+            if (audioSource != null)
+            {
+                audioSource.pitch = 1f;
+                audioSource.PlayOneShot(clip, Mathf.Clamp01(sfxVol * volume));
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlaySFX(clip, volume);
+            }
+        }
+
+        public void PlayButtonClickSound()
+        {
+            if (buttonClickSound != null)
+                PlayAudio(buttonClickSound, 0.9f);
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+                Luan.MainMenu.AudioManager.Instance.PlaySelectSound();
+        }
+
+        public void PlayConfirmClickSound()
+        {
+            AudioClip clip = null;
+            if (Luan.MainMenu.AudioManager.Instance != null && Luan.MainMenu.AudioManager.Instance.ButtonConfirmClip != null)
+            {
+                clip = Luan.MainMenu.AudioManager.Instance.ButtonConfirmClip;
+            }
+            if (clip == null)
+            {
+                clip = Resources.Load<AudioClip>("Audio/confirmation_001");
+            }
+            if (clip != null)
+            {
+                PlayAudio(clip, 0.95f);
+            }
+            else
+            {
+                PlayButtonClickSound();
+            }
+        }
+
+        public void PlayBackClickSound()
+        {
+            if (backClickSound != null)
+                PlayAudio(backClickSound, 0.9f);
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+                Luan.MainMenu.AudioManager.Instance.PlayCloseSound();
+        }
+
+        public void PlaySpinSound()
+        {
+            // Âm thanh vòng quay được thể hiện qua nhịp kim gõ PlayTickSound() chân thực,
+            // không phát âm thanh nền thừa hay tiếng mô tô lên ga.
+        }
+
+        public void StopSpinSound()
+        {
+            if (spinAudioSource != null && spinAudioSource.isPlaying)
+            {
+                spinAudioSource.Stop();
+            }
+        }
+
+        public void PlayTickSound()
+        {
+            float sfxVol = Luan.MainMenu.AudioManager.Instance != null
+                ? Luan.MainMenu.AudioManager.Instance.SFXVolume
+                : PlayerPrefs.GetFloat("SETTINGS_SFX_VOL", 1f);
+
+            if (sfxVol <= 0.001f) return;
+
+            if (tickSound != null && audioSource != null)
+            {
+                audioSource.pitch = UnityEngine.Random.Range(0.96f, 1.04f);
+                audioSource.PlayOneShot(tickSound, Mathf.Clamp01(sfxVol * 0.8f));
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayWheelTick(0.8f);
+            }
+        }
+
+        public void PlayWinSound()
+        {
+            float sfxVol = Luan.MainMenu.AudioManager.Instance != null
+                ? Luan.MainMenu.AudioManager.Instance.SFXVolume
+                : PlayerPrefs.GetFloat("SETTINGS_SFX_VOL", 1f);
+
+            if (sfxVol <= 0.001f) return;
+
+            if (winSound != null && audioSource != null)
+            {
+                audioSource.pitch = 1f;
+                audioSource.PlayOneShot(winSound, Mathf.Clamp01(sfxVol * 0.95f));
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayWheelWin();
+            }
+        }
+
+        #endregion
 
         private int PickWeightedPrize()
         {

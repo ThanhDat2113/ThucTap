@@ -137,10 +137,27 @@ namespace Luan.LuckyWheel
                 group.blocksRaycasts = true;
             }
             transform.SetAsLastSibling();
+
+            if (wheel != null)
+            {
+                wheel.PlayWinSound();
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayWheelWin();
+            }
         }
 
         public void Hide()
         {
+            if (wheel != null)
+            {
+                wheel.PlayConfirmClickSound();
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayConfirmSound();
+            }
             ClaimPendingPrizes();
             HideImmediate();
         }

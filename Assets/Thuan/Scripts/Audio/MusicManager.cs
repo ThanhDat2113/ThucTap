@@ -78,6 +78,7 @@ public class MusicManager : MonoBehaviour
             audioSource.volume = _volume;
         }
         PlayerPrefs.SetFloat(PrefsMusicVolKey, _volume);
+        PlayerPrefs.Save();
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true)
