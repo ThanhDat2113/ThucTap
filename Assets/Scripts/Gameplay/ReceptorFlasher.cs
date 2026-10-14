@@ -3,10 +3,6 @@ using UnityEngine.Events;
 
 namespace RhythmGame
 {
-    /// <summary>
-    /// Quản lý visual của receptor: glow, pulse, press animation, hit feedback.
-    /// Tích hợp ReceptorVisuals cho hiệu ứng nâng cao.
-    /// </summary>
     public class ReceptorFlasher : MonoBehaviour
     {
         [Header("Refs")]
@@ -17,17 +13,17 @@ namespace RhythmGame
         [Header("Visual Effects")]
         public ReceptorVisuals[] visuals;
 
-        [Header("Fallback (nếu không dùng ReceptorVisuals)")]
+        [Header("Fallback")]
         [Tooltip("Màu receptor khi đang giữ phím (nhấn).")]
         public Color pressedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         [Header("Lane Colors")]
         public Color[] laneColors =
         {
-            new Color(0.76f, 0.29f, 0.60f), // Lane 0 - Magenta
-            new Color(0.00f, 1.00f, 1.00f), // Lane 1 - Cyan
-            new Color(0.07f, 0.98f, 0.02f), // Lane 2 - Green
-            new Color(0.98f, 0.22f, 0.25f), // Lane 3 - Red
+            new Color(0.76f, 0.29f, 0.60f),
+            new Color(0.00f, 1.00f, 1.00f),
+            new Color(0.07f, 0.98f, 0.02f),
+            new Color(0.98f, 0.22f, 0.25f),
         };
 
         Color[] idleColors;
@@ -100,7 +96,7 @@ namespace RhythmGame
             }
         }
 
-        void OnJudged(Judgement j, int points, bool isHit)
+        void OnJudged(Judgement j, int points, bool isHit, NoteOwner owner)
         {
             int lane = GetLaneOfLastJudgement();
             if (lane >= 0 && lane < visuals.Length && visuals[lane] != null)

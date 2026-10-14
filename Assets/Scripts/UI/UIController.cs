@@ -5,31 +5,21 @@ namespace RhythmGame
 {
     public enum Grade { F, E, D, C, B, A, S }
 
-    /// <summary>
-    /// Chỉ đọc dữ liệu từ GameManager/JudgementSystem qua event rồi cập nhật
-    /// TextMeshPro. Không tự tính điểm, không tự biết luật chấm điểm.
-    ///
-    /// GHI CHÚ: phần hiển thị chữ "PERFECT/GOOD/BAD/MISS" đã chuyển sang cho
-    /// JudgementPopup (gắn trên object JudgeText) phụ trách toàn bộ animation.
-    /// UIController ở đây lo Score, Combo, Grade, Countdown, Message — không
-    /// đụng vào judgeText để tránh 2 script cùng ghi đè lên 1 Text.
-    /// </summary>
     public class UIController : MonoBehaviour
     {
         [Header("Refs")]
         public GameManager gameManager;
         public JudgementSystem judgement;
 
-        [Header("UI Elements (kéo thả trong Inspector)")]
+        [Header("UI Elements")]
         public TMP_Text countdownText;
         public TMP_Text scoreText;
         public TMP_Text comboText;
         public TMP_Text messageText;
-        [Tooltip("Chữ grade (S/A/B/C/D/E/F). Để trống thì phần này tự tắt, " +
-                 "không gây lỗi. Nên đặt ở góc trên bên phải, cỡ chữ ~90.")]
+        [Tooltip("Chữ grade (S/A/B/C/D/E/F). Để trống thì phần này tự tắt.")]
         public TMP_Text gradeText;
 
-        [Header("Ngưỡng grade (theo tỉ lệ điểm / tổng điểm tối đa)")]
+        [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
         [Range(0f, 1f)] public float thresholdA = 0.90f;
         [Range(0f, 1f)] public float thresholdB = 0.80f;
@@ -38,13 +28,11 @@ namespace RhythmGame
         [Range(0f, 1f)] public float thresholdE = 0.50f;
 
         [Header("Grade Effects")]
-        [Tooltip("Grade tăng lên sẽ nảy nhẹ một lần.")]
         public bool gradePopOnChange = true;
         public float gradePopScale = 1.25f;
         public float gradePopDuration = 0.18f;
 
         [Header("Countdown Effects")]
-        [Tooltip("Nảy khi số đếm thay đổi.")]
         public bool countdownPopOnChange = true;
         public float countdownPopScale = 1.5f;
         public float countdownPopDuration = 0.15f;
@@ -78,22 +66,21 @@ namespace RhythmGame
             switch (state)
             {
                 case GameState.Finished:
-                    messageText.text = "XONG! Nhan R de choi lai";
+                    messageText.text = "XONG! Nhấn R để chơi lại";
                     messageText.fontStyle = FontStyles.Normal;
                     messageText.enableVertexGradient = false;
                     messageText.color = Color.white;
                     break;
 
-                // Máu về 0 -> GameManager đã dừng nhạc và chuyển sang Failed.
                 case GameState.Failed:
                     messageText.text = "GAME OVER";
                     messageText.fontStyle = FontStyles.Bold;
                     messageText.enableVertexGradient = true;
                     messageText.colorGradient = new VertexGradient(
-                        new Color(0.95f, 0.25f, 0.25f),   // trên cùng
-                        new Color(0.95f, 0.25f, 0.25f),   // trên dưới
-                        new Color(1.00f, 0.60f, 0.60f),   // dưới trái
-                        new Color(1.00f, 0.60f, 0.60f));  // dưới dưới
+                        new Color(0.95f, 0.25f, 0.25f),
+                        new Color(0.95f, 0.25f, 0.25f),
+                        new Color(1.00f, 0.60f, 0.60f),
+                        new Color(1.00f, 0.60f, 0.60f));
                     break;
 
                 default:
@@ -112,15 +99,16 @@ namespace RhythmGame
             }
         }
 
-        void HandleJudged(Judgement j, int points, bool isHit)
+        void HandleJudged(Judgement j, int points, bool isHit, NoteOwner owner)
         {
+            // Chỉ xử lý note của player cho single-player UI
+            if (owner != NoteOwner.Player) return;
+
             score += points;
             combo = isHit ? combo + 1 : 0;
             maxCombo = Mathf.Max(maxCombo, combo);
             UpdateScoreUI();
             UpdateGrade();
-
-            // Chữ PERFECT/GOOD/BAD/MISS giờ do JudgementPopup lo (xem VfxBinder).
         }
 
         void UpdateScoreUI()
@@ -129,10 +117,6 @@ namespace RhythmGame
             comboText.text = "Combo: " + combo + " (max " + maxCombo + ")";
         }
 
-        /// <summary>
-        /// Tính lại grade từ điểm hiện tại. Chart có thể null nên mọi thứ đều
-        /// null-safe; thiếu gradeText thì hàm chỉ thoát sớm chứ không lỗi.
-        /// </summary>
         void UpdateGrade()
         {
             if (gradeText == null) return;
@@ -152,7 +136,6 @@ namespace RhythmGame
             gradeText.color = GetGradeColor(grade);
         }
 
-        /// <summary>Tap note ăn 300 điểm; hold note ăn 300 (bấm đầu) + 100 (giữ xong).</summary>
         int CalculateMaxScore(ChartData chart)
         {
             int maxScore = 0;
@@ -199,19 +182,17 @@ namespace RhythmGame
                 int num = Mathf.CeilToInt(gameManager.CountdownRemaining);
                 countdownText.text = num.ToString();
 
-                // Setup gradient on first frame of countdown
                 if (!countdownText.enableVertexGradient)
                 {
                     countdownText.fontStyle = FontStyles.Bold;
                     countdownText.enableVertexGradient = true;
                     countdownText.colorGradient = new VertexGradient(
-                        new Color(0.2f, 0.8f, 1f),   // xanh cyan trên
                         new Color(0.2f, 0.8f, 1f),
-                        new Color(0.0f, 0.5f, 1f),   // xanh đậm dưới
+                        new Color(0.2f, 0.8f, 1f),
+                        new Color(0.0f, 0.5f, 1f),
                         new Color(0.0f, 0.5f, 1f));
                 }
 
-                // Pop animation when number changes
                 if (countdownPopOnChange && countdownText != null && num != lastCountdownNumber)
                 {
                     lastCountdownNumber = num;
@@ -220,7 +201,6 @@ namespace RhythmGame
             }
             else
             {
-                // Reset when not counting
                 lastCountdownNumber = -1;
                 countdownPopTimer = 999f;
                 if (countdownText != null)

@@ -14,6 +14,10 @@ namespace RhythmGame
         [Tooltip("Tùy chọn: Trigger để bắt đầu dance (nếu Animator cần)")]
         public string danceTrigger = "";
 
+        [Header("Mode")]
+        [Tooltip("Chỉ nhảy khi note của owner này được hit")]
+        public NoteOwner owner = NoteOwner.Player;
+
         Animator animator;
         bool isDancing;
 
@@ -39,19 +43,31 @@ namespace RhythmGame
             }
         }
 
-        void OnJudged(Judgement j, int points, bool isHit)
+        void OnJudged(Judgement j, int points, bool isHit, NoteOwner noteOwner)
         {
+            if (noteOwner != owner) return;
+
             if (!isDancing && isHit && (j == Judgement.Perfect || j == Judgement.Good || j == Judgement.Bad || j == Judgement.HoldComplete))
             {
-                // Chưa dance -> bắt đầu dance
                 SetDancing(true);
             }
             else if (isDancing && j == Judgement.Miss)
             {
-                // Đang dance -> miss -> về idle
                 SetDancing(false);
             }
-            // Đang dance + hit note -> không làm gì (tiếp tục dance loop)
+        }
+
+        public void TriggerDance()
+        {
+            if (!isDancing)
+            {
+                SetDancing(true);
+            }
+        }
+
+        public void SetIdle()
+        {
+            SetDancing(false);
         }
 
         void SetDancing(bool dancing)

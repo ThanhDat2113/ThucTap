@@ -1,18 +1,9 @@
 using UnityEngine;
 using RhythmGame;
 
-/// <summary>
-/// Nối InputHandler + JudgementSystem có sẵn của bạn với các VFX (cột sáng, chữ judgement).
-/// Gắn script này vào object "Systems" (nơi đã có InputHandler, JudgementSystem, GameManager...),
-/// rồi kéo đủ các ô dưới đây trong Inspector.
-///
-/// Cột sáng bật khi NGƯỜI CHƠI BẤM PHÍM (InputHandler.OnLanePressed), tắt khi THẢ PHÍM
-/// (OnLaneReleased) — độc lập với việc đánh trúng hay trượt nốt.
-/// Chữ PERFECT/GOOD/BAD/MISS hiện khi NỐT ĐƯỢC CHẤM ĐIỂM (JudgementSystem.OnJudged).
-/// </summary>
 public class VfxBinder : MonoBehaviour
 {
-    [Header("Refs (đều có thể kéo chính object Systems vào)")]
+    [Header("Refs")]
     public InputHandler input;
     public JudgementSystem judgementSystem;
     public JudgementPopup judgementPopup;
@@ -55,7 +46,7 @@ public class VfxBinder : MonoBehaviour
             beams[lane].Release();
     }
 
-    void HandleJudged(Judgement j, int points, bool hit)
+    void HandleJudged(Judgement j, int points, bool hit, NoteOwner owner)
     {
         if (judgementPopup) judgementPopup.Show(j);
     }

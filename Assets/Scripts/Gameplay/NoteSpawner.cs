@@ -6,11 +6,16 @@ namespace RhythmGame
     public class NoteSpawner : MonoBehaviour
     {
         [Header("Refs")]
-        public NotePool pool;
+        public NotePool playerPool;
+        public NotePool opponentPool;
         public Transform[] laneAnchors;
         public Color[] laneColors;
 
-        [Header("Layout (kéo Transform để chỉnh trực quan trong Scene view)")]
+        [Header("Opponent Note Colors")]
+        [Tooltip("Màu cho note của đối thủ (mỗi lane 1 màu)")]
+        public Color[] opponentLaneColors;
+
+        [Header("Layout")]
         [Tooltip("Kéo Transform của receptor vào đây để lấy vị trí Y trực quan. Để trống thì dùng hitLineY bên dưới.")]
         public Transform hitLineReference;
         public float hitLineY = -3.3f;
@@ -33,7 +38,11 @@ namespace RhythmGame
 
         public void Begin(ChartData chartData)
         {
-            foreach (var n in active) pool.Release(n);
+            foreach (var n in active)
+            {
+                if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
+                else opponentPool?.Release(n);
+            }
             active.Clear();
 
             chart = chartData;
@@ -56,17 +65,32 @@ namespace RhythmGame
                 if (n.TopY < killY)
                 {
                     active.RemoveAt(i);
-                    pool.Release(n);
+                    if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
+                    else opponentPool?.Release(n);
                 }
             }
         }
 
         void Spawn(NoteData data)
         {
+            NotePool pool = data.owner == NoteOwner.Player ? playerPool : opponentPool;
+            if (pool == null) pool = playerPool; // fallback
+
             NoteView n = pool.Get();
             float timeSeconds = chart.BeatToTime(data.beat);
             float holdSeconds = data.type == NoteType.Hold ? data.holdBeats * chart.SecondsPerBeat : 0f;
-            n.Setup(data, timeSeconds, holdSeconds, laneColors[data.lane % laneColors.Length]);
+
+            Color noteColor;
+            if (data.owner == NoteOwner.Opponent && opponentLaneColors != null && opponentLaneColors.Length > 0)
+            {
+                noteColor = opponentLaneColors[data.lane % opponentLaneColors.Length];
+            }
+            else
+            {
+                noteColor = laneColors[data.lane % laneColors.Length];
+            }
+
+            n.Setup(data, timeSeconds, holdSeconds, noteColor);
             n.transform.position = new Vector3(laneAnchors[data.lane].position.x, SpawnY, 0f);
             active.Add(n);
         }
@@ -78,6 +102,21 @@ namespace RhythmGame
             foreach (var n in active)
             {
                 if (n.Judged || n.Data.lane != lane) continue;
+                if (n.Data.owner != NoteOwner.Player) continue;
+                float diff = Mathf.Abs(songTime - n.TimeSeconds);
+                if (diff < bestDiff) { bestDiff = diff; best = n; }
+            }
+            return best;
+        }
+
+        public NoteView FindClosestOpponentNote(int lane, float songTime)
+        {
+            NoteView best = null;
+            float bestDiff = float.MaxValue;
+            foreach (var n in active)
+            {
+                if (n.Judged || n.Data.lane != lane) continue;
+                if (n.Data.owner != NoteOwner.Opponent) continue;
                 float diff = Mathf.Abs(songTime - n.TimeSeconds);
                 if (diff < bestDiff) { bestDiff = diff; best = n; }
             }
@@ -87,16 +126,17 @@ namespace RhythmGame
         public void ReleaseNote(NoteView n)
         {
             active.Remove(n);
-            pool.Release(n);
+            if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
+            else opponentPool?.Release(n);
         }
 
-        /// <summary>
-        /// Xoá sạch note đang trên màn hình (dùng khi kết thúc lượt chơi vì hết máu).
-        /// Không đụng tới nextIndex nên nếu Restart sau đó vẫn chạy lại từ đầu.
-        /// </summary>
         public void ClearActive()
         {
-            foreach (var n in active) pool.Release(n);
+            foreach (var n in active)
+            {
+                if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
+                else opponentPool?.Release(n);
+            }
             active.Clear();
         }
     }

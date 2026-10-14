@@ -18,6 +18,7 @@ namespace RhythmGame.EditorTools
             var laneProp = property.FindPropertyRelative("lane");
             var typeProp = property.FindPropertyRelative("type");
             var holdProp = property.FindPropertyRelative("holdBeats");
+            var ownerProp = property.FindPropertyRelative("owner");
 
             var bpmProp = property.serializedObject.FindProperty("bpm");
             var offsetProp = property.serializedObject.FindProperty("firstNoteOffset");
@@ -26,8 +27,8 @@ namespace RhythmGame.EditorTools
             float seconds = offset + beatProp.floatValue * 60f / Mathf.Max(bpm, 0.0001f);
 
             float w = position.width;
-            float beatW = w * 0.22f, laneW = w * 0.13f, typeW = w * 0.20f, holdW = w * 0.17f;
-            float timeW = w - beatW - laneW - typeW - holdW - 12f;
+            float beatW = w * 0.18f, laneW = w * 0.12f, typeW = w * 0.16f, holdW = w * 0.14f, ownerW = w * 0.16f;
+            float timeW = w - beatW - laneW - typeW - holdW - ownerW - 20f;
             float x = position.x;
             float y = position.y;
             float h = position.height;
@@ -47,6 +48,10 @@ namespace RhythmGame.EditorTools
             EditorGUIUtility.labelWidth = 26f;
             EditorGUI.PropertyField(new Rect(x, y, holdW, h), holdProp, new GUIContent("Hold"));
             x += holdW + 4;
+
+            EditorGUIUtility.labelWidth = 36f;
+            EditorGUI.PropertyField(new Rect(x, y, ownerW, h), ownerProp, new GUIContent("Owner"));
+            x += ownerW + 4;
 
             bool wasEnabled = GUI.enabled;
             GUI.enabled = false;
