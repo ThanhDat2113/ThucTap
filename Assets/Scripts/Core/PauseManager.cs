@@ -10,12 +10,12 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Tạm dừng game: dừng thời gian (Time.timeScale = 0) + dừng toàn bộ âm thanh (AudioListener.pause),
-/// hiện menu Tiếp tục / Chơi lại / Menu, đếm ngược 3-2-1 trước khi chơi tiếp.
-/// Tự dựng UI bằng code, không cần tạo Canvas.
+/// hiện menu PAUSE GAME với các nút RESUME / RESTART / MENU.
+/// Nút ở góc màn hình đổi thành nút "quay lại gameplay" (►) khi đang pause.
+/// Tự dựng UI bằng code, không cần tạo Canvas. Chữ và ảnh nút đều đổi được trong Inspector.
 ///
 /// CÁCH DÙNG: tạo 1 GameObject rỗng trong scene gameplay, gắn script này vào.
 /// Phím tắt: Esc hoặc P (Esc cũng là nút Back trên Android).
-/// Trong code nhận input / chấm điểm nốt, thêm dòng đầu:  if (PauseManager.IsPaused) return;
 /// </summary>
 public class PauseManager : MonoBehaviour
 {
@@ -23,17 +23,41 @@ public class PauseManager : MonoBehaviour
     public static bool IsPaused { get; private set; }
 
     [Header("Tuỳ chọn")]
-    [Tooltip("Cho phép tạm dừng. Tắt (từ code) khi game kết thúc / đang ở màn hình kết quả")]
+    [Tooltip("Cho phép tạm dừng. GameManager tự tắt khi game kết thúc / thua")]
     public bool canPause = true;
     [Tooltip("Số giây đếm ngược trước khi chơi tiếp (0 = chơi tiếp ngay)")]
     [Range(0, 5)] public int countdownSeconds = 0;
     public bool showPauseButton = true;
-    [Tooltip("Vị trí nút pause tính từ góc trên phải")]
+    [Tooltip("Vị trí nút góc, tính từ góc trên phải")]
     public Vector2 pauseButtonPosition = new Vector2(-30f, -30f);
     [Tooltip("Tự tạm dừng khi thoát app / mất focus (chỉ chạy trên bản build, không chạy trong Editor)")]
     public bool pauseOnFocusLost = true;
     [Tooltip("Tên scene menu (phải thêm vào Build Settings). Để trống = ẩn nút Menu")]
     public string menuSceneName = "";
+
+    [Header("Chữ hiển thị")]
+    public string titleText = "PAUSE GAME";
+    public string resumeText = "RESUME";
+    public string restartText = "RESTART";
+    public string menuText = "MENU";
+
+    [Header("Ảnh nút (để trống = dùng nút màu mặc định)")]
+    [Tooltip("Nút ở góc khi đang chơi (bấm để pause)")]
+    public Sprite pauseIconSprite;
+    [Tooltip("Nút ở góc khi đang pause (bấm để quay lại gameplay). Trống = hiện ký hiệu ►")]
+    public Sprite resumeIconSprite;
+    [Tooltip("Nút RESUME lớn trong menu")]
+    public Sprite resumeButtonSprite;
+    public Sprite restartButtonSprite;
+    public Sprite menuButtonSprite;
+    [Tooltip("Có ảnh thì ẩn chữ trên nút (bật khi ảnh đã có sẵn chữ/icon; tắt nếu ảnh chỉ là khung nền)")]
+    public bool hideLabelWhenSprite = true;
+
+    [Header("Kích thước nút")]
+    [Tooltip("Chiều cao nút ở góc. Có ảnh thì chiều rộng tự theo tỉ lệ ảnh")]
+    public float pauseButtonHeight = 90f;
+    [Tooltip("Chiều cao các nút trong menu. Có ảnh thì chiều rộng tự theo tỉ lệ ảnh")]
+    public float menuButtonHeight = 110f;
 
     [Header("Giao diện")]
     [Tooltip("Kéo font của bạn vào đây cho khớp với Score/Combo. Để trống = font hệ thống")]
@@ -46,9 +70,14 @@ public class PauseManager : MonoBehaviour
     public UnityEvent onPause;
     public UnityEvent onResume;
 
+    /// <summary>Game đăng ký cách restart riêng (GameManager.Restart). Trống = load lại scene.</summary>
+    public System.Action RestartHandler;
+
     Font uiFont;
     GameObject panel;
     Button pauseButton;
+    Image pauseImage;
+    Text pauseLabel;
     Text countdownText;
     float prevTimeScale = 1f;
     bool counting;
@@ -106,7 +135,7 @@ public class PauseManager : MonoBehaviour
         AudioListener.pause = true;
 
         panel.SetActive(true);
-        pauseButton.gameObject.SetActive(false);
+        RefreshPauseButton(true); // nút góc đổi thành nút quay lại gameplay
         onPause.Invoke();
     }
 
@@ -123,6 +152,7 @@ public class PauseManager : MonoBehaviour
 
         if (countdownSeconds > 0)
         {
+            pauseButton.gameObject.SetActive(false);
             countdownText.gameObject.SetActive(true);
             for (int i = countdownSeconds; i > 0; i--)
             {
@@ -136,15 +166,10 @@ public class PauseManager : MonoBehaviour
         AudioListener.pause = false;
         IsPaused = false;
         counting = false;
+        RefreshPauseButton(false);
         pauseButton.gameObject.SetActive(showPauseButton);
         onResume.Invoke();
     }
-
-    /// <summary>
-    /// Nếu game đã đăng ký cách restart riêng (GameManager.Restart) thì dùng nó,
-    /// không thì load lại cả scene.
-    /// </summary>
-    public System.Action RestartHandler;
 
     public void Restart()
     {
@@ -166,7 +191,11 @@ public class PauseManager : MonoBehaviour
         if (countdownText) countdownText.gameObject.SetActive(false);
         if (panel) panel.SetActive(false);
         ResetState();
-        if (pauseButton) pauseButton.gameObject.SetActive(showPauseButton);
+        if (pauseButton)
+        {
+            RefreshPauseButton(false);
+            pauseButton.gameObject.SetActive(showPauseButton);
+        }
     }
 
     public void GoToMenu()
@@ -209,13 +238,6 @@ public class PauseManager : MonoBehaviour
         scaler.matchWidthOrHeight = 0.5f;
         canvasGO.AddComponent<GraphicRaycaster>();
 
-        // Nút pause (góc trên phải)
-        pauseButton = MakeButton(canvasGO.transform, "II", Vector2.zero, new Vector2(90f, 90f), Pause, 44);
-        var prt = (RectTransform)pauseButton.transform;
-        prt.anchorMin = prt.anchorMax = prt.pivot = new Vector2(1f, 1f);
-        prt.anchoredPosition = pauseButtonPosition;
-        pauseButton.gameObject.SetActive(showPauseButton);
-
         // Màn hình tạm dừng
         var panelRt = NewRect("PausePanel", canvasGO.transform);
         panelRt.anchorMin = Vector2.zero;
@@ -225,17 +247,56 @@ public class PauseManager : MonoBehaviour
         dim.color = dimColor; // vừa làm nền tối vừa chặn bấm xuyên xuống gameplay
         panel = panelRt.gameObject;
 
-        MakeText(panelRt, "TẠM DỪNG", 96, new Vector2(0f, 230f), new Vector2(1200f, 200f));
-        Vector2 size = new Vector2(560f, 110f);
-        MakeButton(panelRt, "TIẾP TỤC", new Vector2(0f, 60f), size, Resume, 52);
-        MakeButton(panelRt, "CHƠI LẠI", new Vector2(0f, -70f), size, Restart, 52);
+        MakeText(panelRt, titleText, 96, new Vector2(0f, 230f), new Vector2(1400f, 200f));
+        MakeMenuButton(panelRt, resumeText, new Vector2(0f, 60f), resumeButtonSprite, Resume);
+        MakeMenuButton(panelRt, restartText, new Vector2(0f, -70f), restartButtonSprite, Restart);
         if (!string.IsNullOrEmpty(menuSceneName))
-            MakeButton(panelRt, "MENU", new Vector2(0f, -200f), size, GoToMenu, 52);
+            MakeMenuButton(panelRt, menuText, new Vector2(0f, -200f), menuButtonSprite, GoToMenu);
         panel.SetActive(false);
 
         // Số đếm ngược
         countdownText = MakeText(canvasGO.transform, "", 260, Vector2.zero, new Vector2(600f, 400f));
         countdownText.gameObject.SetActive(false);
+
+        // Nút ở góc (tạo SAU CÙNG để luôn nằm trên màn hình pause -> vẫn bấm được khi đang pause)
+        pauseButton = MakeButton(canvasGO.transform, Vector2.zero, Toggle, out pauseImage, out pauseLabel);
+        var prt = (RectTransform)pauseButton.transform;
+        prt.anchorMin = prt.anchorMax = prt.pivot = new Vector2(1f, 1f);
+        prt.anchoredPosition = pauseButtonPosition;
+        RefreshPauseButton(false);
+        pauseButton.gameObject.SetActive(showPauseButton);
+    }
+
+    // Nút góc: đang chơi = icon pause (II), đang pause = icon quay lại (►)
+    void RefreshPauseButton(bool paused)
+    {
+        if (pauseButton == null) return;
+        ApplyLook(pauseButton, pauseImage, pauseLabel,
+            paused ? resumeIconSprite : pauseIconSprite,
+            paused ? "\u25BA" : "II", 44,
+            new Vector2(pauseButtonHeight, pauseButtonHeight), pauseButtonHeight);
+    }
+
+    void MakeMenuButton(Transform parent, string label, Vector2 pos, Sprite sprite, UnityAction action)
+    {
+        var btn = MakeButton(parent, pos, action, out Image img, out Text txt);
+        ApplyLook(btn, img, txt, sprite, label, 52,
+            new Vector2(560f, menuButtonHeight), menuButtonHeight);
+    }
+
+    // Có ảnh: dùng ảnh (rộng theo tỉ lệ ảnh, không méo). Không có: nút màu + chữ.
+    void ApplyLook(Button btn, Image img, Text label, Sprite sprite, string text, int fontSize,
+                   Vector2 fallbackSize, float spriteHeight)
+    {
+        var rt = (RectTransform)btn.transform;
+        img.sprite = sprite;
+        img.color = sprite != null ? Color.white : buttonColor;
+        rt.sizeDelta = sprite != null
+            ? new Vector2(spriteHeight * sprite.rect.width / Mathf.Max(1f, sprite.rect.height), spriteHeight)
+            : fallbackSize;
+        label.text = text;
+        label.fontSize = fontSize;
+        label.gameObject.SetActive(sprite == null || !hideLabelWhenSprite);
     }
 
     RectTransform NewRect(string objName, Transform parent)
@@ -261,18 +322,26 @@ public class PauseManager : MonoBehaviour
         return t;
     }
 
-    Button MakeButton(Transform parent, string label, Vector2 pos, Vector2 size, UnityAction action, int fontSize)
+    Button MakeButton(Transform parent, Vector2 pos, UnityAction action, out Image img, out Text label)
     {
-        var rt = NewRect(label + "Button", parent);
+        var rt = NewRect("Button", parent);
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-        rt.sizeDelta = size;
         rt.anchoredPosition = pos;
-        var img = rt.gameObject.AddComponent<Image>();
-        img.color = buttonColor;
+        img = rt.gameObject.AddComponent<Image>();
         var btn = rt.gameObject.AddComponent<Button>();
         btn.targetGraphic = img;
         btn.onClick.AddListener(action);
-        MakeText(rt, label, fontSize, Vector2.zero, size);
+
+        // Chữ trên nút: giãn kín nút, tự theo kích thước nút
+        var lrt = NewRect("Label", rt);
+        lrt.anchorMin = Vector2.zero;
+        lrt.anchorMax = Vector2.one;
+        lrt.offsetMin = lrt.offsetMax = Vector2.zero;
+        label = lrt.gameObject.AddComponent<Text>();
+        label.font = uiFont;
+        label.alignment = TextAnchor.MiddleCenter;
+        label.color = textColor;
+        label.raycastTarget = false;
         return btn;
     }
 }
