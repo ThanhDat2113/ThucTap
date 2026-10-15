@@ -4714,8 +4714,11 @@ MonoBehaviour:
   formatScoreWithCommas: 1
   emptyPlaceholder: '-'
   maxNameLength: 12
-  autoRefresh: 1
-  refreshInterval: 10
+  autoRefresh: 0
+  refreshInterval: 60
+  cacheDurationHours: 24
+  manualRefreshCooldown: 15
+  cacheDuration: 86400
   audioSource: {fileID: 0}
   buttonClickSound: {fileID: 0}
 --- !u!114 &600573867
