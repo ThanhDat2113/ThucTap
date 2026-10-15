@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 // Menu test cho Shop: Unity -> Thuan -> Shop
