@@ -1,0 +1,3419 @@
+fileFormatVersion: 2
+guid: 17d5e8f240cf11540aff2b11f9b472bc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6382717660187950416
+    second: graffiti_king_dance_120_0
+  - first:
+      213: 2617493088034571693
+    second: graffiti_king_dance_120_1
+  - first:
+      213: -2383824555901701502
+    second: graffiti_king_dance_120_2
+  - first:
+      213: -3290800882852591627
+    second: graffiti_king_dance_120_3
+  - first:
+      213: -6042123791621068859
+    second: graffiti_king_dance_120_4
+  - first:
+      213: -668615457604427553
+    second: graffiti_king_dance_120_5
+  - first:
+      213: 7301437939302157600
+    second: graffiti_king_dance_120_6
+  - first:
+      213: -8744074411001753083
+    second: graffiti_king_dance_120_7
+  - first:
+      213: 6800578415603332968
+    second: graffiti_king_dance_120_8
+  - first:
+      213: 12019402595697336
+    second: graffiti_king_dance_120_9
+  - first:
+      213: 4202562534450766034
+    second: graffiti_king_dance_120_10
+  - first:
+      213: -5194346049967698016
+    second: graffiti_king_dance_120_11
+  - first:
+      213: 6406048979439020926
+    second: graffiti_king_dance_120_12
+  - first:
+      213: -3852562377981119321
+    second: graffiti_king_dance_120_13
+  - first:
+      213: -4608559068350498291
+    second: graffiti_king_dance_120_14
+  - first:
+      213: 4653682836422885281
+    second: graffiti_king_dance_120_15
+  - first:
+      213: -7294656011823651448
+    second: graffiti_king_dance_120_16
+  - first:
+      213: -9176367088792864087
+    second: graffiti_king_dance_120_17
+  - first:
+      213: 5742775440607209505
+    second: graffiti_king_dance_120_18
+  - first:
+      213: -3951969254167025018
+    second: graffiti_king_dance_120_19
+  - first:
+      213: 2396627901913935864
+    second: graffiti_king_dance_120_20
+  - first:
+      213: 1628758427648541159
+    second: graffiti_king_dance_120_21
+  - first:
+      213: -2693729474952076511
+    second: graffiti_king_dance_120_22
+  - first:
+      213: -6043263044829556687
+    second: graffiti_king_dance_120_23
+  - first:
+      213: -8481546666777347254
+    second: graffiti_king_dance_120_24
+  - first:
+      213: 2843179763487612979
+    second: graffiti_king_dance_120_25
+  - first:
+      213: -4700293761377447238
+    second: graffiti_king_dance_120_26
+  - first:
+      213: 3276227014184902839
+    second: graffiti_king_dance_120_27
+  - first:
+      213: 4866719442372975035
+    second: graffiti_king_dance_120_28
+  - first:
+      213: -3676372729578384581
+    second: graffiti_king_dance_120_29
+  - first:
+      213: 2467049767934411835
+    second: graffiti_king_dance_120_30
+  - first:
+      213: -1500998350177573858
+    second: graffiti_king_dance_120_31
+  - first:
+      213: 2124358919802255924
+    second: graffiti_king_dance_120_32
+  - first:
+      213: -5522710093288859976
+    second: graffiti_king_dance_120_33
+  - first:
+      213: -4000589273633743007
+    second: graffiti_king_dance_120_34
+  - first:
+      213: -3508534151149370390
+    second: graffiti_king_dance_120_35
+  - first:
+      213: -7987396520110096385
+    second: graffiti_king_dance_120_36
+  - first:
+      213: 6065552299026635889
+    second: graffiti_king_dance_120_37
+  - first:
+      213: -5813658351696342369
+    second: graffiti_king_dance_120_38
+  - first:
+      213: 8709779498700377269
+    second: graffiti_king_dance_120_39
+  - first:
+      213: -3294747933119058862
+    second: graffiti_king_dance_120_40
+  - first:
+      213: -219324658406565575
+    second: graffiti_king_dance_120_41
+  - first:
+      213: -1690415948174337242
+    second: graffiti_king_dance_120_42
+  - first:
+      213: -2714237824539393926
+    second: graffiti_king_dance_120_43
+  - first:
+      213: -5919162401034830025
+    second: graffiti_king_dance_120_44
+  - first:
+      213: 6706098718031861536
+    second: graffiti_king_dance_120_45
+  - first:
+      213: 1353447982995677482
+    second: graffiti_king_dance_120_46
+  - first:
+      213: 4140889761262797418
+    second: graffiti_king_dance_120_47
+  - first:
+      213: -1104764062124103991
+    second: graffiti_king_dance_120_48
+  - first:
+      213: 608038067672253316
+    second: graffiti_king_dance_120_49
+  - first:
+      213: -4548282636960886908
+    second: graffiti_king_dance_120_50
+  - first:
+      213: -6369476991787982781
+    second: graffiti_king_dance_120_51
+  - first:
+      213: -6648272795119479017
+    second: graffiti_king_dance_120_52
+  - first:
+      213: 5850222397166732177
+    second: graffiti_king_dance_120_53
+  - first:
+      213: 3499550987539086060
+    second: graffiti_king_dance_120_54
+  - first:
+      213: 3665185848374164321
+    second: graffiti_king_dance_120_55
+  - first:
+      213: -4920595737766490496
+    second: graffiti_king_dance_120_56
+  - first:
+      213: 8930174996462227235
+    second: graffiti_king_dance_120_57
+  - first:
+      213: -2925977543332527622
+    second: graffiti_king_dance_120_58
+  - first:
+      213: -1158370265212456029
+    second: graffiti_king_dance_120_59
+  - first:
+      213: -1727509964700401515
+    second: graffiti_king_dance_120_60
+  - first:
+      213: 123247635120137727
+    second: graffiti_king_dance_120_61
+  - first:
+      213: 7035577815046655726
+    second: graffiti_king_dance_120_62
+  - first:
+      213: -8414279250959013441
+    second: graffiti_king_dance_120_63
+  - first:
+      213: -8324116330694804558
+    second: graffiti_king_dance_120_64
+  - first:
+      213: 8024926492991756587
+    second: graffiti_king_dance_120_65
+  - first:
+      213: -4726735718636190937
+    second: graffiti_king_dance_120_66
+  - first:
+      213: -4693713640943163164
+    second: graffiti_king_dance_120_67
+  - first:
+      213: 8270124882931987711
+    second: graffiti_king_dance_120_68
+  - first:
+      213: 7036731545864627771
+    second: graffiti_king_dance_120_69
+  - first:
+      213: 443400890551877283
+    second: graffiti_king_dance_120_70
+  - first:
+      213: -5189023550381939276
+    second: graffiti_king_dance_120_71
+  - first:
+      213: -8467363671455483801
+    second: graffiti_king_dance_120_72
+  - first:
+      213: -7976045644201648669
+    second: graffiti_king_dance_120_73
+  - first:
+      213: -1531019996447582357
+    second: graffiti_king_dance_120_74
+  - first:
+      213: 471830895493526237
+    second: graffiti_king_dance_120_75
+  - first:
+      213: -6731654574530127304
+    second: graffiti_king_dance_120_76
+  - first:
+      213: -7186497488635405185
+    second: graffiti_king_dance_120_77
+  - first:
+      213: -7627767371482802482
+    second: graffiti_king_dance_120_78
+  - first:
+      213: 7857670760965835878
+    second: graffiti_king_dance_120_79
+  - first:
+      213: -5232175256291580269
+    second: graffiti_king_dance_120_80
+  - first:
+      213: -2986933682197433468
+    second: graffiti_king_dance_120_81
+  - first:
+      213: -1548889306725468253
+    second: graffiti_king_dance_120_82
+  - first:
+      213: -8690510350387781646
+    second: graffiti_king_dance_120_83
+  - first:
+      213: -4296468963019690335
+    second: graffiti_king_dance_120_84
+  - first:
+      213: 6696609413961330730
+    second: graffiti_king_dance_120_85
+  - first:
+      213: -178634868222330911
+    second: graffiti_king_dance_120_86
+  - first:
+      213: -4168246772274776859
+    second: graffiti_king_dance_120_87
+  - first:
+      213: 1160332830657602250
+    second: graffiti_king_dance_120_88
+  - first:
+      213: -8599074635709871165
+    second: graffiti_king_dance_120_89
+  - first:
+      213: 5882995358599998385
+    second: graffiti_king_dance_120_90
+  - first:
+      213: 1246719622146181828
+    second: graffiti_king_dance_120_91
+  - first:
+      213: 5807476510756445261
+    second: graffiti_king_dance_120_92
+  - first:
+      213: 6498136361361504131
+    second: graffiti_king_dance_120_93
+  - first:
+      213: 3338906582991909902
+    second: graffiti_king_dance_120_94
+  - first:
+      213: -8405377279719095557
+    second: graffiti_king_dance_120_95
+  - first:
+      213: 3336227906305140151
+    second: graffiti_king_dance_120_96
+  - first:
+      213: -5988885676469049143
+    second: graffiti_king_dance_120_97
+  - first:
+      213: 6877167989760979392
+    second: graffiti_king_dance_120_98
+  - first:
+      213: 981273684089760515
+    second: graffiti_king_dance_120_99
+  - first:
+      213: 6363615439443291443
+    second: graffiti_king_dance_120_100
+  - first:
+      213: 3830408250870574256
+    second: graffiti_king_dance_120_101
+  - first:
+      213: 869311719652881056
+    second: graffiti_king_dance_120_102
+  - first:
+      213: -6769367964895758118
+    second: graffiti_king_dance_120_103
+  - first:
+      213: -124775188817045514
+    second: graffiti_king_dance_120_104
+  - first:
+      213: 6912654561425708375
+    second: graffiti_king_dance_120_105
+  - first:
+      213: 8882771863460814625
+    second: graffiti_king_dance_120_106
+  - first:
+      213: 3072407234112310319
+    second: graffiti_king_dance_120_107
+  - first:
+      213: -4395857769809329583
+    second: graffiti_king_dance_120_108
+  - first:
+      213: -960776951023154169
+    second: graffiti_king_dance_120_109
+  - first:
+      213: -1892287027303987329
+    second: graffiti_king_dance_120_110
+  - first:
+      213: -5781244202265463249
+    second: graffiti_king_dance_120_111
+  - first:
+      213: 8683818787485321047
+    second: graffiti_king_dance_120_112
+  - first:
+      213: 7537401233367737978
+    second: graffiti_king_dance_120_113
+  - first:
+      213: 6857340644928656115
+    second: graffiti_king_dance_120_114
+  - first:
+      213: -6668596750394994466
+    second: graffiti_king_dance_120_115
+  - first:
+      213: -2781057641345018334
+    second: graffiti_king_dance_120_116
+  - first:
+      213: -8710453598917991367
+    second: graffiti_king_dance_120_117
+  - first:
+      213: -2821744084773562431
+    second: graffiti_king_dance_120_118
+  - first:
+      213: 2110901685725495456
+    second: graffiti_king_dance_120_119
+  - first:
+      213: -3075355116591417271
+    second: graffiti_king_dance_120_120
+  - first:
+      213: 2677401179127167249
+    second: graffiti_king_dance_120_121
+  - first:
+      213: -6222885971116385505
+    second: graffiti_king_dance_120_122
+  - first:
+      213: -1479086900262506386
+    second: graffiti_king_dance_120_123
+  - first:
+      213: -7402765345000686511
+    second: graffiti_king_dance_120_124
+  - first:
+      213: 4383555944544764387
+    second: graffiti_king_dance_120_125
+  - first:
+      213: -1152978598935080253
+    second: graffiti_king_dance_120_126
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 5298
+        width: 346
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05d7d1515e7f39850800000000000000
+      internalID: 6382717660187950416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_1
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 5298
+        width: 340
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da547527814335420800000000000000
+      internalID: 2617493088034571693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_2
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 5298
+        width: 316
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28230aa4234faeed0800000000000000
+      internalID: -2383824555901701502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_3
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 5298
+        width: 318
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f7870f480ab452d0800000000000000
+      internalID: -3290800882852591627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_4
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 5298
+        width: 318
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c76d7f8c60162ca0800000000000000
+      internalID: -6042123791621068859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_5
+      rect:
+        serializedVersion: 2
+        x: 1962
+        y: 5299
+        width: 324
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd02726a8c998b6f0800000000000000
+      internalID: -668615457604427553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_6
+      rect:
+        serializedVersion: 2
+        x: 2345
+        y: 5299
+        width: 322
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02d4aa10f1be35560800000000000000
+      internalID: 7301437939302157600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_7
+      rect:
+        serializedVersion: 2
+        x: 2726
+        y: 5299
+        width: 327
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50258aab6aec6a680800000000000000
+      internalID: -8744074411001753083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_8
+      rect:
+        serializedVersion: 2
+        x: 3134
+        y: 5298
+        width: 303
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 867b939b902806e50800000000000000
+      internalID: 6800578415603332968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_9
+      rect:
+        serializedVersion: 2
+        x: 3474
+        y: 5298
+        width: 312
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b2012e3593ba2000800000000000000
+      internalID: 12019402595697336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_10
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 4822
+        width: 315
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0ad44eb50825a30800000000000000
+      internalID: 4202562534450766034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_11
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 4822
+        width: 301
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0afc833d9c9f9e7b0800000000000000
+      internalID: -5194346049967698016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_12
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 4824
+        width: 348
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7b67392b9bd6e850800000000000000
+      internalID: 6406048979439020926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_13
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 4823
+        width: 347
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a4b661dde2f88ac0800000000000000
+      internalID: -3852562377981119321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_14
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 4819
+        width: 329
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a309cc1fb1b00c0800000000000000
+      internalID: -4608559068350498291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_15
+      rect:
+        serializedVersion: 2
+        x: 2014
+        y: 4819
+        width: 269
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af715a22e3359040800000000000000
+      internalID: 4653682836422885281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_16
+      rect:
+        serializedVersion: 2
+        x: 2412
+        y: 4821
+        width: 259
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8856598810d24ca90800000000000000
+      internalID: -7294656011823651448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_17
+      rect:
+        serializedVersion: 2
+        x: 2706
+        y: 4821
+        width: 348
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aa7aef40cef6a080800000000000000
+      internalID: -9176367088792864087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_18
+      rect:
+        serializedVersion: 2
+        x: 3150
+        y: 4820
+        width: 278
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 128ea3236df62bf40800000000000000
+      internalID: 5742775440607209505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_19
+      rect:
+        serializedVersion: 2
+        x: 3497
+        y: 4820
+        width: 323
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68aeb1ad6e8c729c0800000000000000
+      internalID: -3951969254167025018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_20
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 4341
+        width: 271
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ffae500168824120800000000000000
+      internalID: 2396627901913935864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_21
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 4341
+        width: 269
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e14ae019238a9610800000000000000
+      internalID: 1628758427648541159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_22
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 4340
+        width: 312
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1236b748053fd9ad0800000000000000
+      internalID: -2693729474952076511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_23
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 4340
+        width: 312
+        height: 328
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13050b08744022ca0800000000000000
+      internalID: -6043263044829556687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_24
+      rect:
+        serializedVersion: 2
+        x: 1583
+        y: 4338
+        width: 316
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4b76d46e3e7b4a80800000000000000
+      internalID: -8481546666777347254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_25
+      rect:
+        serializedVersion: 2
+        x: 1938
+        y: 4340
+        width: 346
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 330224b5ee0057720800000000000000
+      internalID: 2843179763487612979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_26
+      rect:
+        serializedVersion: 2
+        x: 2372
+        y: 4339
+        width: 299
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab2dc1d2ab335ceb0800000000000000
+      internalID: -4700293761377447238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_27
+      rect:
+        serializedVersion: 2
+        x: 2757
+        y: 4341
+        width: 294
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b0a7087c1f777d20800000000000000
+      internalID: 3276227014184902839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_28
+      rect:
+        serializedVersion: 2
+        x: 3142
+        y: 4383
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb9d0204c8f0a8340800000000000000
+      internalID: 4866719442372975035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_29
+      rect:
+        serializedVersion: 2
+        x: 3147
+        y: 4338
+        width: 286
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b331c8f0b76eafcc0800000000000000
+      internalID: -3676372729578384581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_30
+      rect:
+        serializedVersion: 2
+        x: 3532
+        y: 4339
+        width: 289
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b34c0f461b8bc3220800000000000000
+      internalID: 2467049767934411835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_31
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 3859
+        width: 313
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e14e73104f16b2be0800000000000000
+      internalID: -1500998350177573858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_32
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 3859
+        width: 310
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43afe36ae2d3b7d10800000000000000
+      internalID: 2124358919802255924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_33
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 3858
+        width: 334
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b69d044e646b53b0800000000000000
+      internalID: -5522710093288859976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_34
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 3862
+        width: 301
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16f92dc604d0b78c0800000000000000
+      internalID: -4000589273633743007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_35
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 3862
+        width: 291
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae34a6e47ce2f4fc0800000000000000
+      internalID: -3508534151149370390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_36
+      rect:
+        serializedVersion: 2
+        x: 1989
+        y: 3862
+        width: 296
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff75aa1f21172190800000000000000
+      internalID: -7987396520110096385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_37
+      rect:
+        serializedVersion: 2
+        x: 2324
+        y: 3858
+        width: 347
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17c5906edab2d2450800000000000000
+      internalID: 6065552299026635889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_38
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 3859
+        width: 326
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9218adf78cb15fa0800000000000000
+      internalID: -5813658351696342369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_39
+      rect:
+        serializedVersion: 2
+        x: 3132
+        y: 3859
+        width: 306
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bc0404ce4a5fd870800000000000000
+      internalID: 8709779498700377269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_40
+      rect:
+        serializedVersion: 2
+        x: 3531
+        y: 3859
+        width: 291
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c6cfd0634b642d0800000000000000
+      internalID: -3294747933119058862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_41
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 3379
+        width: 288
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 939513d926dc4fcf0800000000000000
+      internalID: -219324658406565575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_42
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 3383
+        width: 290
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62bd96eb6af6a88e0800000000000000
+      internalID: -1690415948174337242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_43
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 3600
+        width: 41
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7086684417155ad0800000000000000
+      internalID: -2714237824539393926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_44
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 3380
+        width: 320
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f78764829eadda0800000000000000
+      internalID: -5919162401034830025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_45
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 3383
+        width: 338
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 027ddfce049d01d50800000000000000
+      internalID: 6706098718031861536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_46
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 3380
+        width: 348
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a212d6805c968c210800000000000000
+      internalID: 1353447982995677482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_47
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 3380
+        width: 343
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a620f1a6c45677930800000000000000
+      internalID: 4140889761262797418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_48
+      rect:
+        serializedVersion: 2
+        x: 2345
+        y: 3380
+        width: 319
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c6a97450f61ba0f0800000000000000
+      internalID: -1104764062124103991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_49
+      rect:
+        serializedVersion: 2
+        x: 2758
+        y: 3379
+        width: 295
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4830589a66f207800800000000000000
+      internalID: 608038067672253316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_50
+      rect:
+        serializedVersion: 2
+        x: 3146
+        y: 3381
+        width: 290
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48f8edd1a0141e0c0800000000000000
+      internalID: -4548282636960886908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_51
+      rect:
+        serializedVersion: 2
+        x: 3491
+        y: 3383
+        width: 293
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34024734c621b97a0800000000000000
+      internalID: -6369476991787982781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_52
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 3554
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 717920ded179cb3a0800000000000000
+      internalID: -6648272795119479017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_53
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 2898
+        width: 279
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1934820464a203150800000000000000
+      internalID: 5850222397166732177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_54
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 2899
+        width: 303
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cea72ade417e09030800000000000000
+      internalID: 3499550987539086060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_55
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 2902
+        width: 314
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16b71203c1b5dd230800000000000000
+      internalID: 3665185848374164321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_56
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 2900
+        width: 305
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08e80273f3886bbb0800000000000000
+      internalID: -4920595737766490496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_57
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 2899
+        width: 280
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32fc43e58da5eeb70800000000000000
+      internalID: 8930174996462227235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_58
+      rect:
+        serializedVersion: 2
+        x: 1938
+        y: 2900
+        width: 347
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af105e44de6d467d0800000000000000
+      internalID: -2925977543332527622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_59
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 2899
+        width: 346
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3f2af8164acefe0800000000000000
+      internalID: -1158370265212456029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_60
+      rect:
+        serializedVersion: 2
+        x: 2725
+        y: 2900
+        width: 330
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 590c51007d6a608e0800000000000000
+      internalID: -1727509964700401515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_61
+      rect:
+        serializedVersion: 2
+        x: 3116
+        y: 2899
+        width: 323
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff52eb6321dd5b100800000000000000
+      internalID: 123247635120137727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_62
+      rect:
+        serializedVersion: 2
+        x: 3517
+        y: 2901
+        width: 306
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee89772fb463a160800000000000000
+      internalID: 7035577815046655726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_63
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 2419
+        width: 318
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb9e5ad1a997a3b80800000000000000
+      internalID: -8414279250959013441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_64
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 2418
+        width: 349
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bb78efdc4cca7c80800000000000000
+      internalID: -8324116330694804558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_65
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 2420
+        width: 321
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b291563a0244e5f60800000000000000
+      internalID: 8024926492991756587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_66
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 2418
+        width: 304
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7230a8f38e2476eb0800000000000000
+      internalID: -4726735718636190937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_67
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 2418
+        width: 271
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e86d2adf449cdeb0800000000000000
+      internalID: -4693713640943163164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_68
+      rect:
+        serializedVersion: 2
+        x: 2001
+        y: 2421
+        width: 286
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4b74793c265c270800000000000000
+      internalID: 8270124882931987711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_69
+      rect:
+        serializedVersion: 2
+        x: 2388
+        y: 2421
+        width: 260
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b36eb0b0f0e77a160800000000000000
+      internalID: 7036731545864627771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_70
+      rect:
+        serializedVersion: 2
+        x: 2773
+        y: 2431
+        width: 240
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aebf6eb2c6472600800000000000000
+      internalID: 443400890551877283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_71
+      rect:
+        serializedVersion: 2
+        x: 3154
+        y: 2424
+        width: 257
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b52954d292ecf7b0800000000000000
+      internalID: -5189023550381939276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_72
+      rect:
+        serializedVersion: 2
+        x: 3511
+        y: 2421
+        width: 310
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76839d25a91ed7a80800000000000000
+      internalID: -8467363671455483801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_73
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1941
+        width: 333
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ed1f09deb46f4190800000000000000
+      internalID: -7976045644201648669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_74
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 1939
+        width: 342
+        height: 269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b67d8b7cc69b0cae0800000000000000
+      internalID: -1531019996447582357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_75
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 1941
+        width: 338
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd232f713b74c8600800000000000000
+      internalID: 471830895493526237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_76
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 1938
+        width: 349
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83a9f7e84db5492a0800000000000000
+      internalID: -6731654574530127304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_77
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 1952
+        width: 330
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7c56aa1c9e644c90800000000000000
+      internalID: -7186497488635405185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_78
+      rect:
+        serializedVersion: 2
+        x: 1940
+        y: 1938
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec6d3714df9b42690800000000000000
+      internalID: -7627767371482802482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_79
+      rect:
+        serializedVersion: 2
+        x: 2337
+        y: 1951
+        width: 329
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66c8755eced0c0d60800000000000000
+      internalID: 7857670760965835878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_80
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 1942
+        width: 318
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396e62e53549367b0800000000000000
+      internalID: -5232175256291580269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_81
+      rect:
+        serializedVersion: 2
+        x: 3118
+        y: 1942
+        width: 320
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 483f8f834a74c86d0800000000000000
+      internalID: -2986933682197433468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_82
+      rect:
+        serializedVersion: 2
+        x: 3514
+        y: 1943
+        width: 308
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a73a34c16d318ae0800000000000000
+      internalID: -1548889306725468253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_83
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 1468
+        width: 324
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ffd74071ea156780800000000000000
+      internalID: -8690510350387781646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_84
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 1460
+        width: 348
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae68b6ed30ef54c0800000000000000
+      internalID: -4296468963019690335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_85
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 1460
+        width: 305
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a20b3b628c22fec50800000000000000
+      internalID: 6696609413961330730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_86
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 1460
+        width: 283
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e7fb17a88c558df0800000000000000
+      internalID: -178634868222330911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_87
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 1464
+        width: 306
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e4b46a15a96726c0800000000000000
+      internalID: -4168246772274776859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_88
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1460
+        width: 254
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac2e190df845a1010800000000000000
+      internalID: 1160332830657602250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_89
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 1460
+        width: 277
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb017dbd23f9a880800000000000000
+      internalID: -8599074635709871165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_90
+      rect:
+        serializedVersion: 2
+        x: 2761
+        y: 1460
+        width: 293
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bbef94fb1994a150800000000000000
+      internalID: 5882995358599998385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_91
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 1742
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca488414ec3d4110800000000000000
+      internalID: 1246719622146181828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_92
+      rect:
+        serializedVersion: 2
+        x: 3111
+        y: 1459
+        width: 306
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4c10110e1d489050800000000000000
+      internalID: 5807476510756445261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_93
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 1460
+        width: 347
+        height: 344
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387700197940e2a50800000000000000
+      internalID: 6498136361361504131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_94
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 1504
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e043271d8dd265e20800000000000000
+      internalID: 3338906582991909902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_95
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 982
+        width: 345
+        height: 394
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2443fc5e91a5b80800000000000000
+      internalID: -8405377279719095557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_96
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 981
+        width: 327
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b5201dca99ac4e20800000000000000
+      internalID: 3336227906305140151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_97
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 1284
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c823ad253433eca0800000000000000
+      internalID: -5988885676469049143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_98
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 984
+        width: 301
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c1f36299db907f50800000000000000
+      internalID: 6877167989760979392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_99
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1303
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30beb97773f2e9d00800000000000000
+      internalID: 981273684089760515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_100
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 980
+        width: 314
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33d653bb68a105850800000000000000
+      internalID: 6363615439443291443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_101
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 986
+        width: 346
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bcadd18208582530800000000000000
+      internalID: 3830408250870574256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_102
+      rect:
+        serializedVersion: 2
+        x: 3524
+        y: 978
+        width: 299
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a27ef8376a601c00800000000000000
+      internalID: 869311719652881056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_103
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 980
+        width: 347
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad8ba7a93bf5e02a0800000000000000
+      internalID: -6769367964895758118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_104
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 980
+        width: 341
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f717c970a5b44ef0800000000000000
+      internalID: -124775188817045514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_105
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 981
+        width: 343
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75553c4e2beaeef50800000000000000
+      internalID: 6912654561425708375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_106
+      rect:
+        serializedVersion: 2
+        x: 3112
+        y: 980
+        width: 327
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12f9a6662f1f54b70800000000000000
+      internalID: 8882771863460814625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_107
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 498
+        width: 335
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2cca92e91263aa20800000000000000
+      internalID: 3072407234112310319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_108
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 498
+        width: 326
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 152cf5b06a6cef2c0800000000000000
+      internalID: -4395857769809329583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_109
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 500
+        width: 319
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70cc1e51472aaa2f0800000000000000
+      internalID: -960776951023154169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_110
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 500
+        width: 327
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f77477479fe3db5e0800000000000000
+      internalID: -1892287027303987329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_111
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 498
+        width: 316
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f263e244705e4cfa0800000000000000
+      internalID: -5781244202265463249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_112
+      rect:
+        serializedVersion: 2
+        x: 1947
+        y: 499
+        width: 326
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7570de9ad2f138870800000000000000
+      internalID: 8683818787485321047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_113
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 498
+        width: 344
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a76a974ac7a3a9860800000000000000
+      internalID: 7537401233367737978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_114
+      rect:
+        serializedVersion: 2
+        x: 2780
+        y: 499
+        width: 273
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f212dc1cfa2a2f50800000000000000
+      internalID: 6857340644928656115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_115
+      rect:
+        serializedVersion: 2
+        x: 3122
+        y: 499
+        width: 268
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed0d16656926473a0800000000000000
+      internalID: -6668596750394994466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_116
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 502
+        width: 302
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2269eb35fc2b769d0800000000000000
+      internalID: -2781057641345018334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_117
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 22
+        width: 306
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93468fb0a904e1780800000000000000
+      internalID: -8710453598917991367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_118
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 23
+        width: 304
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c7130484b627d8d0800000000000000
+      internalID: -2821744084773562431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_119
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 19
+        width: 292
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a0017d26ed6b4d10800000000000000
+      internalID: 2110901685725495456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_120
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 18
+        width: 319
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 948736db0d42255d0800000000000000
+      internalID: -3075355116591417271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_121
+      rect:
+        serializedVersion: 2
+        x: 1578
+        y: 18
+        width: 308
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 119361bdf2a082520800000000000000
+      internalID: 2677401179127167249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_122
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 19
+        width: 349
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b98d5fd2ed3a9a0800000000000000
+      internalID: -6222885971116385505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_123
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 19
+        width: 345
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e607bedfc4a397be0800000000000000
+      internalID: -1479086900262506386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_124
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 28
+        width: 334
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15c79a7e328144990800000000000000
+      internalID: -7402765345000686511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_125
+      rect:
+        serializedVersion: 2
+        x: 3109
+        y: 21
+        width: 328
+        height: 309
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e184af08e485dc30800000000000000
+      internalID: 4383555944544764387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_dance_120_126
+      rect:
+        serializedVersion: 2
+        x: 3483
+        y: 25
+        width: 335
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2d8d0b21ccfffe0800000000000000
+      internalID: -1152978598935080253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      graffiti_king_dance_120_0: 6382717660187950416
+      graffiti_king_dance_120_1: 2617493088034571693
+      graffiti_king_dance_120_10: 4202562534450766034
+      graffiti_king_dance_120_100: 6363615439443291443
+      graffiti_king_dance_120_101: 3830408250870574256
+      graffiti_king_dance_120_102: 869311719652881056
+      graffiti_king_dance_120_103: -6769367964895758118
+      graffiti_king_dance_120_104: -124775188817045514
+      graffiti_king_dance_120_105: 6912654561425708375
+      graffiti_king_dance_120_106: 8882771863460814625
+      graffiti_king_dance_120_107: 3072407234112310319
+      graffiti_king_dance_120_108: -4395857769809329583
+      graffiti_king_dance_120_109: -960776951023154169
+      graffiti_king_dance_120_11: -5194346049967698016
+      graffiti_king_dance_120_110: -1892287027303987329
+      graffiti_king_dance_120_111: -5781244202265463249
+      graffiti_king_dance_120_112: 8683818787485321047
+      graffiti_king_dance_120_113: 7537401233367737978
+      graffiti_king_dance_120_114: 6857340644928656115
+      graffiti_king_dance_120_115: -6668596750394994466
+      graffiti_king_dance_120_116: -2781057641345018334
+      graffiti_king_dance_120_117: -8710453598917991367
+      graffiti_king_dance_120_118: -2821744084773562431
+      graffiti_king_dance_120_119: 2110901685725495456
+      graffiti_king_dance_120_12: 6406048979439020926
+      graffiti_king_dance_120_120: -3075355116591417271
+      graffiti_king_dance_120_121: 2677401179127167249
+      graffiti_king_dance_120_122: -6222885971116385505
+      graffiti_king_dance_120_123: -1479086900262506386
+      graffiti_king_dance_120_124: -7402765345000686511
+      graffiti_king_dance_120_125: 4383555944544764387
+      graffiti_king_dance_120_126: -1152978598935080253
+      graffiti_king_dance_120_13: -3852562377981119321
+      graffiti_king_dance_120_14: -4608559068350498291
+      graffiti_king_dance_120_15: 4653682836422885281
+      graffiti_king_dance_120_16: -7294656011823651448
+      graffiti_king_dance_120_17: -9176367088792864087
+      graffiti_king_dance_120_18: 5742775440607209505
+      graffiti_king_dance_120_19: -3951969254167025018
+      graffiti_king_dance_120_2: -2383824555901701502
+      graffiti_king_dance_120_20: 2396627901913935864
+      graffiti_king_dance_120_21: 1628758427648541159
+      graffiti_king_dance_120_22: -2693729474952076511
+      graffiti_king_dance_120_23: -6043263044829556687
+      graffiti_king_dance_120_24: -8481546666777347254
+      graffiti_king_dance_120_25: 2843179763487612979
+      graffiti_king_dance_120_26: -4700293761377447238
+      graffiti_king_dance_120_27: 3276227014184902839
+      graffiti_king_dance_120_28: 4866719442372975035
+      graffiti_king_dance_120_29: -3676372729578384581
+      graffiti_king_dance_120_3: -3290800882852591627
+      graffiti_king_dance_120_30: 2467049767934411835
+      graffiti_king_dance_120_31: -1500998350177573858
+      graffiti_king_dance_120_32: 2124358919802255924
+      graffiti_king_dance_120_33: -5522710093288859976
+      graffiti_king_dance_120_34: -4000589273633743007
+      graffiti_king_dance_120_35: -3508534151149370390
+      graffiti_king_dance_120_36: -7987396520110096385
+      graffiti_king_dance_120_37: 6065552299026635889
+      graffiti_king_dance_120_38: -5813658351696342369
+      graffiti_king_dance_120_39: 8709779498700377269
+      graffiti_king_dance_120_4: -6042123791621068859
+      graffiti_king_dance_120_40: -3294747933119058862
+      graffiti_king_dance_120_41: -219324658406565575
+      graffiti_king_dance_120_42: -1690415948174337242
+      graffiti_king_dance_120_43: -2714237824539393926
+      graffiti_king_dance_120_44: -5919162401034830025
+      graffiti_king_dance_120_45: 6706098718031861536
+      graffiti_king_dance_120_46: 1353447982995677482
+      graffiti_king_dance_120_47: 4140889761262797418
+      graffiti_king_dance_120_48: -1104764062124103991
+      graffiti_king_dance_120_49: 608038067672253316
+      graffiti_king_dance_120_5: -668615457604427553
+      graffiti_king_dance_120_50: -4548282636960886908
+      graffiti_king_dance_120_51: -6369476991787982781
+      graffiti_king_dance_120_52: -6648272795119479017
+      graffiti_king_dance_120_53: 5850222397166732177
+      graffiti_king_dance_120_54: 3499550987539086060
+      graffiti_king_dance_120_55: 3665185848374164321
+      graffiti_king_dance_120_56: -4920595737766490496
+      graffiti_king_dance_120_57: 8930174996462227235
+      graffiti_king_dance_120_58: -2925977543332527622
+      graffiti_king_dance_120_59: -1158370265212456029
+      graffiti_king_dance_120_6: 7301437939302157600
+      graffiti_king_dance_120_60: -1727509964700401515
+      graffiti_king_dance_120_61: 123247635120137727
+      graffiti_king_dance_120_62: 7035577815046655726
+      graffiti_king_dance_120_63: -8414279250959013441
+      graffiti_king_dance_120_64: -8324116330694804558
+      graffiti_king_dance_120_65: 8024926492991756587
+      graffiti_king_dance_120_66: -4726735718636190937
+      graffiti_king_dance_120_67: -4693713640943163164
+      graffiti_king_dance_120_68: 8270124882931987711
+      graffiti_king_dance_120_69: 7036731545864627771
+      graffiti_king_dance_120_7: -8744074411001753083
+      graffiti_king_dance_120_70: 443400890551877283
+      graffiti_king_dance_120_71: -5189023550381939276
+      graffiti_king_dance_120_72: -8467363671455483801
+      graffiti_king_dance_120_73: -7976045644201648669
+      graffiti_king_dance_120_74: -1531019996447582357
+      graffiti_king_dance_120_75: 471830895493526237
+      graffiti_king_dance_120_76: -6731654574530127304
+      graffiti_king_dance_120_77: -7186497488635405185
+      graffiti_king_dance_120_78: -7627767371482802482
+      graffiti_king_dance_120_79: 7857670760965835878
+      graffiti_king_dance_120_8: 6800578415603332968
+      graffiti_king_dance_120_80: -5232175256291580269
+      graffiti_king_dance_120_81: -2986933682197433468
+      graffiti_king_dance_120_82: -1548889306725468253
+      graffiti_king_dance_120_83: -8690510350387781646
+      graffiti_king_dance_120_84: -4296468963019690335
+      graffiti_king_dance_120_85: 6696609413961330730
+      graffiti_king_dance_120_86: -178634868222330911
+      graffiti_king_dance_120_87: -4168246772274776859
+      graffiti_king_dance_120_88: 1160332830657602250
+      graffiti_king_dance_120_89: -8599074635709871165
+      graffiti_king_dance_120_9: 12019402595697336
+      graffiti_king_dance_120_90: 5882995358599998385
+      graffiti_king_dance_120_91: 1246719622146181828
+      graffiti_king_dance_120_92: 5807476510756445261
+      graffiti_king_dance_120_93: 6498136361361504131
+      graffiti_king_dance_120_94: 3338906582991909902
+      graffiti_king_dance_120_95: -8405377279719095557
+      graffiti_king_dance_120_96: 3336227906305140151
+      graffiti_king_dance_120_97: -5988885676469049143
+      graffiti_king_dance_120_98: 6877167989760979392
+      graffiti_king_dance_120_99: 981273684089760515
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
