@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 0a3d15e85af6bb240b871e2fd95651e4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1910889769330210564
+    second: dj_null_miss_12_0
+  - first:
+      213: -5688164309102976519
+    second: dj_null_miss_12_1
+  - first:
+      213: -8666669752109150451
+    second: dj_null_miss_12_2
+  - first:
+      213: 5584236257934101357
+    second: dj_null_miss_12_3
+  - first:
+      213: 5625685854249060071
+    second: dj_null_miss_12_4
+  - first:
+      213: 4115905219795434439
+    second: dj_null_miss_12_5
+  - first:
+      213: -8584415161038265400
+    second: dj_null_miss_12_6
+  - first:
+      213: 6728532050366361871
+    second: dj_null_miss_12_7
+  - first:
+      213: -4750448183833208044
+    second: dj_null_miss_12_8
+  - first:
+      213: -1797764883757608495
+    second: dj_null_miss_12_9
+  - first:
+      213: -1891307979466897001
+    second: dj_null_miss_12_10
+  - first:
+      213: -2165238342734713487
+    second: dj_null_miss_12_11
+  - first:
+      213: 3510509913697449849
+    second: dj_null_miss_12_12
+  - first:
+      213: -7047705849741218702
+    second: dj_null_miss_12_13
+  - first:
+      213: -4314191036068141825
+    second: dj_null_miss_12_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dj_null_miss_12_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 500
+        width: 323
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf8052e01e72b75e0800000000000000
+      internalID: -1910889769330210564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_1
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 501
+        width: 318
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1acd3b2b49f01b0800000000000000
+      internalID: -5688164309102976519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_2
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 500
+        width: 307
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f49e747cdc9b780800000000000000
+      internalID: -8666669752109150451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_3
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 499
+        width: 338
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bc4004a413f7d40800000000000000
+      internalID: 5584236257934101357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_4
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 502
+        width: 330
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e684707a73721e40800000000000000
+      internalID: 5625685854249060071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_5
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 641
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb351b8df1ae1930800000000000000
+      internalID: 4115905219795434439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_6
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 630
+        width: 10
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c326d9a4e70ed880800000000000000
+      internalID: -8584415161038265400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_7
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 498
+        width: 335
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01fae1204c806d50800000000000000
+      internalID: 6728532050366361871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_8
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 498
+        width: 341
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41bd8b6bb84031eb0800000000000000
+      internalID: -4750448183833208044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_9
+      rect:
+        serializedVersion: 2
+        x: 2726
+        y: 498
+        width: 323
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d1d4f9fc5e0d07e0800000000000000
+      internalID: -1797764883757608495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_10
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 498
+        width: 343
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 799830bc969b0c5e0800000000000000
+      internalID: -1891307979466897001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_11
+      rect:
+        serializedVersion: 2
+        x: 3519
+        y: 500
+        width: 302
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17ded3ff23783f1e0800000000000000
+      internalID: -2165238342734713487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_12
+      rect:
+        serializedVersion: 2
+        x: 2705
+        y: 545
+        width: 18
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9777c62ca26d7b030800000000000000
+      internalID: 3510509913697449849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_13
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 18
+        width: 262
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27c6bb8bed4813e90800000000000000
+      internalID: -7047705849741218702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_miss_12_14
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 20
+        width: 283
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4ebf93c1ae024c0800000000000000
+      internalID: -4314191036068141825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dj_null_miss_12_0: -1910889769330210564
+      dj_null_miss_12_1: -5688164309102976519
+      dj_null_miss_12_10: -1891307979466897001
+      dj_null_miss_12_11: -2165238342734713487
+      dj_null_miss_12_12: 3510509913697449849
+      dj_null_miss_12_13: -7047705849741218702
+      dj_null_miss_12_14: -4314191036068141825
+      dj_null_miss_12_2: -8666669752109150451
+      dj_null_miss_12_3: 5584236257934101357
+      dj_null_miss_12_4: 5625685854249060071
+      dj_null_miss_12_5: 4115905219795434439
+      dj_null_miss_12_6: -8584415161038265400
+      dj_null_miss_12_7: 6728532050366361871
+      dj_null_miss_12_8: -4750448183833208044
+      dj_null_miss_12_9: -1797764883757608495
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

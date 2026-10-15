@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: 3dd50c5ad35fe014aa97c7dfa279d37b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5644466122068127379
+    second: transition_20_0
+  - first:
+      213: 5815318666966526188
+    second: transition_20_1
+  - first:
+      213: -4811913579477620255
+    second: transition_20_2
+  - first:
+      213: 9080748324481331326
+    second: transition_20_3
+  - first:
+      213: 1828030134732146306
+    second: transition_20_4
+  - first:
+      213: 397849187633840747
+    second: transition_20_5
+  - first:
+      213: -2094792882048152315
+    second: transition_20_6
+  - first:
+      213: 5129720874034328154
+    second: transition_20_7
+  - first:
+      213: -2741436894303189126
+    second: transition_20_8
+  - first:
+      213: 5198867013893903143
+    second: transition_20_9
+  - first:
+      213: -8184068305735653093
+    second: transition_20_10
+  - first:
+      213: 4504791594119144211
+    second: transition_20_11
+  - first:
+      213: 847999816478181146
+    second: transition_20_12
+  - first:
+      213: 5894215614832520704
+    second: transition_20_13
+  - first:
+      213: -5491075386183069489
+    second: transition_20_14
+  - first:
+      213: -4042081006674377179
+    second: transition_20_15
+  - first:
+      213: -6694763093680787390
+    second: transition_20_16
+  - first:
+      213: -4915950905874635208
+    second: transition_20_17
+  - first:
+      213: 7702367572950206711
+    second: transition_20_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: transition_20_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 593
+        width: 136
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d611767b7f3daa1b0800000000000000
+      internalID: -5644466122068127379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_1
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 660
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce8ec38448924b050800000000000000
+      internalID: 5815318666966526188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_2
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 649
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e9ab551816a83db0800000000000000
+      internalID: -4811913579477620255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_3
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 687
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e70fe6f3d7c450e70800000000000000
+      internalID: 9080748324481331326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_4
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 682
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2864b63e8b77e5910800000000000000
+      internalID: 1828030134732146306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 647
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b62c71f6ab1758500800000000000000
+      internalID: 397849187633840747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_6
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 672
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50dc083f8fccde2e0800000000000000
+      internalID: -2094792882048152315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_7
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 677
+        width: 122
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a52f8bdd4fd603740800000000000000
+      internalID: 5129720874034328154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_8
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 597
+        width: 97
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7788ec5ba574f9d0800000000000000
+      internalID: -2741436894303189126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_9
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 689
+        width: 53
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72354ad1106162840800000000000000
+      internalID: 5198867013893903143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_10
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 607
+        width: 51
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b19e71bac395c6e80800000000000000
+      internalID: -8184068305735653093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_11
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 31
+        width: 747
+        height: 731
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31323a2661c348e30800000000000000
+      internalID: 4504791594119144211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_12
+      rect:
+        serializedVersion: 2
+        x: 1251
+        y: 672
+        width: 63
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1747c61753b4cb00800000000000000
+      internalID: 847999816478181146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_13
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 26
+        width: 593
+        height: 724
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00e27af6fd57cc150800000000000000
+      internalID: 5894215614832520704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 29
+        width: 677
+        height: 558
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc0daab7708cbc3b0800000000000000
+      internalID: -5491075386183069489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_15
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 575
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52602d38db4a7e7c0800000000000000
+      internalID: -4042081006674377179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_16
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 575
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 240f2c9cf6c6713a0800000000000000
+      internalID: -6694763093680787390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_17
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 577
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 836251a62b807cbb0800000000000000
+      internalID: -4915950905874635208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transition_20_18
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 575
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f84f2baf7e44ea60800000000000000
+      internalID: 7702367572950206711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      transition_20_0: -5644466122068127379
+      transition_20_1: 5815318666966526188
+      transition_20_10: -8184068305735653093
+      transition_20_11: 4504791594119144211
+      transition_20_12: 847999816478181146
+      transition_20_13: 5894215614832520704
+      transition_20_14: -5491075386183069489
+      transition_20_15: -4042081006674377179
+      transition_20_16: -6694763093680787390
+      transition_20_17: -4915950905874635208
+      transition_20_18: 7702367572950206711
+      transition_20_2: -4811913579477620255
+      transition_20_3: 9080748324481331326
+      transition_20_4: 1828030134732146306
+      transition_20_5: 397849187633840747
+      transition_20_6: -2094792882048152315
+      transition_20_7: 5129720874034328154
+      transition_20_8: -2741436894303189126
+      transition_20_9: 5198867013893903143
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
