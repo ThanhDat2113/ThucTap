@@ -56,6 +56,7 @@ public class GameplayHUD : MonoBehaviour
     [SerializeField] private TMP_Text resultTitle;
     [SerializeField] private TMP_Text resultScore;
     [SerializeField] private TMP_Text resultCombo;
+    [SerializeField] private GameObject newBestLabel;
     [SerializeField] private Button resultRetryButton;
     [SerializeField] private Button resultContinueButton;
 
@@ -223,8 +224,15 @@ public class GameplayHUD : MonoBehaviour
         if (PauseChanged != null) PauseChanged(paused);
     }
 
-    public void ShowResult(bool cleared, int score, int maxCombo)
+    // Goi khi het bai / het mau. Neu qua bai thi luu ky luc vao SongStats -> man chon nhac se hien Best Score, Combo, Accuracy.
+    // accuracy: 0-100 (%), truyen -1 neu khong tinh.
+    public void ShowResult(bool cleared, int score, int maxCombo, float accuracy = -1f)
     {
+        SongData song = GameSession.SelectedSong;
+        bool newBest = cleared && song != null && score > 0 && score > SongStats.GetBestScore(song);
+        if (cleared && song != null) SongStats.SaveResult(song, score, maxCombo, accuracy);
+        if (newBestLabel != null) newBestLabel.SetActive(newBest);
+
         if (resultPanel == null) return;
         if (pauseMenu != null) pauseMenu.SetActive(false);
         resultPanel.SetActive(true);
@@ -234,12 +242,13 @@ public class GameplayHUD : MonoBehaviour
             resultTitle.color = cleared ? new Color(0.3f, 0.95f, 1f) : new Color(1f, 0.3f, 0.45f);
         }
         if (resultScore != null) resultScore.text = score.ToString("N0");
-        if (resultCombo != null) resultCombo.text = "MAX COMBO  " + maxCombo;
+        if (resultCombo != null) resultCombo.text = "MAX COMBO  " + maxCombo + (accuracy >= 0f ? "   ACC  " + accuracy.ToString("0.0") + "%" : "");
     }
 
     private void Restart()
     {
         Time.timeScale = 1f;
+        if (GameSession.SelectedSong != null) SongStats.IncrementPlayCount(GameSession.SelectedSong);
         if (RestartRequested != null) RestartRequested();
     }
 

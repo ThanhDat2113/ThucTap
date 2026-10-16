@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -59,7 +59,7 @@ public class SongDetailPanel : MonoBehaviour
 
         int best = SongStats.GetBestScore(song);
         float acc = SongStats.GetBestAccuracy(song);
-        if (bestScoreText != null) bestScoreText.text = best > 0 ? best.ToString() : "--";
+        if (bestScoreText != null) bestScoreText.text = best > 0 ? best.ToString("N0") : "--";
         if (bestComboText != null) bestComboText.text = best > 0 ? SongStats.GetBestCombo(song) + " COMBO" : "";
         if (accuracyText != null) accuracyText.text = acc >= 0f ? acc.ToString("0.0") + "%" : "--";
         if (playCountText != null) playCountText.text = SongStats.GetPlayCount(song).ToString();

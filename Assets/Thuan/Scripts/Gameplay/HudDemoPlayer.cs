@@ -48,6 +48,8 @@ public class HudDemoPlayer : MonoBehaviour
     private float clock, songLength;
     private bool started, finished;
     private int score, combo, maxCombo;
+    private int judged;
+    private float accuracyPoints;
     private float playerHp = 1f, opponentHp = 1f;
     private readonly bool[] held = new bool[4];
     private readonly bool[] pointerHeld = new bool[4];
@@ -192,6 +194,8 @@ public class HudDemoPlayer : MonoBehaviour
 
     private void Judge(HudJudgement j, int lane)
     {
+        judged++;
+        accuracyPoints += j == HudJudgement.Perfect ? 1f : j == HudJudgement.Good ? 0.7f : j == HudJudgement.Bad ? 0.3f : 0f;
         if (j == HudJudgement.Miss)
         {
             combo = 0;
@@ -225,7 +229,8 @@ public class HudDemoPlayer : MonoBehaviour
         foreach (var n in active) Recycle(n);
         active.Clear();
         for (int i = 0; i < 4; i++) hud.SetLanePressed(i, false);
-        hud.ShowResult(cleared, score, maxCombo);
+        float accuracy = judged > 0 ? accuracyPoints / judged * 100f : -1f;
+        hud.ShowResult(cleared, score, maxCombo, accuracy);
     }
 
     private Image GetImage(int lane)
