@@ -3215,19 +3215,29 @@ MonoBehaviour:
   showPauseButton: 1
   pauseButtonPosition: {x: -30, y: -50}
   pauseOnFocusLost: 1
-  menuSceneName: 
+  lobbySceneName: 
+  mainMenuSceneName: 
+  onGoLobby:
+    m_PersistentCalls:
+      m_Calls: []
+  onGoMainMenu:
+    m_PersistentCalls:
+      m_Calls: []
   titleText: PAUSE GAME
   resumeText: RESUME
   restartText: RESTART
-  menuText: MENU
+  lobbyText: LOBBY
+  mainMenuText: MAIN MENU
   pauseIconSprite: {fileID: 5470352240766234753, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
   resumeIconSprite: {fileID: 5470352240766234753, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
   resumeButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
   restartButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
-  menuButtonSprite: {fileID: 0}
+  lobbyButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
+  mainMenuButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
   hideLabelWhenSprite: 0
   pauseButtonHeight: 90
   menuButtonHeight: 110
+  menuButtonGap: 20
   font: {fileID: 12800000, guid: 38624bbe44c61d94b8b09c014def0c60, type: 3}
   dimColor: {r: 0, g: 0, b: 0, a: 0.7}
   buttonColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}

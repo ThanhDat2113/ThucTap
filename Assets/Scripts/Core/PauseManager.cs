@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -10,12 +11,13 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Tạm dừng game: dừng thời gian (Time.timeScale = 0) + dừng toàn bộ âm thanh (AudioListener.pause),
-/// hiện menu PAUSE GAME với các nút RESUME / RESTART / MENU.
+/// hiện menu PAUSE GAME với các nút RESUME / RESTART / LOBBY / MAIN MENU.
 /// Nút ở góc màn hình đổi thành nút "quay lại gameplay" (►) khi đang pause.
 /// Tự dựng UI bằng code, không cần tạo Canvas. Chữ và ảnh nút đều đổi được trong Inspector.
 ///
 /// CÁCH DÙNG: tạo 1 GameObject rỗng trong scene gameplay, gắn script này vào.
 /// Phím tắt: Esc hoặc P (Esc cũng là nút Back trên Android).
+/// Nút LOBBY / MAIN MENU: điền tên scene (hoặc gắn sự kiện) trong Inspector để nút hoạt động.
 /// </summary>
 public class PauseManager : MonoBehaviour
 {
@@ -28,18 +30,29 @@ public class PauseManager : MonoBehaviour
     [Tooltip("Số giây đếm ngược trước khi chơi tiếp (0 = chơi tiếp ngay)")]
     [Range(0, 5)] public int countdownSeconds = 0;
     public bool showPauseButton = true;
-    [Tooltip("Vị trí nút góc, tính từ góc trên phải")]
-    public Vector2 pauseButtonPosition = new Vector2(-30f, -30f);
+    [Tooltip("Vị trí nút góc, tính từ góc trên phải. Y càng âm thì nút càng xuống thấp (tránh đè lên thanh máu)")]
+    public Vector2 pauseButtonPosition = new Vector2(-30f, -65f);
     [Tooltip("Tự tạm dừng khi thoát app / mất focus (chỉ chạy trên bản build, không chạy trong Editor)")]
     public bool pauseOnFocusLost = true;
-    [Tooltip("Tên scene menu (phải thêm vào Build Settings). Để trống = ẩn nút Menu")]
-    public string menuSceneName = "";
+
+    [Header("Quay về sảnh / menu chính")]
+    [Tooltip("Tên scene sảnh (chọn bài). Phải có trong File > Build Settings > Scenes In Build. Trống = bấm nút sẽ chỉ báo cảnh báo trong Console")]
+    public string lobbySceneName = "";
+    [Tooltip("Tên scene menu chính (màn hình tiêu đề). Trống = bấm nút sẽ chỉ báo cảnh báo trong Console")]
+    public string mainMenuSceneName = "";
+    [Tooltip("Hiện nút LOBBY / MAIN MENU trong menu pause (tắt nếu game bạn không cần)")]
+    public bool showLobbyButton = true;
+    public bool showMainMenuButton = true;
+    [Tooltip("Nếu sảnh/menu của bạn là 1 panel trong cùng scene (không phải scene riêng): gắn việc cần làm vào đây. Có gắn thì nút vẫn hiện dù không điền tên scene")]
+    public UnityEvent onGoLobby;
+    public UnityEvent onGoMainMenu;
 
     [Header("Chữ hiển thị")]
     public string titleText = "PAUSE GAME";
     public string resumeText = "RESUME";
     public string restartText = "RESTART";
-    public string menuText = "MENU";
+    public string lobbyText = "LOBBY";
+    public string mainMenuText = "MAIN MENU";
 
     [Header("Ảnh nút (để trống = dùng nút màu mặc định)")]
     [Tooltip("Nút ở góc khi đang chơi (bấm để pause)")]
@@ -49,15 +62,18 @@ public class PauseManager : MonoBehaviour
     [Tooltip("Nút RESUME lớn trong menu")]
     public Sprite resumeButtonSprite;
     public Sprite restartButtonSprite;
-    public Sprite menuButtonSprite;
-    [Tooltip("Có ảnh thì ẩn chữ trên nút (bật khi ảnh đã có sẵn chữ/icon; tắt nếu ảnh chỉ là khung nền)")]
-    public bool hideLabelWhenSprite = true;
+    public Sprite lobbyButtonSprite;
+    public Sprite mainMenuButtonSprite;
+    [Tooltip("Bật = có ảnh thì ẩn chữ (dùng khi ảnh đã có sẵn chữ/icon). Tắt = chữ hiện đè lên ảnh (dùng khi ảnh chỉ là khung nền trống)")]
+    public bool hideLabelWhenSprite = false;
 
     [Header("Kích thước nút")]
     [Tooltip("Chiều cao nút ở góc. Có ảnh thì chiều rộng tự theo tỉ lệ ảnh")]
     public float pauseButtonHeight = 90f;
     [Tooltip("Chiều cao các nút trong menu. Có ảnh thì chiều rộng tự theo tỉ lệ ảnh")]
     public float menuButtonHeight = 110f;
+    [Tooltip("Khoảng cách giữa các nút trong menu")]
+    public float menuButtonGap = 20f;
 
     [Header("Giao diện")]
     [Tooltip("Kéo font của bạn vào đây cho khớp với Score/Combo. Để trống = font hệ thống")]
@@ -81,6 +97,9 @@ public class PauseManager : MonoBehaviour
     Text countdownText;
     float prevTimeScale = 1f;
     bool counting;
+
+    bool HasLobby => showLobbyButton;
+    bool HasMainMenu => showMainMenuButton;
 
     void Awake()
     {
@@ -183,7 +202,25 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    /// <summary>Bỏ pause ngay lập tức, không đếm ngược (dùng khi restart).</summary>
+    public void GoToLobby() { LeaveGameplay(lobbySceneName, onGoLobby); }
+    public void GoToMainMenu() { LeaveGameplay(mainMenuSceneName, onGoMainMenu); }
+
+    // Rời gameplay: trả timeScale + âm thanh về bình thường, chạy sự kiện (nếu có), rồi load scene (nếu có tên)
+    void LeaveGameplay(string sceneName, UnityEvent customEvent)
+    {
+        bool hasEvent = customEvent != null && customEvent.GetPersistentEventCount() > 0;
+        if (string.IsNullOrEmpty(sceneName) && !hasEvent)
+        {
+            Debug.LogWarning("PauseManager: nút này chưa có đích đến. Điền tên scene (Lobby Scene Name / Main Menu Scene Name) " +
+                             "hoặc gắn sự kiện On Go Lobby / On Go Main Menu trong Inspector.");
+            return;
+        }
+        ForceUnpause();
+        if (customEvent != null) customEvent.Invoke();
+        if (!string.IsNullOrEmpty(sceneName)) SceneManager.LoadScene(sceneName);
+    }
+
+    /// <summary>Bỏ pause ngay lập tức, không đếm ngược (dùng khi restart / rời gameplay).</summary>
     public void ForceUnpause()
     {
         StopAllCoroutines();
@@ -196,12 +233,6 @@ public class PauseManager : MonoBehaviour
             RefreshPauseButton(false);
             pauseButton.gameObject.SetActive(showPauseButton);
         }
-    }
-
-    public void GoToMenu()
-    {
-        ResetState();
-        SceneManager.LoadScene(menuSceneName);
     }
 
     static void ResetState()
@@ -247,11 +278,21 @@ public class PauseManager : MonoBehaviour
         dim.color = dimColor; // vừa làm nền tối vừa chặn bấm xuyên xuống gameplay
         panel = panelRt.gameObject;
 
-        MakeText(panelRt, titleText, 96, new Vector2(0f, 230f), new Vector2(1400f, 200f));
-        MakeMenuButton(panelRt, resumeText, new Vector2(0f, 60f), resumeButtonSprite, Resume);
-        MakeMenuButton(panelRt, restartText, new Vector2(0f, -70f), restartButtonSprite, Restart);
-        if (!string.IsNullOrEmpty(menuSceneName))
-            MakeMenuButton(panelRt, menuText, new Vector2(0f, -200f), menuButtonSprite, GoToMenu);
+        // Danh sách nút trong menu (nút nào không có đích đến thì không hiện)
+        var items = new List<MenuItem>();
+        items.Add(new MenuItem(resumeText, resumeButtonSprite, new UnityAction(Resume)));
+        items.Add(new MenuItem(restartText, restartButtonSprite, new UnityAction(Restart)));
+        if (HasLobby) items.Add(new MenuItem(lobbyText, lobbyButtonSprite, new UnityAction(GoToLobby)));
+        if (HasMainMenu) items.Add(new MenuItem(mainMenuText, mainMenuButtonSprite, new UnityAction(GoToMainMenu)));
+
+        // Xếp dọc, cả cụm nằm giữa màn hình (hơi lệch xuống để chừa chỗ cho tiêu đề)
+        float spacing = menuButtonHeight + menuButtonGap;
+        float startY = (items.Count - 1) * spacing * 0.5f - 20f;
+        for (int i = 0; i < items.Count; i++)
+            MakeMenuButton(panelRt, items[i], new Vector2(0f, startY - i * spacing));
+
+        float titleY = startY + menuButtonHeight * 0.5f + 110f;
+        MakeText(panelRt, titleText, 96, new Vector2(0f, titleY), new Vector2(1400f, 200f));
         panel.SetActive(false);
 
         // Số đếm ngược
@@ -267,6 +308,14 @@ public class PauseManager : MonoBehaviour
         pauseButton.gameObject.SetActive(showPauseButton);
     }
 
+    struct MenuItem
+    {
+        public string label;
+        public Sprite sprite;
+        public UnityAction action;
+        public MenuItem(string l, Sprite s, UnityAction a) { label = l; sprite = s; action = a; }
+    }
+
     // Nút góc: đang chơi = icon pause (II), đang pause = icon quay lại (►)
     void RefreshPauseButton(bool paused)
     {
@@ -277,10 +326,10 @@ public class PauseManager : MonoBehaviour
             new Vector2(pauseButtonHeight, pauseButtonHeight), pauseButtonHeight);
     }
 
-    void MakeMenuButton(Transform parent, string label, Vector2 pos, Sprite sprite, UnityAction action)
+    void MakeMenuButton(Transform parent, MenuItem item, Vector2 pos)
     {
-        var btn = MakeButton(parent, pos, action, out Image img, out Text txt);
-        ApplyLook(btn, img, txt, sprite, label, 52,
+        var btn = MakeButton(parent, pos, item.action, out Image img, out Text txt);
+        ApplyLook(btn, img, txt, item.sprite, item.label, 52,
             new Vector2(560f, menuButtonHeight), menuButtonHeight);
     }
 
@@ -296,6 +345,9 @@ public class PauseManager : MonoBehaviour
             : fallbackSize;
         label.text = text;
         label.fontSize = fontSize;
+        label.resizeTextForBestFit = true;   // chữ tự thu nhỏ cho vừa khung nút
+        label.resizeTextMinSize = 16;
+        label.resizeTextMaxSize = fontSize;
         label.gameObject.SetActive(sprite == null || !hideLabelWhenSprite);
     }
 
@@ -336,7 +388,8 @@ public class PauseManager : MonoBehaviour
         var lrt = NewRect("Label", rt);
         lrt.anchorMin = Vector2.zero;
         lrt.anchorMax = Vector2.one;
-        lrt.offsetMin = lrt.offsetMax = Vector2.zero;
+        lrt.offsetMin = new Vector2(16f, 8f);   // chừa viền để chữ không đè lên cạnh khung
+        lrt.offsetMax = new Vector2(-16f, -8f);
         label = lrt.gameObject.AddComponent<Text>();
         label.font = uiFont;
         label.alignment = TextAnchor.MiddleCenter;
