@@ -62,6 +62,7 @@
     <Compile Include="Assets\Thuan\Scripts\Audio\MusicManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteView.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NotePool.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundBeatReactive.cs" />
     <Compile Include="Assets\VFX\SideStreaks.cs" />
     <Compile Include="Assets\Luan\MainMenu\Scripts\UIPasswordToggle.cs" />
     <Compile Include="Assets\Thuan\Scripts\Core\GameSession.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Assets\Luan\MainMenu\Scripts\AspectRatioEnforcer.cs" />
     <Compile Include="Assets\Luan\MainMenu\Scripts\VideoOptimizationManager.cs" />
     <Compile Include="Assets\Thuan\Scripts\UI\ButtonSFX.cs" />
+    <Compile Include="Assets\VFX\Background\BackgroundEqualizer.cs" />
     <Compile Include="Assets\Thuan\Scripts\Audio\SongData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />

@@ -15,7 +15,9 @@ public enum BgScene
     Day,
     Winter,
     Forest,
-    Autumn
+    Autumn,
+    Equalizer,
+    SynthBars
 }
 
 /// <summary>
@@ -26,7 +28,8 @@ public enum BgScene
 ///
 /// YÊU CẦU: trong project phải có đủ các script: WorldBackgroundGradientPro, BackgroundExtras,
 /// BackgroundNightSky, BackgroundClouds, BackgroundSnow, BackgroundFireflies, BackgroundSynthwave,
-/// BackgroundMountains, BackgroundAurora, BackgroundRain, BackgroundPetals, BackgroundBokeh.
+/// BackgroundMountains, BackgroundAurora, BackgroundRain, BackgroundPetals, BackgroundBokeh,
+/// BackgroundEqualizer, BackgroundBeatReactive.
 /// KHÔNG gắn riêng các script đó lên Camera nữa (và gỡ WorldBackgroundGradient cũ) để khỏi bị trùng.
 /// </summary>
 public class WorldBackgroundSelector : MonoBehaviour
@@ -37,6 +40,8 @@ public class WorldBackgroundSelector : MonoBehaviour
     public bool includeGradient = true;
     [Tooltip("Tự xoá các script/object background cũ còn sót trên Camera (gắn tay từ trước) để khỏi bị trùng hiệu ứng")]
     public bool cleanLeftovers = true;
+    [Tooltip("Bật = mọi cảnh đều động: đập theo nhịp, phản ứng theo nhạc và combo, chớp khi Miss / Perfect")]
+    public bool dynamicBackground = true;
 
     BgScene applied = (BgScene)(-1);
     Transform camTf;
@@ -114,7 +119,7 @@ public class WorldBackgroundSelector : MonoBehaviour
         "WorldBackgroundSkyGradient", "WorldBackgroundWinterGradient", "WorldBackgroundForestGradient",
         "BackgroundExtras", "BackgroundNightSky", "BackgroundClouds", "BackgroundSnow",
         "BackgroundFireflies", "BackgroundSynthwave", "BackgroundMountains", "BackgroundAurora",
-        "BackgroundRain", "BackgroundPetals", "BackgroundBokeh"
+        "BackgroundRain", "BackgroundPetals", "BackgroundBokeh", "BackgroundEqualizer"
     };
 
     static readonly HashSet<string> BgObjectNames = new HashSet<string>
@@ -127,7 +132,7 @@ public class WorldBackgroundSelector : MonoBehaviour
     static readonly string[] BgObjectPrefixes =
     {
         "Dust_", "Star_", "Cloud_", "Snow_", "Firefly_", "GridV_", "GridH_",
-        "Mountain_", "Aurora_", "Rain_", "Petal_", "Bokeh_"
+        "Mountain_", "Aurora_", "Rain_", "Petal_", "Bokeh_", "EqBar_", "EqRefl_"
     };
 
     void PurgeLeftovers()
@@ -145,12 +150,18 @@ public class WorldBackgroundSelector : MonoBehaviour
     void PurgeComponents(GameObject go)
     {
         foreach (var mb in go.GetComponents<MonoBehaviour>())
-            if (mb && BgScriptNames.Contains(mb.GetType().Name)) Destroy(mb);
+        {
+            if (!mb) continue;
+            string n = mb.GetType().Name;
+            // BackgroundBeatReactive chỉ bị dọn khi Selector tự thêm bản của nó (Dynamic Background bật)
+            if (BgScriptNames.Contains(n) || (dynamicBackground && n == "BackgroundBeatReactive")) Destroy(mb);
+        }
     }
 
-    static bool IsBgObjectName(string n)
+    bool IsBgObjectName(string n)
     {
         if (BgObjectNames.Contains(n)) return true;
+        if (dynamicBackground && (n == "BeatFlash" || n.StartsWith("BeatRing_"))) return true;
         foreach (var p in BgObjectPrefixes) if (n.StartsWith(p)) return true;
         return false;
     }
@@ -289,6 +300,36 @@ public class WorldBackgroundSelector : MonoBehaviour
                 leaves.colorB = new Color(0.80f, 0.20f, 0.10f, 0.95f);
                 break;
             }
+            case BgScene.Equalizer:
+            {
+                Gradient(BgGradientPreset.Dream);
+                var eq = Add<BackgroundEqualizer>();
+                eq.baseline = -0.35f;
+                var bokeh = Add<BackgroundBokeh>();
+                bokeh.count = 14;
+                break;
+            }
+            case BgScene.SynthBars:
+            {
+                Gradient(BgGradientPreset.Synthwave);
+                Add<BackgroundSynthwave>();
+                var sky = Add<BackgroundNightSky>();
+                sky.showMoon = false;
+                sky.starCount = 60;
+                var eq = Add<BackgroundEqualizer>();
+                eq.baseline = 0f;     // đứng trên đường chân trời của Synthwave
+                eq.maxHeight = 0.3f;
+                break;
+            }
+        }
+
+        // Làm cảnh vừa dựng "sống": đập theo nhịp / nhạc / combo
+        if (dynamicBackground)
+        {
+            var react = Add<BackgroundBeatReactive>();
+            react.beatRings = s == BgScene.Synthwave || s == BgScene.SynthBars || s == BgScene.Sunset
+                           || s == BgScene.Dream || s == BgScene.Night || s == BgScene.Aurora
+                           || s == BgScene.Equalizer;
         }
     }
 }
