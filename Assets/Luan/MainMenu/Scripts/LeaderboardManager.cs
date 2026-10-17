@@ -526,18 +526,43 @@ namespace Luan.MainMenu
             PopulateTop10UI(top10Entries);
 
             // 2. Tải Hạng của chính người chơi hiện tại (nếu chưa bị rate limit)
-            string urlAround = $"https://{titleId}.playfabapi.com/Client/GetLeaderboardAroundPlayer";
-            PlayFabGetLeaderboardAroundPlayerRequest reqAroundData = new PlayFabGetLeaderboardAroundPlayerRequest
-            {
-                StatisticName = statisticName,
-                MaxResultsCount = 1
-            };
-
-            string jsonAround = JsonUtility.ToJson(reqAroundData);
             PlayFabLeaderboardEntry playerEntry = null;
 
-            if (!_isRateLimited)
+            // Tối ưu hóa: Kiểm tra xem người chơi đã có mặt trong danh sách Top 10 vừa tải về hay chưa
+            string myPlayFabId = "";
+            if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
             {
+                myPlayFabId = AccountManager.Instance.CurrentUser.playFabId;
+            }
+            if (string.IsNullOrEmpty(myPlayFabId))
+            {
+                myPlayFabId = PlayerPrefs.GetString("PLAYFAB_ID", "");
+            }
+
+            if (top10Entries != null && !string.IsNullOrEmpty(myPlayFabId))
+            {
+                for (int i = 0; i < top10Entries.Length; i++)
+                {
+                    if (top10Entries[i] != null && top10Entries[i].PlayFabId == myPlayFabId)
+                    {
+                        playerEntry = top10Entries[i];
+                        break;
+                    }
+                }
+            }
+
+            // Nếu người chơi chưa có trong Top 10 (hoặc ở ngoài Top 10), mới cần gọi GetLeaderboardAroundPlayer
+            if (playerEntry == null && !_isRateLimited)
+            {
+                string urlAround = $"https://{titleId}.playfabapi.com/Client/GetLeaderboardAroundPlayer";
+                PlayFabGetLeaderboardAroundPlayerRequest reqAroundData = new PlayFabGetLeaderboardAroundPlayerRequest
+                {
+                    StatisticName = statisticName,
+                    MaxResultsCount = 1
+                };
+
+                string jsonAround = JsonUtility.ToJson(reqAroundData);
+
                 using (UnityWebRequest req = new UnityWebRequest(urlAround, "POST"))
                 {
                     byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonAround);

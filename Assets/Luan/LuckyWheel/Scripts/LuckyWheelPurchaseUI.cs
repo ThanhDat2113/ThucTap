@@ -20,8 +20,8 @@ namespace Luan.LuckyWheel
         [SerializeField] private string freeText = "MIỄN PHÍ";
 
         [Header("Test settings")]
-        [Tooltip("Khi bật: Mỗi lần vào Play Mode sẽ tự động xóa bộ nhớ khuyến mãi để test lại từ đầu.")]
-        [SerializeField] private bool resetOnPlayMode = true;
+        [Tooltip("Khi bật: Mỗi lần vào Play Mode sẽ tự động xóa bộ nhớ khuyến mãi để test lại từ đầu (mặc định tắt để lưu vĩnh viễn sau khi quay).")]
+        [SerializeField] private bool resetOnPlayMode = false;
 
         [Header("UI References")]
         [SerializeField] private TMP_Text priceOneLabel;
@@ -60,6 +60,11 @@ namespace Luan.LuckyWheel
             {
                 if (Application.isPlaying)
                 {
+                    string username = PlayerPrefs.GetString("ACCOUNT_USERNAME", string.Empty);
+                    if (!string.IsNullOrEmpty(username) && PlayerPrefs.GetInt($"{PrefsFirstTenDiscountUsedKey}_{username}", 0) == 1)
+                    {
+                        return true;
+                    }
                     return PlayerPrefs.GetInt(PrefsFirstTenDiscountUsedKey, 0) == 1;
                 }
                 return false;
@@ -80,6 +85,11 @@ namespace Luan.LuckyWheel
             if (Application.isPlaying && resetOnPlayMode)
             {
                 PlayerPrefs.DeleteKey(PrefsFirstTenDiscountUsedKey);
+                string username = PlayerPrefs.GetString("ACCOUNT_USERNAME", string.Empty);
+                if (!string.IsNullOrEmpty(username))
+                {
+                    PlayerPrefs.DeleteKey($"{PrefsFirstTenDiscountUsedKey}_{username}");
+                }
                 PlayerPrefs.Save();
             }
             CacheDefaults();
@@ -93,6 +103,19 @@ namespace Luan.LuckyWheel
 
         private void OnValidate()
         {
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorApplication.delayCall += () =>
+                {
+                    if (this != null)
+                    {
+                        try { CacheDefaults(); Refresh(); } catch { }
+                    }
+                };
+                return;
+            }
+#endif
             try { CacheDefaults(); Refresh(); } catch { }
         }
 
@@ -124,6 +147,11 @@ namespace Luan.LuckyWheel
             if (Application.isPlaying)
             {
                 PlayerPrefs.SetInt(PrefsFirstTenDiscountUsedKey, 1);
+                string username = PlayerPrefs.GetString("ACCOUNT_USERNAME", string.Empty);
+                if (!string.IsNullOrEmpty(username))
+                {
+                    PlayerPrefs.SetInt($"{PrefsFirstTenDiscountUsedKey}_{username}", 1);
+                }
                 PlayerPrefs.Save();
             }
             Refresh();
@@ -133,6 +161,11 @@ namespace Luan.LuckyWheel
         public void ResetFirstTenDiscount()
         {
             PlayerPrefs.DeleteKey(PrefsFirstTenDiscountUsedKey);
+            string username = PlayerPrefs.GetString("ACCOUNT_USERNAME", string.Empty);
+            if (!string.IsNullOrEmpty(username))
+            {
+                PlayerPrefs.DeleteKey($"{PrefsFirstTenDiscountUsedKey}_{username}");
+            }
             PlayerPrefs.Save();
             Refresh();
         }

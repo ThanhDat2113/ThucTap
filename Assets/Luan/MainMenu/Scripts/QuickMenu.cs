@@ -147,6 +147,8 @@ namespace Luan.MainMenu
                 var dotObj = rects[i].Find("NotificationDot");
                 if (dotObj != null)
                 {
+                    var dotRect = dotObj as RectTransform;
+                    if (dotRect != null) dotRect.anchoredPosition = new Vector2(-19f, -19f);
                     badges[i] = dotObj.GetComponent<Image>();
                     if (badges[i] != null && badges[i].sprite == null)
                     {
@@ -164,6 +166,8 @@ namespace Luan.MainMenu
                 var toggleDotObj = toggleTrans.Find("NotificationDot");
                 if (toggleDotObj != null)
                 {
+                    var toggleDotRect = toggleDotObj as RectTransform;
+                    if (toggleDotRect != null) toggleDotRect.anchoredPosition = new Vector2(-19f, -19f);
                     toggleBadge = toggleDotObj.GetComponent<Image>();
                     if (toggleBadge != null && toggleBadge.sprite == null)
                     {
@@ -301,7 +305,7 @@ namespace Luan.MainMenu
             badge.anchorMin = badge.anchorMax = new Vector2(1, 1);
             badge.pivot = new Vector2(.5f, .5f);
             badge.sizeDelta = new Vector2(34, 34);
-            badge.anchoredPosition = new Vector2(-7, -7);
+            badge.anchoredPosition = new Vector2(-19f, -19f);
             var image = badge.gameObject.AddComponent<Image>();
             image.sprite = AtlasSprite("Dot");
             image.raycastTarget = false;

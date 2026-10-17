@@ -752,8 +752,8 @@ namespace Luan.MainMenu
                         PlayerPrefs.Save();
 
                         // Cấp 10.000 Vàng và 1.000 Kim Cương khởi tạo cho tài khoản mới
-                        Wallet.SetCurrencies(Wallet.StartCoins, Wallet.StartGems, 0);
-                        Wallet.SyncToPlayFab();
+                        Wallet.SetCurrencies(Wallet.StartCoins, Wallet.StartGems, 0, notify: false, sync: false);
+                        Wallet.SyncToPlayFab(force: true);
 
                         ShowRegisterFeedback("Đăng ký thành công! Đang chuyển sang Đăng nhập...", Color.green);
                         PlaySound(successSound);
@@ -893,6 +893,7 @@ namespace Luan.MainMenu
         public void Logout()
         {
             _currentUser = null;
+            Wallet.ResetCache();
             PlayerPrefs.DeleteKey(PrefsSessionTicketKey);
             PlayerPrefs.DeleteKey(PrefsPlayFabIdKey);
             PlayerPrefs.DeleteKey(PrefsUsernameKey);
@@ -905,6 +906,15 @@ namespace Luan.MainMenu
             ClearInputs();
             ClearFeedbacks();
 
+            OnLogout?.Invoke();
+        }
+
+        public void InvalidateSession()
+        {
+            _currentUser = null;
+            Wallet.ResetCache();
+            PlayerPrefs.DeleteKey(PrefsSessionTicketKey);
+            PlayerPrefs.Save();
             OnLogout?.Invoke();
         }
 
