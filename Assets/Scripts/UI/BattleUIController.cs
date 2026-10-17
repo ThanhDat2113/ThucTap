@@ -25,6 +25,9 @@ namespace RhythmGame
         public TMP_Text countdownText;
         public TMP_Text messageText;
 
+        [Header("Turn Results")]
+        public TurnResultPanel turnResultPanel;
+
         [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
         [Range(0f, 1f)] public float thresholdA = 0.90f;
@@ -127,6 +130,12 @@ namespace RhythmGame
                 }
                 UpdateOpponentUI();
             }
+            
+            // Record for final result panel (combined stats)
+            turnResultPanel?.RecordJudgement(owner, j);
+            int combo = owner == NoteOwner.Player ? playerCombo : opponentCombo;
+            int maxCombo = owner == NoteOwner.Player ? playerMaxCombo : opponentMaxCombo;
+            turnResultPanel?.RecordScore(points, combo, maxCombo);
         }
 
         void UpdatePlayerUI()

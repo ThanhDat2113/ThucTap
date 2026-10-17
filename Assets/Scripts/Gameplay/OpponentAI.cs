@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace RhythmGame
@@ -50,7 +51,8 @@ namespace RhythmGame
         {
             if (!isActive || spawner == null) return;
 
-            var notes = spawner.ActiveNotes;
+            // Copy to array to avoid collection modified during enumeration
+            var notes = spawner.ActiveNotes.ToArray();
             foreach (var note in notes)
             {
                 if (note.Data.owner != NoteOwner.Opponent) continue;
@@ -110,7 +112,8 @@ namespace RhythmGame
 
         void CheckHoldReleases()
         {
-            var notes = spawner.ActiveNotes;
+            // Copy to array to avoid collection modified during enumeration
+            var notes = spawner.ActiveNotes.ToArray();
             foreach (var note in notes)
             {
                 if (note.Data.owner != NoteOwner.Opponent) continue;
