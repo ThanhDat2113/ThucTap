@@ -1,0 +1,1001 @@
+fileFormatVersion: 2
+guid: 76e4e9ebf0dfb314b86daac0c17e0b92
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7551734750457219505
+    second: dj_null_dance_keyposes_30_0
+  - first:
+      213: 2578900655480545742
+    second: dj_null_dance_keyposes_30_1
+  - first:
+      213: -4090970829202285157
+    second: dj_null_dance_keyposes_30_2
+  - first:
+      213: 3092705023591344524
+    second: dj_null_dance_keyposes_30_3
+  - first:
+      213: -2207427629869237390
+    second: dj_null_dance_keyposes_30_4
+  - first:
+      213: -8799968399022470744
+    second: dj_null_dance_keyposes_30_5
+  - first:
+      213: -554461072706714993
+    second: dj_null_dance_keyposes_30_6
+  - first:
+      213: -3177469659680892480
+    second: dj_null_dance_keyposes_30_7
+  - first:
+      213: 509110078349882579
+    second: dj_null_dance_keyposes_30_8
+  - first:
+      213: -4382114418825748177
+    second: dj_null_dance_keyposes_30_9
+  - first:
+      213: 5402533792438544034
+    second: dj_null_dance_keyposes_30_10
+  - first:
+      213: 2927062912565839501
+    second: dj_null_dance_keyposes_30_11
+  - first:
+      213: -7167087193402092331
+    second: dj_null_dance_keyposes_30_12
+  - first:
+      213: -917587308003367107
+    second: dj_null_dance_keyposes_30_13
+  - first:
+      213: 4032911219418357512
+    second: dj_null_dance_keyposes_30_14
+  - first:
+      213: -6351803999216444962
+    second: dj_null_dance_keyposes_30_15
+  - first:
+      213: -2515793671342196166
+    second: dj_null_dance_keyposes_30_16
+  - first:
+      213: -7741149485488098223
+    second: dj_null_dance_keyposes_30_17
+  - first:
+      213: 7334186271978026237
+    second: dj_null_dance_keyposes_30_18
+  - first:
+      213: 4327901927925882989
+    second: dj_null_dance_keyposes_30_19
+  - first:
+      213: -1079406908579803240
+    second: dj_null_dance_keyposes_30_20
+  - first:
+      213: -6977495617028760529
+    second: dj_null_dance_keyposes_30_21
+  - first:
+      213: -8415112632993286420
+    second: dj_null_dance_keyposes_30_22
+  - first:
+      213: -7946475551220441922
+    second: dj_null_dance_keyposes_30_23
+  - first:
+      213: -8476891173431418333
+    second: dj_null_dance_keyposes_30_24
+  - first:
+      213: -1391353259748856465
+    second: dj_null_dance_keyposes_30_25
+  - first:
+      213: -2781689598890948407
+    second: dj_null_dance_keyposes_30_26
+  - first:
+      213: 7524835087498616182
+    second: dj_null_dance_keyposes_30_27
+  - first:
+      213: 6862344688211778677
+    second: dj_null_dance_keyposes_30_28
+  - first:
+      213: 8908972071740867032
+    second: dj_null_dance_keyposes_30_29
+  - first:
+      213: 2191308356665073725
+    second: dj_null_dance_keyposes_30_30
+  - first:
+      213: -3609443967513779155
+    second: dj_null_dance_keyposes_30_31
+  - first:
+      213: -5661907484549895324
+    second: dj_null_dance_keyposes_30_32
+  - first:
+      213: -3341886773424987201
+    second: dj_null_dance_keyposes_30_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 983
+        width: 291
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9c9f6aeb62dc860800000000000000
+      internalID: 7551734750457219505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_1
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 982
+        width: 347
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec1a0f88b781ac320800000000000000
+      internalID: 2578900655480545742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_2
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 980
+        width: 328
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9d99eaa4b3f937c0800000000000000
+      internalID: -4090970829202285157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_3
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 982
+        width: 330
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c896a3645de7bea20800000000000000
+      internalID: 3092705023591344524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_4
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 982
+        width: 268
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27bf24e1444ad51e0800000000000000
+      internalID: -2207427629869237390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_5
+      rect:
+        serializedVersion: 2
+        x: 1946
+        y: 983
+        width: 340
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a94a958d5b30e580800000000000000
+      internalID: -8799968399022470744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_6
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 982
+        width: 344
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f82c88f87982e48f0800000000000000
+      internalID: -554461072706714993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_7
+      rect:
+        serializedVersion: 2
+        x: 2709
+        y: 982
+        width: 346
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c99322fd2c57e3d0800000000000000
+      internalID: -3177469659680892480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_8
+      rect:
+        serializedVersion: 2
+        x: 3122
+        y: 981
+        width: 314
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d4bd9b3be8b01700800000000000000
+      internalID: 509110078349882579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_9
+      rect:
+        serializedVersion: 2
+        x: 3477
+        y: 978
+        width: 346
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2126cc472a9f23c0800000000000000
+      internalID: -4382114418825748177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_10
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 498
+        width: 317
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6e7514cd7a9fa40800000000000000
+      internalID: 5402533792438544034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_11
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 745
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8605b2f5340f9820800000000000000
+      internalID: 2927062912565839501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_12
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 498
+        width: 341
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d45403ab24698c90800000000000000
+      internalID: -7167087193402092331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_13
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 499
+        width: 348
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d376d0874331443f0800000000000000
+      internalID: -917587308003367107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_14
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 499
+        width: 286
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f5e140367c7f730800000000000000
+      internalID: 4032911219418357512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_15
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 499
+        width: 300
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed95ccf7aebd9d7a0800000000000000
+      internalID: -6351803999216444962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_16
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 499
+        width: 331
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3af8733cfa161dd0800000000000000
+      internalID: -2515793671342196166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_17
+      rect:
+        serializedVersion: 2
+        x: 2326
+        y: 499
+        width: 345
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 154b84cae89e19490800000000000000
+      internalID: -7741149485488098223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_18
+      rect:
+        serializedVersion: 2
+        x: 2706
+        y: 501
+        width: 344
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df4fbc16e8348c560800000000000000
+      internalID: 7334186271978026237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_19
+      rect:
+        serializedVersion: 2
+        x: 3096
+        y: 502
+        width: 322
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6020cc8fdbcf0c30800000000000000
+      internalID: 4327901927925882989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_20
+      rect:
+        serializedVersion: 2
+        x: 3473
+        y: 498
+        width: 348
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89f8ff5b22d2501f0800000000000000
+      internalID: -1079406908579803240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_21
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 24
+        width: 344
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2cd72564b4fa2f90800000000000000
+      internalID: -6977495617028760529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_22
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 20
+        width: 336
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce6788d35a3873b80800000000000000
+      internalID: -8415112632993286420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_23
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 20
+        width: 329
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebcdd21a69278b190800000000000000
+      internalID: -7946475551220441922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_24
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 20
+        width: 313
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322e9f7e3680c5a80800000000000000
+      internalID: -8476891173431418333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_25
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 18
+        width: 287
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d669bf49be0bce0800000000000000
+      internalID: -1391353259748856465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_26
+      rect:
+        serializedVersion: 2
+        x: 2015
+        y: 21
+        width: 245
+        height: 439
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c8c4be3c047569d0800000000000000
+      internalID: -2781689598890948407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_27
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 216
+        width: 51
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67d10cfc4a59d6860800000000000000
+      internalID: 7524835087498616182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_28
+      rect:
+        serializedVersion: 2
+        x: 2387
+        y: 18
+        width: 254
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57cd62bb222fb3f50800000000000000
+      internalID: 6862344688211778677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_29
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 22
+        width: 306
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d18df1c5e603ab70800000000000000
+      internalID: 8908972071740867032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_30
+      rect:
+        serializedVersion: 2
+        x: 3118
+        y: 21
+        width: 302
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30ed502757196e10800000000000000
+      internalID: 2191308356665073725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_31
+      rect:
+        serializedVersion: 2
+        x: 3518
+        y: 21
+        width: 301
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d242aafc5dda8edc0800000000000000
+      internalID: -3609443967513779155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_32
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 158
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46b2740142ddc61b0800000000000000
+      internalID: -5661907484549895324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_keyposes_30_33
+      rect:
+        serializedVersion: 2
+        x: 1996
+        y: 102
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb36d668fab3f91d0800000000000000
+      internalID: -3341886773424987201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dj_null_dance_keyposes_30_0: 7551734750457219505
+      dj_null_dance_keyposes_30_1: 2578900655480545742
+      dj_null_dance_keyposes_30_10: 5402533792438544034
+      dj_null_dance_keyposes_30_11: 2927062912565839501
+      dj_null_dance_keyposes_30_12: -7167087193402092331
+      dj_null_dance_keyposes_30_13: -917587308003367107
+      dj_null_dance_keyposes_30_14: 4032911219418357512
+      dj_null_dance_keyposes_30_15: -6351803999216444962
+      dj_null_dance_keyposes_30_16: -2515793671342196166
+      dj_null_dance_keyposes_30_17: -7741149485488098223
+      dj_null_dance_keyposes_30_18: 7334186271978026237
+      dj_null_dance_keyposes_30_19: 4327901927925882989
+      dj_null_dance_keyposes_30_2: -4090970829202285157
+      dj_null_dance_keyposes_30_20: -1079406908579803240
+      dj_null_dance_keyposes_30_21: -6977495617028760529
+      dj_null_dance_keyposes_30_22: -8415112632993286420
+      dj_null_dance_keyposes_30_23: -7946475551220441922
+      dj_null_dance_keyposes_30_24: -8476891173431418333
+      dj_null_dance_keyposes_30_25: -1391353259748856465
+      dj_null_dance_keyposes_30_26: -2781689598890948407
+      dj_null_dance_keyposes_30_27: 7524835087498616182
+      dj_null_dance_keyposes_30_28: 6862344688211778677
+      dj_null_dance_keyposes_30_29: 8908972071740867032
+      dj_null_dance_keyposes_30_3: 3092705023591344524
+      dj_null_dance_keyposes_30_30: 2191308356665073725
+      dj_null_dance_keyposes_30_31: -3609443967513779155
+      dj_null_dance_keyposes_30_32: -5661907484549895324
+      dj_null_dance_keyposes_30_33: -3341886773424987201
+      dj_null_dance_keyposes_30_4: -2207427629869237390
+      dj_null_dance_keyposes_30_5: -8799968399022470744
+      dj_null_dance_keyposes_30_6: -554461072706714993
+      dj_null_dance_keyposes_30_7: -3177469659680892480
+      dj_null_dance_keyposes_30_8: 509110078349882579
+      dj_null_dance_keyposes_30_9: -4382114418825748177
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 670c8ca2f60c87445818c381a6fc5fda
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2675912167454621151
+    second: dj_null_idle_12_0
+  - first:
+      213: 7679223488426772331
+    second: dj_null_idle_12_1
+  - first:
+      213: -2657929601813042887
+    second: dj_null_idle_12_2
+  - first:
+      213: 219390637727510675
+    second: dj_null_idle_12_3
+  - first:
+      213: 8912006016008945903
+    second: dj_null_idle_12_4
+  - first:
+      213: 2826857977025353534
+    second: dj_null_idle_12_5
+  - first:
+      213: 7100908158178863485
+    second: dj_null_idle_12_6
+  - first:
+      213: -8558726692593599073
+    second: dj_null_idle_12_7
+  - first:
+      213: -3073923774876063900
+    second: dj_null_idle_12_8
+  - first:
+      213: -6928767675750768973
+    second: dj_null_idle_12_9
+  - first:
+      213: 265884517521832904
+    second: dj_null_idle_12_10
+  - first:
+      213: 6171013511251430793
+    second: dj_null_idle_12_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dj_null_idle_12_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 502
+        width: 295
+        height: 418
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 122c8b0bf004ddad0800000000000000
+      internalID: -2675912167454621151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_1
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 503
+        width: 305
+        height: 437
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6783829315129a60800000000000000
+      internalID: 7679223488426772331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_2
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 503
+        width: 309
+        height: 439
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93920f50c132d1bd0800000000000000
+      internalID: -2657929601813042887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_3
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 499
+        width: 312
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3907bc46f9e6b0300800000000000000
+      internalID: 219390637727510675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_4
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 499
+        width: 284
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe08b54f04ecdab70800000000000000
+      internalID: 8912006016008945903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_5
+      rect:
+        serializedVersion: 2
+        x: 1938
+        y: 499
+        width: 318
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e37531f4a540b3720800000000000000
+      internalID: 2826857977025353534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_6
+      rect:
+        serializedVersion: 2
+        x: 2343
+        y: 503
+        width: 306
+        height: 439
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d79aceef85e7b8260800000000000000
+      internalID: 7100908158178863485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_7
+      rect:
+        serializedVersion: 2
+        x: 2738
+        y: 502
+        width: 305
+        height: 436
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9dfd4e4b6b493980800000000000000
+      internalID: -8558726692593599073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_8
+      rect:
+        serializedVersion: 2
+        x: 3124
+        y: 502
+        width: 289
+        height: 437
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46762e3fc9a3755d0800000000000000
+      internalID: -3073923774876063900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_9
+      rect:
+        serializedVersion: 2
+        x: 3486
+        y: 505
+        width: 329
+        height: 436
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3be9aa3528218df90800000000000000
+      internalID: -6928767675750768973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_10
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 25
+        width: 328
+        height: 435
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cb3a2a5f8c90b300800000000000000
+      internalID: 265884517521832904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_idle_12_11
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 18
+        width: 329
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d0742d718d3a550800000000000000
+      internalID: 6171013511251430793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dj_null_idle_12_0: -2675912167454621151
+      dj_null_idle_12_1: 7679223488426772331
+      dj_null_idle_12_10: 265884517521832904
+      dj_null_idle_12_11: 6171013511251430793
+      dj_null_idle_12_2: -2657929601813042887
+      dj_null_idle_12_3: 219390637727510675
+      dj_null_idle_12_4: 8912006016008945903
+      dj_null_idle_12_5: 2826857977025353534
+      dj_null_idle_12_6: 7100908158178863485
+      dj_null_idle_12_7: -8558726692593599073
+      dj_null_idle_12_8: -3073923774876063900
+      dj_null_idle_12_9: -6928767675750768973
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
