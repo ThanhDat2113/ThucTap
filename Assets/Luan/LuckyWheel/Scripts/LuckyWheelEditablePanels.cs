@@ -175,6 +175,49 @@ namespace Luan.LuckyWheel
             NotifyPurchaseUIRefresh();
         }
 
+        private void Start()
+        {
+            SetupChestClickListener();
+        }
+
+        private void SetupChestClickListener()
+        {
+            var chestTransform = transform.Find("Footer/BonusProgress/EditableContent/ChestIcon");
+            if (chestTransform != null)
+            {
+                var chestBtn = chestTransform.GetComponent<Button>();
+                if (chestBtn == null)
+                {
+                    chestBtn = chestTransform.gameObject.AddComponent<Button>();
+                }
+                var img = chestTransform.GetComponent<Image>();
+                if (img != null)
+                {
+                    img.raycastTarget = true;
+                    chestBtn.targetGraphic = img;
+                }
+                chestBtn.onClick.RemoveListener(OnChestClicked);
+                chestBtn.onClick.AddListener(OnChestClicked);
+            }
+        }
+
+        public void OnChestClicked()
+        {
+            if (bonusProgress >= bonusTarget)
+            {
+                var wheelController = FindFirstObjectByType<LuckyWheelController>();
+                if (wheelController != null && !wheelController.IsSpinning)
+                {
+                    wheelController.ClaimPityRewardDirectly();
+                }
+            }
+            else
+            {
+                int remaining = bonusTarget - bonusProgress;
+                Debug.Log($"[LuckyWheel] Bảo hiểm: Hãy quay thêm {remaining} lần để nhận Nhân vật huyền thoại!");
+            }
+        }
+
         public bool HasEnoughDiamonds(int amount)
         {
             return DiamondBalance >= amount;
@@ -288,16 +331,26 @@ namespace Luan.LuckyWheel
             }
         }
 
-        public void AddBonusProgress(int amount)
+        public void SetBonusProgress(int progress)
         {
-            if (amount <= 0) return;
-            bonusProgress = Mathf.Min(bonusTarget, bonusProgress + amount);
+            bonusProgress = Mathf.Clamp(progress, 0, bonusTarget);
             if (Application.isPlaying)
             {
                 PlayerPrefs.SetInt(PrefsBonusProgressKey, bonusProgress);
                 PlayerPrefs.Save();
             }
             Refresh();
+        }
+
+        public void ResetBonusProgress()
+        {
+            SetBonusProgress(0);
+        }
+
+        public void AddBonusProgress(int amount)
+        {
+            if (amount <= 0) return;
+            SetBonusProgress(bonusProgress + amount);
         }
 
         [ContextMenu("Add 1000 Diamonds")]
@@ -496,8 +549,16 @@ namespace Luan.LuckyWheel
             SetSprite("RightPanel/SpinInfo/EditableContent/CalendarIcon", calendarIcon);
 
             var remaining = Mathf.Max(0, bonusTarget - bonusProgress);
-            SetText("Footer/BonusProgress/EditableContent/BonusDescription",
-                $"Quay thêm <color=#FFE600>{remaining}</color> lần để nhận quà đặc biệt!");
+            if (remaining <= 0)
+            {
+                SetText("Footer/BonusProgress/EditableContent/BonusDescription",
+                    "<color=#00FFCC>Bảo hiểm kích hoạt! Lượt quay tiếp theo 100% nhận quà đặc biệt!</color>");
+            }
+            else
+            {
+                SetText("Footer/BonusProgress/EditableContent/BonusDescription",
+                    $"Quay thêm <color=#FFE600>{remaining}</color> lần để nhận quà đặc biệt!");
+            }
             SetText("Footer/BonusProgress/EditableContent/ProgressLabel", $"{bonusProgress}/{bonusTarget}");
             SetSprite("Footer/BonusProgress/EditableContent/GiftIcon", bonusGiftIcon);
             SetSprite("Footer/BonusProgress/EditableContent/ChestIcon", bonusChestIcon);

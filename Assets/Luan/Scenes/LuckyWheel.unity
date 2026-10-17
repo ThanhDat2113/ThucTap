@@ -3044,6 +3044,9 @@ MonoBehaviour:
   prizeName: {fileID: 1105440593}
   prizeAmount: {fileID: 1439438611}
   claimButton: {fileID: 784928978}
+  normalFrameSprite: {fileID: 21300000, guid: 0dd3d3f34d3e64f5089be7739dfa0194, type: 3}
+  legendaryFrameSprite: {fileID: 21300000, guid: d325377ace454ddc8ce978e3c837bb03, type: 3}
+  rareItemId: rare_item
   tenIcons:
   - {fileID: 37248801}
   - {fileID: 2011593399}
@@ -8240,7 +8243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Item hi\u1EBFm"
+  m_text: "Nh\xE2n v\u1EADt\n\xC1nh Sao"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 319628998}
@@ -8762,6 +8765,9 @@ MonoBehaviour:
   prizeName: {fileID: 1946140236}
   prizeAmount: {fileID: 1387849984}
   claimButton: {fileID: 922922019}
+  normalFrameSprite: {fileID: 21300000, guid: 0dd3d3f34d3e64f5089be7739dfa0194, type: 3}
+  legendaryFrameSprite: {fileID: 21300000, guid: d325377ace454ddc8ce978e3c837bb03, type: 3}
+  rareItemId: rare_item
   tenIcons: []
   tenLabels: []
 --- !u!225 &844959430
@@ -10611,7 +10617,7 @@ MonoBehaviour:
   defaultPriceForTen: 500
   discountedPriceForTen: 400
   discountPercent: 20
-  resetOnPlayMode: 1
+  resetOnPlayMode: 0
   priceOneLabel: {fileID: 926540289}
   priceTenLabel: {fileID: 610689696}
   discountLabel: {fileID: 1259373759}
@@ -13821,7 +13827,7 @@ MonoBehaviour:
     amount: 50
     weight: 1
   - id: rare_item
-    displayName: "Item hi\u1EBFm"
+    displayName: "Nh\xE2n v\u1EADt\n\xC1nh Sao"
     icon: {fileID: 21300000, guid: 519bda650afa244e0879a9683812a4d9, type: 3}
     amount: 1
     weight: 1

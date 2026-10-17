@@ -36,6 +36,13 @@ namespace Luan.LuckyWheel
         [Header("Prize configuration (clockwise, starting at the top)")]
         [SerializeField] private List<Prize> prizes = new List<Prize>();
 
+        [Header("Gacha & Pity System (Bảo Hiểm)")]
+        [Tooltip("Tỉ lệ trúng item hiếm / nhân vật huyền thoại ở mỗi lượt quay thường (0.05% = 0.0005).")]
+        [SerializeField, Range(0f, 1f)] private float rareItemDropRate = 0.0005f;
+        [Tooltip("Số lượt quay tối đa để kích hoạt bảo hiểm 100% nhận item hiếm (mặc định 80).")]
+        [SerializeField, Min(1)] private int pityTarget = 80;
+        [SerializeField] private string rareItemId = "rare_item";
+
         [Header("Runtime item layout")]
         [SerializeField] private float slotRadius = 245f;
         [SerializeField] private float iconOffsetY = 36f;
@@ -68,6 +75,9 @@ namespace Luan.LuckyWheel
         public bool IsSpinning { get; private set; }
         public int CurrentSpinCount { get; private set; }
         public IReadOnlyList<Prize> Prizes => prizes;
+        public float RareItemDropRate => rareItemDropRate;
+        public int PityTarget => pityTarget;
+        public string RareItemId => rareItemId;
         public bool KeepItemsUpright
         {
             get => keepItemsUpright;
@@ -309,14 +319,21 @@ namespace Luan.LuckyWheel
             CurrentSpinCount = 1;
             SetButtonsInteractable(false);
 
-            var prizeIndex = PickWeightedPrize();
+            int currentPity = panels != null ? panels.BonusProgress : PlayerPrefs.GetInt("LUCKY_WHEEL_BONUS_PROGRESS", 0);
+            bool wonRare;
+            var prizeIndex = PickPrizeWithPity(ref currentPity, out wonRare);
             var prizeWon = prizes[prizeIndex];
 
             yield return SpinToPrize(prizeIndex);
 
             if (panels != null)
             {
-                panels.AddBonusProgress(1);
+                panels.SetBonusProgress(currentPity);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("LUCKY_WHEEL_BONUS_PROGRESS", currentPity);
+                PlayerPrefs.Save();
             }
 
             onSinglePrizeWon.Invoke(prizeWon);
@@ -334,24 +351,79 @@ namespace Luan.LuckyWheel
             CurrentSpinCount = 10;
             SetButtonsInteractable(false);
 
+            int currentPity = panels != null ? panels.BonusProgress : PlayerPrefs.GetInt("LUCKY_WHEEL_BONUS_PROGRESS", 0);
             var wonPrizes = new List<Prize>(10);
+            int displayPrizeIndex = -1;
+
             for (var i = 0; i < 10; i++)
             {
-                var idx = PickWeightedPrize();
+                bool wonRare;
+                var idx = PickPrizeWithPity(ref currentPity, out wonRare);
                 wonPrizes.Add(prizes[idx]);
+
+                // Nếu trong 10 lượt có trúng nhân vật huyền thoại, mâm quay sẽ dừng ngay ô đó
+                if (wonRare && displayPrizeIndex < 0)
+                {
+                    displayPrizeIndex = idx;
+                }
             }
 
-            var displayPrizeIndex = prizes.IndexOf(wonPrizes[0]);
-            if (displayPrizeIndex < 0) displayPrizeIndex = 0;
+            if (displayPrizeIndex < 0)
+            {
+                displayPrizeIndex = prizes.IndexOf(wonPrizes[0]);
+                if (displayPrizeIndex < 0) displayPrizeIndex = 0;
+            }
 
             yield return SpinToPrize(displayPrizeIndex);
 
             if (panels != null)
             {
-                panels.AddBonusProgress(10);
+                panels.SetBonusProgress(currentPity);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("LUCKY_WHEEL_BONUS_PROGRESS", currentPity);
+                PlayerPrefs.Save();
             }
 
             onTenPrizesWon.Invoke(wonPrizes);
+            onSpinSequenceFinished.Invoke();
+
+            SetButtonsInteractable(true);
+            IsSpinning = false;
+        }
+
+        public void ClaimPityRewardDirectly()
+        {
+            if (IsSpinning) return;
+            StartCoroutine(SpinPityRewardRoutine());
+        }
+
+        private IEnumerator SpinPityRewardRoutine()
+        {
+            if (wheel == null || prizes.Count == 0) yield break;
+            IsSpinning = true;
+            CurrentSpinCount = 1;
+            SetButtonsInteractable(false);
+
+            int rareIndex = FindPrizeIndex(rareItemId);
+            if (rareIndex < 0) rareIndex = 0;
+            var prizeWon = prizes[rareIndex];
+
+            if (panels != null)
+            {
+                panels.SetBonusProgress(0);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("LUCKY_WHEEL_BONUS_PROGRESS", 0);
+                PlayerPrefs.Save();
+            }
+
+            yield return SpinToPrize(rareIndex);
+
+            onSinglePrizeWon.Invoke(prizeWon);
+            onPrizeWon.Invoke(prizeWon.id);
             onSpinSequenceFinished.Invoke();
 
             SetButtonsInteractable(true);
@@ -672,6 +744,74 @@ namespace Luan.LuckyWheel
 
         #endregion
 
+        public int FindPrizeIndex(string id)
+        {
+            if (prizes == null) return -1;
+            for (var i = 0; i < prizes.Count; i++)
+            {
+                if (prizes[i] != null && prizes[i].id == id)
+                    return i;
+            }
+            return -1;
+        }
+
+        public int PickPrizeWithPity(ref int currentPity, out bool wonRare)
+        {
+            wonRare = false;
+            int rareIndex = FindPrizeIndex(rareItemId);
+
+            // Tăng số lượt quay hiện tại trong chu kỳ bảo hiểm
+            currentPity++;
+
+            // Điều kiện bảo hiểm: Đạt hoặc vượt mốc 80 lượt sẽ 100% nhận nhân vật huyền thoại
+            bool isGuaranteed = currentPity >= pityTarget;
+
+            // Điều kiện may mắn: Tỉ lệ 0.05% (0.0005f) xuất hiện ở mỗi lượt quay từ 0 - 80
+            bool isLuckyDrop = UnityEngine.Random.value < rareItemDropRate;
+
+            if (isGuaranteed || isLuckyDrop)
+            {
+                wonRare = true;
+                currentPity = 0; // Đặt lại bảo hiểm về 0 ngay sau khi nhận được
+                if (rareIndex >= 0) return rareIndex;
+            }
+
+            // Nếu chưa trúng item hiếm, quay trong các phần thưởng còn lại theo trọng số
+            return PickWeightedNonRarePrize(rareIndex);
+        }
+
+        private int PickWeightedNonRarePrize(int excludeIndex)
+        {
+            var total = 0f;
+            for (var i = 0; i < prizes.Count; i++)
+            {
+                if (i == excludeIndex) continue;
+                total += Mathf.Max(0f, prizes[i].weight);
+            }
+
+            if (total <= 0f)
+            {
+                int fallback = UnityEngine.Random.Range(0, prizes.Count);
+                if (fallback == excludeIndex && prizes.Count > 1)
+                    fallback = (fallback + 1) % prizes.Count;
+                return fallback;
+            }
+
+            var roll = UnityEngine.Random.value * total;
+            for (var i = 0; i < prizes.Count; i++)
+            {
+                if (i == excludeIndex) continue;
+                roll -= Mathf.Max(0f, prizes[i].weight);
+                if (roll <= 0f) return i;
+            }
+
+            for (var i = prizes.Count - 1; i >= 0; i--)
+            {
+                if (i != excludeIndex) return i;
+            }
+            return 0;
+        }
+
         private int PickWeightedPrize()
         {
             var total = 0f;
@@ -729,7 +869,7 @@ namespace Luan.LuckyWheel
                 NewPrize("premium_chest", "Rương quà", 1, icons, 4),
                 NewPrize("ticket_1", "Vé quay\nx1", 1, icons, 5),
                 NewPrize("energy_50", "Năng lượng\nx50", 50, icons, 6),
-                NewPrize("rare_item", "Item hiếm", 1, icons, 7),
+                NewPrize("rare_item", "Nhân vật\nÁnh Sao", 1, icons, 7),
                 NewPrize("gold_5000", "Vàng\nx5.000", 5000, icons, 8),
                 NewPrize("character_pink", "Nhân vật", 1, icons, 9),
                 NewPrize("ticket_2", "Vé quay\nx2", 2, icons, 10),
