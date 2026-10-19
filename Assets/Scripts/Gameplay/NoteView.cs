@@ -6,15 +6,15 @@ namespace RhythmGame
     public class NoteView : MonoBehaviour
     {
         [Header("Hold note")]
-        [Tooltip("Thân của hold note. Để trống thì tự tạo từ sprite của đầu note.")]
+        [Tooltip("Thân của hold note. Để trống thì tự tạo.")]
         public SpriteRenderer body;
         [Range(0.1f, 1f)] public float bodyWidthRatio = 0.5f;
         [Range(0f, 1f)] public float bodyAlpha = 0.6f;
-        [Tooltip("Sorting order của thân so với đầu note.")]
+        [Tooltip("Sorting order của thân so với đầu note (NoteSkin sẽ tự đặt thân nằm dưới đầu).")]
         public int bodySortingOffset = 0;
 
         [Header("Tail marker")]
-        [Tooltip("Sprite cho đuôi hold note (đánh dấu thời điểm thả). Để trống thì tự tạo từ sprite của đầu note.")]
+        [Tooltip("Sprite cho đuôi hold note (đánh dấu thời điểm thả). Để trống thì tự tạo.")]
         public SpriteRenderer tail;
         [Tooltip("Kích thước đuôi so với đầu note.")]
         [Range(0.3f, 1.5f)] public float tailScale = 1f;
@@ -24,6 +24,11 @@ namespace RhythmGame
         [Header("Visual Effects")]
         [Tooltip("Component hiệu ứng visual (glow, pulse, particles). Tự lấy nếu không gán.")]
         public NoteVisuals visuals;
+
+        [Header("Skin")]
+        [Tooltip("Vẽ sprite note đẹp bằng code. Tự thêm vào nếu prefab chưa có. Bỏ tick để dùng sprite gốc của prefab.")]
+        public bool useSkin = true;
+        public NoteSkin skin;
 
         public NoteData Data { get; private set; }
         public float TimeSeconds { get; private set; }
@@ -42,6 +47,13 @@ namespace RhythmGame
         {
             sr = GetComponent<SpriteRenderer>();
             if (visuals == null) visuals = GetComponent<NoteVisuals>();
+
+            if (useSkin)
+            {
+                if (skin == null) skin = GetComponent<NoteSkin>();
+                if (skin == null) skin = gameObject.AddComponent<NoteSkin>();
+                skin.Apply(sr);   // thay khối trắng bằng sprite neon
+            }
         }
 
         public void Setup(NoteData data, float timeSeconds, float holdSeconds, Color color)
@@ -64,10 +76,12 @@ namespace RhythmGame
             if (IsHold)
             {
                 EnsureBody();
+                EnsureTail();
+                if (skin != null) skin.StyleHold(body, tail, sr);
+
                 body.gameObject.SetActive(true);
                 SetBodyColor(bodyAlpha);
 
-                EnsureTail();
                 tail.gameObject.SetActive(true);
                 SetTailColor(1f);
                 tailScale = 1f; // force match head width
@@ -187,10 +201,13 @@ namespace RhythmGame
             float length = Mathf.Max(0f, tailY - headY);
             float parentScaleY = Mathf.Max(transform.lossyScale.y, 0.0001f);
 
-            Vector2 headSize = sr.sprite != null ? (Vector2)sr.sprite.bounds.size : Vector2.one;
+            // Sprite đầu giờ có thêm vầng sáng nên phải lấy bề rộng phần thân thật (core), không dùng bounds của sprite
+            float headWidth = skin != null
+                ? skin.CoreLocalSize.x
+                : (sr.sprite != null ? sr.sprite.bounds.size.x : 1f);
             Vector2 bodySize = body.sprite != null ? (Vector2)body.sprite.bounds.size : Vector2.one;
 
-            float sx = headSize.x * bodyWidthRatio / Mathf.Max(bodySize.x, 0.0001f);
+            float sx = headWidth * bodyWidthRatio / Mathf.Max(bodySize.x, 0.0001f);
             float sy = length / (parentScaleY * Mathf.Max(bodySize.y, 0.0001f));
 
             body.transform.localScale = new Vector3(sx, sy, 1f);
