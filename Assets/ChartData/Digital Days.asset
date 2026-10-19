@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
   m_Name: Digital Days
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
-  songName: Untitled
+  songName: Digital Days
   audioClip: {fileID: 8300000, guid: 1a2fac4d7362261488716c54e156324e, type: 3}
   musicStartDelay: 1
   bpm: 120

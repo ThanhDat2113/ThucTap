@@ -175,7 +175,7 @@ namespace RhythmGame
 
         void Update()
         {
-            bool counting = gameManager.State == GameState.Countdown;
+            bool counting = gameManager.State == GameState.Countdown && gameManager.gameMode == GameMode.Single;
             countdownText.gameObject.SetActive(counting);
             if (counting)
             {

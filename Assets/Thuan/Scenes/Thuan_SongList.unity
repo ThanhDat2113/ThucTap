@@ -4130,7 +4130,7 @@ MonoBehaviour:
   detailPanel: {fileID: 63608723}
   scrollRect: {fileID: 49322338}
   playButton: {fileID: 1070738420}
-  gameplaySceneName: Thuan_Gameplay
+  gameplaySceneName: GameplayScene
 --- !u!4 &1447035969
 Transform:
   m_ObjectHideFlags: 0

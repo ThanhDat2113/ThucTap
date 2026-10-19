@@ -92,6 +92,10 @@ public class SongListController : MonoBehaviour
         SongData song = musicManager != null ? musicManager.CurrentSong : null;
         if (song == null) return;
 
+        // Tắt nhạc nền của scene Song List trước khi chuyển sang Gameplay
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.StopMusic();
+
         GameSession.SelectedSong = song;
         SongStats.IncrementPlayCount(song);
         SceneManager.LoadScene(gameplaySceneName);

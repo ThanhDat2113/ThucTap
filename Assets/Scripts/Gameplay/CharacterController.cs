@@ -5,8 +5,9 @@ namespace RhythmGame
     [RequireComponent(typeof(Animator))]
     public class CharacterController : MonoBehaviour
     {
-        [Header("Refs")]
-        public JudgementSystem judgementSystem;
+    [Header("Refs")]
+    public JudgementSystem judgementSystem;
+    public GameManager gameManager;
 
         [Header("Animation Parameters")]
         [Tooltip("Tên parameter bool: true = Idle, false = Dance (loop)")]
@@ -32,20 +33,36 @@ namespace RhythmGame
             {
                 judgementSystem.OnJudged += OnJudged;
             }
+            if (gameManager != null)
+            {
+                gameManager.OnTurnChanged += OnTurnChanged;
+            }
             SetDancing(false);
         }
 
+        void Update()
+        {
+            if (gameManager != null && isDancing && gameManager.CurrentTurnOwner != owner)
+            {
+                ForceIdle();
+            }
+        }
         void OnDestroy()
         {
             if (judgementSystem != null)
             {
                 judgementSystem.OnJudged -= OnJudged;
             }
+            if (gameManager != null)
+            {
+                gameManager.OnTurnChanged -= OnTurnChanged;
+            }
         }
 
         void OnJudged(Judgement j, int points, bool isHit, NoteOwner noteOwner)
         {
             if (noteOwner != owner) return;
+            if (gameManager != null && gameManager.CurrentTurnOwner != owner) return;
 
             if (!isDancing && isHit && (j == Judgement.Perfect || j == Judgement.Good || j == Judgement.Bad || j == Judgement.HoldComplete))
             {
@@ -62,6 +79,14 @@ namespace RhythmGame
             if (!isDancing)
             {
                 SetDancing(true);
+            }
+        }
+
+        void OnTurnChanged(NoteOwner newOwner)
+        {
+            if (newOwner != owner)
+            {
+                ForceIdle();
             }
         }
 

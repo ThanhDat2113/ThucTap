@@ -738,6 +738,7 @@ GameObject:
   - component: {fileID: 269285538}
   - component: {fileID: 269285539}
   - component: {fileID: 269285540}
+  - component: {fileID: 269285541}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -850,6 +851,52 @@ MonoBehaviour:
   - {r: 0.98, g: 0.22, b: 0.25, a: 1}
   syncWithBackground: 1
   bgPulseIntensity: 0.15
+--- !u!61 &269285541
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269285537}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.36, y: 13.08}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.36, y: 13.08}
+  m_EdgeRadius: 0
 --- !u!1 &285523868
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.CharacterController
   judgementSystem: {fileID: 443643778}
+  gameManager: {fileID: 443643777}
   danceBool: IsDancing
   danceTrigger: 
   owner: 1
@@ -1520,6 +1568,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.InputHandler
   laneCount: 4
+  receptorTransforms:
+  - {fileID: 269285538}
+  - {fileID: 837932950}
+  - {fileID: 958283368}
+  - {fileID: 1207294088}
+  touchRadiusPixels: 60
 --- !u!114 &443643780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2870,15 +2924,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8965423103058035577, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.39
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 8965423103058035577, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.39
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 8965423103058035577, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.39
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 8965423103058035577, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2972,6 +3026,7 @@ GameObject:
   - component: {fileID: 837932950}
   - component: {fileID: 837932951}
   - component: {fileID: 837932952}
+  - component: {fileID: 837932953}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -3084,6 +3139,52 @@ MonoBehaviour:
   - {r: 0.98, g: 0.22, b: 0.25, a: 1}
   syncWithBackground: 1
   bgPulseIntensity: 0.15
+--- !u!61 &837932953
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837932949}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.36, y: 13.08}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.36, y: 13.08}
+  m_EdgeRadius: 0
 --- !u!1 &862901827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3363,6 +3464,7 @@ GameObject:
   - component: {fileID: 958283368}
   - component: {fileID: 958283369}
   - component: {fileID: 958283370}
+  - component: {fileID: 958283371}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -3475,6 +3577,52 @@ MonoBehaviour:
   - {r: 0.98, g: 0.22, b: 0.25, a: 1}
   syncWithBackground: 1
   bgPulseIntensity: 0.15
+--- !u!61 &958283371
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958283367}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.36, y: 13.08}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.36, y: 13.08}
+  m_EdgeRadius: 0
 --- !u!1 &1133791183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3611,6 +3759,7 @@ GameObject:
   - component: {fileID: 1207294088}
   - component: {fileID: 1207294087}
   - component: {fileID: 1207294089}
+  - component: {fileID: 1207294090}
   m_Layer: 0
   m_Name: 'Receptor '
   m_TagString: Untagged
@@ -3723,6 +3872,52 @@ MonoBehaviour:
   - {r: 0.98, g: 0.22, b: 0.25, a: 1}
   syncWithBackground: 1
   bgPulseIntensity: 0.15
+--- !u!61 &1207294090
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207294086}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.36, y: 13.08}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.36, y: 13.08}
+  m_EdgeRadius: 0
 --- !u!1 &1212483325
 GameObject:
   m_ObjectHideFlags: 0
@@ -4975,6 +5170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.CharacterController
   judgementSystem: {fileID: 443643778}
+  gameManager: {fileID: 443643777}
   danceBool: IsDancing
   danceTrigger: 
   owner: 0
