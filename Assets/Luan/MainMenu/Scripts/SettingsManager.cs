@@ -162,6 +162,7 @@ namespace Luan.MainMenu
             value = Mathf.Clamp01(value);
             AudioListener.volume = value;
             PlayerPrefs.SetFloat("SETTINGS_MASTER_VOL", value);
+            PlayerPrefs.Save();
 
             if (AudioManager.Instance != null)
             {
@@ -189,6 +190,7 @@ namespace Luan.MainMenu
             {
                 PlayerPrefs.SetFloat("SETTINGS_MUSIC_VOL", value);
             }
+            PlayerPrefs.Save();
 
             if (musicFillImage != null) musicFillImage.fillAmount = value;
             UpdatePercentText(musicPercentTMP, musicPercentLegacy, value);
@@ -211,6 +213,7 @@ namespace Luan.MainMenu
             {
                 PlayerPrefs.SetFloat("SETTINGS_SFX_VOL", value);
             }
+            PlayerPrefs.Save();
 
             // Giới hạn tần suất phát âm thanh test khi kéo thanh SFX Slider (0.15s / lần)
             if (Time.unscaledTime - _lastSfxTestTime > 0.15f)
@@ -279,6 +282,7 @@ namespace Luan.MainMenu
                 AudioManager.Instance.ResetToDefault();
             }
 
+            PlayerPrefs.Save();
             SyncSlidersFromAudioManager();
         }
 

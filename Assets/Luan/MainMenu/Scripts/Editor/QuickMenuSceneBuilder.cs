@@ -69,12 +69,12 @@ namespace Luan.MainMenu.Editor
             importer.maxTextureSize = 2048;
             importer.spritesheet = new[]
             {
-                Slice("Shop", 9, 525, 496, 446),
-                Slice("Menu", 511, 531, 447, 418),
-                Slice("Character", 974, 515, 470, 462),
-                Slice("LuckyWheel", 23, 44, 510, 465),
-                Slice("Daily", 548, 48, 485, 437),
-                Slice("Dot", 1146, 124, 268, 265),
+                Slice("Shop", 0, 512, 512, 512),
+                Slice("Menu", 512, 512, 512, 512),
+                Slice("Character", 1024, 512, 512, 512),
+                Slice("LuckyWheel", 0, 0, 512, 512),
+                Slice("Daily", 512, 0, 512, 512),
+                Slice("Dot", 1024, 0, 512, 512),
             };
             importer.SaveAndReimport();
         }

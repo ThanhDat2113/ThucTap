@@ -61,6 +61,8 @@ namespace Luan.MainMenu
         }
 #endif
 
+        private int lastToggleFrame = -1;
+
         private void BindExisting(Transform existing)
         {
             root = existing as RectTransform;
@@ -75,48 +77,158 @@ namespace Luan.MainMenu
 
             for (int i = 0; i < 4; i++)
             {
-                var row = existing.Find(Labels[i]);
-                if (row == null) return;
+                var row = FindRow(existing, i);
+                if (row == null)
+                {
+                    Debug.LogWarning($"QuickMenu: Row {i} ({Labels[i]}) not found in {existing.name}");
+                    continue;
+                }
                 rects[i] = row as RectTransform;
                 groups[i] = row.GetComponent<CanvasGroup>();
+                if (groups[i] == null) groups[i] = row.gameObject.AddComponent<CanvasGroup>();
+
+                if (!expanded && rects[i] != null)
+                {
+                    rects[i].anchoredPosition = Vector2.zero;
+                    rects[i].gameObject.SetActive(false);
+                    groups[i].alpha = 0f;
+                    groups[i].interactable = groups[i].blocksRaycasts = false;
+                }
+
+                // Ensure sprite is set to minimalist atlas sprite
+                var rowImage = row.GetComponent<Image>();
+                if (rowImage != null)
+                {
+                    var s = AtlasSprite(Icons[i]);
+                    if (s != null) rowImage.sprite = s;
+                }
+
                 entries[i] = row.GetComponent<Button>();
-                // Scene buttons use persistent listeners; runtime generated buttons wire themselves in Build().
+                if (entries[i] != null)
+                {
+                    int index = i;
+                    entries[i].onClick.RemoveAllListeners();
+                    entries[i].onClick.AddListener(() => Select(index));
+                }
             }
-            toggle = existing.Find("ButtonMucLuc")?.GetComponent<Button>();
+
+            var toggleTrans = existing.Find("ButtonMucLuc");
+            if (toggleTrans == null)
+            {
+                for (int c = 0; c < existing.childCount; c++)
+                {
+                    var ch = existing.GetChild(c);
+                    if (ch.name.IndexOf("mucluc", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        ch.name.IndexOf("menu", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        toggleTrans = ch;
+                        break;
+                    }
+                }
+            }
+
+            toggle = toggleTrans?.GetComponent<Button>();
+            if (toggle != null)
+            {
+                var toggleImg = toggle.GetComponent<Image>();
+                if (toggleImg != null)
+                {
+                    var s = AtlasSprite("Menu");
+                    if (s != null) toggleImg.sprite = s;
+                }
+
+                toggle.onClick.RemoveListener(Toggle);
+                toggle.onClick.AddListener(Toggle);
+            }
 
             for (int i = 0; i < 4; i++)
             {
-                var dotObj = existing.Find(Labels[i] + "/NotificationDot");
+                if (rects[i] == null) continue;
+                var dotObj = rects[i].Find("NotificationDot");
                 if (dotObj != null)
                 {
+                    var dotRect = dotObj as RectTransform;
+                    if (dotRect != null) dotRect.anchoredPosition = new Vector2(-19f, -19f);
                     badges[i] = dotObj.GetComponent<Image>();
                     if (badges[i] != null && badges[i].sprite == null)
                     {
                         badges[i].sprite = AtlasSprite("Dot");
                     }
                 }
-                else if (rects[i] != null)
+                else
                 {
                     badges[i] = NewBadge(rects[i]);
                 }
             }
 
-            var toggleDotObj = existing.Find("ButtonMucLuc/NotificationDot");
-            if (toggleDotObj != null)
+            if (toggleTrans != null)
             {
-                toggleBadge = toggleDotObj.GetComponent<Image>();
-                if (toggleBadge != null && toggleBadge.sprite == null)
+                var toggleDotObj = toggleTrans.Find("NotificationDot");
+                if (toggleDotObj != null)
                 {
-                    toggleBadge.sprite = AtlasSprite("Dot");
+                    var toggleDotRect = toggleDotObj as RectTransform;
+                    if (toggleDotRect != null) toggleDotRect.anchoredPosition = new Vector2(-19f, -19f);
+                    toggleBadge = toggleDotObj.GetComponent<Image>();
+                    if (toggleBadge != null && toggleBadge.sprite == null)
+                    {
+                        toggleBadge.sprite = AtlasSprite("Dot");
+                    }
                 }
-            }
-            else if (toggle != null)
-            {
-                toggleBadge = NewBadge(toggle.transform as RectTransform);
+                else
+                {
+                    toggleBadge = NewBadge(toggleTrans as RectTransform);
+                }
             }
 
             RefreshNotifications();
             UpdateSafeArea();
+        }
+
+        private static Transform FindRow(Transform root, int index)
+        {
+            if (root == null) return null;
+
+            if (index >= 0 && index < Labels.Length)
+            {
+                var t = root.Find(Labels[index]);
+                if (t != null) return t;
+            }
+
+            if (index >= 0 && index < Icons.Length)
+            {
+                var t = root.Find(Icons[index]);
+                if (t != null) return t;
+            }
+
+            for (int i = 0; i < root.childCount; i++)
+            {
+                var ch = root.GetChild(i);
+                if (ch.name.IndexOf("mucluc", StringComparison.OrdinalIgnoreCase) >= 0) continue;
+                string lower = ch.name.ToLowerInvariant();
+                switch (index)
+                {
+                    case 0:
+                        if (lower.Contains("shop") || lower.Contains("store")) return ch;
+                        break;
+                    case 1:
+                        if (lower.Contains("wheel") || lower.Contains("lucky") || lower.Contains("quay")) return ch;
+                        break;
+                    case 2:
+                        if (lower.Contains("nhân") || lower.Contains("nhan") || lower.Contains("character")) return ch;
+                        break;
+                    case 3:
+                        if (lower.Contains("điểm") || lower.Contains("diem") || lower.Contains("daily") || lower.Contains("checkin")) return ch;
+                        break;
+                }
+            }
+
+            if (index < root.childCount)
+            {
+                var ch = root.GetChild(index);
+                if (ch.name.IndexOf("mucluc", StringComparison.OrdinalIgnoreCase) < 0) return ch;
+            }
+
+            return null;
         }
 
         private void Build(Transform canvas)
@@ -193,7 +305,7 @@ namespace Luan.MainMenu
             badge.anchorMin = badge.anchorMax = new Vector2(1, 1);
             badge.pivot = new Vector2(.5f, .5f);
             badge.sizeDelta = new Vector2(34, 34);
-            badge.anchoredPosition = new Vector2(-7, -7);
+            badge.anchoredPosition = new Vector2(-19f, -19f);
             var image = badge.gameObject.AddComponent<Image>();
             image.sprite = AtlasSprite("Dot");
             image.raycastTarget = false;
@@ -315,6 +427,7 @@ namespace Luan.MainMenu
                 if (groups != null && groups[i] != null)
                 {
                     groups[i].interactable = groups[i].blocksRaycasts = false;
+                    groups[i].alpha = 0f;
                 }
             }
         }
@@ -326,6 +439,11 @@ namespace Luan.MainMenu
 
         public void Toggle()
         {
+            // Debounce guard: prevents multiple invocations within the same frame
+            // (e.g. if Button has both persistent scene listener and runtime AddListener)
+            if (Time.frameCount == lastToggleFrame) return;
+            lastToggleFrame = Time.frameCount;
+
             expanded = !expanded;
             if (animation != null) StopCoroutine(animation);
             animation = StartCoroutine(Animate());
@@ -333,32 +451,59 @@ namespace Luan.MainMenu
 
         private IEnumerator Animate()
         {
-            const float duration = .35f;
-            const float stagger = .045f;
+            const float duration = .32f;
+            const float stagger = .04f;
             float[] from = new float[4];
             for (int i = 0; i < 4; i++)
             {
+                if (rects[i] == null) continue;
                 from[i] = rects[i].anchoredPosition.x;
-                if (expanded) rects[i].gameObject.SetActive(true);
-                groups[i].interactable = groups[i].blocksRaycasts = expanded;
+                if (expanded)
+                {
+                    rects[i].gameObject.SetActive(true);
+                }
+                if (groups[i] != null)
+                {
+                    groups[i].interactable = groups[i].blocksRaycasts = expanded;
+                }
             }
-            float elapsed = 0;
-            while (elapsed < duration + 3 * stagger)
+
+            float elapsed = 0f;
+            float total = duration + 3 * stagger;
+            while (elapsed < total)
             {
                 elapsed += Time.unscaledDeltaTime;
                 for (int i = 0; i < 4; i++)
                 {
-                    float delay = (expanded ? i : 3 - i) * stagger;
+                    if (rects[i] == null) continue;
+                    float delay = (expanded ? i : (3 - i)) * stagger;
                     float t = Mathf.Clamp01((elapsed - delay) / duration);
-                    // Ease out keeps the movement visible and gives the row a gentle stop.
-                    t = 1 - Mathf.Pow(1 - t, 3);
-                    rects[i].anchoredPosition = new Vector2(
-                        Mathf.Lerp(from[i], expanded ? -108 * (i + 1) : 0, t), 0);
+                    // Smooth ease out cubic
+                    t = 1f - Mathf.Pow(1f - t, 3);
+                    float targetX = expanded ? -108f * (i + 1) : 0f;
+                    rects[i].anchoredPosition = new Vector2(Mathf.Lerp(from[i], targetX, t), 0f);
+                    if (groups[i] != null)
+                    {
+                        groups[i].alpha = expanded ? Mathf.Lerp(0.2f, 1f, t) : Mathf.Lerp(1f, 0f, t);
+                    }
                 }
                 yield return null;
             }
-            if (!expanded)
-                for (int i = 0; i < 4; i++) rects[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (rects[i] == null) continue;
+                rects[i].anchoredPosition = new Vector2(expanded ? -108f * (i + 1) : 0f, 0f);
+                if (!expanded)
+                {
+                    rects[i].gameObject.SetActive(false);
+                }
+                if (groups[i] != null)
+                {
+                    groups[i].interactable = groups[i].blocksRaycasts = expanded;
+                    groups[i].alpha = expanded ? 1f : 0f;
+                }
+            }
             animation = null;
         }
 
@@ -367,17 +512,32 @@ namespace Luan.MainMenu
         public void OpenCharacter() => Select(2);
         public void OpenDaily() => Select(3);
 
+        private static readonly string[] SceneNames = {
+            "Thuan_Shop",
+            "LuckyWheel",
+            "Thuan_CharacterSelect",
+            "Thuan_DailyCheckin"
+        };
+
         private void Select(int index)
         {
-            if (index == 1)
+            if (index >= 0 && index < SceneNames.Length)
             {
-                if (Application.CanStreamedLevelBeLoaded("LuckyWheel")) SceneManager.LoadScene("LuckyWheel");
-                else Debug.LogWarning("Thêm scene LuckyWheel vào Build Settings để mở vòng quay.");
-                return;
+                string sceneName = SceneNames[index];
+                if (Application.CanStreamedLevelBeLoaded(sceneName))
+                {
+                    Debug.Log($"QuickMenu: Đang chuyển sang scene '{sceneName}' ({Labels[index]}).");
+                    SceneManager.LoadScene(sceneName);
+                    return;
+                }
+                Debug.LogWarning($"QuickMenu: Scene '{sceneName}' ({Labels[index]}) chưa được thêm vào Build Settings.");
             }
-            // Screens not implemented yet. Keep a visible response and a stable click hook.
-            StartCoroutine(Flash(entries[index].GetComponent<Image>()));
-            Debug.Log("QuickMenu: " + Labels[index] + " chưa có màn hình.");
+
+            if (index >= 0 && index < entries.Length && entries[index] != null)
+            {
+                var img = entries[index].GetComponent<Image>();
+                if (img != null) StartCoroutine(Flash(img));
+            }
         }
 
         private IEnumerator Flash(Image image)

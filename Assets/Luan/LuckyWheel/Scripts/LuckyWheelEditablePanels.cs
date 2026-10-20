@@ -57,11 +57,11 @@ namespace Luan.LuckyWheel
 
         public static LuckyWheelEditablePanels Instance { get; private set; }
 
-        public int CoinBalance => coinBalance;
-        public int DiamondBalance => diamondBalance;
-        public int TicketCount => ticketCount;
+        public int CoinBalance => Application.isPlaying ? Wallet.Coins : coinBalance;
+        public int DiamondBalance => Application.isPlaying ? Wallet.Gems : diamondBalance;
+        public int TicketCount => Application.isPlaying ? Wallet.Tickets : ticketCount;
         public bool HasDailyFreeSpin => hasDailyFreeSpin;
-        public int TotalAvailableSpins => (hasDailyFreeSpin ? 1 : 0) + ticketCount;
+        public int TotalAvailableSpins => (hasDailyFreeSpin ? 1 : 0) + TicketCount;
         public int SpinCount => TotalAvailableSpins;
         public bool HasFreeSpinForOne => TotalAvailableSpins >= 1;
         public bool HasFreeSpinForTen => TotalAvailableSpins >= 10;
@@ -78,11 +78,11 @@ namespace Luan.LuckyWheel
                 return Instance.HasFreeSpinForOne;
             }
 
-            // 1. Kiểm tra vé quay (ticketCount) lưu trong PlayerPrefs
-            int tickets = PlayerPrefs.GetInt(PrefsTicketsKey, 0);
-            if (tickets <= 0 && PlayerPrefs.HasKey("LUCKY_WHEEL_SPIN_COUNT"))
+            // 1. Kiểm tra vé quay (TicketCount) từ Wallet
+            int tickets = Wallet.Tickets;
+            if (tickets <= 0 && PlayerPrefs.HasKey(PrefsTicketsKey))
             {
-                tickets = PlayerPrefs.GetInt("LUCKY_WHEEL_SPIN_COUNT", 0);
+                tickets = PlayerPrefs.GetInt(PrefsTicketsKey, 0);
             }
             if (tickets > 0) return true;
 
@@ -146,82 +146,93 @@ namespace Luan.LuckyWheel
             if (Application.isPlaying)
             {
                 Instance = this;
-                if (resetOnPlayMode)
+
+                // Đồng bộ 1 lần dữ liệu cũ nếu trước đó chỉ lưu trong LuckyWheel mà Wallet đang = 0
+                if (PlayerPrefs.HasKey(PrefsCoinKey) && !PlayerPrefs.HasKey("WALLET_MIGRATED_FROM_LW"))
                 {
-                    PlayerPrefs.DeleteKey(PrefsDiamondKey);
-                    PlayerPrefs.DeleteKey(PrefsCoinKey);
-                    PlayerPrefs.DeleteKey(PrefsTicketsKey);
-                    PlayerPrefs.DeleteKey(PrefsDailyFreeDateKey);
-                    PlayerPrefs.DeleteKey("LUCKY_WHEEL_SPIN_COUNT");
-                    PlayerPrefs.DeleteKey(PrefsBonusProgressKey);
+                    int oldCoins = PlayerPrefs.GetInt(PrefsCoinKey, 0);
+                    int oldDiamonds = PlayerPrefs.GetInt(PrefsDiamondKey, 0);
+                    int oldTickets = PlayerPrefs.GetInt(PrefsTicketsKey, 0);
+
+                    if (Wallet.Coins == 0 && oldCoins > 0) Wallet.SetCoins(oldCoins, false);
+                    if (Wallet.Gems == 0 && oldDiamonds > 0) Wallet.SetGems(oldDiamonds, false);
+                    if (Wallet.Tickets == 0 && oldTickets > 0) Wallet.SetTickets(oldTickets, false);
+
+                    PlayerPrefs.SetInt("WALLET_MIGRATED_FROM_LW", 1);
                     PlayerPrefs.Save();
-
-                    diamondBalance = 1000;
-                    coinBalance = 5000;
-                    ticketCount = 0;
-                    hasDailyFreeSpin = true;
-                    bonusProgress = 0;
                 }
-                else
+
+                string lastClaimDate = PlayerPrefs.GetString(PrefsDailyFreeDateKey, string.Empty);
+                string today = DateTime.Today.ToString("yyyy-MM-dd");
+                hasDailyFreeSpin = (lastClaimDate != today);
+
+                if (PlayerPrefs.HasKey(PrefsBonusProgressKey))
                 {
-                    if (PlayerPrefs.HasKey(PrefsDiamondKey))
-                    {
-                        diamondBalance = PlayerPrefs.GetInt(PrefsDiamondKey);
-                    }
-                    else
-                    {
-                        if (diamondBalance <= 0) diamondBalance = 1000;
-                        PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
-                        PlayerPrefs.Save();
-                    }
-
-                    if (PlayerPrefs.HasKey(PrefsCoinKey))
-                    {
-                        coinBalance = PlayerPrefs.GetInt(PrefsCoinKey);
-                    }
-                    else
-                    {
-                        if (coinBalance <= 0) coinBalance = 5000;
-                        PlayerPrefs.SetInt(PrefsCoinKey, coinBalance);
-                        PlayerPrefs.Save();
-                    }
-
-                    if (PlayerPrefs.HasKey(PrefsTicketsKey))
-                    {
-                        ticketCount = PlayerPrefs.GetInt(PrefsTicketsKey);
-                    }
-                    else if (PlayerPrefs.HasKey("LUCKY_WHEEL_SPIN_COUNT"))
-                    {
-                        ticketCount = PlayerPrefs.GetInt("LUCKY_WHEEL_SPIN_COUNT");
-                    }
-
-                    string lastClaimDate = PlayerPrefs.GetString(PrefsDailyFreeDateKey, string.Empty);
-                    string today = DateTime.Today.ToString("yyyy-MM-dd");
-                    hasDailyFreeSpin = (lastClaimDate != today);
-
-                    if (PlayerPrefs.HasKey(PrefsBonusProgressKey))
-                    {
-                        bonusProgress = PlayerPrefs.GetInt(PrefsBonusProgressKey);
-                    }
+                    bonusProgress = PlayerPrefs.GetInt(PrefsBonusProgressKey);
                 }
             }
             Refresh();
             NotifyPurchaseUIRefresh();
         }
 
+        private void Start()
+        {
+            SetupChestClickListener();
+        }
+
+        private void SetupChestClickListener()
+        {
+            var chestTransform = transform.Find("Footer/BonusProgress/EditableContent/ChestIcon");
+            if (chestTransform != null)
+            {
+                var chestBtn = chestTransform.GetComponent<Button>();
+                if (chestBtn == null)
+                {
+                    chestBtn = chestTransform.gameObject.AddComponent<Button>();
+                }
+                var img = chestTransform.GetComponent<Image>();
+                if (img != null)
+                {
+                    img.raycastTarget = true;
+                    chestBtn.targetGraphic = img;
+                }
+                chestBtn.onClick.RemoveListener(OnChestClicked);
+                chestBtn.onClick.AddListener(OnChestClicked);
+            }
+        }
+
+        public void OnChestClicked()
+        {
+            if (bonusProgress >= bonusTarget)
+            {
+                var wheelController = FindFirstObjectByType<LuckyWheelController>();
+                if (wheelController != null && !wheelController.IsSpinning)
+                {
+                    wheelController.ClaimPityRewardDirectly();
+                }
+            }
+            else
+            {
+                int remaining = bonusTarget - bonusProgress;
+                Debug.Log($"[LuckyWheel] Bảo hiểm: Hãy quay thêm {remaining} lần để nhận Nhân vật huyền thoại!");
+            }
+        }
+
         public bool HasEnoughDiamonds(int amount)
         {
-            return diamondBalance >= amount;
+            return DiamondBalance >= amount;
         }
 
         public bool TrySpendDiamonds(int amount)
         {
-            if (diamondBalance < amount) return false;
-            diamondBalance -= amount;
+            if (DiamondBalance < amount) return false;
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
-                PlayerPrefs.Save();
+                Wallet.Add(CurrencyType.Gem, -amount);
+            }
+            else
+            {
+                diamondBalance -= amount;
             }
             Refresh();
             NotifyPurchaseUIRefresh();
@@ -231,11 +242,13 @@ namespace Luan.LuckyWheel
         public void AddDiamonds(int amount)
         {
             if (amount <= 0) return;
-            diamondBalance += amount;
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
-                PlayerPrefs.Save();
+                Wallet.Add(CurrencyType.Gem, amount);
+            }
+            else
+            {
+                diamondBalance += amount;
             }
             Refresh();
             NotifyPurchaseUIRefresh();
@@ -244,11 +257,13 @@ namespace Luan.LuckyWheel
         public void AddCoins(int amount)
         {
             if (amount <= 0) return;
-            coinBalance += amount;
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsCoinKey, coinBalance);
-                PlayerPrefs.Save();
+                Wallet.Add(CurrencyType.Coin, amount);
+            }
+            else
+            {
+                coinBalance += amount;
             }
             Refresh();
         }
@@ -256,11 +271,13 @@ namespace Luan.LuckyWheel
         public void AddTickets(int amount)
         {
             if (amount <= 0) return;
-            ticketCount += amount;
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsTicketsKey, ticketCount);
-                PlayerPrefs.Save();
+                Wallet.AddTickets(amount);
+            }
+            else
+            {
+                ticketCount += amount;
             }
             Refresh();
             NotifyPurchaseUIRefresh();
@@ -285,10 +302,13 @@ namespace Luan.LuckyWheel
 
             if (remaining > 0)
             {
-                ticketCount = Mathf.Max(0, ticketCount - remaining);
                 if (Application.isPlaying)
                 {
-                    PlayerPrefs.SetInt(PrefsTicketsKey, ticketCount);
+                    Wallet.AddTickets(-remaining);
+                }
+                else
+                {
+                    ticketCount = Mathf.Max(0, ticketCount - remaining);
                 }
             }
 
@@ -311,16 +331,26 @@ namespace Luan.LuckyWheel
             }
         }
 
-        public void AddBonusProgress(int amount)
+        public void SetBonusProgress(int progress)
         {
-            if (amount <= 0) return;
-            bonusProgress = Mathf.Min(bonusTarget, bonusProgress + amount);
+            bonusProgress = Mathf.Clamp(progress, 0, bonusTarget);
             if (Application.isPlaying)
             {
                 PlayerPrefs.SetInt(PrefsBonusProgressKey, bonusProgress);
                 PlayerPrefs.Save();
             }
             Refresh();
+        }
+
+        public void ResetBonusProgress()
+        {
+            SetBonusProgress(0);
+        }
+
+        public void AddBonusProgress(int amount)
+        {
+            if (amount <= 0) return;
+            SetBonusProgress(bonusProgress + amount);
         }
 
         [ContextMenu("Add 1000 Diamonds")]
@@ -409,9 +439,7 @@ namespace Luan.LuckyWheel
             diamondBalance = Mathf.Max(0, diamonds);
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsDiamondKey, diamondBalance);
-                PlayerPrefs.SetInt(PrefsCoinKey, coinBalance);
-                PlayerPrefs.Save();
+                Wallet.SetCurrencies(coins, diamonds, Wallet.Tickets);
             }
             Refresh();
         }
@@ -421,8 +449,7 @@ namespace Luan.LuckyWheel
             ticketCount = Mathf.Max(0, count);
             if (Application.isPlaying)
             {
-                PlayerPrefs.SetInt(PrefsTicketsKey, ticketCount);
-                PlayerPrefs.Save();
+                Wallet.SetTickets(ticketCount);
             }
             Refresh();
             NotifyPurchaseUIRefresh();
@@ -475,13 +502,29 @@ namespace Luan.LuckyWheel
             Refresh();
         }
 
-        private void OnEnable() => Refresh();
+        private void OnEnable()
+        {
+            Wallet.Changed += OnWalletCurrencyChanged;
+            Refresh();
+        }
+
+        private void OnDisable()
+        {
+            Wallet.Changed -= OnWalletCurrencyChanged;
+        }
+
+        private void OnWalletCurrencyChanged()
+        {
+            Refresh();
+            NotifyPurchaseUIRefresh();
+        }
+
         private void OnValidate() => Refresh();
 
         public void Refresh()
         {
-            SetText("TopBar/Currencies/EditableContent/CoinValue", FormatCurrency(coinBalance));
-            SetText("TopBar/Currencies/EditableContent/DiamondValue", FormatCurrency(diamondBalance));
+            SetText("TopBar/Currencies/EditableContent/CoinValue", FormatCurrency(CoinBalance));
+            SetText("TopBar/Currencies/EditableContent/DiamondValue", FormatCurrency(DiamondBalance));
             SetSprite("TopBar/Currencies/EditableContent/CoinIcon", coinIcon);
             SetSprite("TopBar/Currencies/EditableContent/DiamondIcon", diamondIcon);
 
@@ -506,8 +549,16 @@ namespace Luan.LuckyWheel
             SetSprite("RightPanel/SpinInfo/EditableContent/CalendarIcon", calendarIcon);
 
             var remaining = Mathf.Max(0, bonusTarget - bonusProgress);
-            SetText("Footer/BonusProgress/EditableContent/BonusDescription",
-                $"Quay thêm <color=#FFE600>{remaining}</color> lần để nhận quà đặc biệt!");
+            if (remaining <= 0)
+            {
+                SetText("Footer/BonusProgress/EditableContent/BonusDescription",
+                    "<color=#00FFCC>Bảo hiểm kích hoạt! Lượt quay tiếp theo 100% nhận quà đặc biệt!</color>");
+            }
+            else
+            {
+                SetText("Footer/BonusProgress/EditableContent/BonusDescription",
+                    $"Quay thêm <color=#FFE600>{remaining}</color> lần để nhận quà đặc biệt!");
+            }
             SetText("Footer/BonusProgress/EditableContent/ProgressLabel", $"{bonusProgress}/{bonusTarget}");
             SetSprite("Footer/BonusProgress/EditableContent/GiftIcon", bonusGiftIcon);
             SetSprite("Footer/BonusProgress/EditableContent/ChestIcon", bonusChestIcon);

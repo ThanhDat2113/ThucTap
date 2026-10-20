@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe08a2b557c1842b41d03ab785f7cc, type: 3}
+  m_Name: rooftop_theme
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
+  displayName: Rooftop Theme
+  description: 'Battle under the city
+
+    lights, high above the street.'
+  category: 0
+  currency: 1
+  price: 700
+  isHot: 0
+  cardSprite: {fileID: 21300000, guid: f027effaa72d7014e8abd49c2bffe5cc, type: 3}
+  cardOwnedSprite: {fileID: 21300000, guid: ea0adc2f6eb17ab46aef2e956779b43f, type: 3}
+  artSprite: {fileID: 21300000, guid: 6b6fc1641cf9714409bb568e6450a661, type: 3}
+  priceRect: {x: 0.303, y: 0.0574, z: 0.6234, w: 0.2336}
+  cartRect: {x: 0.6667, y: 0.0492, z: 0.9307, w: 0.2295}

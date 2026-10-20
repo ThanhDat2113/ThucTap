@@ -72,6 +72,15 @@ namespace Luan.MainMenu
         public string errorMessage;
     }
 
+    [Serializable]
+    internal class CachedLeaderboardData
+    {
+        public string lastFetchUtcIso;
+        public string playFabId;
+        public PlayFabLeaderboardEntry[] top10;
+        public PlayFabLeaderboardEntry playerEntry;
+    }
+
     #endregion
 
     /// <summary>
@@ -170,12 +179,23 @@ namespace Luan.MainMenu
         [SerializeField] private int maxNameLength = 12;
 
         [Header("--- Tự Động Làm Mới Định Kỳ (Auto Refresh) ---")]
-        [Tooltip("Có tự động cập nhật bảng xếp hạng trong lúc người chơi đang mở bảng không?")]
-        [SerializeField] private bool autoRefresh = true;
+        [Tooltip("Có tự động cập nhật bảng xếp hạng trong lúc người chơi đang mở bảng không? (Khuyến nghị: TẮT để không tốn API request PlayFab)")]
+        [SerializeField] private bool autoRefresh = false;
 
-        [Tooltip("Khoảng cách giữa mỗi lần quét cập nhật (giây, khuyến nghị từ 10s - 30s)")]
-        [Range(5f, 60f)]
-        [SerializeField] private float refreshInterval = 10f;
+        [Tooltip("Khoảng cách giữa mỗi lần quét cập nhật nếu bật (giây, khuyến nghị từ 60s - 120s)")]
+        [Range(30f, 300f)]
+        [SerializeField] private float refreshInterval = 60f;
+
+        [Header("--- Bộ Nhớ Đệm 24 Giờ (Persistent 24-Hour Cache) ---")]
+        [Tooltip("Thời gian lưu cache dữ liệu bảng xếp hạng tính bằng giờ (Mặc định: 24 giờ). Trong 24 giờ, mở bảng sẽ dùng cache từ PlayerPrefs không gọi server")]
+        [SerializeField] private float cacheDurationHours = 24f;
+
+        [Tooltip("Thời gian chờ giữa mỗi lần bấm nút Làm Mới thủ công (giây, chống spam)")]
+        [SerializeField] private float manualRefreshCooldown = 15f;
+
+        // Giữ trường cũ để tương thích với Inspector cũ nếu có
+        [HideInInspector]
+        [SerializeField] private float cacheDuration = 86400f;
 
         [Header("--- Âm Thanh (Audio SFX) ---")]
         [SerializeField] private AudioSource audioSource;
@@ -183,6 +203,14 @@ namespace Luan.MainMenu
 
         private bool _isLoading = false;
         private Coroutine _autoRefreshCoroutine = null;
+
+        // Quản lý bộ nhớ đệm (Cache) 24h và chống spam nút Làm Mới
+        private const string PrefsLeaderboardCacheKey = "LEADERBOARD_24H_CACHE_DATA";
+        private PlayFabLeaderboardEntry[] _cachedTop10Entries = null;
+        private PlayFabLeaderboardEntry _cachedPlayerEntry = null;
+        private DateTime _lastFetchUtc = DateTime.MinValue;
+        private float _lastManualRefreshClickTime = -999f;
+        private bool _isRateLimited = false;
 
         private void Awake()
         {
@@ -208,13 +236,129 @@ namespace Luan.MainMenu
 
             if (refreshButton != null)
             {
-                refreshButton.onClick.AddListener(() => FetchLeaderboard());
+                refreshButton.onClick.AddListener(OnRefreshButtonClicked);
             }
+
+            // Tải dữ liệu cache từ PlayerPrefs nếu có
+            LoadPersistentCache();
+        }
+
+        private void LoadPersistentCache()
+        {
+            try
+            {
+                if (PlayerPrefs.HasKey(PrefsLeaderboardCacheKey))
+                {
+                    string json = PlayerPrefs.GetString(PrefsLeaderboardCacheKey, "");
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        CachedLeaderboardData cached = JsonUtility.FromJson<CachedLeaderboardData>(json);
+                        if (cached != null)
+                        {
+                            if (DateTime.TryParse(cached.lastFetchUtcIso, null, System.Globalization.DateTimeStyles.RoundtripKind, out DateTime parsedUtc))
+                            {
+                                _lastFetchUtc = parsedUtc;
+                            }
+
+                            _cachedTop10Entries = cached.top10;
+
+                            string currentPlayFabId = "";
+                            if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
+                            {
+                                currentPlayFabId = AccountManager.Instance.CurrentUser.playFabId;
+                            }
+
+                            if (string.IsNullOrEmpty(currentPlayFabId) || string.IsNullOrEmpty(cached.playFabId) || cached.playFabId == currentPlayFabId)
+                            {
+                                _cachedPlayerEntry = cached.playerEntry;
+                            }
+                            else
+                            {
+                                _cachedPlayerEntry = null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[LeaderboardManager] Lỗi đọc cache từ PlayerPrefs: {ex.Message}");
+            }
+        }
+
+        private void SavePersistentCache(PlayFabLeaderboardEntry[] top10, PlayFabLeaderboardEntry playerEntry)
+        {
+            try
+            {
+                _cachedTop10Entries = top10;
+                _cachedPlayerEntry = playerEntry;
+                _lastFetchUtc = DateTime.UtcNow;
+
+                string currentPlayFabId = "";
+                if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
+                {
+                    currentPlayFabId = AccountManager.Instance.CurrentUser.playFabId;
+                }
+
+                CachedLeaderboardData data = new CachedLeaderboardData
+                {
+                    lastFetchUtcIso = _lastFetchUtc.ToString("o"),
+                    playFabId = currentPlayFabId,
+                    top10 = top10,
+                    playerEntry = playerEntry
+                };
+
+                string json = JsonUtility.ToJson(data);
+                PlayerPrefs.SetString(PrefsLeaderboardCacheKey, json);
+                PlayerPrefs.Save();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[LeaderboardManager] Lỗi lưu cache vào PlayerPrefs: {ex.Message}");
+            }
+        }
+
+        public bool IsCacheValid()
+        {
+            if (_cachedTop10Entries == null || _cachedTop10Entries.Length == 0) return false;
+            if (_lastFetchUtc == DateTime.MinValue) return false;
+
+            double elapsedHours = (DateTime.UtcNow - _lastFetchUtc).TotalHours;
+            return elapsedHours < cacheDurationHours;
+        }
+
+        public string GetCacheRemainingTimeString()
+        {
+            if (_lastFetchUtc == DateTime.MinValue) return "";
+            TimeSpan remaining = TimeSpan.FromHours(cacheDurationHours) - (DateTime.UtcNow - _lastFetchUtc);
+            if (remaining.TotalSeconds <= 0) return "Sắp cập nhật";
+
+            if (remaining.TotalHours >= 1)
+            {
+                return $"{Mathf.FloorToInt((float)remaining.TotalHours)}h {remaining.Minutes}m";
+            }
+            return $"{remaining.Minutes}m {remaining.Seconds}s";
+        }
+
+        private void OnRefreshButtonClicked()
+        {
+            if (_isLoading) return;
+
+            if (Time.unscaledTime - _lastManualRefreshClickTime < manualRefreshCooldown)
+            {
+                float remainSec = Mathf.Ceil(manualRefreshCooldown - (Time.unscaledTime - _lastManualRefreshClickTime));
+                SetStatus($"Vui lòng đợi {remainSec}s trước khi làm mới!");
+                return;
+            }
+
+            _lastManualRefreshClickTime = Time.unscaledTime;
+            PlayButtonClickSound();
+            FetchLeaderboard(isSilentBackground: false, forceRefresh: true);
         }
 
         private void OnEnable()
         {
-            // Tự động tải lại bảng xếp hạng mỗi khi mở panel Thành Tích
+            // Tự động tải lại bảng xếp hạng mỗi khi mở panel Thành Tích (dùng cache nếu có)
             FetchLeaderboard();
 
             if (autoRefresh)
@@ -238,9 +382,16 @@ namespace Luan.MainMenu
             while (true)
             {
                 yield return new WaitForSecondsRealtime(refreshInterval);
-                if (gameObject.activeInHierarchy && !_isLoading)
+                if (gameObject.activeInHierarchy && !_isLoading && !_isRateLimited)
                 {
-                    FetchLeaderboard(isSilentBackground: true);
+                    if (!IsCacheValid())
+                    {
+                        FetchLeaderboard(isSilentBackground: true, forceRefresh: false);
+                    }
+                    else if (statusTMP != null)
+                    {
+                        statusTMP.text = $"Cập nhật mỗi 24h (Làm mới sau: {GetCacheRemainingTimeString()})";
+                    }
                 }
             }
         }
@@ -271,11 +422,23 @@ namespace Luan.MainMenu
         }
 
         /// <summary>
-        /// Tải dữ liệu Bảng Xếp Hạng Top 10 và Hạng của người chơi hiện tại từ PlayFab.
+        /// Tải dữ liệu Bảng Xếp Hạng Top 10 và Hạng của người chơi hiện tại từ PlayFab (hoặc dùng cache 24h nếu còn hạn).
         /// </summary>
-        public void FetchLeaderboard(bool isSilentBackground = false)
+        public void FetchLeaderboard(bool isSilentBackground = false, bool forceRefresh = false)
         {
             if (_isLoading) return;
+
+            // Kiểm tra cache 24 giờ: nếu còn hạn và không ép buộc làm mới -> Dùng ngay cache lưu trên máy, không tốn API!
+            if (!forceRefresh && IsCacheValid())
+            {
+                PopulateTop10UI(_cachedTop10Entries);
+                PopulateCurrentPlayerUI(_cachedPlayerEntry);
+                if (statusTMP != null)
+                {
+                    statusTMP.text = $"Cập nhật mỗi 24h (Làm mới sau: {GetCacheRemainingTimeString()})";
+                }
+                return;
+            }
 
             string titleId = GetEffectiveTitleId();
             string sessionTicket = GetSessionTicket();
@@ -346,60 +509,123 @@ namespace Luan.MainMenu
                 }
                 else
                 {
-                    Debug.LogWarning($"[LeaderboardManager] Tải Top 10 thất bại: {req.downloadHandler.text}");
+                    if (req.responseCode == 429 || req.downloadHandler.text.Contains("APIClientRequestRateLimitExceeded") || req.downloadHandler.text.Contains("OverLimit"))
+                    {
+                        _isRateLimited = true;
+                        SetStatus("PlayFab đang giới hạn tần suất yêu cầu (Rate Limit). Vui lòng đợi 1-2 phút!");
+                        Debug.LogWarning("[LeaderboardManager] Bị giới hạn API PlayFab (Rate Limit 429).");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[LeaderboardManager] Tải Top 10 thất bại: {req.downloadHandler.text}");
+                    }
                 }
             }
 
             // Cập nhật giao diện Top 1 - 10
             PopulateTop10UI(top10Entries);
 
-            // 2. Tải Hạng của chính người chơi hiện tại
-            string urlAround = $"https://{titleId}.playfabapi.com/Client/GetLeaderboardAroundPlayer";
-            PlayFabGetLeaderboardAroundPlayerRequest reqAroundData = new PlayFabGetLeaderboardAroundPlayerRequest
-            {
-                StatisticName = statisticName,
-                MaxResultsCount = 1
-            };
-
-            string jsonAround = JsonUtility.ToJson(reqAroundData);
+            // 2. Tải Hạng của chính người chơi hiện tại (nếu chưa bị rate limit)
             PlayFabLeaderboardEntry playerEntry = null;
 
-            using (UnityWebRequest req = new UnityWebRequest(urlAround, "POST"))
+            // Tối ưu hóa: Kiểm tra xem người chơi đã có mặt trong danh sách Top 10 vừa tải về hay chưa
+            string myPlayFabId = "";
+            if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
             {
-                byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonAround);
-                req.uploadHandler = new UploadHandlerRaw(bodyRaw);
-                req.downloadHandler = new DownloadHandlerBuffer();
-                req.SetRequestHeader("Content-Type", "application/json");
-                req.SetRequestHeader("X-Authorization", sessionTicket);
+                myPlayFabId = AccountManager.Instance.CurrentUser.playFabId;
+            }
+            if (string.IsNullOrEmpty(myPlayFabId))
+            {
+                myPlayFabId = PlayerPrefs.GetString("PLAYFAB_ID", "");
+            }
 
-                yield return req.SendWebRequest();
-
-                if (req.result == UnityWebRequest.Result.Success)
+            if (top10Entries != null && !string.IsNullOrEmpty(myPlayFabId))
+            {
+                for (int i = 0; i < top10Entries.Length; i++)
                 {
-                    try
+                    if (top10Entries[i] != null && top10Entries[i].PlayFabId == myPlayFabId)
                     {
-                        PlayFabGetLeaderboardResponse res = JsonUtility.FromJson<PlayFabGetLeaderboardResponse>(req.downloadHandler.text);
-                        if (res != null && res.data != null && res.data.Leaderboard != null && res.data.Leaderboard.Length > 0)
+                        playerEntry = top10Entries[i];
+                        break;
+                    }
+                }
+            }
+
+            // Nếu người chơi chưa có trong Top 10 (hoặc ở ngoài Top 10), mới cần gọi GetLeaderboardAroundPlayer
+            if (playerEntry == null && !_isRateLimited)
+            {
+                string urlAround = $"https://{titleId}.playfabapi.com/Client/GetLeaderboardAroundPlayer";
+                PlayFabGetLeaderboardAroundPlayerRequest reqAroundData = new PlayFabGetLeaderboardAroundPlayerRequest
+                {
+                    StatisticName = statisticName,
+                    MaxResultsCount = 1
+                };
+
+                string jsonAround = JsonUtility.ToJson(reqAroundData);
+
+                using (UnityWebRequest req = new UnityWebRequest(urlAround, "POST"))
+                {
+                    byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonAround);
+                    req.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                    req.downloadHandler = new DownloadHandlerBuffer();
+                    req.SetRequestHeader("Content-Type", "application/json");
+                    req.SetRequestHeader("X-Authorization", sessionTicket);
+
+                    yield return req.SendWebRequest();
+
+                    if (req.result == UnityWebRequest.Result.Success)
+                    {
+                        try
                         {
-                            playerEntry = res.data.Leaderboard[0];
+                            PlayFabGetLeaderboardResponse res = JsonUtility.FromJson<PlayFabGetLeaderboardResponse>(req.downloadHandler.text);
+                            if (res != null && res.data != null && res.data.Leaderboard != null && res.data.Leaderboard.Length > 0)
+                            {
+                                playerEntry = res.data.Leaderboard[0];
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.LogWarning($"[LeaderboardManager] Lỗi parse hạng người chơi: {ex.Message}");
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Debug.LogWarning($"[LeaderboardManager] Lỗi parse hạng người chơi: {ex.Message}");
+                        if (req.responseCode == 429 || req.downloadHandler.text.Contains("APIClientRequestRateLimitExceeded") || req.downloadHandler.text.Contains("OverLimit"))
+                        {
+                            _isRateLimited = true;
+                            SetStatus("PlayFab đang giới hạn tần suất yêu cầu (Rate Limit). Vui lòng đợi 1-2 phút!");
+                            Debug.LogWarning("[LeaderboardManager] Bị giới hạn API PlayFab (Rate Limit 429).");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"[LeaderboardManager] Tải hạng người chơi thất bại: {req.downloadHandler.text}");
+                        }
                     }
                 }
-                else
-                {
-                    Debug.LogWarning($"[LeaderboardManager] Tải hạng người chơi thất bại: {req.downloadHandler.text}");
-                }
+            }
+
+            // Lưu dữ liệu vào Cache RAM & Persistent PlayerPrefs (tồn tại 24 giờ)
+            if (top10Entries != null)
+            {
+                SavePersistentCache(top10Entries, playerEntry);
+                _isRateLimited = false;
             }
 
             // Cập nhật giao diện thanh xếp hạng hiện tại của người chơi
             PopulateCurrentPlayerUI(playerEntry);
 
             SetLoadingState(false);
-            SetStatus("");
+            if (!_isRateLimited)
+            {
+                if (statusTMP != null)
+                {
+                    statusTMP.text = $"Cập nhật mỗi 24h (Làm mới sau: {GetCacheRemainingTimeString()})";
+                }
+                else
+                {
+                    SetStatus("");
+                }
+            }
             _isLoading = false;
         }
 
@@ -600,10 +826,20 @@ namespace Luan.MainMenu
                 {
                     Debug.Log($"[LeaderboardManager] Lưu điểm {score} lên PlayFab thành công!");
                     onComplete?.Invoke(true);
-                    // Tự động tải lại bảng nếu panel đang mở
-                    if (gameObject.activeInHierarchy)
+
+                    // Cập nhật điểm của người chơi vào cache cục bộ ngay lập tức để UI cập nhật mà không cần gọi API GetLeaderboard!
+                    if (_cachedPlayerEntry != null)
                     {
-                        FetchLeaderboard();
+                        if (score > _cachedPlayerEntry.StatValue)
+                        {
+                            _cachedPlayerEntry.StatValue = score;
+                            SavePersistentCache(_cachedTop10Entries, _cachedPlayerEntry);
+                            PopulateCurrentPlayerUI(_cachedPlayerEntry);
+                        }
+                    }
+                    else if (gameObject.activeInHierarchy)
+                    {
+                        FetchLeaderboard(isSilentBackground: true, forceRefresh: false);
                     }
                 }
                 else

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bf39b5fc0cb1c42a8f9678bafa2515, type: 3}
+  m_Name: shiro
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  displayName: SHIRO
+  title: THE WILD CARD
+  description: 'Unpredictable, loud and wild.
+
+    He laughs at the rules
+
+    and
+    freestyles through them.'
+  tags:
+  - FREESTYLE
+  - CHAOS
+  - POWER
+  quote: '"NO RULES, JUST NOISE"'
+  vocal: 7
+  style: 8
+  power: 9
+  speed: 8
+  cardSprite: {fileID: 21300000, guid: 44ff6a31c5b90b14d9bd5b83124a4716, type: 3}
+  fullArt: {fileID: 0}
+  posterSprite: {fileID: 21300000, guid: 939204ebd65013546be536aa9c41fc0a, type: 3}
+  previewClip: {fileID: 0}
+  unlocked: 1

@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: 1e273b52cf4b17a4a9d4ba8b0fbfae3f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2468490505279076767
+    second: CharacterSelect_CoreAtlas_640x512_0
+  - first:
+      213: -7677426048615891949
+    second: CharacterSelect_CoreAtlas_640x512_1
+  - first:
+      213: -7147611902292903460
+    second: CharacterSelect_CoreAtlas_640x512_2
+  - first:
+      213: -8437017986142631769
+    second: CharacterSelect_CoreAtlas_640x512_3
+  - first:
+      213: -8298670651733015817
+    second: CharacterSelect_CoreAtlas_640x512_4
+  - first:
+      213: 2021112459256947613
+    second: CharacterSelect_CoreAtlas_640x512_5
+  - first:
+      213: 5853039032995490027
+    second: CharacterSelect_CoreAtlas_640x512_6
+  - first:
+      213: 2951494942847097453
+    second: CharacterSelect_CoreAtlas_640x512_7
+  - first:
+      213: 8967269913134978225
+    second: CharacterSelect_CoreAtlas_640x512_8
+  - first:
+      213: -9070236896167698001
+    second: CharacterSelect_CoreAtlas_640x512_9
+  - first:
+      213: -3468347347201635320
+    second: CharacterSelect_CoreAtlas_640x512_10
+  - first:
+      213: -2167059370485050138
+    second: CharacterSelect_CoreAtlas_640x512_11
+  - first:
+      213: -7942377873653305151
+    second: CharacterSelect_CoreAtlas_640x512_12
+  - first:
+      213: -4618737948475928271
+    second: CharacterSelect_CoreAtlas_640x512_13
+  - first:
+      213: 8944465389180591936
+    second: CharacterSelect_CoreAtlas_640x512_14
+  - first:
+      213: -5705829352129706455
+    second: CharacterSelect_CoreAtlas_640x512_15
+  - first:
+      213: 5466385705205578978
+    second: CharacterSelect_CoreAtlas_640x512_16
+  - first:
+      213: -6171631857834673558
+    second: CharacterSelect_CoreAtlas_640x512_17
+  - first:
+      213: -2703899742267961432
+    second: CharacterSelect_CoreAtlas_640x512_18
+  - first:
+      213: -7348319381965593397
+    second: CharacterSelect_CoreAtlas_640x512_19
+  - first:
+      213: -4489680508593367758
+    second: CharacterSelect_CoreAtlas_640x512_20
+  - first:
+      213: -7299898016100072167
+    second: CharacterSelect_CoreAtlas_640x512_21
+  - first:
+      213: -2304081726666115544
+    second: CharacterSelect_CoreAtlas_640x512_22
+  - first:
+      213: 1452769346364312704
+    second: CharacterSelect_CoreAtlas_640x512_23
+  - first:
+      213: 7687279762596067223
+    second: CharacterSelect_CoreAtlas_640x512_24
+  - first:
+      213: 4910618978165094795
+    second: CharacterSelect_CoreAtlas_640x512_25
+  - first:
+      213: 4182633258541585880
+    second: CharacterSelect_CoreAtlas_640x512_26
+  - first:
+      213: 4553226682714577528
+    second: CharacterSelect_CoreAtlas_640x512_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 3237
+        width: 577
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1668a6dc6f82ebdd0800000000000000
+      internalID: -2468490505279076767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_1
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 3288
+        width: 334
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31c3bee7fad447590800000000000000
+      internalID: -7677426048615891949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_2
+      rect:
+        serializedVersion: 2
+        x: 1434
+        y: 3285
+        width: 333
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd93a7338d49ecc90800000000000000
+      internalID: -7147611902292903460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_3
+      rect:
+        serializedVersion: 2
+        x: 2186
+        y: 3259
+        width: 112
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a80364c7d0b9ea80800000000000000
+      internalID: -8437017986142631769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_4
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 2741
+        width: 145
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f28e7fa20335dc80800000000000000
+      internalID: -8298670651733015817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 2591
+        width: 420
+        height: 449
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d936029c21f6c0c10800000000000000
+      internalID: 2021112459256947613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_6
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 2655
+        width: 427
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be821326dfb2a3150800000000000000
+      internalID: 5853039032995490027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_7
+      rect:
+        serializedVersion: 2
+        x: 2165
+        y: 2724
+        width: 153
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6a53c84301d5f820800000000000000
+      internalID: 2951494942847097453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_8
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 2223
+        width: 151
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b45571b974227c70800000000000000
+      internalID: 8967269913134978225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_9
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 2208
+        width: 161
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1684f599b002280800000000000000
+      internalID: -9070236896167698001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_10
+      rect:
+        serializedVersion: 2
+        x: 1527
+        y: 2222
+        width: 150
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80cc06cb674fddfc0800000000000000
+      internalID: -3468347347201635320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_11
+      rect:
+        serializedVersion: 2
+        x: 2166
+        y: 2222
+        width: 152
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e49e0febfe0de1e0800000000000000
+      internalID: -2167059370485050138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_12
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 1712
+        width: 157
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c0f8f8876107c190800000000000000
+      internalID: -7942377873653305151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_13
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 1717
+        width: 115
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 131d9769e42f6efb0800000000000000
+      internalID: -4618737948475928271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_14
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 1716
+        width: 126
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f92e3b1ef112c70800000000000000
+      internalID: 8944465389180591936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_15
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 1717
+        width: 119
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 926cf4d5f62d0d0b0800000000000000
+      internalID: -5705829352129706455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_16
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 1205
+        width: 114
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec3d0436d08cdb40800000000000000
+      internalID: 5466385705205578978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_17
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 1182
+        width: 417
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6ab7452685f95aa0800000000000000
+      internalID: -6171631857834673558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_18
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1237
+        width: 259
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8af09d1a281d97ad0800000000000000
+      internalID: -2703899742267961432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_19
+      rect:
+        serializedVersion: 2
+        x: 2107
+        y: 1238
+        width: 265
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc4a2d58476850a90800000000000000
+      internalID: -7348319381965593397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_20
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 707
+        width: 354
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2351c426d5371b1c0800000000000000
+      internalID: -4489680508593367758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_21
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 710
+        width: 475
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 915c6cd4e6d81ba90800000000000000
+      internalID: -7299898016100072167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_22
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 706
+        width: 107
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826f89c80e14600e0800000000000000
+      internalID: -2304081726666115544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_23
+      rect:
+        serializedVersion: 2
+        x: 2195
+        y: 703
+        width: 94
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08c0f9ef506492410800000000000000
+      internalID: 1452769346364312704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_24
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 198
+        width: 86
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79776921734beaa60800000000000000
+      internalID: 7687279762596067223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_25
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 201
+        width: 89
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8972dc61f5062440800000000000000
+      internalID: 4910618978165094795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_26
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 206
+        width: 95
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d51b11c9c2bb0a30800000000000000
+      internalID: 4182633258541585880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterSelect_CoreAtlas_640x512_27
+      rect:
+        serializedVersion: 2
+        x: 2195
+        y: 208
+        width: 90
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a580d3b8f403f30800000000000000
+      internalID: 4553226682714577528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CharacterSelect_CoreAtlas_640x512_0: -2468490505279076767
+      CharacterSelect_CoreAtlas_640x512_1: -7677426048615891949
+      CharacterSelect_CoreAtlas_640x512_10: -3468347347201635320
+      CharacterSelect_CoreAtlas_640x512_11: -2167059370485050138
+      CharacterSelect_CoreAtlas_640x512_12: -7942377873653305151
+      CharacterSelect_CoreAtlas_640x512_13: -4618737948475928271
+      CharacterSelect_CoreAtlas_640x512_14: 8944465389180591936
+      CharacterSelect_CoreAtlas_640x512_15: -5705829352129706455
+      CharacterSelect_CoreAtlas_640x512_16: 5466385705205578978
+      CharacterSelect_CoreAtlas_640x512_17: -6171631857834673558
+      CharacterSelect_CoreAtlas_640x512_18: -2703899742267961432
+      CharacterSelect_CoreAtlas_640x512_19: -7348319381965593397
+      CharacterSelect_CoreAtlas_640x512_2: -7147611902292903460
+      CharacterSelect_CoreAtlas_640x512_20: -4489680508593367758
+      CharacterSelect_CoreAtlas_640x512_21: -7299898016100072167
+      CharacterSelect_CoreAtlas_640x512_22: -2304081726666115544
+      CharacterSelect_CoreAtlas_640x512_23: 1452769346364312704
+      CharacterSelect_CoreAtlas_640x512_24: 7687279762596067223
+      CharacterSelect_CoreAtlas_640x512_25: 4910618978165094795
+      CharacterSelect_CoreAtlas_640x512_26: 4182633258541585880
+      CharacterSelect_CoreAtlas_640x512_27: 4553226682714577528
+      CharacterSelect_CoreAtlas_640x512_3: -8437017986142631769
+      CharacterSelect_CoreAtlas_640x512_4: -8298670651733015817
+      CharacterSelect_CoreAtlas_640x512_5: 2021112459256947613
+      CharacterSelect_CoreAtlas_640x512_6: 5853039032995490027
+      CharacterSelect_CoreAtlas_640x512_7: 2951494942847097453
+      CharacterSelect_CoreAtlas_640x512_8: 8967269913134978225
+      CharacterSelect_CoreAtlas_640x512_9: -9070236896167698001
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
