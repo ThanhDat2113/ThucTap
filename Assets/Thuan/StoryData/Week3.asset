@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4db601df17a70c47982177800aca9d8, type: 3}
+  m_Name: Week3
+  m_EditorClassIdentifier: Assembly-CSharp::StoryWeekData
+  weekNumber: 3
+  title: BROKEN SIGNALS
+  description: Something is jamming the city's airwaves. A hooded rapper is broadcasting
+    from the shadows, and every beat he drops pulls the crowd further away.
+  cardNormal: {fileID: 21300000, guid: c0eeba2001ff88d4d874ab316ed5edf6, type: 3}
+  cardSelected: {fileID: 21300000, guid: abb0ff9eb34283b4fb281b8b10a49259, type: 3}
+  detailArt: {fileID: 21300000, guid: 23d71fd3364ac5d4eb4400d97ff8cda5, type: 3}
+  tracks:
+  - title: Static Heart
+    song: {fileID: 0}
+  - title: Glitch Talk
+    song: {fileID: 0}
+  - title: Real Me
+    song: {fileID: 0}

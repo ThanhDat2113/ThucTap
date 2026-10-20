@@ -66,7 +66,9 @@ public class HudDemoPlayer : MonoBehaviour
         songLength = song != null && song.clip != null ? song.clip.length : fallbackLength;
 
         string diff = GameSession.SelectedDifficulty.ToString();
-        hud.SetSongInfo(song != null ? song.songName : "Demo Track", song != null ? song.artist : "Rhythm Battle", diff);
+        string artist = song != null ? song.artist : "Rhythm Battle";
+        if (StorySession.Active) artist += "   |   WEEK " + StorySession.Week.weekNumber + "  " + (StorySession.TrackIndex + 1) + "/" + StorySession.TrackCount;
+        hud.SetSongInfo(song != null ? song.songName : "Demo Track", artist, diff);
         hud.PauseChanged += OnPause;
         hud.RestartRequested += () => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         hud.QuitRequested += () => { if (audioSource != null) audioSource.Stop(); SceneManager.LoadScene(songListScene); };

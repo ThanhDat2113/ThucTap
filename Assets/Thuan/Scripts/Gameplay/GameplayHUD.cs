@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum HudJudgement { Perfect = 0, Good = 1, Bad = 2, Miss = 3 }
 
@@ -85,7 +86,7 @@ public class GameplayHUD : MonoBehaviour
         if (restartButton != null) restartButton.onClick.AddListener(Restart);
         if (quitButton != null) quitButton.onClick.AddListener(Quit);
         if (resultRetryButton != null) resultRetryButton.onClick.AddListener(Restart);
-        if (resultContinueButton != null) resultContinueButton.onClick.AddListener(Quit);
+        if (resultContinueButton != null) resultContinueButton.onClick.AddListener(Continue);
     }
 
     private void Start()
@@ -231,6 +232,7 @@ public class GameplayHUD : MonoBehaviour
         SongData song = GameSession.SelectedSong;
         bool newBest = cleared && song != null && score > 0 && score > SongStats.GetBestScore(song);
         if (cleared && song != null) SongStats.SaveResult(song, score, maxCombo, accuracy);
+        StorySession.Report(cleared, score, accuracy);
         if (newBestLabel != null) newBestLabel.SetActive(newBest);
 
         if (resultPanel == null) return;
@@ -238,11 +240,21 @@ public class GameplayHUD : MonoBehaviour
         resultPanel.SetActive(true);
         if (resultTitle != null)
         {
-            resultTitle.text = cleared ? "SONG CLEAR!" : "FAILED";
+            resultTitle.text = !cleared ? "FAILED" : (StorySession.Active && StorySession.WeekCompleted ? "WEEK CLEAR!" : "SONG CLEAR!");
             resultTitle.color = cleared ? new Color(0.3f, 0.95f, 1f) : new Color(1f, 0.3f, 0.45f);
         }
         if (resultScore != null) resultScore.text = score.ToString("N0");
-        if (resultCombo != null) resultCombo.text = "MAX COMBO  " + maxCombo + (accuracy >= 0f ? "   ACC  " + accuracy.ToString("0.0") + "%" : "");
+        if (resultCombo != null)
+        {
+            resultCombo.text = "MAX COMBO  " + maxCombo + (accuracy >= 0f ? "   ACC  " + accuracy.ToString("0.0") + "%" : "");
+            if (StorySession.Active)
+                resultCombo.text += "\n<size=85%><color=#7FF4FF>WEEK " + StorySession.Week.weekNumber + "  -  TRACK " + (StorySession.TrackIndex + 1) + "/" + StorySession.TrackCount + "   TOTAL " + StorySession.RunScore.ToString("N0") + "</color></size>";
+        }
+        if (resultContinueButton != null)
+        {
+            var label = resultContinueButton.GetComponentInChildren<TMP_Text>();
+            if (label != null) label.text = StorySession.Active && cleared && StorySession.HasNext ? "NEXT SONG" : "CONTINUE";
+        }
     }
 
     private void Restart()
@@ -252,9 +264,24 @@ public class GameplayHUD : MonoBehaviour
         if (RestartRequested != null) RestartRequested();
     }
 
+    // Story Mode: qua bai -> sang bai tiep theo trong tuan; con lai ve man chon nhac
+    private void Continue()
+    {
+        Time.timeScale = 1f;
+        if (StorySession.Active && StorySession.LastCleared && StorySession.HasNext)
+        {
+            StorySession.Advance();
+            if (GameSession.SelectedSong != null) SongStats.IncrementPlayCount(GameSession.SelectedSong);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            return;
+        }
+        Quit();
+    }
+
     private void Quit()
     {
         Time.timeScale = 1f;
+        StorySession.End();
         if (QuitRequested != null) QuitRequested();
     }
 
