@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RhythmGame;
 
 public enum BgScene
 {
@@ -42,6 +43,10 @@ public class WorldBackgroundSelector : MonoBehaviour
     public bool cleanLeftovers = true;
     [Tooltip("Bật = mọi cảnh đều động: đập theo nhịp, phản ứng theo nhạc và combo, chớp khi Miss / Perfect")]
     public bool dynamicBackground = true;
+    [Tooltip("Bật = note đổi kiểu và màu lane cho khớp từng cảnh (receptor đổi theo)")]
+    public bool matchNotesToScene = true;
+    [Tooltip("Để trống = tự thêm vào cùng object với Selector")]
+    public NoteThemeApplier noteTheme;
 
     BgScene applied = (BgScene)(-1);
     Transform camTf;
@@ -55,6 +60,11 @@ public class WorldBackgroundSelector : MonoBehaviour
         if (!cam) cam = Camera.main;
         if (!cam) { Debug.LogError("WorldBackgroundSelector: không tìm thấy Camera."); enabled = false; return; }
         camTf = cam.transform;
+        if (matchNotesToScene && !noteTheme)
+        {
+            noteTheme = GetComponent<NoteThemeApplier>();
+            if (!noteTheme) noteTheme = gameObject.AddComponent<NoteThemeApplier>();
+        }
         Apply(scene);
     }
 
@@ -78,6 +88,7 @@ public class WorldBackgroundSelector : MonoBehaviour
         Clear();
         if (cleanLeftovers) PurgeLeftovers();
         applied = s;
+        if (matchNotesToScene && noteTheme) noteTheme.ApplyForScene(s);
         if (s == BgScene.None) return;
 
         pendingBefore = new HashSet<Transform>();

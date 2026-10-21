@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\Gameplay\JudgementSystem.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NoteThemeApplier.cs" />
     <Compile Include="Assets\Scripts\Data\NoteData.cs" />
     <Compile Include="Assets\VFX\SpeedLines.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundSnow.cs" />

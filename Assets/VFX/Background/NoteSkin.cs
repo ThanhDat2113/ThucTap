@@ -3,26 +3,15 @@ using UnityEngine;
 
 namespace RhythmGame
 {
-    // Giữ nguyên thứ tự 4 giá trị đầu để prefab cũ không bị đổi style. Skin mới nằm phía sau Custom.
-    public enum NoteStyle { Neon, Glass, Capsule, Custom, Outline, Crystal, Flat, Soft }
+    public enum NoteStyle { Neon, Glass, Capsule, Custom }
 
     /// <summary>
     /// Tự vẽ sprite note đẹp bằng code (viền neon, vầng sáng, gradient) thay cho khối trắng của prefab.
     /// Hình được vẽ theo kích thước THẬT của note nên góc bo không bị méo dù prefab scale lệch trục.
     /// Màu vẫn do NoteView tô theo màu lane (sr.color), nên Miss / Hold vẫn tự đổi màu như cũ.
     ///
-    /// CÁCH DÙNG: không cần làm gì thêm, NoteView tự thêm component này vào note.
-    /// Muốn đổi skin: chọn prefab note, mở component NoteSkin trong Inspector, đổi Style.
-    ///
-    /// Các skin dựng sẵn:
-    ///   Neon    - viền sáng + vầng sáng mạnh, ruột tối (hợp nhạc điện tử)
-    ///   Glass   - kính mờ, có vệt bóng phía trên
-    ///   Capsule - bo tròn hẳn hai đầu, mềm mại
-    ///   Outline - chỉ có viền sáng, ruột gần như trong suốt (tối giản, dễ nhìn nền)
-    ///   Crystal - ruột sáng, vệt bóng mạnh, góc vuông hơn (cảm giác pha lê)
-    ///   Flat    - màu phẳng, không glow (dành cho máy yếu / phong cách tối giản)
-    ///   Soft    - vầng sáng rất lớn, bo tròn (phong cách mơ màng)
-    ///   Custom  - tự kéo các thanh trượt bên dưới
+    /// CÁCH DÙNG: không cần làm gì thêm, NoteView (bản mới) tự thêm component này vào note.
+    /// Muốn chỉnh: chọn prefab note, mở component NoteSkin trong Inspector.
     /// </summary>
     public class NoteSkin : MonoBehaviour
     {
@@ -50,6 +39,10 @@ namespace RhythmGame
         /// <summary>Kích thước phần thân note (không tính vầng sáng) theo đơn vị local của prefab.</summary>
         public Vector2 CoreLocalSize { get; private set; } = Vector2.one;
 
+        SpriteRenderer headSr;
+        bool coreMeasured;
+        Vector2 coreMeasuredSize;   // kích thước thân note lúc đầu (đo 1 lần, tránh đo lại phần vầng sáng)
+
         struct Params
         {
             public float corner, border, glowSize, glowAlpha, fillBottom, fillTop, fillAlpha, shine, innerGlow;
@@ -57,30 +50,36 @@ namespace RhythmGame
 
         static readonly Dictionary<string, Sprite> cache = new Dictionary<string, Sprite>();
 
-        static Params P(float corner, float border, float glowSize, float glowAlpha,
-                        float fillBottom, float fillTop, float fillAlpha, float shine, float innerGlow)
+        // Kiểu note áp cho TOÀN BỘ note, kể cả note được pool tạo ra về sau (NotePool không tạo sẵn note)
+        static bool hasGlobalStyle;
+        static NoteStyle globalStyle;
+        public static void SetGlobalStyle(NoteStyle s) { hasGlobalStyle = true; globalStyle = s; }
+        public static void ClearGlobalStyle() { hasGlobalStyle = false; }
+        NoteStyle EffectiveStyle { get { return hasGlobalStyle ? globalStyle : style; } }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStatics()
         {
-            return new Params
-            {
-                corner = corner, border = border, glowSize = glowSize, glowAlpha = glowAlpha,
-                fillBottom = fillBottom, fillTop = fillTop, fillAlpha = fillAlpha, shine = shine, innerGlow = innerGlow
-            };
+            hasGlobalStyle = false;
+            cache.Clear();   // texture cũ đã bị huỷ giữa các lần Play nếu tắt Domain Reload
         }
 
         Params GetParams()
         {
-            switch (style)
+            switch (EffectiveStyle)
             {
-                //                      corner border glowSz glowA  fillB  fillT  fillA  shine  inner
-                case NoteStyle.Neon:    return P(0.30f, 0.12f, 0.70f, 0.55f, 0.25f, 0.45f, 0.90f, 0.00f, 0.50f);
-                case NoteStyle.Glass:   return P(0.35f, 0.06f, 0.45f, 0.40f, 0.60f, 0.95f, 0.80f, 0.35f, 0.30f);
-                case NoteStyle.Capsule: return P(0.50f, 0.08f, 0.60f, 0.50f, 0.70f, 0.90f, 0.95f, 0.20f, 0.30f);
-                case NoteStyle.Outline: return P(0.30f, 0.10f, 0.60f, 0.50f, 0.10f, 0.25f, 0.18f, 0.00f, 0.60f);
-                case NoteStyle.Crystal: return P(0.20f, 0.07f, 0.50f, 0.45f, 0.55f, 1.00f, 0.85f, 0.60f, 0.40f);
-                case NoteStyle.Flat:    return P(0.15f, 0.00f, 0.00f, 0.00f, 0.85f, 0.95f, 1.00f, 0.00f, 0.00f);
-                case NoteStyle.Soft:    return P(0.50f, 0.04f, 1.20f, 0.60f, 0.50f, 0.80f, 0.90f, 0.10f, 0.50f);
-                default:                return P(cornerRadius, borderWidth, glowSize, glowAlpha,
-                                                 fillBottom, fillTop, fillAlpha, shine, innerGlow);
+                case NoteStyle.Neon:
+                    return new Params { corner = 0.30f, border = 0.12f, glowSize = 0.70f, glowAlpha = 0.55f,
+                                        fillBottom = 0.32f, fillTop = 0.58f, fillAlpha = 0.90f, shine = 0f, innerGlow = 0.5f };
+                case NoteStyle.Glass:
+                    return new Params { corner = 0.35f, border = 0.06f, glowSize = 0.45f, glowAlpha = 0.40f,
+                                        fillBottom = 0.60f, fillTop = 0.95f, fillAlpha = 0.80f, shine = 0.35f, innerGlow = 0.3f };
+                case NoteStyle.Capsule:
+                    return new Params { corner = 0.50f, border = 0.08f, glowSize = 0.60f, glowAlpha = 0.50f,
+                                        fillBottom = 0.70f, fillTop = 0.90f, fillAlpha = 0.95f, shine = 0.2f, innerGlow = 0.3f };
+                default:
+                    return new Params { corner = cornerRadius, border = borderWidth, glowSize = glowSize, glowAlpha = glowAlpha,
+                                        fillBottom = fillBottom, fillTop = fillTop, fillAlpha = fillAlpha, shine = shine, innerGlow = innerGlow };
             }
         }
 
@@ -91,13 +90,19 @@ namespace RhythmGame
             float sx = Mathf.Max(Mathf.Abs(ls.x), 0.0001f);
             float sy = Mathf.Max(Mathf.Abs(ls.y), 0.0001f);
 
-            Vector2 core = (sizeOverride.x > 0f && sizeOverride.y > 0f) ? sizeOverride : (Vector2)head.bounds.size;
+            headSr = head;
+            if (!coreMeasured)
+            {
+                coreMeasuredSize = (Vector2)head.bounds.size;
+                coreMeasured = true;
+            }
+            Vector2 core = (sizeOverride.x > 0f && sizeOverride.y > 0f) ? sizeOverride : coreMeasuredSize;
             if (core.x < 0.01f || core.y < 0.01f) core = new Vector2(1.5f, 0.35f);
             CoreLocalSize = new Vector2(core.x / sx, core.y / sy);
 
             Params p = GetParams();
-            string key = string.Format("head|{0:F3}|{1:F3}|{2:F3}|{3:F3}|{4:F3}|{5:F3}|{6:F3}|{7:F3}|{8:F3}|{9:F3}|{10:F3}|{11:F3}|{12:F3}",
-                core.x, core.y, sx, sy, p.corner, p.border, p.glowSize, p.glowAlpha, p.fillBottom, p.fillTop, p.fillAlpha, p.shine, p.innerGlow);
+            string key = string.Format("head|{0:F3}|{1:F3}|{2:F3}|{3:F3}|{4:F3}|{5:F3}|{6:F3}|{7:F3}|{8:F3}|{9:F3}|{10:F3}|{11:F3}",
+                core.x, core.y, sx, sy, p.corner, p.border, p.glowSize, p.glowAlpha, p.fillBottom, p.fillTop, p.fillAlpha, p.shine + p.innerGlow);
             if (!cache.TryGetValue(key, out Sprite head_) || head_ == null)
             {
                 head_ = BuildHead(core, sx, sy, p);
@@ -113,6 +118,13 @@ namespace RhythmGame
             BodySprite = body_;
 
             head.sprite = HeadSprite;
+        }
+
+        /// <summary>Đổi kiểu note lúc đang chạy (dùng khi đổi cảnh nền) và vẽ lại sprite.</summary>
+        public void SetStyle(NoteStyle s)
+        {
+            style = s;
+            if (headSr != null) Apply(headSr);
         }
 
         /// <summary>Gán sprite cho thân và đuôi của hold note (đuôi dùng chung hình với đầu).</summary>
@@ -169,7 +181,7 @@ namespace RhythmGame
                           + Mathf.Min(Mathf.Max(qx, qy), 0f) - r;   // d < 0: bên trong, d > 0: bên ngoài
 
                 float inside = Mathf.Clamp01(0.5f - d / e);
-                float edge = bw > 0f ? Mathf.Clamp01(0.5f + (d + bw) / e) : 0f;   // 1 ở dải viền sát mép
+                float edge = Mathf.Clamp01(0.5f + (d + bw) / e);   // 1 ở dải viền sát mép
 
                 // ruột note: gradient dọc + dải bóng + sáng dần về phía viền
                 float t = Mathf.Clamp01(wy / ch + 0.5f);

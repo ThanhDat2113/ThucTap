@@ -1504,6 +1504,7 @@ GameObject:
   - component: {fileID: 772989726}
   - component: {fileID: 772989731}
   - component: {fileID: 772989734}
+  - component: {fileID: 772989735}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1641,7 +1642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e67bcb340ec5a1458c668d24abb20a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundGradientPro
-  preset: 7
+  preset: 9
   topColor: {r: 0.45, g: 0.15, b: 0.55, a: 1}
   middleColor: {r: 0.7, g: 0.2, b: 0.6, a: 1}
   bottomColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}
@@ -1665,10 +1666,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d026163250599a478726c8bda994bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSelector
-  scene: 7
+  scene: 9
   includeGradient: 1
   cleanLeftovers: 1
   dynamicBackground: 1
+  matchNotesToScene: 1
+  noteTheme: {fileID: 0}
+--- !u!114 &772989735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772989722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720b4de0ae2c58a4a974525e3473e697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.NoteThemeApplier
+  spawner: {fileID: 0}
+  receptors: {fileID: 0}
+  overrideStyle: 1
+  overrideLaneColors: 1
+  overrideReceptors: 1
+  debugLog: 1
 --- !u!1 &837932949
 GameObject:
   m_ObjectHideFlags: 0
