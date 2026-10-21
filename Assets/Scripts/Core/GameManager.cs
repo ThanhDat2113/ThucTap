@@ -17,6 +17,7 @@ namespace RhythmGame
         public InputHandler input;
         public HealthSystem playerHealthSystem;
         public HealthSystem opponentHealthSystem;
+        public FlowSystem flowSystem;
 
         [Header("Battle")]
         public OpponentAI opponentAI;
@@ -74,6 +75,9 @@ namespace RhythmGame
 
             if (playerHealthSystem != null) playerHealthSystem.ResetHealth();
             if (opponentHealthSystem != null) opponentHealthSystem.ResetHealth();
+
+            flowSystem?.Reset();
+            judgement?.ResetCombo();
 
             if (opponentAI != null)
             {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace RhythmGame
 {
@@ -27,6 +28,11 @@ namespace RhythmGame
         public TMP_Text badText;
         public TMP_Text missText;
         public Button continueButton;
+        public Button retryButton;
+        public Button confirmButton; // Trở về màn hình chọn nhạc
+
+        [Header("Scene")]
+        public string songListSceneName = "Thuan_SongList";
 
         [Header("Animation")]
         public float fadeDuration = 0.3f;
@@ -47,6 +53,12 @@ namespace RhythmGame
             
             if (continueButton != null)
                 continueButton.onClick.AddListener(OnContinueClicked);
+
+            if (retryButton != null)
+                retryButton.onClick.AddListener(OnRetryClicked);
+
+            if (confirmButton != null)
+                confirmButton.onClick.AddListener(OnConfirmClicked);
             
             if (panelRoot != null) panelRoot.SetActive(false);
             if (panelCanvasGroup != null) panelCanvasGroup.alpha = 0f;
@@ -60,6 +72,10 @@ namespace RhythmGame
             }
             if (continueButton != null)
                 continueButton.onClick.RemoveListener(OnContinueClicked);
+            if (retryButton != null)
+                retryButton.onClick.RemoveListener(OnRetryClicked);
+            if (confirmButton != null)
+                confirmButton.onClick.RemoveListener(OnConfirmClicked);
         }
 
         void OnStateChanged(GameState state)
@@ -151,6 +167,32 @@ namespace RhythmGame
         {
             Time.timeScale = 1f;
             StartCoroutine(FadeAndHide());
+        }
+
+        void OnRetryClicked()
+        {
+            Time.timeScale = 1f;
+            StartCoroutine(FadeAndRetry());
+        }
+
+        System.Collections.IEnumerator FadeAndRetry()
+        {
+            yield return FadePanel(1f, 0f, fadeDuration);
+            HidePanelImmediate();
+            if (gameManager != null) gameManager.Restart();
+        }
+
+        void OnConfirmClicked()
+        {
+            Time.timeScale = 1f;
+            StartCoroutine(FadeAndGoToSongList());
+        }
+
+        System.Collections.IEnumerator FadeAndGoToSongList()
+        {
+            yield return FadePanel(1f, 0f, fadeDuration);
+            HidePanelImmediate();
+            SceneManager.LoadScene(songListSceneName);
         }
 
         System.Collections.IEnumerator FadeAndHide()

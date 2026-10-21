@@ -10,6 +10,7 @@ namespace RhythmGame
         public NoteSpawner spawner;
         public InputHandler input;
         public HealthSystem healthSystem;
+        public FlowSystem flowSystem;
 
         [Header("Timing window (giây)")]
         public float perfectWindow = 0.045f;
@@ -38,6 +39,7 @@ namespace RhythmGame
         public System.Action<int> OnLaneActivated;
 
         float songTime;
+        int _combo;
 
         void Start()
         {
@@ -77,6 +79,9 @@ namespace RhythmGame
                     OnJudged?.Invoke(Judgement.Miss, 0, false, NoteOwner.Player);
                     PlaySfx(Judgement.Miss);
                     healthSystem?.ApplyJudgement(Judgement.Miss);
+
+                    _combo = 0;
+                    flowSystem?.OnMiss();
                 }
             }
         }
@@ -107,6 +112,9 @@ namespace RhythmGame
             PlaySfx(judgement);
             OnJudged?.Invoke(judgement, points, true, note.Data.owner);
             healthSystem?.ApplyJudgement(judgement);
+
+            _combo++;
+            flowSystem?.OnNoteJudged(true, _combo);
         }
 
         void HandleRelease(int lane)
@@ -143,6 +151,9 @@ namespace RhythmGame
             PlaySfx(tailJudgement);
             OnJudged?.Invoke(tailJudgement, holdCompletePoints + tailPoints, tailJudgement != Judgement.Miss, holding.Data.owner);
             healthSystem?.ApplyJudgement(tailJudgement);
+
+            _combo++;
+            flowSystem?.OnNoteJudged(tailJudgement != Judgement.Miss, _combo);
         }
 
         void CompleteHold(NoteView n)
@@ -152,6 +163,9 @@ namespace RhythmGame
             PlaySfx(Judgement.HoldComplete);
             OnJudged?.Invoke(Judgement.HoldComplete, holdCompletePoints, true, n.Data.owner);
             healthSystem?.ApplyJudgement(Judgement.HoldComplete);
+
+            _combo++;
+            flowSystem?.OnNoteJudged(true, _combo);
         }
 
         public void JudgeOpponentNote(NoteView note, Judgement judgement)
@@ -211,6 +225,12 @@ namespace RhythmGame
                 _ => missSfx
             };
             if (clip != null) audioSource.PlayOneShot(clip);
+        }
+
+        public void ResetCombo()
+        {
+            _combo = 0;
+            flowSystem?.Reset();
         }
     }
 }

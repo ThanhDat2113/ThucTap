@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace RhythmGame
 {
@@ -10,6 +11,7 @@ namespace RhythmGame
         [Header("Refs")]
         public GameManager gameManager;
         public JudgementSystem judgement;
+        public FlowSystem flowSystem;
 
         [Header("UI Elements")]
         public TMP_Text countdownText;
@@ -18,6 +20,11 @@ namespace RhythmGame
         public TMP_Text messageText;
         [Tooltip("Chữ grade (S/A/B/C/D/E/F). Để trống thì phần này tự tắt.")]
         public TMP_Text gradeText;
+
+        [Header("Flow UI")]
+        public Image flowBar;
+        public TMP_Text flowText;
+        public TMP_Text flowStatusText;
 
         [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
@@ -50,15 +57,26 @@ namespace RhythmGame
         {
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
+            if (flowSystem != null)
+            {
+                flowSystem.OnFlowAmountChanged += HandleFlowAmountChanged;
+                flowSystem.OnFlowStateChanged += HandleFlowStateChanged;
+            }
             if (gradeText != null) gradeBaseScale = gradeText.transform.localScale;
             if (countdownText != null) countdownBaseScale = countdownText.transform.localScale;
             UpdateGrade();
+            UpdateFlowUI();
         }
 
         void OnDestroy()
         {
             if (gameManager != null) gameManager.OnStateChanged -= HandleStateChanged;
             if (judgement != null) judgement.OnJudged -= HandleJudged;
+            if (flowSystem != null)
+            {
+                flowSystem.OnFlowAmountChanged -= HandleFlowAmountChanged;
+                flowSystem.OnFlowStateChanged -= HandleFlowStateChanged;
+            }
         }
 
         void HandleStateChanged(GameState state)
@@ -96,6 +114,7 @@ namespace RhythmGame
                 score = combo = maxCombo = 0;
                 UpdateScoreUI();
                 UpdateGrade();
+                UpdateFlowUI();
             }
         }
 
@@ -104,7 +123,8 @@ namespace RhythmGame
             // Chỉ xử lý note của player cho single-player UI
             if (owner != NoteOwner.Player) return;
 
-            score += points;
+            float multiplier = flowSystem != null ? flowSystem.FlowScoreMultiplier : 1f;
+            score += Mathf.RoundToInt(points * multiplier);
             combo = isHit ? combo + 1 : 0;
             maxCombo = Mathf.Max(maxCombo, combo);
             UpdateScoreUI();
@@ -115,6 +135,29 @@ namespace RhythmGame
         {
             scoreText.text = "Score: " + score;
             comboText.text = "Combo: " + combo + " (max " + maxCombo + ")";
+        }
+
+        void HandleFlowAmountChanged(float normalized)
+        {
+            UpdateFlowUI();
+        }
+
+        void HandleFlowStateChanged(bool isActive)
+        {
+            UpdateFlowUI();
+            if (flowStatusText != null)
+            {
+                flowStatusText.text = isActive ? "IN THE FLOW!" : "";
+                flowStatusText.color = isActive ? Color.magenta : Color.white;
+            }
+        }
+
+        void UpdateFlowUI()
+        {
+            if (flowBar != null)
+                flowBar.fillAmount = flowSystem != null ? flowSystem.NormalizedFlow : 0f;
+            if (flowText != null && flowSystem != null)
+                flowText.text = $"FLOW: {flowSystem.FlowAmount:F0}/{flowSystem.maxFlow:F0}";
         }
 
         void UpdateGrade()

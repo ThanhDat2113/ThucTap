@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace RhythmGame
 {
@@ -8,12 +9,18 @@ namespace RhythmGame
         [Header("Refs")]
         public GameManager gameManager;
         public JudgementSystem judgement;
+        public FlowSystem flowSystem;
 
         [Header("Player UI")]
         public TMP_Text playerScoreText;
         public TMP_Text playerComboText;
         public TMP_Text playerGradeText;
         public HealthBar playerHealthBar;
+
+        [Header("Flow UI")]
+        public Image flowBar;
+        public TMP_Text flowText;
+        public TMP_Text flowStatusText;
 
         [Header("Opponent UI")]
         public TMP_Text opponentScoreText;
@@ -45,6 +52,11 @@ namespace RhythmGame
         {
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
+            if (flowSystem != null)
+            {
+                flowSystem.OnFlowAmountChanged += HandleFlowAmountChanged;
+                flowSystem.OnFlowStateChanged += HandleFlowStateChanged;
+            }
 
             if (gameManager.chart != null)
             {
@@ -56,6 +68,11 @@ namespace RhythmGame
         {
             if (gameManager != null) gameManager.OnStateChanged -= HandleStateChanged;
             if (judgement != null) judgement.OnJudged -= HandleJudged;
+            if (flowSystem != null)
+            {
+                flowSystem.OnFlowAmountChanged -= HandleFlowAmountChanged;
+                flowSystem.OnFlowStateChanged -= HandleFlowStateChanged;
+            }
         }
 
         void CalculateMaxScores(ChartData chart)
@@ -97,6 +114,7 @@ namespace RhythmGame
                 playerGrade = opponentGrade = Grade.F;
                 UpdatePlayerUI();
                 UpdateOpponentUI();
+                UpdateFlowUI();
             }
         }
 
@@ -106,7 +124,8 @@ namespace RhythmGame
             {
                 if (isHit && points > 0)
                 {
-                    playerScore += points;
+                    float multiplier = flowSystem != null ? flowSystem.FlowScoreMultiplier : 1f;
+                    playerScore += Mathf.RoundToInt(points * multiplier);
                     playerCombo = isHit ? playerCombo + 1 : 0;
                     playerMaxCombo = Mathf.Max(playerMaxCombo, playerCombo);
                 }
@@ -136,6 +155,29 @@ namespace RhythmGame
             int combo = owner == NoteOwner.Player ? playerCombo : opponentCombo;
             int maxCombo = owner == NoteOwner.Player ? playerMaxCombo : opponentMaxCombo;
             turnResultPanel?.RecordScore(points, combo, maxCombo);
+        }
+
+        void HandleFlowAmountChanged(float normalized)
+        {
+            UpdateFlowUI();
+        }
+
+        void HandleFlowStateChanged(bool isActive)
+        {
+            UpdateFlowUI();
+            if (flowStatusText != null)
+            {
+                flowStatusText.text = isActive ? "IN THE FLOW!" : "";
+                flowStatusText.color = isActive ? Color.magenta : Color.white;
+            }
+        }
+
+        void UpdateFlowUI()
+        {
+            if (flowBar != null)
+                flowBar.fillAmount = flowSystem != null ? flowSystem.NormalizedFlow : 0f;
+            if (flowText != null && flowSystem != null)
+                flowText.text = $"FLOW: {flowSystem.FlowAmount:F0}/{flowSystem.maxFlow:F0}";
         }
 
         void UpdatePlayerUI()

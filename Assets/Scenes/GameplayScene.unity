@@ -410,7 +410,10 @@ MonoBehaviour:
   goodText: {fileID: 261031704}
   badText: {fileID: 805922319}
   missText: {fileID: 430988611}
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 246373762}
+  retryButton: {fileID: 1637727079}
+  confirmButton: {fileID: 246373762}
+  songListSceneName: Thuan_SongList
   fadeDuration: 0.3
 --- !u!1 &182536842 stripped
 GameObject:
@@ -535,6 +538,7 @@ RectTransform:
   - {fileID: 433048013}
   - {fileID: 1510705371}
   - {fileID: 2127167514}
+  - {fileID: 1055755922}
   - {fileID: 1307869609}
   - {fileID: 1778707734}
   m_Father: {fileID: 0}
@@ -544,6 +548,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &246373762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4569827861162051328, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
+  m_PrefabInstance: {fileID: 825858333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &257773906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,11 +1474,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.UIController
   gameManager: {fileID: 443643777}
   judgement: {fileID: 443643778}
+  flowSystem: {fileID: 1986998219}
   countdownText: {fileID: 2025360695}
   scoreText: {fileID: 939561461}
   comboText: {fileID: 702269747}
   messageText: {fileID: 433048014}
   gradeText: {fileID: 1510705372}
+  flowBar: {fileID: 1055755923}
+  flowText: {fileID: 0}
+  flowStatusText: {fileID: 0}
   thresholdS: 0.95
   thresholdA: 0.9
   thresholdB: 0.8
@@ -1520,6 +1539,7 @@ MonoBehaviour:
   input: {fileID: 443643779}
   playerHealthSystem: {fileID: 443643784}
   opponentHealthSystem: {fileID: 443643784}
+  flowSystem: {fileID: 1986998219}
   opponentAI: {fileID: 443643786}
   playerCharacter: {fileID: 1893438986}
   opponentCharacter: {fileID: 394965248}
@@ -1541,6 +1561,7 @@ MonoBehaviour:
   spawner: {fileID: 443643780}
   input: {fileID: 443643779}
   healthSystem: {fileID: 443643784}
+  flowSystem: {fileID: 1986998219}
   perfectWindow: 0.045
   goodWindow: 0.09
   missWindow: 0.14
@@ -1744,10 +1765,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.BattleUIController
   gameManager: {fileID: 443643777}
   judgement: {fileID: 443643778}
+  flowSystem: {fileID: 1986998219}
   playerScoreText: {fileID: 939561461}
   playerComboText: {fileID: 702269747}
   playerGradeText: {fileID: 1510705372}
   playerHealthBar: {fileID: 443643785}
+  flowBar: {fileID: 1055755923}
+  flowText: {fileID: 0}
+  flowStatusText: {fileID: 0}
   opponentScoreText: {fileID: 0}
   opponentComboText: {fileID: 0}
   opponentGradeText: {fileID: 0}
@@ -3623,6 +3648,81 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 7.36, y: 13.08}
   m_EdgeRadius: 0
+--- !u!1 &1055755921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1055755922}
+  - component: {fileID: 1055755924}
+  - component: {fileID: 1055755923}
+  m_Layer: 5
+  m_Name: Image (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1055755922
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055755921}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000105, y: 1.0000105, z: 1.0000105}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 225792405}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0010376, y: 443}
+  m_SizeDelta: {x: 1920.8, y: 39.17}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1055755923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055755921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1055755924
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055755921}
+  m_CullTransparentMesh: 1
 --- !u!1 &1133791183
 GameObject:
   m_ObjectHideFlags: 0
@@ -4691,6 +4791,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1637727079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 532997229626003040, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
+  m_PrefabInstance: {fileID: 825858333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1698091516 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 193002931076995869, guid: 233c7362691b5dc458a50273a194aef6, type: 3}
@@ -5270,6 +5381,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
+--- !u!1 &1986998217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1986998218}
+  - component: {fileID: 1986998219}
+  m_Layer: 0
+  m_Name: Flow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1986998218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986998217}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1144.7136, y: 746.7492, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986998219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986998217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3241fe27d0aa444aa613415b03e4b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.FlowSystem
+  flowBuildPerHit: 10
+  flowBuildPerCombo: 2
+  maxFlow: 100
+  flowDrainRate: 20
+  flowScoreMultiplier: 1.5
 --- !u!1 &2018538452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5723,3 +5883,4 @@ SceneRoots:
   - {fileID: 1893438989}
   - {fileID: 394965251}
   - {fileID: 119438322}
+  - {fileID: 1986998218}
