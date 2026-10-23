@@ -1642,7 +1642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e67bcb340ec5a1458c668d24abb20a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundGradientPro
-  preset: 9
+  preset: 2
   topColor: {r: 0.45, g: 0.15, b: 0.55, a: 1}
   middleColor: {r: 0.7, g: 0.2, b: 0.6, a: 1}
   bottomColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}
@@ -1666,7 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d026163250599a478726c8bda994bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSelector
-  scene: 9
+  scene: 2
   includeGradient: 1
   cleanLeftovers: 1
   dynamicBackground: 1

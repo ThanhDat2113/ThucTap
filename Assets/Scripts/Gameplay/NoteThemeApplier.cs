@@ -27,6 +27,11 @@ namespace RhythmGame
         [Tooltip("In 1 dòng vào Console mỗi lần áp theme để kiểm tra")]
         public bool debugLog = true;
 
+        [Header("Kiểu cố định (tuỳ chọn)")]
+        [Tooltip("Bật = luôn dùng đúng 1 kiểu note cho MỌI cảnh, bỏ qua kiểu tự chọn theo cảnh (màu lane vẫn theo cảnh)")]
+        public bool useFixedStyle = false;
+        public NoteStyle fixedStyle = NoteStyle.Neon;
+
         bool captured;
         Color[] defaultColors;
         NoteStyle defaultStyle = NoteStyle.Neon;
@@ -90,7 +95,8 @@ namespace RhythmGame
             if (overrideStyle)
             {
                 // Pool chưa tạo note nào lúc này -> đặt kiểu toàn cục để note tạo sau cũng dùng đúng kiểu
-                if (hasTheme) NoteSkin.SetGlobalStyle(style);
+                if (useFixedStyle) style = fixedStyle;
+                if (hasTheme || useFixedStyle) NoteSkin.SetGlobalStyle(style);
                 else NoteSkin.ClearGlobalStyle();
 
                 foreach (var note in notes)
@@ -130,7 +136,7 @@ namespace RhythmGame
             {
                 case BgScene.Synthwave:
                 case BgScene.SynthBars:
-                    style = NoteStyle.Neon;
+                    style = NoteStyle.Slant;
                     colors = Cols(1.00f, 0.25f, 0.75f, 0.20f, 1.00f, 1.00f, 0.70f, 0.35f, 1.00f, 1.00f, 0.85f, 0.25f);
                     return true;
                 case BgScene.Sunset:
@@ -138,31 +144,31 @@ namespace RhythmGame
                     colors = Cols(1.00f, 0.85f, 0.35f, 1.00f, 0.40f, 0.50f, 0.75f, 0.55f, 1.00f, 0.40f, 0.90f, 1.00f);
                     return true;
                 case BgScene.Dream:
-                    style = NoteStyle.Capsule;
+                    style = NoteStyle.Bubble;
                     colors = Cols(1.00f, 0.55f, 0.85f, 0.75f, 0.60f, 1.00f, 0.50f, 1.00f, 0.95f, 1.00f, 0.95f, 0.60f);
                     return true;
                 case BgScene.Aurora:
-                    style = NoteStyle.Neon;
+                    style = NoteStyle.Laser;
                     colors = Cols(0.30f, 1.00f, 0.60f, 0.30f, 0.85f, 1.00f, 0.70f, 0.45f, 1.00f, 1.00f, 0.40f, 0.80f);
                     return true;
                 case BgScene.Rainy:
-                    style = NoteStyle.Glass;
+                    style = NoteStyle.Outline;
                     colors = Cols(0.40f, 0.75f, 1.00f, 0.65f, 0.60f, 1.00f, 0.35f, 0.95f, 0.85f, 1.00f, 0.80f, 0.45f);
                     return true;
                 case BgScene.Blossom:
-                    style = NoteStyle.Capsule;
+                    style = NoteStyle.Petal;
                     colors = Cols(0.90f, 0.20f, 0.50f, 0.60f, 0.25f, 0.75f, 0.10f, 0.70f, 0.70f, 1.00f, 0.50f, 0.25f);
                     return true;
                 case BgScene.Night:
-                    style = NoteStyle.Neon;
+                    style = NoteStyle.Cyber;
                     colors = Cols(0.55f, 0.65f, 1.00f, 1.00f, 0.85f, 0.40f, 1.00f, 0.50f, 0.80f, 0.50f, 1.00f, 0.80f);
                     return true;
                 case BgScene.Day:
-                    style = NoteStyle.Glass;
+                    style = NoteStyle.Candy;
                     colors = Cols(1.00f, 0.55f, 0.15f, 1.00f, 0.30f, 0.60f, 0.20f, 0.80f, 0.40f, 0.55f, 0.30f, 0.90f);
                     return true;
                 case BgScene.Winter:
-                    style = NoteStyle.Glass;
+                    style = NoteStyle.Gem;
                     colors = Cols(0.15f, 0.40f, 0.90f, 0.50f, 0.30f, 0.85f, 0.10f, 0.70f, 0.75f, 0.85f, 0.25f, 0.60f);
                     return true;
                 case BgScene.Forest:
@@ -174,7 +180,7 @@ namespace RhythmGame
                     colors = Cols(1.00f, 0.60f, 0.15f, 0.95f, 0.25f, 0.20f, 1.00f, 0.85f, 0.30f, 1.00f, 0.95f, 0.70f);
                     return true;
                 case BgScene.Equalizer:
-                    style = NoteStyle.Neon;
+                    style = NoteStyle.Arrow;
                     colors = Cols(1.00f, 0.30f, 0.70f, 0.30f, 1.00f, 1.00f, 0.70f, 1.00f, 0.40f, 0.80f, 0.50f, 1.00f);
                     return true;
                 default:

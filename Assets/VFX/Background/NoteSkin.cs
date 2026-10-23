@@ -3,15 +3,32 @@ using UnityEngine;
 
 namespace RhythmGame
 {
-    public enum NoteStyle { Neon, Glass, Capsule, Custom }
+    // Giữ nguyên thứ tự 4 giá trị đầu để không lệch giá trị đã lưu trong Inspector
+    public enum NoteStyle
+    {
+        Neon, Glass, Capsule, Custom,
+        Outline, Cyber, Slant, Gem, Arrow, Petal, Bubble, Pixel, Laser, Candy, Flat
+    }
+
+    public enum NoteShape { Rounded, Chamfer, Slant, Gem, Arrow, Ellipse }
 
     /// <summary>
-    /// Tự vẽ sprite note đẹp bằng code (viền neon, vầng sáng, gradient) thay cho khối trắng của prefab.
-    /// Hình được vẽ theo kích thước THẬT của note nên góc bo không bị méo dù prefab scale lệch trục.
-    /// Màu vẫn do NoteView tô theo màu lane (sr.color), nên Miss / Hold vẫn tự đổi màu như cũ.
-    ///
-    /// CÁCH DÙNG: không cần làm gì thêm, NoteView (bản mới) tự thêm component này vào note.
-    /// Muốn chỉnh: chọn prefab note, mở component NoteSkin trong Inspector.
+    /// Tự vẽ sprite note đẹp bằng code thay cho khối trắng của prefab. 15 kiểu có sẵn:
+    ///   Neon, Glass, Capsule        : bo góc, viền sáng / kính / viên thuốc
+    ///   Outline                     : chỉ có viền (gọn, hợp nền rối)
+    ///   Cyber                       : vuông vát góc + vạch scanline
+    ///   Slant                       : hình bình hành nghiêng (tốc độ)
+    ///   Gem                         : hình ngọc nhọn hai đầu, có vạch sáng giữa
+    ///   Arrow                       : mũi tên chỉ xuống vạch bấm
+    ///   Petal                       : cánh hoa / chiếc lá (oval mềm)
+    ///   Bubble                      : bong bóng trong suốt, có điểm bóng
+    ///   Pixel                       : khối pixel retro
+    ///   Laser                       : tia sáng, lõi trắng nóng
+    ///   Candy                       : viên kẹo sọc chéo
+    ///   Flat                        : phẳng, tối giản (hợp nền sáng)
+    ///   Custom                      : tự chỉnh mọi thông số bên dưới
+    /// Hình được vẽ theo kích thước THẬT của note nên không bị méo dù prefab scale lệch trục.
+    /// Màu vẫn do NoteView tô theo màu lane (sr.color) nên Miss / Hold tự đổi màu như cũ.
     /// </summary>
     public class NoteSkin : MonoBehaviour
     {
@@ -21,11 +38,12 @@ namespace RhythmGame
         public Vector2 sizeOverride = Vector2.zero;
 
         [Header("Tuỳ chỉnh (chỉ có tác dụng khi Style = Custom)")]
-        [Tooltip("Độ bo góc, tính theo % chiều cao note")]
+        public NoteShape shape = NoteShape.Rounded;
+        [Tooltip("Độ bo góc (chỉ cho Rounded), % chiều cao note")]
         [Range(0f, 0.5f)] public float cornerRadius = 0.3f;
-        [Tooltip("Độ dày viền sáng, tính theo % chiều cao note")]
+        [Tooltip("Độ dày viền sáng, % chiều cao note")]
         [Range(0f, 0.5f)] public float borderWidth = 0.12f;
-        [Tooltip("Vầng sáng bên ngoài, tính theo % chiều cao note")]
+        [Tooltip("Vầng sáng bên ngoài, % chiều cao note")]
         [Range(0f, 2f)] public float glowSize = 0.7f;
         [Range(0f, 1f)] public float glowAlpha = 0.55f;
         [Range(0f, 1f)] public float fillBottom = 0.25f;
@@ -33,6 +51,14 @@ namespace RhythmGame
         [Range(0f, 1f)] public float fillAlpha = 0.9f;
         [Range(0f, 1f)] public float shine = 0f;
         [Range(0f, 1f)] public float innerGlow = 0.5f;
+        [Tooltip("Điểm bóng loáng phía trên (kiểu bong bóng)")]
+        [Range(0f, 1f)] public float specular = 0f;
+        [Tooltip("Vạch sáng trắng chạy dọc giữa note (kiểu tia laser)")]
+        [Range(0f, 1f)] public float centerLine = 0f;
+        [Range(0f, 1f)] public float scanlines = 0f;
+        [Range(0f, 1f)] public float stripes = 0f;
+        [Tooltip("0 = mịn. Số khác 0 = vẽ khối pixel, số hàng pixel trên chiều cao note")]
+        [Range(0, 12)] public int pixelRows = 0;
 
         public Sprite HeadSprite { get; private set; }
         public Sprite BodySprite { get; private set; }
@@ -45,7 +71,29 @@ namespace RhythmGame
 
         struct Params
         {
-            public float corner, border, glowSize, glowAlpha, fillBottom, fillTop, fillAlpha, shine, innerGlow;
+            public NoteShape shape;
+            public float corner, border, glowSize, glowAlpha, fillBottom, fillTop, fillAlpha;
+            public float shine, innerGlow, specular, centerLine, scan, stripe;
+            public int pixelRows;
+
+            public string Key()
+            {
+                return string.Format("{0}|{1:F3}|{2:F3}|{3:F3}|{4:F3}|{5:F3}|{6:F3}|{7:F3}|{8:F3}|{9:F3}|{10:F3}|{11:F3}|{12:F3}|{13:F3}|{14}",
+                    (int)shape, corner, border, glowSize, glowAlpha, fillBottom, fillTop, fillAlpha,
+                    shine, innerGlow, specular, centerLine, scan, stripe, pixelRows);
+            }
+        }
+
+        static Params P(NoteShape shape, float corner, float border, float glowSize, float glowAlpha,
+                        float fillBottom, float fillTop, float fillAlpha, float shine, float innerGlow,
+                        float specular, float centerLine, float scan, float stripe, int pixelRows)
+        {
+            return new Params
+            {
+                shape = shape, corner = corner, border = border, glowSize = glowSize, glowAlpha = glowAlpha,
+                fillBottom = fillBottom, fillTop = fillTop, fillAlpha = fillAlpha, shine = shine, innerGlow = innerGlow,
+                specular = specular, centerLine = centerLine, scan = scan, stripe = stripe, pixelRows = pixelRows
+            };
         }
 
         static readonly Dictionary<string, Sprite> cache = new Dictionary<string, Sprite>();
@@ -66,20 +114,26 @@ namespace RhythmGame
 
         Params GetParams()
         {
+            //                                    hình               bo    viền  glowS glowA fillB fillT fillA shine inner spec  line  scan  stripe pixel
             switch (EffectiveStyle)
             {
-                case NoteStyle.Neon:
-                    return new Params { corner = 0.30f, border = 0.12f, glowSize = 0.70f, glowAlpha = 0.55f,
-                                        fillBottom = 0.32f, fillTop = 0.58f, fillAlpha = 0.90f, shine = 0f, innerGlow = 0.5f };
-                case NoteStyle.Glass:
-                    return new Params { corner = 0.35f, border = 0.06f, glowSize = 0.45f, glowAlpha = 0.40f,
-                                        fillBottom = 0.60f, fillTop = 0.95f, fillAlpha = 0.80f, shine = 0.35f, innerGlow = 0.3f };
-                case NoteStyle.Capsule:
-                    return new Params { corner = 0.50f, border = 0.08f, glowSize = 0.60f, glowAlpha = 0.50f,
-                                        fillBottom = 0.70f, fillTop = 0.90f, fillAlpha = 0.95f, shine = 0.2f, innerGlow = 0.3f };
+                case NoteStyle.Neon:    return P(NoteShape.Rounded, .30f, .12f, .70f, .55f, .32f, .58f, .90f, 0f,   .5f, 0f,   0f,   0f,  0f,  0);
+                case NoteStyle.Glass:   return P(NoteShape.Rounded, .35f, .06f, .45f, .40f, .60f, .95f, .80f, .35f, .3f, 0f,   0f,   0f,  0f,  0);
+                case NoteStyle.Capsule: return P(NoteShape.Rounded, .50f, .08f, .60f, .50f, .70f, .90f, .95f, .20f, .3f, 0f,   0f,   0f,  0f,  0);
+                case NoteStyle.Outline: return P(NoteShape.Rounded, .28f, .14f, .60f, .55f, .55f, .55f, .12f, 0f,   .6f, 0f,   0f,   0f,  0f,  0);
+                case NoteStyle.Cyber:   return P(NoteShape.Chamfer, 0f,   .10f, .50f, .50f, .20f, .40f, .90f, 0f,   .5f, 0f,   0f,   .6f, 0f,  0);
+                case NoteStyle.Slant:   return P(NoteShape.Slant,   0f,   .10f, .55f, .50f, .35f, .65f, .90f, 0f,   .4f, 0f,   0f,   0f,  0f,  0);
+                case NoteStyle.Gem:     return P(NoteShape.Gem,     0f,   .09f, .55f, .50f, .55f, .95f, .90f, .30f, .3f, 0f,   .55f, 0f,  0f,  0);
+                case NoteStyle.Arrow:   return P(NoteShape.Arrow,   0f,   .10f, .50f, .50f, .35f, .70f, .90f, 0f,   .4f, 0f,   0f,   0f,  0f,  0);
+                case NoteStyle.Petal:   return P(NoteShape.Ellipse, 0f,   .03f, .50f, .45f, .75f, .95f, .95f, .25f, .25f, .35f, 0f,   0f,  0f,  0);
+                case NoteStyle.Bubble:  return P(NoteShape.Rounded, .50f, .05f, .35f, .35f, .55f, .75f, .55f, 0f,   .4f, .9f,  0f,   0f,  0f,  0);
+                case NoteStyle.Pixel:   return P(NoteShape.Rounded, .20f, .16f, 0f,   0f,   .40f, .65f, 1.0f, 0f,   .2f, 0f,   0f,   0f,  0f,  6);
+                case NoteStyle.Laser:   return P(NoteShape.Rounded, .50f, .05f, .90f, .60f, .25f, .25f, .35f, 0f,   .5f, 0f,   1f,   0f,  0f,  0);
+                case NoteStyle.Candy:   return P(NoteShape.Rounded, .50f, .08f, .30f, .35f, .75f, .95f, 1.0f, 0f,   .2f, .3f,  0f,   0f,  .9f, 0);
+                case NoteStyle.Flat:    return P(NoteShape.Rounded, .30f, .06f, .15f, .25f, .85f, .92f, 1.0f, 0f,   .1f, 0f,   0f,   0f,  0f,  0);
                 default:
-                    return new Params { corner = cornerRadius, border = borderWidth, glowSize = glowSize, glowAlpha = glowAlpha,
-                                        fillBottom = fillBottom, fillTop = fillTop, fillAlpha = fillAlpha, shine = shine, innerGlow = innerGlow };
+                    return P(shape, cornerRadius, borderWidth, glowSize, glowAlpha, fillBottom, fillTop, fillAlpha,
+                             shine, innerGlow, specular, centerLine, scanlines, stripes, pixelRows);
             }
         }
 
@@ -101,8 +155,7 @@ namespace RhythmGame
             CoreLocalSize = new Vector2(core.x / sx, core.y / sy);
 
             Params p = GetParams();
-            string key = string.Format("head|{0:F3}|{1:F3}|{2:F3}|{3:F3}|{4:F3}|{5:F3}|{6:F3}|{7:F3}|{8:F3}|{9:F3}|{10:F3}|{11:F3}",
-                core.x, core.y, sx, sy, p.corner, p.border, p.glowSize, p.glowAlpha, p.fillBottom, p.fillTop, p.fillAlpha, p.shine + p.innerGlow);
+            string key = string.Format("head|{0:F3}|{1:F3}|{2:F3}|{3:F3}|{4}", core.x, core.y, sx, sy, p.Key());
             if (!cache.TryGetValue(key, out Sprite head_) || head_ == null)
             {
                 head_ = BuildHead(core, sx, sy, p);
@@ -144,8 +197,80 @@ namespace RhythmGame
             }
         }
 
-        // Vẽ hình chữ nhật bo góc bằng khoảng cách có dấu (SDF) trong toạ độ WORLD:
-        // mỗi pixel biết nó nằm ở đâu trong thế giới thật nên góc bo luôn tròn, không bị méo theo scale.
+        // ---------- Hình dạng (khoảng cách có dấu, toạ độ WORLD, âm = bên trong) ----------
+        static Vector2[] BuildPoly(NoteShape shape, float hx, float hy)
+        {
+            switch (shape)
+            {
+                case NoteShape.Chamfer:
+                {
+                    float k = Mathf.Min(hy * 0.85f, hx * 0.45f);
+                    return new[]
+                    {
+                        new Vector2(-hx + k, hy), new Vector2(hx - k, hy), new Vector2(hx, hy - k), new Vector2(hx, -hy + k),
+                        new Vector2(hx - k, -hy), new Vector2(-hx + k, -hy), new Vector2(-hx, -hy + k), new Vector2(-hx, hy - k)
+                    };
+                }
+                case NoteShape.Slant:
+                {
+                    float s = Mathf.Min(hy, hx * 0.4f);
+                    return new[] { new Vector2(-hx + s, hy), new Vector2(hx, hy), new Vector2(hx - s, -hy), new Vector2(-hx, -hy) };
+                }
+                case NoteShape.Gem:
+                {
+                    float tip = Mathf.Min(hy * 1.1f, hx * 0.45f);
+                    return new[]
+                    {
+                        new Vector2(-hx, 0f), new Vector2(-hx + tip, hy), new Vector2(hx - tip, hy),
+                        new Vector2(hx, 0f), new Vector2(hx - tip, -hy), new Vector2(-hx + tip, -hy)
+                    };
+                }
+                case NoteShape.Arrow:   // mũi tên chỉ xuống vạch bấm
+                    return new[] { new Vector2(-hx, hy), new Vector2(hx, hy), new Vector2(hx, 0f), new Vector2(0f, -hy), new Vector2(-hx, 0f) };
+                default:
+                    return null;
+            }
+        }
+
+        static float PolySdf(Vector2 pt, Vector2[] v)
+        {
+            float d = Vector2.Dot(pt - v[0], pt - v[0]);
+            float s = 1f;
+            for (int i = 0, j = v.Length - 1; i < v.Length; j = i, i++)
+            {
+                Vector2 e = v[j] - v[i];
+                Vector2 w = pt - v[i];
+                Vector2 b = w - e * Mathf.Clamp01(Vector2.Dot(w, e) / Vector2.Dot(e, e));
+                d = Mathf.Min(d, Vector2.Dot(b, b));
+                bool c1 = pt.y >= v[i].y, c2 = pt.y < v[j].y, c3 = e.x * w.y > e.y * w.x;
+                if ((c1 && c2 && c3) || (!c1 && !c2 && !c3)) s = -s;
+            }
+            return s * Mathf.Sqrt(d);
+        }
+
+        static float Sdf(Vector2 pt, NoteShape shape, float hx, float hy, float r, Vector2[] poly)
+        {
+            switch (shape)
+            {
+                case NoteShape.Rounded:
+                {
+                    float qx = Mathf.Abs(pt.x) - (hx - r);
+                    float qy = Mathf.Abs(pt.y) - (hy - r);
+                    return new Vector2(Mathf.Max(qx, 0f), Mathf.Max(qy, 0f)).magnitude
+                           + Mathf.Min(Mathf.Max(qx, qy), 0f) - r;
+                }
+                case NoteShape.Ellipse:
+                {
+                    // xấp xỉ khoảng cách tới elip: chính xác hơn nhiều so với nhân theo bán kính nhỏ nhất
+                    float k0 = new Vector2(pt.x / hx, pt.y / hy).magnitude;
+                    float k1 = new Vector2(pt.x / (hx * hx), pt.y / (hy * hy)).magnitude;
+                    return k1 > 1e-9f ? k0 * (k0 - 1f) / k1 : -Mathf.Min(hx, hy);
+                }
+                default:
+                    return PolySdf(new Vector2(pt.x, pt.y + 2e-4f * hy), poly);   // lệch nhẹ để tránh trùng đúng mép ngang
+            }
+        }
+
         Sprite BuildHead(Vector2 core, float sx, float sy, Params p)
         {
             float cw = core.x, ch = core.y;
@@ -160,7 +285,7 @@ namespace RhythmGame
 
             var tex = new Texture2D(W, H, TextureFormat.RGBA32, false);
             tex.wrapMode = TextureWrapMode.Clamp;
-            tex.filterMode = FilterMode.Bilinear;
+            tex.filterMode = p.pixelRows > 0 ? FilterMode.Point : FilterMode.Bilinear;
             var px = new Color32[W * H];
 
             float hx = cw * 0.5f, hy = ch * 0.5f;
@@ -168,26 +293,56 @@ namespace RhythmGame
             float bw = p.border * ch;
             float e = Mathf.Max(Wt / W, Ht / H);        // độ rộng mép mượt (1 pixel)
             float glowLen = Mathf.Max(pad, 0.0001f);
+            Vector2[] poly = BuildPoly(p.shape, hx, hy);
+            float cell = p.pixelRows > 0 ? ch / p.pixelRows : 0f;
+            float lineSig = 0.08f * ch;
 
             for (int j = 0; j < H; j++)
             for (int i = 0; i < W; i++)
             {
                 float wx = ((i + 0.5f) / W - 0.5f) * Wt;
                 float wy = ((j + 0.5f) / H - 0.5f) * Ht;
+                if (cell > 0f)   // kiểu Pixel: làm tròn toạ độ về ô lưới -> mép răng cưa, vầng sáng thành bậc
+                {
+                    wx = (Mathf.Floor(wx / cell) + 0.5f) * cell;
+                    wy = (Mathf.Floor(wy / cell) + 0.5f) * cell;
+                }
 
-                float qx = Mathf.Abs(wx) - (hx - r);
-                float qy = Mathf.Abs(wy) - (hy - r);
-                float d = new Vector2(Mathf.Max(qx, 0f), Mathf.Max(qy, 0f)).magnitude
-                          + Mathf.Min(Mathf.Max(qx, qy), 0f) - r;   // d < 0: bên trong, d > 0: bên ngoài
-
+                float d = Sdf(new Vector2(wx, wy), p.shape, hx, hy, r, poly);   // d < 0: bên trong
                 float inside = Mathf.Clamp01(0.5f - d / e);
-                float edge = Mathf.Clamp01(0.5f + (d + bw) / e);   // 1 ở dải viền sát mép
+                float edge = Mathf.Clamp01(0.5f + (d + bw) / e);                // 1 ở dải viền sát mép
 
                 // ruột note: gradient dọc + dải bóng + sáng dần về phía viền
                 float t = Mathf.Clamp01(wy / ch + 0.5f);
                 float v = Mathf.Lerp(p.fillBottom, p.fillTop, t);
                 v += p.shine * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.55f, 0.95f, t)) * 0.5f;
                 v += p.innerGlow * 0.35f * Mathf.Exp(Mathf.Min(d, 0f) / (0.35f * ch));
+
+                if (p.scan > 0f)    // vạch ngang kiểu màn hình CRT
+                    v *= 1f - p.scan * 0.5f * (0.5f + 0.5f * Mathf.Sin(wy / ch * 18.85f));
+                if (p.stripe > 0f)  // sọc chéo kiểu kẹo
+                {
+                    float st = Mathf.Repeat((wx + wy) / (ch * 0.9f), 1f);
+                    float band = Mathf.SmoothStep(0f, 1f, Mathf.Abs(st * 2f - 1f));
+                    v *= 1f - p.stripe * 0.35f * (1f - band);
+                }
+
+                float fa = p.fillAlpha;
+                if (p.centerLine > 0f)   // lõi trắng nóng chạy dọc giữa
+                {
+                    float cl = Mathf.Exp(-(wy * wy) / (2f * lineSig * lineSig));
+                    v = Mathf.Lerp(v, 1f, p.centerLine * cl);
+                    fa = Mathf.Max(fa, p.centerLine * cl);
+                }
+                if (p.specular > 0f)     // điểm bóng loáng phía trên
+                {
+                    float dy = wy - 0.30f * ch;
+                    float sp = Mathf.Exp(-(dy * dy) / (2f * (0.12f * ch) * (0.12f * ch)));
+                    float fx = Mathf.Clamp01(1f - Mathf.Pow(Mathf.Abs(wx) / (hx * 0.85f), 4f));
+                    float sv = p.specular * sp * fx;
+                    v = Mathf.Lerp(v, 1f, sv * 0.85f);
+                    fa = Mathf.Max(fa, sv * 0.9f);
+                }
                 v = Mathf.Lerp(Mathf.Clamp01(v), 1f, edge);
 
                 // vầng sáng bên ngoài
@@ -198,7 +353,7 @@ namespace RhythmGame
                     glow *= Mathf.Clamp01((pad - d) / (0.25f * pad));   // tắt hẳn trước mép texture
                 }
 
-                float insideA = Mathf.Lerp(p.fillAlpha, 1f, edge);
+                float insideA = Mathf.Lerp(fa, 1f, edge);
                 float a = Mathf.Lerp(glow, insideA, inside);
                 float c = Mathf.Lerp(1f, v, inside);
 
