@@ -1,0 +1,3601 @@
+fileFormatVersion: 2
+guid: f34ef1f8a15c5b34e91f292954bb0670
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8839088058817677565
+    second: airi_nova_dance_120_0
+  - first:
+      213: -1263378555529273826
+    second: airi_nova_dance_120_1
+  - first:
+      213: -4690313203902498371
+    second: airi_nova_dance_120_2
+  - first:
+      213: -8545989652819617274
+    second: airi_nova_dance_120_3
+  - first:
+      213: 4386385692636821835
+    second: airi_nova_dance_120_4
+  - first:
+      213: 181715745794459670
+    second: airi_nova_dance_120_5
+  - first:
+      213: -4582363519174541125
+    second: airi_nova_dance_120_6
+  - first:
+      213: 626104520985897323
+    second: airi_nova_dance_120_7
+  - first:
+      213: -2440281695079016106
+    second: airi_nova_dance_120_8
+  - first:
+      213: 6909820042118924597
+    second: airi_nova_dance_120_9
+  - first:
+      213: 1090687595756310165
+    second: airi_nova_dance_120_10
+  - first:
+      213: -635069501774022226
+    second: airi_nova_dance_120_11
+  - first:
+      213: 1763494314222103795
+    second: airi_nova_dance_120_12
+  - first:
+      213: -9023548879230112460
+    second: airi_nova_dance_120_13
+  - first:
+      213: -5796579518576825163
+    second: airi_nova_dance_120_14
+  - first:
+      213: 180893832046233419
+    second: airi_nova_dance_120_15
+  - first:
+      213: -2538467102996652784
+    second: airi_nova_dance_120_16
+  - first:
+      213: 6935653210462545296
+    second: airi_nova_dance_120_17
+  - first:
+      213: 2410431617919870323
+    second: airi_nova_dance_120_18
+  - first:
+      213: -3789563566041643666
+    second: airi_nova_dance_120_19
+  - first:
+      213: -5538727855916883089
+    second: airi_nova_dance_120_20
+  - first:
+      213: 864247128601547354
+    second: airi_nova_dance_120_21
+  - first:
+      213: -5536054694218140506
+    second: airi_nova_dance_120_22
+  - first:
+      213: 554056272987012931
+    second: airi_nova_dance_120_23
+  - first:
+      213: -7625771520232911569
+    second: airi_nova_dance_120_24
+  - first:
+      213: -8472171164911000106
+    second: airi_nova_dance_120_25
+  - first:
+      213: 6061908464462958452
+    second: airi_nova_dance_120_26
+  - first:
+      213: 5588559889627677189
+    second: airi_nova_dance_120_27
+  - first:
+      213: 6358234811649487129
+    second: airi_nova_dance_120_28
+  - first:
+      213: -2855751223338770307
+    second: airi_nova_dance_120_29
+  - first:
+      213: 4808424620449749376
+    second: airi_nova_dance_120_30
+  - first:
+      213: 780697821112661668
+    second: airi_nova_dance_120_31
+  - first:
+      213: 984664297753988523
+    second: airi_nova_dance_120_32
+  - first:
+      213: -4146108862855963978
+    second: airi_nova_dance_120_33
+  - first:
+      213: 4881651078210808196
+    second: airi_nova_dance_120_34
+  - first:
+      213: -3234266261077496573
+    second: airi_nova_dance_120_35
+  - first:
+      213: 7369141465741520384
+    second: airi_nova_dance_120_36
+  - first:
+      213: -2795790561638415843
+    second: airi_nova_dance_120_37
+  - first:
+      213: 163713821745785305
+    second: airi_nova_dance_120_38
+  - first:
+      213: -4233909412065111243
+    second: airi_nova_dance_120_39
+  - first:
+      213: -6747015529521274701
+    second: airi_nova_dance_120_40
+  - first:
+      213: 5753059285675588707
+    second: airi_nova_dance_120_41
+  - first:
+      213: -7263820429042487671
+    second: airi_nova_dance_120_42
+  - first:
+      213: -2572851177281297586
+    second: airi_nova_dance_120_43
+  - first:
+      213: -3419703411239446821
+    second: airi_nova_dance_120_44
+  - first:
+      213: -5448312693373877407
+    second: airi_nova_dance_120_45
+  - first:
+      213: 7820230359813963316
+    second: airi_nova_dance_120_46
+  - first:
+      213: -1198947510880772211
+    second: airi_nova_dance_120_47
+  - first:
+      213: 2266521214619099678
+    second: airi_nova_dance_120_48
+  - first:
+      213: 7052892936177201299
+    second: airi_nova_dance_120_49
+  - first:
+      213: 2746077192564509741
+    second: airi_nova_dance_120_50
+  - first:
+      213: -2406001971585890957
+    second: airi_nova_dance_120_51
+  - first:
+      213: -5366977894647787364
+    second: airi_nova_dance_120_52
+  - first:
+      213: 7035543471071158765
+    second: airi_nova_dance_120_53
+  - first:
+      213: -7891213503759393521
+    second: airi_nova_dance_120_54
+  - first:
+      213: -1831937487681137571
+    second: airi_nova_dance_120_55
+  - first:
+      213: -7554389366092502117
+    second: airi_nova_dance_120_56
+  - first:
+      213: 6079909543164293706
+    second: airi_nova_dance_120_57
+  - first:
+      213: -4276860855007038268
+    second: airi_nova_dance_120_58
+  - first:
+      213: 1663181058671947379
+    second: airi_nova_dance_120_59
+  - first:
+      213: 3503411418817012661
+    second: airi_nova_dance_120_60
+  - first:
+      213: 1308804915401774282
+    second: airi_nova_dance_120_61
+  - first:
+      213: -6735142155630413238
+    second: airi_nova_dance_120_62
+  - first:
+      213: 3926181367957865641
+    second: airi_nova_dance_120_63
+  - first:
+      213: -824800156603743637
+    second: airi_nova_dance_120_64
+  - first:
+      213: 5964084775528393754
+    second: airi_nova_dance_120_65
+  - first:
+      213: 458142218880562020
+    second: airi_nova_dance_120_66
+  - first:
+      213: -7683069663604940074
+    second: airi_nova_dance_120_67
+  - first:
+      213: 5160834877092397518
+    second: airi_nova_dance_120_68
+  - first:
+      213: 5198391386873652993
+    second: airi_nova_dance_120_69
+  - first:
+      213: -7197937935657399298
+    second: airi_nova_dance_120_70
+  - first:
+      213: -8816105315303745943
+    second: airi_nova_dance_120_71
+  - first:
+      213: 4719973181087231426
+    second: airi_nova_dance_120_72
+  - first:
+      213: 4687356769365847200
+    second: airi_nova_dance_120_73
+  - first:
+      213: -5335390008624409741
+    second: airi_nova_dance_120_74
+  - first:
+      213: 6572839054845804844
+    second: airi_nova_dance_120_75
+  - first:
+      213: 4633844248626103893
+    second: airi_nova_dance_120_76
+  - first:
+      213: -6866999841744166168
+    second: airi_nova_dance_120_77
+  - first:
+      213: -2842241084313430214
+    second: airi_nova_dance_120_78
+  - first:
+      213: -5189757401752727035
+    second: airi_nova_dance_120_79
+  - first:
+      213: 5266425109977704281
+    second: airi_nova_dance_120_80
+  - first:
+      213: 5347090900125709852
+    second: airi_nova_dance_120_81
+  - first:
+      213: -158808396925673702
+    second: airi_nova_dance_120_82
+  - first:
+      213: -4025264662702205359
+    second: airi_nova_dance_120_83
+  - first:
+      213: -9055288833950105417
+    second: airi_nova_dance_120_84
+  - first:
+      213: 6214992241366880814
+    second: airi_nova_dance_120_85
+  - first:
+      213: -248370556078090254
+    second: airi_nova_dance_120_86
+  - first:
+      213: -6414593645501563435
+    second: airi_nova_dance_120_87
+  - first:
+      213: -1502693523644761285
+    second: airi_nova_dance_120_88
+  - first:
+      213: 9010192742818933298
+    second: airi_nova_dance_120_89
+  - first:
+      213: 8436317212417530866
+    second: airi_nova_dance_120_90
+  - first:
+      213: -3298522992637365741
+    second: airi_nova_dance_120_91
+  - first:
+      213: -189671428329047459
+    second: airi_nova_dance_120_92
+  - first:
+      213: 8748720767260158938
+    second: airi_nova_dance_120_93
+  - first:
+      213: 9179487009844183902
+    second: airi_nova_dance_120_94
+  - first:
+      213: -7890232862066183927
+    second: airi_nova_dance_120_95
+  - first:
+      213: 1240303122039651231
+    second: airi_nova_dance_120_96
+  - first:
+      213: -3747637415631551355
+    second: airi_nova_dance_120_97
+  - first:
+      213: -4720450094986067418
+    second: airi_nova_dance_120_98
+  - first:
+      213: 3707761923641233405
+    second: airi_nova_dance_120_99
+  - first:
+      213: 3706204491613966496
+    second: airi_nova_dance_120_100
+  - first:
+      213: -5241736690809560788
+    second: airi_nova_dance_120_101
+  - first:
+      213: -9048810224826694812
+    second: airi_nova_dance_120_102
+  - first:
+      213: -5267971190535121127
+    second: airi_nova_dance_120_103
+  - first:
+      213: -7255639088001727804
+    second: airi_nova_dance_120_104
+  - first:
+      213: 3437370640761768973
+    second: airi_nova_dance_120_105
+  - first:
+      213: 6774252797682834836
+    second: airi_nova_dance_120_106
+  - first:
+      213: 8316880448740914689
+    second: airi_nova_dance_120_107
+  - first:
+      213: -6708387216733607070
+    second: airi_nova_dance_120_108
+  - first:
+      213: -5945133835161852805
+    second: airi_nova_dance_120_109
+  - first:
+      213: -6909633452627102484
+    second: airi_nova_dance_120_110
+  - first:
+      213: -8821562380565472723
+    second: airi_nova_dance_120_111
+  - first:
+      213: 621342836914908349
+    second: airi_nova_dance_120_112
+  - first:
+      213: 1178116816084466839
+    second: airi_nova_dance_120_113
+  - first:
+      213: 5083832021475307335
+    second: airi_nova_dance_120_114
+  - first:
+      213: 1131261119939953807
+    second: airi_nova_dance_120_115
+  - first:
+      213: 9194932598031806649
+    second: airi_nova_dance_120_116
+  - first:
+      213: -5361846665640384410
+    second: airi_nova_dance_120_117
+  - first:
+      213: 7453488942220850837
+    second: airi_nova_dance_120_118
+  - first:
+      213: 5010954712520838829
+    second: airi_nova_dance_120_119
+  - first:
+      213: -7528103451934161407
+    second: airi_nova_dance_120_120
+  - first:
+      213: -2040782204236048068
+    second: airi_nova_dance_120_121
+  - first:
+      213: 7900446322674360958
+    second: airi_nova_dance_120_122
+  - first:
+      213: -4503846383364693686
+    second: airi_nova_dance_120_123
+  - first:
+      213: -2650447352976871487
+    second: airi_nova_dance_120_124
+  - first:
+      213: 7696349476048277838
+    second: airi_nova_dance_120_125
+  - first:
+      213: -5858703266501898660
+    second: airi_nova_dance_120_126
+  - first:
+      213: -6261211905305389
+    second: airi_nova_dance_120_127
+  - first:
+      213: 2205293611010650938
+    second: airi_nova_dance_120_128
+  - first:
+      213: 3605315034760514571
+    second: airi_nova_dance_120_129
+  - first:
+      213: 8076370113444168899
+    second: airi_nova_dance_120_130
+  - first:
+      213: 6677674653592806155
+    second: airi_nova_dance_120_131
+  - first:
+      213: -1983141528723842097
+    second: airi_nova_dance_120_132
+  - first:
+      213: 2339598154931305818
+    second: airi_nova_dance_120_133
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: airi_nova_dance_120_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 5298
+        width: 304
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30776c3fd30455580800000000000000
+      internalID: -8839088058817677565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_1
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 5309
+        width: 318
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ed4dcb5e3977ee0800000000000000
+      internalID: -1263378555529273826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_2
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 5299
+        width: 320
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db9311ccdf8a8eeb0800000000000000
+      internalID: -4690313203902498371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_3
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 5300
+        width: 348
+        height: 372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ad58970bb866980800000000000000
+      internalID: -8545989652819617274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_4
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 5297
+        width: 302
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4939712c829fdc30800000000000000
+      internalID: 4386385692636821835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_5
+      rect:
+        serializedVersion: 2
+        x: 1940
+        y: 5299
+        width: 297
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6188c2e0285958200800000000000000
+      internalID: 181715745794459670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_6
+      rect:
+        serializedVersion: 2
+        x: 2319
+        y: 5299
+        width: 331
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb084ef58ac2860c0800000000000000
+      internalID: -4582363519174541125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_7
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 5298
+        width: 333
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6961ad9ebe50b800800000000000000
+      internalID: 626104520985897323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_8
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 5297
+        width: 315
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6595dec3ab0622ed0800000000000000
+      internalID: -2440281695079016106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_9
+      rect:
+        serializedVersion: 2
+        x: 3476
+        y: 5297
+        width: 296
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5398f50f7bc94ef50800000000000000
+      internalID: 6909820042118924597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_10
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 4818
+        width: 354
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ecaf1f696e22f00800000000000000
+      internalID: 1090687595756310165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_11
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 4820
+        width: 325
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea9331327a7cf27f0800000000000000
+      internalID: -635069501774022226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_12
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 4821
+        width: 349
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fc21a24cb0397810800000000000000
+      internalID: 1763494314222103795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_13
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 4819
+        width: 348
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43d6d186a1ae5c280800000000000000
+      internalID: -9023548879230112460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_14
+      rect:
+        serializedVersion: 2
+        x: 1562
+        y: 4818
+        width: 343
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bc6ce2b3a96e8fa0800000000000000
+      internalID: -5796579518576825163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_15
+      rect:
+        serializedVersion: 2
+        x: 1967
+        y: 4819
+        width: 322
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b47cc295bf9a28200800000000000000
+      internalID: 180893832046233419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_16
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 4821
+        width: 343
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01d9ed38e9d85ccd0800000000000000
+      internalID: -2538467102996652784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_17
+      rect:
+        serializedVersion: 2
+        x: 2706
+        y: 4820
+        width: 351
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 095eae629d3604060800000000000000
+      internalID: 6935653210462545296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_18
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 4821
+        width: 13
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375eb7519c2937120800000000000000
+      internalID: 2410431617919870323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_19
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 4821
+        width: 350
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e654350c304c86bc0800000000000000
+      internalID: -3789563566041643666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_20
+      rect:
+        serializedVersion: 2
+        x: 3471
+        y: 4821
+        width: 18
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6363884c5c7223b0800000000000000
+      internalID: -5538727855916883089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_21
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 4820
+        width: 337
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a52527a3f2c6efb00800000000000000
+      internalID: 864247128601547354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_22
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 4341
+        width: 342
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a47efd369bfb23b0800000000000000
+      internalID: -5536054694218140506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_23
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 4336
+        width: 330
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34fb7f8ae3760b700800000000000000
+      internalID: 554056272987012931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_24
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 4451
+        width: 15
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2d0a369431db2690800000000000000
+      internalID: -7625771520232911569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_25
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 4437
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d52c27863dcc6a80800000000000000
+      internalID: -8472171164911000106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_26
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 4338
+        width: 353
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47f8f3d81a9302450800000000000000
+      internalID: 6061908464462958452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_27
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 4341
+        width: 351
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50201433c9d8e8d40800000000000000
+      internalID: 5588559889627677189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_28
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 4340
+        width: 312
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 911f3e2bfdcfc3850800000000000000
+      internalID: 6358234811649487129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_29
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 4337
+        width: 318
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d70610e84655e58d0800000000000000
+      internalID: -2855751223338770307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_30
+      rect:
+        serializedVersion: 2
+        x: 2324
+        y: 4340
+        width: 347
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 089562757b4fab240800000000000000
+      internalID: 4808424620449749376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_31
+      rect:
+        serializedVersion: 2
+        x: 2726
+        y: 4340
+        width: 330
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a67750388895da00800000000000000
+      internalID: 780697821112661668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_32
+      rect:
+        serializedVersion: 2
+        x: 3117
+        y: 4337
+        width: 285
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: badc2aa36fa3aad00800000000000000
+      internalID: 984664297753988523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_33
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 4336
+        width: 346
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ba1f5dc4ff0676c0800000000000000
+      internalID: -4146108862855963978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_34
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 4343
+        width: 9
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4896822aacb1fb340800000000000000
+      internalID: 4881651078210808196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_35
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 3857
+        width: 346
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30de17fa8f39d13d0800000000000000
+      internalID: -3234266261077496573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_36
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 3862
+        width: 321
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00eef15ae13744660800000000000000
+      internalID: 7369141465741520384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_37
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 3862
+        width: 297
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1207230c4b5339d0800000000000000
+      internalID: -2795790561638415843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_38
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 3856
+        width: 343
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d9aafd7ad0a54200800000000000000
+      internalID: 163713821745785305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_39
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 3856
+        width: 351
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5331daa62d12e35c0800000000000000
+      internalID: -4233909412065111243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_40
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 3862
+        width: 344
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b027d48f19cd52a0800000000000000
+      internalID: -6747015529521274701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_41
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 3870
+        width: 348
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36cb47670f8f6df40800000000000000
+      internalID: 5753059285675588707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_42
+      rect:
+        serializedVersion: 2
+        x: 2706
+        y: 3858
+        width: 345
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98e62be1ec9b13b90800000000000000
+      internalID: -7263820429042487671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_43
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 3859
+        width: 352
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43e33e5c756b4cd0800000000000000
+      internalID: -2572851177281297586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_44
+      rect:
+        serializedVersion: 2
+        x: 3507
+        y: 3858
+        width: 317
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd691e7add5ca80d0800000000000000
+      internalID: -3419703411239446821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_45
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 3378
+        width: 309
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 163c236c874b364b0800000000000000
+      internalID: -5448312693373877407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_46
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 3380
+        width: 341
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43ebf62341a078c60800000000000000
+      internalID: 7820230359813963316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_47
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 3381
+        width: 347
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8fdc95579b7c5fe0800000000000000
+      internalID: -1198947510880772211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_48
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 3376
+        width: 303
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e122241490d447f10800000000000000
+      internalID: 2266521214619099678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_49
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 3378
+        width: 318
+        height: 426
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39034b3f1c8e0e160800000000000000
+      internalID: 7052892936177201299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_50
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 3376
+        width: 319
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2c0c9448a60c1620800000000000000
+      internalID: 2746077192564509741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_51
+      rect:
+        serializedVersion: 2
+        x: 2319
+        y: 3376
+        width: 333
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375cbb254f92c9ed0800000000000000
+      internalID: -2406001971585890957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_52
+      rect:
+        serializedVersion: 2
+        x: 2658
+        y: 3438
+        width: 15
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9015205a0aa485b0800000000000000
+      internalID: -5366977894647787364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_53
+      rect:
+        serializedVersion: 2
+        x: 2664
+        y: 3475
+        width: 9
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de1e303d28543a160800000000000000
+      internalID: 7035543471071158765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_54
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 3378
+        width: 351
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0dd7a5b027cc7290800000000000000
+      internalID: -7891213503759393521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_55
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 3381
+        width: 352
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d545b0c9f86a396e0800000000000000
+      internalID: -1831937487681137571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_56
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 3376
+        width: 350
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9b611b75ea692790800000000000000
+      internalID: -7554389366092502117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_57
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 2897
+        width: 326
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a42b0da448d206450800000000000000
+      internalID: 6079909543164293706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_58
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 2896
+        width: 22
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4388f46b985a4c0800000000000000
+      internalID: -4276860855007038268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_59
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 2896
+        width: 338
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37eac476c5ec41710800000000000000
+      internalID: 1663181058671947379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_60
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 2901
+        width: 279
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b3a2a0af1e9e9030800000000000000
+      internalID: 3503411418817012661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_61
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 2903
+        width: 348
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac4deced22fc92210800000000000000
+      internalID: 1308804915401774282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_62
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 2896
+        width: 339
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4af3edc4e7f782a0800000000000000
+      internalID: -6735142155630413238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_63
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 2896
+        width: 308
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a4c2e007299c7630800000000000000
+      internalID: 3926181367957865641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_64
+      rect:
+        serializedVersion: 2
+        x: 2388
+        y: 2901
+        width: 283
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6282f6a0a8bd84f0800000000000000
+      internalID: -824800156603743637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_65
+      rect:
+        serializedVersion: 2
+        x: 2704
+        y: 2897
+        width: 281
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1c6fa7118fa4c250800000000000000
+      internalID: 5964084775528393754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_66
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 2897
+        width: 349
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4633cf4bbe5ab5600800000000000000
+      internalID: 458142218880562020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_67
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 2897
+        width: 346
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d26f3cf8d0406590800000000000000
+      internalID: -7683069663604940074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_68
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2420
+        width: 353
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec10a893af7fe9740800000000000000
+      internalID: 5160834877092397518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_69
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 2419
+        width: 346
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 107ed029c65642840800000000000000
+      internalID: 5198391386873652993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_70
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 2417
+        width: 345
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efb05d57599cb1c90800000000000000
+      internalID: -7197937935657399298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_71
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 2421
+        width: 347
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96613eaece6e6a580800000000000000
+      internalID: -8816105315303745943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_72
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 2420
+        width: 339
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd2318c996b08140800000000000000
+      internalID: 4719973181087231426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_73
+      rect:
+        serializedVersion: 2
+        x: 1892
+        y: 2655
+        width: 13
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ace295a526dc0140800000000000000
+      internalID: 4687356769365847200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_74
+      rect:
+        serializedVersion: 2
+        x: 1897
+        y: 2692
+        width: 8
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37316c52e03e4f5b0800000000000000
+      internalID: -5335390008624409741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_75
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 2420
+        width: 339
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2106e5cb4a673b50800000000000000
+      internalID: 6572839054845804844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_76
+      rect:
+        serializedVersion: 2
+        x: 2332
+        y: 2434
+        width: 341
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55688dffac8be4040800000000000000
+      internalID: 4633844248626103893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_77
+      rect:
+        serializedVersion: 2
+        x: 2735
+        y: 2420
+        width: 321
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2ec20e60483b0a0800000000000000
+      internalID: -6866999841744166168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_78
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 2418
+        width: 350
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a371a7beac45e88d0800000000000000
+      internalID: -2842241084313430214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_79
+      rect:
+        serializedVersion: 2
+        x: 3487
+        y: 2416
+        width: 338
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 502131eb3274af7b0800000000000000
+      internalID: -5189757401752727035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_80
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 2420
+        width: 14
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9572b6c1cb9161940800000000000000
+      internalID: 5266425109977704281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_81
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1936
+        width: 329
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1677b3f7dea43a40800000000000000
+      internalID: 5347090900125709852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_82
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 1942
+        width: 313
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f55e9ba9ccbcdf0800000000000000
+      internalID: -158808396925673702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_83
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 1938
+        width: 330
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 156d3b4bd136328c0800000000000000
+      internalID: -4025264662702205359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_84
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 1943
+        width: 309
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b0c7d158c6255280800000000000000
+      internalID: -9055288833950105417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_85
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1937
+        width: 349
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e225b7cd386104650800000000000000
+      internalID: 6214992241366880814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_86
+      rect:
+        serializedVersion: 2
+        x: 1961
+        y: 1936
+        width: 323
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f79c409b4c9d8cf0800000000000000
+      internalID: -248370556078090254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_87
+      rect:
+        serializedVersion: 2
+        x: 2331
+        y: 1939
+        width: 325
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ddb66db019caf6a0800000000000000
+      internalID: -6414593645501563435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_88
+      rect:
+        serializedVersion: 2
+        x: 2717
+        y: 1946
+        width: 340
+        height: 328
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3bbfdca33c552be0800000000000000
+      internalID: -1502693523644761285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_89
+      rect:
+        serializedVersion: 2
+        x: 3102
+        y: 1939
+        width: 323
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23a6681cf82aa0d70800000000000000
+      internalID: 9010192742818933298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_90
+      rect:
+        serializedVersion: 2
+        x: 3473
+        y: 1936
+        width: 346
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb19a2aec1d31570800000000000000
+      internalID: 8436317212417530866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_91
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1455
+        width: 329
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 312346480da4932d0800000000000000
+      internalID: -3298522992637365741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_92
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 1460
+        width: 331
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5af76247d62e5df0800000000000000
+      internalID: -189671428329047459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_93
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 1460
+        width: 349
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adbef936f23b96970800000000000000
+      internalID: 8748720767260158938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_94
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 1459
+        width: 350
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e53431aecc6146f70800000000000000
+      internalID: 9179487009844183902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_95
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 1456
+        width: 346
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9017e652403408290800000000000000
+      internalID: -7890232862066183927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_96
+      rect:
+        serializedVersion: 2
+        x: 1956
+        y: 1456
+        width: 318
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9b3bfa3e11763110800000000000000
+      internalID: 1240303122039651231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_97
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 1456
+        width: 351
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 584815650a7bdfbc0800000000000000
+      internalID: -3747637415631551355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_98
+      rect:
+        serializedVersion: 2
+        x: 2748
+        y: 1457
+        width: 304
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 622856c06a79d7eb0800000000000000
+      internalID: -4720450094986067418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_99
+      rect:
+        serializedVersion: 2
+        x: 3098
+        y: 1456
+        width: 337
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dffca5233dd947330800000000000000
+      internalID: 3707761923641233405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_100
+      rect:
+        serializedVersion: 2
+        x: 3486
+        y: 1457
+        width: 334
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a09b9b49551f6330800000000000000
+      internalID: 3706204491613966496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_101
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 978
+        width: 339
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c212a2a604c9147b0800000000000000
+      internalID: -5241736690809560788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_102
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 978
+        width: 338
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 463484d0b0b2c6280800000000000000
+      internalID: -9048810224826694812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_103
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 981
+        width: 337
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9179925fc1864e6b0800000000000000
+      internalID: -5267971190535121127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_104
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 979
+        width: 333
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c2c73501bace4b90800000000000000
+      internalID: -7255639088001727804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_105
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 979
+        width: 334
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c46f3c26ef3bf20800000000000000
+      internalID: 3437370640761768973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_106
+      rect:
+        serializedVersion: 2
+        x: 1938
+        y: 979
+        width: 349
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49dd498270bf20e50800000000000000
+      internalID: 6774252797682834836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_107
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 978
+        width: 350
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 106f79214be7b6370800000000000000
+      internalID: 8316880448740914689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_108
+      rect:
+        serializedVersion: 2
+        x: 2705
+        y: 976
+        width: 347
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26b62d27e5507e2a0800000000000000
+      internalID: -6708387216733607070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_109
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 977
+        width: 346
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b74a50d8644ae7da0800000000000000
+      internalID: -5945133835161852805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_110
+      rect:
+        serializedVersion: 2
+        x: 3514
+        y: 977
+        width: 310
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce47100dbfc0c10a0800000000000000
+      internalID: -6909633452627102484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_111
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 499
+        width: 290
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2a1276e0c3839580800000000000000
+      internalID: -8821562380565472723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_112
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 496
+        width: 301
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbceb06a4047f9800800000000000000
+      internalID: 621342836914908349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_113
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 501
+        width: 354
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79cf0a69003895010800000000000000
+      internalID: 1178116816084466839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_114
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 497
+        width: 302
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74faac9c9466d8640800000000000000
+      internalID: 5083832021475307335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_115
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 498
+        width: 308
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f844b32befb03bf00800000000000000
+      internalID: 1131261119939953807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_116
+      rect:
+        serializedVersion: 2
+        x: 1952
+        y: 496
+        width: 305
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b078572b76fa9f70800000000000000
+      internalID: 9194932598031806649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_117
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 496
+        width: 334
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 668646aadd4e695b0800000000000000
+      internalID: -5361846665640384410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_118
+      rect:
+        serializedVersion: 2
+        x: 2705
+        y: 497
+        width: 348
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5963062e3bc107760800000000000000
+      internalID: 7453488942220850837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_119
+      rect:
+        serializedVersion: 2
+        x: 3093
+        y: 498
+        width: 348
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daecf5903cc7a8540800000000000000
+      internalID: 5010954712520838829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_120
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 499
+        width: 317
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 106821bcbcdc68790800000000000000
+      internalID: -7528103451934161407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_121
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 21
+        width: 346
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c395294d56fada3e0800000000000000
+      internalID: -2040782204236048068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_122
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 20
+        width: 335
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e72eb06721604ad60800000000000000
+      internalID: 7900446322674360958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_123
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 19
+        width: 319
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a41ae94a39f1f71c0800000000000000
+      internalID: -4503846383364693686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_124
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 16
+        width: 347
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cf60f5dc28b73bd0800000000000000
+      internalID: -2650447352976871487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_125
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 16
+        width: 327
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e411f1b421deeca60800000000000000
+      internalID: 7696349476048277838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_126
+      rect:
+        serializedVersion: 2
+        x: 1948
+        y: 16
+        width: 335
+        height: 436
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ecbbb7b64b1bea0800000000000000
+      internalID: -5858703266501898660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_127
+      rect:
+        serializedVersion: 2
+        x: 2398
+        y: 19
+        width: 273
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d455800671c9eff0800000000000000
+      internalID: -6261211905305389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_128
+      rect:
+        serializedVersion: 2
+        x: 2729
+        y: 23
+        width: 313
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a337ab5ead6ca9e10800000000000000
+      internalID: 2205293611010650938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_129
+      rect:
+        serializedVersion: 2
+        x: 3045
+        y: 201
+        width: 12
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0c864e1ce6a80230800000000000000
+      internalID: 3605315034760514571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_130
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 16
+        width: 341
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c4cb66e3d7051070800000000000000
+      internalID: 8076370113444168899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_131
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 24
+        width: 332
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b036705b7bddbac50800000000000000
+      internalID: 6677674653592806155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_132
+      rect:
+        serializedVersion: 2
+        x: 3049
+        y: 171
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb171969477a74e0800000000000000
+      internalID: -1983141528723842097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_120_133
+      rect:
+        serializedVersion: 2
+        x: 3051
+        y: 135
+        width: 6
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5df6dd402ce77020800000000000000
+      internalID: 2339598154931305818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      airi_nova_dance_120_0: -8839088058817677565
+      airi_nova_dance_120_1: -1263378555529273826
+      airi_nova_dance_120_10: 1090687595756310165
+      airi_nova_dance_120_100: 3706204491613966496
+      airi_nova_dance_120_101: -5241736690809560788
+      airi_nova_dance_120_102: -9048810224826694812
+      airi_nova_dance_120_103: -5267971190535121127
+      airi_nova_dance_120_104: -7255639088001727804
+      airi_nova_dance_120_105: 3437370640761768973
+      airi_nova_dance_120_106: 6774252797682834836
+      airi_nova_dance_120_107: 8316880448740914689
+      airi_nova_dance_120_108: -6708387216733607070
+      airi_nova_dance_120_109: -5945133835161852805
+      airi_nova_dance_120_11: -635069501774022226
+      airi_nova_dance_120_110: -6909633452627102484
+      airi_nova_dance_120_111: -8821562380565472723
+      airi_nova_dance_120_112: 621342836914908349
+      airi_nova_dance_120_113: 1178116816084466839
+      airi_nova_dance_120_114: 5083832021475307335
+      airi_nova_dance_120_115: 1131261119939953807
+      airi_nova_dance_120_116: 9194932598031806649
+      airi_nova_dance_120_117: -5361846665640384410
+      airi_nova_dance_120_118: 7453488942220850837
+      airi_nova_dance_120_119: 5010954712520838829
+      airi_nova_dance_120_12: 1763494314222103795
+      airi_nova_dance_120_120: -7528103451934161407
+      airi_nova_dance_120_121: -2040782204236048068
+      airi_nova_dance_120_122: 7900446322674360958
+      airi_nova_dance_120_123: -4503846383364693686
+      airi_nova_dance_120_124: -2650447352976871487
+      airi_nova_dance_120_125: 7696349476048277838
+      airi_nova_dance_120_126: -5858703266501898660
+      airi_nova_dance_120_127: -6261211905305389
+      airi_nova_dance_120_128: 2205293611010650938
+      airi_nova_dance_120_129: 3605315034760514571
+      airi_nova_dance_120_13: -9023548879230112460
+      airi_nova_dance_120_130: 8076370113444168899
+      airi_nova_dance_120_131: 6677674653592806155
+      airi_nova_dance_120_132: -1983141528723842097
+      airi_nova_dance_120_133: 2339598154931305818
+      airi_nova_dance_120_14: -5796579518576825163
+      airi_nova_dance_120_15: 180893832046233419
+      airi_nova_dance_120_16: -2538467102996652784
+      airi_nova_dance_120_17: 6935653210462545296
+      airi_nova_dance_120_18: 2410431617919870323
+      airi_nova_dance_120_19: -3789563566041643666
+      airi_nova_dance_120_2: -4690313203902498371
+      airi_nova_dance_120_20: -5538727855916883089
+      airi_nova_dance_120_21: 864247128601547354
+      airi_nova_dance_120_22: -5536054694218140506
+      airi_nova_dance_120_23: 554056272987012931
+      airi_nova_dance_120_24: -7625771520232911569
+      airi_nova_dance_120_25: -8472171164911000106
+      airi_nova_dance_120_26: 6061908464462958452
+      airi_nova_dance_120_27: 5588559889627677189
+      airi_nova_dance_120_28: 6358234811649487129
+      airi_nova_dance_120_29: -2855751223338770307
+      airi_nova_dance_120_3: -8545989652819617274
+      airi_nova_dance_120_30: 4808424620449749376
+      airi_nova_dance_120_31: 780697821112661668
+      airi_nova_dance_120_32: 984664297753988523
+      airi_nova_dance_120_33: -4146108862855963978
+      airi_nova_dance_120_34: 4881651078210808196
+      airi_nova_dance_120_35: -3234266261077496573
+      airi_nova_dance_120_36: 7369141465741520384
+      airi_nova_dance_120_37: -2795790561638415843
+      airi_nova_dance_120_38: 163713821745785305
+      airi_nova_dance_120_39: -4233909412065111243
+      airi_nova_dance_120_4: 4386385692636821835
+      airi_nova_dance_120_40: -6747015529521274701
+      airi_nova_dance_120_41: 5753059285675588707
+      airi_nova_dance_120_42: -7263820429042487671
+      airi_nova_dance_120_43: -2572851177281297586
+      airi_nova_dance_120_44: -3419703411239446821
+      airi_nova_dance_120_45: -5448312693373877407
+      airi_nova_dance_120_46: 7820230359813963316
+      airi_nova_dance_120_47: -1198947510880772211
+      airi_nova_dance_120_48: 2266521214619099678
+      airi_nova_dance_120_49: 7052892936177201299
+      airi_nova_dance_120_5: 181715745794459670
+      airi_nova_dance_120_50: 2746077192564509741
+      airi_nova_dance_120_51: -2406001971585890957
+      airi_nova_dance_120_52: -5366977894647787364
+      airi_nova_dance_120_53: 7035543471071158765
+      airi_nova_dance_120_54: -7891213503759393521
+      airi_nova_dance_120_55: -1831937487681137571
+      airi_nova_dance_120_56: -7554389366092502117
+      airi_nova_dance_120_57: 6079909543164293706
+      airi_nova_dance_120_58: -4276860855007038268
+      airi_nova_dance_120_59: 1663181058671947379
+      airi_nova_dance_120_6: -4582363519174541125
+      airi_nova_dance_120_60: 3503411418817012661
+      airi_nova_dance_120_61: 1308804915401774282
+      airi_nova_dance_120_62: -6735142155630413238
+      airi_nova_dance_120_63: 3926181367957865641
+      airi_nova_dance_120_64: -824800156603743637
+      airi_nova_dance_120_65: 5964084775528393754
+      airi_nova_dance_120_66: 458142218880562020
+      airi_nova_dance_120_67: -7683069663604940074
+      airi_nova_dance_120_68: 5160834877092397518
+      airi_nova_dance_120_69: 5198391386873652993
+      airi_nova_dance_120_7: 626104520985897323
+      airi_nova_dance_120_70: -7197937935657399298
+      airi_nova_dance_120_71: -8816105315303745943
+      airi_nova_dance_120_72: 4719973181087231426
+      airi_nova_dance_120_73: 4687356769365847200
+      airi_nova_dance_120_74: -5335390008624409741
+      airi_nova_dance_120_75: 6572839054845804844
+      airi_nova_dance_120_76: 4633844248626103893
+      airi_nova_dance_120_77: -6866999841744166168
+      airi_nova_dance_120_78: -2842241084313430214
+      airi_nova_dance_120_79: -5189757401752727035
+      airi_nova_dance_120_8: -2440281695079016106
+      airi_nova_dance_120_80: 5266425109977704281
+      airi_nova_dance_120_81: 5347090900125709852
+      airi_nova_dance_120_82: -158808396925673702
+      airi_nova_dance_120_83: -4025264662702205359
+      airi_nova_dance_120_84: -9055288833950105417
+      airi_nova_dance_120_85: 6214992241366880814
+      airi_nova_dance_120_86: -248370556078090254
+      airi_nova_dance_120_87: -6414593645501563435
+      airi_nova_dance_120_88: -1502693523644761285
+      airi_nova_dance_120_89: 9010192742818933298
+      airi_nova_dance_120_9: 6909820042118924597
+      airi_nova_dance_120_90: 8436317212417530866
+      airi_nova_dance_120_91: -3298522992637365741
+      airi_nova_dance_120_92: -189671428329047459
+      airi_nova_dance_120_93: 8748720767260158938
+      airi_nova_dance_120_94: 9179487009844183902
+      airi_nova_dance_120_95: -7890232862066183927
+      airi_nova_dance_120_96: 1240303122039651231
+      airi_nova_dance_120_97: -3747637415631551355
+      airi_nova_dance_120_98: -4720450094986067418
+      airi_nova_dance_120_99: 3707761923641233405
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
