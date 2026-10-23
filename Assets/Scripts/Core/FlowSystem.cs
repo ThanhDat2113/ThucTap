@@ -64,26 +64,22 @@ namespace RhythmGame
             // Khi dang o trang thai In the Flow, flow tiep tuc tut xuong, khong tang len nua
             if (_isFlowActive) return;
 
-            // Khi flow vua tut xuong het, cho phep build flow lai chi khi combo moi bat dau (combo == 1)
-            if (_flowJustDeactivated)
-            {
-                if (combo <= 1)
-                {
-                    _flowJustDeactivated = false;
-                }
-                else
-                {
-                    return;
-                }
-            }
+float build;
+if (_flowJustDeactivated)
+{
+    build = flowBuildPerHit;
+}
+else
+{
+    build = flowBuildPerHit + (flowBuildPerCombo * Mathf.Max(0, _currentCombo - 1));
+}
+_flowAmount = Mathf.Clamp(_flowAmount + build, 0f, maxFlow);
 
-            float build = flowBuildPerHit + (flowBuildPerCombo * Mathf.Max(0, _currentCombo - 1));
-            _flowAmount = Mathf.Clamp(_flowAmount + build, 0f, maxFlow);
-
-            if (!_isFlowActive && _flowAmount >= maxFlow)
-            {
-                ActivateFlow();
-            }
+if (!_isFlowActive && _flowAmount >= maxFlow)
+{
+    _flowJustDeactivated = false;
+    ActivateFlow();
+}
 
             OnFlowAmountChanged?.Invoke(NormalizedFlow);
         }
@@ -103,7 +99,7 @@ namespace RhythmGame
                 if (_flowAmount <= 0f)
                 {
                     DeactivateFlow();
-                    _flowJustDeactivated = true;
+                    _flowJustDeactivated = false;
                 }
             }
             else

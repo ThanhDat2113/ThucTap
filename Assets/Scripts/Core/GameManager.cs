@@ -20,6 +20,7 @@ namespace RhythmGame
         public JudgementSystem judgement;
         public InputHandler input;
         public HealthSystem healthSystem;
+        public OpponentAI opponentAI;
 
         [Header("Chart")]
         public ChartData chart;
@@ -41,8 +42,12 @@ namespace RhythmGame
         {
             input.OnRestartPressed += Restart;
             if (healthSystem != null) healthSystem.OnHealthDepleted.AddListener(OnHealthDepleted);
-            // Nút "Chơi lại" trong menu pause sẽ gọi Restart() này thay vì load lại cả scene
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = Restart;
+            if (chart == null && GameSession.SelectedSong != null && GameSession.SelectedSong.chart != null)
+            {
+                chart = GameSession.SelectedSong.chart;
+                if (musicSource != null && GameSession.SelectedSong.clip != null) musicSource.clip = GameSession.SelectedSong.clip;
+            }
             Restart();
         }
 
@@ -95,6 +100,7 @@ namespace RhythmGame
         {
             SongTime += Time.deltaTime;
             judgement.SetSongTime(SongTime);
+            if (opponentAI != null) opponentAI.SetSongTime(SongTime);
 
             spawner.Tick(SongTime);
             judgement.CheckMisses();
@@ -125,7 +131,8 @@ namespace RhythmGame
             if (PauseManager.Instance != null)
                 PauseManager.Instance.canPause = s == GameState.Countdown || s == GameState.Playing;
             OnStateChanged?.Invoke(s);
-            if (s == GameState.Playing) playMusicRoutine = StartCoroutine(PlayMusicDelayed());
+            if (s == GameState.Playing) { playMusicRoutine = StartCoroutine(PlayMusicDelayed()); if (opponentAI != null) opponentAI.SetActive(true); }
+            if (s != GameState.Playing && opponentAI != null) opponentAI.SetActive(false);
         }
 
         System.Collections.IEnumerator PlayMusicDelayed()

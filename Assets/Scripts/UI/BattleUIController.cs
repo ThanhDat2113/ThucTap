@@ -94,16 +94,13 @@ namespace RhythmGame
             switch (state)
             {
                 case GameState.Finished:
-                    messageText.text = "THẮNG! Nhấn R để chơi lại";
-                    messageText.color = Color.green;
+                    if (messageText != null) { messageText.text = "THẮNG! Nhấn R để chơi lại"; messageText.color = Color.green; }
                     break;
                 case GameState.Failed:
-                    messageText.text = "THUA! Nhấn R để chơi lại";
-                    messageText.color = Color.red;
+                    if (messageText != null) { messageText.text = "THUA! Nhấn R để chơi lại"; messageText.color = Color.red; }
                     break;
                 default:
-                    messageText.text = "";
-                    messageText.color = Color.white;
+                    if (messageText != null) { messageText.text = ""; messageText.color = Color.white; }
                     break;
             }
 
