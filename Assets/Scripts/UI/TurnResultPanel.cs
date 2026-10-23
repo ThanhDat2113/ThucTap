@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace RhythmGame
 {
@@ -153,6 +154,30 @@ namespace RhythmGame
             if (goodText != null) goodText.text = totalGood.ToString();
             if (badText != null) badText.text = totalBad.ToString();
             if (missText != null) missText.text = totalMiss.ToString();
+
+            // Save achievement (best score, combo, accuracy, play count)
+            SongData songToSave = GameSession.SelectedSong;
+            if (songToSave == null && MusicManager.Instance != null)
+            {
+                songToSave = MusicManager.Instance.CurrentSong;
+            }
+            if (songToSave == null && gameManager != null && gameManager.chart != null)
+            {
+                // Fallback cho debug: tạo SongData tạm
+                songToSave = ScriptableObject.CreateInstance<SongData>();
+                songToSave.songName = gameManager.chart.songName;
+                songToSave.name = gameManager.chart.songName;
+            }
+
+            if (songToSave != null)
+            {
+                SongStats.SaveResult(songToSave, totalScore, totalMaxCombo, accuracy / 100f);
+                Debug.Log($"[TurnResultPanel] Đã lưu thành tích: Song={songToSave.songName}, Score={totalScore}, MaxCombo={totalMaxCombo}, Accuracy={accuracy:F1}%");
+            }
+            else
+            {
+                Debug.LogWarning("[TurnResultPanel] Không thể lưu thành tích: Không tìm thấy SongData");
+            }
 
             // Show panel with fade in
             panelRoot.SetActive(true);
