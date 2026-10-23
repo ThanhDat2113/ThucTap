@@ -31,5 +31,6 @@ MonoBehaviour:
   cardSprite: {fileID: 21300000, guid: c5150032f5472e1409e890fe2ba415ac, type: 3}
   fullArt: {fileID: 0}
   posterSprite: {fileID: 21300000, guid: 2f46f2ae23fc89943ac16089dc4b497a, type: 3}
+  avatar: {fileID: 21300000, guid: 04cd514c25132974cba5936ea311e91a, type: 3}
   previewClip: {fileID: 0}
   unlocked: 1
