@@ -33,19 +33,11 @@ namespace RhythmGame
             {
                 judgementSystem.OnJudged += OnJudged;
             }
-            if (gameManager != null)
-            {
-                gameManager.OnTurnChanged += OnTurnChanged;
-            }
             SetDancing(false);
         }
 
         void Update()
         {
-            if (gameManager != null && isDancing && gameManager.CurrentTurnOwner != owner)
-            {
-                ForceIdle();
-            }
         }
         void OnDestroy()
         {
@@ -53,16 +45,11 @@ namespace RhythmGame
             {
                 judgementSystem.OnJudged -= OnJudged;
             }
-            if (gameManager != null)
-            {
-                gameManager.OnTurnChanged -= OnTurnChanged;
-            }
         }
 
         void OnJudged(Judgement j, int points, bool isHit, NoteOwner noteOwner)
         {
             if (noteOwner != owner) return;
-            if (gameManager != null && gameManager.CurrentTurnOwner != owner) return;
 
             if (!isDancing && isHit && (j == Judgement.Perfect || j == Judgement.Good || j == Judgement.Bad || j == Judgement.HoldComplete))
             {
@@ -79,14 +66,6 @@ namespace RhythmGame
             if (!isDancing)
             {
                 SetDancing(true);
-            }
-        }
-
-        void OnTurnChanged(NoteOwner newOwner)
-        {
-            if (newOwner != owner)
-            {
-                ForceIdle();
             }
         }
 

@@ -176,7 +176,7 @@ namespace RhythmGame
                 if (!n.Holding || input.IsHeld(n.Data.lane)) continue;
 
                 n.BreakHold();
-                OnJudged?.Invoke(Judgement.Miss, 0, false);
+                OnJudged?.Invoke(Judgement.Miss, 0, false, NoteOwner.Player);
                 PlaySfx(Judgement.Miss);
                 healthSystem?.ApplyJudgement(Judgement.Miss);
             }

@@ -221,7 +221,7 @@ public class BackgroundBeatReactive : MonoBehaviour
         }
     }
 
-    void OnJudged(Judgement j, int points, bool isHit)
+    void OnJudged(Judgement j, int points, bool isHit, NoteOwner owner)
     {
         switch (j)
         {
