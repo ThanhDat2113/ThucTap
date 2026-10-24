@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
-  m_Name: Data 1
+  m_Name: FunkHipHop
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
-  songName: 
+  songName: Funk Hip Hop
   audioClip: {fileID: 8300000, guid: 24d7111e83ffcf641bfc4c0a657d9db8, type: 3}
   musicStartDelay: 1
   bpm: 120

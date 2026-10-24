@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9677769ffa7f34541b14d729add0b038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.NoteSkin
-  style: 8
+  style: 7
   sizeOverride: {x: 0, y: 0}
   shape: 0
   cornerRadius: 0.3

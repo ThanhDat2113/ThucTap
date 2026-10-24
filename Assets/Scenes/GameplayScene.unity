@@ -882,7 +882,7 @@ MonoBehaviour:
   judgement: {fileID: 443643778}
   input: {fileID: 443643779}
   healthSystem: {fileID: 443643784}
-  chart: {fileID: 11400000, guid: 664eb9d61deb6ad429bfff209990aca1, type: 2}
+  chart: {fileID: 11400000, guid: af3dfad63783f0240a24e2f0e4ae17e8, type: 2}
   musicSource: {fileID: 1212483326}
   countdownSeconds: 3
 --- !u!114 &443643778
@@ -1642,7 +1642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e67bcb340ec5a1458c668d24abb20a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundGradientPro
-  preset: 2
+  preset: 6
   topColor: {r: 0.45, g: 0.15, b: 0.55, a: 1}
   middleColor: {r: 0.7, g: 0.2, b: 0.6, a: 1}
   bottomColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}
@@ -1666,7 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d026163250599a478726c8bda994bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSelector
-  scene: 2
+  scene: 6
   includeGradient: 1
   cleanLeftovers: 1
   dynamicBackground: 1
@@ -1690,6 +1690,8 @@ MonoBehaviour:
   overrideLaneColors: 1
   overrideReceptors: 1
   debugLog: 1
+  useFixedStyle: 1
+  fixedStyle: 5
 --- !u!1 &837932949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3252,12 +3254,12 @@ MonoBehaviour:
   restartText: RESTART
   lobbyText: LOBBY
   mainMenuText: MAIN MENU
-  pauseIconSprite: {fileID: 5470352240766234753, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
-  resumeIconSprite: {fileID: 5470352240766234753, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
-  resumeButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
-  restartButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
-  lobbyButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
-  mainMenuButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
+  pauseIconSprite: {fileID: 5470352240766234753, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  resumeIconSprite: {fileID: 5470352240766234753, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  resumeButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
+  restartButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
+  lobbyButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
+  mainMenuButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
   hideLabelWhenSprite: 0
   pauseButtonHeight: 90
   menuButtonHeight: 110
