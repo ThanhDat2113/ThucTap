@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +41,7 @@ public class SongListController : MonoBehaviour
             Destroy(child.gameObject);
         spawnedItems.Clear();
 
-        string savedName = musicManager.GetSavedSongName();
+        string savedName = musicManager != null ? musicManager.GetSavedSongName() : string.Empty;
         int selectedIndex = -1;
 
         for (int i = 0; i < songs.Count; i++)
@@ -59,7 +59,8 @@ public class SongListController : MonoBehaviour
         }
 
         // Man chon bai luon phat nhac nen; bai hat chi phat khi bam PLAY
-        musicManager.PlayMusic(ambientBgm);
+        if (musicManager != null && ambientBgm != null)
+            musicManager.PlayMusic(ambientBgm);
 
         if (selectedIndex < 0)
         {
@@ -76,18 +77,19 @@ public class SongListController : MonoBehaviour
         foreach (SongItemUI item in spawnedItems)
             item.SetSelected(item == selectedItem);
 
-        musicManager.SelectSong(song);
+        if (musicManager != null)
+            musicManager.SelectSong(song);
 
         if (detailPanel != null)
             detailPanel.Show(song);
 
         if (playButton != null)
-            playButton.interactable = musicManager.CurrentSong != null;
+            playButton.interactable = musicManager != null && musicManager.CurrentSong != null;
     }
 
     public void StartGame()
     {
-        SongData song = musicManager.CurrentSong;
+        SongData song = musicManager != null ? musicManager.CurrentSong : null;
         if (song == null) return;
 
         GameSession.SelectedSong = song;

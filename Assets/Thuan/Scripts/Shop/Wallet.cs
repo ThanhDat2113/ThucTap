@@ -1,11 +1,72 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
-// Vi tien cua nguoi choi + do da mua, luu bang PlayerPrefs
+#region PlayFab Currency Data Models
+
+[Serializable]
+public class PlayFabStatisticUpdate
+{
+    public string StatisticName;
+    public int Value;
+}
+
+[Serializable]
+internal class PlayFabUpdatePlayerStatisticsRequest
+{
+    public PlayFabStatisticUpdate[] Statistics;
+}
+
+[Serializable]
+internal class PlayFabUpdatePlayerStatisticsResponse
+{
+    public int code;
+    public string status;
+    public string errorMessage;
+}
+
+[Serializable]
+public class PlayFabStatisticValue
+{
+    public string StatisticName;
+    public int Value;
+    public int Version;
+}
+
+[Serializable]
+internal class PlayFabGetPlayerStatisticsRequest
+{
+    public string[] StatisticNames;
+}
+
+[Serializable]
+internal class PlayFabGetPlayerStatisticsResult
+{
+    public PlayFabStatisticValue[] Statistics;
+}
+
+[Serializable]
+internal class PlayFabGetPlayerStatisticsResponse
+{
+    public int code;
+    public string status;
+    public PlayFabGetPlayerStatisticsResult data;
+    public string errorMessage;
+}
+
+#endregion
+
+/// <summary>
+/// Ví tiền người chơi (Vàng, Kim Cương, Vé Quay) + đồ đã sở hữu.
+/// Lưu trữ cục bộ bằng PlayerPrefs và tự động đồng bộ hóa lên PlayFab (Player Statistics).
+/// </summary>
 public static class Wallet
 {
-    public const int StartCoins = 0;
-    public const int StartGems = 0;
+    public const int StartCoins = 10000;
+    public const int StartGems = 1000;
 
     private const string CoinKey = "wallet_coins";
     private const string GemKey = "wallet_gems";
@@ -16,31 +77,80 @@ public static class Wallet
 
     public static int Coins { get { return PlayerPrefs.GetInt(CoinKey, StartCoins); } }
     public static int Gems { get { return PlayerPrefs.GetInt(GemKey, StartGems); } }
+    public static int Tickets { get { return PlayerPrefs.GetInt(TicketKey, 0); } }
 
     public static int Get(CurrencyType type) { return type == CurrencyType.Coin ? Coins : Gems; }
 
     public static void Add(CurrencyType type, int amount)
     {
-        PlayerPrefs.SetInt(type == CurrencyType.Coin ? CoinKey : GemKey, Mathf.Max(0, Get(type) + amount));
+        if (amount == 0) return;
+        int newAmount = Mathf.Max(0, Get(type) + amount);
+        PlayerPrefs.SetInt(type == CurrencyType.Coin ? CoinKey : GemKey, newAmount);
         PlayerPrefs.Save();
-        if (Changed != null) Changed();
+        Changed?.Invoke();
+        RequestDebouncedSyncToPlayFab();
     }
-
-    public static int Tickets { get { return PlayerPrefs.GetInt(TicketKey, 0); } }
 
     public static void AddTickets(int amount)
     {
-        PlayerPrefs.SetInt(TicketKey, Mathf.Max(0, Tickets + amount));
+        if (amount == 0) return;
+        int newAmount = Mathf.Max(0, Tickets + amount);
+        PlayerPrefs.SetInt(TicketKey, newAmount);
         PlayerPrefs.Save();
-        if (Changed != null) Changed();
+        Changed?.Invoke();
+        RequestDebouncedSyncToPlayFab();
     }
 
-    // Tang do mien phi (vd: qua diem danh)
+    public static void SetCoins(int amount, bool notify = true)
+    {
+        int clamped = Mathf.Max(0, amount);
+        if (Coins == clamped) return;
+        PlayerPrefs.SetInt(CoinKey, clamped);
+        PlayerPrefs.Save();
+        if (notify) Changed?.Invoke();
+        RequestDebouncedSyncToPlayFab();
+    }
+
+    public static void SetGems(int amount, bool notify = true)
+    {
+        int clamped = Mathf.Max(0, amount);
+        if (Gems == clamped) return;
+        PlayerPrefs.SetInt(GemKey, clamped);
+        PlayerPrefs.Save();
+        if (notify) Changed?.Invoke();
+        RequestDebouncedSyncToPlayFab();
+    }
+
+    public static void SetTickets(int amount, bool notify = true)
+    {
+        int clamped = Mathf.Max(0, amount);
+        if (Tickets == clamped) return;
+        PlayerPrefs.SetInt(TicketKey, clamped);
+        PlayerPrefs.Save();
+        if (notify) Changed?.Invoke();
+        RequestDebouncedSyncToPlayFab();
+    }
+
+    public static void SetCurrencies(int coins, int gems, int tickets, bool notify = true, bool sync = true)
+    {
+        int cCoins = Mathf.Max(0, coins);
+        int cGems = Mathf.Max(0, gems);
+        int cTickets = Mathf.Max(0, tickets);
+        bool hasDiff = (Coins != cCoins) || (Gems != cGems) || (Tickets != cTickets);
+        PlayerPrefs.SetInt(CoinKey, cCoins);
+        PlayerPrefs.SetInt(GemKey, cGems);
+        PlayerPrefs.SetInt(TicketKey, cTickets);
+        PlayerPrefs.Save();
+        if (notify && hasDiff) Changed?.Invoke();
+        if (sync && hasDiff) RequestDebouncedSyncToPlayFab();
+    }
+
+    // Tặng đồ miễn phí (vd: quà điểm danh)
     public static void GrantItem(string itemId)
     {
         PlayerPrefs.SetInt(OwnedPrefix + itemId, 1);
         PlayerPrefs.Save();
-        if (Changed != null) Changed();
+        Changed?.Invoke();
     }
 
     public static bool IsOwned(string itemId) { return PlayerPrefs.GetInt(OwnedPrefix + itemId, 0) == 1; }
@@ -52,7 +162,457 @@ public static class Wallet
         PlayerPrefs.SetInt(item.currency == CurrencyType.Coin ? CoinKey : GemKey, Get(item.currency) - item.price);
         PlayerPrefs.SetInt(OwnedPrefix + item.Id, 1);
         PlayerPrefs.Save();
-        if (Changed != null) Changed();
+        Changed?.Invoke();
+        RequestDebouncedSyncToPlayFab();
         return true;
     }
+
+    #region Đồng Bộ Hóa PlayFab (PlayFab Sync Layer)
+
+    private static bool _isSyncing = false;
+    private static bool _isFetching = false;
+    private static bool _isDirty = false;
+    private static int _lastSyncedCoins = -1;
+    private static int _lastSyncedGems = -1;
+    private static int _lastSyncedTickets = -1;
+    private static WalletRunner _runner = null;
+
+    private static WalletRunner EnsureRunner()
+    {
+        if (_runner == null)
+        {
+            var go = new GameObject("[WalletSyncRunner]");
+            UnityEngine.Object.DontDestroyOnLoad(go);
+            _runner = go.AddComponent<WalletRunner>();
+        }
+        return _runner;
+    }
+
+    private class WalletRunner : MonoBehaviour
+    {
+        private Coroutine _debounceCoroutine;
+
+        public void QueueSync(float delay)
+        {
+            if (_debounceCoroutine != null)
+            {
+                StopCoroutine(_debounceCoroutine);
+            }
+            _debounceCoroutine = StartCoroutine(DebounceRoutine(delay));
+        }
+
+        public void CancelDebounce()
+        {
+            if (_debounceCoroutine != null)
+            {
+                StopCoroutine(_debounceCoroutine);
+                _debounceCoroutine = null;
+            }
+        }
+
+        private IEnumerator DebounceRoutine(float delay)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            _debounceCoroutine = null;
+            if (Wallet._isDirty)
+            {
+                yield return Wallet.SyncToPlayFabRoutine();
+            }
+        }
+
+        private void OnApplicationPause(bool pause)
+        {
+            if (pause && Wallet._isDirty)
+            {
+                StartCoroutine(Wallet.SyncToPlayFabRoutine());
+            }
+        }
+    }
+
+    /// <summary>
+    /// Xóa bộ nhớ cache đồng bộ khi đăng xuất tài khoản.
+    /// </summary>
+    public static void ResetCache()
+    {
+        _lastSyncedCoins = -1;
+        _lastSyncedGems = -1;
+        _lastSyncedTickets = -1;
+        _isDirty = false;
+        _isSyncing = false;
+        _isFetching = false;
+        if (_runner != null)
+        {
+            _runner.CancelDebounce();
+        }
+    }
+
+    private static string GetEffectiveTitleId()
+    {
+        if (Luan.MainMenu.AccountManager.Instance != null && !string.IsNullOrEmpty(Luan.MainMenu.AccountManager.Instance.PlayFabTitleId))
+        {
+            return Luan.MainMenu.AccountManager.Instance.PlayFabTitleId;
+        }
+        return "12FBEE";
+    }
+
+    private static string GetSessionTicket()
+    {
+        if (Luan.MainMenu.AccountManager.Instance != null && Luan.MainMenu.AccountManager.Instance.CurrentUser != null)
+        {
+            return Luan.MainMenu.AccountManager.Instance.CurrentUser.sessionTicket;
+        }
+        return PlayerPrefs.GetString("PLAYFAB_SESSION_TICKET", "");
+    }
+
+    public static bool IsLoggedIn
+    {
+        get
+        {
+            if (Luan.MainMenu.AccountManager.Instance != null)
+            {
+                return Luan.MainMenu.AccountManager.Instance.IsLoggedIn;
+            }
+            return !string.IsNullOrEmpty(PlayerPrefs.GetString("PLAYFAB_SESSION_TICKET", ""));
+        }
+    }
+
+    /// <summary>
+    /// Yêu cầu đồng bộ lên PlayFab với cơ chế chống spam (debounce 1.5 giây).
+    /// </summary>
+    public static void RequestDebouncedSyncToPlayFab()
+    {
+        if (!IsLoggedIn) return;
+        _isDirty = true;
+        if (Application.isPlaying)
+        {
+            EnsureRunner().QueueSync(1.5f);
+        }
+    }
+
+    /// <summary>
+    /// Xử lý cập nhật số dư từ các Statistic trả về từ PlayFab (Coins, Gems, Tickets).
+    /// </summary>
+    public static void ProcessPlayFabStatistics(PlayFabStatisticValue[] stats)
+    {
+        int currentCoins = Coins;
+        int currentGems = Gems;
+        int currentTickets = Tickets;
+
+        if (stats == null || stats.Length == 0)
+        {
+            // Nếu server PlayFab chưa có chỉ số nào:
+            // Giữ nguyên số dư hiện tại trên máy (nếu người chơi đã có số dư hoặc vừa test), chỉ gán mặc định nếu máy chưa có
+            int initCoins = currentCoins > 0 ? currentCoins : StartCoins;
+            int initGems = currentGems > 0 ? currentGems : StartGems;
+            int initTickets = currentTickets;
+
+            SetCurrencies(initCoins, initGems, initTickets, notify: true, sync: false);
+            _isDirty = true;
+            SyncToPlayFab(force: true);
+            return;
+        }
+
+        int foundCoins = -1;
+        int foundGems = -1;
+        int foundTickets = -1;
+
+        for (int i = 0; i < stats.Length; i++)
+        {
+            var s = stats[i];
+            if (s == null) continue;
+            string name = s.StatisticName;
+            if (string.Equals(name, "Coins", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(name, "Gold", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(name, "Vang", StringComparison.OrdinalIgnoreCase))
+            {
+                foundCoins = s.Value;
+            }
+            else if (string.Equals(name, "Gems", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(name, "Diamonds", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(name, "KimCuong", StringComparison.OrdinalIgnoreCase))
+            {
+                foundGems = s.Value;
+            }
+            else if (string.Equals(name, "Tickets", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(name, "SpinTickets", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(name, "VeQuay", StringComparison.OrdinalIgnoreCase))
+            {
+                foundTickets = s.Value;
+            }
+        }
+
+        bool changed = false;
+
+        if (foundCoins >= 0)
+        {
+            if (currentCoins != foundCoins)
+            {
+                PlayerPrefs.SetInt(CoinKey, foundCoins);
+                changed = true;
+            }
+            _lastSyncedCoins = foundCoins;
+        }
+        else
+        {
+            // Server chưa có dữ liệu Vàng -> Giữ nguyên số dư hiện tại trên máy
+            int localCoins = currentCoins > 0 ? currentCoins : StartCoins;
+            PlayerPrefs.SetInt(CoinKey, localCoins);
+            _lastSyncedCoins = -1;
+            changed = true;
+        }
+
+        if (foundGems >= 0)
+        {
+            if (currentGems != foundGems)
+            {
+                PlayerPrefs.SetInt(GemKey, foundGems);
+                changed = true;
+            }
+            _lastSyncedGems = foundGems;
+        }
+        else
+        {
+            // Server chưa có dữ liệu Kim Cương -> Giữ nguyên số dư hiện tại trên máy
+            int localGems = currentGems > 0 ? currentGems : StartGems;
+            PlayerPrefs.SetInt(GemKey, localGems);
+            _lastSyncedGems = -1;
+            changed = true;
+        }
+
+        if (foundTickets >= 0)
+        {
+            if (currentTickets != foundTickets)
+            {
+                PlayerPrefs.SetInt(TicketKey, foundTickets);
+                changed = true;
+            }
+            _lastSyncedTickets = foundTickets;
+        }
+        else
+        {
+            _lastSyncedTickets = -1;
+        }
+
+        if (changed)
+        {
+            PlayerPrefs.Save();
+            Changed?.Invoke();
+        }
+
+        if (foundCoins < 0 || foundGems < 0 || foundTickets < 0)
+        {
+            // Nếu server còn thiếu chỉ số nào, đẩy chỉ số cục bộ lên PlayFab một lần
+            _isDirty = true;
+            SyncToPlayFab(force: true);
+        }
+        else
+        {
+            // Đã đồng bộ hoàn toàn với server -> Không cần gửi request nào nữa
+            _isDirty = false;
+        }
+    }
+
+    /// <summary>
+    /// Đồng bộ ngay lập tức các chỉ số Coins, Gems, Tickets lên PlayFab.
+    /// Có cơ chế value caching: nếu giá trị không đổi so với server thì bỏ qua request để tránh chạm Rate Limit.
+    /// </summary>
+    public static void SyncToPlayFab(Action<bool> onComplete = null, bool force = false)
+    {
+        if (!IsLoggedIn || !Application.isPlaying)
+        {
+            onComplete?.Invoke(false);
+            return;
+        }
+        EnsureRunner().CancelDebounce();
+        EnsureRunner().StartCoroutine(SyncToPlayFabRoutine(onComplete, force));
+    }
+
+    public static IEnumerator SyncToPlayFabRoutine(Action<bool> onComplete = null, bool force = false)
+    {
+        if (_isSyncing)
+        {
+            onComplete?.Invoke(false);
+            yield break;
+        }
+
+        int cCoins = Coins;
+        int cGems = Gems;
+        int cTickets = Tickets;
+
+        // Tối ưu hóa: Nếu giá trị hiện tại trùng khớp hoàn toàn với server và không yêu cầu force sync
+        // -> Hủy bỏ request, tiết kiệm hạn mức API PlayFab!
+        if (!force && cCoins == _lastSyncedCoins && cGems == _lastSyncedGems && cTickets == _lastSyncedTickets)
+        {
+            _isDirty = false;
+            onComplete?.Invoke(true);
+            yield break;
+        }
+
+        string titleId = GetEffectiveTitleId();
+        string sessionTicket = GetSessionTicket();
+
+        if (string.IsNullOrEmpty(titleId) || string.IsNullOrEmpty(sessionTicket))
+        {
+            onComplete?.Invoke(false);
+            yield break;
+        }
+
+        _isSyncing = true;
+
+        string url = $"https://{titleId}.playfabapi.com/Client/UpdatePlayerStatistics";
+        PlayFabUpdatePlayerStatisticsRequest reqObj = new PlayFabUpdatePlayerStatisticsRequest
+        {
+            Statistics = new PlayFabStatisticUpdate[]
+            {
+                new PlayFabStatisticUpdate { StatisticName = "Coins", Value = cCoins },
+                new PlayFabStatisticUpdate { StatisticName = "Gems", Value = cGems },
+                new PlayFabStatisticUpdate { StatisticName = "Tickets", Value = cTickets }
+            }
+        };
+
+        string json = JsonUtility.ToJson(reqObj);
+
+        using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
+        {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+            req.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.SetRequestHeader("Content-Type", "application/json");
+            req.SetRequestHeader("X-Authorization", sessionTicket);
+
+            yield return req.SendWebRequest();
+
+            if (req.result == UnityWebRequest.Result.Success)
+            {
+                _isDirty = false;
+                _lastSyncedCoins = cCoins;
+                _lastSyncedGems = cGems;
+                _lastSyncedTickets = cTickets;
+                Debug.Log($"[Wallet] Đồng bộ tiền tệ lên PlayFab thành công: Vàng={cCoins}, Kim Cương={cGems}, Vé={cTickets}");
+                onComplete?.Invoke(true);
+            }
+            else
+            {
+                bool isAuthError = req.responseCode == 401 || (req.downloadHandler != null && req.downloadHandler.text.Contains("NotAuthenticated"));
+                if (isAuthError)
+                {
+                    PlayerPrefs.DeleteKey("PLAYFAB_SESSION_TICKET");
+                    PlayerPrefs.Save();
+                    ResetCache();
+                    if (Luan.MainMenu.AccountManager.Instance != null)
+                    {
+                        Luan.MainMenu.AccountManager.Instance.InvalidateSession();
+                    }
+                    Debug.Log("[Wallet] Phiên đăng nhập PlayFab đã hết hạn. Vui lòng đăng nhập lại tài khoản.");
+                }
+                else
+                {
+                    Debug.LogWarning($"[Wallet] Đồng bộ tiền tệ lên PlayFab thất bại: {req.downloadHandler?.text}");
+                }
+                onComplete?.Invoke(false);
+            }
+        }
+
+        _isSyncing = false;
+    }
+
+    /// <summary>
+    /// Kéo dữ liệu tiền tệ mới nhất từ PlayFab về máy.
+    /// </summary>
+    public static void FetchFromPlayFab(Action<bool> onComplete = null)
+    {
+        if (!IsLoggedIn || !Application.isPlaying)
+        {
+            onComplete?.Invoke(false);
+            return;
+        }
+        if (_isFetching)
+        {
+            onComplete?.Invoke(false);
+            return;
+        }
+        EnsureRunner().StartCoroutine(FetchFromPlayFabRoutine(onComplete));
+    }
+
+    public static IEnumerator FetchFromPlayFabRoutine(Action<bool> onComplete = null)
+    {
+        if (_isFetching)
+        {
+            onComplete?.Invoke(false);
+            yield break;
+        }
+
+        string titleId = GetEffectiveTitleId();
+        string sessionTicket = GetSessionTicket();
+
+        if (string.IsNullOrEmpty(titleId) || string.IsNullOrEmpty(sessionTicket))
+        {
+            onComplete?.Invoke(false);
+            yield break;
+        }
+
+        _isFetching = true;
+
+        string url = $"https://{titleId}.playfabapi.com/Client/GetPlayerStatistics";
+        PlayFabGetPlayerStatisticsRequest reqObj = new PlayFabGetPlayerStatisticsRequest
+        {
+            StatisticNames = new string[] { "Coins", "Gold", "Gems", "Diamonds", "Tickets", "SpinTickets" }
+        };
+
+        string json = JsonUtility.ToJson(reqObj);
+
+        using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
+        {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+            req.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.SetRequestHeader("Content-Type", "application/json");
+            req.SetRequestHeader("X-Authorization", sessionTicket);
+
+            yield return req.SendWebRequest();
+
+            if (req.result == UnityWebRequest.Result.Success)
+            {
+                try
+                {
+                    PlayFabGetPlayerStatisticsResponse res = JsonUtility.FromJson<PlayFabGetPlayerStatisticsResponse>(req.downloadHandler.text);
+                    if (res != null && res.data != null && res.data.Statistics != null)
+                    {
+                        ProcessPlayFabStatistics(res.data.Statistics);
+                        _isFetching = false;
+                        onComplete?.Invoke(true);
+                        yield break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[Wallet] Lỗi parse dữ liệu PlayFab GetPlayerStatistics: {ex.Message}");
+                }
+            }
+            else
+            {
+                bool isAuthError = req.responseCode == 401 || (req.downloadHandler != null && req.downloadHandler.text.Contains("NotAuthenticated"));
+                if (isAuthError)
+                {
+                    PlayerPrefs.DeleteKey("PLAYFAB_SESSION_TICKET");
+                    PlayerPrefs.Save();
+                    ResetCache();
+                    if (Luan.MainMenu.AccountManager.Instance != null)
+                    {
+                        Luan.MainMenu.AccountManager.Instance.InvalidateSession();
+                    }
+                    Debug.Log("[Wallet] Phiên đăng nhập PlayFab đã hết hạn. Vui lòng đăng nhập lại tài khoản.");
+                }
+                else
+                {
+                    Debug.LogWarning($"[Wallet] Lấy dữ liệu PlayFab thất bại: {req.downloadHandler?.text}");
+                }
+            }
+        }
+
+        _isFetching = false;
+        onComplete?.Invoke(false);
+    }
+
+    #endregion
 }

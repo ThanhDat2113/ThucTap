@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class SceneBackgroundMusic : MonoBehaviour
 {
@@ -6,6 +6,9 @@ public class SceneBackgroundMusic : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.Instance.PlayMusic(bgmClip);
+        if (MusicManager.Instance != null && bgmClip != null)
+        {
+            MusicManager.Instance.PlayMusic(bgmClip);
+        }
     }
 }
