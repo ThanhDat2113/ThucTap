@@ -577,6 +577,7 @@ GameObject:
   - component: {fileID: 152615613}
   - component: {fileID: 152615615}
   - component: {fileID: 152615614}
+  - component: {fileID: 152615616}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -596,10 +597,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 452460680}
+  m_Father: {fileID: 1327443873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -623,7 +624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc181f566daf492488194b997c0aafca, type: 3}
+  m_Sprite: {fileID: 621374161, guid: 8e6065f6e38f98b4d969ea8a8409fdc9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -641,6 +642,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152615612}
   m_CullTransparentMesh: 1
+--- !u!114 &152615616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152615612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 1.6120218
 --- !u!1 &205593665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,7 +1314,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 452460680}
+  m_Father: {fileID: 1327443873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1319,7 +1334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.02, g: 0, b: 0.06, a: 0.35}
+  m_Color: {r: 0.03, g: 0, b: 0.08, a: 0.3}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2165,8 +2180,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 152615613}
-  - {fileID: 327675828}
   - {fileID: 623823615}
   - {fileID: 1208731208}
   - {fileID: 1036761110}
@@ -2226,9 +2239,9 @@ Canvas:
   m_GameObject: {fileID: 452460679}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1239410323}
+  m_PlaneDistance: 5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2238,7 +2251,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1 &500208080
 GameObject:
@@ -3238,6 +3251,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912414040}
   m_CullTransparentMesh: 1
+--- !u!1 &916913897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 916913899}
+  - component: {fileID: 916913898}
+  m_Layer: 0
+  m_Name: Stage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &916913898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916913897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9225f04b4f56fb479adbaadf2b11125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayStage
+  hud: {fileID: 1624680560}
+  players:
+  - displayName: Main1
+    prefab: {fileID: 6944092959569327192, guid: 8ea9ca8336c90994eb2921981981abc8, type: 3}
+    controller: {fileID: 0}
+    avatar: {fileID: 21300000, guid: 5f46dce606565e04999b1d8722d937aa, type: 3}
+    idleState: idle
+    danceState: dance
+    missState: miss1
+    flipX: 0
+    heightScale: 1
+  - displayName: Main2
+    prefab: {fileID: 6230300821541266309, guid: ef98e310fa0aa3d4fbc2a78b6e22e496, type: 3}
+    controller: {fileID: 0}
+    avatar: {fileID: 21300000, guid: 4e58040f3f01033478ca24c3948d5f70, type: 3}
+    idleState: idle2
+    danceState: dance2
+    missState: miss2
+    flipX: 0
+    heightScale: 1
+  roster:
+  - {fileID: 11400000, guid: 7a34897d44822af49a8119a56d8b2acc, type: 2}
+  - {fileID: 11400000, guid: ffb9d6b53cb9e6746a2a94cd6187e97b, type: 2}
+  - {fileID: 11400000, guid: 8cdaf22d7e9724c46a4ab4867421bfcd, type: 2}
+  - {fileID: 11400000, guid: ef4b42d93c3d7824fadf928c14110a8b, type: 2}
+  - {fileID: 11400000, guid: 24a06118737913647acc025316c00b01, type: 2}
+  - {fileID: 11400000, guid: c271843039e796e43b9147feaa6081a6, type: 2}
+  - {fileID: 11400000, guid: 6baf82e8357afd74285038e8a65b47d7, type: 2}
+  - {fileID: 11400000, guid: 91da51232176a5c4e8362f110fc770ca, type: 2}
+  - {fileID: 11400000, guid: 5aa877e7cf28d89419b219da7879fe46, type: 2}
+  opponents:
+  - displayName: Graffiti King
+    prefab: {fileID: 5587143041612084552, guid: f295e26211799284ca4b8b1460ceafbc, type: 3}
+    controller: {fileID: 9100000, guid: e11a00a124b48e34fae40a16d98ab147, type: 2}
+    avatar: {fileID: 21300000, guid: cc45bf704ba8b8f44a378ecf826fe93c, type: 3}
+    idleState: idle
+    danceState: dance
+    missState: miss
+    flipX: 1
+    heightScale: 1
+  - displayName: DJ Null
+    prefab: {fileID: 8428212374481371165, guid: 0f49d3dc563f6ab4eb344531e1ce0cec, type: 3}
+    controller: {fileID: 9100000, guid: d92c1c24620b1914cb48b482103f3cdd, type: 2}
+    avatar: {fileID: 21300000, guid: 658990941e8dfc74f989c0c458bd858c, type: 3}
+    idleState: idle
+    danceState: dance
+    missState: miss
+    flipX: 0
+    heightScale: 1
+  playerFeet: {x: -5.3, y: -3.55}
+  opponentFeet: {x: 5.3, y: -3.55}
+  playerHeight: 5.4
+  opponentHeight: 6.2
+  sortingOrder: 0
+  bossFlinchEvery: 10
+--- !u!4 &916913899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916913897}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &921884430
 GameObject:
   m_ObjectHideFlags: 0
@@ -4493,7 +4605,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.07, g: 0.07, b: 0.11, a: 1}
+  m_BackGroundColor: {r: 0.05, g: 0.02, b: 0.1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5150,6 +5262,91 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326056927}
   m_CullTransparentMesh: 1
+--- !u!1 &1327443870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1327443873}
+  - component: {fileID: 1327443872}
+  - component: {fileID: 1327443871}
+  m_Layer: 5
+  m_Name: BackgroundCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1327443871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327443870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0.5
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1327443872
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327443870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 1239410323}
+  m_PlaneDistance: 9
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -10
+  m_TargetDisplay: 0
+--- !u!224 &1327443873
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327443870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 152615613}
+  - {fileID: 327675828}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1348681560
 GameObject:
   m_ObjectHideFlags: 0
@@ -6478,6 +6675,15 @@ MonoBehaviour:
   - -90
   - 180
   noteSize: {x: 175, y: 149}
+  holdTailSprite: {fileID: 21300000, guid: 5a322bcc381ab764492a4575bb79704a, type: 3}
+  laneColors:
+  - {r: 0.76, g: 0.24, b: 1, a: 1}
+  - {r: 0.13, g: 0.67, b: 1, a: 1}
+  - {r: 0.16, g: 0.9, b: 0.4, a: 1}
+  - {r: 1, g: 0.23, b: 0.36, a: 1}
+  holdTailWidth: 110
+  holdChance: {x: 0.12, y: 0.18, z: 0.22}
+  releaseGrace: 0.12
   fallbackSong: {fileID: 11400000, guid: 1192c85b9053dbf4ea90fb67247f472e, type: 2}
   fallbackLength: 90
   songListScene: Thuan_SongList
@@ -8383,3 +8589,5 @@ SceneRoots:
   - {fileID: 901840845}
   - {fileID: 646096046}
   - {fileID: 1624680561}
+  - {fileID: 1327443873}
+  - {fileID: 916913899}

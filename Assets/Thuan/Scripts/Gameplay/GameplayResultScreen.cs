@@ -25,6 +25,9 @@ public class GameplayResultScreen : MonoBehaviour
     private TMP_Text perfectText;
     private TMP_Text goodText;
     private TMP_Text badText;
+    private TMP_Text shitText;
+    private GameObject nextButton;
+    private RectTransform retryButton, menuButton;
     private TMP_Text missText;
     private TMP_Text comboText;
     private TMP_Text scoreText;
@@ -61,12 +64,18 @@ public class GameplayResultScreen : MonoBehaviour
         perfectText.text = perfect.ToString("N0");
         goodText.text = good.ToString("N0");
         badText.text = bad.ToString("N0");
+        shitText.text = "0";
         missText.text = miss.ToString("N0");
         comboText.text = maxCombo.ToString("N0");
         scoreText.text = score.ToString("N0");
-        rankText.text = Rank(cleared, accuracy);
+        rankText.text = RankOf(cleared, accuracy);
         rankText.color = RankColor(rankText.text);
         newBestText.gameObject.SetActive(newBest);
+        // NEXT chi hien khi con bai tiep theo trong Story Mode
+        if (nextButton != null) nextButton.SetActive(hasNext);
+        // khong co NEXT thi dua RETRY va MENU vao giua
+        if (retryButton != null) retryButton.anchoredPosition = new Vector2((hasNext ? 670f : 815f) * ScaleX - 960f, retryButton.anchoredPosition.y);
+        if (menuButton != null) menuButton.anchoredPosition = new Vector2((hasNext ? 1325f : 1165f) * ScaleX - 960f, menuButton.anchoredPosition.y);
         content.localScale = Vector3.one * 0.92f;
         StopAllCoroutines();
         StartCoroutine(Pop());
@@ -84,8 +93,8 @@ public class GameplayResultScreen : MonoBehaviour
         resultLogo = CreateImage("ResultLogo", content, clearLogoSprite);
         SetRect(resultLogo.rectTransform, new Vector2(720f * ScaleX, 231f * ScaleY), new Vector2(-546.6f, 407.6f));
         resultLogo.raycastTarget = false;
-        resultLogo.rectTransform.sizeDelta *= 1.12f;
-        resultLogo.rectTransform.anchoredPosition += new Vector2(60f, -6f);
+        resultLogo.rectTransform.sizeDelta *= 0.96f;
+        resultLogo.rectTransform.anchoredPosition += new Vector2(50f, -6f);
         resultLogo.preserveAspect = false;
         Image character = CreateImage("Character", content, Resources.Load<Sprite>("Result/result_character"));
         SetRect(character.rectTransform, new Vector2(720f * ScaleX, 660f * ScaleY), new Vector2(-546.6f, 5.3f));
@@ -97,41 +106,52 @@ public class GameplayResultScreen : MonoBehaviour
         Image rankPanel = PlaceSprite("RankPanel", "rank_panel", new Rect(1270, 285, 402, 440));
         Image scoreBar = PlaceSprite("ScoreBar", "score_bar", new Rect(700, 175, 630, 145));
 
-        coverArt = CreateImage("SongCover", songPanel.transform, null);
-        SetRect(coverArt.rectTransform, new Vector2(160f, 150f), new Vector2(-314f, 4f));
-        coverArt.preserveAspect = true;
-        Image songTextBacking = CreateImage("SongTextBacking", songPanel.transform, null);
-        SetRect(songTextBacking.rectTransform, new Vector2(570f, 106f), new Vector2(102f, 21f));
-        songTextBacking.color = new Color(.025f, .025f, .03f, .92f);
-        songTextBacking.raycastTarget = false;
-        songText = CreateText("SongName", songPanel.transform, "SONG TITLE", 38, Color.white, TextAlignmentOptions.Left);
-        SetRect(songText.rectTransform, new Vector2(520f, 50f), new Vector2(88f, 43f));
+        // Noi dung dat theo o ben trong khung (khung hoi nghieng len ben phai)
+        RectTransform songContent = CreateNode("SongContent", songPanel.transform);
+        SetRect(songContent, new Vector2(880f, 170f), new Vector2(4f, -4f));
+        songContent.localEulerAngles = new Vector3(0f, 0f, 2.5f);
+
+        Image coverFrame = CreateImage("SongCoverFrame", songContent, null);
+        SetRect(coverFrame.rectTransform, new Vector2(146f, 146f), new Vector2(-358f, 0f));
+        coverFrame.color = new Color(1f, .16f, .5f, 1f);
+        coverFrame.raycastTarget = false;
+        coverArt = CreateImage("SongCover", songContent, null);
+        SetRect(coverArt.rectTransform, new Vector2(138f, 138f), new Vector2(-358f, 0f));
+        coverArt.preserveAspect = false;
+        coverArt.raycastTarget = false;
+
+        songText = CreateText("SongName", songContent, "SONG TITLE", 40, Color.white, TextAlignmentOptions.Left);
+        SetRect(songText.rectTransform, new Vector2(560f, 54f), new Vector2(5f, 38f));
         songText.fontStyle = FontStyles.Bold;
         songText.enableAutoSizing = true;
         songText.fontSizeMin = 22f;
-        songText.fontSizeMax = 38f;
-        artistText = CreateText("Artist", songPanel.transform, "ARTIST", 25, new Color(.64f, .64f, .68f), TextAlignmentOptions.Left);
-        SetRect(artistText.rectTransform, new Vector2(430f, 40f), new Vector2(45f, -8f));
+        songText.fontSizeMax = 40f;
+        artistText = CreateText("Artist", songContent, "ARTIST", 26, new Color(.7f, .7f, .76f), TextAlignmentOptions.Left);
+        SetRect(artistText.rectTransform, new Vector2(560f, 36f), new Vector2(5f, -6f));
         artistText.enableAutoSizing = true;
         artistText.fontSizeMin = 16f;
-        artistText.fontSizeMax = 25f;
-        Image difficultyBadge = CreateImage("DifficultyBadge", songPanel.transform, null);
-        SetRect(difficultyBadge.rectTransform, new Vector2(145f, 46f), new Vector2(-8f, -55f));
+        artistText.fontSizeMax = 26f;
+        Image difficultyBadge = CreateImage("DifficultyBadge", songContent, null);
+        SetRect(difficultyBadge.rectTransform, new Vector2(130f, 38f), new Vector2(-210f, -50f));
         difficultyBadge.color = new Color(1f, .08f, .4f, 1f);
         difficultyBadge.raycastTarget = false;
-        difficultyText = CreateText("Difficulty", songPanel.transform, "HARD", 24, Color.black, TextAlignmentOptions.Center);
-        SetRect(difficultyText.rectTransform, new Vector2(140f, 42f), new Vector2(-8f, -55f));
+        difficultyText = CreateText("Difficulty", songContent, "HARD", 24, Color.black, TextAlignmentOptions.Center);
+        SetRect(difficultyText.rectTransform, new Vector2(126f, 36f), new Vector2(-210f, -50f));
         difficultyText.fontStyle = FontStyles.Bold;
 
-        perfectText = ValueText("PerfectValue", statsPanel.transform, 137f);
-        goodText = ValueText("GoodValue", statsPanel.transform, 73f);
-        badText = ValueText("BadValue", statsPanel.transform, 9f);
-        missText = ValueText("MissValue", statsPanel.transform, -55f);
-        comboText = ValueText("ComboValue", statsPanel.transform, -148f);
+        // canh dung 5 dong cua khung: PERFECT, GOOD, BAD, SHIT, MISSES + MAX COMBO
+        perfectText = ValueText("PerfectValue", statsPanel.transform, 155f);
+        goodText = ValueText("GoodValue", statsPanel.transform, 91f);
+        badText = ValueText("BadValue", statsPanel.transform, 31f);
+        shitText = ValueText("ShitValue", statsPanel.transform, -30f);
+        missText = ValueText("MissValue", statsPanel.transform, -93f);
+        comboText = ValueText("ComboValue", statsPanel.transform, -175f);
 
         rankText = CreateText("RankValue", rankPanel.transform, "S", 205, Yellow, TextAlignmentOptions.Center);
         SetRect(rankText.rectTransform, new Vector2(300f, 265f), new Vector2(6f, -5f));
         rankText.fontStyle = FontStyles.Bold | FontStyles.Italic;
+        rankText.outlineWidth = 0.22f;
+        rankText.outlineColor = new Color32(25, 0, 20, 255);
         newBestText = CreateText("NewRecord", rankPanel.transform, "NEW RECORD!", 27, Color.white, TextAlignmentOptions.Center);
         SetRect(newBestText.rectTransform, new Vector2(260f, 50f), new Vector2(10f, -153f));
         newBestText.fontStyle = FontStyles.Bold | FontStyles.Italic;
@@ -140,9 +160,9 @@ public class GameplayResultScreen : MonoBehaviour
         SetRect(scoreText.rectTransform, new Vector2(420f, 92f), new Vector2(84f, 0f));
         scoreText.fontStyle = FontStyles.Bold;
 
-        CreateButton("RetryButton", "retry_button", new Rect(500, 60, 340, 120), () => RetryRequested?.Invoke());
-        CreateButton("NextButton", "next_button", new Rect(810, 60, 355, 120), () => ContinueRequested?.Invoke());
-        CreateButton("MenuButton", "menu_button", new Rect(1120, 60, 410, 120), () => MenuRequested?.Invoke());
+        retryButton = (RectTransform)CreateButton("RetryButton", "retry_button", new Rect(500, 60, 340, 120), () => RetryRequested?.Invoke()).transform;
+        nextButton = CreateButton("NextButton", "next_button", new Rect(810, 60, 355, 120), () => ContinueRequested?.Invoke());
+        menuButton = (RectTransform)CreateButton("MenuButton", "menu_button", new Rect(1120, 60, 410, 120), () => MenuRequested?.Invoke()).transform;
     }
 
     private TMP_Text ValueText(string name, Transform parent, float y)
@@ -167,7 +187,7 @@ public class GameplayResultScreen : MonoBehaviour
         return image;
     }
 
-    private void CreateButton(string objectName, string spriteName, Rect sourceRect, UnityEngine.Events.UnityAction action)
+    private GameObject CreateButton(string objectName, string spriteName, Rect sourceRect, UnityEngine.Events.UnityAction action)
     {
         Image image = PlaceSprite(objectName, spriteName, sourceRect);
         image.raycastTarget = true;
@@ -177,6 +197,7 @@ public class GameplayResultScreen : MonoBehaviour
         colors.pressedColor = new Color(.72f, .72f, .72f, 1f);
         button.colors = colors;
         button.onClick.AddListener(action);
+        return image.gameObject;
     }
 
     private TMP_Text CreateText(string name, Transform parent, string value, float size, Color color, TextAlignmentOptions alignment)
@@ -240,9 +261,11 @@ public class GameplayResultScreen : MonoBehaviour
         content.localScale = Vector3.one;
     }
 
-    private static string Rank(bool cleared, float accuracy)
+    // Thang hang dung chung cho ca game (man tong ket, Free Play, Story Mode)
+    public static string RankOf(bool cleared, float accuracy)
     {
         if (!cleared) return "F";
+        if (accuracy < 0f) return "";
         if (accuracy >= 95f) return "S";
         if (accuracy >= 90f) return "A";
         if (accuracy >= 80f) return "B";
@@ -254,7 +277,7 @@ public class GameplayResultScreen : MonoBehaviour
     {
         if (rank == "S" || rank == "A") return Yellow;
         if (rank == "B") return Cyan;
-        if (rank == "F") return Red;
+        if (rank == "F") return Color.white;
         return Color.white;
     }
 

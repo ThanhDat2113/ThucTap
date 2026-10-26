@@ -19,6 +19,7 @@ MonoBehaviour:
   cardNormal: {fileID: 21300000, guid: f9603a633ecabce4c81c519d97dc2652, type: 3}
   cardSelected: {fileID: 21300000, guid: 629f45b6a9bb3f9469fa5bd49239471f, type: 3}
   detailArt: {fileID: 21300000, guid: ac092d626fcaf0541a22f755a388a40b, type: 3}
+  opponent: 0
   tracks:
   - title: Skyline
     song: {fileID: 0}

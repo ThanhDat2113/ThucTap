@@ -61,6 +61,8 @@ public class GameplayHUD : MonoBehaviour
     public event Action<bool> PauseChanged;
     public event Action RestartRequested;
     public event Action QuitRequested;
+    // Moi lan cham not (de nhan vat tren san khau phan ung)
+    public event Action<HudJudgement, int> Judged;
 
     public bool IsPaused { get; private set; }
     public HudReceptor[] Receptors { get { return receptors; } }
@@ -70,6 +72,7 @@ public class GameplayHUD : MonoBehaviour
     private float comboPunch, crownPunch;
     private Coroutine judgeRoutine;
     private bool playing;
+    private bool portraitsSet;
 
     private static readonly string[] JudgeWords = { "PERFECT!!", "GOOD!", "BAD", "MISS" };
     private static readonly Color[] JudgeTop = { new Color(0.85f, 1f, 1f), new Color(0.55f, 0.85f, 1f), new Color(1f, 0.8f, 0.4f), new Color(0.8f, 0.8f, 0.85f) };
@@ -150,6 +153,7 @@ public class GameplayHUD : MonoBehaviour
 
     public void ShowJudgement(HudJudgement j, int lane = -1)
     {
+        if (Judged != null) Judged(j, lane);
         if (judgementText == null) return;
         if (judgeRoutine != null) StopCoroutine(judgeRoutine);
         judgeRoutine = StartCoroutine(JudgeRoutine(j, lane));
@@ -188,12 +192,14 @@ public class GameplayHUD : MonoBehaviour
 
     public void SetPortraits(Sprite player, Sprite opp)
     {
+        portraitsSet = true;
         if (playerPortrait != null && player != null) playerPortrait.sprite = player;
         if (opponentPortrait != null && opp != null) opponentPortrait.sprite = opp;
     }
 
     private void ApplyPortraits()
     {
+        if (portraitsSet) return;
         CharacterData me = roster.Find(c => c != null && c.Id == CharacterSelection.SelectedId);
         if (me == null && roster.Count > 0) me = roster[0];
         selectedCharacter = me;

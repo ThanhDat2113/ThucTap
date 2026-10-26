@@ -18,15 +18,8 @@ public static class StoryProgress
     }
 
     // Hang theo do chinh xac
-    public static string Rank(float accuracy)
-    {
-        if (accuracy < 0f) return "";
-        if (accuracy >= 95f) return "S";
-        if (accuracy >= 85f) return "A";
-        if (accuracy >= 70f) return "B";
-        if (accuracy >= 50f) return "C";
-        return "D";
-    }
+    // Dung chung thang hang voi man tong ket
+    public static string Rank(float accuracy) { return GameplayResultScreen.RankOf(true, accuracy); }
 
     public static void ResetAll(StoryWeekData[] weeks)
     {

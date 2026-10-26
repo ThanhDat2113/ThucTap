@@ -20,6 +20,7 @@ MonoBehaviour:
   cardNormal: {fileID: 21300000, guid: 0ec30ee0f831c564c930e511651b4fc9, type: 3}
   cardSelected: {fileID: 21300000, guid: d25762290605b9940828be66546c007f, type: 3}
   detailArt: {fileID: 21300000, guid: 1024a7ff5e238f749919dedb8fc2910a, type: 3}
+  opponent: 0
   tracks:
   - title: Come My Way
     song: {fileID: 11400000, guid: 1192c85b9053dbf4ea90fb67247f472e, type: 2}
