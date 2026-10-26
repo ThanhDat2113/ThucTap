@@ -1505,6 +1505,7 @@ GameObject:
   - component: {fileID: 772989731}
   - component: {fileID: 772989734}
   - component: {fileID: 772989735}
+  - component: {fileID: 772989736}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1637,7 +1638,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772989722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e67bcb340ec5a1458c668d24abb20a3, type: 3}
   m_Name: 
@@ -1690,8 +1691,75 @@ MonoBehaviour:
   overrideLaneColors: 1
   overrideReceptors: 1
   debugLog: 1
-  useFixedStyle: 1
-  fixedStyle: 5
+  useFixedStyle: 0
+  fixedStyle: 8
+--- !u!114 &772989736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772989722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dadd215ec2dd0b6429e87051b3c40990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatedBackground
+  themes:
+  - name: Theme
+    image: {fileID: 2800000, guid: 802feb302e5df2f4ca320226dedcafc2, type: 3}
+    paletteTop: {r: 0.25, g: 0.1, b: 0.55, a: 1}
+    paletteMiddle: {r: 1, g: 0.2, b: 0.85, a: 1}
+    paletteBottom: {r: 0.2, g: 0.9, b: 1, a: 1}
+    floorY: 0.34
+    beamColorA: {r: 0.2, g: 0.85, b: 1, a: 1}
+    beamColorB: {r: 1, g: 0.25, b: 0.85, a: 1}
+    beamOrigins:
+    - {x: 0.44, y: 0.9}
+    - {x: 0.51, y: 0.9}
+    - {x: 0.556, y: 0.9}
+    - {x: 0.604, y: 0.9}
+    focusPoint: {x: 0.58, y: 0.74}
+    focusColor: {r: 1, g: 0.7, b: 0.85, a: 1}
+    focusRadius: 0.12
+    twinkleRect: {x: 0.3, y: 0.38, z: 0.82, w: 0.8}
+  startIndex: 0
+  randomOnStart: 0
+  fadeTime: 1.2
+  shader: {fileID: 4800000, guid: 4adf451574cfd8942b0619998c65e9a4, type: 3}
+  audioSource: {fileID: 0}
+  useAudioSpectrum: 1
+  beatSensitivity: 1
+  useBpmPulse: 0
+  bpm: 120
+  pulseStrength: 0.8
+  pulseDecay: 5
+  baseZoom: 1.08
+  swayAmount: 0.008
+  swaySpeed: 0.35
+  pulseZoom: 0.012
+  hueRange: 0.18
+  neonBoost: 1.2
+  floorWave: 0.004
+  beamStrength: 0.35
+  flicker: 0.15
+  vignette: 0.35
+  laneCenterX: 0.5
+  laneHalfWidth: 0.17
+  laneSoftness: 0.12
+  laneDim: 0.35
+  barsStrength: 0.5
+  barHeight: 0.35
+  barInner: 0.3
+  particleStrength: 0.6
+  aberration: 0.004
+  focusStrength: 0.6
+  twinkle: 0.5
+  rippleStrength: 1
+  rippleDuration: 0.9
+  autoBurstOnBigBeat: 1
+  burstEveryCombo: 50
+  distance: 60
 --- !u!1 &837932949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,16 +3322,16 @@ MonoBehaviour:
   restartText: RESTART
   lobbyText: LOBBY
   mainMenuText: MAIN MENU
-  pauseIconSprite: {fileID: 5470352240766234753, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
-  resumeIconSprite: {fileID: 5470352240766234753, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
-  resumeButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
-  restartButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
-  lobbyButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
-  mainMenuButtonSprite: {fileID: 21300000, guid: 0e29cb20aa77e24439f7e1852ea1fa86, type: 3}
+  pauseIconSprite: {fileID: -7073005737689301607, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  resumeIconSprite: {fileID: -7073005737689301607, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  resumeButtonSprite: {fileID: 2547092431569953345, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  restartButtonSprite: {fileID: 2547092431569953345, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  lobbyButtonSprite: {fileID: 2547092431569953345, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
+  mainMenuButtonSprite: {fileID: 2547092431569953345, guid: 21ecba8d3c0ca4a40968fe87b1034bc6, type: 3}
   hideLabelWhenSprite: 0
   pauseButtonHeight: 90
-  menuButtonHeight: 110
-  menuButtonGap: 20
+  menuButtonHeight: 100
+  menuButtonGap: 40
   font: {fileID: 12800000, guid: 38624bbe44c61d94b8b09c014def0c60, type: 3}
   dimColor: {r: 0, g: 0, b: 0, a: 0.7}
   buttonColor: {r: 0.95, g: 0.25, b: 0.65, a: 1}

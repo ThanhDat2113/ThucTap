@@ -76,6 +76,7 @@
     <Compile Include="Assets\VFX\Background\BackgroundPetals.cs" />
     <Compile Include="Assets\Luan\LuckyWheel\Scripts\LuckyWheelSliceGraphic.cs" />
     <Compile Include="Assets\Thuan\Scripts\UI\GameplayScreen.cs" />
+    <Compile Include="Assets\VFX\Background\AnimatedBackground.cs" />
     <Compile Include="Assets\Luan\MainMenu\Scripts\LeaderboardManager.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundWinterGradient.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
@@ -190,6 +191,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\UI\AnimatedNeonBackground (1).shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Thuan\UI\Fonts\Bangers-OFL.txt" />

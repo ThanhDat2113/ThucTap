@@ -156,9 +156,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9677769ffa7f34541b14d729add0b038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.NoteSkin
-  style: 7
+  style: 5
   sizeOverride: {x: 0, y: 0}
-  shape: 0
+  useBackgroundPalette: 1
+  background: {fileID: 0}
+  laneTint: 1
+  harmony: 2
+  accentShift: 0.42
+  edgeShadow: 0.5
   cornerRadius: 0.3
   borderWidth: 0.12
   glowSize: 0.7
@@ -168,8 +173,3 @@ MonoBehaviour:
   fillAlpha: 0.9
   shine: 0
   innerGlow: 0.5
-  specular: 0
-  centerLine: 0
-  scanlines: 0
-  stripes: 0
-  pixelRows: 0
