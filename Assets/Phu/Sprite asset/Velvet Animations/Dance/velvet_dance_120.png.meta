@@ -1,0 +1,5993 @@
+fileFormatVersion: 2
+guid: 5375dd2a2dd071f4ebdac71cea330a3a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6106857536408964797
+    second: velvet_dance_120_0
+  - first:
+      213: -4684803424376824977
+    second: velvet_dance_120_1
+  - first:
+      213: 8279042172259945463
+    second: velvet_dance_120_2
+  - first:
+      213: -8670664016941518764
+    second: velvet_dance_120_3
+  - first:
+      213: 3299249231114579514
+    second: velvet_dance_120_4
+  - first:
+      213: -8840384935017549859
+    second: velvet_dance_120_5
+  - first:
+      213: 4623216973260474484
+    second: velvet_dance_120_6
+  - first:
+      213: -3284075703297660900
+    second: velvet_dance_120_7
+  - first:
+      213: -1092673076091691789
+    second: velvet_dance_120_8
+  - first:
+      213: 4648761018729697961
+    second: velvet_dance_120_9
+  - first:
+      213: -6156386363832342704
+    second: velvet_dance_120_10
+  - first:
+      213: -6080584167529481733
+    second: velvet_dance_120_11
+  - first:
+      213: -5834943925275564940
+    second: velvet_dance_120_12
+  - first:
+      213: 3129444751644254321
+    second: velvet_dance_120_13
+  - first:
+      213: 3608720646437547950
+    second: velvet_dance_120_14
+  - first:
+      213: -3757884927845012083
+    second: velvet_dance_120_15
+  - first:
+      213: -7248204399316188312
+    second: velvet_dance_120_16
+  - first:
+      213: -5836966285165300597
+    second: velvet_dance_120_17
+  - first:
+      213: -2773023324339954602
+    second: velvet_dance_120_18
+  - first:
+      213: 2922364562042193158
+    second: velvet_dance_120_19
+  - first:
+      213: -1319282906400914336
+    second: velvet_dance_120_20
+  - first:
+      213: 7280914371169497720
+    second: velvet_dance_120_21
+  - first:
+      213: -696318212004724895
+    second: velvet_dance_120_22
+  - first:
+      213: -6197986412840728752
+    second: velvet_dance_120_23
+  - first:
+      213: -1951221613955584912
+    second: velvet_dance_120_24
+  - first:
+      213: 4998283878700524502
+    second: velvet_dance_120_25
+  - first:
+      213: -155189688978761124
+    second: velvet_dance_120_26
+  - first:
+      213: 8491155384952308461
+    second: velvet_dance_120_27
+  - first:
+      213: -8319388093035337332
+    second: velvet_dance_120_28
+  - first:
+      213: 790770827514178176
+    second: velvet_dance_120_29
+  - first:
+      213: -3454963362717729368
+    second: velvet_dance_120_30
+  - first:
+      213: -1921349212425461729
+    second: velvet_dance_120_31
+  - first:
+      213: -8167954517098120603
+    second: velvet_dance_120_32
+  - first:
+      213: 226076584883232392
+    second: velvet_dance_120_33
+  - first:
+      213: 1075264535812831090
+    second: velvet_dance_120_34
+  - first:
+      213: -6534604211588070051
+    second: velvet_dance_120_35
+  - first:
+      213: 1787242834043076297
+    second: velvet_dance_120_36
+  - first:
+      213: 3238223144400965530
+    second: velvet_dance_120_37
+  - first:
+      213: -7911860794967757906
+    second: velvet_dance_120_38
+  - first:
+      213: -8032406188693532039
+    second: velvet_dance_120_39
+  - first:
+      213: 765062681269406932
+    second: velvet_dance_120_40
+  - first:
+      213: 7479792341317427566
+    second: velvet_dance_120_41
+  - first:
+      213: 6877833944891293838
+    second: velvet_dance_120_42
+  - first:
+      213: -2951294676588448360
+    second: velvet_dance_120_43
+  - first:
+      213: -8484870844537203615
+    second: velvet_dance_120_44
+  - first:
+      213: -7957820063726346150
+    second: velvet_dance_120_45
+  - first:
+      213: -8391654922423756634
+    second: velvet_dance_120_46
+  - first:
+      213: -6593804594235723036
+    second: velvet_dance_120_47
+  - first:
+      213: 6225790417789352449
+    second: velvet_dance_120_48
+  - first:
+      213: -5091030445552239225
+    second: velvet_dance_120_49
+  - first:
+      213: 8786109888864154333
+    second: velvet_dance_120_50
+  - first:
+      213: 2309291384118116859
+    second: velvet_dance_120_51
+  - first:
+      213: 1036745050070853841
+    second: velvet_dance_120_52
+  - first:
+      213: 4278196201431004773
+    second: velvet_dance_120_53
+  - first:
+      213: 3503457806083612703
+    second: velvet_dance_120_54
+  - first:
+      213: -4512234606540765019
+    second: velvet_dance_120_55
+  - first:
+      213: -6343642867076963108
+    second: velvet_dance_120_56
+  - first:
+      213: -8478046450442089980
+    second: velvet_dance_120_57
+  - first:
+      213: 1275901352259690599
+    second: velvet_dance_120_58
+  - first:
+      213: -6404343358480015382
+    second: velvet_dance_120_59
+  - first:
+      213: 4361179323647524875
+    second: velvet_dance_120_60
+  - first:
+      213: -1029963168319950757
+    second: velvet_dance_120_61
+  - first:
+      213: 3528304703607500252
+    second: velvet_dance_120_62
+  - first:
+      213: -2302719800284477534
+    second: velvet_dance_120_63
+  - first:
+      213: -9032153275279451801
+    second: velvet_dance_120_64
+  - first:
+      213: 6814288959974647879
+    second: velvet_dance_120_65
+  - first:
+      213: -7604311629818333718
+    second: velvet_dance_120_66
+  - first:
+      213: -9096113402050054177
+    second: velvet_dance_120_67
+  - first:
+      213: -5485172891363135751
+    second: velvet_dance_120_68
+  - first:
+      213: 6583043084733806803
+    second: velvet_dance_120_69
+  - first:
+      213: -5781229999171868007
+    second: velvet_dance_120_70
+  - first:
+      213: 4343967561727396623
+    second: velvet_dance_120_71
+  - first:
+      213: -7455240726563116629
+    second: velvet_dance_120_72
+  - first:
+      213: -1600570539827655448
+    second: velvet_dance_120_73
+  - first:
+      213: 4394718233137491590
+    second: velvet_dance_120_74
+  - first:
+      213: -3569159827916616544
+    second: velvet_dance_120_75
+  - first:
+      213: 4103066833420466000
+    second: velvet_dance_120_76
+  - first:
+      213: -4117189402863195080
+    second: velvet_dance_120_77
+  - first:
+      213: -1816967991270366059
+    second: velvet_dance_120_78
+  - first:
+      213: -2556355148034550016
+    second: velvet_dance_120_79
+  - first:
+      213: 37422651115021361
+    second: velvet_dance_120_80
+  - first:
+      213: 8830524210199744514
+    second: velvet_dance_120_81
+  - first:
+      213: 2262366961651629526
+    second: velvet_dance_120_82
+  - first:
+      213: 1659360519991933899
+    second: velvet_dance_120_83
+  - first:
+      213: 9191907593883944137
+    second: velvet_dance_120_84
+  - first:
+      213: 8642197188934878972
+    second: velvet_dance_120_85
+  - first:
+      213: -2055871088476861946
+    second: velvet_dance_120_86
+  - first:
+      213: 1391110796013016752
+    second: velvet_dance_120_87
+  - first:
+      213: 2306561097728439105
+    second: velvet_dance_120_88
+  - first:
+      213: 7035307451580148937
+    second: velvet_dance_120_89
+  - first:
+      213: 8457346743116083879
+    second: velvet_dance_120_90
+  - first:
+      213: 734489145690838642
+    second: velvet_dance_120_91
+  - first:
+      213: -2735872188498220540
+    second: velvet_dance_120_92
+  - first:
+      213: -801022362340806749
+    second: velvet_dance_120_93
+  - first:
+      213: -4738509641131366253
+    second: velvet_dance_120_94
+  - first:
+      213: -7475801040244959759
+    second: velvet_dance_120_95
+  - first:
+      213: 9133707749192791816
+    second: velvet_dance_120_96
+  - first:
+      213: 4353138249063748671
+    second: velvet_dance_120_97
+  - first:
+      213: -1231488626571206842
+    second: velvet_dance_120_98
+  - first:
+      213: -5175353887874420787
+    second: velvet_dance_120_99
+  - first:
+      213: -9102112880028376126
+    second: velvet_dance_120_100
+  - first:
+      213: 2651028840794113479
+    second: velvet_dance_120_101
+  - first:
+      213: -2825398297252788036
+    second: velvet_dance_120_102
+  - first:
+      213: 434731448233281892
+    second: velvet_dance_120_103
+  - first:
+      213: -7142037991319334736
+    second: velvet_dance_120_104
+  - first:
+      213: 8994886024406370311
+    second: velvet_dance_120_105
+  - first:
+      213: 7145919239698545896
+    second: velvet_dance_120_106
+  - first:
+      213: -8586589471260888125
+    second: velvet_dance_120_107
+  - first:
+      213: -8411669682031842141
+    second: velvet_dance_120_108
+  - first:
+      213: -4899591828308697824
+    second: velvet_dance_120_109
+  - first:
+      213: 5327876566831206953
+    second: velvet_dance_120_110
+  - first:
+      213: -3801158608356882057
+    second: velvet_dance_120_111
+  - first:
+      213: 3158517428897360702
+    second: velvet_dance_120_112
+  - first:
+      213: -1696819547212820519
+    second: velvet_dance_120_113
+  - first:
+      213: -3803807343613772594
+    second: velvet_dance_120_114
+  - first:
+      213: -4423418628562154235
+    second: velvet_dance_120_115
+  - first:
+      213: 1779924373654041121
+    second: velvet_dance_120_116
+  - first:
+      213: 2064982291366220675
+    second: velvet_dance_120_117
+  - first:
+      213: -4492625263122100541
+    second: velvet_dance_120_118
+  - first:
+      213: -993228115692331719
+    second: velvet_dance_120_119
+  - first:
+      213: 1377056433287852564
+    second: velvet_dance_120_120
+  - first:
+      213: -4775409128384850585
+    second: velvet_dance_120_121
+  - first:
+      213: -228233208604296557
+    second: velvet_dance_120_122
+  - first:
+      213: 483464424541283906
+    second: velvet_dance_120_123
+  - first:
+      213: -3123078101867124575
+    second: velvet_dance_120_124
+  - first:
+      213: 5284037267229333409
+    second: velvet_dance_120_125
+  - first:
+      213: 7689058530077229982
+    second: velvet_dance_120_126
+  - first:
+      213: -6420530069637853192
+    second: velvet_dance_120_127
+  - first:
+      213: -9066559035188603203
+    second: velvet_dance_120_128
+  - first:
+      213: 6727915531791473444
+    second: velvet_dance_120_129
+  - first:
+      213: 6321410358496224988
+    second: velvet_dance_120_130
+  - first:
+      213: 4260775414169214528
+    second: velvet_dance_120_131
+  - first:
+      213: 3711990864515231742
+    second: velvet_dance_120_132
+  - first:
+      213: -7625644922101411576
+    second: velvet_dance_120_133
+  - first:
+      213: -1754494133981368047
+    second: velvet_dance_120_134
+  - first:
+      213: -8591093571647991056
+    second: velvet_dance_120_135
+  - first:
+      213: -5298136232862436543
+    second: velvet_dance_120_136
+  - first:
+      213: -632055425503957816
+    second: velvet_dance_120_137
+  - first:
+      213: 2050324515996076962
+    second: velvet_dance_120_138
+  - first:
+      213: 2516621708357075674
+    second: velvet_dance_120_139
+  - first:
+      213: -2071495616451891659
+    second: velvet_dance_120_140
+  - first:
+      213: -3598836311887020169
+    second: velvet_dance_120_141
+  - first:
+      213: 7236175404151604341
+    second: velvet_dance_120_142
+  - first:
+      213: -2355842142984850600
+    second: velvet_dance_120_143
+  - first:
+      213: 2979612976440745355
+    second: velvet_dance_120_144
+  - first:
+      213: -2066757796597677565
+    second: velvet_dance_120_145
+  - first:
+      213: -5338023009252997367
+    second: velvet_dance_120_146
+  - first:
+      213: -3445452645395076100
+    second: velvet_dance_120_147
+  - first:
+      213: -3998932096943614569
+    second: velvet_dance_120_148
+  - first:
+      213: 6936864480556335889
+    second: velvet_dance_120_149
+  - first:
+      213: -7644178961100703976
+    second: velvet_dance_120_150
+  - first:
+      213: 7135055284511978628
+    second: velvet_dance_120_151
+  - first:
+      213: 4190066797959462235
+    second: velvet_dance_120_152
+  - first:
+      213: -2320666663649050710
+    second: velvet_dance_120_153
+  - first:
+      213: 433458416753202617
+    second: velvet_dance_120_154
+  - first:
+      213: 1472213507861788697
+    second: velvet_dance_120_155
+  - first:
+      213: 2364137978905509391
+    second: velvet_dance_120_156
+  - first:
+      213: 107113135257755275
+    second: velvet_dance_120_157
+  - first:
+      213: 823744595851303060
+    second: velvet_dance_120_158
+  - first:
+      213: -3635773283246974358
+    second: velvet_dance_120_159
+  - first:
+      213: 561355074600046337
+    second: velvet_dance_120_160
+  - first:
+      213: 2858030733541353556
+    second: velvet_dance_120_161
+  - first:
+      213: 3651176563255870016
+    second: velvet_dance_120_162
+  - first:
+      213: -5919155602829474441
+    second: velvet_dance_120_163
+  - first:
+      213: 5493344366339269189
+    second: velvet_dance_120_164
+  - first:
+      213: 8454308762990984852
+    second: velvet_dance_120_165
+  - first:
+      213: -4267626556181936008
+    second: velvet_dance_120_166
+  - first:
+      213: -449744761044712339
+    second: velvet_dance_120_167
+  - first:
+      213: -5907244971099237637
+    second: velvet_dance_120_168
+  - first:
+      213: -7283216508029245855
+    second: velvet_dance_120_169
+  - first:
+      213: -3017194458525956903
+    second: velvet_dance_120_170
+  - first:
+      213: 5889822683042653363
+    second: velvet_dance_120_171
+  - first:
+      213: -1083884252184552019
+    second: velvet_dance_120_172
+  - first:
+      213: -3119486478770147690
+    second: velvet_dance_120_173
+  - first:
+      213: 2097265791793750412
+    second: velvet_dance_120_174
+  - first:
+      213: -4831972404311109237
+    second: velvet_dance_120_175
+  - first:
+      213: 8610755168100283160
+    second: velvet_dance_120_176
+  - first:
+      213: -7509860358750733853
+    second: velvet_dance_120_177
+  - first:
+      213: -4328981529558262621
+    second: velvet_dance_120_178
+  - first:
+      213: 8867507196233554584
+    second: velvet_dance_120_179
+  - first:
+      213: 8757523662144235337
+    second: velvet_dance_120_180
+  - first:
+      213: 4501885255030197956
+    second: velvet_dance_120_181
+  - first:
+      213: 9118759013481281747
+    second: velvet_dance_120_182
+  - first:
+      213: 334978327683381679
+    second: velvet_dance_120_183
+  - first:
+      213: 5713343826987777907
+    second: velvet_dance_120_184
+  - first:
+      213: 230910885420940931
+    second: velvet_dance_120_185
+  - first:
+      213: 4489443573501321454
+    second: velvet_dance_120_186
+  - first:
+      213: -4316647712208470647
+    second: velvet_dance_120_187
+  - first:
+      213: 7841699901485954380
+    second: velvet_dance_120_188
+  - first:
+      213: -946002232633910181
+    second: velvet_dance_120_189
+  - first:
+      213: -6424158480052584280
+    second: velvet_dance_120_190
+  - first:
+      213: -652987712724621021
+    second: velvet_dance_120_191
+  - first:
+      213: 2820662643717764262
+    second: velvet_dance_120_192
+  - first:
+      213: 4793202500824089048
+    second: velvet_dance_120_193
+  - first:
+      213: -6523552802035950415
+    second: velvet_dance_120_194
+  - first:
+      213: 9051853920857920994
+    second: velvet_dance_120_195
+  - first:
+      213: 8266967284106068032
+    second: velvet_dance_120_196
+  - first:
+      213: 7259835370289187463
+    second: velvet_dance_120_197
+  - first:
+      213: 7655617152475079122
+    second: velvet_dance_120_198
+  - first:
+      213: -3401201316465647184
+    second: velvet_dance_120_199
+  - first:
+      213: 1499592581284626121
+    second: velvet_dance_120_200
+  - first:
+      213: 8383489674429958682
+    second: velvet_dance_120_201
+  - first:
+      213: -6518988213161684578
+    second: velvet_dance_120_202
+  - first:
+      213: 6505262456446068550
+    second: velvet_dance_120_203
+  - first:
+      213: -3399835450059966221
+    second: velvet_dance_120_204
+  - first:
+      213: -7285597914454732043
+    second: velvet_dance_120_205
+  - first:
+      213: 5538871050939916699
+    second: velvet_dance_120_206
+  - first:
+      213: -3647771375294518525
+    second: velvet_dance_120_207
+  - first:
+      213: 7469983551523034010
+    second: velvet_dance_120_208
+  - first:
+      213: -6757817537949753920
+    second: velvet_dance_120_209
+  - first:
+      213: -2080306704117603684
+    second: velvet_dance_120_210
+  - first:
+      213: -934159353108337861
+    second: velvet_dance_120_211
+  - first:
+      213: 6594473088200911719
+    second: velvet_dance_120_212
+  - first:
+      213: 3950496797351383943
+    second: velvet_dance_120_213
+  - first:
+      213: 1730410644775155125
+    second: velvet_dance_120_214
+  - first:
+      213: 8851922073600040374
+    second: velvet_dance_120_215
+  - first:
+      213: 434366753336414613
+    second: velvet_dance_120_216
+  - first:
+      213: -4972726905900226057
+    second: velvet_dance_120_217
+  - first:
+      213: 6405624479245400847
+    second: velvet_dance_120_218
+  - first:
+      213: -4340327012522781738
+    second: velvet_dance_120_219
+  - first:
+      213: 8464531938529751380
+    second: velvet_dance_120_220
+  - first:
+      213: 1870685839518399195
+    second: velvet_dance_120_221
+  - first:
+      213: -8223148316236136955
+    second: velvet_dance_120_222
+  - first:
+      213: 5451727658502734137
+    second: velvet_dance_120_223
+  - first:
+      213: -3347716484145045225
+    second: velvet_dance_120_224
+  - first:
+      213: -6400444788597687760
+    second: velvet_dance_120_225
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: velvet_dance_120_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 5291
+        width: 357
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbec297e29aefb450800000000000000
+      internalID: 6106857536408964797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_1
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 5291
+        width: 357
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6b5c7f4b1c3cfeb0800000000000000
+      internalID: -4684803424376824977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_2
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 5291
+        width: 359
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fb480ecdf015e270800000000000000
+      internalID: 8279042172259945463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_3
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 5291
+        width: 359
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4507077040d9ba780800000000000000
+      internalID: -8670664016941518764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_4
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 5291
+        width: 362
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3ea01e02b949cd20800000000000000
+      internalID: 3299249231114579514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_5
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 5291
+        width: 362
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddf609e6db4a05580800000000000000
+      internalID: -8840384935017549859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_6
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 5291
+        width: 362
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4784fb2a757f82040800000000000000
+      internalID: 4623216973260474484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_7
+      rect:
+        serializedVersion: 2
+        x: 2699
+        y: 5291
+        width: 362
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c18a3713c8e9c62d0800000000000000
+      internalID: -3284075703297660900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_8
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 5291
+        width: 362
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fcdbe360ab06d0f0800000000000000
+      internalID: -1092673076091691789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_9
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 5291
+        width: 362
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a2111f2487b38040800000000000000
+      internalID: 4648761018729697961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_10
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 4811
+        width: 362
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057e6b3583f109aa0800000000000000
+      internalID: -6156386363832342704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_11
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 4811
+        width: 362
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf97a8b7aec6d9ba0800000000000000
+      internalID: -6080584167529481733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_12
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 4811
+        width: 312
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47460a13a6d160fa0800000000000000
+      internalID: -5834943925275564940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_13
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 5137
+        width: 10
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17067fdcb650e6b20800000000000000
+      internalID: 3129444751644254321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_14
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 4811
+        width: 314
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaf2780ee40c41230800000000000000
+      internalID: 3608720646437547950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_15
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 5137
+        width: 11
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8de009719f49dbc0800000000000000
+      internalID: -3757884927845012083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_16
+      rect:
+        serializedVersion: 2
+        x: 1572
+        y: 4811
+        width: 315
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 863c55f5084396b90800000000000000
+      internalID: -7248204399316188312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_17
+      rect:
+        serializedVersion: 2
+        x: 1953
+        y: 5137
+        width: 11
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b847ac6d61eeefea0800000000000000
+      internalID: -5836966285165300597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_18
+      rect:
+        serializedVersion: 2
+        x: 1956
+        y: 4811
+        width: 315
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c18d68afd3489d0800000000000000
+      internalID: -2773023324339954602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_19
+      rect:
+        serializedVersion: 2
+        x: 2337
+        y: 5135
+        width: 12
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60507b8f5135e8820800000000000000
+      internalID: 2922364562042193158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_20
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 4811
+        width: 307
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0648abdbf27f0bde0800000000000000
+      internalID: -1319282906400914336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_21
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 5137
+        width: 11
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 872389d6b010b0560800000000000000
+      internalID: 7280914371169497720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_22
+      rect:
+        serializedVersion: 2
+        x: 2728
+        y: 4811
+        width: 311
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16fb2d2864e2656f0800000000000000
+      internalID: -696318212004724895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_23
+      rect:
+        serializedVersion: 2
+        x: 3105
+        y: 5137
+        width: 11
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0574ee322345cf9a0800000000000000
+      internalID: -6197986412840728752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_24
+      rect:
+        serializedVersion: 2
+        x: 3112
+        y: 4811
+        width: 311
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07cec16b74edbe4e0800000000000000
+      internalID: -1951221613955584912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_25
+      rect:
+        serializedVersion: 2
+        x: 3489
+        y: 5137
+        width: 10
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d3a184a4b87d5540800000000000000
+      internalID: 4998283878700524502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_26
+      rect:
+        serializedVersion: 2
+        x: 3496
+        y: 4811
+        width: 310
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a1e93dcc7a8ddf0800000000000000
+      internalID: -155189688978761124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_27
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 4331
+        width: 304
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de24ab4a5d4a6d570800000000000000
+      internalID: 8491155384952308461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_28
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 4331
+        width: 321
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c89a30e7b989b8c80800000000000000
+      internalID: -8319388093035337332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_29
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 4331
+        width: 321
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08a69b0c0e169fa00800000000000000
+      internalID: 790770827514178176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_30
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 4331
+        width: 321
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ad783570218d00d0800000000000000
+      internalID: -3454963362717729368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_31
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 4331
+        width: 321
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1067ef221ff555e0800000000000000
+      internalID: -1921349212425461729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_32
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 4331
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ab1d274a895ae80800000000000000
+      internalID: -8167954517098120603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_33
+      rect:
+        serializedVersion: 2
+        x: 2329
+        y: 4331
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88e9ff5c47f232300800000000000000
+      internalID: 226076584883232392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_34
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 4331
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277f2b8f56b1cee00800000000000000
+      internalID: 1075264535812831090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_35
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 4331
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d558584671c6055a0800000000000000
+      internalID: -6534604211588070051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_36
+      rect:
+        serializedVersion: 2
+        x: 3481
+        y: 4331
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ceff7a63ef8dc810800000000000000
+      internalID: 1787242834043076297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_37
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 3851
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9fc7710bca70fc20800000000000000
+      internalID: 3238223144400965530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_38
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 3851
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eab6b9b968c633290800000000000000
+      internalID: -7911860794967757906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_39
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 3851
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 972d54ff029278090800000000000000
+      internalID: -8032406188693532039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_40
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 3851
+        width: 334
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dc88f3847c0e9a00800000000000000
+      internalID: 765062681269406932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_41
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 3851
+        width: 335
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e61a9e9318f8dc760800000000000000
+      internalID: 7479792341317427566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_42
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 3851
+        width: 335
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e808e555889f27f50800000000000000
+      internalID: 6877833944891293838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_43
+      rect:
+        serializedVersion: 2
+        x: 2328
+        y: 3851
+        width: 336
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 895b176d025ea07d0800000000000000
+      internalID: -2951294676588448360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_44
+      rect:
+        serializedVersion: 2
+        x: 2711
+        y: 4084
+        width: 18
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1649a42fbeeaf3a80800000000000000
+      internalID: -8484870844537203615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_45
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 3851
+        width: 336
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a506d1b70d4209190800000000000000
+      internalID: -7957820063726346150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_46
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 3851
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a816471f4ada8b80800000000000000
+      internalID: -8391654922423756634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_47
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 4083
+        width: 19
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e2bd3238a91e74a0800000000000000
+      internalID: -6593804594235723036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_48
+      rect:
+        serializedVersion: 2
+        x: 3479
+        y: 3851
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10a7d5a3663766650800000000000000
+      internalID: 6225790417789352449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_49
+      rect:
+        serializedVersion: 2
+        x: 3479
+        y: 4083
+        width: 19
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78df82088c60959b0800000000000000
+      internalID: -5091030445552239225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_50
+      rect:
+        serializedVersion: 2
+        x: 2711
+        y: 3890
+        width: 16
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd27b43a4688ee970800000000000000
+      internalID: 8786109888864154333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_51
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 3889
+        width: 17
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf10b3957404c0020800000000000000
+      internalID: 2309291384118116859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_52
+      rect:
+        serializedVersion: 2
+        x: 3479
+        y: 3889
+        width: 17
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d82e105122436e00800000000000000
+      internalID: 1036745050070853841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_53
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 3371
+        width: 324
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56678b147c43f5b30800000000000000
+      internalID: 4278196201431004773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_54
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f10ee210058ce9030800000000000000
+      internalID: 3503457806083612703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_55
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a8c9ed38825161c0800000000000000
+      internalID: -4512234606540765019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_56
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd4efe52c6ad6f7a0800000000000000
+      internalID: -6343642867076963108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_57
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40a43240cade75a80800000000000000
+      internalID: -8478046450442089980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_58
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76021e51589e4b110800000000000000
+      internalID: 1275901352259690599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_59
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aef9a2aa5a33f17a0800000000000000
+      internalID: -6404343358480015382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_60
+      rect:
+        serializedVersion: 2
+        x: 2711
+        y: 3371
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b000ac30d75068c30800000000000000
+      internalID: 4361179323647524875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_61
+      rect:
+        serializedVersion: 2
+        x: 3100
+        y: 3371
+        width: 328
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b50bd8494f5d4b1f0800000000000000
+      internalID: -1029963168319950757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_62
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 3371
+        width: 362
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd6dd52f6e07f030800000000000000
+      internalID: 3528304703607500252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_63
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 3781
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a709ceba881b00e0800000000000000
+      internalID: -2302719800284477534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_64
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 3750
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7695616537857a280800000000000000
+      internalID: -9032153275279451801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_65
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 3695
+        width: 23
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 748a72894b7319e50800000000000000
+      internalID: 6814288959974647879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_66
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 3602
+        width: 24
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae57e4facde087690800000000000000
+      internalID: -7604311629818333718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_67
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 3630
+        width: 29
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd7f22add0d14c180800000000000000
+      internalID: -9096113402050054177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_68
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 3408
+        width: 18
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fea2b62150c0e3b0800000000000000
+      internalID: -5485172891363135751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_69
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 3377
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d876ae9ecaab5b50800000000000000
+      internalID: 6583043084733806803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_70
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 2891
+        width: 362
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99a678e22f1f4cfa0800000000000000
+      internalID: -5781229999171868007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_71
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 2891
+        width: 389
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0bc4986b7fd84c30800000000000000
+      internalID: 4343967561727396623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_72
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 3299
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba92e2a0f0aa98890800000000000000
+      internalID: -7455240726563116629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_73
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 3299
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec0e9ff291a9c9e0800000000000000
+      internalID: -1600570539827655448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_74
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 2891
+        width: 329
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68ea716e2fc2dfc30800000000000000
+      internalID: 4394718233137491590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_75
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 3299
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ac8f66fb0cc77ec0800000000000000
+      internalID: -3569159827916616544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_76
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 2891
+        width: 333
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057b6b7cb8501f830800000000000000
+      internalID: 4103066833420466000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_77
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 3299
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c26594d0eccd6c0800000000000000
+      internalID: -4117189402863195080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_78
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 2891
+        width: 334
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59423181d35d8c6e0800000000000000
+      internalID: -1816967991270366059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_79
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 3301
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 007d8a97980068cd0800000000000000
+      internalID: -2556355148034550016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_80
+      rect:
+        serializedVersion: 2
+        x: 1959
+        y: 2891
+        width: 334
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134a342f3b3f48000800000000000000
+      internalID: 37422651115021361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_81
+      rect:
+        serializedVersion: 2
+        x: 2343
+        y: 2891
+        width: 319
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2005179abf25c8a70800000000000000
+      internalID: 8830524210199744514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_82
+      rect:
+        serializedVersion: 2
+        x: 2727
+        y: 2891
+        width: 319
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dd33dcd3ca856f10800000000000000
+      internalID: 2262366961651629526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_83
+      rect:
+        serializedVersion: 2
+        x: 3111
+        y: 2891
+        width: 319
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb3d6ce99b370710800000000000000
+      internalID: 1659360519991933899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_84
+      rect:
+        serializedVersion: 2
+        x: 3481
+        y: 2892
+        width: 333
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c40bad7147309f70800000000000000
+      internalID: 9191907593883944137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_85
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 3213
+        width: 24
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf6c7551e804fe770800000000000000
+      internalID: 8642197188934878972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_86
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 3213
+        width: 25
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a475333241873e0800000000000000
+      internalID: -2055871088476861946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_87
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 3213
+        width: 25
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b6119706e73e4310800000000000000
+      internalID: 1391110796013016752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_88
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 3213
+        width: 25
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143b6d2091d820020800000000000000
+      internalID: 2306561097728439105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_89
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 3270
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cce7114ade62a160800000000000000
+      internalID: 7035307451580148937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_90
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 3215
+        width: 23
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a2bdbdcd088e5570800000000000000
+      internalID: 8457346743116083879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_91
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 3149
+        width: 31
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 276584c8cfd613a00800000000000000
+      internalID: 734489145690838642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_92
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 3149
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40a61b56dba380ad0800000000000000
+      internalID: -2735872188498220540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_93
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 3149
+        width: 31
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3af288bc76232e4f0800000000000000
+      internalID: -801022362340806749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_94
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 3093
+        width: 29
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 398e99b469e6d3eb0800000000000000
+      internalID: -4738509641131366253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_95
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 3149
+        width: 31
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f514b8ff8e904890800000000000000
+      internalID: -7475801040244959759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_96
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 3093
+        width: 30
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8077ed03ec271ce70800000000000000
+      internalID: 9133707749192791816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_97
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 3150
+        width: 29
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f345c917c24796c30800000000000000
+      internalID: 4353138249063748671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_98
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 3099
+        width: 30
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64f1a4c6e9fd8eee0800000000000000
+      internalID: -1231488626571206842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_99
+      rect:
+        serializedVersion: 2
+        x: 2329
+        y: 3103
+        width: 17
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcfee462f037d28b0800000000000000
+      internalID: -5175353887874420787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_100
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 3103
+        width: 16
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c3a6688f8ccea180800000000000000
+      internalID: -9102112880028376126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_101
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 3103
+        width: 16
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c549d85fa85ac420800000000000000
+      internalID: 2651028840794113479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_102
+      rect:
+        serializedVersion: 2
+        x: 3481
+        y: 3105
+        width: 15
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb8014fd73b2ac8d0800000000000000
+      internalID: -2825398297252788036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_103
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 3046
+        width: 7
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 469c2a8e2f9780600800000000000000
+      internalID: 434731448233281892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_104
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 3044
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b0111b794262ec90800000000000000
+      internalID: -7142037991319334736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_105
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 3044
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7080ed7ae2144dc70800000000000000
+      internalID: 8994886024406370311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_106
+      rect:
+        serializedVersion: 2
+        x: 2329
+        y: 3040
+        width: 9
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec7cd310b76b2360800000000000000
+      internalID: 7145919239698545896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_107
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 3044
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c3b26d9e5e46d880800000000000000
+      internalID: -8586589471260888125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_108
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 3044
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aca19abdfeb34b80800000000000000
+      internalID: -8411669682031842141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_109
+      rect:
+        serializedVersion: 2
+        x: 3481
+        y: 3046
+        width: 7
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02dd049f037210cb0800000000000000
+      internalID: -4899591828308697824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_110
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 2983
+        width: 7
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9221a1d528b60f940800000000000000
+      internalID: 5327876566831206953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_111
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 2981
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77948f592629f3bc0800000000000000
+      internalID: -3801158608356882057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_112
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 2981
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3bae46fdde45db20800000000000000
+      internalID: 3158517428897360702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_113
+      rect:
+        serializedVersion: 2
+        x: 2329
+        y: 2980
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dfc078ac9fa378e0800000000000000
+      internalID: -1696819547212820519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_114
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 2981
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eccf0e9df59263bc0800000000000000
+      internalID: -3803807343613772594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_115
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 2981
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50d05bf813cdc92c0800000000000000
+      internalID: -4423418628562154235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_116
+      rect:
+        serializedVersion: 2
+        x: 3481
+        y: 2983
+        width: 7
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12275b299cf83b810800000000000000
+      internalID: 1779924373654041121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_117
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 2896
+        width: 20
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3831b58047a48ac10800000000000000
+      internalID: 2064982291366220675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_118
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 2891
+        width: 24
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ce49aa402df6a1c0800000000000000
+      internalID: -4492625263122100541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_119
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 2895
+        width: 21
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93d5a378a485732f0800000000000000
+      internalID: -993228115692331719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_120
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 2895
+        width: 21
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 412f9c5b7894c1310800000000000000
+      internalID: 1377056433287852564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_121
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 2897
+        width: 21
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 765967de2b65abdb0800000000000000
+      internalID: -4775409128384850585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_122
+      rect:
+        serializedVersion: 2
+        x: 2329
+        y: 2896
+        width: 7
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a71332b1725dcf0800000000000000
+      internalID: -228233208604296557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_123
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 2897
+        width: 7
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2466256255c95b600800000000000000
+      internalID: 483464424541283906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_124
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 2897
+        width: 7
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a8a86c530998a4d0800000000000000
+      internalID: -3123078101867124575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_125
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 2411
+        width: 285
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a7512506eba45940800000000000000
+      internalID: 5284037267229333409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_126
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 2411
+        width: 290
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e93c076aef505ba60800000000000000
+      internalID: 7689058530077229982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_127
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 2411
+        width: 290
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ff85894be1b5e6a0800000000000000
+      internalID: -6420530069637853192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_128
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 2411
+        width: 289
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db6997c189c1d2280800000000000000
+      internalID: -9066559035188603203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_129
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 2411
+        width: 281
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42b9347b78b5e5d50800000000000000
+      internalID: 6727915531791473444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_130
+      rect:
+        serializedVersion: 2
+        x: 1961
+        y: 2411
+        width: 301
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd664a19a392ab750800000000000000
+      internalID: 6321410358496224988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_131
+      rect:
+        serializedVersion: 2
+        x: 2345
+        y: 2411
+        width: 301
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04e16452aa0512b30800000000000000
+      internalID: 4260775414169214528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_132
+      rect:
+        serializedVersion: 2
+        x: 2729
+        y: 2411
+        width: 301
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effece83604a38330800000000000000
+      internalID: 3711990864515231742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_133
+      rect:
+        serializedVersion: 2
+        x: 3113
+        y: 2411
+        width: 301
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80152e288544c2690800000000000000
+      internalID: -7625644922101411576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_134
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 2411
+        width: 326
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 111b88f71e8c6a7e0800000000000000
+      internalID: -1754494133981368047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_135
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1931
+        width: 326
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f297c50aed46c880800000000000000
+      internalID: -8591093571647991056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_136
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1933
+        width: 326
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143bb9cba2d3976b0800000000000000
+      internalID: -5298136232862436543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_137
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 1931
+        width: 360
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cc6a7470fc7a37f0800000000000000
+      internalID: -632055425503957816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_138
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 1934
+        width: 318
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ab8832c847347c10800000000000000
+      internalID: 2050324515996076962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_139
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 1934
+        width: 320
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad209a03c16dce220800000000000000
+      internalID: 2516621708357075674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_140
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 1934
+        width: 319
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e2b9b46b19043e0800000000000000
+      internalID: -2071495616451891659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_141
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 1931
+        width: 318
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77f7239117d5e0ec0800000000000000
+      internalID: -3598836311887020169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_142
+      rect:
+        serializedVersion: 2
+        x: 2633
+        y: 2090
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57400e0f03f0c6460800000000000000
+      internalID: 7236175404151604341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_143
+      rect:
+        serializedVersion: 2
+        x: 2699
+        y: 1934
+        width: 362
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8533e708d0e5e4fd0800000000000000
+      internalID: -2355842142984850600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_144
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 1934
+        width: 362
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8d15e42736b95920800000000000000
+      internalID: 2979612976440745355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_145
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1934
+        width: 362
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 302c601fbb66153e0800000000000000
+      internalID: -2066757796597677565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_146
+      rect:
+        serializedVersion: 2
+        x: 1498
+        y: 1939
+        width: 27
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9070d9aea588be5b0800000000000000
+      internalID: -5338023009252997367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_147
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 1937
+        width: 28
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfbebc4e21b4f20d0800000000000000
+      internalID: -3445452645395076100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_148
+      rect:
+        serializedVersion: 2
+        x: 2265
+        y: 1937
+        width: 28
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79594c0f170f088c0800000000000000
+      internalID: -3998932096943614569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_149
+      rect:
+        serializedVersion: 2
+        x: 2647
+        y: 1937
+        width: 30
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 113c592fd71b44060800000000000000
+      internalID: 6936864480556335889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_150
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1451
+        width: 362
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817f3184cbb6ae590800000000000000
+      internalID: -7644178961100703976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_151
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 1452
+        width: 362
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4843c166afec40360800000000000000
+      internalID: 7135055284511978628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_152
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 1451
+        width: 362
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5d38858d8b162a30800000000000000
+      internalID: 4190066797959462235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_153
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 1451
+        width: 362
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaf7b1ff6f55bcfd0800000000000000
+      internalID: -2320666663649050710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_154
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 1451
+        width: 362
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b55a7b2224f30600800000000000000
+      internalID: 433458416753202617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_155
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 1451
+        width: 362
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91832a1a26a5e6410800000000000000
+      internalID: 1472213507861788697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_156
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 1451
+        width: 362
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e3ca057fa1fc020800000000000000
+      internalID: 2364137978905509391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_157
+      rect:
+        serializedVersion: 2
+        x: 2699
+        y: 1452
+        width: 362
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e11d934da8c7100800000000000000
+      internalID: 107113135257755275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_158
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 1458
+        width: 362
+        height: 435
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4985d5578578e6b00800000000000000
+      internalID: 823744595851303060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_159
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1456
+        width: 362
+        height: 437
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6a553846732b8dc0800000000000000
+      internalID: -3635773283246974358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_160
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1773
+        width: 21
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10f066657755ac700800000000000000
+      internalID: 561355074600046337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_161
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 1711
+        width: 12
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 458a1e54fc3c9a720800000000000000
+      internalID: 2858030733541353556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_162
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1712
+        width: 10
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04209115db59ba230800000000000000
+      internalID: 3651176563255870016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_163
+      rect:
+        serializedVersion: 2
+        x: 3083
+        y: 1451
+        width: 65
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 775061b175feadda0800000000000000
+      internalID: -5919155602829474441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_164
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1458
+        width: 62
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 542ab80a8974c3c40800000000000000
+      internalID: 5493344366339269189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_165
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 975
+        width: 362
+        height: 438
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49ebc8fe60db35570800000000000000
+      internalID: 8454308762990984852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_166
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1292
+        width: 22
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87880cc024856c4c0800000000000000
+      internalID: -4267626556181936008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_167
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 975
+        width: 362
+        height: 438
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d64465ec58f22c9f0800000000000000
+      internalID: -449744761044712339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_168
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 1292
+        width: 22
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2da682fff350ea0800000000000000
+      internalID: -5907244971099237637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_169
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 1291
+        width: 26
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166e7a09c21dcea90800000000000000
+      internalID: -7283216508029245855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_170
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 971
+        width: 321
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d4884130a5c026d0800000000000000
+      internalID: -3017194458525956903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_171
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 1292
+        width: 22
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b4abcc468adcb150800000000000000
+      internalID: 5889822683042653363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_172
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 971
+        width: 320
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dad56eae30545f0f0800000000000000
+      internalID: -1083884252184552019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_173
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 1292
+        width: 22
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e6547439b55b4d0800000000000000
+      internalID: -3119486478770147690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_174
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 971
+        width: 320
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81e177302cfa1d10800000000000000
+      internalID: 2097265791793750412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_175
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 1293
+        width: 22
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81db8cf2b261fcb0800000000000000
+      internalID: -4831972404311109237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_176
+      rect:
+        serializedVersion: 2
+        x: 1974
+        y: 971
+        width: 319
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 813f972243c8f7770800000000000000
+      internalID: 8610755168100283160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_177
+      rect:
+        serializedVersion: 2
+        x: 2365
+        y: 971
+        width: 269
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e9ffdbeacd97c790800000000000000
+      internalID: -7509860358750733853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_178
+      rect:
+        serializedVersion: 2
+        x: 2732
+        y: 971
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3acd37b1c3e5ce3c0800000000000000
+      internalID: -4328981529558262621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_179
+      rect:
+        serializedVersion: 2
+        x: 3116
+        y: 971
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89a98ba10d6bf0b70800000000000000
+      internalID: 8867507196233554584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_180
+      rect:
+        serializedVersion: 2
+        x: 3500
+        y: 972
+        width: 296
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9476f221f59f88970800000000000000
+      internalID: 8757523662144235337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_181
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1232
+        width: 10
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cec4a599c8e97e30800000000000000
+      internalID: 4501885255030197956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_182
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 1233
+        width: 8
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d871fe62075c8e70800000000000000
+      internalID: 9118759013481281747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_183
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 1087
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa9b505a30516a400800000000000000
+      internalID: 334978327683381679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_184
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 978
+        width: 62
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37ff647a0ffd94f40800000000000000
+      internalID: 5713343826987777907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_185
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 978
+        width: 60
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38e39441a3c543300800000000000000
+      internalID: 230910885420940931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_186
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 491
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee0e4bdd425bd4e30800000000000000
+      internalID: 4489443573501321454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_187
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 491
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98dbf4db6cf2814c0800000000000000
+      internalID: -4316647712208470647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_188
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 491
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c453947638053dc60800000000000000
+      internalID: 7841699901485954380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_189
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 491
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c11274bff1fd2f0800000000000000
+      internalID: -946002232633910181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_190
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 833
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a007a726edc8d6a0800000000000000
+      internalID: -6424158480052584280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_191
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 491
+        width: 282
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 329aa5c822f10f6f0800000000000000
+      internalID: -652987712724621021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_192
+      rect:
+        serializedVersion: 2
+        x: 1965
+        y: 837
+        width: 24
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a4f20edab1052720800000000000000
+      internalID: 2820662643717764262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_193
+      rect:
+        serializedVersion: 2
+        x: 1975
+        y: 491
+        width: 302
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d1422e6740e48240800000000000000
+      internalID: 4793202500824089048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_194
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 837
+        width: 24
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bc94213a4fa775a0800000000000000
+      internalID: -6523552802035950415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_195
+      rect:
+        serializedVersion: 2
+        x: 2359
+        y: 491
+        width: 302
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e59677ae25ae9d70800000000000000
+      internalID: 9051853920857920994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_196
+      rect:
+        serializedVersion: 2
+        x: 2733
+        y: 837
+        width: 23
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0400be2d1fa2ab270800000000000000
+      internalID: 8266967284106068032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_197
+      rect:
+        serializedVersion: 2
+        x: 2743
+        y: 491
+        width: 302
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78a47e51ecd10c460800000000000000
+      internalID: 7259835370289187463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_198
+      rect:
+        serializedVersion: 2
+        x: 3099
+        y: 492
+        width: 330
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d12aad2d373e3a60800000000000000
+      internalID: 7655617152475079122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_199
+      rect:
+        serializedVersion: 2
+        x: 3492
+        y: 492
+        width: 325
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b1697a4c618cc0d0800000000000000
+      internalID: -3401201316465647184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_200
+      rect:
+        serializedVersion: 2
+        x: 3479
+        y: 806
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cef74be18f9fc410800000000000000
+      internalID: 1499592581284626121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_201
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 501
+        width: 21
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1a8d86f073285470800000000000000
+      internalID: 8383489674429958682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_202
+      rect:
+        serializedVersion: 2
+        x: 1965
+        y: 503
+        width: 20
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e911a8b52c6e785a0800000000000000
+      internalID: -6518988213161684578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_203
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 503
+        width: 20
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 647272fdcb5574a50800000000000000
+      internalID: 6505262456446068550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_204
+      rect:
+        serializedVersion: 2
+        x: 2733
+        y: 503
+        width: 19
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f83568dbab51d0d0800000000000000
+      internalID: -3399835450059966221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_205
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 324
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f2599c2c4b54ea90800000000000000
+      internalID: -7285597914454732043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_206
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 11
+        width: 326
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b91e7f7efd50edc40800000000000000
+      internalID: 5538871050939916699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_207
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 324
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30b6bb9c243806dc0800000000000000
+      internalID: -3647771375294518525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_208
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 11
+        width: 326
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a939a826676baa760800000000000000
+      internalID: 7469983551523034010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_209
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 324
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd9991f0c86732a0800000000000000
+      internalID: -6757817537949753920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_210
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 11
+        width: 326
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c92e43513144123e0800000000000000
+      internalID: -2080306704117603684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_211
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 324
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b6e5a84033903f0800000000000000
+      internalID: -934159353108337861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_212
+      rect:
+        serializedVersion: 2
+        x: 1187
+        y: 11
+        width: 326
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ba61fa556448b50800000000000000
+      internalID: 6594473088200911719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_213
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 324
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 783927418ebf2d630800000000000000
+      internalID: 3950496797351383943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_214
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 11
+        width: 326
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b5b0653057a30810800000000000000
+      internalID: 1730410644775155125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_215
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 326
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd9e58f93858da70800000000000000
+      internalID: 8851922073600040374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_216
+      rect:
+        serializedVersion: 2
+        x: 1956
+        y: 12
+        width: 325
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5915bd2c24e270600800000000000000
+      internalID: 434366753336414613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_217
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 327
+        width: 9
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f92ac8c9335dfab0800000000000000
+      internalID: -4972726905900226057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_218
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 16
+        width: 320
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0bf7f1868955e850800000000000000
+      internalID: 6405624479245400847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_219
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 11
+        width: 353
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d31c81049f04c3c0800000000000000
+      internalID: -4340327012522781738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_220
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 11
+        width: 354
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 451b30a73fe087570800000000000000
+      internalID: 8464531938529751380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_221
+      rect:
+        serializedVersion: 2
+        x: 3471
+        y: 11
+        width: 354
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdaf8d61cd206f910800000000000000
+      internalID: 1870685839518399195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_222
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 192
+        width: 6
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50eb46bac2281ed80800000000000000
+      internalID: -8223148316236136955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_223
+      rect:
+        serializedVersion: 2
+        x: 1562
+        y: 190
+        width: 7
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9314a31cb6d68ab40800000000000000
+      internalID: 5451727658502734137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_224
+      rect:
+        serializedVersion: 2
+        x: 1946
+        y: 190
+        width: 7
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 711a0d938958a81d0800000000000000
+      internalID: -3347716484145045225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_120_225
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 187
+        width: 8
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03a7223306d0d27a0800000000000000
+      internalID: -6400444788597687760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      velvet_dance_120_0: 6106857536408964797
+      velvet_dance_120_1: -4684803424376824977
+      velvet_dance_120_10: -6156386363832342704
+      velvet_dance_120_100: -9102112880028376126
+      velvet_dance_120_101: 2651028840794113479
+      velvet_dance_120_102: -2825398297252788036
+      velvet_dance_120_103: 434731448233281892
+      velvet_dance_120_104: -7142037991319334736
+      velvet_dance_120_105: 8994886024406370311
+      velvet_dance_120_106: 7145919239698545896
+      velvet_dance_120_107: -8586589471260888125
+      velvet_dance_120_108: -8411669682031842141
+      velvet_dance_120_109: -4899591828308697824
+      velvet_dance_120_11: -6080584167529481733
+      velvet_dance_120_110: 5327876566831206953
+      velvet_dance_120_111: -3801158608356882057
+      velvet_dance_120_112: 3158517428897360702
+      velvet_dance_120_113: -1696819547212820519
+      velvet_dance_120_114: -3803807343613772594
+      velvet_dance_120_115: -4423418628562154235
+      velvet_dance_120_116: 1779924373654041121
+      velvet_dance_120_117: 2064982291366220675
+      velvet_dance_120_118: -4492625263122100541
+      velvet_dance_120_119: -993228115692331719
+      velvet_dance_120_12: -5834943925275564940
+      velvet_dance_120_120: 1377056433287852564
+      velvet_dance_120_121: -4775409128384850585
+      velvet_dance_120_122: -228233208604296557
+      velvet_dance_120_123: 483464424541283906
+      velvet_dance_120_124: -3123078101867124575
+      velvet_dance_120_125: 5284037267229333409
+      velvet_dance_120_126: 7689058530077229982
+      velvet_dance_120_127: -6420530069637853192
+      velvet_dance_120_128: -9066559035188603203
+      velvet_dance_120_129: 6727915531791473444
+      velvet_dance_120_13: 3129444751644254321
+      velvet_dance_120_130: 6321410358496224988
+      velvet_dance_120_131: 4260775414169214528
+      velvet_dance_120_132: 3711990864515231742
+      velvet_dance_120_133: -7625644922101411576
+      velvet_dance_120_134: -1754494133981368047
+      velvet_dance_120_135: -8591093571647991056
+      velvet_dance_120_136: -5298136232862436543
+      velvet_dance_120_137: -632055425503957816
+      velvet_dance_120_138: 2050324515996076962
+      velvet_dance_120_139: 2516621708357075674
+      velvet_dance_120_14: 3608720646437547950
+      velvet_dance_120_140: -2071495616451891659
+      velvet_dance_120_141: -3598836311887020169
+      velvet_dance_120_142: 7236175404151604341
+      velvet_dance_120_143: -2355842142984850600
+      velvet_dance_120_144: 2979612976440745355
+      velvet_dance_120_145: -2066757796597677565
+      velvet_dance_120_146: -5338023009252997367
+      velvet_dance_120_147: -3445452645395076100
+      velvet_dance_120_148: -3998932096943614569
+      velvet_dance_120_149: 6936864480556335889
+      velvet_dance_120_15: -3757884927845012083
+      velvet_dance_120_150: -7644178961100703976
+      velvet_dance_120_151: 7135055284511978628
+      velvet_dance_120_152: 4190066797959462235
+      velvet_dance_120_153: -2320666663649050710
+      velvet_dance_120_154: 433458416753202617
+      velvet_dance_120_155: 1472213507861788697
+      velvet_dance_120_156: 2364137978905509391
+      velvet_dance_120_157: 107113135257755275
+      velvet_dance_120_158: 823744595851303060
+      velvet_dance_120_159: -3635773283246974358
+      velvet_dance_120_16: -7248204399316188312
+      velvet_dance_120_160: 561355074600046337
+      velvet_dance_120_161: 2858030733541353556
+      velvet_dance_120_162: 3651176563255870016
+      velvet_dance_120_163: -5919155602829474441
+      velvet_dance_120_164: 5493344366339269189
+      velvet_dance_120_165: 8454308762990984852
+      velvet_dance_120_166: -4267626556181936008
+      velvet_dance_120_167: -449744761044712339
+      velvet_dance_120_168: -5907244971099237637
+      velvet_dance_120_169: -7283216508029245855
+      velvet_dance_120_17: -5836966285165300597
+      velvet_dance_120_170: -3017194458525956903
+      velvet_dance_120_171: 5889822683042653363
+      velvet_dance_120_172: -1083884252184552019
+      velvet_dance_120_173: -3119486478770147690
+      velvet_dance_120_174: 2097265791793750412
+      velvet_dance_120_175: -4831972404311109237
+      velvet_dance_120_176: 8610755168100283160
+      velvet_dance_120_177: -7509860358750733853
+      velvet_dance_120_178: -4328981529558262621
+      velvet_dance_120_179: 8867507196233554584
+      velvet_dance_120_18: -2773023324339954602
+      velvet_dance_120_180: 8757523662144235337
+      velvet_dance_120_181: 4501885255030197956
+      velvet_dance_120_182: 9118759013481281747
+      velvet_dance_120_183: 334978327683381679
+      velvet_dance_120_184: 5713343826987777907
+      velvet_dance_120_185: 230910885420940931
+      velvet_dance_120_186: 4489443573501321454
+      velvet_dance_120_187: -4316647712208470647
+      velvet_dance_120_188: 7841699901485954380
+      velvet_dance_120_189: -946002232633910181
+      velvet_dance_120_19: 2922364562042193158
+      velvet_dance_120_190: -6424158480052584280
+      velvet_dance_120_191: -652987712724621021
+      velvet_dance_120_192: 2820662643717764262
+      velvet_dance_120_193: 4793202500824089048
+      velvet_dance_120_194: -6523552802035950415
+      velvet_dance_120_195: 9051853920857920994
+      velvet_dance_120_196: 8266967284106068032
+      velvet_dance_120_197: 7259835370289187463
+      velvet_dance_120_198: 7655617152475079122
+      velvet_dance_120_199: -3401201316465647184
+      velvet_dance_120_2: 8279042172259945463
+      velvet_dance_120_20: -1319282906400914336
+      velvet_dance_120_200: 1499592581284626121
+      velvet_dance_120_201: 8383489674429958682
+      velvet_dance_120_202: -6518988213161684578
+      velvet_dance_120_203: 6505262456446068550
+      velvet_dance_120_204: -3399835450059966221
+      velvet_dance_120_205: -7285597914454732043
+      velvet_dance_120_206: 5538871050939916699
+      velvet_dance_120_207: -3647771375294518525
+      velvet_dance_120_208: 7469983551523034010
+      velvet_dance_120_209: -6757817537949753920
+      velvet_dance_120_21: 7280914371169497720
+      velvet_dance_120_210: -2080306704117603684
+      velvet_dance_120_211: -934159353108337861
+      velvet_dance_120_212: 6594473088200911719
+      velvet_dance_120_213: 3950496797351383943
+      velvet_dance_120_214: 1730410644775155125
+      velvet_dance_120_215: 8851922073600040374
+      velvet_dance_120_216: 434366753336414613
+      velvet_dance_120_217: -4972726905900226057
+      velvet_dance_120_218: 6405624479245400847
+      velvet_dance_120_219: -4340327012522781738
+      velvet_dance_120_22: -696318212004724895
+      velvet_dance_120_220: 8464531938529751380
+      velvet_dance_120_221: 1870685839518399195
+      velvet_dance_120_222: -8223148316236136955
+      velvet_dance_120_223: 5451727658502734137
+      velvet_dance_120_224: -3347716484145045225
+      velvet_dance_120_225: -6400444788597687760
+      velvet_dance_120_23: -6197986412840728752
+      velvet_dance_120_24: -1951221613955584912
+      velvet_dance_120_25: 4998283878700524502
+      velvet_dance_120_26: -155189688978761124
+      velvet_dance_120_27: 8491155384952308461
+      velvet_dance_120_28: -8319388093035337332
+      velvet_dance_120_29: 790770827514178176
+      velvet_dance_120_3: -8670664016941518764
+      velvet_dance_120_30: -3454963362717729368
+      velvet_dance_120_31: -1921349212425461729
+      velvet_dance_120_32: -8167954517098120603
+      velvet_dance_120_33: 226076584883232392
+      velvet_dance_120_34: 1075264535812831090
+      velvet_dance_120_35: -6534604211588070051
+      velvet_dance_120_36: 1787242834043076297
+      velvet_dance_120_37: 3238223144400965530
+      velvet_dance_120_38: -7911860794967757906
+      velvet_dance_120_39: -8032406188693532039
+      velvet_dance_120_4: 3299249231114579514
+      velvet_dance_120_40: 765062681269406932
+      velvet_dance_120_41: 7479792341317427566
+      velvet_dance_120_42: 6877833944891293838
+      velvet_dance_120_43: -2951294676588448360
+      velvet_dance_120_44: -8484870844537203615
+      velvet_dance_120_45: -7957820063726346150
+      velvet_dance_120_46: -8391654922423756634
+      velvet_dance_120_47: -6593804594235723036
+      velvet_dance_120_48: 6225790417789352449
+      velvet_dance_120_49: -5091030445552239225
+      velvet_dance_120_5: -8840384935017549859
+      velvet_dance_120_50: 8786109888864154333
+      velvet_dance_120_51: 2309291384118116859
+      velvet_dance_120_52: 1036745050070853841
+      velvet_dance_120_53: 4278196201431004773
+      velvet_dance_120_54: 3503457806083612703
+      velvet_dance_120_55: -4512234606540765019
+      velvet_dance_120_56: -6343642867076963108
+      velvet_dance_120_57: -8478046450442089980
+      velvet_dance_120_58: 1275901352259690599
+      velvet_dance_120_59: -6404343358480015382
+      velvet_dance_120_6: 4623216973260474484
+      velvet_dance_120_60: 4361179323647524875
+      velvet_dance_120_61: -1029963168319950757
+      velvet_dance_120_62: 3528304703607500252
+      velvet_dance_120_63: -2302719800284477534
+      velvet_dance_120_64: -9032153275279451801
+      velvet_dance_120_65: 6814288959974647879
+      velvet_dance_120_66: -7604311629818333718
+      velvet_dance_120_67: -9096113402050054177
+      velvet_dance_120_68: -5485172891363135751
+      velvet_dance_120_69: 6583043084733806803
+      velvet_dance_120_7: -3284075703297660900
+      velvet_dance_120_70: -5781229999171868007
+      velvet_dance_120_71: 4343967561727396623
+      velvet_dance_120_72: -7455240726563116629
+      velvet_dance_120_73: -1600570539827655448
+      velvet_dance_120_74: 4394718233137491590
+      velvet_dance_120_75: -3569159827916616544
+      velvet_dance_120_76: 4103066833420466000
+      velvet_dance_120_77: -4117189402863195080
+      velvet_dance_120_78: -1816967991270366059
+      velvet_dance_120_79: -2556355148034550016
+      velvet_dance_120_8: -1092673076091691789
+      velvet_dance_120_80: 37422651115021361
+      velvet_dance_120_81: 8830524210199744514
+      velvet_dance_120_82: 2262366961651629526
+      velvet_dance_120_83: 1659360519991933899
+      velvet_dance_120_84: 9191907593883944137
+      velvet_dance_120_85: 8642197188934878972
+      velvet_dance_120_86: -2055871088476861946
+      velvet_dance_120_87: 1391110796013016752
+      velvet_dance_120_88: 2306561097728439105
+      velvet_dance_120_89: 7035307451580148937
+      velvet_dance_120_9: 4648761018729697961
+      velvet_dance_120_90: 8457346743116083879
+      velvet_dance_120_91: 734489145690838642
+      velvet_dance_120_92: -2735872188498220540
+      velvet_dance_120_93: -801022362340806749
+      velvet_dance_120_94: -4738509641131366253
+      velvet_dance_120_95: -7475801040244959759
+      velvet_dance_120_96: 9133707749192791816
+      velvet_dance_120_97: 4353138249063748671
+      velvet_dance_120_98: -1231488626571206842
+      velvet_dance_120_99: -5175353887874420787
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
