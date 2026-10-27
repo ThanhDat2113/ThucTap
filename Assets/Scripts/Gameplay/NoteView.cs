@@ -52,7 +52,7 @@ namespace RhythmGame
             {
                 if (skin == null) skin = GetComponent<NoteSkin>();
                 if (skin == null) skin = gameObject.AddComponent<NoteSkin>();
-                skin.Apply(sr);   // thay khối trắng bằng sprite neon
+                skin.Apply(sr);   // thay khối trắng bằng sprite đã vẽ
             }
         }
 
@@ -64,13 +64,20 @@ namespace RhythmGame
             Judged = false;
             Holding = false;
             color.a = 1f;
+            Color laneColor = color;
+            currentLane = data.lane;
+
+            // Nếu skin tô màu theo background thì sprite đã mang màu sẵn, sr.color để trắng.
+            // Ngược lại giữ cách cũ: sprite trắng/xám nhân với màu lane.
+            if (skin != null && skin.TryApplyPalette(sr, laneColor, currentLane))
+                color = Color.white;
+
             baseColor = color;
             sr.color = color;
-            currentLane = data.lane;
 
             if (visuals != null)
             {
-                visuals.Initialize(currentLane, color);
+                visuals.Initialize(currentLane, laneColor);
             }
 
             if (IsHold)
@@ -201,7 +208,7 @@ namespace RhythmGame
             float length = Mathf.Max(0f, tailY - headY);
             float parentScaleY = Mathf.Max(transform.lossyScale.y, 0.0001f);
 
-            // Sprite đầu giờ có thêm vầng sáng nên phải lấy bề rộng phần thân thật (core), không dùng bounds của sprite
+            // Sprite đầu có thêm vầng sáng nên lấy bề rộng phần thân thật (core), không dùng bounds của sprite
             float headWidth = skin != null
                 ? skin.CoreLocalSize.x
                 : (sr.sprite != null ? sr.sprite.bounds.size.x : 1f);

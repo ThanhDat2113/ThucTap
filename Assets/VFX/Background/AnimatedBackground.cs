@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RhythmGame;
 using UnityEngine;
 
 /// <summary>Một background: 1 ảnh + bảng màu cho note + vị trí đèn sân khấu.</summary>
@@ -9,7 +10,14 @@ public class BackgroundTheme
     [Tooltip("Ảnh nền (nên 16:9, vùng giữa tối và thoáng để dễ nhìn note)")]
     public Texture2D image;
 
-    [Header("Màu note (NoteSkin lấy theo)")]
+    [Header("Note hợp với nền")]
+    [Tooltip("Tự lấy màu chủ đạo từ chính tấm ảnh (màu note, tia đèn, equalizer, hạt sáng đều theo ảnh). Tắt nếu muốn tự đặt màu bên dưới.")]
+    public bool autoPalette = true;
+    [Tooltip("Tự đổi kiểu note khi dùng theme này (Street = bảng kim loại graffiti neon giống nền sân khấu)")]
+    public bool setNoteStyle = true;
+    public NoteStyle noteStyle = NoteStyle.Street;
+
+    [Header("Màu note (NoteSkin lấy theo; bị ghi đè khi bật Auto Palette)")]
     public Color paletteTop = new Color(0.25f, 0.10f, 0.55f);
     public Color paletteMiddle = new Color(1.00f, 0.20f, 0.85f);
     public Color paletteBottom = new Color(0.20f, 0.90f, 1.00f);
@@ -252,7 +260,80 @@ public class AnimatedBackground : MonoBehaviour
         curTex = th.image;
         blend = (instant || prevTex == curTex) ? 1f : 0f;
         index = i;
+
+        if (th.autoPalette) ExtractPalette(th);
+        if (th.setNoteStyle) NoteSkin.SetGlobalStyle(th.noteStyle);
+
         Layout();
+    }
+
+    // Trích 2 màu chủ đạo (rực và nổi bật nhất) + màu trung bình của ảnh, rồi gán cho palette / tia đèn / quầng sáng
+    void ExtractPalette(BackgroundTheme th)
+    {
+        const int W = 48, H = 27;
+        var rt = RenderTexture.GetTemporary(W, H, 0, RenderTextureFormat.ARGB32);
+        var prevActive = RenderTexture.active;
+        Graphics.Blit(th.image, rt);
+        RenderTexture.active = rt;
+        var tmp = new Texture2D(W, H, TextureFormat.RGBA32, false);
+        tmp.ReadPixels(new Rect(0, 0, W, H), 0, 0);
+        RenderTexture.active = prevActive;
+        RenderTexture.ReleaseTemporary(rt);
+        Color32[] px = tmp.GetPixels32();
+        Destroy(tmp);
+
+        const int BINS = 12;
+        float[] binW = new float[BINS];
+        Vector3[] binSum = new Vector3[BINS];
+        Vector3 allSum = Vector3.zero;
+
+        for (int k = 0; k < px.Length; k++)
+        {
+            Color c = px[k];
+            allSum += new Vector3(c.r, c.g, c.b);
+            Color.RGBToHSV(c, out float h, out float sat, out float v);
+            float w = sat * v;
+            w *= w;                       // ưu tiên điểm vừa rực vừa sáng (đèn neon, graffiti)
+            if (w < 0.02f) continue;
+            int bin = Mathf.Min(BINS - 1, (int)(h * BINS));
+            binW[bin] += w;
+            binSum[bin] += new Vector3(c.r, c.g, c.b) * w;
+        }
+
+        int a = 0;
+        for (int b = 1; b < BINS; b++) if (binW[b] > binW[a]) a = b;
+        if (binW[a] <= 0f) return;        // ảnh gần như xám: giữ màu đặt tay
+
+        int second = -1;
+        for (int b = 0; b < BINS; b++)
+        {
+            int dd = Mathf.Min((b - a + BINS) % BINS, (a - b + BINS) % BINS);
+            if (dd < 2) continue;         // bỏ các màu quá gần màu chính
+            if (binW[b] < binW[a] * 0.2f) continue;
+            if (second < 0 || binW[b] > binW[second]) second = b;
+        }
+
+        Vector3 va = binSum[a] / binW[a];
+        Color colA = new Color(va.x, va.y, va.z, 1f);
+        Color colB;
+        if (second >= 0)
+        {
+            Vector3 vb = binSum[second] / binW[second];
+            colB = new Color(vb.x, vb.y, vb.z, 1f);
+        }
+        else
+        {
+            Color.RGBToHSV(colA, out float h, out float sat, out float v);
+            colB = Color.HSVToRGB(Mathf.Repeat(h + 0.4f, 1f), sat, v);   // ảnh chỉ có một tông: lấy màu lệch tông
+        }
+
+        Vector3 avg = allSum / px.Length;
+        th.paletteTop = new Color(avg.x, avg.y, avg.z, 1f);   // màu trung bình -> NoteSkin biết nền tối hay sáng
+        th.paletteMiddle = colA;
+        th.paletteBottom = colB;
+        th.beamColorA = colB;
+        th.beamColorB = colA;
+        th.focusColor = Color.Lerp(colA, Color.white, 0.4f);
     }
 
     public void SetThemeByName(string themeName)

@@ -8,7 +8,8 @@ namespace RhythmGame
     {
         Neon, Glass, Capsule, Custom,
         Outline, Crystal, Flat, Soft,
-        Slant, Bubble, Laser, Petal, Cyber, Candy, Gem, Arrow
+        Slant, Bubble, Laser, Petal, Cyber, Candy, Gem, Arrow,
+        Street
     }
 
     // Cách chọn màu note so với nền
@@ -29,6 +30,7 @@ namespace RhythmGame
     ///   Laser  - tia sáng mảnh, glow lớn        Petal  - cánh hoa nhọn hai đầu
     ///   Cyber  - cắt góc, có rãnh kỹ thuật      Candy  - kẹo có sọc chéo
     ///   Gem    - đá quý lục giác có mặt cắt     Arrow  - mũi tên chỉ xuống
+    ///   Street - bảng kim loại tối có lưới loa, viền neon, vệt sơn graffiti (giống nền sân khấu neon)
     ///   Custom - tự kéo các thanh trượt
     ///
     /// Màu: nếu trong scene có AnimatedBackground (hoặc WorldBackgroundGradientPro) và bật Use Background Palette
@@ -54,6 +56,17 @@ namespace RhythmGame
         public NoteHarmony harmony = NoteHarmony.Auto;
         [Tooltip("Mức lệch tông của Accent (0.5 = màu đối hoàn toàn, 0.42 = gần đối)")]
         [Range(0f, 0.5f)] public float accentShift = 0.42f;
+
+        [Header("Màu dự phòng (dùng khi không tìm thấy nền AnimatedBackground / WorldBackgroundGradientPro)")]
+        public Color fallbackTop = new Color(0.20f, 0.08f, 0.45f);
+        public Color fallbackMiddle = new Color(1.00f, 0.25f, 0.85f);
+        public Color fallbackBottom = new Color(0.25f, 0.90f, 1.00f);
+
+        [Header("Ruột note")]
+        [Tooltip("Làm sáng và đậm màu phần ruột note. 0 = ruột tối như kiểu gốc, 1 = ruột sáng đầy màu")]
+        [Range(0f, 1f)] public float fillLift = 0.55f;
+        [Tooltip("Ruột luôn đặc (không trong suốt) cho mọi kiểu, kể cả Outline / Glass")]
+        public bool solidFill = true;
 
         [Header("Tách note khỏi nền")]
         [Tooltip("Viền tối mảnh bao quanh note, nằm giữa note và vầng sáng, giúp note không chìm vào nền nhiều màu")]
@@ -85,6 +98,7 @@ namespace RhythmGame
             public int pattern;    // 0 không, 1 sọc kẹo, 2 mặt cắt đá quý, 3 rãnh cyber, 4 vệt bóng bong bóng
             public float thin;     // 1 = cao đủ chiều cao note, nhỏ hơn = mảnh hơn (Laser)
             public float shadow;   // độ đậm viền tối quanh note
+            public float lift;     // mức làm sáng ruột note
         }
 
         struct Pal
@@ -94,6 +108,17 @@ namespace RhythmGame
         }
 
         static readonly Dictionary<string, Sprite> cache = new Dictionary<string, Sprite>();
+
+        // vệt sơn graffiti của kiểu Street: x, y (theo tỉ lệ nửa rộng / nửa cao note), bán kính (theo chiều cao note)
+        static readonly Vector3[] Splats =
+        {
+            new Vector3(-0.78f,  0.35f, 0.10f),
+            new Vector3(-0.55f, -0.45f, 0.05f),
+            new Vector3( 0.62f,  0.40f, 0.07f),
+            new Vector3( 0.86f, -0.20f, 0.12f),
+            new Vector3( 0.10f,  0.55f, 0.04f),
+            new Vector3(-0.20f, -0.55f, 0.06f)
+        };
 
         // kiểu toàn cục: khi đặt, MỌI note (kể cả note tạo sau) dùng kiểu này thay vì style riêng
         static bool globalSet;
@@ -114,6 +139,7 @@ namespace RhythmGame
         SpriteRenderer headRenderer;
         bool paletteActive;
         Color lastLane = Color.white;
+        int lastLaneIndex = -1;
 
         /// <summary>Đổi kiểu cho note này và vẽ lại sprite ngay.</summary>
         public void SetStyle(NoteStyle s)
@@ -125,7 +151,7 @@ namespace RhythmGame
         void Refresh()
         {
             if (headRenderer == null) return;
-            if (paletteActive) TryApplyPalette(headRenderer, lastLane);
+            if (paletteActive) TryApplyPalette(headRenderer, lastLane, lastLaneIndex);
             else Apply(headRenderer);
         }
 
@@ -145,6 +171,14 @@ namespace RhythmGame
         {
             Params p = StyleParams();
             p.shadow = edgeShadow;
+            p.lift = fillLift;
+            // ruột đầy màu: nâng độ sáng của dải gradient ruột và không để trong suốt
+            if (EffectiveStyle != NoteStyle.Custom)   // Custom giữ nguyên các thanh trượt do bạn tự đặt
+            {
+                p.fillBottom = Mathf.Lerp(p.fillBottom, 0.85f, fillLift);
+                p.fillTop = Mathf.Lerp(p.fillTop, 1.00f, fillLift);
+                if (solidFill) p.fillAlpha = Mathf.Max(p.fillAlpha, 0.95f);
+            }
             return p;
         }
 
@@ -168,6 +202,7 @@ namespace RhythmGame
                 case NoteStyle.Candy:   return P(0.50f, 0.07f, 0.45f, 0.40f, 0.75f, 0.95f, 1.00f, 0.25f, 0.20f, 0, 1);
                 case NoteStyle.Gem:     return P(0.05f, 0.06f, 0.55f, 0.50f, 0.50f, 0.90f, 0.92f, 0.30f, 0.30f, 5, 2);
                 case NoteStyle.Arrow:   return P(0.10f, 0.09f, 0.65f, 0.55f, 0.35f, 0.60f, 0.95f, 0.10f, 0.45f, 3, 0);
+                case NoteStyle.Street:  return P(0.12f, 0.07f, 0.60f, 0.50f, 0.20f, 0.30f, 0.97f, 0.00f, 0.00f, 0, 5);
                 default:                return P(cornerRadius, borderWidth, glowSize, glowAlpha,
                                                  fillBottom, fillTop, fillAlpha, shine, innerGlow);
             }
@@ -202,7 +237,7 @@ namespace RhythmGame
         /// Tô note bằng gradient của background (đã pha màu lane). Trả về true nếu thành công;
         /// khi đó sprite đã mang màu sẵn nên NoteView phải để sr.color = trắng.
         /// </summary>
-        public bool TryApplyPalette(SpriteRenderer head, Color laneColor)
+        public bool TryApplyPalette(SpriteRenderer head, Color laneColor, int laneIndex = -1)
         {
             headRenderer = head;
             if (!useBackgroundPalette) { paletteActive = false; return false; }
@@ -226,9 +261,13 @@ namespace RhythmGame
             {
                 T = background.topColor; M = background.middleColor; B = background.bottomColor;
             }
-            else { paletteActive = false; return false; }
+            else
+            {
+                // không có nền nào để lấy màu: dùng bảng màu dự phòng để note luôn có màu, không bị trắng / đen
+                T = fallbackTop; M = fallbackMiddle; B = fallbackBottom;
+            }
 
-            Pal pal = MakePalette(T, M, B, laneColor);
+            Pal pal = MakePalette(T, M, B, laneColor, laneIndex);
 
             HeadSprite = GetHeadSprite(GetParams(), pal);
             BodySprite = GetBodySprite(pal);
@@ -236,6 +275,7 @@ namespace RhythmGame
 
             paletteActive = true;
             lastLane = laneColor;
+            lastLaneIndex = laneIndex;
             return true;
         }
 
@@ -302,8 +342,29 @@ namespace RhythmGame
             return o;
         }
 
-        Pal MakePalette(Color T, Color M, Color B, Color lane)
+        static readonly Color[] DefaultLaneColors =
         {
+            new Color(1.00f, 0.30f, 0.75f),
+            new Color(0.20f, 0.90f, 1.00f),
+            new Color(0.70f, 0.40f, 1.00f),
+            new Color(1.00f, 0.85f, 0.30f)
+        };
+
+        Pal MakePalette(Color T, Color M, Color B, Color lane, int laneIndex)
+        {
+            // màu lane trắng / xám (chưa được đặt) thì pha vào chỉ làm note nhạt đi:
+            // dùng bảng màu lane mặc định để 4 lane vẫn khác màu nhau
+            float tint = laneTint;
+            if (Sat(lane) < 0.15f)
+            {
+                if (laneIndex >= 0)
+                {
+                    lane = DefaultLaneColors[laneIndex % DefaultLaneColors.Length];
+                    tint = Mathf.Max(laneTint, 0.5f);
+                }
+                else tint = 0f;
+            }
+
             float lT = Lum(T), lM = Lum(M), lB = Lum(B);
             float lum = (lT + lM + lB) / 3f;
             float bgLum = 0.5f * lM + 0.25f * (lT + lB);   // vùng giữa màn hình (chỗ có note) quan trọng nhất
@@ -335,10 +396,10 @@ namespace RhythmGame
 
             // pha màu lane để vẫn phân biệt được các lane
             lane.a = 1f;
-            pal.bot = Color.Lerp(pal.bot, lane, laneTint);
-            pal.top = Color.Lerp(pal.top, lane, laneTint);
-            pal.glow = Color.Lerp(pal.glow, lane, laneTint);
-            pal.border = Color.Lerp(pal.border, lane, laneTint * 0.4f);
+            pal.bot = Color.Lerp(pal.bot, lane, tint);
+            pal.top = Color.Lerp(pal.top, lane, tint);
+            pal.glow = Color.Lerp(pal.glow, lane, tint);
+            pal.border = Color.Lerp(pal.border, lane, tint * 0.4f);
 
             // đảm bảo note luôn đủ tương phản với độ sáng của nền
             pal.bot = Ensure(pal.bot, bgLum, 0.28f);
@@ -351,11 +412,11 @@ namespace RhythmGame
 
         Sprite GetHeadSprite(Params p, Pal pal)
         {
-            string key = string.Format("head|{0:F3}|{1:F3}|{2:F3}|{3:F3}|{4:F3}|{5:F3}|{6:F3}|{7:F3}|{8:F3}|{9:F3}|{10:F3}|{11:F3}|{12:F3}|{13}|{14}|{15}|{16:F2}|{17}|{18:F2}",
+            string key = string.Format("head|{0:F3}|{1:F3}|{2:F3}|{3:F3}|{4:F3}|{5:F3}|{6:F3}|{7:F3}|{8:F3}|{9:F3}|{10:F3}|{11:F3}|{12:F3}|{13}|{14}|{15}|{16:F2}|{17}|{18:F2}|{19:F2}",
                 core.x, core.y, sx, sy, p.corner, p.border, p.glowSize, p.glowAlpha, p.fillBottom, p.fillTop, p.fillAlpha, p.shine, p.innerGlow,
                 p.shape, p.pattern, "s", p.thin,
                 pal.on ? Hex(pal.bot) + Hex(pal.top) + Hex(pal.glow) + Hex(pal.border) + Hex(pal.shadow) : "g",
-                p.shadow);
+                p.shadow, p.lift);
             if (!cache.TryGetValue(key, out Sprite s) || s == null)
             {
                 s = BuildHead(core, sx, sy, p, pal);
@@ -526,6 +587,68 @@ namespace RhythmGame
 
                 float insideA = Mathf.Lerp(p.fillAlpha, 1f, edge);
                 float a = Mathf.Lerp(outA, insideA, inside);
+
+                // kiểu Street: thân kim loại tối + lưới loa + đường neon bên trong + viền neon + vệt sơn
+                if (p.pattern == 5)
+                {
+                    Color cb = pal.on ? pal.bot : Color.white;
+                    Color ct = pal.on ? pal.top : Color.white;
+                    Color cs = pal.on ? pal.shadow : Color.black;
+                    Color neonC = Color.Lerp(cb, ct, t);
+
+                    Color fillS = Color.Lerp(cs, neonC, Mathf.Lerp(0.20f, 0.70f, p.lift));
+                    fillS = Color.Lerp(fillS, neonC, 0.10f * t);
+
+                    // lưới loa: các lỗ tròn xếp so le
+                    float gs = 0.075f * ch;
+                    float gx = Mathf.Repeat(wx / gs, 1f) - 0.5f;
+                    float stag = Mathf.Abs(Mathf.Floor(wx / gs) % 2f) * 0.5f;
+                    float gy = Mathf.Repeat(wy / gs + stag, 1f) - 0.5f;
+                    float hole = Mathf.SmoothStep(0.30f, 0.20f, Mathf.Sqrt(gx * gx + gy * gy));
+                    fillS = new Color(fillS.r * (1f - 0.45f * hole), fillS.g * (1f - 0.45f * hole), fillS.b * (1f - 0.45f * hole), 1f);
+
+                    // đường neon chạy bên trong, cách mép một đoạn
+                    float inset = bw * 2.2f;
+                    float lnS = Mathf.SmoothStep(bw * 0.35f, 0f, Mathf.Abs(d + inset));
+                    fillS = Color.Lerp(fillS, neonC, lnS * 0.95f);
+
+                    // vệt sơn graffiti, xen kẽ hai màu
+                    float splat = 0f;
+                    int splatIdx = 0;
+                    if (d < 0f)
+                    {
+                        for (int k = 0; k < Splats.Length; k++)
+                        {
+                            float dist = new Vector2(wx - Splats[k].x * hx, wy - Splats[k].y * hy).magnitude;
+                            float rr = Splats[k].z * ch;
+                            float sp = Mathf.SmoothStep(rr, rr * 0.8f, dist);
+                            if (sp > splat) { splat = sp; splatIdx = k; }
+                        }
+                    }
+                    Color splatC = (splatIdx % 2 == 0) ? cb : ct;
+                    fillS = Color.Lerp(fillS, Color.Lerp(splatC, Color.white, 0.15f), splat * 0.85f);
+
+                    // viền neon sáng
+                    fillS = Color.Lerp(fillS, Color.Lerp(neonC, Color.white, 0.35f), edge);
+
+                    Color gC = pal.on ? pal.glow : Color.white;
+                    Color outS = outA > 0.0001f
+                        ? new Color((cs.r * ringA + gC.r * glowK) / outA,
+                                    (cs.g * ringA + gC.g * glowK) / outA,
+                                    (cs.b * ringA + gC.b * glowK) / outA, 1f)
+                        : gC;
+                    Color rgbS = Color.Lerp(outS, fillS, inside);
+                    if (pal.on)
+                    {
+                        px[j * W + i] = new Color32(To8(rgbS.r), To8(rgbS.g), To8(rgbS.b), To8(a));
+                    }
+                    else
+                    {
+                        byte g8 = To8(rgbS.r);
+                        px[j * W + i] = new Color32(g8, g8, g8, To8(a));
+                    }
+                    continue;
+                }
 
                 if (pal.on)
                 {

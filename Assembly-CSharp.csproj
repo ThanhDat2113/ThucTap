@@ -167,6 +167,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Core\HealthSystem.cs" />
     <Compile Include="Assets\Thuan\Scripts\Audio\SFXManager.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenuUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

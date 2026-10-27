@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using RhythmGame;
 #if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
 using UnityEngine.InputSystem;
 #endif
@@ -67,6 +68,12 @@ public class PauseManager : MonoBehaviour
     [Tooltip("Bật = có ảnh thì ẩn chữ (dùng khi ảnh đã có sẵn chữ/icon). Tắt = chữ hiện đè lên ảnh (dùng khi ảnh chỉ là khung nền trống)")]
     public bool hideLabelWhenSprite = false;
 
+    [Header("Menu neon (PauseMenuUI)")]
+    [Tooltip("Dùng menu pause phong cách neon graffiti (bảng kính nghiêng, tiêu đề glitch, nút phát sáng, đếm ngược nảy). Tắt = dùng menu cũ.")]
+    public bool useNeonMenu = true;
+    [Tooltip("Bật = menu mới dùng ảnh nút bạn đã gán ở trên (RESUME/RESTART/LOBBY/MAIN MENU). Tắt = nút neon tự vẽ, đồng bộ với bảng.")]
+    public bool keepCustomButtonSprites = false;
+
     [Header("Kích thước nút")]
     [Tooltip("Chiều cao nút ở góc. Có ảnh thì chiều rộng tự theo tỉ lệ ảnh")]
     public float pauseButtonHeight = 90f;
@@ -88,6 +95,14 @@ public class PauseManager : MonoBehaviour
 
     /// <summary>Game đăng ký cách restart riêng (GameManager.Restart). Trống = load lại scene.</summary>
     public System.Action RestartHandler;
+
+    /// <summary>
+    /// (Tuỳ chọn) GameManager gán hàm trả về điểm / combo / tiến độ để menu pause hiện thẻ thông tin. Không gán thì menu ẩn phần này.
+    /// Ví dụ: PauseManager.Instance.StatsProvider = () => new PauseMenuUI.Stats { song = tên, score = score, combo = combo, maxCombo = maxCombo, progress = songTime / songLength };
+    /// </summary>
+    public System.Func<PauseMenuUI.Stats> StatsProvider;
+
+    PauseMenuUI menu;
 
     Font uiFont;
     GameObject panel;
@@ -153,7 +168,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f;
         AudioListener.pause = true;
 
-        panel.SetActive(true);
+        ShowMenu();
         RefreshPauseButton(true); // nút góc đổi thành nút quay lại gameplay
         onPause.Invoke();
     }
@@ -167,18 +182,21 @@ public class PauseManager : MonoBehaviour
     IEnumerator ResumeRoutine()
     {
         counting = true;
-        panel.SetActive(false);
+        if (menu == null) panel.SetActive(false);
+        else if (countdownSeconds <= 0) menu.Hide();
 
         if (countdownSeconds > 0)
         {
             pauseButton.gameObject.SetActive(false);
-            countdownText.gameObject.SetActive(true);
+            if (menu == null) countdownText.gameObject.SetActive(true);
             for (int i = countdownSeconds; i > 0; i--)
             {
-                countdownText.text = i.ToString();
+                if (menu != null) menu.ShowCountdown(i);   // số đếm ngược to có hiệu ứng nảy
+                else countdownText.text = i.ToString();
                 yield return new WaitForSecondsRealtime(1f); // thời gian thật, không bị timeScale = 0 chặn
             }
-            countdownText.gameObject.SetActive(false);
+            if (menu != null) menu.Hide();
+            else countdownText.gameObject.SetActive(false);
         }
 
         Time.timeScale = prevTimeScale;
@@ -226,7 +244,7 @@ public class PauseManager : MonoBehaviour
         StopAllCoroutines();
         counting = false;
         if (countdownText) countdownText.gameObject.SetActive(false);
-        if (panel) panel.SetActive(false);
+        HideMenu();
         ResetState();
         if (pauseButton)
         {
@@ -269,7 +287,13 @@ public class PauseManager : MonoBehaviour
         scaler.matchWidthOrHeight = 0.5f;
         canvasGO.AddComponent<GraphicRaycaster>();
 
-        // Màn hình tạm dừng
+        if (useNeonMenu)
+        {
+            BuildNeonMenu();   // giao diện mới do PauseMenuUI vẽ
+        }
+        else
+        {
+        // Màn hình tạm dừng (menu cũ)
         var panelRt = NewRect("PausePanel", canvasGO.transform);
         panelRt.anchorMin = Vector2.zero;
         panelRt.anchorMax = Vector2.one;
@@ -294,6 +318,7 @@ public class PauseManager : MonoBehaviour
         float titleY = startY + menuButtonHeight * 0.5f + 110f;
         MakeText(panelRt, titleText, 96, new Vector2(0f, titleY), new Vector2(1400f, 200f));
         panel.SetActive(false);
+        }
 
         // Số đếm ngược
         countdownText = MakeText(canvasGO.transform, "", 260, Vector2.zero, new Vector2(600f, 400f));
@@ -306,6 +331,40 @@ public class PauseManager : MonoBehaviour
         prt.anchoredPosition = pauseButtonPosition;
         RefreshPauseButton(false);
         pauseButton.gameObject.SetActive(showPauseButton);
+    }
+
+    // ---------- Menu neon ----------
+    void BuildNeonMenu()
+    {
+        menu = GetComponent<PauseMenuUI>();
+        if (menu == null) menu = gameObject.AddComponent<PauseMenuUI>();
+        menu.font = uiFont;
+        menu.title = titleText;
+        menu.canvasSortingOrder = 99;   // thấp hơn canvas pause (100) để nút ► ở góc vẫn bấm được khi đang pause
+
+        var list = new List<PauseMenuUI.Item>();
+        list.Add(new PauseMenuUI.Item { label = resumeText, sprite = keepCustomButtonSprites ? resumeButtonSprite : null, action = Resume });
+        list.Add(new PauseMenuUI.Item { label = restartText, sprite = keepCustomButtonSprites ? restartButtonSprite : null, action = Restart });
+        if (HasLobby) list.Add(new PauseMenuUI.Item { label = lobbyText, sprite = keepCustomButtonSprites ? lobbyButtonSprite : null, action = GoToLobby });
+        if (HasMainMenu) list.Add(new PauseMenuUI.Item { label = mainMenuText, sprite = keepCustomButtonSprites ? mainMenuButtonSprite : null, action = GoToMainMenu, danger = true });
+        menu.SetItems(list);
+    }
+
+    void ShowMenu()
+    {
+        if (menu != null)
+        {
+            if (StatsProvider != null) menu.SetStats(StatsProvider());
+            else menu.ClearStats();
+            menu.Show();
+        }
+        else if (panel != null) panel.SetActive(true);
+    }
+
+    void HideMenu()
+    {
+        if (menu != null) menu.Hide();
+        else if (panel != null) panel.SetActive(false);
     }
 
     struct MenuItem
