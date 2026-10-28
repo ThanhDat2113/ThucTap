@@ -43,6 +43,12 @@ Shader "RhythmGame/AnimatedNeonBackground"
         _RippleCenter ("Ripple Center (screen)", Vector) = (0.5,0.35,0,0)
         _Twinkle ("Window Twinkle", Float) = 0.5
         _TwinkleRect ("Twinkle Rect", Vector) = (0.30,0.38,0.82,0.80)
+        _Hit0 ("Hit 0 (x, y, age, strength)", Vector) = (0,0,0,0)
+        _Hit1 ("Hit 1", Vector) = (0,0,0,0)
+        _Hit2 ("Hit 2", Vector) = (0,0,0,0)
+        _Hit3 ("Hit 3", Vector) = (0,0,0,0)
+        _HitStrength ("Hit Strength", Float) = 0.6
+        _Rain ("Rain", Float) = 0
     }
 
     SubShader
@@ -100,6 +106,12 @@ Shader "RhythmGame/AnimatedNeonBackground"
             float4 _RippleCenter;
             float _Twinkle;
             float4 _TwinkleRect;
+            float4 _Hit0;
+            float4 _Hit1;
+            float4 _Hit2;
+            float4 _Hit3;
+            float _HitStrength;
+            float _Rain;
 
             struct appdata
             {
@@ -255,6 +267,27 @@ Shader "RhythmGame/AnimatedNeonBackground"
                 // lam toi vung giua man hinh de gameplay de nhin
                 col *= 1.0 - _LaneDim * lm;
 
+                // phan ung khi danh trung note: vong song tren san + tru sang vuon len tu diem danh
+                [unroll]
+                for (int hi = 0; hi < 4; hi++)
+                {
+                    float4 hv = (hi == 0) ? _Hit0 : ((hi == 1) ? _Hit1 : ((hi == 2) ? _Hit2 : _Hit3));
+                    if (hv.w > 0.001)
+                    {
+                        float2 dp = (suv - hv.xy) * float2(_ScreenAspect, 1.0);
+                        float age = hv.z;
+                        float fadeH = (1.0 - age) * (1.0 - age);
+                        float rr = length(float2(dp.x, dp.y * 3.0));
+                        float rx2 = (rr - age * 0.35) / 0.02;
+                        float ringH = exp(-rx2 * rx2) * (1.0 - age);
+                        float upH = suv.y - hv.y;
+                        float pxn = dp.x / 0.035;
+                        float pillar = exp(-pxn * pxn) * smoothstep(-0.02, 0.02, upH) * exp(-max(upH, 0.0) * 5.0) * fadeH;
+                        float3 hc = lerp(_BeamColA.rgb, _BeamColB.rgb, saturate(hv.x));
+                        col += hc * (ringH * 0.9 + pillar * 0.8) * hv.w * _HitStrength;
+                    }
+                }
+
                 // equalizer hai ben (toa do man hinh, nam ngoai vung lane)
                 float sd = abs(suv.x - 0.5);
                 if (_BarStrength > 0.001 && sd > _BarInner)
@@ -297,6 +330,18 @@ Shader "RhythmGame/AnimatedNeonBackground"
                         ps += lerp(_BeamColA.rgb, _BeamColB.rgb, h2) * star * tw * keep * (1.0 - 0.25 * fl);
                     }
                     col += ps * _ParticleStrength * (0.5 + _Energy + _Pulse) * (1.0 - 0.7 * lm);
+                }
+
+                // mua roi (chi hien khi theme bat Rain)
+                if (_Rain > 0.001)
+                {
+                    float rcx = floor(suv.x * 90.0);
+                    float rnd = hash21(float2(rcx, 3.1));
+                    float ry = frac(suv.y + t * (0.7 + rnd * 0.8) + rnd * 7.0);
+                    float rxf = frac(suv.x * 90.0);
+                    float rln = smoothstep(0.10, 0.0, abs(rxf - 0.5));
+                    float drop = exp(-ry * 14.0) * step(0.62, rnd);
+                    col += float3(0.55, 0.75, 1.0) * rln * drop * _Rain * 0.5 * (1.0 - 0.8 * lm);
                 }
 
                 // vignette

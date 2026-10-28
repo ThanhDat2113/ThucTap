@@ -1725,11 +1725,12 @@ MonoBehaviour:
     focusPoint: {x: 0.58, y: 0.74}
     focusColor: {r: 1, g: 0.7, b: 0.85, a: 1}
     focusRadius: 0.12
+    rain: 0
     twinkleRect: {x: 0.3, y: 0.38, z: 0.82, w: 0.8}
   startIndex: 0
   randomOnStart: 0
   fadeTime: 1.2
-  shader: {fileID: 4800000, guid: 4adf451574cfd8942b0619998c65e9a4, type: 3}
+  shader: {fileID: 4800000, guid: 7939217e635807040840d74b5de0b602, type: 3}
   audioSource: {fileID: 0}
   useAudioSpectrum: 1
   beatSensitivity: 1
@@ -1758,6 +1759,8 @@ MonoBehaviour:
   aberration: 0.004
   focusStrength: 0.6
   twinkle: 0.5
+  hitStrength: 0.6
+  hitDuration: 0.55
   rippleStrength: 1
   rippleDuration: 0.9
   autoBurstOnBigBeat: 1
@@ -3334,6 +3337,7 @@ MonoBehaviour:
   hideLabelWhenSprite: 0
   useNeonMenu: 1
   keepCustomButtonSprites: 0
+  useNeonCornerButton: 1
   pauseButtonHeight: 90
   menuButtonHeight: 100
   menuButtonGap: 40

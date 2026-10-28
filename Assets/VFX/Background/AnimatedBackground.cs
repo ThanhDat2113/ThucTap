@@ -40,6 +40,10 @@ public class BackgroundTheme
     public Color focusColor = new Color(1f, 0.70f, 0.85f);
     [Range(0.02f, 0.5f)] public float focusRadius = 0.12f;
 
+    [Header("Mưa")]
+    [Tooltip("Vệt mưa rơi trên nền (0 = tắt). Hợp với cảnh Rainy / Night.")]
+    [Range(0f, 1f)] public float rain = 0f;
+
     [Header("Cửa sổ toà nhà lập loè")]
     [Tooltip("Vùng có toà nhà trong ảnh: x0, y0, x1, y1 (0..1, gốc ở góc dưới trái)")]
     public Vector4 twinkleRect = new Vector4(0.30f, 0.38f, 0.82f, 0.80f);
@@ -117,6 +121,11 @@ public class AnimatedBackground : MonoBehaviour
     [Tooltip("Cửa sổ toà nhà lập loè")]
     [Range(0f, 1f)] public float twinkle = 0.5f;
 
+    [Header("Phản ứng khi đánh trúng note")]
+    [Tooltip("Vòng sóng trên sàn + trụ sáng vươn lên tại điểm đánh (NoteView tự gọi khi trúng note)")]
+    [Range(0f, 1.5f)] public float hitStrength = 0.6f;
+    public float hitDuration = 0.55f;
+
     [Header("Sóng xung kích")]
     [Range(0f, 1.5f)] public float rippleStrength = 1f;
     public float rippleDuration = 0.9f;
@@ -133,6 +142,10 @@ public class AnimatedBackground : MonoBehaviour
     public Color paletteMiddle { get { var c = Current; return c != null ? c.paletteMiddle : new Color(1f, 0.2f, 0.85f); } }
     public Color paletteBottom { get { var c = Current; return c != null ? c.paletteBottom : new Color(0.2f, 0.9f, 1f); } }
     public int ThemeIndex { get { return index; } }
+    /// <summary>Độ mạnh nhịp hiện tại (0..1.5), cho các thành phần khác nhấp nháy theo nhạc.</summary>
+    public float PulseValue { get { return pulse; } }
+    /// <summary>Mức năng lượng nhạc đã làm mượt (0..1).</summary>
+    public float EnergyValue { get { return energy; } }
 
     BackgroundTheme Current
     {
@@ -164,6 +177,10 @@ public class AnimatedBackground : MonoBehaviour
     readonly float[] bandPeak = new float[16];
     readonly float[] rawBands = new float[16];
     float specPeak = 0.0005f;
+
+    // phản ứng khi trúng note: 4 ô xoay vòng (x, y theo màn hình 0..1, tuổi 0..1, độ mạnh)
+    readonly Vector4[] hits = new Vector4[4];
+    int hitIdx;
 
     // sóng xung kích
     float ripple = 1f;
@@ -241,6 +258,16 @@ public class AnimatedBackground : MonoBehaviour
         rippleOn = true;
         lastBurst = Time.time;
         Pulse(1f);
+    }
+
+    /// <summary>Gọi khi đánh trúng note: tạo vòng sóng trên sàn và trụ sáng tại vị trí đó. NoteView tự gọi.</summary>
+    public void Hit(Vector3 worldPos, float strength = 1f)
+    {
+        if (cam == null || mat == null) return;
+        Vector3 vp = cam.WorldToViewportPoint(worldPos);
+        hits[hitIdx] = new Vector4(vp.x, vp.y, 0f, Mathf.Clamp(strength, 0.2f, 1.5f));
+        hitIdx = (hitIdx + 1) % hits.Length;
+        Pulse(0.25f * strength);
     }
 
     public void SetBpm(float newBpm)
@@ -393,6 +420,12 @@ public class AnimatedBackground : MonoBehaviour
             ripple += dt / Mathf.Max(0.1f, rippleDuration);
             if (ripple >= 1f) { ripple = 1f; rippleOn = false; }
         }
+        for (int k = 0; k < hits.Length; k++)
+        {
+            if (hits[k].w <= 0f) continue;
+            hits[k].z += dt / Mathf.Max(0.1f, hitDuration);
+            if (hits[k].z >= 1f) hits[k].w = 0f;
+        }
 
         float e = Mathf.Clamp01(energy * 0.8f + comboSmooth * 0.4f);
         float t = Time.time;
@@ -432,6 +465,8 @@ public class AnimatedBackground : MonoBehaviour
         mat.SetFloat("_FocusStrength", focusStrength);
         mat.SetFloat("_Twinkle", twinkle);
         mat.SetVector("_Ripple", new Vector4(ripple, rippleOn ? rippleStrength : 0f, 0f, 0f));
+        mat.SetFloat("_HitStrength", hitStrength);
+        for (int k = 0; k < hits.Length; k++) mat.SetVector("_Hit" + k, hits[k]);
 
         var th = Current;
         if (th != null)
@@ -440,6 +475,7 @@ public class AnimatedBackground : MonoBehaviour
             mat.SetVector("_Focus", new Vector4(th.focusPoint.x, th.focusPoint.y, th.focusRadius, 0f));
             mat.SetColor("_FocusCol", th.focusColor);
             mat.SetVector("_TwinkleRect", th.twinkleRect);
+            mat.SetFloat("_Rain", th.rain);
             mat.SetColor("_BeamColA", th.beamColorA);
             mat.SetColor("_BeamColB", th.beamColorB);
             for (int k = 0; k < 4; k++)

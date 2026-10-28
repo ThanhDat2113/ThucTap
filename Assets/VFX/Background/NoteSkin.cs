@@ -62,6 +62,12 @@ namespace RhythmGame
         public Color fallbackMiddle = new Color(1.00f, 0.25f, 0.85f);
         public Color fallbackBottom = new Color(0.25f, 0.90f, 1.00f);
 
+        [Header("Dùng cho receptor (vạch bấm)")]
+        [Tooltip("Bỏ qua kiểu toàn cục do NoteThemeApplier đặt, luôn dùng Style của component này")]
+        public bool ignoreGlobalStyle = false;
+        [Tooltip("Ruột rỗng, chỉ có viền neon (khung vạch bấm)")]
+        public bool hollowFill = false;
+
         [Header("Ruột note")]
         [Tooltip("Làm sáng và đậm màu phần ruột note. 0 = ruột tối như kiểu gốc, 1 = ruột sáng đầy màu")]
         [Range(0f, 1f)] public float fillLift = 0.55f;
@@ -85,6 +91,9 @@ namespace RhythmGame
         [Range(0f, 1f)] public float fillAlpha = 0.9f;
         [Range(0f, 1f)] public float shine = 0f;
         [Range(0f, 1f)] public float innerGlow = 0.5f;
+
+        /// <summary>Màu glow của note (theo palette nền + màu lane), NoteView dùng để tô đuôi sao chổi.</summary>
+        public Color GlowColor { get; private set; } = Color.white;
 
         public Sprite HeadSprite { get; private set; }
         public Sprite BodySprite { get; private set; }
@@ -124,10 +133,13 @@ namespace RhythmGame
         static bool globalSet;
         static NoteStyle globalStyle = NoteStyle.Neon;
 
-        public static void SetGlobalStyle(NoteStyle s) { globalStyle = s; globalSet = true; }
-        public static void ClearGlobalStyle() { globalSet = false; }
+        /// <summary>Tăng mỗi lần kiểu toàn cục đổi, để receptor biết cần vẽ lại cho cùng kiểu với note.</summary>
+        public static int StyleVersion { get; private set; }
 
-        NoteStyle EffectiveStyle { get { return globalSet ? globalStyle : style; } }
+        public static void SetGlobalStyle(NoteStyle s) { globalStyle = s; globalSet = true; StyleVersion++; }
+        public static void ClearGlobalStyle() { globalSet = false; StyleVersion++; }
+
+        NoteStyle EffectiveStyle { get { return (globalSet && !ignoreGlobalStyle) ? globalStyle : style; } }
 
         // đo kích thước note một lần duy nhất (trước khi sprite bị thay bằng sprite có vầng sáng)
         bool measured;
@@ -171,9 +183,13 @@ namespace RhythmGame
         {
             Params p = StyleParams();
             p.shadow = edgeShadow;
-            p.lift = fillLift;
+            p.lift = hollowFill ? 0f : fillLift;
             // ruột đầy màu: nâng độ sáng của dải gradient ruột và không để trong suốt
-            if (EffectiveStyle != NoteStyle.Custom)   // Custom giữ nguyên các thanh trượt do bạn tự đặt
+            if (hollowFill)
+            {
+                p.fillAlpha = Mathf.Min(p.fillAlpha, 0.22f);   // khung rỗng: ruột chỉ còn một lớp kính mờ
+            }
+            else if (EffectiveStyle != NoteStyle.Custom)   // Custom giữ nguyên các thanh trượt do bạn tự đặt
             {
                 p.fillBottom = Mathf.Lerp(p.fillBottom, 0.85f, fillLift);
                 p.fillTop = Mathf.Lerp(p.fillTop, 1.00f, fillLift);
@@ -268,6 +284,7 @@ namespace RhythmGame
             }
 
             Pal pal = MakePalette(T, M, B, laneColor, laneIndex);
+            GlowColor = Color.Lerp(pal.glow, Color.white, 0.2f);
 
             HeadSprite = GetHeadSprite(GetParams(), pal);
             BodySprite = GetBodySprite(pal);

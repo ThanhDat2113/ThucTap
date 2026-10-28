@@ -40,6 +40,8 @@ namespace RhythmGame
         [Tooltip("Font chữ. Để trống = font hệ thống. PauseManager tự truyền font của nó vào đây.")]
         public Font font;
         public string title = "PAUSE GAME";
+        [Tooltip("Hiện dòng hướng dẫn phím ở đáy bảng (UP / DOWN, ENTER, ESC)")]
+        public bool showHint = false;
         [Tooltip("Phải nhỏ hơn Sorting Order của nút pause ở góc (100) để nút góc vẫn bấm được khi đang pause")]
         public int canvasSortingOrder = 99;
         [Tooltip("Lấy màu theo nền AnimatedBackground nếu có")]
@@ -301,7 +303,7 @@ namespace RhythmGame
         string ComputeKey()
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append(hasStats).Append('|').Append(title).Append('|');
+            sb.Append(hasStats).Append('|').Append(showHint).Append('|').Append(title).Append('|');
             foreach (var it in items)
                 sb.Append(it.label).Append(',').Append(it.danger).Append(',').Append(it.sprite != null ? it.sprite.name : "-").Append(';');
             return sb.ToString();
@@ -357,7 +359,7 @@ namespace RhythmGame
             float lastBtn = firstBtn - (n - 1) * spacing;
             float barsBase = lastBtn - 42f - 62f;
             float hintY = barsBase - 28f;
-            panelH = -(hintY - 34f);
+            panelH = -(showHint ? hintY - 34f : barsBase - 40f);
             panelFit = Mathf.Min(1f, 1000f / (panelH + 80f));
             float H = panelH;
 
@@ -474,8 +476,9 @@ namespace RhythmGame
                 bars[i] = rt;
             }
 
-            NewText("Hint", panel, "UP / DOWN  select      ENTER  confirm      ESC  resume", 20,
-                    new Color(1f, 1f, 1f, 0.5f), new Vector2(0f, Y(hintY)), new Vector2(760f, 28f));
+            if (showHint)
+                NewText("Hint", panel, "UP / DOWN  select      ENTER  confirm      ESC  resume", 20,
+                        new Color(1f, 1f, 1f, 0.5f), new Vector2(0f, Y(hintY)), new Vector2(760f, 28f));
 
             // số đếm ngược (nằm ngoài bảng để bảng ẩn đi vẫn thấy)
             countdownText = NewText("Countdown", root.transform, "3", 300, Color.white, Vector2.zero, new Vector2(600f, 400f));
@@ -631,6 +634,106 @@ namespace RhythmGame
             tex.SetPixels32(px);
             tex.Apply();
             return Sprite.Create(tex, new Rect(0, 0, W, H), new Vector2(0.5f, 0.5f), S, 0, SpriteMeshType.FullRect);
+        }
+
+        // ---------- Nút pause ở góc (dùng bởi PauseManager) ----------
+
+        public const float CornerW = 92f, CornerH = 76f, CornerGlow = 16f;
+
+        /// <summary>Màu neon hiện tại (theo AnimatedBackground nếu có, không thì hồng / cyan).</summary>
+        public static void NeonColors(out Color a, out Color b)
+        {
+            a = new Color(1.00f, 0.25f, 0.80f);
+            b = new Color(0.20f, 0.90f, 1.00f);
+            if (AnimatedBackground.Instance != null)
+            {
+                a = Vivid(AnimatedBackground.Instance.paletteMiddle);
+                b = Vivid(AnimatedBackground.Instance.paletteBottom);
+            }
+        }
+
+        /// <summary>Khung kính nghiêng có viền neon + vầng sáng. Kích thước logic = (CornerW, CornerH) + 2 * CornerGlow mỗi chiều.</summary>
+        public static Sprite MakeCornerFrame(Color a, Color b)
+        {
+            Color fillTop = new Color(0.12f, 0.05f, 0.26f, 0.94f);
+            Color fillBot = new Color(0.04f, 0.01f, 0.10f, 0.96f);
+            return MakeShape(CornerW, CornerH, 18f, 12f, 3f, CornerGlow, 0.65f, fillTop, fillBot, a, b, 0.08f);
+        }
+
+        /// <summary>Icon trắng có vầng sáng: pause = hai thanh nghiêng, play = tam giác bo góc. Kích thước logic 64 x 64.</summary>
+        public static Sprite MakeIcon(bool pause, Color glowColor)
+        {
+            const int S = 2;
+            const int N = 64;
+            int W = N * S;
+            var tex = new Texture2D(W, W, TextureFormat.RGBA32, false);
+            tex.wrapMode = TextureWrapMode.Clamp;
+            tex.filterMode = FilterMode.Bilinear;
+            var px = new Color32[W * W];
+            float padS = 14f * S;
+            Color core = Color.Lerp(Color.white, glowColor, 0.12f);
+            core.a = 1f;
+
+            for (int j = 0; j < W; j++)
+            for (int i = 0; i < W; i++)
+            {
+                float x = i + 0.5f - W * 0.5f;
+                float y = j + 0.5f - W * 0.5f;
+                float d;
+                if (pause)
+                {
+                    const float k = 0.22f;   // nghiêng cùng hướng với khung
+                    float d1 = RoundBoxSdf((x - 11f * S) - k * y, y, 5f * S, 17f * S, 3f * S);
+                    float d2 = RoundBoxSdf((x + 11f * S) - k * y, y, 5f * S, 17f * S, 3f * S);
+                    d = Mathf.Min(d1, d2);
+                }
+                else
+                {
+                    Vector2 pt = new Vector2(x, y);
+                    Vector2 va = new Vector2(-9f * S, -13f * S);
+                    Vector2 vb = new Vector2(-9f * S, 13f * S);
+                    Vector2 vc = new Vector2(15f * S, 0f);
+                    d = SdTriangle(pt, va, vb, vc) - 4f * S;   // trừ bán kính -> góc bo tròn
+                }
+
+                float inside = Mathf.Clamp01(0.5f - d);
+                float g = 0f;
+                if (d > 0f)
+                {
+                    g = 0.85f * Mathf.Exp(-d / (5f * S));
+                    g *= Mathf.Clamp01((padS - d) / (0.3f * padS));
+                }
+                Color outC = new Color(glowColor.r, glowColor.g, glowColor.b, g);
+                px[j * W + i] = Color.Lerp(outC, core, inside);
+            }
+
+            tex.SetPixels32(px);
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, W, W), new Vector2(0.5f, 0.5f), S, 0, SpriteMeshType.FullRect);
+        }
+
+        static float RoundBoxSdf(float x, float y, float hx, float hy, float r)
+        {
+            float qx = Mathf.Abs(x) - (hx - r);
+            float qy = Mathf.Abs(y) - (hy - r);
+            return new Vector2(Mathf.Max(qx, 0f), Mathf.Max(qy, 0f)).magnitude + Mathf.Min(Mathf.Max(qx, qy), 0f) - r;
+        }
+
+        static float SegDist(Vector2 p, Vector2 a, Vector2 b)
+        {
+            Vector2 pa = p - a, ba = b - a;
+            float h = Mathf.Clamp01(Vector2.Dot(pa, ba) / Vector2.Dot(ba, ba));
+            return (pa - ba * h).magnitude;
+        }
+
+        static float Cross2(Vector2 u, Vector2 v) { return u.x * v.y - u.y * v.x; }
+
+        static float SdTriangle(Vector2 p, Vector2 a, Vector2 b, Vector2 c)
+        {
+            float d = Mathf.Min(SegDist(p, a, b), Mathf.Min(SegDist(p, b, c), SegDist(p, c, a)));
+            float s1 = Cross2(b - a, p - a), s2 = Cross2(c - b, p - b), s3 = Cross2(a - c, p - c);
+            bool inside = (s1 >= 0f && s2 >= 0f && s3 >= 0f) || (s1 <= 0f && s2 <= 0f && s3 <= 0f);
+            return inside ? -d : d;
         }
 
         static Sprite MakeVignette()

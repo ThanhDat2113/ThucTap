@@ -73,6 +73,8 @@ public class PauseManager : MonoBehaviour
     public bool useNeonMenu = true;
     [Tooltip("Bật = menu mới dùng ảnh nút bạn đã gán ở trên (RESUME/RESTART/LOBBY/MAIN MENU). Tắt = nút neon tự vẽ, đồng bộ với bảng.")]
     public bool keepCustomButtonSprites = false;
+    [Tooltip("Vẽ nút pause / tiếp tục ở góc theo phong cách neon (khung kính nghiêng + icon || và ► vẽ bằng code, nhấp nháy nhẹ). Tắt = dùng ảnh pauseIconSprite / resumeIconSprite của bạn.")]
+    public bool useNeonCornerButton = true;
 
     [Header("Kích thước nút")]
     [Tooltip("Chiều cao nút ở góc. Có ảnh thì chiều rộng tự theo tỉ lệ ảnh")]
@@ -104,6 +106,10 @@ public class PauseManager : MonoBehaviour
 
     PauseMenuUI menu;
 
+    // nút góc kiểu neon
+    Image pauseIconImg;
+    Sprite neonFrame, neonIconPause, neonIconPlay;
+
     Font uiFont;
     GameObject panel;
     Button pauseButton;
@@ -134,6 +140,13 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
+        // icon nút góc nhấp nháy nhẹ, nhanh hơn khi đang pause để gợi ý bấm quay lại
+        if (pauseIconImg != null && pauseButton != null && pauseButton.gameObject.activeSelf)
+        {
+            float pulse = 0.85f + 0.15f * Mathf.Sin(Time.unscaledTime * (IsPaused ? 6f : 2.5f));
+            pauseIconImg.color = new Color(pulse, pulse, pulse, 1f);
+        }
+
         if (!canPause) return;
         if (KeyPressed()) Toggle();
     }
@@ -329,8 +342,23 @@ public class PauseManager : MonoBehaviour
         var prt = (RectTransform)pauseButton.transform;
         prt.anchorMin = prt.anchorMax = prt.pivot = new Vector2(1f, 1f);
         prt.anchoredPosition = pauseButtonPosition;
+        if (useNeonCornerButton) BuildNeonCornerButton();
         RefreshPauseButton(false);
         pauseButton.gameObject.SetActive(showPauseButton);
+    }
+
+    void BuildNeonCornerButton()
+    {
+        PauseMenuUI.NeonColors(out Color a, out Color b);
+        neonFrame = PauseMenuUI.MakeCornerFrame(a, b);
+        neonIconPause = PauseMenuUI.MakeIcon(true, b);
+        neonIconPlay = PauseMenuUI.MakeIcon(false, a);
+
+        var irt = NewRect("Icon", pauseButton.transform);
+        irt.anchorMin = irt.anchorMax = irt.pivot = new Vector2(0.5f, 0.5f);
+        irt.anchoredPosition = Vector2.zero;
+        pauseIconImg = irt.gameObject.AddComponent<Image>();
+        pauseIconImg.raycastTarget = false;
     }
 
     // ---------- Menu neon ----------
@@ -379,6 +407,21 @@ public class PauseManager : MonoBehaviour
     void RefreshPauseButton(bool paused)
     {
         if (pauseButton == null) return;
+
+        if (useNeonCornerButton && pauseIconImg != null)
+        {
+            float full = PauseMenuUI.CornerH + 2f * PauseMenuUI.CornerGlow;
+            float f = pauseButtonHeight / full;
+            pauseImage.sprite = neonFrame;
+            pauseImage.color = Color.white;
+            ((RectTransform)pauseButton.transform).sizeDelta =
+                new Vector2(PauseMenuUI.CornerW + 2f * PauseMenuUI.CornerGlow, full) * f;
+            pauseLabel.gameObject.SetActive(false);
+            pauseIconImg.sprite = paused ? neonIconPlay : neonIconPause;
+            ((RectTransform)pauseIconImg.transform).sizeDelta = new Vector2(64f, 64f) * f;
+            return;
+        }
+
         ApplyLook(pauseButton, pauseImage, pauseLabel,
             paused ? resumeIconSprite : pauseIconSprite,
             paused ? "\u25BA" : "II", 44,
