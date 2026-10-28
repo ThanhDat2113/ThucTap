@@ -11,6 +11,7 @@ namespace RhythmGame
         [Header("Refs")]
         public GameManager gameManager;
         public BattleUIController battleUI;
+        public UIController uiController;
 
         [Header("Panel")]
         public GameObject panelRoot;
@@ -38,15 +39,6 @@ namespace RhythmGame
         [Header("Animation")]
         public float fadeDuration = 0.3f;
 
-        // Overall stats (entire song)
-        int totalScore;
-        int totalCombo;
-        int totalMaxCombo;
-        int totalPerfect;
-        int totalGood;
-        int totalBad;
-        int totalMiss;
-        int totalNotes;
 
         void Start()
         {
@@ -63,6 +55,8 @@ namespace RhythmGame
             
             if (panelRoot != null) panelRoot.SetActive(false);
             if (panelCanvasGroup != null) panelCanvasGroup.alpha = 0f;
+
+            if (uiController == null) uiController = FindObjectOfType<UIController>();
         }
 
         void OnDestroy()
@@ -83,8 +77,7 @@ namespace RhythmGame
         {
             if (state == GameState.Playing)
             {
-                // Reset stats at start
-                ResetStats();
+                // Gameplay counters now live on BattleUIController; nothing to reset here.
             }
             else if (state == GameState.Finished || state == GameState.Failed)
             {
@@ -93,34 +86,7 @@ namespace RhythmGame
             }
         }
 
-        public void RecordJudgement(NoteOwner owner, Judgement judgement)
-        {
-            // Record for both player and opponent combined
-            totalNotes++;
-            switch (judgement)
-            {
-                case Judgement.Perfect: totalPerfect++; break;
-                case Judgement.Good: totalGood++; break;
-                case Judgement.Bad: totalBad++; break;
-                case Judgement.Miss: totalMiss++; break;
-            }
-        }
 
-        public void RecordScore(int points, int combo, int maxCombo)
-        {
-            totalScore += points;
-            totalCombo = combo;
-            totalMaxCombo = maxCombo;
-        }
-
-        void ResetStats()
-        {
-            totalScore = 0;
-            totalCombo = 0;
-            totalMaxCombo = 0;
-            totalPerfect = totalGood = totalBad = totalMiss = 0;
-            totalNotes = 0;
-        }
 
         void ShowFinalResult(GameState endState)
         {
@@ -132,28 +98,30 @@ namespace RhythmGame
                 songNameText.text = gameManager.chart.songName;
             }
 
-            if (scoreText != null) scoreText.text = totalScore.ToString();
-            if (totalNotesText != null) totalNotesText.text = totalNotes.ToString();
-            if (comboText != null) comboText.text = totalCombo.ToString();
-            if (maxComboText != null) maxComboText.text = totalMaxCombo.ToString();
+            if (scoreText != null) scoreText.text = battleUI.playerScore.ToString();
+            if (totalNotesText != null) totalNotesText.text = battleUI.TotalNoteSlots.ToString();
+            if (comboText != null) comboText.text = battleUI.playerMaxCombo.ToString();
+            if (maxComboText != null) maxComboText.text = battleUI.playerMaxCombo.ToString();
 
-            // Calculate accuracy
-            float accuracy = totalNotes > 0 ? (float)(totalPerfect + totalGood + totalBad) / totalNotes * 100f : 0f;
-            if (accuracyText != null) accuracyText.text = string.Format("{0:F1}%", accuracy);
+            float hitRatio = battleUI != null ? battleUI.PlayerHitRatio : 0f;
+            if (accuracyText != null) accuracyText.text = string.Format("{0:F1}%", hitRatio * 100f);
 
-            // Grade
-            Grade grade = CalculateGrade(accuracy / 100f);
+            int total = battleUI != null ? battleUI.TotalNoteSlots : 0;
+            int p = battleUI != null ? battleUI.playerPerfect : 0;
+            int g = battleUI != null ? battleUI.playerGood : 0;
+            Grade grade = battleUI != null ? battleUI.PlayerGrade : Grade.F;
+            Debug.Log($"[TurnResultPanel] Perfect={p}, Good={g}, TotalSlots={total}, HitRatio={hitRatio*100f:F1}%, Grade={grade}");
+
             if (gradeText != null)
             {
                 gradeText.text = grade.ToString();
                 gradeText.color = GetGradeColor(grade);
             }
 
-            // Judgement breakdown
-            if (perfectText != null) perfectText.text = totalPerfect.ToString();
-            if (goodText != null) goodText.text = totalGood.ToString();
-            if (badText != null) badText.text = totalBad.ToString();
-            if (missText != null) missText.text = totalMiss.ToString();
+            if (perfectText != null) perfectText.text = p.ToString();
+            if (goodText != null) goodText.text = g.ToString();
+            if (badText != null) badText.text = (battleUI != null ? battleUI.playerBad : 0).ToString();
+            if (missText != null) missText.text = (battleUI != null ? battleUI.playerMiss : 0).ToString();
 
             // Save achievement (best score, combo, accuracy, play count)
             SongData songToSave = GameSession.SelectedSong;
@@ -171,8 +139,8 @@ namespace RhythmGame
 
             if (songToSave != null)
             {
-                SongStats.SaveResult(songToSave, totalScore, totalMaxCombo, accuracy / 100f);
-                Debug.Log($"[TurnResultPanel] Đã lưu thành tích: Song={songToSave.songName}, Score={totalScore}, MaxCombo={totalMaxCombo}, Accuracy={accuracy:F1}%");
+                SongStats.SaveResult(songToSave, battleUI.playerScore, battleUI.playerMaxCombo, hitRatio);
+                Debug.Log($"[TurnResultPanel] Đã lưu thành tích: Song={songToSave.songName}, Score={battleUI.playerScore}, MaxCombo={battleUI.playerMaxCombo}, Accuracy={hitRatio * 100f:F1}%");
             }
             else
             {
@@ -246,16 +214,7 @@ namespace RhythmGame
             if (panelCanvasGroup != null) panelCanvasGroup.alpha = 0f;
         }
 
-        Grade CalculateGrade(float percentage)
-        {
-            if (percentage >= 0.95f) return Grade.S;
-            if (percentage >= 0.90f) return Grade.A;
-            if (percentage >= 0.80f) return Grade.B;
-            if (percentage >= 0.70f) return Grade.C;
-            if (percentage >= 0.60f) return Grade.D;
-            if (percentage >= 0.50f) return Grade.E;
-            return Grade.F;
-        }
+
 
         Color GetGradeColor(Grade grade)
         {

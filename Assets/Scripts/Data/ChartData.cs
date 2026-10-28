@@ -47,7 +47,7 @@ namespace RhythmGame
                 do { lane = rng.Next(0, laneCount); } while (lane == prev);
                 prev = lane;
 
-                NoteOwner owner = rng.NextDouble() < opponentNoteRatio ? NoteOwner.Opponent : NoteOwner.Player;
+                NoteOwner owner = NoteOwner.Player;
 
                 if (rng.NextDouble() < 0.2)
                 {
@@ -78,7 +78,7 @@ namespace RhythmGame
                 do { lane = rng.Next(0, laneCount); } while (lane == prev);
                 prev = lane;
 
-                NoteOwner owner = GetOwnerForBeat(beat, totalBeats, rng);
+                NoteOwner owner = NoteOwner.Player;
 
                 if (rng.NextDouble() < 0.2)
                 {
@@ -123,7 +123,7 @@ namespace RhythmGame
 
             foreach (var note in notes)
             {
-                note.owner = note.beat < midBeat ? NoteOwner.Player : NoteOwner.Opponent;
+                note.owner = NoteOwner.Player;
             }
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
@@ -138,7 +138,7 @@ namespace RhythmGame
             foreach (var note in notes)
             {
                 int sectionIndex = Mathf.FloorToInt(note.beat / sectionLengthBeats);
-                note.owner = (sectionIndex % 2 == 0) ? NoteOwner.Player : NoteOwner.Opponent;
+                note.owner = NoteOwner.Player;
             }
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
@@ -148,31 +148,9 @@ namespace RhythmGame
         [ContextMenu("Balance Note Count")]
         public void BalanceNoteCount()
         {
-            int playerCount = 0, opponentCount = 0;
             foreach (var note in notes)
             {
-                if (note.owner == NoteOwner.Player) playerCount++;
-                else opponentCount++;
-            }
-
-            int diff = Mathf.Abs(playerCount - opponentCount);
-            if (diff < 2) return;
-
-            // Swap some notes to balance
-            var sortedNotes = new List<NoteData>(notes);
-            sortedNotes.Sort((a, b) => a.beat.CompareTo(b.beat));
-
-            int toSwap = diff / 2;
-            int swapped = 0;
-            NoteOwner majority = playerCount > opponentCount ? NoteOwner.Player : NoteOwner.Opponent;
-
-            for (int i = 0; i < sortedNotes.Count && swapped < toSwap; i++)
-            {
-                if (sortedNotes[i].owner == majority)
-                {
-                    sortedNotes[i].owner = majority == NoteOwner.Player ? NoteOwner.Opponent : NoteOwner.Player;
-                    swapped++;
-                }
+                note.owner = NoteOwner.Player;
             }
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);

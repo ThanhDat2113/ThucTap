@@ -68,8 +68,6 @@ namespace RhythmGame
             {
                 NoteView n = notes[i];
 
-                if (n.Data.owner != NoteOwner.Player) continue;
-
                 if (n.Holding)
                 {
                     if (songTime >= n.TailTimeSeconds) CompleteHold(n);

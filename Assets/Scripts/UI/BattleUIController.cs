@@ -28,6 +28,10 @@ namespace RhythmGame
         public TMP_Text opponentGradeText;
         public HealthBar opponentHealthBar;
 
+        [Header("Opponent Judgement UI")]
+        public TMP_Text opponentJudgementText;
+        public JudgementPopup opponentJudgementPopup;
+
         [Header("Shared UI")]
         public TMP_Text countdownText;
         public TMP_Text messageText;
@@ -37,16 +41,60 @@ namespace RhythmGame
 
         [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
-        [Range(0f, 1f)] public float thresholdA = 0.90f;
-        [Range(0f, 1f)] public float thresholdB = 0.80f;
-        [Range(0f, 1f)] public float thresholdC = 0.70f;
-        [Range(0f, 1f)] public float thresholdD = 0.60f;
-        [Range(0f, 1f)] public float thresholdE = 0.50f;
+        [Range(0f, 1f)] public float thresholdA = 0.80f;
+        [Range(0f, 1f)] public float thresholdB = 0.60f;
+        [Range(0f, 1f)] public float thresholdC = 0.40f;
+        [Range(0f, 1f)] public float thresholdD = 0.20f;
+        [Range(0f, 1f)] public float thresholdE = 0f;
 
-        int playerScore, playerCombo, playerMaxCombo;
-        int opponentScore, opponentCombo, opponentMaxCombo;
+        public int playerScore, playerCombo, playerMaxCombo;
+        public int opponentScore, opponentCombo, opponentMaxCombo;
         Grade playerGrade = Grade.F, opponentGrade = Grade.F;
         int playerMaxScore, opponentMaxScore;
+        public int playerTotalNotes, playerHitNotes;
+        public int playerPerfect, playerGood;
+        public int playerBad, playerMiss;
+
+        public int TotalNoteSlots
+        {
+            get
+            {
+                int total = 0;
+                if (gameManager != null && gameManager.chart != null)
+                {
+                    foreach (var note in gameManager.chart.notes)
+                    {
+                        total += note.type == NoteType.Hold ? 2 : 1;
+                    }
+                }
+                return total;
+            }
+        }
+
+        public float PlayerHitRatio
+        {
+            get
+            {
+                int total = TotalNoteSlots;
+                return total > 0 ? (float)playerHitNotes / total : 0f;
+            }
+        }
+
+        public Grade PlayerGrade
+        {
+            get
+            {
+                int total = TotalNoteSlots;
+                if (total <= 0) return Grade.E;
+                float p = (float)(playerPerfect + playerGood) / total;
+                if (p >= thresholdS) return Grade.S;
+                if (p >= thresholdA) return Grade.A;
+                if (p >= thresholdB) return Grade.B;
+                if (p >= thresholdC) return Grade.C;
+                if (p >= thresholdD) return Grade.D;
+                return Grade.E;
+            }
+        }
 
         void Start()
         {
@@ -82,10 +130,8 @@ namespace RhythmGame
             foreach (var note in chart.notes)
             {
                 int noteMaxScore = note.type == NoteType.Hold ? 400 : 300;
-                if (note.owner == NoteOwner.Player)
-                    playerMaxScore += noteMaxScore;
-                else
-                    opponentMaxScore += noteMaxScore;
+                playerMaxScore += noteMaxScore;
+                opponentMaxScore += noteMaxScore;
             }
         }
 
@@ -107,6 +153,7 @@ namespace RhythmGame
             if (state == GameState.Playing)
             {
                 playerScore = playerCombo = playerMaxCombo = 0;
+                playerTotalNotes = playerHitNotes = playerPerfect = playerGood = playerBad = playerMiss = 0;
                 opponentScore = opponentCombo = opponentMaxCombo = 0;
                 playerGrade = opponentGrade = Grade.F;
                 UpdatePlayerUI();
@@ -117,41 +164,27 @@ namespace RhythmGame
 
         void HandleJudged(Judgement j, int points, bool isHit, NoteOwner owner)
         {
-            if (owner == NoteOwner.Player)
+            if (owner != NoteOwner.Player) return;
+
+            if (isHit && points > 0)
             {
-                if (isHit && points > 0)
-                {
-                    float multiplier = flowSystem != null ? flowSystem.FlowScoreMultiplier : 1f;
-                    playerScore += Mathf.RoundToInt(points * multiplier);
-                    playerCombo = isHit ? playerCombo + 1 : 0;
-                    playerMaxCombo = Mathf.Max(playerMaxCombo, playerCombo);
-                }
-                else if (!isHit)
-                {
-                    playerCombo = 0;
-                }
-                UpdatePlayerUI();
+                float multiplier = flowSystem != null ? flowSystem.FlowScoreMultiplier : 1f;
+                playerScore += Mathf.RoundToInt(points * multiplier);
+                playerCombo = isHit ? playerCombo + 1 : 0;
+                playerMaxCombo = Mathf.Max(playerMaxCombo, playerCombo);
             }
-            else
+            else if (!isHit)
             {
-                if (isHit && points > 0)
-                {
-                    opponentScore += points;
-                    opponentCombo = isHit ? opponentCombo + 1 : 0;
-                    opponentMaxCombo = Mathf.Max(opponentMaxCombo, opponentCombo);
-                }
-                else if (!isHit)
-                {
-                    opponentCombo = 0;
-                }
-                UpdateOpponentUI();
+                playerCombo = 0;
             }
-            
-            // Record for final result panel (combined stats)
-            turnResultPanel?.RecordJudgement(owner, j);
-            int combo = owner == NoteOwner.Player ? playerCombo : opponentCombo;
-            int maxCombo = owner == NoteOwner.Player ? playerMaxCombo : opponentMaxCombo;
-            turnResultPanel?.RecordScore(points, combo, maxCombo);
+            playerTotalNotes++;
+            if (isHit) playerHitNotes++;
+            if (j == Judgement.Perfect) playerPerfect++;
+            else if (j == Judgement.Good) playerGood++;
+            else if (j == Judgement.HoldComplete && isHit) playerGood++;
+            else if (j == Judgement.Bad) playerBad++;
+            else if (j == Judgement.Miss) playerMiss++;
+            UpdatePlayerUI();
         }
 
         void HandleFlowAmountChanged(float normalized)
@@ -181,7 +214,13 @@ namespace RhythmGame
         {
             if (playerScoreText) playerScoreText.text = "P1: " + playerScore;
             if (playerComboText) playerComboText.text = "Combo: " + playerCombo + " (max " + playerMaxCombo + ")";
-            UpdateGradeText(playerGradeText, playerScore, playerMaxScore);
+
+            Grade g = PlayerGrade;
+            if (playerGradeText != null)
+            {
+                playerGradeText.text = g.ToString();
+                playerGradeText.color = GetGradeColor(g);
+            }
         }
 
         void UpdateOpponentUI()
@@ -207,8 +246,7 @@ namespace RhythmGame
             if (percentage >= thresholdB) return Grade.B;
             if (percentage >= thresholdC) return Grade.C;
             if (percentage >= thresholdD) return Grade.D;
-            if (percentage >= thresholdE) return Grade.E;
-            return Grade.F;
+            return Grade.E;
         }
 
         Color GetGradeColor(Grade grade)
@@ -249,6 +287,36 @@ namespace RhythmGame
         {
             opponentCombo = 0;
             UpdateOpponentUI();
+        }
+
+        public void SetOpponentJudgement(Judgement j)
+        {
+            if (opponentJudgementPopup != null)
+            {
+                opponentJudgementPopup.Show(j);
+                return;
+            }
+
+            if (opponentJudgementText == null) return;
+
+            string text;
+            Color color;
+            switch (j)
+            {
+                case Judgement.Perfect:
+                    text = "PERFECT"; color = Color.yellow; break;
+                case Judgement.Good:
+                    text = "GOOD"; color = new Color(1f, 0.6f, 0.9f); break;
+                case Judgement.Bad:
+                    text = "BAD"; color = new Color(0.6f, 1f, 0.8f); break;
+                case Judgement.HoldComplete:
+                    text = "HOLD!"; color = Color.cyan; break;
+                default:
+                    text = "MISS"; color = Color.gray; break;
+            }
+
+            opponentJudgementText.text = text;
+            opponentJudgementText.color = color;
         }
     }
 }

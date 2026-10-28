@@ -28,11 +28,11 @@ namespace RhythmGame
 
         [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
-        [Range(0f, 1f)] public float thresholdA = 0.90f;
-        [Range(0f, 1f)] public float thresholdB = 0.80f;
-        [Range(0f, 1f)] public float thresholdC = 0.70f;
-        [Range(0f, 1f)] public float thresholdD = 0.60f;
-        [Range(0f, 1f)] public float thresholdE = 0.50f;
+        [Range(0f, 1f)] public float thresholdA = 0.80f;
+        [Range(0f, 1f)] public float thresholdB = 0.60f;
+        [Range(0f, 1f)] public float thresholdC = 0.40f;
+        [Range(0f, 1f)] public float thresholdD = 0.20f;
+        [Range(0f, 1f)] public float thresholdE = 0f;
 
         [Header("Grade Effects")]
         public bool gradePopOnChange = true;
@@ -45,6 +45,9 @@ namespace RhythmGame
         public float countdownPopDuration = 0.15f;
 
         int score, combo, maxCombo;
+        int playerPerfect, playerGood;
+        int playerHitNotes;
+        int playerBad, playerMiss;
         Grade currentGrade = Grade.F;
         float gradePopTimer = 999f;
         Vector3 gradeBaseScale = Vector3.one;
@@ -112,6 +115,7 @@ namespace RhythmGame
             if (state == GameState.Playing)
             {
                 score = combo = maxCombo = 0;
+                playerPerfect = playerGood = playerHitNotes = playerBad = playerMiss = 0;
                 UpdateScoreUI();
                 UpdateGrade();
                 UpdateFlowUI();
@@ -127,6 +131,12 @@ namespace RhythmGame
             score += Mathf.RoundToInt(points * multiplier);
             combo = isHit ? combo + 1 : 0;
             maxCombo = Mathf.Max(maxCombo, combo);
+            if (j == Judgement.Perfect) playerPerfect++;
+            else if (j == Judgement.Good) playerGood++;
+            else if (j == Judgement.HoldComplete && isHit) playerGood++;
+            else if (j == Judgement.Bad) playerBad++;
+            else if (j == Judgement.Miss) playerMiss++;
+            if (isHit) playerHitNotes++;
             UpdateScoreUI();
             UpdateGrade();
         }
@@ -164,10 +174,11 @@ namespace RhythmGame
         {
             if (gradeText == null) return;
 
-            ChartData chart = gameManager != null ? gameManager.chart : null;
-            int maxScore = chart != null ? CalculateMaxScore(chart) : 0;
-            float percentage = maxScore > 0 ? (float)score / maxScore : 0f;
+            int total = TotalNoteSlots;
+            float percentage = total > 0 ? (float)(playerPerfect + playerGood) / total : 0f;
             Grade grade = CalculateGrade(percentage);
+
+            Debug.Log($"[UIController] Perfect={playerPerfect}, Good={playerGood}, Total={TotalNoteSlots}, Pct={percentage*100f:F1}%, Grade={grade}");
 
             if (grade != currentGrade)
             {
@@ -177,6 +188,39 @@ namespace RhythmGame
 
             gradeText.text = grade.ToString();
             gradeText.color = GetGradeColor(grade);
+        }
+
+        public int TotalNoteSlots
+        {
+            get
+            {
+                int total = 0;
+                if (gameManager != null && gameManager.chart != null)
+                {
+                    foreach (var note in gameManager.chart.notes)
+                    {
+                        total += note.type == NoteType.Hold ? 2 : 1;
+                    }
+                }
+                return total;
+            }
+        }
+
+        public Grade CurrentGrade => currentGrade;
+
+        public int PlayerPerfect => playerPerfect;
+        public int PlayerGood => playerGood;
+        public int PlayerHitNotes => playerHitNotes;
+        public int PlayerBad => playerBad;
+        public int PlayerMiss => playerMiss;
+
+        public float PlayerHitRatio
+        {
+            get
+            {
+                int total = TotalNoteSlots;
+                return total > 0 ? (float)playerHitNotes / total : 0f;
+            }
         }
 
         int CalculateMaxScore(ChartData chart)
@@ -197,8 +241,7 @@ namespace RhythmGame
             if (percentage >= thresholdB) return Grade.B;
             if (percentage >= thresholdC) return Grade.C;
             if (percentage >= thresholdD) return Grade.D;
-            if (percentage >= thresholdE) return Grade.E;
-            return Grade.F;
+            return Grade.E;
         }
 
         Color GetGradeColor(Grade grade)

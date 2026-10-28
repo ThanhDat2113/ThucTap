@@ -49,11 +49,7 @@ namespace RhythmGame
 
         void OnJudged(Judgement j, int points, bool isHit, NoteOwner noteOwner)
         {
-            if (noteOwner != owner)
-            {
-                ForceIdle();
-                return;
-            }
+            if (noteOwner != owner) return;
 
             if (!isDancing && isHit && (j == Judgement.Perfect || j == Judgement.Good || j == Judgement.Bad || j == Judgement.HoldComplete))
             {

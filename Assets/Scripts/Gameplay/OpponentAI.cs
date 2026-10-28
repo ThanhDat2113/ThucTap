@@ -1,10 +1,21 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RhythmGame
 {
     public class OpponentAI : MonoBehaviour
     {
+        struct PendingNote
+        {
+            public float startTime;
+            public float tailTime;
+            public bool isHold;
+            public bool started;
+            public bool hit;
+            public Judgement headJudgement;
+        }
+
+
         [Header("Refs")]
         public NoteSpawner spawner;
         public JudgementSystem judgementSystem;
@@ -27,6 +38,7 @@ namespace RhythmGame
 
         float songTime;
         bool isActive;
+        readonly List<PendingNote> pendingNotes = new List<PendingNote>();
 
         void Start()
         {
@@ -34,14 +46,16 @@ namespace RhythmGame
             {
                 judgementSystem.OnJudged += OnJudged;
             }
+            if (spawner != null)
+            {
+                spawner.OnNoteSpawned += HandleNoteSpawned;
+            }
         }
 
         void OnDestroy()
         {
-            if (judgementSystem != null)
-            {
-                judgementSystem.OnJudged -= OnJudged;
-            }
+            if (judgementSystem != null) judgementSystem.OnJudged -= OnJudged;
+            if (spawner != null) spawner.OnNoteSpawned -= HandleNoteSpawned;
         }
 
         public void SetSongTime(float t) => songTime = t;
@@ -49,107 +63,142 @@ namespace RhythmGame
 
         void Update()
         {
-            if (!isActive || spawner == null) return;
+            if (!isActive || spawner == null || judgementSystem == null) return;
 
-            // Copy to array to avoid collection modified during enumeration
-            var notes = spawner.ActiveNotes.ToArray();
-            foreach (var note in notes)
+            for (int i = pendingNotes.Count - 1; i >= 0; i--)
             {
-                if (note.Data.owner != NoteOwner.Opponent) continue;
-                if (note.Judged) continue;
-                if (note.Holding) continue;
+                var note = pendingNotes[i];
 
-                float diff = songTime - note.TimeSeconds - reactionTime;
-
-                if (diff >= -judgementSystem.missWindow && diff <= judgementSystem.missWindow)
+                if (!note.started)
                 {
-                    AttemptTap(note, diff);
-                }
-            }
+                    float diff = songTime - note.startTime - reactionTime;
 
-            CheckHoldReleases();
-        }
-
-        void AttemptTap(NoteView note, float diff)
-        {
-            if (Random.value > accuracy)
-            {
-                if (battleUI != null) battleUI.SetOpponentMiss();
-                return;
-            }
-
-            Judgement judgement;
-            float absDiff = Mathf.Abs(diff);
-
-            if (absDiff <= judgementSystem.perfectWindow)
-            {
-                float r = Random.value;
-                if (r < perfectRate) judgement = Judgement.Perfect;
-                else if (r < perfectRate + goodRate) judgement = Judgement.Good;
-                else judgement = Judgement.Bad;
-            }
-            else if (absDiff <= judgementSystem.goodWindow)
-            {
-                float r = Random.value;
-                if (r < goodRate / (goodRate + badRate)) judgement = Judgement.Good;
-                else judgement = Judgement.Bad;
-            }
-            else
-            {
-                judgement = Judgement.Bad;
-            }
-
-            int points = GetPointsForJudgement(judgement);
-            judgementSystem.JudgeOpponentNote(note, judgement);
-
-            if (battleUI != null) battleUI.AddOpponentScore(points, true);
-
-            if (characterController != null)
-            {
-                characterController.TriggerDance();
-            }
-        }
-
-        void CheckHoldReleases()
-        {
-            // Copy to array to avoid collection modified during enumeration
-            var notes = spawner.ActiveNotes.ToArray();
-            foreach (var note in notes)
-            {
-                if (note.Data.owner != NoteOwner.Opponent) continue;
-                if (!note.Holding) continue;
-
-                float diff = songTime - note.TailTimeSeconds - reactionTime;
-
-                if (diff >= -judgementSystem.holdTailBadWindow)
-                {
-                    Judgement tailJudgement;
-                    if (diff <= judgementSystem.holdTailPerfectWindow) tailJudgement = Judgement.Perfect;
-                    else if (diff <= judgementSystem.holdTailGoodWindow) tailJudgement = Judgement.Good;
-                    else if (diff <= judgementSystem.holdTailBadWindow) tailJudgement = Judgement.Bad;
-                    else tailJudgement = Judgement.Miss;
-
-                    if (Random.value > accuracy)
+                    if (diff > judgementSystem.missWindow)
                     {
-                        tailJudgement = Judgement.Miss;
+                        pendingNotes.RemoveAt(i);
+                        MissAtHead();
                     }
-
-                    int tailPoints = GetPointsForJudgement(tailJudgement);
-                    judgementSystem.JudgeOpponentHoldRelease(note, tailJudgement);
-
-                    if (battleUI != null) battleUI.AddOpponentScore(tailPoints, tailJudgement != Judgement.Miss);
-
-                    if (characterController != null)
+                    else if (diff >= -judgementSystem.missWindow && diff <= judgementSystem.missWindow)
                     {
-                        characterController.TriggerDance();
+                        note.started = true;
+
+                        if (Random.value > accuracy)
+                        {
+                            pendingNotes.RemoveAt(i);
+                            MissAtHead();
+                        }
+                        else
+                        {
+                            Judgement judgement;
+                            float absDiff = Mathf.Abs(diff);
+
+                            if (absDiff <= judgementSystem.perfectWindow)
+                            {
+                                float r = Random.value;
+                                if (r < perfectRate) judgement = Judgement.Perfect;
+                                else if (r < perfectRate + goodRate) judgement = Judgement.Good;
+                                else judgement = Judgement.Bad;
+                            }
+                            else if (absDiff <= judgementSystem.goodWindow)
+                            {
+                                float r = Random.value;
+                                if (r < goodRate / Mathf.Max(0.0001f, goodRate + badRate)) judgement = Judgement.Good;
+                                else judgement = Judgement.Bad;
+                            }
+                            else
+                            {
+                                judgement = Judgement.Bad;
+                            }
+
+                            int points = GetPointsForJudgement(judgement);
+                            if (battleUI != null) battleUI.AddOpponentScore(points, true);
+                            if (characterController != null) characterController.TriggerDance();
+                            if (battleUI != null) battleUI.SetOpponentJudgement(judgement);
+
+                            note.hit = true;
+                            note.headJudgement = judgement;
+
+                            if (note.isHold)
+                            {
+                                pendingNotes[i] = note;
+                            }
+                            else
+                            {
+                                pendingNotes.RemoveAt(i);
+                            }
+                        }
                     }
                 }
+                else if (note.isHold && note.hit)
+                {
+                    if (songTime >= note.tailTime)
+                    {
+                        float tailDiff = songTime - note.tailTime;
+
+                        Judgement tailJudgement;
+                        int tailPoints;
+                        if (tailDiff <= judgementSystem.holdTailPerfectWindow) { tailJudgement = Judgement.Perfect; tailPoints = 300; }
+                        else if (tailDiff <= judgementSystem.holdTailGoodWindow) { tailJudgement = Judgement.Good; tailPoints = 100; }
+                        else if (tailDiff <= judgementSystem.holdTailBadWindow) { tailJudgement = Judgement.Bad; tailPoints = 50; }
+                        else { tailJudgement = Judgement.Miss; tailPoints = 0; }
+
+                        if (Random.value > accuracy)
+                        {
+                            tailJudgement = Judgement.Miss;
+                            tailPoints = 0;
+                        }
+
+                        int holdCompletePoints = judgementSystem != null ? judgementSystem.holdCompletePoints : 100;
+
+                        if (tailJudgement == Judgement.Miss)
+                        {
+                            if (battleUI != null) battleUI.SetOpponentMiss();
+                            if (battleUI != null) battleUI.SetOpponentJudgement(Judgement.Miss);
+                            if (characterController != null) characterController.SetIdle();
+                        }
+                        else
+                        {
+                            if (battleUI != null) battleUI.AddOpponentScore(holdCompletePoints + tailPoints, true);
+                            if (characterController != null) characterController.TriggerDance();
+                            if (battleUI != null) battleUI.SetOpponentJudgement(Judgement.HoldComplete);
+                        }
+
+                        pendingNotes.RemoveAt(i);
+                    }
+                }
+                else
+                {
+                    if (songTime > note.startTime + judgementSystem.missWindow)
+                    {
+                        pendingNotes.RemoveAt(i);
+                    }
+                }
             }
+        }
+
+        void MissAtHead()
+        {
+            if (battleUI != null) battleUI.SetOpponentMiss();
+            if (battleUI != null) battleUI.SetOpponentJudgement(Judgement.Miss);
+            if (characterController != null) characterController.SetIdle();
+        }
+
+        void HandleNoteSpawned(NoteView note)
+        {
+            if (note == null) return;
+            pendingNotes.Add(new PendingNote
+            {
+                startTime = note.TimeSeconds,
+                tailTime = note.TailTimeSeconds,
+                isHold = note.IsHold,
+                started = false,
+                hit = false,
+                headJudgement = Judgement.Miss
+            });
         }
 
         void OnJudged(Judgement j, int points, bool isHit, NoteOwner owner)
         {
-            // Optional: react to player's judgement
         }
 
         int GetPointsForJudgement(Judgement j)

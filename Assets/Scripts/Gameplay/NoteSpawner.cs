@@ -32,6 +32,8 @@ namespace RhythmGame
         ChartData chart;
         int nextIndex;
         readonly List<NoteView> active = new List<NoteView>();
+    public event System.Action<NoteView> OnNoteSpawned;
+
         public IReadOnlyList<NoteView> ActiveNotes => active;
 
         public bool Finished => chart != null && nextIndex >= chart.notes.Count && active.Count == 0;
@@ -40,8 +42,7 @@ namespace RhythmGame
         {
             foreach (var n in active)
             {
-                if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
-                else opponentPool?.Release(n);
+                playerPool?.Release(n);
             }
             active.Clear();
 
@@ -65,34 +66,27 @@ namespace RhythmGame
                 if (n.TopY < killY)
                 {
                     active.RemoveAt(i);
-                    if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
-                    else opponentPool?.Release(n);
+                    playerPool?.Release(n);
                 }
             }
         }
 
         void Spawn(NoteData data)
         {
-            NotePool pool = data.owner == NoteOwner.Player ? playerPool : opponentPool;
-            if (pool == null) pool = playerPool; // fallback
+            data.owner = NoteOwner.Player;
+            NotePool pool = playerPool;
+            if (pool == null) return;
 
             NoteView n = pool.Get();
             float timeSeconds = chart.BeatToTime(data.beat);
             float holdSeconds = data.type == NoteType.Hold ? data.holdBeats * chart.SecondsPerBeat : 0f;
 
-            Color noteColor;
-            if (data.owner == NoteOwner.Opponent && opponentLaneColors != null && opponentLaneColors.Length > 0)
-            {
-                noteColor = opponentLaneColors[data.lane % opponentLaneColors.Length];
-            }
-            else
-            {
-                noteColor = laneColors[data.lane % laneColors.Length];
-            }
+            Color noteColor = laneColors[data.lane % laneColors.Length];
 
             n.Setup(data, timeSeconds, holdSeconds, noteColor);
             n.transform.position = new Vector3(laneAnchors[data.lane].position.x, SpawnY, 0f);
             active.Add(n);
+            OnNoteSpawned?.Invoke(n);
         }
 
         public NoteView FindClosestUnjudged(int lane, float songTime)
@@ -102,7 +96,6 @@ namespace RhythmGame
             foreach (var n in active)
             {
                 if (n.Judged || n.Data.lane != lane) continue;
-                if (n.Data.owner != NoteOwner.Player) continue;
                 float diff = Mathf.Abs(songTime - n.TimeSeconds);
                 if (diff < bestDiff) { bestDiff = diff; best = n; }
             }
@@ -126,16 +119,14 @@ namespace RhythmGame
         public void ReleaseNote(NoteView n)
         {
             active.Remove(n);
-            if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
-            else opponentPool?.Release(n);
+            playerPool?.Release(n);
         }
 
         public void ClearActive()
         {
             foreach (var n in active)
             {
-                if (n.Data.owner == NoteOwner.Player) playerPool?.Release(n);
-                else opponentPool?.Release(n);
+                playerPool?.Release(n);
             }
             active.Clear();
         }
