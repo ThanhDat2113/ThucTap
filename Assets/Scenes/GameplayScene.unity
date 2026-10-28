@@ -861,6 +861,12 @@ MonoBehaviour:
   judgement: {fileID: 0}
   visuals: []
   pressedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  useNeonReceptors: 0
+  hideOriginalSprite: 1
+  sameStyleAsNotes: 1
+  idleBrightness: 0.65
+  pressScale: 1.06
+  flashDecay: 6
   laneColors:
   - {r: 0.76, g: 0.29, b: 0.6, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
