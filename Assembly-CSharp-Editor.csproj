@@ -49,11 +49,21 @@
     <Analyzer Include="C:\Program Files\Unity 6000.3.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\QLDATNSceneTracker.cs" />
+    <Compile Include="Assets\Thuan\Editor\ShopDebugMenu.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\Editor\MainMenuManagerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\CreateWhiteSquareSprite.cs" />
     <Compile Include="Assets\Editor\NoteDataDrawer.cs" />
     <Compile Include="Assets\Luan\MainMenu\Scripts\Editor\VideoAlphaSetup.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\Editor\QuickMenuSceneBuilder.cs" />
+    <Compile Include="Assets\Luan\LuckyWheel\Editor\LuckyWheelBonusProgressBuilder.cs" />
+    <Compile Include="Assets\Luan\LuckyWheel\Editor\LuckyWheelRewardPopupBuilder.cs" />
+    <Compile Include="Assets\Luan\MainMenu\Scripts\Editor\MobileKeyboardAdjusterEditor.cs" />
+    <Compile Include="Assets\Thuan\Editor\StoryDebugMenu.cs" />
     <Compile Include="Assets\Scripts\Editor\NoteDataDrawer.cs" />
+    <Compile Include="Assets\Thuan\Editor\WalletDebugWindow.cs" />
+    <Compile Include="Assets\Thuan\Editor\DailyCheckinDebugMenu.cs" />
+    <Compile Include="Assets\Editor\InventoryDebugMenu.cs" />
     <Compile Include="Assets\Luan\LuckyWheel\Editor\LuckyWheelSceneBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
