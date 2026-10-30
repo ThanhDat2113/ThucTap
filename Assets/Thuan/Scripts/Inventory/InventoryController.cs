@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class InventoryController : MonoBehaviour
@@ -13,10 +14,15 @@ public class InventoryController : MonoBehaviour
     [Tooltip("CHỈ bật khi cần test — sẽ tặng FREE toàn bộ item trong list.")]
     [SerializeField] private bool grantAllForDebug = false;
 
+    [Header("Nút quay lại")]
+    [Tooltip("Tên scene Main Menu (để load khi bấm nút Trở về).")]
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+
     Canvas canvas;
     RectTransform panel;
     RectTransform grid;
     GameObject emptyHint;
+    Button backButton;
 
     void Start()
     {
@@ -87,7 +93,7 @@ public class InventoryController : MonoBehaviour
             var glg = go.GetComponent<GridLayoutGroup>();
             glg.cellSize = new Vector2(120, 120);
             glg.spacing = new Vector2(15, 15);
-            glg.childAlignment = TextAnchor.UpperLeft;
+            glg.childAlignment = TextAnchor.MiddleCenter;
             glg.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             glg.constraintCount = 5;
             glg.padding = new RectOffset(20, 20, 20, 20);
@@ -107,6 +113,35 @@ public class InventoryController : MonoBehaviour
             txt.text = "Kho đồ trống.";
             txt.fontSize = 20; txt.color = Color.white; txt.alignment = TMPro.TextAlignmentOptions.Center;
             emptyHint.gameObject.SetActive(false);
+        }
+
+        if (backButton == null)
+        {
+            var go = new GameObject("BackButton", typeof(RectTransform), typeof(Image), typeof(Button));
+            var rt = go.GetComponent<RectTransform>();
+            rt.SetParent(panel.transform, false);
+            rt.anchorMin = new Vector2(1f, 1f);
+            rt.anchorMax = new Vector2(1f, 1f);
+            rt.anchoredPosition = new Vector2(-20f, -20f);
+            rt.sizeDelta = new Vector2(160f, 40f);
+            var img = go.GetComponent<Image>();
+            img.color = new Color(0.2f, 0.2f, 0.25f, 0.9f);
+            backButton = go.GetComponent<Button>();
+            backButton.targetGraphic = img;
+            backButton.onClick.AddListener(OnBackClicked);
+
+            var txtGo = new GameObject("Text", typeof(TextMeshProUGUI));
+            var nrt = txtGo.GetComponent<RectTransform>();
+            nrt.SetParent(rt.transform, false);
+            nrt.anchorMin = Vector2.zero;
+            nrt.anchorMax = Vector2.one;
+            nrt.offsetMin = Vector2.zero;
+            nrt.offsetMax = Vector2.zero;
+            var ntxt = txtGo.GetComponent<TextMeshProUGUI>();
+            ntxt.text = "TRỞ VỀ MENU";
+            ntxt.fontSize = 16;
+            ntxt.color = Color.white;
+            ntxt.alignment = TMPro.TextAlignmentOptions.Center;
         }
     }
 
@@ -145,5 +180,11 @@ public class InventoryController : MonoBehaviour
             ntxt.text = item.displayName; ntxt.fontSize = 14; ntxt.color = Color.white;
             ntxt.alignment = TMPro.TextAlignmentOptions.Center; ntxt.enableWordWrapping = true;
         }
+    }
+
+    private void OnBackClicked()
+    {
+        if (!string.IsNullOrEmpty(mainMenuSceneName))
+            SceneManager.LoadScene(mainMenuSceneName);
     }
 }
