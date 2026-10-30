@@ -205,6 +205,7 @@ namespace RhythmGame
                 visuals.PlayMissEffect();
             }
             if (trail != null) trail.gameObject.SetActive(false);
+            if (AnimatedBackground.Instance != null) AnimatedBackground.Instance.Miss();
 
             Color c = baseColor * 0.5f;
             c.a = 0.5f;

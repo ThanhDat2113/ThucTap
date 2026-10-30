@@ -121,6 +121,15 @@ public class AnimatedBackground : MonoBehaviour
     [Tooltip("Cửa sổ toà nhà lập loè")]
     [Range(0f, 1f)] public float twinkle = 0.5f;
 
+    [Header("Fever (combo cao) và Miss")]
+    [Tooltip("Từ combo này nền vào chế độ Fever: màu rực hơn, nhiều tia sáng và hạt hơn. Tự đếm combo từ các lần trúng / miss.")]
+    public int feverCombo = 50;
+    [Range(0f, 2f)] public float feverStrength = 1f;
+    [Tooltip("Nhiễu hình, mất màu và ngả đỏ trong chốc lát mỗi khi miss. 0 = tắt")]
+    [Range(0f, 1.5f)] public float missGlitch = 1f;
+    [Tooltip("Lưới ánh sáng chạy trên sàn nước")]
+    [Range(0f, 1.5f)] public float floorGrid = 0.35f;
+
     [Header("Phản ứng khi đánh trúng note")]
     [Tooltip("Vòng sóng trên sàn + trụ sáng vươn lên tại điểm đánh (NoteView tự gọi khi trúng note)")]
     [Range(0f, 1.5f)] public float hitStrength = 0.6f;
@@ -182,6 +191,11 @@ public class AnimatedBackground : MonoBehaviour
     readonly Vector4[] hits = new Vector4[4];
     int hitIdx;
 
+    // fever / miss
+    int autoCombo, comboValue;
+    float fever, glitch;
+    bool feverOn;
+
     // sóng xung kích
     float ripple = 1f;
     bool rippleOn;
@@ -241,6 +255,21 @@ public class AnimatedBackground : MonoBehaviour
     /// <summary>Combo càng cao nền càng sáng và sôi động.</summary>
     public void SetCombo(int combo)
     {
+        autoCombo = combo;
+        ApplyCombo(combo);
+    }
+
+    /// <summary>Gọi khi miss: nền nhiễu hình ngắn, combo tự đếm về 0. NoteView tự gọi.</summary>
+    public void Miss(float strength = 1f)
+    {
+        glitch = Mathf.Max(glitch, Mathf.Clamp01(strength) * missGlitch);
+        autoCombo = 0;
+        ApplyCombo(0);
+    }
+
+    void ApplyCombo(int combo)
+    {
+        comboValue = combo;
         comboLevel = Mathf.Clamp01(combo / 100f);
 
         if (combo < lastBurstCombo) lastBurstCombo = 0;
@@ -268,6 +297,8 @@ public class AnimatedBackground : MonoBehaviour
         hits[hitIdx] = new Vector4(vp.x, vp.y, 0f, Mathf.Clamp(strength, 0.2f, 1.5f));
         hitIdx = (hitIdx + 1) % hits.Length;
         Pulse(0.25f * strength);
+        autoCombo++;
+        ApplyCombo(autoCombo);
     }
 
     public void SetBpm(float newBpm)
@@ -420,6 +451,15 @@ public class AnimatedBackground : MonoBehaviour
             ripple += dt / Mathf.Max(0.1f, rippleDuration);
             if (ripple >= 1f) { ripple = 1f; rippleOn = false; }
         }
+        glitch = Mathf.Max(0f, glitch - dt * 3.5f);
+
+        // Fever: vào mượt khi combo vượt ngưỡng, tạo một đợt sóng xung kích khi bắt đầu
+        float fc = Mathf.Max(2, feverCombo);
+        float feverTarget = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((comboValue - fc * 0.5f) / (fc * 0.5f)));
+        fever = Mathf.Lerp(fever, feverTarget, 1f - Mathf.Exp(-2f * dt));
+        if (!feverOn && fever > 0.6f) { feverOn = true; Burst(); }
+        else if (feverOn && fever < 0.3f) feverOn = false;
+
         for (int k = 0; k < hits.Length; k++)
         {
             if (hits[k].w <= 0f) continue;
@@ -466,6 +506,9 @@ public class AnimatedBackground : MonoBehaviour
         mat.SetFloat("_Twinkle", twinkle);
         mat.SetVector("_Ripple", new Vector4(ripple, rippleOn ? rippleStrength : 0f, 0f, 0f));
         mat.SetFloat("_HitStrength", hitStrength);
+        mat.SetFloat("_Fever", fever * feverStrength);
+        mat.SetFloat("_Glitch", glitch);
+        mat.SetFloat("_FloorGrid", floorGrid);
         for (int k = 0; k < hits.Length; k++) mat.SetVector("_Hit" + k, hits[k]);
 
         var th = Current;
