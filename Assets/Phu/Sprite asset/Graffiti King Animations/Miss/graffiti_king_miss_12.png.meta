@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 3d1c1bc4d7b65a94ea97f7efea8704a9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3052787560014923064
+    second: graffiti_king_miss_12_0
+  - first:
+      213: 4527607154264942624
+    second: graffiti_king_miss_12_1
+  - first:
+      213: 7097391830854592346
+    second: graffiti_king_miss_12_2
+  - first:
+      213: 2592883609664718092
+    second: graffiti_king_miss_12_3
+  - first:
+      213: -7183195589038911094
+    second: graffiti_king_miss_12_4
+  - first:
+      213: 5098551981928790408
+    second: graffiti_king_miss_12_5
+  - first:
+      213: 4731978705731938356
+    second: graffiti_king_miss_12_6
+  - first:
+      213: -8488001093438116412
+    second: graffiti_king_miss_12_7
+  - first:
+      213: -1600248801993415680
+    second: graffiti_king_miss_12_8
+  - first:
+      213: -5751385149925937472
+    second: graffiti_king_miss_12_9
+  - first:
+      213: -318275769111429081
+    second: graffiti_king_miss_12_10
+  - first:
+      213: 2614986673056118721
+    second: graffiti_king_miss_12_11
+  - first:
+      213: -3682130911427002550
+    second: graffiti_king_miss_12_12
+  - first:
+      213: -4225070654887860478
+    second: graffiti_king_miss_12_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 500
+        width: 310
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ca349673e152a5d0800000000000000
+      internalID: -3052787560014923064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_1
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 500
+        width: 350
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 028aa70f7ba45de30800000000000000
+      internalID: 4527607154264942624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_2
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 498
+        width: 322
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a57e8dd34400f7260800000000000000
+      internalID: 7097391830854592346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_3
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 498
+        width: 330
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c058ff1c7e5cbf320800000000000000
+      internalID: 2592883609664718092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_4
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 498
+        width: 340
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a81de238ba9205c90800000000000000
+      internalID: -7183195589038911094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_5
+      rect:
+        serializedVersion: 2
+        x: 1951
+        y: 500
+        width: 324
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889bab7a302b1c640800000000000000
+      internalID: 5098551981928790408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_6
+      rect:
+        serializedVersion: 2
+        x: 2339
+        y: 501
+        width: 332
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4386ddfcf8d5ba140800000000000000
+      internalID: 4731978705731938356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_7
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 510
+        width: 310
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cd6e741aff843a80800000000000000
+      internalID: -8488001093438116412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_8
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 502
+        width: 340
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00420fc6136cac9e0800000000000000
+      internalID: -1600248801993415680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_9
+      rect:
+        serializedVersion: 2
+        x: 3572
+        y: 501
+        width: 251
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ce2534ada9fe20b0800000000000000
+      internalID: -5751385149925937472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_10
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 298
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 720cf71dfd1459bf0800000000000000
+      internalID: -318275769111429081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_11
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 24
+        width: 275
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c7f3eb368c4a4420800000000000000
+      internalID: 2614986673056118721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_12
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 18
+        width: 311
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4f78efd17176ecc0800000000000000
+      internalID: -3682130911427002550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: graffiti_king_miss_12_13
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 223
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2076b70ff988d55c0800000000000000
+      internalID: -4225070654887860478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      graffiti_king_miss_12_0: -3052787560014923064
+      graffiti_king_miss_12_1: 4527607154264942624
+      graffiti_king_miss_12_10: -318275769111429081
+      graffiti_king_miss_12_11: 2614986673056118721
+      graffiti_king_miss_12_12: -3682130911427002550
+      graffiti_king_miss_12_13: -4225070654887860478
+      graffiti_king_miss_12_2: 7097391830854592346
+      graffiti_king_miss_12_3: 2592883609664718092
+      graffiti_king_miss_12_4: -7183195589038911094
+      graffiti_king_miss_12_5: 5098551981928790408
+      graffiti_king_miss_12_6: 4731978705731938356
+      graffiti_king_miss_12_7: -8488001093438116412
+      graffiti_king_miss_12_8: -1600248801993415680
+      graffiti_king_miss_12_9: -5751385149925937472
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

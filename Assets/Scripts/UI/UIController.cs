@@ -1,55 +1,53 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace RhythmGame
 {
     public enum Grade { F, E, D, C, B, A, S }
 
-    /// <summary>
-    /// Chỉ đọc dữ liệu từ GameManager/JudgementSystem qua event rồi cập nhật
-    /// TextMeshPro. Không tự tính điểm, không tự biết luật chấm điểm.
-    ///
-    /// GHI CHÚ: phần hiển thị chữ "PERFECT/GOOD/BAD/MISS" đã chuyển sang cho
-    /// JudgementPopup (gắn trên object JudgeText) phụ trách toàn bộ animation.
-    /// UIController ở đây lo Score, Combo, Grade, Countdown, Message — không
-    /// đụng vào judgeText để tránh 2 script cùng ghi đè lên 1 Text.
-    /// </summary>
     public class UIController : MonoBehaviour
     {
         [Header("Refs")]
         public GameManager gameManager;
         public JudgementSystem judgement;
+        public FlowSystem flowSystem;
 
-        [Header("UI Elements (kéo thả trong Inspector)")]
+        [Header("UI Elements")]
         public TMP_Text countdownText;
         public TMP_Text scoreText;
         public TMP_Text comboText;
         public TMP_Text messageText;
-        [Tooltip("Chữ grade (S/A/B/C/D/E/F). Để trống thì phần này tự tắt, " +
-                 "không gây lỗi. Nên đặt ở góc trên bên phải, cỡ chữ ~90.")]
+        [Tooltip("Chữ grade (S/A/B/C/D/E/F). Để trống thì phần này tự tắt.")]
         public TMP_Text gradeText;
 
-        [Header("Ngưỡng grade (theo tỉ lệ điểm / tổng điểm tối đa)")]
+        [Header("Flow UI")]
+        public Image flowBar;
+        public TMP_Text flowText;
+        public TMP_Text flowStatusText;
+
+        [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
-        [Range(0f, 1f)] public float thresholdA = 0.90f;
-        [Range(0f, 1f)] public float thresholdB = 0.80f;
-        [Range(0f, 1f)] public float thresholdC = 0.70f;
-        [Range(0f, 1f)] public float thresholdD = 0.60f;
-        [Range(0f, 1f)] public float thresholdE = 0.50f;
+        [Range(0f, 1f)] public float thresholdA = 0.80f;
+        [Range(0f, 1f)] public float thresholdB = 0.60f;
+        [Range(0f, 1f)] public float thresholdC = 0.40f;
+        [Range(0f, 1f)] public float thresholdD = 0.20f;
+        [Range(0f, 1f)] public float thresholdE = 0f;
 
         [Header("Grade Effects")]
-        [Tooltip("Grade tăng lên sẽ nảy nhẹ một lần.")]
         public bool gradePopOnChange = true;
         public float gradePopScale = 1.25f;
         public float gradePopDuration = 0.18f;
 
         [Header("Countdown Effects")]
-        [Tooltip("Nảy khi số đếm thay đổi.")]
         public bool countdownPopOnChange = true;
         public float countdownPopScale = 1.5f;
         public float countdownPopDuration = 0.15f;
 
         int score, combo, maxCombo;
+        int playerPerfect, playerGood;
+        int playerHitNotes;
+        int playerBad, playerMiss;
         Grade currentGrade = Grade.F;
         float gradePopTimer = 999f;
         Vector3 gradeBaseScale = Vector3.one;
@@ -62,15 +60,26 @@ namespace RhythmGame
         {
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
+            if (flowSystem != null)
+            {
+                flowSystem.OnFlowAmountChanged += HandleFlowAmountChanged;
+                flowSystem.OnFlowStateChanged += HandleFlowStateChanged;
+            }
             if (gradeText != null) gradeBaseScale = gradeText.transform.localScale;
             if (countdownText != null) countdownBaseScale = countdownText.transform.localScale;
             UpdateGrade();
+            UpdateFlowUI();
         }
 
         void OnDestroy()
         {
             if (gameManager != null) gameManager.OnStateChanged -= HandleStateChanged;
             if (judgement != null) judgement.OnJudged -= HandleJudged;
+            if (flowSystem != null)
+            {
+                flowSystem.OnFlowAmountChanged -= HandleFlowAmountChanged;
+                flowSystem.OnFlowStateChanged -= HandleFlowStateChanged;
+            }
         }
 
         void HandleStateChanged(GameState state)
@@ -78,22 +87,21 @@ namespace RhythmGame
             switch (state)
             {
                 case GameState.Finished:
-                    messageText.text = "XONG! Nhan R de choi lai";
+                    messageText.text = "XONG! Nhấn R để chơi lại";
                     messageText.fontStyle = FontStyles.Normal;
                     messageText.enableVertexGradient = false;
                     messageText.color = Color.white;
                     break;
 
-                // Máu về 0 -> GameManager đã dừng nhạc và chuyển sang Failed.
                 case GameState.Failed:
                     messageText.text = "GAME OVER";
                     messageText.fontStyle = FontStyles.Bold;
                     messageText.enableVertexGradient = true;
                     messageText.colorGradient = new VertexGradient(
-                        new Color(0.95f, 0.25f, 0.25f),   // trên cùng
-                        new Color(0.95f, 0.25f, 0.25f),   // trên dưới
-                        new Color(1.00f, 0.60f, 0.60f),   // dưới trái
-                        new Color(1.00f, 0.60f, 0.60f));  // dưới dưới
+                        new Color(0.95f, 0.25f, 0.25f),
+                        new Color(0.95f, 0.25f, 0.25f),
+                        new Color(1.00f, 0.60f, 0.60f),
+                        new Color(1.00f, 0.60f, 0.60f));
                     break;
 
                 default:
@@ -107,20 +115,30 @@ namespace RhythmGame
             if (state == GameState.Playing)
             {
                 score = combo = maxCombo = 0;
+                playerPerfect = playerGood = playerHitNotes = playerBad = playerMiss = 0;
                 UpdateScoreUI();
                 UpdateGrade();
+                UpdateFlowUI();
             }
         }
 
-        void HandleJudged(Judgement j, int points, bool isHit)
+        void HandleJudged(Judgement j, int points, bool isHit, NoteOwner owner)
         {
-            score += points;
+            // Chỉ xử lý note của player cho single-player UI
+            if (owner != NoteOwner.Player) return;
+
+            float multiplier = flowSystem != null ? flowSystem.FlowScoreMultiplier : 1f;
+            score += Mathf.RoundToInt(points * multiplier);
             combo = isHit ? combo + 1 : 0;
             maxCombo = Mathf.Max(maxCombo, combo);
+            if (j == Judgement.Perfect) playerPerfect++;
+            else if (j == Judgement.Good) playerGood++;
+            else if (j == Judgement.HoldComplete && isHit) playerGood++;
+            else if (j == Judgement.Bad) playerBad++;
+            else if (j == Judgement.Miss) playerMiss++;
+            if (isHit) playerHitNotes++;
             UpdateScoreUI();
             UpdateGrade();
-
-            // Chữ PERFECT/GOOD/BAD/MISS giờ do JudgementPopup lo (xem VfxBinder).
         }
 
         void UpdateScoreUI()
@@ -129,18 +147,38 @@ namespace RhythmGame
             comboText.text = "Combo: " + combo + " (max " + maxCombo + ")";
         }
 
-        /// <summary>
-        /// Tính lại grade từ điểm hiện tại. Chart có thể null nên mọi thứ đều
-        /// null-safe; thiếu gradeText thì hàm chỉ thoát sớm chứ không lỗi.
-        /// </summary>
+        void HandleFlowAmountChanged(float normalized)
+        {
+            UpdateFlowUI();
+        }
+
+        void HandleFlowStateChanged(bool isActive)
+        {
+            UpdateFlowUI();
+            if (flowStatusText != null)
+            {
+                flowStatusText.text = isActive ? "IN THE FLOW!" : "";
+                flowStatusText.color = isActive ? Color.magenta : Color.white;
+            }
+        }
+
+        void UpdateFlowUI()
+        {
+            if (flowBar != null)
+                flowBar.fillAmount = flowSystem != null ? flowSystem.NormalizedFlow : 0f;
+            if (flowText != null && flowSystem != null)
+                flowText.text = $"FLOW: {flowSystem.FlowAmount:F0}/{flowSystem.maxFlow:F0}";
+        }
+
         void UpdateGrade()
         {
             if (gradeText == null) return;
 
-            ChartData chart = gameManager != null ? gameManager.chart : null;
-            int maxScore = chart != null ? CalculateMaxScore(chart) : 0;
-            float percentage = maxScore > 0 ? (float)score / maxScore : 0f;
+            int total = TotalNoteSlots;
+            float percentage = total > 0 ? (float)(playerPerfect + playerGood) / total : 0f;
             Grade grade = CalculateGrade(percentage);
+
+            Debug.Log($"[UIController] Perfect={playerPerfect}, Good={playerGood}, Total={TotalNoteSlots}, Pct={percentage*100f:F1}%, Grade={grade}");
 
             if (grade != currentGrade)
             {
@@ -152,7 +190,39 @@ namespace RhythmGame
             gradeText.color = GetGradeColor(grade);
         }
 
-        /// <summary>Tap note ăn 300 điểm; hold note ăn 300 (bấm đầu) + 100 (giữ xong).</summary>
+        public int TotalNoteSlots
+        {
+            get
+            {
+                int total = 0;
+                if (gameManager != null && gameManager.chart != null)
+                {
+                    foreach (var note in gameManager.chart.notes)
+                    {
+                        total += note.type == NoteType.Hold ? 2 : 1;
+                    }
+                }
+                return total;
+            }
+        }
+
+        public Grade CurrentGrade => currentGrade;
+
+        public int PlayerPerfect => playerPerfect;
+        public int PlayerGood => playerGood;
+        public int PlayerHitNotes => playerHitNotes;
+        public int PlayerBad => playerBad;
+        public int PlayerMiss => playerMiss;
+
+        public float PlayerHitRatio
+        {
+            get
+            {
+                int total = TotalNoteSlots;
+                return total > 0 ? (float)playerHitNotes / total : 0f;
+            }
+        }
+
         int CalculateMaxScore(ChartData chart)
         {
             int maxScore = 0;
@@ -171,8 +241,7 @@ namespace RhythmGame
             if (percentage >= thresholdB) return Grade.B;
             if (percentage >= thresholdC) return Grade.C;
             if (percentage >= thresholdD) return Grade.D;
-            if (percentage >= thresholdE) return Grade.E;
-            return Grade.F;
+            return Grade.E;
         }
 
         Color GetGradeColor(Grade grade)
@@ -199,19 +268,17 @@ namespace RhythmGame
                 int num = Mathf.CeilToInt(gameManager.CountdownRemaining);
                 countdownText.text = num.ToString();
 
-                // Setup gradient on first frame of countdown
                 if (!countdownText.enableVertexGradient)
                 {
                     countdownText.fontStyle = FontStyles.Bold;
                     countdownText.enableVertexGradient = true;
                     countdownText.colorGradient = new VertexGradient(
-                        new Color(0.2f, 0.8f, 1f),   // xanh cyan trên
                         new Color(0.2f, 0.8f, 1f),
-                        new Color(0.0f, 0.5f, 1f),   // xanh đậm dưới
+                        new Color(0.2f, 0.8f, 1f),
+                        new Color(0.0f, 0.5f, 1f),
                         new Color(0.0f, 0.5f, 1f));
                 }
 
-                // Pop animation when number changes
                 if (countdownPopOnChange && countdownText != null && num != lastCountdownNumber)
                 {
                     lastCountdownNumber = num;
@@ -220,7 +287,6 @@ namespace RhythmGame
             }
             else
             {
-                // Reset when not counting
                 lastCountdownNumber = -1;
                 countdownPopTimer = 999f;
                 if (countdownText != null)

@@ -78,6 +78,7 @@ public class MusicManager : MonoBehaviour
             audioSource.volume = _volume;
         }
         PlayerPrefs.SetFloat(PrefsMusicVolKey, _volume);
+        PlayerPrefs.Save();
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true)
@@ -138,5 +139,16 @@ public class MusicManager : MonoBehaviour
     public string GetSavedSongName()
     {
         return PlayerPrefs.GetString(SelectedSongKey, string.Empty);
+    }
+
+    /// <summary>
+    /// Dừng nhạc nền hiện tại.
+    /// </summary>
+    public void StopMusic()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 }

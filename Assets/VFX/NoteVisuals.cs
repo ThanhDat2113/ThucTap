@@ -158,6 +158,10 @@ namespace RhythmGame
             var go = new GameObject("HitBurst");
             go.transform.position = position;
             var ps = go.AddComponent<ParticleSystem>();
+            
+            // Ensure particle system is stopped before configuring
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            
             var main = ps.main;
             main.duration = 0.1f;
             main.loop = false;

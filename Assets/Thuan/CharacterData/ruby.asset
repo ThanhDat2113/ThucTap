@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bf39b5fc0cb1c42a8f9678bafa2515, type: 3}
+  m_Name: ruby
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  displayName: RUBY
+  title: THE BUNNY DIVA
+  description: 'A fiery idol with a sweet smile
+
+    and a sharper tongue.
+
+    Every
+    stage is her runway.'
+  tags:
+  - SINGER
+  - POP
+  - CHARM
+  quote: '"SMILE AND SLAY"'
+  vocal: 9
+  style: 8
+  power: 6
+  speed: 7
+  cardSprite: {fileID: 21300000, guid: 901d6c0cdbed3fa45a57cc6aaca5bf6e, type: 3}
+  fullArt: {fileID: 0}
+  posterSprite: {fileID: 21300000, guid: f1e090c9d5dae2940b00127bbdbd4207, type: 3}
+  avatar: {fileID: 21300000, guid: b3a8330b7f5ce8646bc46749ec15d980, type: 3}
+  gameplayModel: 1
+  previewClip: {fileID: 0}
+  unlocked: 1

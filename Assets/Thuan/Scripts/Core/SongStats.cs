@@ -22,9 +22,13 @@ public static class SongStats
         {
             PlayerPrefs.SetInt(Key(song, "best"), score);
             PlayerPrefs.SetInt(Key(song, "combo"), maxCombo);
+            Debug.Log($"[SongStats] New best score for {song.name}: {score}");
         }
         if (accuracy > GetBestAccuracy(song))
+        {
             PlayerPrefs.SetFloat(Key(song, "acc"), accuracy);
+            Debug.Log($"[SongStats] New best accuracy for {song.name}: {accuracy*100f:F1}%");
+        }
         PlayerPrefs.Save();
     }
 }

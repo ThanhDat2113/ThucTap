@@ -10,6 +10,7 @@ namespace RhythmGame
         public NoteSpawner spawner;
         public InputHandler input;
         public HealthSystem healthSystem;
+        public FlowSystem flowSystem;
 
         [Header("Timing window (giây)")]
         public float perfectWindow = 0.045f;
@@ -34,10 +35,11 @@ namespace RhythmGame
         public AudioClip holdCompleteSfx;
         public AudioSource audioSource;
 
-        public System.Action<Judgement, int, bool> OnJudged;
+        public System.Action<Judgement, int, bool, NoteOwner> OnJudged;
         public System.Action<int> OnLaneActivated;
 
         float songTime;
+        int _combo;
 
         void Start()
         {
@@ -77,9 +79,12 @@ namespace RhythmGame
                 {
                     n.MarkJudged();
                     n.PlayMissVisual();
-                    OnJudged?.Invoke(Judgement.Miss, 0, false);
+                    OnJudged?.Invoke(Judgement.Miss, 0, false, NoteOwner.Player);
                     PlaySfx(Judgement.Miss);
                     healthSystem?.ApplyJudgement(Judgement.Miss);
+
+                    _combo = 0;
+                    flowSystem?.OnMiss();
                 }
             }
         }
@@ -109,8 +114,11 @@ namespace RhythmGame
             else spawner.ReleaseNote(note);
 
             PlaySfx(judgement);
-            OnJudged?.Invoke(judgement, points, true);
+            OnJudged?.Invoke(judgement, points, true, note.Data.owner);
             healthSystem?.ApplyJudgement(judgement);
+
+            _combo++;
+            flowSystem?.OnNoteJudged(true, _combo);
         }
 
         void HandleRelease(int lane)
@@ -119,24 +127,22 @@ namespace RhythmGame
             NoteView holding = null;
             foreach (var n in spawner.ActiveNotes)
             {
-                if (n.Holding && n.Data.lane == lane) { holding = n; break; }
+                if (n.Holding && n.Data.lane == lane && n.Data.owner == NoteOwner.Player) { holding = n; break; }
             }
             if (holding == null) return;
 
             float tailTime = holding.TailTimeSeconds;
             float diff = songTime - tailTime;
 
-            // Released too early -> break hold, count as miss
             if (diff < -holdReleaseTolerance)
             {
                 holding.BreakHold();
-                OnJudged?.Invoke(Judgement.Miss, 0, false);
+                OnJudged?.Invoke(Judgement.Miss, 0, false, NoteOwner.Player);
                 PlaySfx(Judgement.Miss);
                 healthSystem?.ApplyJudgement(Judgement.Miss);
                 return;
             }
 
-            // Judge tail release timing
             Judgement tailJudgement;
             int tailPoints;
             if (diff <= holdTailPerfectWindow) { tailJudgement = Judgement.Perfect; tailPoints = 300; }
@@ -145,14 +151,14 @@ namespace RhythmGame
             else { tailJudgement = Judgement.Miss; tailPoints = 0; }
 
             holding.PlayHitEffect(tailJudgement, holding.transform.position);
-
-            // Release the note
             spawner.ReleaseNote(holding);
 
-            // Award hold complete bonus + tail judgement
             PlaySfx(tailJudgement);
-            OnJudged?.Invoke(tailJudgement, holdCompletePoints + tailPoints, tailJudgement != Judgement.Miss);
+            OnJudged?.Invoke(tailJudgement, holdCompletePoints + tailPoints, tailJudgement != Judgement.Miss, holding.Data.owner);
             healthSystem?.ApplyJudgement(tailJudgement);
+
+            _combo++;
+            flowSystem?.OnNoteJudged(tailJudgement != Judgement.Miss, _combo);
         }
 
         /// <summary>
@@ -168,7 +174,7 @@ namespace RhythmGame
                 if (!n.Holding || input.IsHeld(n.Data.lane)) continue;
 
                 n.BreakHold();
-                OnJudged?.Invoke(Judgement.Miss, 0, false);
+                OnJudged?.Invoke(Judgement.Miss, 0, false, NoteOwner.Player);
                 PlaySfx(Judgement.Miss);
                 healthSystem?.ApplyJudgement(Judgement.Miss);
             }
@@ -179,8 +185,56 @@ namespace RhythmGame
             n.PlayHitEffect(Judgement.HoldComplete, n.transform.position);
             spawner.ReleaseNote(n);
             PlaySfx(Judgement.HoldComplete);
-            OnJudged?.Invoke(Judgement.HoldComplete, holdCompletePoints, true);
+            OnJudged?.Invoke(Judgement.HoldComplete, holdCompletePoints, true, n.Data.owner);
             healthSystem?.ApplyJudgement(Judgement.HoldComplete);
+
+            _combo++;
+            flowSystem?.OnNoteJudged(true, _combo);
+        }
+
+        public void JudgeOpponentNote(NoteView note, Judgement judgement)
+        {
+            if (note == null || note.Judged) return;
+
+            note.MarkJudged();
+            int points = GetPointsForJudgement(judgement);
+            note.PlayHitEffect(judgement, note.transform.position);
+
+            if (note.IsHold)
+            {
+                note.BeginHold();
+            }
+            else
+            {
+                spawner.ReleaseNote(note);
+            }
+
+            PlaySfx(judgement);
+            OnJudged?.Invoke(judgement, points, true, note.Data.owner);
+        }
+
+        public void JudgeOpponentHoldRelease(NoteView note, Judgement tailJudgement)
+        {
+            if (note == null) return;
+
+            note.PlayHitEffect(tailJudgement, note.transform.position);
+            spawner.ReleaseNote(note);
+
+            int tailPoints = GetPointsForJudgement(tailJudgement);
+            PlaySfx(tailJudgement);
+            OnJudged?.Invoke(tailJudgement, holdCompletePoints + tailPoints, tailJudgement != Judgement.Miss, note.Data.owner);
+        }
+
+        int GetPointsForJudgement(Judgement j)
+        {
+            return j switch
+            {
+                Judgement.Perfect => 300,
+                Judgement.Good => 100,
+                Judgement.Bad => 50,
+                Judgement.HoldComplete => holdCompletePoints,
+                _ => 0
+            };
         }
 
         void PlaySfx(Judgement j)
@@ -195,6 +249,12 @@ namespace RhythmGame
                 _ => missSfx
             };
             if (clip != null) audioSource.PlayOneShot(clip);
+        }
+
+        public void ResetCombo()
+        {
+            _combo = 0;
+            flowSystem?.Reset();
         }
     }
 }

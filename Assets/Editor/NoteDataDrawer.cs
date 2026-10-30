@@ -5,7 +5,7 @@ namespace RhythmGame.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(ChartData))]
-    public class NoteDataDrawer : UnityEditor.Editor
+    public class ChartDataEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
@@ -21,6 +21,13 @@ namespace RhythmGame.Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("laneCount"));
             EditorGUILayout.PropertyField(offsetProp);
 
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Battle Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("opponentNoteRatio"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("opponentAccuracy"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("battleSplitMode"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("sectionLengthBeats"));
+
             var notesProp = serializedObject.FindProperty("notes");
 
             float bpm = bpmProp.floatValue;
@@ -35,11 +42,12 @@ namespace RhythmGame.Editor
             headerStyle.fontStyle = FontStyle.Bold;
 
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("Beat", headerStyle, GUILayout.Width(70));
-            GUILayout.Label("Lane", headerStyle, GUILayout.Width(50));
-            GUILayout.Label("Type", headerStyle, GUILayout.Width(60));
-            GUILayout.Label("Hold", headerStyle, GUILayout.Width(50));
-            GUILayout.Label("= sec", headerStyle, GUILayout.Width(70));
+            GUILayout.Label("Beat", headerStyle, GUILayout.Width(60));
+            GUILayout.Label("Lane", headerStyle, GUILayout.Width(45));
+            GUILayout.Label("Type", headerStyle, GUILayout.Width(55));
+            GUILayout.Label("Hold", headerStyle, GUILayout.Width(45));
+            GUILayout.Label("Owner", headerStyle, GUILayout.Width(60));
+            GUILayout.Label("= sec", headerStyle, GUILayout.Width(60));
             EditorGUILayout.EndHorizontal();
 
             var timeStyle = new GUIStyle(EditorStyles.label);
@@ -60,15 +68,17 @@ namespace RhythmGame.Editor
                 var laneProp = element.FindPropertyRelative("lane");
                 var typeProp = element.FindPropertyRelative("type");
                 var holdProp = element.FindPropertyRelative("holdBeats");
+                var ownerProp = element.FindPropertyRelative("owner");
 
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.PropertyField(beatProp, GUIContent.none, GUILayout.Width(70));
-                EditorGUILayout.PropertyField(laneProp, GUIContent.none, GUILayout.Width(50));
-                EditorGUILayout.PropertyField(typeProp, GUIContent.none, GUILayout.Width(60));
-                EditorGUILayout.PropertyField(holdProp, GUIContent.none, GUILayout.Width(50));
+                EditorGUILayout.PropertyField(beatProp, GUIContent.none, GUILayout.Width(60));
+                EditorGUILayout.PropertyField(laneProp, GUIContent.none, GUILayout.Width(45));
+                EditorGUILayout.PropertyField(typeProp, GUIContent.none, GUILayout.Width(55));
+                EditorGUILayout.PropertyField(holdProp, GUIContent.none, GUILayout.Width(45));
+                EditorGUILayout.PropertyField(ownerProp, GUIContent.none, GUILayout.Width(60));
 
                 float time = offset + beatProp.floatValue * secPerBeat;
-                GUILayout.Label(time.ToString("F3"), timeStyle, GUILayout.Width(70));
+                GUILayout.Label(time.ToString("F3"), timeStyle, GUILayout.Width(60));
 
                 if (GUILayout.Button("–", GUILayout.Width(20)))
                 {
@@ -82,6 +92,39 @@ namespace RhythmGame.Editor
             if (GUILayout.Button("Add Note"))
             {
                 notesProp.InsertArrayElementAtIndex(notesProp.arraySize);
+            }
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Generate Test Chart"))
+            {
+                ((ChartData)target).GenerateTestChart();
+                serializedObject.Update();
+            }
+
+            if (GUILayout.Button("Generate Battle Chart"))
+            {
+                ((ChartData)target).GenerateBattleChart();
+                serializedObject.Update();
+            }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Convert Existing Chart", EditorStyles.boldLabel);
+            if (GUILayout.Button("Convert to Battle (Half Split)"))
+            {
+                ((ChartData)target).ConvertToBattleHalfSplit();
+                serializedObject.Update();
+            }
+
+            if (GUILayout.Button("Convert to Battle (Alternating Sections)"))
+            {
+                ((ChartData)target).ConvertToBattleAlternating();
+                serializedObject.Update();
+            }
+
+            if (GUILayout.Button("Balance Note Count"))
+            {
+                ((ChartData)target).BalanceNoteCount();
+                serializedObject.Update();
             }
 
             serializedObject.ApplyModifiedProperties();

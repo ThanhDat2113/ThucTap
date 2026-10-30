@@ -1,0 +1,3471 @@
+fileFormatVersion: 2
+guid: c30b3cc694333d047a51c59715c58a64
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8471259773844907216
+    second: dj_null_dance_120_0
+  - first:
+      213: -5474765638348088011
+    second: dj_null_dance_120_1
+  - first:
+      213: -3559261254677385711
+    second: dj_null_dance_120_2
+  - first:
+      213: 4940977809582949954
+    second: dj_null_dance_120_3
+  - first:
+      213: 8186557973713251696
+    second: dj_null_dance_120_4
+  - first:
+      213: -4879983392740534480
+    second: dj_null_dance_120_5
+  - first:
+      213: -7546356211375461988
+    second: dj_null_dance_120_6
+  - first:
+      213: -131537694535224264
+    second: dj_null_dance_120_7
+  - first:
+      213: 7004175156107552552
+    second: dj_null_dance_120_8
+  - first:
+      213: -5913109382191776254
+    second: dj_null_dance_120_9
+  - first:
+      213: 6972307009921235005
+    second: dj_null_dance_120_10
+  - first:
+      213: 6455316919788196266
+    second: dj_null_dance_120_11
+  - first:
+      213: -1691751120772021185
+    second: dj_null_dance_120_12
+  - first:
+      213: 5839648206502261911
+    second: dj_null_dance_120_13
+  - first:
+      213: -687940430506951741
+    second: dj_null_dance_120_14
+  - first:
+      213: 3663989794470328597
+    second: dj_null_dance_120_15
+  - first:
+      213: 7266828888204167354
+    second: dj_null_dance_120_16
+  - first:
+      213: -5716418400048711981
+    second: dj_null_dance_120_17
+  - first:
+      213: -5550918663888716991
+    second: dj_null_dance_120_18
+  - first:
+      213: 5384705687807134201
+    second: dj_null_dance_120_19
+  - first:
+      213: 3272293684127409845
+    second: dj_null_dance_120_20
+  - first:
+      213: -7360606652451268986
+    second: dj_null_dance_120_21
+  - first:
+      213: -6603245983552686215
+    second: dj_null_dance_120_22
+  - first:
+      213: 8635055962463906254
+    second: dj_null_dance_120_23
+  - first:
+      213: -5776885427059747060
+    second: dj_null_dance_120_24
+  - first:
+      213: -7885268118244867661
+    second: dj_null_dance_120_25
+  - first:
+      213: -1829685903430123003
+    second: dj_null_dance_120_26
+  - first:
+      213: -5444634181556957587
+    second: dj_null_dance_120_27
+  - first:
+      213: 2689696968417394255
+    second: dj_null_dance_120_28
+  - first:
+      213: 4375307635041355087
+    second: dj_null_dance_120_29
+  - first:
+      213: 8674833858992403119
+    second: dj_null_dance_120_30
+  - first:
+      213: 1793654685449000914
+    second: dj_null_dance_120_31
+  - first:
+      213: -406613091686514172
+    second: dj_null_dance_120_32
+  - first:
+      213: 3665729705161002197
+    second: dj_null_dance_120_33
+  - first:
+      213: 123987531235567388
+    second: dj_null_dance_120_34
+  - first:
+      213: -1451281887557734145
+    second: dj_null_dance_120_35
+  - first:
+      213: 3051947587846215384
+    second: dj_null_dance_120_36
+  - first:
+      213: -1356356099487345216
+    second: dj_null_dance_120_37
+  - first:
+      213: 6286966447942074438
+    second: dj_null_dance_120_38
+  - first:
+      213: 609725707947411892
+    second: dj_null_dance_120_39
+  - first:
+      213: 4557625528062537874
+    second: dj_null_dance_120_40
+  - first:
+      213: 5282784640405473533
+    second: dj_null_dance_120_41
+  - first:
+      213: -4000424428144623739
+    second: dj_null_dance_120_42
+  - first:
+      213: 5105951599170161667
+    second: dj_null_dance_120_43
+  - first:
+      213: -8787714786336226122
+    second: dj_null_dance_120_44
+  - first:
+      213: -6323244944116945950
+    second: dj_null_dance_120_45
+  - first:
+      213: -3960773124741720815
+    second: dj_null_dance_120_46
+  - first:
+      213: -7529609074761472900
+    second: dj_null_dance_120_47
+  - first:
+      213: 8114306460096556058
+    second: dj_null_dance_120_48
+  - first:
+      213: -3825153876208301176
+    second: dj_null_dance_120_49
+  - first:
+      213: -9194444505842546145
+    second: dj_null_dance_120_50
+  - first:
+      213: 6825279713749564269
+    second: dj_null_dance_120_51
+  - first:
+      213: -2877536555881426330
+    second: dj_null_dance_120_52
+  - first:
+      213: 4828617274333632961
+    second: dj_null_dance_120_53
+  - first:
+      213: 7008404737502726930
+    second: dj_null_dance_120_54
+  - first:
+      213: 1859645753176518351
+    second: dj_null_dance_120_55
+  - first:
+      213: -6578561918047623875
+    second: dj_null_dance_120_56
+  - first:
+      213: 2184570086313406380
+    second: dj_null_dance_120_57
+  - first:
+      213: -6901426332422558133
+    second: dj_null_dance_120_58
+  - first:
+      213: 5651669604794161583
+    second: dj_null_dance_120_59
+  - first:
+      213: -3956375733638386387
+    second: dj_null_dance_120_60
+  - first:
+      213: -4914045686030554259
+    second: dj_null_dance_120_61
+  - first:
+      213: 2038959806863739297
+    second: dj_null_dance_120_62
+  - first:
+      213: 8610133361061646197
+    second: dj_null_dance_120_63
+  - first:
+      213: -3826802724119561275
+    second: dj_null_dance_120_64
+  - first:
+      213: 39748922174587169
+    second: dj_null_dance_120_65
+  - first:
+      213: 8500535573245072899
+    second: dj_null_dance_120_66
+  - first:
+      213: -3879527518357211980
+    second: dj_null_dance_120_67
+  - first:
+      213: -5105454233251477365
+    second: dj_null_dance_120_68
+  - first:
+      213: -5241199009035425331
+    second: dj_null_dance_120_69
+  - first:
+      213: 2268319115723038619
+    second: dj_null_dance_120_70
+  - first:
+      213: -1134761305831819059
+    second: dj_null_dance_120_71
+  - first:
+      213: -7259460531177416755
+    second: dj_null_dance_120_72
+  - first:
+      213: 7207612678440436366
+    second: dj_null_dance_120_73
+  - first:
+      213: -453514128330469397
+    second: dj_null_dance_120_74
+  - first:
+      213: -1920672759319538314
+    second: dj_null_dance_120_75
+  - first:
+      213: -7181904912513421321
+    second: dj_null_dance_120_76
+  - first:
+      213: 860202786992513953
+    second: dj_null_dance_120_77
+  - first:
+      213: -2097536473136813444
+    second: dj_null_dance_120_78
+  - first:
+      213: -6677242047730184597
+    second: dj_null_dance_120_79
+  - first:
+      213: 277330522761373186
+    second: dj_null_dance_120_80
+  - first:
+      213: -655628878160747165
+    second: dj_null_dance_120_81
+  - first:
+      213: 7004626274267951831
+    second: dj_null_dance_120_82
+  - first:
+      213: 5878802998983714573
+    second: dj_null_dance_120_83
+  - first:
+      213: 5649361458359774557
+    second: dj_null_dance_120_84
+  - first:
+      213: 373983560473034156
+    second: dj_null_dance_120_85
+  - first:
+      213: 7975414091918291652
+    second: dj_null_dance_120_86
+  - first:
+      213: 4212736185907808001
+    second: dj_null_dance_120_87
+  - first:
+      213: 5729174112804182951
+    second: dj_null_dance_120_88
+  - first:
+      213: -807920263382120160
+    second: dj_null_dance_120_89
+  - first:
+      213: 5918278813703334409
+    second: dj_null_dance_120_90
+  - first:
+      213: 7104238596610849303
+    second: dj_null_dance_120_91
+  - first:
+      213: -1846247889428439658
+    second: dj_null_dance_120_92
+  - first:
+      213: 7161867117721459788
+    second: dj_null_dance_120_93
+  - first:
+      213: -5711333699870033164
+    second: dj_null_dance_120_94
+  - first:
+      213: 9219389344636496888
+    second: dj_null_dance_120_95
+  - first:
+      213: 3979987192883955364
+    second: dj_null_dance_120_96
+  - first:
+      213: 8533371854462747748
+    second: dj_null_dance_120_97
+  - first:
+      213: 5501072026324941936
+    second: dj_null_dance_120_98
+  - first:
+      213: 5412266031837165612
+    second: dj_null_dance_120_99
+  - first:
+      213: 7603197415171151186
+    second: dj_null_dance_120_100
+  - first:
+      213: -1653913076960759650
+    second: dj_null_dance_120_101
+  - first:
+      213: -6928872167121071715
+    second: dj_null_dance_120_102
+  - first:
+      213: 920642044233409975
+    second: dj_null_dance_120_103
+  - first:
+      213: -8528753353749010791
+    second: dj_null_dance_120_104
+  - first:
+      213: 909310118677988988
+    second: dj_null_dance_120_105
+  - first:
+      213: -2826833402636166974
+    second: dj_null_dance_120_106
+  - first:
+      213: 1953819645715558760
+    second: dj_null_dance_120_107
+  - first:
+      213: -3904018271544664380
+    second: dj_null_dance_120_108
+  - first:
+      213: 7589194692974410182
+    second: dj_null_dance_120_109
+  - first:
+      213: 6715086238488835347
+    second: dj_null_dance_120_110
+  - first:
+      213: 5915045237215919773
+    second: dj_null_dance_120_111
+  - first:
+      213: 6984588875793471819
+    second: dj_null_dance_120_112
+  - first:
+      213: 3957058539770141503
+    second: dj_null_dance_120_113
+  - first:
+      213: -3347169126690260929
+    second: dj_null_dance_120_114
+  - first:
+      213: -6079458502161118359
+    second: dj_null_dance_120_115
+  - first:
+      213: 2943684894312709688
+    second: dj_null_dance_120_116
+  - first:
+      213: -7066109313934726325
+    second: dj_null_dance_120_117
+  - first:
+      213: 3328854914928202568
+    second: dj_null_dance_120_118
+  - first:
+      213: -8468021451261269739
+    second: dj_null_dance_120_119
+  - first:
+      213: 7882854676525673898
+    second: dj_null_dance_120_120
+  - first:
+      213: -508954613412344056
+    second: dj_null_dance_120_121
+  - first:
+      213: -6384991751440551085
+    second: dj_null_dance_120_122
+  - first:
+      213: -2286069058220659097
+    second: dj_null_dance_120_123
+  - first:
+      213: 7186039384961891165
+    second: dj_null_dance_120_124
+  - first:
+      213: -8818661304636727685
+    second: dj_null_dance_120_125
+  - first:
+      213: 7555382444111441180
+    second: dj_null_dance_120_126
+  - first:
+      213: 9045477369311608725
+    second: dj_null_dance_120_127
+  - first:
+      213: -8508659219779921831
+    second: dj_null_dance_120_128
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dj_null_dance_120_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 5303
+        width: 291
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b1beb4e1a007a80800000000000000
+      internalID: -8471259773844907216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_1
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 5301
+        width: 326
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d5fb198a9b504b0800000000000000
+      internalID: -5474765638348088011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_2
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 5301
+        width: 324
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11ea4242fb6fa9ec0800000000000000
+      internalID: -3559261254677385711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_3
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 5300
+        width: 333
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 246874fa321e19440800000000000000
+      internalID: 4940977809582949954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_4
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 5302
+        width: 347
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07de1545a1f7c9170800000000000000
+      internalID: 8186557973713251696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_5
+      rect:
+        serializedVersion: 2
+        x: 1938
+        y: 5298
+        width: 348
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03715e5a5f0d64cb0800000000000000
+      internalID: -4879983392740534480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_6
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 5301
+        width: 322
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9927601205f54790800000000000000
+      internalID: -7546356211375461988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_7
+      rect:
+        serializedVersion: 2
+        x: 2774
+        y: 5299
+        width: 281
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83477aae92fac2ef0800000000000000
+      internalID: -131537694535224264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_8
+      rect:
+        serializedVersion: 2
+        x: 3107
+        y: 5300
+        width: 328
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827286cd134d33160800000000000000
+      internalID: 7004175156107552552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_9
+      rect:
+        serializedVersion: 2
+        x: 3492
+        y: 5298
+        width: 330
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20efd6c885a60fda0800000000000000
+      internalID: -5913109382191776254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_10
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 4818
+        width: 336
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d38325fd84c92c060800000000000000
+      internalID: 6972307009921235005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_11
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 4818
+        width: 346
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa15b8c6984e59950800000000000000
+      internalID: 6455316919788196266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_12
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 4822
+        width: 330
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f34c306a151b588e0800000000000000
+      internalID: -1691751120772021185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_13
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 4819
+        width: 334
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79470d1aa199a0150800000000000000
+      internalID: 5839648206502261911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_14
+      rect:
+        serializedVersion: 2
+        x: 1577
+        y: 4818
+        width: 326
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cbf005c2d1f376f0800000000000000
+      internalID: -687940430506951741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_15
+      rect:
+        serializedVersion: 2
+        x: 1971
+        y: 4818
+        width: 315
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5197f003e4b19d230800000000000000
+      internalID: 3663989794470328597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_16
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 4822
+        width: 268
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab8c4fc5f56f8d460800000000000000
+      internalID: 7266828888204167354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_17
+      rect:
+        serializedVersion: 2
+        x: 2742
+        y: 4819
+        width: 290
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d6f69580c33ba0b0800000000000000
+      internalID: -5716418400048711981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_18
+      rect:
+        serializedVersion: 2
+        x: 3108
+        y: 4818
+        width: 316
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14bb3dd92ec27f2b0800000000000000
+      internalID: -5550918663888716991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_19
+      rect:
+        serializedVersion: 2
+        x: 3488
+        y: 4819
+        width: 333
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f905cd2b415aba40800000000000000
+      internalID: 5384705687807134201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_20
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 4343
+        width: 340
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b62b23b4c5896d20800000000000000
+      internalID: 3272293684127409845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_21
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 4343
+        width: 340
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 686d34d6f3fd9d990800000000000000
+      internalID: -7360606652451268986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_22
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 4376
+        width: 30
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97731d173ce8c54a0800000000000000
+      internalID: -6603245983552686215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_23
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 4343
+        width: 327
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec9a74ab5a1e5d770800000000000000
+      internalID: 8635055962463906254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_24
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 4343
+        width: 329
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0719f3bf4164dfa0800000000000000
+      internalID: -5776885427059747060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_25
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 4342
+        width: 344
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b14d45ac66e19290800000000000000
+      internalID: -7885268118244867661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_26
+      rect:
+        serializedVersion: 2
+        x: 1947
+        y: 4341
+        width: 295
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 502028b6d56ab96e0800000000000000
+      internalID: -1829685903430123003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_27
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 4338
+        width: 327
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e095c0f06c074b0800000000000000
+      internalID: -5444634181556957587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_28
+      rect:
+        serializedVersion: 2
+        x: 2771
+        y: 4340
+        width: 284
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4eb6f36429b35520800000000000000
+      internalID: 2689696968417394255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_29
+      rect:
+        serializedVersion: 2
+        x: 3093
+        y: 4342
+        width: 346
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45c1b9dc1738bc30800000000000000
+      internalID: 4375307635041355087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_30
+      rect:
+        serializedVersion: 2
+        x: 3474
+        y: 4338
+        width: 337
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa2f5cafe63336870800000000000000
+      internalID: 8674833858992403119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_31
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 3864
+        width: 316
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d717e7ee6754e810800000000000000
+      internalID: 1793654685449000914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_32
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 3863
+        width: 296
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40280052c8b6b5af0800000000000000
+      internalID: -406613091686514172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_33
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 3861
+        width: 314
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc08b6beb94fd230800000000000000
+      internalID: 3665729705161002197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_34
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 3858
+        width: 323
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c17afd3b00e78b100800000000000000
+      internalID: 123987531235567388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_35
+      rect:
+        serializedVersion: 2
+        x: 1576
+        y: 3858
+        width: 327
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff0b92fffc20cdbe0800000000000000
+      internalID: -1451281887557734145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_36
+      rect:
+        serializedVersion: 2
+        x: 1970
+        y: 3861
+        width: 316
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d61fa64922ba5a20800000000000000
+      internalID: 3051947587846215384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_37
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 3858
+        width: 346
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c55f1550514d2de0800000000000000
+      internalID: -1356356099487345216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_38
+      rect:
+        serializedVersion: 2
+        x: 2708
+        y: 3861
+        width: 342
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6400364bcaacf3750800000000000000
+      internalID: 6286966447942074438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_39
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 3862
+        width: 344
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b901a80d4e267800800000000000000
+      internalID: 609725707947411892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_40
+      rect:
+        serializedVersion: 2
+        x: 3473
+        y: 3865
+        width: 11
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2907b6b3540ff3f30800000000000000
+      internalID: 4557625528062537874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_41
+      rect:
+        serializedVersion: 2
+        x: 3492
+        y: 3858
+        width: 329
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df8024c14a8305940800000000000000
+      internalID: 5282784640405473533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_42
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 3378
+        width: 317
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58ff4a18d23ab78c0800000000000000
+      internalID: -4000424428144623739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_43
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 3625
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30c00ec4debfbd640800000000000000
+      internalID: 5105951599170161667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_44
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 3380
+        width: 347
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b44bfc06f3cb0680800000000000000
+      internalID: -8787714786336226122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_45
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 3380
+        width: 328
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ebef1ea9325f38a0800000000000000
+      internalID: -6323244944116945950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_46
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 3382
+        width: 345
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1151bdff3d18809c0800000000000000
+      internalID: -3960773124741720815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_47
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 3378
+        width: 341
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c74e849a074718790800000000000000
+      internalID: -7529609074761472900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_48
+      rect:
+        serializedVersion: 2
+        x: 1948
+        y: 3378
+        width: 324
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1c66b8ebbecb9070800000000000000
+      internalID: 8114306460096556058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_49
+      rect:
+        serializedVersion: 2
+        x: 2321
+        y: 3384
+        width: 345
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88b456de0d25aeac0800000000000000
+      internalID: -3825153876208301176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_50
+      rect:
+        serializedVersion: 2
+        x: 2705
+        y: 3378
+        width: 347
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1a863aaf65c66080800000000000000
+      internalID: -9194444505842546145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_51
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 3379
+        width: 348
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bf8bedcb348be50800000000000000
+      internalID: 6825279713749564269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_52
+      rect:
+        serializedVersion: 2
+        x: 3479
+        y: 3379
+        width: 344
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6629c7e8fbfe018d0800000000000000
+      internalID: -2877536555881426330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_53
+      rect:
+        serializedVersion: 2
+        x: 2657
+        y: 3385
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c998f0f3d1b20340800000000000000
+      internalID: 4828617274333632961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_54
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 2901
+        width: 323
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21bc3050afad24160800000000000000
+      internalID: 7008404737502726930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_55
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 2900
+        width: 295
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fce662ea5f9cec910800000000000000
+      internalID: 1859645753176518351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_56
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 2899
+        width: 286
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d35ebdd4ac044b4a0800000000000000
+      internalID: -6578561918047623875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_57
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 2901
+        width: 284
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cafa7ad4be6215e10800000000000000
+      internalID: 2184570086313406380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_58
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 2902
+        width: 292
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e2d64e0553930a0800000000000000
+      internalID: -6901426332422558133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_59
+      rect:
+        serializedVersion: 2
+        x: 1992
+        y: 2901
+        width: 295
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa9d0adcf83ce6e40800000000000000
+      internalID: 5651669604794161583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_60
+      rect:
+        serializedVersion: 2
+        x: 2352
+        y: 2899
+        width: 300
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d22866b312819c0800000000000000
+      internalID: -3956375733638386387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_61
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 2908
+        width: 342
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bab1afb7dcdcbb0800000000000000
+      internalID: -4914045686030554259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_62
+      rect:
+        serializedVersion: 2
+        x: 3090
+        y: 2901
+        width: 346
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a989673427db4c10800000000000000
+      internalID: 2038959806863739297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_63
+      rect:
+        serializedVersion: 2
+        x: 3491
+        y: 2901
+        width: 330
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57fc1d66ca65d7770800000000000000
+      internalID: 8610133361061646197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_64
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 2419
+        width: 331
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cb3b5b923774eac0800000000000000
+      internalID: -3826802724119561275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_65
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 2420
+        width: 337
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 121cb622f673d8000800000000000000
+      internalID: 39748922174587169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_66
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 2423
+        width: 347
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30618dbe018f7f570800000000000000
+      internalID: 8500535573245072899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_67
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 2421
+        width: 316
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b437f3d646292ac0800000000000000
+      internalID: -3879527518357211980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_68
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 2419
+        width: 345
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b88080abc68c529b0800000000000000
+      internalID: -5105454233251477365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_69
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 2421
+        width: 343
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc9605535458347b0800000000000000
+      internalID: -5241199009035425331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_70
+      rect:
+        serializedVersion: 2
+        x: 2354
+        y: 2422
+        width: 317
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9f56e9b730ba7f10800000000000000
+      internalID: 2268319115723038619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_71
+      rect:
+        serializedVersion: 2
+        x: 2736
+        y: 2422
+        width: 319
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc83905ca948040f0800000000000000
+      internalID: -1134761305831819059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_72
+      rect:
+        serializedVersion: 2
+        x: 3090
+        y: 2421
+        width: 344
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc79332fb17314b90800000000000000
+      internalID: -7259460531177416755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_73
+      rect:
+        serializedVersion: 2
+        x: 3482
+        y: 2425
+        width: 341
+        height: 309
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e824b012b85960460800000000000000
+      internalID: 7207612678440436366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_74
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1948
+        width: 10
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: befcd389d4bc4b9f0800000000000000
+      internalID: -453514128330469397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_75
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 1943
+        width: 337
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6755df23d466855e0800000000000000
+      internalID: -1920672759319538314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_76
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 1941
+        width: 320
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ff210f888fb45c90800000000000000
+      internalID: -7181904912513421321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_77
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1942
+        width: 322
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a36d7190ed00fb00800000000000000
+      internalID: 860202786992513953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_78
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 1941
+        width: 345
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a214fd0bd04e2e0800000000000000
+      internalID: -2097536473136813444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_79
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 1940
+        width: 338
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6e8db13cbba553a0800000000000000
+      internalID: -6677242047730184597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_80
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 1940
+        width: 336
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 206a09e14a649d300800000000000000
+      internalID: 277330522761373186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_81
+      rect:
+        serializedVersion: 2
+        x: 2321
+        y: 1938
+        width: 348
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365adbc420db6e6f0800000000000000
+      internalID: -655628878160747165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_82
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 1941
+        width: 344
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d2fb1efb7e653160800000000000000
+      internalID: 7004626274267951831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_83
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 1941
+        width: 346
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d07ecea2e24b59150800000000000000
+      internalID: 5878802998983714573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_84
+      rect:
+        serializedVersion: 2
+        x: 3476
+        y: 1941
+        width: 342
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d21559050966e40800000000000000
+      internalID: 5649361458359774557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_85
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1464
+        width: 344
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cadb4d91118a03500800000000000000
+      internalID: 373983560473034156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_86
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 1463
+        width: 348
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c23f6d6cdc5eae60800000000000000
+      internalID: 7975414091918291652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_87
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 1458
+        width: 328
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1070875bd35a67a30800000000000000
+      internalID: 4212736185907808001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_88
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1458
+        width: 313
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ab9e0a408d128f40800000000000000
+      internalID: 5729174112804182951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_89
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 1460
+        width: 336
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029c44e0dc0b9c4f0800000000000000
+      internalID: -807920263382120160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_90
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 1461
+        width: 343
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ae1848933f12250800000000000000
+      internalID: 5918278813703334409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_91
+      rect:
+        serializedVersion: 2
+        x: 2321
+        y: 1614
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71afb9e1d53579260800000000000000
+      internalID: 7104238596610849303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_92
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 1461
+        width: 325
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69d9d4f835fc066e0800000000000000
+      internalID: -1846247889428439658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_93
+      rect:
+        serializedVersion: 2
+        x: 2710
+        y: 1461
+        width: 341
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4c9658c230146360800000000000000
+      internalID: 7161867117721459788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_94
+      rect:
+        serializedVersion: 2
+        x: 3109
+        y: 1460
+        width: 329
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fa778982444db0b0800000000000000
+      internalID: -5711333699870033164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_95
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 1461
+        width: 348
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb641533c9d1ff70800000000000000
+      internalID: 9219389344636496888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_96
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 980
+        width: 330
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a6c37ad341cb3730800000000000000
+      internalID: 3979987192883955364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_97
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 979
+        width: 323
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46481996d70ac6670800000000000000
+      internalID: 8533371854462747748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_98
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 980
+        width: 313
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07cbfecacdbb75c40800000000000000
+      internalID: 5501072026324941936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_99
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 979
+        width: 320
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c283191d74b3c1b40800000000000000
+      internalID: 5412266031837165612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_100
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 979
+        width: 315
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 255d17004cbf38960800000000000000
+      internalID: 7603197415171151186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_101
+      rect:
+        serializedVersion: 2
+        x: 1987
+        y: 978
+        width: 298
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e90716eb1de1c09e0800000000000000
+      internalID: -1653913076960759650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_102
+      rect:
+        serializedVersion: 2
+        x: 2357
+        y: 978
+        width: 287
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9158a88973b7df90800000000000000
+      internalID: -6928872167121071715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_103
+      rect:
+        serializedVersion: 2
+        x: 2706
+        y: 979
+        width: 348
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b562dbbf07c6cc00800000000000000
+      internalID: 920642044233409975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_104
+      rect:
+        serializedVersion: 2
+        x: 3104
+        y: 979
+        width: 334
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9966ed41308c3a980800000000000000
+      internalID: -8528753353749010791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_105
+      rect:
+        serializedVersion: 2
+        x: 3474
+        y: 981
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7648763cb48e9c00800000000000000
+      internalID: 909310118677988988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_106
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 501
+        width: 245
+        height: 439
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c899ac5ff115c8d0800000000000000
+      internalID: -2826833402636166974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_107
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 500
+        width: 306
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8613e02bd9c5d1b10800000000000000
+      internalID: 1953819645715558760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_108
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 501
+        width: 307
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ce12fff01422d9c0800000000000000
+      internalID: -3904018271544664380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_109
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 500
+        width: 289
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c9f40e2d5c325960800000000000000
+      internalID: 7589194692974410182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_110
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 696
+        width: 51
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 315bd391b57c03d50800000000000000
+      internalID: 6715086238488835347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_111
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 498
+        width: 254
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9efe92dd46761250800000000000000
+      internalID: 5915045237215919773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_112
+      rect:
+        serializedVersion: 2
+        x: 1959
+        y: 498
+        width: 317
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4990db939e3ee060800000000000000
+      internalID: 6984588875793471819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_113
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 501
+        width: 299
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3bdc6ac6cb4ae630800000000000000
+      internalID: 3957058539770141503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_114
+      rect:
+        serializedVersion: 2
+        x: 2744
+        y: 498
+        width: 297
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f38f870d9677c81d0800000000000000
+      internalID: -3347169126690260929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_115
+      rect:
+        serializedVersion: 2
+        x: 3121
+        y: 502
+        width: 306
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96b45ffd3bc61aba0800000000000000
+      internalID: -6079458502161118359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_116
+      rect:
+        serializedVersion: 2
+        x: 3477
+        y: 500
+        width: 346
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83e3138a0d11ad820800000000000000
+      internalID: 2943684894312709688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_117
+      rect:
+        serializedVersion: 2
+        x: 1598
+        y: 638
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b67de440320fd90800000000000000
+      internalID: -7066109313934726325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_118
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 582
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 843db1978e7723e20800000000000000
+      internalID: 3328854914928202568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_119
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 20
+        width: 322
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5192f270b5b8b7a80800000000000000
+      internalID: -8468021451261269739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_120
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 20
+        width: 288
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aade65a2096856d60800000000000000
+      internalID: 7882854676525673898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_121
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 21
+        width: 302
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80fc2c4c974dfe8f0800000000000000
+      internalID: -508954613412344056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_122
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 25
+        width: 314
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3533699c4d3f367a0800000000000000
+      internalID: -6384991751440551085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_123
+      rect:
+        serializedVersion: 2
+        x: 1578
+        y: 18
+        width: 324
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76eeebcbd404640e0800000000000000
+      internalID: -2286069058220659097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_124
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 24
+        width: 299
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5bbe925fb0f9b360800000000000000
+      internalID: 7186039384961891165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_125
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 21
+        width: 301
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7e15a64442dd9580800000000000000
+      internalID: -8818661304636727685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_126
+      rect:
+        serializedVersion: 2
+        x: 2717
+        y: 23
+        width: 331
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1d2c738d4c1ad860800000000000000
+      internalID: 7555382444111441180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_127
+      rect:
+        serializedVersion: 2
+        x: 3121
+        y: 19
+        width: 303
+        height: 344
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f37ad0ebdf78d70800000000000000
+      internalID: 9045477369311608725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dj_null_dance_120_128
+      rect:
+        serializedVersion: 2
+        x: 3509
+        y: 19
+        width: 305
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9585a2a358b2be980800000000000000
+      internalID: -8508659219779921831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dj_null_dance_120_0: -8471259773844907216
+      dj_null_dance_120_1: -5474765638348088011
+      dj_null_dance_120_10: 6972307009921235005
+      dj_null_dance_120_100: 7603197415171151186
+      dj_null_dance_120_101: -1653913076960759650
+      dj_null_dance_120_102: -6928872167121071715
+      dj_null_dance_120_103: 920642044233409975
+      dj_null_dance_120_104: -8528753353749010791
+      dj_null_dance_120_105: 909310118677988988
+      dj_null_dance_120_106: -2826833402636166974
+      dj_null_dance_120_107: 1953819645715558760
+      dj_null_dance_120_108: -3904018271544664380
+      dj_null_dance_120_109: 7589194692974410182
+      dj_null_dance_120_11: 6455316919788196266
+      dj_null_dance_120_110: 6715086238488835347
+      dj_null_dance_120_111: 5915045237215919773
+      dj_null_dance_120_112: 6984588875793471819
+      dj_null_dance_120_113: 3957058539770141503
+      dj_null_dance_120_114: -3347169126690260929
+      dj_null_dance_120_115: -6079458502161118359
+      dj_null_dance_120_116: 2943684894312709688
+      dj_null_dance_120_117: -7066109313934726325
+      dj_null_dance_120_118: 3328854914928202568
+      dj_null_dance_120_119: -8468021451261269739
+      dj_null_dance_120_12: -1691751120772021185
+      dj_null_dance_120_120: 7882854676525673898
+      dj_null_dance_120_121: -508954613412344056
+      dj_null_dance_120_122: -6384991751440551085
+      dj_null_dance_120_123: -2286069058220659097
+      dj_null_dance_120_124: 7186039384961891165
+      dj_null_dance_120_125: -8818661304636727685
+      dj_null_dance_120_126: 7555382444111441180
+      dj_null_dance_120_127: 9045477369311608725
+      dj_null_dance_120_128: -8508659219779921831
+      dj_null_dance_120_13: 5839648206502261911
+      dj_null_dance_120_14: -687940430506951741
+      dj_null_dance_120_15: 3663989794470328597
+      dj_null_dance_120_16: 7266828888204167354
+      dj_null_dance_120_17: -5716418400048711981
+      dj_null_dance_120_18: -5550918663888716991
+      dj_null_dance_120_19: 5384705687807134201
+      dj_null_dance_120_2: -3559261254677385711
+      dj_null_dance_120_20: 3272293684127409845
+      dj_null_dance_120_21: -7360606652451268986
+      dj_null_dance_120_22: -6603245983552686215
+      dj_null_dance_120_23: 8635055962463906254
+      dj_null_dance_120_24: -5776885427059747060
+      dj_null_dance_120_25: -7885268118244867661
+      dj_null_dance_120_26: -1829685903430123003
+      dj_null_dance_120_27: -5444634181556957587
+      dj_null_dance_120_28: 2689696968417394255
+      dj_null_dance_120_29: 4375307635041355087
+      dj_null_dance_120_3: 4940977809582949954
+      dj_null_dance_120_30: 8674833858992403119
+      dj_null_dance_120_31: 1793654685449000914
+      dj_null_dance_120_32: -406613091686514172
+      dj_null_dance_120_33: 3665729705161002197
+      dj_null_dance_120_34: 123987531235567388
+      dj_null_dance_120_35: -1451281887557734145
+      dj_null_dance_120_36: 3051947587846215384
+      dj_null_dance_120_37: -1356356099487345216
+      dj_null_dance_120_38: 6286966447942074438
+      dj_null_dance_120_39: 609725707947411892
+      dj_null_dance_120_4: 8186557973713251696
+      dj_null_dance_120_40: 4557625528062537874
+      dj_null_dance_120_41: 5282784640405473533
+      dj_null_dance_120_42: -4000424428144623739
+      dj_null_dance_120_43: 5105951599170161667
+      dj_null_dance_120_44: -8787714786336226122
+      dj_null_dance_120_45: -6323244944116945950
+      dj_null_dance_120_46: -3960773124741720815
+      dj_null_dance_120_47: -7529609074761472900
+      dj_null_dance_120_48: 8114306460096556058
+      dj_null_dance_120_49: -3825153876208301176
+      dj_null_dance_120_5: -4879983392740534480
+      dj_null_dance_120_50: -9194444505842546145
+      dj_null_dance_120_51: 6825279713749564269
+      dj_null_dance_120_52: -2877536555881426330
+      dj_null_dance_120_53: 4828617274333632961
+      dj_null_dance_120_54: 7008404737502726930
+      dj_null_dance_120_55: 1859645753176518351
+      dj_null_dance_120_56: -6578561918047623875
+      dj_null_dance_120_57: 2184570086313406380
+      dj_null_dance_120_58: -6901426332422558133
+      dj_null_dance_120_59: 5651669604794161583
+      dj_null_dance_120_6: -7546356211375461988
+      dj_null_dance_120_60: -3956375733638386387
+      dj_null_dance_120_61: -4914045686030554259
+      dj_null_dance_120_62: 2038959806863739297
+      dj_null_dance_120_63: 8610133361061646197
+      dj_null_dance_120_64: -3826802724119561275
+      dj_null_dance_120_65: 39748922174587169
+      dj_null_dance_120_66: 8500535573245072899
+      dj_null_dance_120_67: -3879527518357211980
+      dj_null_dance_120_68: -5105454233251477365
+      dj_null_dance_120_69: -5241199009035425331
+      dj_null_dance_120_7: -131537694535224264
+      dj_null_dance_120_70: 2268319115723038619
+      dj_null_dance_120_71: -1134761305831819059
+      dj_null_dance_120_72: -7259460531177416755
+      dj_null_dance_120_73: 7207612678440436366
+      dj_null_dance_120_74: -453514128330469397
+      dj_null_dance_120_75: -1920672759319538314
+      dj_null_dance_120_76: -7181904912513421321
+      dj_null_dance_120_77: 860202786992513953
+      dj_null_dance_120_78: -2097536473136813444
+      dj_null_dance_120_79: -6677242047730184597
+      dj_null_dance_120_8: 7004175156107552552
+      dj_null_dance_120_80: 277330522761373186
+      dj_null_dance_120_81: -655628878160747165
+      dj_null_dance_120_82: 7004626274267951831
+      dj_null_dance_120_83: 5878802998983714573
+      dj_null_dance_120_84: 5649361458359774557
+      dj_null_dance_120_85: 373983560473034156
+      dj_null_dance_120_86: 7975414091918291652
+      dj_null_dance_120_87: 4212736185907808001
+      dj_null_dance_120_88: 5729174112804182951
+      dj_null_dance_120_89: -807920263382120160
+      dj_null_dance_120_9: -5913109382191776254
+      dj_null_dance_120_90: 5918278813703334409
+      dj_null_dance_120_91: 7104238596610849303
+      dj_null_dance_120_92: -1846247889428439658
+      dj_null_dance_120_93: 7161867117721459788
+      dj_null_dance_120_94: -5711333699870033164
+      dj_null_dance_120_95: 9219389344636496888
+      dj_null_dance_120_96: 3979987192883955364
+      dj_null_dance_120_97: 8533371854462747748
+      dj_null_dance_120_98: 5501072026324941936
+      dj_null_dance_120_99: 5412266031837165612
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
