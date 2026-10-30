@@ -33,5 +33,6 @@ MonoBehaviour:
   fullArt: {fileID: 0}
   posterSprite: {fileID: 21300000, guid: e038eed6aeeee8c48a8bdf07cabbe10b, type: 3}
   avatar: {fileID: 21300000, guid: 37a1ab9f490762b4bbacdbe4567ed0f5, type: 3}
+  gameplayModel: 0
   previewClip: {fileID: 0}
   unlocked: 1

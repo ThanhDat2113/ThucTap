@@ -24,6 +24,9 @@ public class StoryWeekData : ScriptableObject
     public Sprite cardSelected;
     public Sprite detailArt;
 
+    [Header("Doi thu tren san khau: 0 = Graffiti King, 1 = DJ Null")]
+    public int opponent;
+
     [Header("Bai hat")]
     public StoryTrack[] tracks = new StoryTrack[3];
 

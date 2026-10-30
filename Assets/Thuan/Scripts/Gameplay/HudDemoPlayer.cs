@@ -19,6 +19,15 @@ public class HudDemoPlayer : MonoBehaviour
     [SerializeField] private float[] noteRotations = { 0f, 90f, -90f, 180f };
     [SerializeField] private Vector2 noteSize = new Vector2(150f, 128f);
 
+    [Header("Not giu (not dai)")]
+    [SerializeField] private Sprite holdTailSprite;
+    [SerializeField] private Color[] laneColors = { new Color(0.76f, 0.24f, 1f), new Color(0.13f, 0.67f, 1f), new Color(0.16f, 0.9f, 0.4f), new Color(1f, 0.23f, 0.36f) };
+    [SerializeField] private float holdTailWidth = 64f;
+    [Tooltip("Ty le not giu theo do kho: Easy / Normal / Hard")]
+    [SerializeField] private Vector3 holdChance = new Vector3(0.12f, 0.18f, 0.22f);
+    [Tooltip("Nha phim som hon cuoi duoi bao nhieu giay thi van tinh la giu du")]
+    [SerializeField] private float releaseGrace = 0.12f;
+
     [Header("Bai hat")]
     [SerializeField] private SongData fallbackSong;
     [SerializeField] private float fallbackLength = 90f;
@@ -38,17 +47,34 @@ public class HudDemoPlayer : MonoBehaviour
     [SerializeField] private float perfectHeal = 0.02f;
     [SerializeField] private float opponentDamage = 0.012f;
 
-    private class Note { public float time; public int lane; public RectTransform rt; public Image img; public bool done; }
+    private class Note
+    {
+        public float time, duration;
+        public int lane;
+        public RectTransform rt;
+        public Image img;
+        public Image tail;
+        public bool done;      // dau not da xu ly (trung hoac truot)
+        public bool holding;   // dang giu
+        public bool broken;    // truot / nha som -> mo dan
+        public float tickTimer;
+        public bool IsHold { get { return duration > 0f; } }
+        public float End { get { return time + duration; } }
+    }
 
     private readonly List<Note> chart = new List<Note>();
     private readonly List<Note> active = new List<Note>();
     private readonly Stack<Image> pool = new Stack<Image>();
+    private readonly Stack<Image> tailPool = new Stack<Image>();
+    private RectTransform tailLayer;
+    private readonly float[] laneBusyUntil = new float[4];
     private int nextIndex;
     private AudioSource audioSource;
     private float clock, songLength;
     private bool started, finished;
     private int score, combo, maxCombo;
     private int judged;
+    private int perfectCount, goodCount, badCount, missCount;
     private float accuracyPoints;
     private float playerHp = 1f, opponentHp = 1f;
     private readonly bool[] held = new bool[4];
@@ -58,6 +84,7 @@ public class HudDemoPlayer : MonoBehaviour
     private void Start()
     {
         SongData song = GameSession.SelectedSong != null ? GameSession.SelectedSong : fallbackSong;
+        GameSession.SelectedSong = song; // de man tong ket / luu diem biet dang choi bai nao
         if (song != null && MusicManager.Instance != null)
         {
             MusicManager.Instance.PlaySongFromStart(song);
@@ -74,6 +101,7 @@ public class HudDemoPlayer : MonoBehaviour
         hud.QuitRequested += () => { if (audioSource != null) audioSource.Stop(); SceneManager.LoadScene(songListScene); };
         foreach (var r in hud.Receptors) if (r != null) r.PointerPress += (lane, down) => pointerHeld[lane] = down;
 
+        CreateTailLayer();
         BuildChart(song);
         started = true;
     }
@@ -86,20 +114,31 @@ public class HudDemoPlayer : MonoBehaviour
         var d = GameSession.SelectedDifficulty;
         float density = d == ChartDifficulty.Easy ? 0.45f : d == ChartDifficulty.Normal ? 0.8f : 1f;
         bool halfBeats = d == ChartDifficulty.Hard;
+        float holdP = d == ChartDifficulty.Easy ? holdChance.x : d == ChartDifficulty.Normal ? holdChance.y : holdChance.z;
         int lastLane = -1;
-        for (float t = firstNoteTime; t < songLength - 3f; t += beat)
+        for (float t = firstNoteTime; t < songLength - 4f; t += beat)
         {
-            if (rnd.NextDouble() < density) AddNote(t, ref lastLane, rnd);
-            if (halfBeats && rnd.NextDouble() < 0.3) AddNote(t + beat * 0.5f, ref lastLane, rnd);
+            if (rnd.NextDouble() < density) AddNote(t, ref lastLane, rnd, holdP, beat);
+            if (halfBeats && rnd.NextDouble() < 0.3) AddNote(t + beat * 0.5f, ref lastLane, rnd, 0f, beat);
         }
     }
 
-    private void AddNote(float t, ref int lastLane, System.Random rnd)
+    private void AddNote(float t, ref int lastLane, System.Random rnd, float holdP, float beat)
     {
-        int lane = rnd.Next(4);
-        if (lane == lastLane) lane = (lane + 1 + rnd.Next(3)) % 4;
+        // chon lan con trong (khong dang co not giu), uu tien khac lan truoc
+        var free = new List<int>();
+        for (int l = 0; l < 4; l++) if (laneBusyUntil[l] + 0.15f <= t && l != lastLane) free.Add(l);
+        if (free.Count == 0) return;
+        int lane = free[rnd.Next(free.Count)];
         lastLane = lane;
-        chart.Add(new Note { time = t, lane = lane });
+        float dur = 0f;
+        if (rnd.NextDouble() < holdP)
+        {
+            float[] beats = { 1f, 1.5f, 2f, 3f };
+            dur = beats[rnd.Next(beats.Length)] * beat;
+        }
+        laneBusyUntil[lane] = t + dur;
+        chart.Add(new Note { time = t, lane = lane, duration = dur });
     }
 
     // Lay thoi gian theo nhac neu nhac dang chay; neu nhac tam ngung bat thuong thi chay tiep bang dong ho rieng
@@ -133,13 +172,14 @@ public class HudDemoPlayer : MonoBehaviour
             var n = chart[nextIndex++];
             n.img = GetImage(n.lane);
             n.rt = n.img.rectTransform;
+            if (n.IsHold) n.tail = GetTail(n.lane);
             active.Add(n);
         }
 
         if (autoPlay)
         {
             foreach (var n in active)
-                if (!n.done && n.time - now <= 0.01f) { autoHold[n.lane] = 0.1f; held[n.lane] = true; Press(n.lane, n.time); }
+                if (!n.done && n.time - now <= 0.01f) { autoHold[n.lane] = n.IsHold ? n.duration + 0.05f : 0.1f; held[n.lane] = true; Press(n.lane, n.time); }
             for (int l = 0; l < 4; l++) autoHold[l] -= Time.deltaTime;
         }
 
@@ -155,27 +195,81 @@ public class HudDemoPlayer : MonoBehaviour
         {
             var n = active[i];
             float dt = n.time - now;
-            if (!n.done && dt < -badWindow) { n.done = true; Judge(HudJudgement.Miss, n.lane); if (finished) return; }
-            float t = 1f - dt / approachTime;
-            if (t > 1.25f || (n.done && n.img.color.a <= 0.01f)) { Recycle(n); active.RemoveAt(i); continue; }
-            Place(n, t);
+            if (!n.done && dt < -badWindow)
+            {
+                n.done = true; n.broken = true;
+                Judge(HudJudgement.Miss, n.lane); if (finished) return;
+            }
+            if (n.holding)
+            {
+                bool down = held[n.lane];
+                if (now >= n.End)
+                {
+                    n.holding = false; // giu du -> thuong them 1 lan cham
+                    var c = n.img.color; c.a = 0f; n.img.color = c;
+                    Judge(HudJudgement.Perfect, n.lane); if (finished) return;
+                }
+                else if (!down && now < n.End - releaseGrace)
+                {
+                    n.holding = false; n.broken = true; // nha som
+                    Judge(HudJudgement.Miss, n.lane); if (finished) return;
+                }
+                else
+                {
+                    n.tickTimer -= Time.deltaTime;
+                    if (n.tickTimer <= 0f) { n.tickTimer = 0.12f; score += 20; hud.SetScore(score); hud.PlayLaneHit(n.lane); }
+                }
+            }
+            float t = n.holding ? 1f : 1f - dt / approachTime;
+            bool gone = n.IsHold
+                ? (n.done && !n.holding && (n.broken ? n.img.color.a <= 0.01f && (n.tail == null || n.tail.color.a <= 0.01f) : true)) || 1f - (n.End - now) / approachTime > 1.3f
+                : t > 1.25f || (n.done && n.img.color.a <= 0.01f);
+            if (gone) { Recycle(n); active.RemoveAt(i); continue; }
+            Place(n, t, now);
         }
 
         if (now >= songLength - 0.1f || (nextIndex >= chart.Count && active.Count == 0 && now > songLength - 2f)) Finish(true);
     }
 
-    private void Place(Note n, float t)
+    private Vector3 LanePoint(int lane, float t, out float scale)
     {
-        Vector3 top = noteLayer.InverseTransformPoint(laneTops[n.lane].position);
-        Vector3 hit = noteLayer.InverseTransformPoint(hud.Receptors[n.lane].transform.position);
+        Vector3 top = noteLayer.InverseTransformPoint(laneTops[lane].position);
+        Vector3 hit = noteLayer.InverseTransformPoint(hud.Receptors[lane].transform.position);
         float p = Mathf.Pow(Mathf.Max(0f, t), 1.6f);
-        Vector3 pos = Vector3.LerpUnclamped(top, hit, p);
-        float s = Mathf.LerpUnclamped(0.3f, 1f, p);
+        scale = Mathf.LerpUnclamped(0.3f, 1f, p);
+        return Vector3.LerpUnclamped(top, hit, p);
+    }
+
+    private void Place(Note n, float t, float now)
+    {
+        float s;
+        Vector3 pos = LanePoint(n.lane, t, out s);
         n.rt.anchoredPosition = pos;
         n.rt.localScale = new Vector3(s, s, 1f);
         float a = Mathf.Clamp01(t / 0.12f);
-        if (n.done) a = Mathf.Clamp01(n.img.color.a - Time.deltaTime * 6f);
+        if (n.done && !n.holding) a = Mathf.Clamp01(n.img.color.a - Time.deltaTime * (n.broken ? 3f : 6f));
         var c = n.img.color; c.a = a; n.img.color = c;
+        if (n.holding) n.img.color = new Color(1.2f, 1.2f, 1.2f, 1f);
+
+        if (n.tail == null) return;
+        // duoi not: tu dau not keo len diem ket thuc
+        float tEnd = Mathf.Max(0f, 1f - (n.End - now) / approachTime);
+        float se;
+        Vector3 endPos = LanePoint(n.lane, tEnd, out se);
+        Vector3 a0 = tailLayer.InverseTransformPoint(noteLayer.TransformPoint(pos));
+        Vector3 a1 = tailLayer.InverseTransformPoint(noteLayer.TransformPoint(endPos));
+        Vector3 d = a1 - a0;
+        var trt = n.tail.rectTransform;
+        trt.anchoredPosition = a0;
+        trt.sizeDelta = new Vector2(holdTailWidth * (s + se) * 0.5f, Mathf.Max(0f, d.magnitude));
+        trt.localEulerAngles = new Vector3(0f, 0f, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg - 90f);
+        Color lc = laneColors[n.lane];
+        float ta;
+        if (n.broken) { lc = Color.Lerp(lc, Color.gray, 0.7f); ta = Mathf.Clamp01(n.tail.color.a - Time.deltaTime * 3f); }
+        else ta = Mathf.Clamp01(t / 0.12f);
+        if (n.holding) lc = Color.Lerp(lc, Color.white, 0.35f + 0.15f * Mathf.Sin(Time.time * 25f));
+        lc.a = ta;
+        n.tail.color = lc;
     }
 
     private void Press(int lane, float now)
@@ -189,7 +283,8 @@ public class HudDemoPlayer : MonoBehaviour
         }
         if (best == null || bestAbs > badWindow) return;
         best.done = true;
-        var col = best.img.color; col.a = 0f; best.img.color = col;
+        if (best.IsHold) { best.holding = true; best.tickTimer = 0.12f; }
+        else { var col = best.img.color; col.a = 0f; best.img.color = col; }
         HudJudgement j = bestAbs <= perfectWindow ? HudJudgement.Perfect : bestAbs <= goodWindow ? HudJudgement.Good : HudJudgement.Bad;
         Judge(j, lane);
     }
@@ -197,6 +292,10 @@ public class HudDemoPlayer : MonoBehaviour
     private void Judge(HudJudgement j, int lane)
     {
         judged++;
+        if (j == HudJudgement.Perfect) perfectCount++;
+        else if (j == HudJudgement.Good) goodCount++;
+        else if (j == HudJudgement.Bad) badCount++;
+        else missCount++;
         accuracyPoints += j == HudJudgement.Perfect ? 1f : j == HudJudgement.Good ? 0.7f : j == HudJudgement.Bad ? 0.3f : 0f;
         if (j == HudJudgement.Miss)
         {
@@ -232,7 +331,7 @@ public class HudDemoPlayer : MonoBehaviour
         active.Clear();
         for (int i = 0; i < 4; i++) hud.SetLanePressed(i, false);
         float accuracy = judged > 0 ? accuracyPoints / judged * 100f : -1f;
-        hud.ShowResult(cleared, score, maxCombo, accuracy);
+        hud.ShowResult(cleared, score, maxCombo, accuracy, perfectCount, goodCount, badCount, missCount);
     }
 
     private Image GetImage(int lane)
@@ -258,10 +357,39 @@ public class HudDemoPlayer : MonoBehaviour
 
     private void Recycle(Note n)
     {
+        if (n.tail != null) { n.tail.gameObject.SetActive(false); tailPool.Push(n.tail); n.tail = null; }
         if (n.img == null) return;
         n.img.gameObject.SetActive(false);
         pool.Push(n.img);
         n.img = null;
+    }
+
+    private void CreateTailLayer()
+    {
+        var go = new GameObject("HoldTailLayer", typeof(RectTransform));
+        tailLayer = go.GetComponent<RectTransform>();
+        tailLayer.SetParent(noteLayer.parent, false);
+        tailLayer.anchorMin = noteLayer.anchorMin; tailLayer.anchorMax = noteLayer.anchorMax;
+        tailLayer.pivot = noteLayer.pivot; tailLayer.anchoredPosition = noteLayer.anchoredPosition; tailLayer.sizeDelta = noteLayer.sizeDelta;
+        tailLayer.SetSiblingIndex(noteLayer.GetSiblingIndex()); // nam duoi dau not
+    }
+
+    private Image GetTail(int lane)
+    {
+        Image img;
+        if (tailPool.Count > 0) img = tailPool.Pop();
+        else
+        {
+            var go = new GameObject("HoldTail", typeof(RectTransform), typeof(Image));
+            go.transform.SetParent(tailLayer, false);
+            img = go.GetComponent<Image>();
+            img.raycastTarget = false;
+            img.sprite = holdTailSprite;
+            img.rectTransform.pivot = new Vector2(0.5f, 0f);
+        }
+        img.gameObject.SetActive(true);
+        var c = laneColors[lane]; c.a = 0f; img.color = c;
+        return img;
     }
 
     private static bool KeyHeld(int lane)

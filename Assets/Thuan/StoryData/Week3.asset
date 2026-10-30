@@ -19,6 +19,7 @@ MonoBehaviour:
   cardNormal: {fileID: 21300000, guid: c0eeba2001ff88d4d874ab316ed5edf6, type: 3}
   cardSelected: {fileID: 21300000, guid: abb0ff9eb34283b4fb281b8b10a49259, type: 3}
   detailArt: {fileID: 21300000, guid: 23d71fd3364ac5d4eb4400d97ff8cda5, type: 3}
+  opponent: 1
   tracks:
   - title: Static Heart
     song: {fileID: 0}

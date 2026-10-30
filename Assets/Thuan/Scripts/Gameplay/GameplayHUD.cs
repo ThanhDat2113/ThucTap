@@ -54,16 +54,15 @@ public class GameplayHUD : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject resultPanel;
-    [SerializeField] private TMP_Text resultTitle;
-    [SerializeField] private TMP_Text resultScore;
-    [SerializeField] private TMP_Text resultCombo;
-    [SerializeField] private GameObject newBestLabel;
-    [SerializeField] private Button resultRetryButton;
-    [SerializeField] private Button resultContinueButton;
+
+    private GameplayResultScreen resultScreen;
+    private CharacterData selectedCharacter;
 
     public event Action<bool> PauseChanged;
     public event Action RestartRequested;
     public event Action QuitRequested;
+    // Moi lan cham not (de nhan vat tren san khau phan ung)
+    public event Action<HudJudgement, int> Judged;
 
     public bool IsPaused { get; private set; }
     public HudReceptor[] Receptors { get { return receptors; } }
@@ -73,6 +72,7 @@ public class GameplayHUD : MonoBehaviour
     private float comboPunch, crownPunch;
     private Coroutine judgeRoutine;
     private bool playing;
+    private bool portraitsSet;
 
     private static readonly string[] JudgeWords = { "PERFECT!!", "GOOD!", "BAD", "MISS" };
     private static readonly Color[] JudgeTop = { new Color(0.85f, 1f, 1f), new Color(0.55f, 0.85f, 1f), new Color(1f, 0.8f, 0.4f), new Color(0.8f, 0.8f, 0.85f) };
@@ -80,13 +80,18 @@ public class GameplayHUD : MonoBehaviour
 
     private void Awake()
     {
+        if (resultPanel != null) resultScreen = resultPanel.GetComponent<GameplayResultScreen>();
+        if (resultScreen != null)
+        {
+            resultScreen.RetryRequested += Restart;
+            resultScreen.ContinueRequested += Continue;
+            resultScreen.MenuRequested += Quit;
+        }
         for (int i = 0; i < receptors.Length; i++) if (receptors[i] != null) receptors[i].Lane = i;
         if (pauseButton != null) pauseButton.onClick.AddListener(() => SetPaused(true));
         if (resumeButton != null) resumeButton.onClick.AddListener(() => SetPaused(false));
         if (restartButton != null) restartButton.onClick.AddListener(Restart);
         if (quitButton != null) quitButton.onClick.AddListener(Quit);
-        if (resultRetryButton != null) resultRetryButton.onClick.AddListener(Restart);
-        if (resultContinueButton != null) resultContinueButton.onClick.AddListener(Continue);
     }
 
     private void Start()
@@ -148,6 +153,7 @@ public class GameplayHUD : MonoBehaviour
 
     public void ShowJudgement(HudJudgement j, int lane = -1)
     {
+        if (Judged != null) Judged(j, lane);
         if (judgementText == null) return;
         if (judgeRoutine != null) StopCoroutine(judgeRoutine);
         judgeRoutine = StartCoroutine(JudgeRoutine(j, lane));
@@ -186,14 +192,17 @@ public class GameplayHUD : MonoBehaviour
 
     public void SetPortraits(Sprite player, Sprite opp)
     {
+        portraitsSet = true;
         if (playerPortrait != null && player != null) playerPortrait.sprite = player;
         if (opponentPortrait != null && opp != null) opponentPortrait.sprite = opp;
     }
 
     private void ApplyPortraits()
     {
+        if (portraitsSet) return;
         CharacterData me = roster.Find(c => c != null && c.Id == CharacterSelection.SelectedId);
         if (me == null && roster.Count > 0) me = roster[0];
+        selectedCharacter = me;
         SetPortraits(AvatarOf(me), AvatarOf(opponent));
     }
 
@@ -227,33 +236,24 @@ public class GameplayHUD : MonoBehaviour
 
     // Goi khi het bai / het mau. Neu qua bai thi luu ky luc vao SongStats -> man chon nhac se hien Best Score, Combo, Accuracy.
     // accuracy: 0-100 (%), truyen -1 neu khong tinh.
-    public void ShowResult(bool cleared, int score, int maxCombo, float accuracy = -1f)
+    public void ShowResult(bool cleared, int score, int maxCombo, float accuracy = -1f,
+        int perfect = 0, int good = 0, int bad = 0, int miss = 0)
     {
         SongData song = GameSession.SelectedSong;
         bool newBest = cleared && song != null && score > 0 && score > SongStats.GetBestScore(song);
         if (cleared && song != null) SongStats.SaveResult(song, score, maxCombo, accuracy);
         StorySession.Report(cleared, score, accuracy);
-        if (newBestLabel != null) newBestLabel.SetActive(newBest);
-
         if (resultPanel == null) return;
         if (pauseMenu != null) pauseMenu.SetActive(false);
         resultPanel.SetActive(true);
-        if (resultTitle != null)
+        if (resultScreen != null)
         {
-            resultTitle.text = !cleared ? "FAILED" : (StorySession.Active && StorySession.WeekCompleted ? "WEEK CLEAR!" : "SONG CLEAR!");
-            resultTitle.color = cleared ? new Color(0.3f, 0.95f, 1f) : new Color(1f, 0.3f, 0.45f);
-        }
-        if (resultScore != null) resultScore.text = score.ToString("N0");
-        if (resultCombo != null)
-        {
-            resultCombo.text = "MAX COMBO  " + maxCombo + (accuracy >= 0f ? "   ACC  " + accuracy.ToString("0.0") + "%" : "");
-            if (StorySession.Active)
-                resultCombo.text += "\n<size=85%><color=#7FF4FF>WEEK " + StorySession.Week.weekNumber + "  -  TRACK " + (StorySession.TrackIndex + 1) + "/" + StorySession.TrackCount + "   TOTAL " + StorySession.RunScore.ToString("N0") + "</color></size>";
-        }
-        if (resultContinueButton != null)
-        {
-            var label = resultContinueButton.GetComponentInChildren<TMP_Text>();
-            if (label != null) label.text = StorySession.Active && cleared && StorySession.HasNext ? "NEXT SONG" : "CONTINUE";
+            Sprite performer = selectedCharacter != null
+                ? (selectedCharacter.fullArt != null ? selectedCharacter.fullArt : selectedCharacter.posterSprite)
+                : null;
+            bool hasNext = StorySession.Active && cleared && StorySession.HasNext;
+            resultScreen.Show(cleared, song, performer, score, maxCombo, accuracy,
+                perfect, good, bad, miss, newBest, hasNext);
         }
     }
 

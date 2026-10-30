@@ -20,6 +20,7 @@ MonoBehaviour:
   cardNormal: {fileID: 21300000, guid: 80d249384b4fb844c9cdd50b94f5d476, type: 3}
   cardSelected: {fileID: 21300000, guid: 1206dff3e8f04d442afc34c309fc9a59, type: 3}
   detailArt: {fileID: 21300000, guid: 74575a56796349d49b05f9f12734a8a5, type: 3}
+  opponent: 1
   tracks:
   - title: Neon Pulse
     song: {fileID: 0}

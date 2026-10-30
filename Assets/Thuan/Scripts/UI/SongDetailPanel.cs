@@ -61,8 +61,7 @@ public class SongDetailPanel : MonoBehaviour
         float acc = SongStats.GetBestAccuracy(song);
         if (bestScoreText != null) bestScoreText.text = best > 0 ? best.ToString("N0") : "--";
         if (bestComboText != null) bestComboText.text = best > 0 ? SongStats.GetBestCombo(song) + " COMBO" : "";
-        float displayAcc = acc <= 1f && acc >= 0f ? acc * 100f : acc;
-if (accuracyText != null) accuracyText.text = acc >= 0f ? displayAcc.ToString("0.0") + "%" : "--";
+        if (accuracyText != null) accuracyText.text = acc >= 0f ? acc.ToString("0.0") + "%  <color=#FFD21C>" + GameplayResultScreen.RankOf(true, acc) + "</color>" : "--";
         if (playCountText != null) playCountText.text = SongStats.GetPlayCount(song).ToString();
 
         RefreshDifficulty();
