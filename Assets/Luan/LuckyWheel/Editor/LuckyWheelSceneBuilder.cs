@@ -36,7 +36,17 @@ namespace Luan.LuckyWheel.Editor
             scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             scaler.matchWidthOrHeight = 0.5f;
 
-            AddImage(canvasGo.transform, "Background", "Background.png", new Vector2(836, 470.5f), new Vector2(1672, 941), false);
+            var bgGo = new GameObject("Background", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            bgGo.transform.SetParent(canvasGo.transform, false);
+            var bgRt = bgGo.GetComponent<RectTransform>();
+            bgRt.anchorMin = Vector2.zero;
+            bgRt.anchorMax = Vector2.one;
+            bgRt.offsetMin = bgRt.offsetMax = Vector2.zero;
+            bgRt.pivot = new Vector2(0.5f, 0.5f);
+            var bgImg = bgGo.GetComponent<Image>();
+            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Root + "Background.png");
+            bgImg.preserveAspect = false;
+            bgImg.raycastTarget = false;
 
             var decoration = AddGroup(canvasGo.transform, "Decorations");
             AddImage(decoration, "Characters", "Characters.png", new Vector2(266, 493), new Vector2(532, 650), false);
