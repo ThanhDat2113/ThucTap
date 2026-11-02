@@ -84,3 +84,4 @@ qldatn-vscode-install_*.ps1
 /.utmp/
 /.cxx/
 .qldatn/
+.vsconfig
