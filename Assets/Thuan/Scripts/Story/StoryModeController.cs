@@ -23,12 +23,6 @@ public class StoryModeController : MonoBehaviour
     [SerializeField] private Image nextCover;
     [SerializeField] private TMP_Text nextTitle;
 
-    [Header("Do kho: 0 Easy, 1 Normal, 2 Hard")]
-    [SerializeField] private Button[] difficultyButtons = new Button[3];
-    [SerializeField] private Sprite[] difficultyOn = new Sprite[3];
-    [SerializeField] private Sprite[] difficultyOff = new Sprite[3];
-    [SerializeField] private TMP_Text[] difficultyLabels = new TMP_Text[3];
-
     [Header("Start")]
     [SerializeField] private Button startButton;
     [SerializeField] private CanvasGroup startGroup;
@@ -46,12 +40,6 @@ public class StoryModeController : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < difficultyButtons.Length; i++)
-        {
-            if (difficultyButtons[i] == null) continue;
-            int idx = i;
-            difficultyButtons[i].onClick.AddListener(() => { GameSession.SelectedDifficulty = (ChartDifficulty)idx; RefreshDetail(); });
-        }
         if (startButton != null) startButton.onClick.AddListener(StartWeek);
         if (detailArt != null) artBasePos = detailArt.rectTransform.anchoredPosition;
     }
@@ -71,9 +59,10 @@ public class StoryModeController : MonoBehaviour
             cards[i].gameObject.SetActive(has);
             if (!has) continue;
             var w = weeks[i];
+            // Mo khoa theo tien do: qua tuan truoc thi mo tuan sau
             bool prevCleared = i == 0 || StoryProgress.IsCleared(weeks[i - 1]);
-            string msg = !w.Playable ? "COMING SOON" : "CLEAR WEEK " + weeks[i - 1 >= 0 ? i - 1 : 0].weekNumber + " TO UNLOCK";
-            cards[i].Setup(w, prevCleared && w.Playable, msg, OnCardClicked);
+            string msg = i == 0 ? "" : "CLEAR WEEK " + weeks[i - 1].weekNumber;
+            cards[i].Setup(w, prevCleared, msg, OnCardClicked);
         }
         int last = Mathf.Clamp(PlayerPrefs.GetInt(LastWeekKey, 0), 0, Mathf.Min(weeks.Count, cards.Length) - 1);
         Select(cards[last], false);
@@ -109,14 +98,13 @@ public class StoryModeController : MonoBehaviour
     {
         if (selected == null) return;
         var w = selected.Week;
-        var diff = GameSession.SelectedDifficulty;
         detailWeek.text = "WEEK " + w.weekNumber;
         detailTitle.text = w.title;
         detailDescription.text = w.description;
         if (detailArt != null) { detailArt.sprite = w.detailArt; detailArt.color = selected.Locked ? new Color(0.45f, 0.45f, 0.55f) : Color.white; }
 
-        int best = StoryProgress.GetBestScore(w, diff);
-        float rate = StoryProgress.GetClearRate(w, diff);
+        int best = StoryProgress.GetBestScore(w);
+        float rate = StoryProgress.GetClearRate(w);
         bestScoreText.text = best > 0 ? best.ToString("N0") : "--";
         rankText.text = best > 0 ? StoryProgress.Rank(rate) + " RANK" : "";
         clearRateText.text = rate >= 0f ? rate.ToString("0.0") + "%" : "--";
@@ -129,17 +117,10 @@ public class StoryModeController : MonoBehaviour
             nextCover.sprite = c; nextCover.color = c != null ? (selected.Locked ? new Color(0.4f, 0.4f, 0.5f) : Color.white) : new Color(0.1f, 0.05f, 0.2f);
         }
 
-        for (int i = 0; i < difficultyButtons.Length; i++)
-        {
-            if (difficultyButtons[i] == null) continue;
-            ((Image)difficultyButtons[i].targetGraphic).sprite = i == (int)diff ? difficultyOn[i] : difficultyOff[i];
-            if (difficultyLabels[i] != null) difficultyLabels[i].alpha = i == (int)diff ? 1f : 0.5f;
-        }
-
-        bool canStart = !selected.Locked;
+        bool canStart = !selected.Locked && w.Playable;
         startButton.interactable = canStart;
         if (startGroup != null) startGroup.alpha = canStart ? 1f : 0.45f;
-        if (startHint != null) { startHint.gameObject.SetActive(!canStart); startHint.text = w.Playable ? "CLEAR THE PREVIOUS WEEK FIRST" : "COMING SOON"; }
+        if (startHint != null) { startHint.gameObject.SetActive(!canStart); startHint.text = selected.Locked ? "CLEAR THE PREVIOUS WEEK FIRST" : "SONGS COMING SOON"; }
     }
 
     private IEnumerator SlideArt()
@@ -160,7 +141,7 @@ public class StoryModeController : MonoBehaviour
 
     private void StartWeek()
     {
-        if (selected == null || selected.Locked) return;
+        if (selected == null || selected.Locked || !selected.Week.Playable) return;
         StorySession.Begin(selected.Week);
         if (GameSession.SelectedSong != null) SongStats.IncrementPlayCount(GameSession.SelectedSong);
         SceneManager.LoadScene(gameplayScene);
