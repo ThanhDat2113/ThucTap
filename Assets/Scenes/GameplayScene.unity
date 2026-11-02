@@ -1272,6 +1272,12 @@ MonoBehaviour:
   judgement: {fileID: 443643778}
   visuals: []
   pressedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  useNeonReceptors: 1
+  hideOriginalSprite: 1
+  sameStyleAsNotes: 1
+  idleBrightness: 0.65
+  pressScale: 1.06
+  flashDecay: 6
   laneColors:
   - {r: 0.76, g: 0.29, b: 0.6, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
@@ -2449,6 +2455,8 @@ MonoBehaviour:
   overrideLaneColors: 1
   overrideReceptors: 1
   debugLog: 1
+  useFixedStyle: 0
+  fixedStyle: 0
 --- !u!114 &772989736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5093,8 +5101,8 @@ MonoBehaviour:
   showPauseButton: 1
   pauseButtonPosition: {x: -30, y: -50}
   pauseOnFocusLost: 1
-  lobbySceneName: 
-  mainMenuSceneName: 
+  lobbySceneName: Thuan_SongList
+  mainMenuSceneName: MainMenu
   showLobbyButton: 1
   showMainMenuButton: 1
   onGoLobby:
@@ -5115,6 +5123,9 @@ MonoBehaviour:
   lobbyButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
   mainMenuButtonSprite: {fileID: 93029727800843500, guid: f97f9a8058b04ad449292bbd1844b903, type: 3}
   hideLabelWhenSprite: 0
+  useNeonMenu: 1
+  keepCustomButtonSprites: 0
+  useNeonCornerButton: 1
   pauseButtonHeight: 90
   menuButtonHeight: 110
   menuButtonGap: 20
