@@ -153,6 +153,15 @@ public static class Wallet
         Changed?.Invoke();
     }
 
+    public static void RevokeItem(string itemId)
+    {
+        if (string.IsNullOrEmpty(itemId)) return;
+        if (PlayerPrefs.GetInt(OwnedPrefix + itemId, 0) == 0) return;
+        PlayerPrefs.SetInt(OwnedPrefix + itemId, 0);
+        PlayerPrefs.Save();
+        Changed?.Invoke();
+    }
+
     public static bool IsOwned(string itemId) { return PlayerPrefs.GetInt(OwnedPrefix + itemId, 0) == 1; }
 
     public static bool TryBuy(ShopItemData item)

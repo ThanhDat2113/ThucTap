@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4db601df17a70c47982177800aca9d8, type: 3}
+  m_Name: Week2
+  m_EditorClassIdentifier: Assembly-CSharp::StoryWeekData
+  weekNumber: 2
+  title: HIGHER TOGETHER
+  description: Ruby has ruled the rooftop stages for years. To earn a place in the
+    scene, you'll have to out-sing the queen herself - and maybe win a partner along
+    the way.
+  cardNormal: {fileID: 21300000, guid: 80d249384b4fb844c9cdd50b94f5d476, type: 3}
+  cardSelected: {fileID: 21300000, guid: 1206dff3e8f04d442afc34c309fc9a59, type: 3}
+  detailArt: {fileID: 21300000, guid: 74575a56796349d49b05f9f12734a8a5, type: 3}
+  opponent: 1
+  tracks:
+  - title: Neon Pulse
+    song: {fileID: 0}
+  - title: Final Echo
+    song: {fileID: 0}
+  - title: Street Voltage
+    song: {fileID: 0}

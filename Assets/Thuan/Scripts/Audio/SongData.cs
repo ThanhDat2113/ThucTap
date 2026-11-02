@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using RhythmGame;
 
 [CreateAssetMenu(fileName = "NewSong", menuName = "Music/Song")]
 public class SongData : ScriptableObject
@@ -10,4 +11,5 @@ public class SongData : ScriptableObject
     [Range(1, 5)] public int difficulty = 3;
     [Tooltip("0 = chua biet, se hien --")]
     public int bpm;
+    public ChartData chart;
 }

@@ -24,6 +24,12 @@ public class CharacterData : ScriptableObject
     public Sprite fullArt;
     [Tooltip("Dung khi chua co fullArt - anh chan dung hien trong khung ben trai")]
     public Sprite posterSprite;
+    [Tooltip("Anh mat nhan vat - dung cho avatar tren thanh HP o man choi")]
+    public Sprite avatar;
+
+    [Header("Man choi")]
+    [Tooltip("Nhan vat hien tren san khau: 0 = Main1 (nam), 1 = Main2 (nu)")]
+    public int gameplayModel;
 
     [Header("Khac")]
     public AudioClip previewClip;

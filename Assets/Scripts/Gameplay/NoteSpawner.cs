@@ -1,0 +1,134 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace RhythmGame
+{
+    public class NoteSpawner : MonoBehaviour
+    {
+        [Header("Refs")]
+        public NotePool playerPool;
+        public NotePool opponentPool;
+        public Transform[] laneAnchors;
+        public Color[] laneColors;
+
+        [Header("Opponent Note Colors")]
+        [Tooltip("Màu cho note của đối thủ (mỗi lane 1 màu)")]
+        public Color[] opponentLaneColors;
+
+        [Header("Layout")]
+        [Tooltip("Kéo Transform của receptor vào đây để lấy vị trí Y trực quan. Để trống thì dùng hitLineY bên dưới.")]
+        public Transform hitLineReference;
+        public float hitLineY = -3.3f;
+        [Tooltip("Kéo 1 Transform đặt ở mép trên màn hình vào đây. Để trống thì dùng spawnY bên dưới.")]
+        public Transform spawnLineReference;
+        public float spawnY = 5.5f;
+        public float scrollSpeed = 7f;
+
+        float HitLineY => hitLineReference != null ? hitLineReference.position.y : hitLineY;
+        float SpawnY => spawnLineReference != null ? spawnLineReference.position.y : spawnY;
+
+        public float TravelTime => (SpawnY - HitLineY) / scrollSpeed;
+
+        ChartData chart;
+        int nextIndex;
+        readonly List<NoteView> active = new List<NoteView>();
+    public event System.Action<NoteView> OnNoteSpawned;
+
+        public IReadOnlyList<NoteView> ActiveNotes => active;
+
+        public bool Finished => chart != null && nextIndex >= chart.notes.Count && active.Count == 0;
+
+        public void Begin(ChartData chartData)
+        {
+            foreach (var n in active)
+            {
+                playerPool?.Release(n);
+            }
+            active.Clear();
+
+            chart = chartData;
+            nextIndex = 0;
+        }
+
+        public void Tick(float songTime)
+        {
+            while (nextIndex < chart.notes.Count &&
+                   chart.BeatToTime(chart.notes[nextIndex].beat) - songTime <= TravelTime)
+                Spawn(chart.notes[nextIndex++]);
+
+            float killY = HitLineY - (SpawnY - HitLineY) - 2f;
+            for (int i = active.Count - 1; i >= 0; i--)
+            {
+                NoteView n = active[i];
+                float laneX = laneAnchors[n.Data.lane].position.x;
+                n.UpdatePosition(songTime, laneX, HitLineY, scrollSpeed);
+
+                if (n.TopY < killY)
+                {
+                    active.RemoveAt(i);
+                    playerPool?.Release(n);
+                }
+            }
+        }
+
+        void Spawn(NoteData data)
+        {
+            data.owner = NoteOwner.Player;
+            NotePool pool = playerPool;
+            if (pool == null) return;
+
+            NoteView n = pool.Get();
+            float timeSeconds = chart.BeatToTime(data.beat);
+            float holdSeconds = data.type == NoteType.Hold ? data.holdBeats * chart.SecondsPerBeat : 0f;
+
+            Color noteColor = laneColors[data.lane % laneColors.Length];
+
+            n.Setup(data, timeSeconds, holdSeconds, noteColor);
+            n.transform.position = new Vector3(laneAnchors[data.lane].position.x, SpawnY, 0f);
+            active.Add(n);
+            OnNoteSpawned?.Invoke(n);
+        }
+
+        public NoteView FindClosestUnjudged(int lane, float songTime)
+        {
+            NoteView best = null;
+            float bestDiff = float.MaxValue;
+            foreach (var n in active)
+            {
+                if (n.Judged || n.Data.lane != lane) continue;
+                float diff = Mathf.Abs(songTime - n.TimeSeconds);
+                if (diff < bestDiff) { bestDiff = diff; best = n; }
+            }
+            return best;
+        }
+
+        public NoteView FindClosestOpponentNote(int lane, float songTime)
+        {
+            NoteView best = null;
+            float bestDiff = float.MaxValue;
+            foreach (var n in active)
+            {
+                if (n.Judged || n.Data.lane != lane) continue;
+                if (n.Data.owner != NoteOwner.Opponent) continue;
+                float diff = Mathf.Abs(songTime - n.TimeSeconds);
+                if (diff < bestDiff) { bestDiff = diff; best = n; }
+            }
+            return best;
+        }
+
+        public void ReleaseNote(NoteView n)
+        {
+            active.Remove(n);
+            playerPool?.Release(n);
+        }
+
+        public void ClearActive()
+        {
+            foreach (var n in active)
+            {
+                playerPool?.Release(n);
+            }
+            active.Clear();
+        }
+    }
+}

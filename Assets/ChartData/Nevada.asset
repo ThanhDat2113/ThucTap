@@ -1,0 +1,2665 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
+  m_Name: Nevada
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
+  songName: Nevada
+  audioClip: {fileID: 8300000, guid: 4c65c5162610f9442a7916b88b4b5a3d, type: 3}
+  musicStartDelay: 0
+  bpm: 120
+  laneCount: 4
+  firstNoteOffset: 0
+  notes:
+  - beat: 3.0586667
+    lane: 0
+    type: 1
+    holdBeats: 3.9253335
+  - beat: 3.0586667
+    lane: 3
+    type: 1
+    holdBeats: 3.9253335
+  - beat: 7.24
+    lane: 1
+    type: 1
+    holdBeats: 3.712
+  - beat: 7.24
+    lane: 2
+    type: 1
+    holdBeats: 3.712
+  - beat: 11.165334
+    lane: 0
+    type: 1
+    holdBeats: 3.5413332
+  - beat: 11.208
+    lane: 3
+    type: 1
+    holdBeats: 3.4986668
+  - beat: 15.005333
+    lane: 1
+    type: 1
+    holdBeats: 1.6213341
+  - beat: 15.005333
+    lane: 2
+    type: 1
+    holdBeats: 1.6639996
+  - beat: 17.096
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 17.437334
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 17.949333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 18.205334
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 18.888
+    lane: 3
+    type: 1
+    holdBeats: 3.3706665
+  - beat: 18.930666
+    lane: 0
+    type: 1
+    holdBeats: 3.2853336
+  - beat: 22.6
+    lane: 1
+    type: 1
+    holdBeats: 3.5839996
+  - beat: 22.6
+    lane: 2
+    type: 1
+    holdBeats: 3.5839996
+  - beat: 26.568
+    lane: 3
+    type: 1
+    holdBeats: 3.712
+  - beat: 26.568
+    lane: 0
+    type: 1
+    holdBeats: 3.6693325
+  - beat: 30.493334
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 30.536
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 31.175999
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 31.175999
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 31.858665
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 31.901333
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 34.29067
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 34.845333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 35.357334
+    lane: 0
+    type: 1
+    holdBeats: 0.51200104
+  - beat: 35.826668
+    lane: 3
+    type: 1
+    holdBeats: 0.5546646
+  - beat: 36.296
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 37.149334
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 37.618668
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 38.173332
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 38.557335
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 39.069332
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 39.453335
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 39.837334
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 40.221333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 40.648
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 41.16
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 42.141335
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 42.184
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 47.816
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 48.24267
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 48.84
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 49.778667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 52.722668
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 53.192
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 53.746666
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 54.088
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 54.6
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 54.898666
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 55.282665
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 55.70933
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 56.605335
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 56.605335
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 60.402668
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 60.786667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 61.298668
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 61.64
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 62.322666
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 62.408
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 62.962666
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 63.13333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 63.517334
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 63.559998
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 64.24267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 64.24267
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 66.248
+    lane: 1
+    type: 1
+    holdBeats: 1.3226624
+  - beat: 66.248
+    lane: 2
+    type: 1
+    holdBeats: 1.4506683
+  - beat: 67.86933
+    lane: 3
+    type: 1
+    holdBeats: 1.4080048
+  - beat: 67.86933
+    lane: 0
+    type: 1
+    holdBeats: 1.4506683
+  - beat: 69.32
+    lane: 1
+    type: 1
+    holdBeats: 1.4079971
+  - beat: 69.32
+    lane: 2
+    type: 1
+    holdBeats: 1.4079971
+  - beat: 70.6
+    lane: 0
+    type: 1
+    holdBeats: 2.1333313
+  - beat: 70.68533
+    lane: 3
+    type: 1
+    holdBeats: 1.9626694
+  - beat: 75.89066
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 76.445335
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 76.65867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 76.95734
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 77.512
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 77.81067
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 78.83466
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 79.218666
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 79.77333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 79.816
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 81.77866
+    lane: 0
+    type: 1
+    holdBeats: 1.4506683
+  - beat: 81.77866
+    lane: 3
+    type: 1
+    holdBeats: 1.4506683
+  - beat: 83.31467
+    lane: 1
+    type: 1
+    holdBeats: 1.5786667
+  - beat: 83.35733
+    lane: 2
+    type: 1
+    holdBeats: 1.5360031
+  - beat: 84.808
+    lane: 0
+    type: 1
+    holdBeats: 1.5786667
+  - beat: 84.85067
+    lane: 3
+    type: 1
+    holdBeats: 1.4933319
+  - beat: 86.25867
+    lane: 1
+    type: 1
+    holdBeats: 2.0906677
+  - beat: 86.25867
+    lane: 2
+    type: 1
+    holdBeats: 2.0479965
+  - beat: 91.336
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 91.336
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 91.89066
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 91.89066
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 92.36
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 92.36
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 92.914665
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 92.914665
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 93.384
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 93.42667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 93.93867
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 93.93867
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 94.45067
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 94.49333
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 95.218666
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 95.218666
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 96.24267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 96.75467
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 97.181335
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 97.69334
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 98.16267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 99.016
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 99.144
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 99.57066
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 99.99733
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 100.765335
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 101.576
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 102.25867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 102.25867
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 103.026665
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 103.368
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 104.09333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 104.136
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 105.07467
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 105.07467
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 105.970665
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 106.22667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 106.73867
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 107.08
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 107.592
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 108.01867
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 108.65867
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 109.34133
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 109.85333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 110.152
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 110.57867
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 110.92
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 111.77333
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 111.816
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 112.28533
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 112.669334
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 113.224
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 113.650665
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 114.461334
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 114.67467
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 115.10133
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 115.57066
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 116.296
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 117.02133
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 117.917336
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 118.6
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 119.069336
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 119.58134
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 120.43467
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 121.416
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 121.88533
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 122.39733
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 122.824
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 123.293335
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 123.63467
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 124.01867
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 125.085335
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 125.17067
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 125.29867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 125.554665
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 125.64
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 126.32267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 126.408
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 127.26134
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 127.60266
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 128.11467
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 128.54134
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 129.13867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 129.94934
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 130.16267
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 130.632
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 131.10133
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 131.82666
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 132.59467
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 133.27733
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 134.13066
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 134.472
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 134.984
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 135.88
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 136.86133
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 137.33067
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 137.84267
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 138.39734
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 138.824
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 139.592
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 140.36
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 140.78667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 141.21333
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 141.68266
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 142.06667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 142.62134
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 142.96266
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 143.38933
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 143.77333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 144.15733
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 144.66933
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 145.48
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 145.736
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 146.16267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 146.632
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 147.4
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 147.4
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 148.04
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 148.04
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 148.76534
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 148.76534
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 149.448
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 149.53334
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 149.96
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 149.96
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 150.472
+    lane: 1
+    type: 1
+    holdBeats: 0.7680054
+  - beat: 150.51466
+    lane: 2
+    type: 1
+    holdBeats: 0.7253418
+  - beat: 151.496
+    lane: 3
+    type: 1
+    holdBeats: 0.5973358
+  - beat: 151.496
+    lane: 0
+    type: 1
+    holdBeats: 0.6399994
+  - beat: 152.47734
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 152.47734
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 152.86133
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 152.904
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 153.416
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 153.45866
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 153.8
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 153.84267
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 154.26933
+    lane: 1
+    type: 1
+    holdBeats: 0.7680054
+  - beat: 154.312
+    lane: 2
+    type: 1
+    holdBeats: 0.7680054
+  - beat: 155.16533
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 155.16533
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 155.72
+    lane: 1
+    type: 1
+    holdBeats: 4.9493256
+  - beat: 155.76266
+    lane: 2
+    type: 1
+    holdBeats: 4.906662
+  - beat: 162.07733
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 162.12
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 162.504
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 162.93066
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 163.05867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 163.61333
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 163.656
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 164.08267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 164.12534
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 164.50934
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 164.59467
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 165.02133
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 165.064
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 165.96
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 165.96
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 166.856
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 166.856
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 167.88
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 167.96533
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 168.86133
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 169.33067
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 169.8
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 169.88533
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 170.696
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 170.696
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 171.80533
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 171.80533
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 172.65866
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 172.70134
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 173.68266
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 173.68266
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 174.152
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 174.23734
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 174.664
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 174.664
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 175.13333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 175.176
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 175.60266
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 175.64534
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 176.62666
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 177.05333
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 177.56534
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 178.07733
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 178.41867
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 179.05867
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 179.44267
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 180.04
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 180.04
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 180.552
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 180.552
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 181.40533
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 181.448
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 182.25867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 182.30133
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 184.264
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 184.81866
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 185.24533
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 185.672
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 186.184
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 186.48267
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 187.208
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 187.25067
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 187.976
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 188.01866
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 190.10933
+    lane: 1
+    type: 1
+    holdBeats: 1.5786743
+  - beat: 190.152
+    lane: 2
+    type: 1
+    holdBeats: 1.4933472
+  - beat: 191.77333
+    lane: 0
+    type: 1
+    holdBeats: 1.4506683
+  - beat: 191.77333
+    lane: 3
+    type: 1
+    holdBeats: 1.4080048
+  - beat: 193.18134
+    lane: 1
+    type: 1
+    holdBeats: 1.4933319
+  - beat: 193.18134
+    lane: 2
+    type: 1
+    holdBeats: 1.4933319
+  - beat: 194.58934
+    lane: 0
+    type: 1
+    holdBeats: 3.3706665
+  - beat: 194.58934
+    lane: 3
+    type: 1
+    holdBeats: 3.41333
+  - beat: 199.79466
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 200.264
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 200.776
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 200.81866
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 201.544
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 201.58667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 202.65334
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 203.80533
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 203.848
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 205.46933
+    lane: 0
+    type: 1
+    holdBeats: 1.6640015
+  - beat: 205.46933
+    lane: 3
+    type: 1
+    holdBeats: 1.5786743
+  - beat: 207.048
+    lane: 1
+    type: 1
+    holdBeats: 1.706665
+  - beat: 207.09067
+    lane: 2
+    type: 1
+    holdBeats: 1.6213379
+  - beat: 208.584
+    lane: 0
+    type: 1
+    holdBeats: 1.6213379
+  - beat: 208.62666
+    lane: 3
+    type: 1
+    holdBeats: 1.5786743
+  - beat: 210.07733
+    lane: 1
+    type: 1
+    holdBeats: 3.9253387
+  - beat: 210.12
+    lane: 2
+    type: 1
+    holdBeats: 3.8826752
+  - beat: 215.24
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 215.752
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 216.264
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 216.43466
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 216.81866
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 216.86133
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 217.288
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 217.37334
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 217.8
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 217.84267
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 218.22667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 218.26933
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 218.99466
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 218.99466
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 221.384
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 221.384
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 223.944
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 223.98666
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 227.61333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 227.61333
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 229.832
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 229.832
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 230.89867
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 230.94133
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 231.496
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 231.58133
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 231.96533
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 232.008
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 232.69067
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 232.776
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 233.71466
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 234.22667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 234.73866
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 234.90933
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 236.744
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 236.744
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 238.664
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 238.664
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 240.49867
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 240.54134
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 242.33333
+    lane: 1
+    type: 1
+    holdBeats: 0.89601135
+  - beat: 242.376
+    lane: 2
+    type: 1
+    holdBeats: 0.8533325
+  - beat: 243.528
+    lane: 0
+    type: 1
+    holdBeats: 1.6213379
+  - beat: 243.57066
+    lane: 3
+    type: 1
+    holdBeats: 1.4506683
+  - beat: 245.02133
+    lane: 1
+    type: 1
+    holdBeats: 2.3466644
+  - beat: 245.02133
+    lane: 2
+    type: 1
+    holdBeats: 2.3466644
+  - beat: 247.24
+    lane: 0
+    type: 1
+    holdBeats: 2.3040009
+  - beat: 247.32533
+    lane: 3
+    type: 1
+    holdBeats: 2.2613373
+  - beat: 249.45866
+    lane: 2
+    type: 1
+    holdBeats: 1.4933319
+  - beat: 249.50133
+    lane: 1
+    type: 1
+    holdBeats: 1.4080048
+  - beat: 251.37866
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 251.72
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 252.40266
+    lane: 1
+    type: 1
+    holdBeats: 1.0666656
+  - beat: 252.44533
+    lane: 2
+    type: 1
+    holdBeats: 1.0666656
+  - beat: 253.93866
+    lane: 3
+    type: 1
+    holdBeats: 1.152008
+  - beat: 253.93866
+    lane: 0
+    type: 1
+    holdBeats: 1.1946716
+  - beat: 255.048
+    lane: 1
+    type: 1
+    holdBeats: 1.5360107
+  - beat: 255.09067
+    lane: 2
+    type: 1
+    holdBeats: 1.4933472
+  - beat: 256.456
+    lane: 0
+    type: 1
+    holdBeats: 4.6506653
+  - beat: 256.49866
+    lane: 3
+    type: 1
+    holdBeats: 4.565338
+  - beat: 261.61865
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 261.66135
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 262.088
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 262.13068
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 262.68533
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 262.728
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 263.41068
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 263.41068
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 264.56265
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 264.60535
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 265.07468
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 265.11734
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 265.58667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 265.62933
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 267.37866
+    lane: 1
+    type: 1
+    holdBeats: 1.8773499
+  - beat: 267.42133
+    lane: 2
+    type: 1
+    holdBeats: 1.8346863
+  - beat: 269.08533
+    lane: 0
+    type: 1
+    holdBeats: 1.5786743
+  - beat: 269.17065
+    lane: 3
+    type: 1
+    holdBeats: 1.4506836
+  - beat: 270.536
+    lane: 1
+    type: 1
+    holdBeats: 1.5786438
+  - beat: 270.536
+    lane: 2
+    type: 1
+    holdBeats: 1.5786438
+  - beat: 271.98666
+    lane: 0
+    type: 1
+    holdBeats: 2.773346
+  - beat: 271.98666
+    lane: 3
+    type: 1
+    holdBeats: 2.773346
+  - beat: 277.448
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 277.448
+    lane: 0
+    type: 1
+    holdBeats: 0.554657
+  - beat: 278.30133
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 278.344
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 279.112
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 279.19733
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 280.09332
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 280.09332
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 280.98932
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 281.032
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 282.09866
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 282.61066
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 283.08
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 283.464
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 283.976
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 284.78665
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 284.95734
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 285.46933
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 285.93866
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 286.62134
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 287.34668
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 288.11465
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 288.79733
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 289.26666
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 289.56534
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 289.90668
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 290.07733
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 290.84534
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 290.84534
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 291.784
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 291.82666
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 292.25333
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 292.33865
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 292.76532
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 292.76532
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 293.27734
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 293.32
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 293.704
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 293.74667
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 294.42932
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 294.42932
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 295.112
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 295.624
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 296.05066
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 296.43466
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 297.37332
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 297.62933
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 298.09866
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 298.65332
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 299.03732
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 299.54935
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 300.488
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 300.53067
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 301.46933
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 301.512
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 302.28
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 302.28
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 302.96268
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 303.048
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 303.688
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 304.41333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 304.712
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 305.30933
+    lane: 1
+    type: 1
+    holdBeats: 0.7253418
+  - beat: 305.352
+    lane: 2
+    type: 1
+    holdBeats: 0.6826782
+  - beat: 306.29068
+    lane: 0
+    type: 1
+    holdBeats: 0.76797485
+  - beat: 306.29068
+    lane: 3
+    type: 1
+    holdBeats: 0.76797485
+  - beat: 307.31467
+    lane: 1
+    type: 1
+    holdBeats: 0.5119934
+  - beat: 307.35733
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 308.25333
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 308.25333
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 308.72266
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 308.72266
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 309.23468
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 309.27734
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 310.04532
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 310.088
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 310.984
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 311.02667
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 311.88
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 311.92267
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 313.11734
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 313.544
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 313.71466
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 314.09866
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 314.39734
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 314.90933
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 315.76266
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 315.89066
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 316.01868
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 316.40268
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 316.95734
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 316.95734
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 317.68268
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 317.68268
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 318.32266
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 318.32266
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 319.00534
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 319.048
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 319.77335
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 319.77335
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 320.28534
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 320.328
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 320.75467
+    lane: 3
+    type: 1
+    holdBeats: 1.0239868
+  - beat: 320.79733
+    lane: 0
+    type: 1
+    holdBeats: 0.98132324
+  - beat: 321.77866
+    lane: 1
+    type: 1
+    holdBeats: 1.0240173
+  - beat: 321.77866
+    lane: 2
+    type: 1
+    holdBeats: 0.98135376
+  - beat: 322.80267
+    lane: 0
+    type: 1
+    holdBeats: 0.59732056
+  - beat: 322.84534
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 323.31467
+    lane: 2
+    type: 1
+    holdBeats: 0.5119934
+  - beat: 323.35733
+    lane: 1
+    type: 1
+    holdBeats: 0.5119934
+  - beat: 323.82666
+    lane: 0
+    type: 1
+    holdBeats: 0.5546875
+  - beat: 323.86932
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 324.296
+    lane: 2
+    type: 1
+    holdBeats: 0.5120239
+  - beat: 324.296
+    lane: 1
+    type: 1
+    holdBeats: 0.5120239
+  - beat: 324.76532
+    lane: 3
+    type: 1
+    holdBeats: 0.81066895
+  - beat: 324.76532
+    lane: 0
+    type: 1
+    holdBeats: 0.8533325
+  - beat: 325.49066
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 325.53333
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 326.17334
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 326.6
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 327.06934
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 327.624
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 328.56265
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 328.73334
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 329.032
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 329.50134
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 330.056
+    lane: 0
+    type: 1
+    holdBeats: 1.1093445
+  - beat: 330.61066
+    lane: 3
+    type: 1
+    holdBeats: 0.7253418
+  - beat: 331.336
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 331.464
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 331.93332
+    lane: 0
+    type: 1
+    holdBeats: 1.1946716
+  - beat: 332.36
+    lane: 3
+    type: 1
+    holdBeats: 0.5973511
+  - beat: 333.08533
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 333.81067
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 333.896
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 334.536
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 334.536
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 335.26132
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 335.34668
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 335.816
+    lane: 0
+    type: 1
+    holdBeats: 0.5119934
+  - beat: 336.24268
+    lane: 3
+    type: 1
+    holdBeats: 0.93865967
+  - beat: 337.18134
+    lane: 0
+    type: 1
+    holdBeats: 1.0666504
+  - beat: 338.20532
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 338.67465
+    lane: 0
+    type: 1
+    holdBeats: 0.7253418
+  - beat: 339.144
+    lane: 3
+    type: 1
+    holdBeats: 0.76797485
+  - beat: 339.74133
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 340.168
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 340.936
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 341.704
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 341.91733
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 342.25867
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 343.02667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 343.02667
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 344.05066
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 344.09332
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 344.52
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 344.52
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 345.032
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 345.07468
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 345.45868
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 345.50134
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 345.928
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 345.97067
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 346.73868
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 346.78134
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 347.08
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 347.08
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 347.464
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 347.50665
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 347.976
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 347.976
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 348.616
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 348.616
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 349.29868
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 349.29868
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 349.98132
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 350.024
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 350.74933
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 350.83466
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 351.21866
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 351.21866
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 351.64532
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 351.688
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 352.584
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 352.584
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 353.608
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 354.03467
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 354.46133
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 354.80267
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 355.57068
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 355.57068
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 356.33865
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 356.33865
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 357.10666
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 357.14932
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 357.576
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 357.61865
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 358.088
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 358.088
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 358.51468
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 358.51468
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 359.53867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 359.624
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 360.008
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 360.47733
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 360.86133
+    lane: 1
+    type: 1
+    holdBeats: 0.5973511
+  - beat: 361.416
+    lane: 2
+    type: 1
+    holdBeats: 0.7680054
+  - beat: 362.184
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 362.44
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 362.86667
+    lane: 1
+    type: 1
+    holdBeats: 0.7680054
+  - beat: 363.464
+    lane: 2
+    type: 1
+    holdBeats: 0.6826782
+  - beat: 364.06134
+    lane: 1
+    type: 1
+    holdBeats: 0.8959961
+  - beat: 364.82935
+    lane: 2
+    type: 1
+    holdBeats: 1.9626465
+  - beat: 365.42667
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 366.19467
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 366.74933
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 366.792
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 367.26132
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 367.304
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 368.11465
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 368.15732
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 369.05334
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 369.096
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 369.992
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 370.376
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 370.76
+    lane: 0
+    type: 1
+    holdBeats: 0.5119934
+  - beat: 371.144
+    lane: 3
+    type: 1
+    holdBeats: 0.554657
+  - beat: 371.69867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 371.912
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 372.168
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 372.46667
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 372.552
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 372.97867
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 373.064
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 373.91733
+    lane: 1
+    type: 1
+    holdBeats: 4.6080017
+  - beat: 373.91733
+    lane: 2
+    type: 1
+    holdBeats: 4.6506653
+  - beat: 378.78134
+    lane: 0
+    type: 1
+    holdBeats: 3.9253235
+  - beat: 378.824
+    lane: 3
+    type: 1
+    holdBeats: 3.8399963
+  - beat: 382.792
+    lane: 1
+    type: 1
+    holdBeats: 3.4559937
+  - beat: 382.792
+    lane: 2
+    type: 1
+    holdBeats: 3.3706665
+  - beat: 386.54666
+    lane: 0
+    type: 1
+    holdBeats: 1.4506836
+  - beat: 386.58932
+    lane: 3
+    type: 1
+    holdBeats: 1.40802
+  - beat: 388.33865
+    lane: 2
+    type: 0
+    holdBeats: 0
+  - beat: 388.33865
+    lane: 1
+    type: 0
+    holdBeats: 0
+  - beat: 388.936
+    lane: 0
+    type: 0
+    holdBeats: 0
+  - beat: 388.936
+    lane: 3
+    type: 0
+    holdBeats: 0
+  - beat: 389.448
+    lane: 1
+    type: 1
+    holdBeats: 4.480011
+  - beat: 389.448
+    lane: 2
+    type: 1
+    holdBeats: 4.480011
+  - beat: 394.26935
+    lane: 0
+    type: 1
+    holdBeats: 3.626648
+  - beat: 394.26935
+    lane: 3
+    type: 1
+    holdBeats: 3.5839844
+  - beat: 398.06668
+    lane: 1
+    type: 1
+    holdBeats: 4.1386414
+  - beat: 398.06668
+    lane: 2
+    type: 1
+    holdBeats: 4.1386414
+  - beat: 402.58932
+    lane: 3
+    type: 1
+    holdBeats: 6.0586853
+  - beat: 402.58932
+    lane: 0
+    type: 1
+    holdBeats: 6.1440125

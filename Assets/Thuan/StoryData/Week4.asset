@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4db601df17a70c47982177800aca9d8, type: 3}
+  m_Name: Week4
+  m_EditorClassIdentifier: Assembly-CSharp::StoryWeekData
+  weekNumber: 4
+  title: BEYOND THE BEAT
+  description: The whole crew on one stage. Every rival, every friend, every voice
+    you've met - the final show that decides who the city remembers.
+  cardNormal: {fileID: 21300000, guid: f9603a633ecabce4c81c519d97dc2652, type: 3}
+  cardSelected: {fileID: 21300000, guid: 629f45b6a9bb3f9469fa5bd49239471f, type: 3}
+  detailArt: {fileID: 21300000, guid: ac092d626fcaf0541a22f755a388a40b, type: 3}
+  opponent: 0
+  tracks:
+  - title: Skyline
+    song: {fileID: 0}
+  - title: Afterglow
+    song: {fileID: 0}
+  - title: Our Song
+    song: {fileID: 0}

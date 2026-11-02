@@ -140,4 +140,15 @@ public class MusicManager : MonoBehaviour
     {
         return PlayerPrefs.GetString(SelectedSongKey, string.Empty);
     }
+
+    /// <summary>
+    /// Dừng nhạc nền hiện tại.
+    /// </summary>
+    public void StopMusic()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
 }

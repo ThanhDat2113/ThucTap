@@ -126,6 +126,7 @@ public class ShopController : MonoBehaviour
     {
         if (Wallet.TryBuy(item))
         {
+            InventoryManager.GrantItem(item.Id);
             PlayClip(buyClip);
             ShowMessage("PURCHASED!", new Color(0.35f, 0.95f, 1f));
         }
