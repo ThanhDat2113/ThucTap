@@ -96,6 +96,7 @@ public class SongListController : MonoBehaviour
         if (MusicManager.Instance != null)
             MusicManager.Instance.StopMusic();
 
+        StorySession.End();
         GameSession.SelectedSong = song;
         SongStats.IncrementPlayCount(song);
         SceneManager.LoadScene(gameplaySceneName);
