@@ -538,7 +538,7 @@ namespace Luan.Dialogue
 
         public void FinishDialogue()
         {
-            hasCompletedChapter1ThisSession = true;
+            hasCompletedDialogueThisSession = true;
 
             if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
             if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
