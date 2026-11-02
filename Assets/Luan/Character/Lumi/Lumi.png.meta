@@ -1,10 +1,7 @@
 fileFormatVersion: 2
 guid: d821e8708c304ba6b024b946bb9dd482
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 480625313784399930
-    second: Lumi
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:

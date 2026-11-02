@@ -4,20 +4,22 @@ using UnityEngine.UI;
 namespace Luan.MainMenu
 {
     /// <summary>
-    /// Khóa cứng tỉ lệ khung hình 16:9 (Letterbox / Pillarbox).
-    /// Đảm bảo game hiển thị chính xác 100% y hệt như trong Unity Editor trên MỌI điện thoại (Android, iPhone) và iPad.
-    /// Giữ nguyên tuyệt đối vị trí các nút, khoảng cách và độ sắc nét ban đầu.
+    /// Khóa cứng tỉ lệ khung hình (Letterbox / Pillarbox).
+    /// Mặc định tắt (lockAspectRatio = false) để hỗ trợ game tràn viền trên mọi điện thoại.
     /// </summary>
     [ExecuteAlways]
     [RequireComponent(typeof(Camera))]
     [AddComponentMenu("UI/Aspect Ratio Enforcer")]
     public class AspectRatioEnforcer : MonoBehaviour
     {
+        [Tooltip("Bật tính năng khóa cứng tỉ lệ (Mặc định FALSE để hỗ trợ tràn viền Full Screen trên điện thoại)")]
+        [SerializeField] private bool lockAspectRatio = false;
+
         [Tooltip("Tỉ lệ khung hình mục tiêu (Chuẩn 16:9 = 1.777778)")]
         [SerializeField] private float targetAspect = 16f / 9f;
 
         [Tooltip("Tự động gán Canvas trong Scene vào Camera này")]
-        [SerializeField] private bool autoAssignCanvas = true;
+        [SerializeField] private bool autoAssignCanvas = false;
 
         private Camera _cam;
         private Camera _bgCam;
@@ -26,6 +28,11 @@ namespace Luan.MainMenu
 
         private void Awake()
         {
+            if (!lockAspectRatio)
+            {
+                RestoreFullScreen();
+                return;
+            }
             _cam = GetComponent<Camera>();
             CreateBackgroundCamera();
             ApplyLetterbox();
@@ -34,12 +41,22 @@ namespace Luan.MainMenu
 
         private void Start()
         {
+            if (!lockAspectRatio)
+            {
+                RestoreFullScreen();
+                return;
+            }
             ApplyLetterbox();
             SetupCanvas();
         }
 
         private void OnEnable()
         {
+            if (!lockAspectRatio)
+            {
+                RestoreFullScreen();
+                return;
+            }
             _cam = GetComponent<Camera>();
             CreateBackgroundCamera();
             ApplyLetterbox();
@@ -62,6 +79,7 @@ namespace Luan.MainMenu
 #if UNITY_EDITOR
         private void OnEditorUpdate()
         {
+            if (!lockAspectRatio) return;
             if (!Application.isPlaying)
             {
                 if (Screen.width != _lastWidth || Screen.height != _lastHeight)
@@ -74,6 +92,7 @@ namespace Luan.MainMenu
 
         private void OnBeginCameraRendering(UnityEngine.Rendering.ScriptableRenderContext context, Camera camera)
         {
+            if (!lockAspectRatio) return;
             if (camera == _cam)
             {
                 if (Screen.width != _lastWidth || Screen.height != _lastHeight)
@@ -87,6 +106,7 @@ namespace Luan.MainMenu
 
         private void Update()
         {
+            if (!lockAspectRatio) return;
             if (Screen.width != _lastWidth || Screen.height != _lastHeight)
             {
                 ApplyLetterbox();
@@ -96,12 +116,39 @@ namespace Luan.MainMenu
 
         private void OnValidate()
         {
+            if (!lockAspectRatio)
+            {
+                RestoreFullScreen();
+                return;
+            }
             if (_cam == null) _cam = GetComponent<Camera>();
             ApplyLetterbox();
         }
 
+        public void RestoreFullScreen()
+        {
+            if (_cam == null) _cam = GetComponent<Camera>();
+            if (_cam != null)
+            {
+                _cam.rect = new Rect(0, 0, 1, 1);
+            }
+            Transform bgCamTransform = transform.Find("_LetterboxBackgroundCamera");
+            if (bgCamTransform != null)
+            {
+                if (Application.isPlaying)
+                    Destroy(bgCamTransform.gameObject);
+                else
+                    DestroyImmediate(bgCamTransform.gameObject);
+            }
+        }
+
         public void ApplyLetterbox()
         {
+            if (!lockAspectRatio)
+            {
+                RestoreFullScreen();
+                return;
+            }
             if (_cam == null) _cam = GetComponent<Camera>();
             if (_cam == null) return;
 
@@ -117,7 +164,6 @@ namespace Luan.MainMenu
 
             if (scaleHeight < 1.0f)
             {
-                // Màn hình vuông hơn 16:9 (ví dụ iPad 4:3) -> Viền đen trên & dưới (Letterbox)
                 rect.width = 1.0f;
                 rect.height = scaleHeight;
                 rect.x = 0;
@@ -125,7 +171,6 @@ namespace Luan.MainMenu
             }
             else
             {
-                // Màn hình dài hơn 16:9 (ví dụ Android/iPhone 20:9) -> Viền đen 2 bên trái & phải (Pillarbox)
                 float scaleWidth = 1.0f / scaleHeight;
                 rect.width = scaleWidth;
                 rect.height = 1.0f;
@@ -138,6 +183,7 @@ namespace Luan.MainMenu
 
         private void CreateBackgroundCamera()
         {
+            if (!lockAspectRatio) return;
             if (_cam == null) _cam = GetComponent<Camera>();
 
             Transform bgCamTransform = transform.Find("_LetterboxBackgroundCamera");
@@ -156,7 +202,7 @@ namespace Luan.MainMenu
 
                 _bgCam = bgCamObj.AddComponent<Camera>();
                 _bgCam.depth = _cam.depth - 10;
-                _bgCam.cullingMask = 0; // Không render bất kỳ object nào
+                _bgCam.cullingMask = 0;
                 _bgCam.clearFlags = CameraClearFlags.SolidColor;
                 _bgCam.backgroundColor = Color.black;
                 _bgCam.rect = new Rect(0, 0, 1, 1);
@@ -165,7 +211,7 @@ namespace Luan.MainMenu
 
         private void SetupCanvas()
         {
-            if (!autoAssignCanvas) return;
+            if (!lockAspectRatio || !autoAssignCanvas) return;
             if (_cam == null) _cam = GetComponent<Camera>();
             if (_cam == null) return;
 
@@ -193,7 +239,6 @@ namespace Luan.MainMenu
                         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
                         scaler.referenceResolution = new Vector2(1920, 1080);
                         scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-                        // Khóa tỉ lệ để Canvas luôn đạt chuẩn 1920x1080
                         scaler.matchWidthOrHeight = (scaleHeight < 1.0f) ? 0f : 1f;
                     }
                 }
