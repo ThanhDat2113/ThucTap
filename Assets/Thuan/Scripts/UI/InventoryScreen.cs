@@ -72,8 +72,33 @@ public class InventoryScreen : MonoBehaviour
 
     private void Start()
     {
+        LoadOwnedShopItems();
         RefreshWallet();
         ShowCategory(InventoryCategory.All);
+    }
+
+    private void LoadOwnedShopItems()
+    {
+        ShopItemData[] shopItems = Resources.LoadAll<ShopItemData>("ShopData");
+        foreach (var shopItem in shopItems)
+        {
+            if (shopItem == null || shopItem.category == ShopCategory.CurrencyPacks || !Wallet.IsOwned(shopItem.Id)) continue;
+            if (items.Exists(item => item != null && item.id == shopItem.Id)) continue;
+
+            InventoryItem inventoryItem = new InventoryItem
+            {
+                id = shopItem.Id,
+                displayName = shopItem.displayName,
+                description = shopItem.description,
+                category = (InventoryCategory)Mathf.Clamp((int)shopItem.category, 1, 5),
+                rarity = shopItem.category == ShopCategory.Characters ? ItemRarity.Epic : ItemRarity.Rare,
+                count = 1,
+                icon = shopItem.cardSprite,
+                art = shopItem.artSprite,
+                equippable = true
+            };
+            items.Add(inventoryItem);
+        }
     }
 
     public void ShowCategory(InventoryCategory c)
