@@ -13,11 +13,15 @@ namespace RhythmGame
         public BattleUIController battleUI;
         public UIController uiController;
 
+        [Header("Result Screen mới (kiểu ảnh 2)")]
+        [Tooltip("Gán object ResultPanel có GameplayResultScreen. Để trống = dùng UI cũ.")]
+        public GameplayResultScreen resultScreen;
+
         [Header("Panel")]
         public GameObject panelRoot;
         public CanvasGroup panelCanvasGroup;
 
-        [Header("Content")]
+        [Header("Content (UI cũ)")]
         public TMP_Text songNameText;
         public TMP_Text scoreText;
         public TMP_Text totalNotesText;
@@ -39,11 +43,10 @@ namespace RhythmGame
         [Header("Animation")]
         public float fadeDuration = 0.3f;
 
-
         void Start()
         {
             gameManager.OnStateChanged += OnStateChanged;
-            
+
             if (continueButton != null)
                 continueButton.onClick.AddListener(OnContinueClicked);
 
@@ -52,7 +55,15 @@ namespace RhythmGame
 
             if (confirmButton != null)
                 confirmButton.onClick.AddListener(OnConfirmClicked);
-            
+
+            // UI mới: nối sự kiện 3 nút
+            if (resultScreen != null)
+            {
+                resultScreen.RetryRequested += OnRetryClicked;
+                resultScreen.ContinueRequested += OnContinueClicked;
+                resultScreen.MenuRequested += OnConfirmClicked;
+            }
+
             if (panelRoot != null) panelRoot.SetActive(false);
             if (panelCanvasGroup != null) panelCanvasGroup.alpha = 0f;
 
@@ -61,7 +72,7 @@ namespace RhythmGame
 
         void OnDestroy()
         {
-            if (gameManager != null) 
+            if (gameManager != null)
             {
                 gameManager.OnStateChanged -= OnStateChanged;
             }
@@ -71,6 +82,13 @@ namespace RhythmGame
                 retryButton.onClick.RemoveListener(OnRetryClicked);
             if (confirmButton != null)
                 confirmButton.onClick.RemoveListener(OnConfirmClicked);
+
+            if (resultScreen != null)
+            {
+                resultScreen.RetryRequested -= OnRetryClicked;
+                resultScreen.ContinueRequested -= OnContinueClicked;
+                resultScreen.MenuRequested -= OnConfirmClicked;
+            }
         }
 
         void OnStateChanged(GameState state)
@@ -81,49 +99,24 @@ namespace RhythmGame
             }
             else if (state == GameState.Finished || state == GameState.Failed)
             {
-                // Game over - show final results
                 ShowFinalResult(state);
             }
         }
-
-
 
         void ShowFinalResult(GameState endState)
         {
             if (panelRoot == null) return;
 
-            // Update content
-            if (songNameText != null && gameManager != null && gameManager.chart != null)
-            {
-                songNameText.text = gameManager.chart.songName;
-            }
-
-            if (scoreText != null) scoreText.text = battleUI.playerScore.ToString();
-            if (totalNotesText != null) totalNotesText.text = battleUI.TotalNoteSlots.ToString();
-            if (comboText != null) comboText.text = battleUI.playerMaxCombo.ToString();
-            if (maxComboText != null) maxComboText.text = battleUI.playerMaxCombo.ToString();
-
             float hitRatio = battleUI != null ? battleUI.PlayerHitRatio : 0f;
-            if (accuracyText != null) accuracyText.text = string.Format("{0:F1}%", hitRatio * 100f);
-
             int total = battleUI != null ? battleUI.TotalNoteSlots : 0;
             int p = battleUI != null ? battleUI.playerPerfect : 0;
             int g = battleUI != null ? battleUI.playerGood : 0;
+            int b = battleUI != null ? battleUI.playerBad : 0;
+            int m = battleUI != null ? battleUI.playerMiss : 0;
             Grade grade = battleUI != null ? battleUI.PlayerGrade : Grade.F;
             Debug.Log($"[TurnResultPanel] Perfect={p}, Good={g}, TotalSlots={total}, HitRatio={hitRatio*100f:F1}%, Grade={grade}");
 
-            if (gradeText != null)
-            {
-                gradeText.text = grade.ToString();
-                gradeText.color = GetGradeColor(grade);
-            }
-
-            if (perfectText != null) perfectText.text = p.ToString();
-            if (goodText != null) goodText.text = g.ToString();
-            if (badText != null) badText.text = (battleUI != null ? battleUI.playerBad : 0).ToString();
-            if (missText != null) missText.text = (battleUI != null ? battleUI.playerMiss : 0).ToString();
-
-            // Save achievement (best score, combo, accuracy, play count)
+            // Lấy SongData (dùng cho cả lưu thành tích lẫn UI mới)
             SongData songToSave = GameSession.SelectedSong;
             if (songToSave == null && MusicManager.Instance != null)
             {
@@ -137,6 +130,44 @@ namespace RhythmGame
                 songToSave.name = gameManager.chart.songName;
             }
 
+            if (resultScreen != null)
+            {
+                // ===== UI MỚI =====
+                bool cleared = endState == GameState.Finished;
+                resultScreen.Show(
+                    cleared, songToSave, null,
+                    battleUI != null ? battleUI.playerScore : 0,
+                    battleUI != null ? battleUI.playerMaxCombo : 0,
+                    hitRatio * 100f,
+                    p, g, b, m,
+                    false,   // newBest: chưa có dữ liệu, nối sau nếu cần
+                    false);  // hasNext: chỉ true khi có bài kế tiếp trong Story Mode
+            }
+            else
+            {
+                // ===== UI CŨ =====
+                if (songNameText != null && gameManager != null && gameManager.chart != null)
+                    songNameText.text = gameManager.chart.songName;
+
+                if (scoreText != null) scoreText.text = battleUI.playerScore.ToString();
+                if (totalNotesText != null) totalNotesText.text = battleUI.TotalNoteSlots.ToString();
+                if (comboText != null) comboText.text = battleUI.playerMaxCombo.ToString();
+                if (maxComboText != null) maxComboText.text = battleUI.playerMaxCombo.ToString();
+                if (accuracyText != null) accuracyText.text = string.Format("{0:F1}%", hitRatio * 100f);
+
+                if (gradeText != null)
+                {
+                    gradeText.text = grade.ToString();
+                    gradeText.color = GetGradeColor(grade);
+                }
+
+                if (perfectText != null) perfectText.text = p.ToString();
+                if (goodText != null) goodText.text = g.ToString();
+                if (badText != null) badText.text = b.ToString();
+                if (missText != null) missText.text = m.ToString();
+            }
+
+            // Save achievement (best score, combo, accuracy, play count)
             if (songToSave != null)
             {
                 SongStats.SaveResult(songToSave, battleUI.playerScore, battleUI.playerMaxCombo, hitRatio);
@@ -168,7 +199,7 @@ namespace RhythmGame
             StartCoroutine(FadeAndRetry());
         }
 
-        System.Collections.IEnumerator FadeAndRetry()
+        IEnumerator FadeAndRetry()
         {
             yield return FadePanel(1f, 0f, fadeDuration);
             HidePanelImmediate();
@@ -181,20 +212,20 @@ namespace RhythmGame
             StartCoroutine(FadeAndGoToSongList());
         }
 
-        System.Collections.IEnumerator FadeAndGoToSongList()
+        IEnumerator FadeAndGoToSongList()
         {
             yield return FadePanel(1f, 0f, fadeDuration);
             HidePanelImmediate();
             SceneManager.LoadScene(songListSceneName);
         }
 
-        System.Collections.IEnumerator FadeAndHide()
+        IEnumerator FadeAndHide()
         {
             yield return FadePanel(1f, 0f, fadeDuration);
             HidePanelImmediate();
         }
 
-        System.Collections.IEnumerator FadePanel(float from, float to, float duration)
+        IEnumerator FadePanel(float from, float to, float duration)
         {
             float elapsed = 0f;
             while (elapsed < duration)
@@ -213,8 +244,6 @@ namespace RhythmGame
             if (panelRoot != null) panelRoot.SetActive(false);
             if (panelCanvasGroup != null) panelCanvasGroup.alpha = 0f;
         }
-
-
 
         Color GetGradeColor(Grade grade)
         {
