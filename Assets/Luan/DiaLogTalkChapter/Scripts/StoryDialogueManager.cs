@@ -601,15 +601,15 @@ namespace Luan.Dialogue
                 var cfg = GetCurrentChapterConfig();
                 var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
 
-                // 1. Chapter Logo (Khởi tạo sẵn sàng cho Animation Fade In & Scale Pop)
+                // 1. Chapter Logo (Khởi tạo alpha = 0 để Fade In, GIỮ NGUYÊN 100% SCALE TỪ EDIT MODE)
                 Sprite logoSpr = data != null ? data.chapterLogo : null;
                 if (chapterLogoImage != null)
                 {
                     if (logoSpr != null)
                     {
                         chapterLogoImage.sprite = logoSpr;
-                        chapterLogoImage.color = new Color(1f, 1f, 1f, 0f); // Bắt đầu ẩn hoàn toàn để chạy Fade In
-                        chapterLogoImage.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+                        Color c = chapterLogoImage.color;
+                        chapterLogoImage.color = new Color(c.r, c.g, c.b, 0f); // Bắt đầu ẩn hoàn toàn để Fade In
                         chapterLogoImage.gameObject.SetActive(true);
                     }
                     else
@@ -691,7 +691,12 @@ namespace Luan.Dialogue
                 skipLogoRequested = false;
 
                 if (topBanner != null) topBanner.SetActive(true);
-                if (chapterLogoImage != null) chapterLogoImage.gameObject.SetActive(true);
+                if (chapterLogoImage != null)
+                {
+                    chapterLogoImage.gameObject.SetActive(true);
+                    Color c = chapterLogoImage.color;
+                    chapterLogoImage.color = new Color(c.r, c.g, c.b, 0f);
+                }
 
                 if (logoCanvasGroup != null)
                 {
@@ -700,24 +705,21 @@ namespace Luan.Dialogue
                     logoCanvasGroup.interactable = true;
                 }
 
-                // 1. ANIMATION FADE IN & SCALE POP (0.6s)
-                float fadeInTime = 0.6f;
+                // 1. Fade in Logo & Dim Overlay (0.5s) - Giữ nguyên 100% scale từ Edit Mode, chỉ fade alpha
+                float fadeInTime = 0.5f;
                 float elapsed = 0f;
-                Vector3 initialScale = new Vector3(0.8f, 0.8f, 1f);
-                Vector3 baseScale = Vector3.one;
 
                 while (elapsed < fadeInTime)
                 {
                     elapsed += Time.unscaledDeltaTime;
                     float t = Mathf.Clamp01(elapsed / fadeInTime);
                     float easeAlpha = Mathf.SmoothStep(0f, 1f, t);
-                    float easeScale = 1f - Mathf.Pow(1f - t, 3); // Cubic ease out pop
 
                     if (logoCanvasGroup != null) logoCanvasGroup.alpha = easeAlpha;
                     if (chapterLogoImage != null)
                     {
-                        chapterLogoImage.color = new Color(1f, 1f, 1f, easeAlpha);
-                        chapterLogoImage.transform.localScale = Vector3.LerpUnclamped(initialScale, baseScale, easeScale);
+                        Color c = chapterLogoImage.color;
+                        chapterLogoImage.color = new Color(c.r, c.g, c.b, easeAlpha);
                     }
                     if (chapterTitleText != null)
                     {
@@ -736,8 +738,8 @@ namespace Luan.Dialogue
                 if (logoCanvasGroup != null) logoCanvasGroup.alpha = 1f;
                 if (chapterLogoImage != null)
                 {
-                    chapterLogoImage.color = Color.white;
-                    chapterLogoImage.transform.localScale = Vector3.one;
+                    Color c = chapterLogoImage.color;
+                    chapterLogoImage.color = new Color(c.r, c.g, c.b, 1f);
                 }
                 if (dimOverlay != null)
                 {
@@ -745,26 +747,18 @@ namespace Luan.Dialogue
                     dimOverlay.color = new Color(c.r, c.g, c.b, targetDim);
                 }
 
-                // 2. GIỮ LOGO 3 GIÂY KÈM HIỆU ỨNG NHỊP THỞ (BREATHING PULSE)
+                // 2. GIỮ LOGO 3 GIÂY (GIỮ NGUYÊN 100% SCALE GỐC TRONG EDIT MODE)
                 float holdDuration = Mathf.Max(1.0f, logoDisplayDuration);
                 float holdTimer = 0f;
                 while (holdTimer < holdDuration && !skipLogoRequested)
                 {
                     holdTimer += Time.unscaledDeltaTime;
-                    // Nhịp thở nhẹ nhàng 1.0 -> 1.03 để logo sống động
-                    float pulse = 1f + 0.025f * Mathf.Sin(holdTimer * 3.5f);
-                    if (chapterLogoImage != null)
-                    {
-                        chapterLogoImage.transform.localScale = new Vector3(pulse, pulse, 1f);
-                    }
                     yield return null;
                 }
 
-                // 3. ANIMATION FADE OUT & SCALE EXPAND (0.45s)
+                // 3. Fade out Logo (0.45s) - Giữ nguyên 100% scale từ Edit Mode, chỉ fade alpha
                 float fadeOutTime = 0.45f;
                 elapsed = 0f;
-                Vector3 currentScale = chapterLogoImage != null ? chapterLogoImage.transform.localScale : Vector3.one;
-                Vector3 dissipateScale = currentScale * 1.07f; // bung nhẹ ra khi tan biến
 
                 while (elapsed < fadeOutTime)
                 {
@@ -775,8 +769,8 @@ namespace Luan.Dialogue
                     if (logoCanvasGroup != null) logoCanvasGroup.alpha = 1f - ease;
                     if (chapterLogoImage != null)
                     {
-                        chapterLogoImage.color = new Color(1f, 1f, 1f, 1f - ease);
-                        chapterLogoImage.transform.localScale = Vector3.Lerp(currentScale, dissipateScale, ease);
+                        Color c = chapterLogoImage.color;
+                        chapterLogoImage.color = new Color(c.r, c.g, c.b, 1f - ease);
                     }
                     if (chapterTitleText != null)
                     {
@@ -789,8 +783,8 @@ namespace Luan.Dialogue
                 if (logoCanvasGroup != null) logoCanvasGroup.alpha = 0f;
                 if (chapterLogoImage != null)
                 {
-                    chapterLogoImage.color = new Color(1f, 1f, 1f, 0f);
-                    chapterLogoImage.transform.localScale = Vector3.one;
+                    Color c = chapterLogoImage.color;
+                    chapterLogoImage.color = new Color(c.r, c.g, c.b, 0f);
                 }
                 if (topBanner != null) topBanner.SetActive(false);
             }
@@ -826,7 +820,6 @@ namespace Luan.Dialogue
             if (characterStoryCard != null)
             {
                 characterStoryCard.SetActive(true);
-                characterStoryCard.transform.localScale = new Vector3(0.94f, 0.94f, 1f);
                 if (storyCardCanvasGroup != null)
                 {
                     storyCardCanvasGroup.alpha = 0f;
@@ -843,26 +836,19 @@ namespace Luan.Dialogue
             if (promptPulseRoutine != null) StopCoroutine(promptPulseRoutine);
             promptPulseRoutine = StartCoroutine(AnimatePromptPulse());
 
-            // Fade in Story Card mượt mà kết hợp scale pop (0.5s)
-            float cardFadeTime = 0.5f;
+            // Fade in Story Card (0.45s) - Giữ nguyên 100% scale từ Edit Mode, chỉ fade alpha
+            float cardFadeTime = 0.45f;
             float cardElapsed = 0f;
-            Vector3 cardStartScale = new Vector3(0.94f, 0.94f, 1f);
             while (cardElapsed < cardFadeTime)
             {
                 cardElapsed += Time.unscaledDeltaTime;
                 float t = Mathf.Clamp01(cardElapsed / cardFadeTime);
                 float easeAlpha = Mathf.SmoothStep(0f, 1f, t);
-                float easeScale = 1f - Mathf.Pow(1f - t, 3);
 
                 if (storyCardCanvasGroup != null) storyCardCanvasGroup.alpha = easeAlpha;
-                if (characterStoryCard != null)
-                {
-                    characterStoryCard.transform.localScale = Vector3.LerpUnclamped(cardStartScale, Vector3.one, easeScale);
-                }
                 yield return null;
             }
             if (storyCardCanvasGroup != null) storyCardCanvasGroup.alpha = 1f;
-            if (characterStoryCard != null) characterStoryCard.transform.localScale = Vector3.one;
 
             // Nếu đang bật Auto Mode, tự động chờ người chơi đọc rồi chuyển tiếp
             if (isAutoMode)
