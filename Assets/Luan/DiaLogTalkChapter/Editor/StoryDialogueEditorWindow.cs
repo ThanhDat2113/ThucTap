@@ -11,13 +11,14 @@ namespace Luan.Dialogue.Editor
         private Vector2 scrollPos;
         private StoryDialogueManager manager;
         private int selectedChapterIndex = 0;
+        private int selectedDialogueSubTab = 0; // 0: Pre-Battle, 1: Post-Battle
 
         [MenuItem("Tools/Luan/Story Dialogue Editor (Soạn Lời Thoại)")]
         [MenuItem("Window/Story Dialogue Editor")]
         public static void OpenWindow()
         {
             var window = GetWindow<StoryDialogueEditorWindow>("Story Dialogue");
-            window.minSize = new Vector2(620, 720);
+            window.minSize = new Vector2(680, 780);
             window.Show();
         }
 
@@ -48,7 +49,7 @@ namespace Luan.Dialogue.Editor
                 alignment = TextAnchor.MiddleCenter
             };
             GUI.color = new Color(0.2f, 0.95f, 1f, 1f);
-            EditorGUILayout.LabelField("⚡ BẢNG SOẠN LỜI THOẠI CỐT TRUYỆN (MULTI-CHAPTER) ⚡", titleStyle);
+            EditorGUILayout.LabelField("⚡ BẢNG SOẠN LỜI THOẠI & CỐT TRUYỆN (MULTI-CHAPTER) ⚡", titleStyle);
             GUI.color = Color.white;
 
             // 2. THÔNG TIN TÀI KHOẢN (DISPLAY NAME)
@@ -83,7 +84,6 @@ namespace Luan.Dialogue.Editor
                 return;
             }
 
-            // Đảm bảo có ít nhất 2 chapter mặc định
             if (manager.Chapters == null || manager.Chapters.Count == 0)
             {
                 StoryDialogueSceneBuilder.Build();
@@ -92,8 +92,8 @@ namespace Luan.Dialogue.Editor
             var chapters = manager.Chapters;
 
             // 4. CHAPTER SELECTOR TABS
-            EditorGUILayout.LabelField("📚 Chọn Chapter Cần Soạn Lời Thoại:", EditorStyles.boldLabel);
-            int tabCount = chapters.Count + 1; // +1 cho tab [+ Thêm Chapter]
+            EditorGUILayout.LabelField("📚 Chọn Chapter Cần Chỉnh Sửa:", EditorStyles.boldLabel);
+            int tabCount = chapters.Count + 1;
             string[] tabNames = new string[tabCount];
             for (int c = 0; c < chapters.Count; c++)
             {
@@ -106,7 +106,6 @@ namespace Luan.Dialogue.Editor
 
             if (newTab == tabCount - 1)
             {
-                // Người dùng bấm vào "Thêm Chapter Mới"
                 CreateNewChapter(chapters.Count + 1);
                 selectedChapterIndex = chapters.Count - 1;
             }
@@ -121,6 +120,7 @@ namespace Luan.Dialogue.Editor
                 selectedChapterIndex = chapters.Count - 1;
 
             var activeChapter = chapters[selectedChapterIndex];
+            DialogueStoryData currentData = activeChapter.dialogueAsset;
 
             // 5. CẤU HÌNH CHAPTER ĐANG CHỌN
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -129,7 +129,6 @@ namespace Luan.Dialogue.Editor
             EditorGUILayout.LabelField($"⚙️ Cấu Hình Chapter {activeChapter.chapterNumber}: {activeChapter.chapterTitle}", EditorStyles.boldLabel);
             GUI.color = Color.white;
 
-            // Nút test chapter này
             bool isCurrentTest = manager.TestChapter == activeChapter.chapterNumber;
             GUI.backgroundColor = isCurrentTest ? new Color(0.2f, 1f, 0.6f) : Color.white;
             string testBtnText = isCurrentTest ? "✓ Đang Chọn Để Test Trong Editor" : "🧪 Đặt Làm Chapter Test Trong Editor";
@@ -150,7 +149,9 @@ namespace Luan.Dialogue.Editor
             {
                 Undo.RecordObject(manager, "Đổi tên Chapter");
                 activeChapter.chapterTitle = newTitle;
+                if (currentData != null) currentData.chapterTitle = newTitle;
                 EditorUtility.SetDirty(manager);
+                if (currentData != null) EditorUtility.SetDirty(currentData);
             }
             EditorGUILayout.EndHorizontal();
 
@@ -189,33 +190,117 @@ namespace Luan.Dialogue.Editor
 
             EditorGUILayout.Space(8);
 
-            // 6. DANH SÁCH LỜI THOẠI CỦA CHAPTER
-            DialogueStoryData currentData = activeChapter.dialogueAsset;
-            List<DialogueLine> lines = null;
+            // 6. GIỚI THIỆU CHAPTER & CỐT TRUYỆN (INTRO SCREEN)
             if (currentData != null)
             {
-                lines = currentData.lines;
-            }
-            else
-            {
-                lines = manager.DialogueLines;
-            }
+                GUI.backgroundColor = new Color(0.92f, 0.95f, 1f);
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+                GUI.backgroundColor = Color.white;
 
-            if (lines == null || lines.Count == 0)
-            {
-                EditorGUILayout.HelpBox($"⚠️ Chapter {activeChapter.chapterNumber} hiện chưa có câu thoại nào!\nBấm '+ Thêm Câu Thoại Mới' bên dưới để bắt đầu soạn thoại.", MessageType.Info);
-            }
-            else
-            {
-                EditorGUILayout.LabelField($"💬 Danh Sách Lời Thoại Chapter {activeChapter.chapterNumber} ({lines.Count} câu):", EditorStyles.boldLabel);
+                GUI.color = new Color(1f, 0.4f, 0.85f, 1f);
+                EditorGUILayout.LabelField("📖 Màn Hình Giới Thiệu (Chapter Logo & Cốt Truyện Nhân Vật)", EditorStyles.boldLabel);
+                GUI.color = Color.white;
+                EditorGUILayout.HelpBox("Màn hình này sẽ hiện ra trước khi vào trận. Người chơi đọc sơ về nhân vật rồi chạm vào màn hình để bắt đầu đối thoại.", MessageType.None);
 
-                for (int i = 0; i < lines.Count; i++)
+                EditorGUILayout.Space(4);
+
+                // Logo Chapter Image slot
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Logo Chapter (Sprite):", GUILayout.Width(140));
+                Sprite newLogo = (Sprite)EditorGUILayout.ObjectField(currentData.chapterLogo, typeof(Sprite), false);
+                if (newLogo != currentData.chapterLogo)
                 {
-                    var line = lines[i];
+                    RecordUndo(currentData, "Đổi Logo Chapter");
+                    currentData.chapterLogo = newLogo;
+                    MarkDirty(currentData);
+                }
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.LabelField("   💡 Bạn có thể kéo thả Sprite Logo Chapter vào ô trên khi làm xong ảnh.", EditorStyles.miniLabel);
+
+                EditorGUILayout.Space(4);
+
+                // Story Title
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Tiêu Đề Giới Thiệu:", GUILayout.Width(140));
+                string newStoryTitle = EditorGUILayout.TextField(currentData.characterStoryTitle);
+                if (newStoryTitle != currentData.characterStoryTitle)
+                {
+                    RecordUndo(currentData, "Đổi Tiêu Đề Cốt Truyện");
+                    currentData.characterStoryTitle = newStoryTitle;
+                    MarkDirty(currentData);
+                }
+                EditorGUILayout.EndHorizontal();
+
+                // Character Intro Art
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Ảnh Nhân Vật Intro:", GUILayout.Width(140));
+                Sprite newIntroArt = (Sprite)EditorGUILayout.ObjectField(currentData.characterIntroArt, typeof(Sprite), false);
+                if (newIntroArt != currentData.characterIntroArt)
+                {
+                    RecordUndo(currentData, "Đổi Ảnh Intro Nhân Vật");
+                    currentData.characterIntroArt = newIntroArt;
+                    MarkDirty(currentData);
+                }
+                EditorGUILayout.EndHorizontal();
+
+                // Story Text Body
+                EditorGUILayout.LabelField("Nội Dung Cốt Truyện / Giới Thiệu:");
+                string newStory = EditorGUILayout.TextArea(currentData.characterStory, GUILayout.Height(100));
+                if (newStory != currentData.characterStory)
+                {
+                    RecordUndo(currentData, "Sửa Nội Dung Cốt Truyện");
+                    currentData.characterStory = newStory;
+                    MarkDirty(currentData);
+                }
+
+                EditorGUILayout.EndVertical();
+            }
+
+            EditorGUILayout.Space(10);
+
+            // 7. SOẠN LỜI THOẠI (PRE-BATTLE VS POST-BATTLE)
+            int preCount = currentData != null ? currentData.preBattleLines.Count : manager.DialogueLines.Count;
+            int postCount = currentData != null ? currentData.postBattleLines.Count : 0;
+
+            string[] subTabLabels = new string[]
+            {
+                $"⚔️ Thoại Trước Trận ({preCount} câu)",
+                $"🏆 Thoại Sau Trận ({postCount} câu)"
+            };
+
+            selectedDialogueSubTab = GUILayout.Toolbar(selectedDialogueSubTab, subTabLabels, GUILayout.Height(30));
+            EditorGUILayout.Space(6);
+
+            List<DialogueLine> activeLinesList = null;
+            if (currentData != null)
+            {
+                activeLinesList = selectedDialogueSubTab == 0 ? currentData.preBattleLines : currentData.postBattleLines;
+            }
+            else
+            {
+                activeLinesList = manager.DialogueLines;
+            }
+
+            string subTabDesc = selectedDialogueSubTab == 0
+                ? "Các câu thoại diễn ra TRƯỚC khi nốt nhạc bắt đầu rơi."
+                : "Các câu thoại diễn ra SAU khi trận đấu kết thúc thành công (thắng).";
+            EditorGUILayout.HelpBox(subTabDesc, MessageType.Info);
+
+            EditorGUILayout.Space(4);
+
+            if (activeLinesList == null || activeLinesList.Count == 0)
+            {
+                EditorGUILayout.HelpBox($"⚠️ Hiện chưa có câu thoại nào trong danh sách này.\nBấm '+ Thêm Câu Thoại Mới' bên dưới để bắt đầu soạn.", MessageType.Warning);
+            }
+            else
+            {
+                for (int i = 0; i < activeLinesList.Count; i++)
+                {
+                    var line = activeLinesList[i];
                     bool isLeft = line.side == SpeakerSide.Left;
 
                     Color accentColor = isLeft ? new Color(0.2f, 0.95f, 1f) : new Color(1f, 0.25f, 0.85f);
-                    string opponentDisplayName = !string.IsNullOrEmpty(activeChapter.defaultOpponentName) ? activeChapter.defaultOpponentName : "BOSS";
+                    string opponentDisplayName = !string.IsNullOrEmpty(activeChapter.defaultOpponentName) ? activeChapter.defaultOpponentName : "Raze";
 
                     GUI.backgroundColor = isLeft ? new Color(0.88f, 0.96f, 1f) : new Color(1f, 0.90f, 0.98f);
                     EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -231,18 +316,18 @@ namespace Luan.Dialogue.Editor
                     if (GUILayout.Button("▲", GUILayout.Width(26), GUILayout.Height(20)) && i > 0)
                     {
                         RecordUndo(currentData, "Di chuyển câu thoại lên");
-                        var temp = lines[i];
-                        lines[i] = lines[i - 1];
-                        lines[i - 1] = temp;
+                        var temp = activeLinesList[i];
+                        activeLinesList[i] = activeLinesList[i - 1];
+                        activeLinesList[i - 1] = temp;
                         MarkDirty(currentData);
                         break;
                     }
-                    if (GUILayout.Button("▼", GUILayout.Width(26), GUILayout.Height(20)) && i < lines.Count - 1)
+                    if (GUILayout.Button("▼", GUILayout.Width(26), GUILayout.Height(20)) && i < activeLinesList.Count - 1)
                     {
                         RecordUndo(currentData, "Di chuyển câu thoại xuống");
-                        var temp = lines[i];
-                        lines[i] = lines[i + 1];
-                        lines[i + 1] = temp;
+                        var temp = activeLinesList[i];
+                        activeLinesList[i] = activeLinesList[i + 1];
+                        activeLinesList[i + 1] = temp;
                         MarkDirty(currentData);
                         break;
                     }
@@ -251,7 +336,7 @@ namespace Luan.Dialogue.Editor
                     if (GUILayout.Button("✕ Xóa", GUILayout.Width(55), GUILayout.Height(20)))
                     {
                         RecordUndo(currentData, "Xóa câu thoại");
-                        lines.RemoveAt(i);
+                        activeLinesList.RemoveAt(i);
                         MarkDirty(currentData);
                         GUI.backgroundColor = Color.white;
                         break;
@@ -298,11 +383,12 @@ namespace Luan.Dialogue.Editor
                         line.speakerName = newName;
                         MarkDirty(currentData);
                     }
+                    line.nameColor = EditorGUILayout.ColorField(GUIContent.none, line.nameColor, false, false, false, GUILayout.Width(50));
                     EditorGUILayout.EndHorizontal();
 
                     // Nội dung thoại
                     EditorGUILayout.LabelField("Nội Dung Lời Thoại:");
-                    string newText = EditorGUILayout.TextArea(line.text, GUILayout.Height(55));
+                    string newText = EditorGUILayout.TextArea(line.text, GUILayout.Height(50));
                     if (newText != line.text)
                     {
                         RecordUndo(currentData, "Sửa nội dung thoại");
@@ -317,12 +403,14 @@ namespace Luan.Dialogue.Editor
 
             EditorGUILayout.Space(6);
 
-            // 7. NÚT THÊM CÂU THOẠI & LƯU
+            // 8. NÚT THÊM CÂU THOẠI & LƯU
             GUI.backgroundColor = new Color(0.3f, 1f, 0.5f);
-            if (GUILayout.Button($"➕ Thêm Câu Thoại Mới Vào Chapter {activeChapter.chapterNumber}", GUILayout.Height(36)))
+            string addLabel = selectedDialogueSubTab == 0 ? "➕ Thêm Câu Thoại Trước Trận (Pre-Battle)" : "➕ Thêm Câu Thoại Sau Trận (Post-Battle)";
+            if (GUILayout.Button(addLabel, GUILayout.Height(36)))
             {
                 RecordUndo(currentData, "Thêm câu thoại mới");
-                lines.Add(new DialogueLine
+                string oppName = !string.IsNullOrEmpty(activeChapter.defaultOpponentName) ? activeChapter.defaultOpponentName : "Raze";
+                activeLinesList.Add(new DialogueLine
                 {
                     speakerName = "{PLAYER}",
                     side = SpeakerSide.Left,
@@ -335,25 +423,32 @@ namespace Luan.Dialogue.Editor
             GUI.backgroundColor = Color.white;
 
             EditorGUILayout.Space(10);
+            EditorGUILayout.BeginHorizontal();
             GUI.backgroundColor = new Color(1f, 0.8f, 0.3f);
-            if (GUILayout.Button("💾 Lưu Thay Đổi Vào Scene & File Asset", GUILayout.Height(32)))
+            if (GUILayout.Button("💾 Lưu Thay Đổi Vào Scene & File Asset", GUILayout.Height(34)))
             {
                 MarkDirty(currentData);
                 AssetDatabase.SaveAssets();
                 EditorSceneManager.MarkSceneDirty(manager.gameObject.scene);
                 EditorSceneManager.SaveScene(manager.gameObject.scene);
-                Debug.Log($"<color=#00FFAA>[StoryDialogueEditor] Đã lưu thành công lời thoại Chapter {activeChapter.chapterNumber}!</color>");
+                Debug.Log($"<color=#00FFAA>[StoryDialogueEditor] Đã lưu thành công dữ liệu Chapter {activeChapter.chapterNumber}!</color>");
+            }
+
+            GUI.backgroundColor = new Color(0.2f, 0.9f, 1f);
+            if (GUILayout.Button("⚡ Build Lại Toàn Bộ UI Vào GameplayScene", GUILayout.Height(34)))
+            {
+                StoryDialogueSceneBuilder.Build();
             }
             GUI.backgroundColor = Color.white;
+            EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space(12);
 
-            // 8. GỢI Ý & HƯỚNG DẪN
             EditorGUILayout.HelpBox(
-                "💡 MẸO ĐA CHAPTER (MULTI-CHAPTER):\n" +
-                "• Bạn có thể tạo lời thoại cho Chapter 1, Chapter 2, Chapter 3,... bằng các Tab ở trên.\n" +
-                "• Khi người chơi chọn Week tương ứng trong Story Mode, game sẽ tự động load đúng lời thoại và Avatar của Boss Chapter đó.\n" +
-                "• Dùng từ khóa {PLAYER} trong câu thoại (VD: 'Chào {PLAYER}!') để tự động thay bằng Tên Tài Khoản thực tế của người chơi.",
+                "💡 GHI CHÚ QUAN TRỌNG:\n" +
+                "• Lời thoại trước trận: 29 câu đối đầu giữa {PLAYER} và Raze.\n" +
+                "• Lời thoại sau trận: 37 câu đối thoại sau chiến thắng (hơn đúng 1 điểm, nhận huy hiệu).\n" +
+                "• Dùng từ khóa {PLAYER} hoặc [Tên người chơi] để tự động thay bằng Tên Tài Khoản thực tế.",
                 MessageType.Info
             );
 
@@ -367,8 +462,11 @@ namespace Luan.Dialogue.Editor
             if (newAsset == null)
             {
                 newAsset = ScriptableObject.CreateInstance<DialogueStoryData>();
+                newAsset.chapterNumber = nextNum;
                 newAsset.chapterTitle = $"Chapter {nextNum}";
-                newAsset.lines = new List<DialogueLine>
+                newAsset.characterStoryTitle = $"Câu chuyện của BOSS {nextNum}";
+                newAsset.characterStory = "Nội dung giới thiệu về nhân vật...";
+                newAsset.preBattleLines = new List<DialogueLine>
                 {
                     new DialogueLine
                     {
@@ -385,6 +483,7 @@ namespace Luan.Dialogue.Editor
                         customAvatar = manager.OpponentAvatarSprite
                     }
                 };
+                newAsset.postBattleLines = new List<DialogueLine>();
                 AssetDatabase.CreateAsset(newAsset, newAssetPath);
                 AssetDatabase.SaveAssets();
             }

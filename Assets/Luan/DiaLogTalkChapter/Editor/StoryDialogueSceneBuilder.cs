@@ -6,6 +6,31 @@ using Luan.Dialogue;
 
 namespace Luan.Dialogue.Editor
 {
+    [InitializeOnLoad]
+    public static class StoryDialogueSceneAutoBuilder
+    {
+        static StoryDialogueSceneAutoBuilder()
+        {
+            EditorApplication.delayCall += CheckAndBuild;
+        }
+
+        private static void CheckAndBuild()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+
+            var activeScene = EditorSceneManager.GetActiveScene();
+            if (activeScene.path == "Assets/Scenes/GameplayScene.unity")
+            {
+                var canvas = GameObject.Find("StoryDialogueCanvas");
+                if (canvas != null && canvas.transform.Find("IntroContainer") == null)
+                {
+                    Debug.Log("<color=#00FF99>[StoryDialogueSceneAutoBuilder] Phát hiện chưa có IntroContainer trong GameplayScene, tự động build...</color>");
+                    StoryDialogueSceneBuilder.Build();
+                }
+            }
+        }
+    }
+
     public static class StoryDialogueSceneBuilder
     {
         private const string ScenePath = "Assets/Scenes/GameplayScene.unity";
@@ -66,15 +91,8 @@ namespace Luan.Dialogue.Editor
             if (oppProp != null) oppProp.objectReferenceValue = boss1Avatar;
             so.ApplyModifiedProperties();
 
-            // Build UI 2 Speaker
+            // Build UI Intro + 2 Speaker Dialogue
             manager.BuildUIGameObjects(boxSpr, frameSpr, skipSpr, autoSpr, nameTagSpr, nextSpr);
-
-            // Neu danh sach thoai dang rong -> nap 4 cau mau Chapter 1
-            if (manager.DialogueLines == null || manager.DialogueLines.Count == 0)
-            {
-                manager.InitDefaultChapter1Lines();
-                EditorUtility.SetDirty(manager);
-            }
 
             // Tao hoac load Chapter1_Dialogue & Chapter2_Dialogue assets
             string chap1Path = "Assets/Luan/DiaLogTalkChapter/Data/Chapter1_Dialogue.asset";
@@ -82,10 +100,20 @@ namespace Luan.Dialogue.Editor
             if (chap1Asset == null)
             {
                 chap1Asset = ScriptableObject.CreateInstance<DialogueStoryData>();
+                chap1Asset.chapterNumber = 1;
                 chap1Asset.chapterTitle = "Chapter 1: Concrete Dreams";
-                chap1Asset.lines = new List<DialogueLine>(manager.DialogueLines);
+                chap1Asset.characterStoryTitle = "Câu chuyện của Raze";
+                chap1Asset.characterIntroArt = boss1Avatar;
                 AssetDatabase.CreateAsset(chap1Asset, chap1Path);
                 AssetDatabase.SaveAssets();
+            }
+            else
+            {
+                if (chap1Asset.characterIntroArt == null)
+                {
+                    chap1Asset.characterIntroArt = boss1Avatar;
+                    EditorUtility.SetDirty(chap1Asset);
+                }
             }
 
             string chap2Path = "Assets/Luan/DiaLogTalkChapter/Data/Chapter2_Dialogue.asset";
@@ -102,7 +130,7 @@ namespace Luan.Dialogue.Editor
                 chapterTitle = "Concrete Dreams",
                 dialogueAsset = chap1Asset,
                 opponentAvatar = boss1Avatar,
-                defaultOpponentName = "BOSS 1"
+                defaultOpponentName = "Raze"
             });
             manager.Chapters.Add(new ChapterDialogueEntry
             {
@@ -119,8 +147,7 @@ namespace Luan.Dialogue.Editor
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             EditorSceneManager.SaveOpenScenes();
 
-            Debug.Log("<color=#00FF99>[StoryDialogueSceneBuilder] Da build thanh cong Story Dialogue UI va Multi-Chapter (Chapter 1 & 2) vao GameplayScene!</color>");
+            Debug.Log("<color=#00FF99>[StoryDialogueSceneBuilder] Da build thanh cong Story Dialogue UI (Intro + Pre/Post Battle) vao GameplayScene!</color>");
         }
     }
 }
-

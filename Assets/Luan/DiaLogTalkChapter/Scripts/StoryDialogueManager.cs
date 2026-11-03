@@ -13,6 +13,14 @@ namespace Luan.Dialogue
         Right   // Boss 1 / Opponent
     }
 
+    public enum DialoguePhase
+    {
+        None,
+        Intro,
+        PreBattle,
+        PostBattle
+    }
+
     [System.Serializable]
     public class DialogueLine
     {
@@ -72,7 +80,7 @@ namespace Luan.Dialogue
         public int chapterNumber = 1;
         [Tooltip("Tên hiển thị Chapter")]
         public string chapterTitle = "Chapter 1";
-        [Tooltip("File Asset chứa lời thoại của Chapter này")]
+        [Tooltip("File Asset chứa dữ liệu của Chapter này")]
         public DialogueStoryData dialogueAsset;
         [Tooltip("Avatar đối thủ riêng của Chapter này (VD: Boss 1, Boss 2 / DJ Null)")]
         public Sprite opponentAvatar;
@@ -81,17 +89,18 @@ namespace Luan.Dialogue
     }
 
     /// <summary>
-    /// Điều phối hệ thống hội thoại (Story Dialogue) trước màn chơi.
-    /// - Hỗ trợ hiển thị riêng biệt 2 nhân vật (Left: Main 1, Right: Boss 1, Boss 2,...).
-    /// - Hỗ trợ ĐA CHAPTER: Tự động chạy đúng hội thoại theo Week/Chapter người chơi chọn (Chapter 1, Chapter 2,...).
-    /// - Nhân vật đang nói sẽ sáng rõ, nổi bật (pop animation), nhân vật kia mờ đi nhẹ.
-    /// - Dễ dàng nhập/sửa danh sách thoại trực tiếp trên Story Dialogue Editor Window.
+    /// Điều phối hệ thống hội thoại (Story Dialogue) trước và sau trận đấu.
+    /// - Hỗ trợ màn hình Intro giới thiệu Chapter Logo & cốt truyện nhân vật trước trận.
+    /// - Hỗ trợ riêng biệt 2 nhân vật (Left: Main 1 / Player, Right: Boss 1 / Raze, Boss 2,...).
+    /// - Hỗ trợ ĐA CHAPTER: Tự động chạy đúng hội thoại theo Week/Chapter người chơi chọn.
+    /// - Tự động chạy lời thoại trước trận (Pre-Battle) -> Gameplay -> lời thoại sau trận (Post-Battle).
     /// </summary>
     public class StoryDialogueManager : MonoBehaviour
     {
         public static StoryDialogueManager Instance { get; private set; }
 
         private static bool hasCompletedDialogueThisSession = false;
+        private static bool hasCompletedPostBattleThisSession = false;
 
         [Header("Chế độ kiểm thử")]
         [Tooltip("Bật để luôn chạy hội thoại khi bấm Play trực tiếp tại GameplayScene")]
@@ -113,7 +122,18 @@ namespace Luan.Dialogue
         [SerializeField] private Button clickAreaButton;
         [SerializeField] private GameObject nextIndicator;
 
-        [Header("Speaker Bên Trái (Main 1)")]
+        [Header("Intro Cốt Truyện & Nhân Vật")]
+        [SerializeField] private GameObject introContainer;
+        [SerializeField] private CanvasGroup introCanvasGroup;
+        [SerializeField] private Image chapterLogoImage;
+        [SerializeField] private TMP_Text chapterTitleText;
+        [SerializeField] private TMP_Text characterStoryTitleText;
+        [SerializeField] private TMP_Text characterStoryBodyText;
+        [SerializeField] private Image characterIntroArtImage;
+        [SerializeField] private Button tapToContinueButton;
+        [SerializeField] private TMP_Text tapPromptText;
+
+        [Header("Speaker Bên Trái (Main 1 / Player)")]
         [SerializeField] private SpeakerUI leftSpeaker = new SpeakerUI();
 
         [Header("Speaker Bên Phải (Boss)")]
@@ -146,15 +166,18 @@ namespace Luan.Dialogue
         [SerializeField] private float typingSpeed = 0.025f;
         [SerializeField] private float autoAdvanceDelay = 2.2f;
 
+        private DialoguePhase currentPhase = DialoguePhase.None;
         private int currentLineIndex = -1;
         private bool isTyping = false;
         private bool isAutoMode = false;
         private Coroutine typingRoutine;
         private Coroutine transitionRoutine;
         private Coroutine autoRoutine;
+        private Coroutine promptPulseRoutine;
 
         public List<ChapterDialogueEntry> Chapters => chapters;
         public int TestChapter { get => testChapter; set => testChapter = value; }
+        public DialoguePhase CurrentPhase => currentPhase;
 
         public int GetCurrentChapterNumber()
         {
@@ -190,21 +213,46 @@ namespace Luan.Dialogue
             var cfg = GetCurrentChapterConfig();
             if (cfg != null && !string.IsNullOrEmpty(cfg.defaultOpponentName))
                 return cfg.defaultOpponentName;
-            return "BOSS " + GetCurrentChapterNumber();
+            return "Raze";
+        }
+
+        public List<DialogueLine> GetPreBattleLines()
+        {
+            var cfg = GetCurrentChapterConfig();
+            if (cfg != null && cfg.dialogueAsset != null && cfg.dialogueAsset.preBattleLines != null && cfg.dialogueAsset.preBattleLines.Count > 0)
+                return cfg.dialogueAsset.preBattleLines;
+
+            if (dialogueDataAsset != null && dialogueDataAsset.preBattleLines != null && dialogueDataAsset.preBattleLines.Count > 0)
+                return dialogueDataAsset.preBattleLines;
+
+            if (dialogueDataAsset != null && dialogueDataAsset.lines != null && dialogueDataAsset.lines.Count > 0)
+                return dialogueDataAsset.lines;
+
+            return dialogueLines;
+        }
+
+        public List<DialogueLine> GetPostBattleLines()
+        {
+            var cfg = GetCurrentChapterConfig();
+            if (cfg != null && cfg.dialogueAsset != null && cfg.dialogueAsset.postBattleLines != null && cfg.dialogueAsset.postBattleLines.Count > 0)
+                return cfg.dialogueAsset.postBattleLines;
+
+            if (dialogueDataAsset != null && dialogueDataAsset.postBattleLines != null && dialogueDataAsset.postBattleLines.Count > 0)
+                return dialogueDataAsset.postBattleLines;
+
+            return null;
         }
 
         public List<DialogueLine> DialogueLines
         {
             get
             {
-                var cfg = GetCurrentChapterConfig();
-                if (cfg != null && cfg.dialogueAsset != null && cfg.dialogueAsset.lines != null && cfg.dialogueAsset.lines.Count > 0)
-                    return cfg.dialogueAsset.lines;
-
-                if (dialogueDataAsset != null && dialogueDataAsset.lines != null && dialogueDataAsset.lines.Count > 0)
-                    return dialogueDataAsset.lines;
-
-                return dialogueLines;
+                if (currentPhase == DialoguePhase.PostBattle)
+                {
+                    var post = GetPostBattleLines();
+                    if (post != null && post.Count > 0) return post;
+                }
+                return GetPreBattleLines();
             }
         }
 
@@ -213,14 +261,6 @@ namespace Luan.Dialogue
         public Sprite OpponentAvatarSprite { get => opponentAvatarSprite; set => opponentAvatarSprite = value; }
         public SpeakerUI LeftSpeaker => leftSpeaker;
         public SpeakerUI RightSpeaker => rightSpeaker;
-
-        private void OnValidate()
-        {
-            if ((dialogueLines == null || dialogueLines.Count == 0) && dialogueDataAsset == null && (chapters == null || chapters.Count == 0))
-            {
-                InitDefaultChapter1Lines();
-            }
-        }
 
         public static bool HasPendingDialogue()
         {
@@ -233,9 +273,23 @@ namespace Luan.Dialogue
             return isStoryMode && hasValidWeek && !hasCompletedDialogueThisSession;
         }
 
+        public bool HasPendingPostBattleDialogue()
+        {
+            if (hasCompletedPostBattleThisSession) return false;
+
+            bool isStory = StorySession.Active;
+            if (testInEditor && Application.isEditor) isStory = true;
+
+            if (!isStory) return false;
+
+            var post = GetPostBattleLines();
+            return post != null && post.Count > 0;
+        }
+
         public static void ResetSessionState()
         {
             hasCompletedDialogueThisSession = false;
+            hasCompletedPostBattleThisSession = false;
         }
 
         private void Awake()
@@ -258,28 +312,67 @@ namespace Luan.Dialogue
 
         private void Start()
         {
+            SubscribeGameManager();
+
             if (HasPendingDialogue())
             {
                 StartDialogue();
             }
             else
             {
-                if (mainCanvasGroup != null)
-                {
-                    mainCanvasGroup.alpha = 0f;
-                    mainCanvasGroup.blocksRaycasts = false;
-                    mainCanvasGroup.interactable = false;
-                }
-                if (dialogueCanvas != null)
-                {
-                    dialogueCanvas.gameObject.SetActive(false);
-                }
+                HideAllUI();
             }
         }
 
         private void OnDestroy()
         {
             if (Instance == this) Instance = null;
+
+            var gm = RhythmGame.GameManager.Instance ?? FindFirstObjectByType<RhythmGame.GameManager>();
+            if (gm != null)
+            {
+                gm.OnStateChanged -= HandleGameStateChanged;
+            }
+        }
+
+        private void SubscribeGameManager()
+        {
+            var gm = RhythmGame.GameManager.Instance ?? FindFirstObjectByType<RhythmGame.GameManager>();
+            if (gm != null)
+            {
+                gm.OnStateChanged -= HandleGameStateChanged;
+                gm.OnStateChanged += HandleGameStateChanged;
+            }
+        }
+
+        private void HandleGameStateChanged(RhythmGame.GameState state)
+        {
+            if (state == RhythmGame.GameState.Finished)
+            {
+                if (HasPendingPostBattleDialogue())
+                {
+                    StartCoroutine(DelayedStartPostBattle());
+                }
+            }
+        }
+
+        private IEnumerator DelayedStartPostBattle()
+        {
+            yield return new WaitForSecondsRealtime(0.2f);
+            StartPostBattleDialogue();
+        }
+
+        private void HideAllUI()
+        {
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 0f;
+                mainCanvasGroup.blocksRaycasts = false;
+                mainCanvasGroup.interactable = false;
+            }
+            if (introContainer != null) introContainer.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
         }
 
         private void HookEvents()
@@ -299,19 +392,190 @@ namespace Luan.Dialogue
                 autoButton.onClick.RemoveAllListeners();
                 autoButton.onClick.AddListener(OnAutoToggleClicked);
             }
+            if (tapToContinueButton != null)
+            {
+                tapToContinueButton.onClick.RemoveAllListeners();
+                tapToContinueButton.onClick.AddListener(OnTapToContinueClicked);
+            }
         }
 
         public void StartDialogue()
         {
-            if (dialogueCanvas != null)
-                dialogueCanvas.gameObject.SetActive(true);
+            var cfg = GetCurrentChapterConfig();
+            var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
+            bool hasIntro = introContainer != null && (data != null && (!string.IsNullOrEmpty(data.characterStory) || data.chapterLogo != null || !string.IsNullOrEmpty(data.characterStoryTitle)));
+
+            if (hasIntro)
+            {
+                ShowIntroScreen();
+            }
+            else
+            {
+                StartPreBattleDialogue();
+            }
+        }
+
+        public void ShowIntroScreen()
+        {
+            currentPhase = DialoguePhase.Intro;
+
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
+            if (topControlsGroup != null) topControlsGroup.SetActive(false);
+
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
+            if (introContainer != null)
+            {
+                introContainer.SetActive(true);
+                if (introCanvasGroup != null)
+                {
+                    introCanvasGroup.alpha = 1f;
+                    introCanvasGroup.blocksRaycasts = true;
+                    introCanvasGroup.interactable = true;
+                }
+
+                var cfg = GetCurrentChapterConfig();
+                var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
+
+                // 1. Chapter Logo
+                Sprite logoSpr = data != null ? data.chapterLogo : null;
+                if (chapterLogoImage != null)
+                {
+                    if (logoSpr != null)
+                    {
+                        chapterLogoImage.sprite = logoSpr;
+                        chapterLogoImage.color = Color.white;
+                        chapterLogoImage.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        chapterLogoImage.sprite = null;
+                        chapterLogoImage.color = new Color(1f, 1f, 1f, 0f);
+                    }
+                }
+
+                // 2. Chapter Title
+                string cTitle = data != null && !string.IsNullOrEmpty(data.chapterTitle) ? data.chapterTitle : (cfg != null ? cfg.chapterTitle : $"CHAPTER {GetCurrentChapterNumber()}");
+                if (chapterTitleText != null)
+                {
+                    chapterTitleText.text = cTitle.ToUpper();
+                }
+
+                // 3. Story Title
+                string oppName = GetActiveOpponentName();
+                string sTitle = data != null && !string.IsNullOrEmpty(data.characterStoryTitle) ? data.characterStoryTitle : ("CÂU CHUYỆN CỦA " + oppName).ToUpper();
+                if (characterStoryTitleText != null)
+                {
+                    characterStoryTitleText.text = sTitle;
+                }
+
+                // 4. Story Body
+                string sBody = data != null ? data.characterStory : "";
+                if (characterStoryBodyText != null)
+                {
+                    characterStoryBodyText.text = ResolveDialogueText(sBody);
+                }
+
+                // 5. Opponent Intro Art
+                Sprite introArt = data != null && data.characterIntroArt != null ? data.characterIntroArt : GetActiveOpponentAvatar();
+                if (characterIntroArtImage != null)
+                {
+                    characterIntroArtImage.sprite = introArt;
+                    characterIntroArtImage.color = introArt != null ? Color.white : new Color(0, 0, 0, 0);
+                }
+
+                if (promptPulseRoutine != null) StopCoroutine(promptPulseRoutine);
+                promptPulseRoutine = StartCoroutine(AnimatePromptPulse());
+            }
+        }
+
+        private IEnumerator AnimatePromptPulse()
+        {
+            if (tapPromptText == null) yield break;
+
+            Color baseColor = tapPromptText.color;
+            while (currentPhase == DialoguePhase.Intro)
+            {
+                float alpha = Mathf.PingPong(Time.unscaledTime * 1.8f, 0.65f) + 0.35f;
+                tapPromptText.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+                yield return null;
+            }
+            tapPromptText.color = baseColor;
+        }
+
+        public void OnTapToContinueClicked()
+        {
+            if (currentPhase != DialoguePhase.Intro) return;
+
+            if (nextClip != null && SFXManager.Instance != null)
+                SFXManager.Instance.PlaySFX(nextClip);
+
+            if (transitionRoutine != null) StopCoroutine(transitionRoutine);
+            transitionRoutine = StartCoroutine(TransitionFromIntroToPreBattle());
+        }
+
+        private IEnumerator TransitionFromIntroToPreBattle()
+        {
+            if (promptPulseRoutine != null) { StopCoroutine(promptPulseRoutine); promptPulseRoutine = null; }
+
+            if (introCanvasGroup != null)
+            {
+                introCanvasGroup.blocksRaycasts = false;
+                introCanvasGroup.interactable = false;
+
+                float dur = 0.25f;
+                float elapsed = 0f;
+                while (elapsed < dur)
+                {
+                    elapsed += Time.unscaledDeltaTime;
+                    introCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / dur);
+                    yield return null;
+                }
+                introCanvasGroup.alpha = 0f;
+            }
+
+            if (introContainer != null) introContainer.SetActive(false);
+
+            StartPreBattleDialogue();
+        }
+
+        public void StartPreBattleDialogue()
+        {
+            currentPhase = DialoguePhase.PreBattle;
+
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+            if (introContainer != null) introContainer.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(true);
+            if (topControlsGroup != null) topControlsGroup.SetActive(true);
 
             var activeLines = DialogueLines;
             if (activeLines == null || activeLines.Count == 0)
             {
                 InitDefaultChapter1Lines();
-                activeLines = DialogueLines;
             }
+
+            currentLineIndex = -1;
+            isAutoMode = false;
+            UpdateAutoButtonVisual();
+
+            if (transitionRoutine != null) StopCoroutine(transitionRoutine);
+            transitionRoutine = StartCoroutine(AnimateOpenDialogue());
+        }
+
+        public void StartPostBattleDialogue()
+        {
+            currentPhase = DialoguePhase.PostBattle;
+
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+            if (introContainer != null) introContainer.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(true);
+            if (topControlsGroup != null) topControlsGroup.SetActive(true);
 
             currentLineIndex = -1;
             isAutoMode = false;
@@ -390,7 +654,6 @@ namespace Luan.Dialogue
 
             string resolvedSpeaker = ResolveSpeakerName(line.speakerName, isLeft);
 
-            // Kích hoạt bên nói, làm mờ/ẩn bên không nói
             if (activeSpeaker != null)
             {
                 activeSpeaker.SetActiveState(true, false, activeColor);
@@ -408,7 +671,6 @@ namespace Luan.Dialogue
                     activeSpeaker.avatarImage.color = spr != null ? Color.white : new Color(0, 0, 0, 0);
                 }
 
-                // Hiệu ứng Pop nảy nhẹ nhân vật đang nói
                 if (activeSpeaker.rootContainer != null)
                     StartCoroutine(AnimateSpeakerPop(activeSpeaker.rootContainer.transform));
             }
@@ -418,7 +680,6 @@ namespace Luan.Dialogue
                 inactiveSpeaker.SetActiveState(false, hideInactiveSpeaker, Color.gray);
             }
 
-            // Bắt đầu gõ chữ (tự động thay thế {PLAYER} bằng tên người chơi)
             string resolvedContent = ResolveDialogueText(line.text);
             typingRoutine = StartCoroutine(TypewriterRoutine(resolvedContent));
         }
@@ -481,13 +742,14 @@ namespace Luan.Dialogue
 
         public void OnDialogueAreaClicked()
         {
+            var activeLines = DialogueLines;
             if (isTyping)
             {
                 if (typingRoutine != null) StopCoroutine(typingRoutine);
                 isTyping = false;
-                if (currentLineIndex >= 0 && currentLineIndex < dialogueLines.Count && dialogueText != null)
+                if (currentLineIndex >= 0 && activeLines != null && currentLineIndex < activeLines.Count && dialogueText != null)
                 {
-                    dialogueText.text = dialogueLines[currentLineIndex].text;
+                    dialogueText.text = ResolveDialogueText(activeLines[currentLineIndex].text);
                 }
                 if (nextIndicator != null) nextIndicator.SetActive(true);
 
@@ -538,7 +800,14 @@ namespace Luan.Dialogue
 
         public void FinishDialogue()
         {
-            hasCompletedDialogueThisSession = true;
+            if (currentPhase == DialoguePhase.PreBattle)
+            {
+                hasCompletedDialogueThisSession = true;
+            }
+            else if (currentPhase == DialoguePhase.PostBattle)
+            {
+                hasCompletedPostBattleThisSession = true;
+            }
 
             if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
             if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
@@ -549,6 +818,9 @@ namespace Luan.Dialogue
 
         private IEnumerator AnimateCloseDialogue()
         {
+            DialoguePhase finishedPhase = currentPhase;
+            currentPhase = DialoguePhase.None;
+
             if (mainCanvasGroup != null)
             {
                 mainCanvasGroup.interactable = false;
@@ -579,7 +851,10 @@ namespace Luan.Dialogue
             if (mainCanvasGroup != null) mainCanvasGroup.alpha = 0f;
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
 
-            StartGameplay();
+            if (finishedPhase == DialoguePhase.PreBattle)
+            {
+                StartGameplay();
+            }
         }
 
         private void StartGameplay()
@@ -595,15 +870,10 @@ namespace Luan.Dialogue
             }
         }
 
-        /// <summary>
-        /// Lấy Tên hiển thị (DisplayName) từ tài khoản đang đăng nhập hoặc cache đã lưu.
-        /// Nếu không có sẽ mặc định trả về "Kai".
-        /// </summary>
         public static string GetPlayerDisplayName()
         {
             try
             {
-                // 1. Thử lấy từ AccountManager singleton (nếu đang chạy game và đã đăng nhập)
                 if (Luan.MainMenu.AccountManager.Instance != null && Luan.MainMenu.AccountManager.Instance.CurrentUser != null)
                 {
                     var user = Luan.MainMenu.AccountManager.Instance.CurrentUser;
@@ -613,7 +883,6 @@ namespace Luan.Dialogue
             }
             catch { }
 
-            // 2. Thử lấy từ cache PlayerPrefs đã lưu lúc đăng nhập trước đó
             string cachedDisplay = PlayerPrefs.GetString("PLAYFAB_CACHED_DISPLAYNAME", "");
             if (!string.IsNullOrEmpty(cachedDisplay)) return cachedDisplay;
 
@@ -623,7 +892,6 @@ namespace Luan.Dialogue
             string legacyUser = PlayerPrefs.GetString("ACCOUNT_USERNAME", "");
             if (!string.IsNullOrEmpty(legacyUser)) return legacyUser;
 
-            // 3. Tên nhân vật mặc định nếu chạy thử trong Editor mà chưa có tài khoản nào
             return "Kai";
         }
 
@@ -646,7 +914,7 @@ namespace Luan.Dialogue
             }
             else
             {
-                if (string.IsNullOrEmpty(rawName)) return Instance != null ? Instance.GetActiveOpponentName() : "BOSS";
+                if (string.IsNullOrEmpty(rawName)) return Instance != null ? Instance.GetActiveOpponentName() : "Raze";
             }
 
             return rawName.Replace("{PLAYER}", playerName).Replace("{player}", playerName);
@@ -660,6 +928,8 @@ namespace Luan.Dialogue
                 .Replace("{PLAYER}", playerName)
                 .Replace("{player}", playerName)
                 .Replace("{Player}", playerName)
+                .Replace("[Tên người chơi]", playerName)
+                .Replace("[tên người chơi]", playerName)
                 .Replace("Main 1", playerName)
                 .Replace("MAIN 1", playerName);
         }
@@ -671,17 +941,9 @@ namespace Luan.Dialogue
             {
                 new DialogueLine
                 {
-                    speakerName = "{PLAYER}",
-                    side = SpeakerSide.Left,
-                    text = "Khu phố này... ánh đèn neon mờ ảo và tiếng bass dội lên từ lòng đất. Đây chính là Underground Arena.",
-                    nameColor = new Color(0.2f, 0.95f, 1f, 1f),
-                    customAvatar = playerAvatarSprite
-                },
-                new DialogueLine
-                {
-                    speakerName = "BOSS 1",
+                    speakerName = "Raze",
                     side = SpeakerSide.Right,
-                    text = "Này nhóc! Dám bước chân vào địa bàn của ta thách đấu à? Nhịp điệu đường phố ở đây không dành cho kẻ yếu tim đâu!",
+                    text = "Này, coi chừng.",
                     nameColor = new Color(1f, 0.2f, 0.85f, 1f),
                     customAvatar = opponentAvatarSprite
                 },
@@ -689,24 +951,34 @@ namespace Luan.Dialogue
                 {
                     speakerName = "{PLAYER}",
                     side = SpeakerSide.Left,
-                    text = "Tôi đến đây không phải để dạo chơi. Âm nhạc của tôi sẽ khiến cả khu phố này phải thức tỉnh!",
+                    text = "Của anh à?",
                     nameColor = new Color(0.2f, 0.95f, 1f, 1f),
                     customAvatar = playerAvatarSprite
                 },
                 new DialogueLine
                 {
-                    speakerName = "BOSS 1",
+                    speakerName = "Raze",
                     side = SpeakerSide.Right,
-                    text = "Hahaha! Khá lắm, {PLAYER}! Trên sàn đấu này, chỉ có nốt nhạc chuẩn xác mới có tiếng nói. LÊN NHẠC ĐI!",
+                    text = "Ừ. Đá đổ là cậu tự lau đấy.",
                     nameColor = new Color(1f, 0.2f, 0.85f, 1f),
                     customAvatar = opponentAvatarSprite
+                },
+                new DialogueLine
+                {
+                    speakerName = "{PLAYER}",
+                    side = SpeakerSide.Left,
+                    text = "Tôi đang tìm Raze.",
+                    nameColor = new Color(0.2f, 0.95f, 1f, 1f),
+                    customAvatar = playerAvatarSprite
                 }
             };
         }
 
+        [SerializeField, HideInInspector] private GameObject topControlsGroup;
+
         public void EnsureUI()
         {
-            if (dialogueCanvas != null && mainCanvasGroup != null && dialogueText != null)
+            if (dialogueCanvas != null && mainCanvasGroup != null && dialogueText != null && introContainer != null)
                 return;
 
             var existingCanvas = GameObject.Find("StoryDialogueCanvas");
@@ -727,6 +999,40 @@ namespace Luan.Dialogue
             var dim = root.Find("DimOverlay");
             if (dim != null) dimOverlay = dim.GetComponent<Image>();
 
+            // Intro Container
+            var intro = root.Find("IntroContainer");
+            if (intro != null)
+            {
+                introContainer = intro.gameObject;
+                introCanvasGroup = intro.GetComponent<CanvasGroup>();
+
+                var logo = intro.Find("TopBanner/ChapterLogo");
+                if (logo != null) chapterLogoImage = logo.GetComponent<Image>();
+
+                var cTitle = intro.Find("TopBanner/ChapterTitleText");
+                if (cTitle != null) chapterTitleText = cTitle.GetComponent<TMP_Text>();
+
+                var card = intro.Find("CharacterStoryCard");
+                if (card != null)
+                {
+                    var sTitle = card.Find("StoryTitleText");
+                    if (sTitle != null) characterStoryTitleText = sTitle.GetComponent<TMP_Text>();
+
+                    var sBody = card.Find("CharacterStoryBodyText");
+                    if (sBody != null) characterStoryBodyText = sBody.GetComponent<TMP_Text>();
+
+                    var art = card.Find("OpponentPortraitContainer/PortraitFrame/PortraitImage");
+                    if (art != null) characterIntroArtImage = art.GetComponent<Image>();
+                }
+
+                var prompt = intro.Find("BottomPrompt");
+                if (prompt != null) tapPromptText = prompt.GetComponent<TMP_Text>();
+
+                var tapBtn = intro.Find("TapScreenButton");
+                if (tapBtn != null) tapToContinueButton = tapBtn.GetComponent<Button>();
+            }
+
+            // Dialogue Container
             var container = root.Find("DialogueContainer");
             if (container != null)
             {
@@ -745,17 +1051,21 @@ namespace Luan.Dialogue
                 }
 
                 // Left Speaker
-                var avLeft = container.Find("AvatarContainer") ?? container.Find("LeftAvatarContainer");
+                var avLeft = container.Find("LeftSpeaker_AvatarContainer") ?? container.Find("AvatarContainer") ?? container.Find("LeftAvatarContainer");
+                var nameLeft = container.Find("LeftSpeaker_NameTagContainer") ?? container.Find("NameTagContainer") ?? container.Find("LeftNameTagContainer");
+                var rootLeft = container.Find("LeftSpeaker");
+                if (rootLeft != null)
+                {
+                    leftSpeaker.rootContainer = rootLeft.gameObject;
+                    leftSpeaker.canvasGroup = rootLeft.GetComponent<CanvasGroup>();
+                }
                 if (avLeft != null)
                 {
-                    leftSpeaker.rootContainer = avLeft.gameObject;
-                    leftSpeaker.canvasGroup = avLeft.GetComponent<CanvasGroup>() ?? avLeft.gameObject.AddComponent<CanvasGroup>();
                     var frame = avLeft.Find("AvatarFrame");
                     if (frame != null) leftSpeaker.avatarFrame = frame.GetComponent<Image>();
-                    var img = avLeft.Find("AvatarImage") ?? frame?.Find("AvatarImage");
+                    var img = frame?.Find("AvatarImage") ?? avLeft.Find("AvatarImage");
                     if (img != null) leftSpeaker.avatarImage = img.GetComponent<Image>();
                 }
-                var nameLeft = container.Find("NameTagContainer") ?? container.Find("LeftNameTagContainer");
                 if (nameLeft != null)
                 {
                     leftSpeaker.nameTagContainer = nameLeft.gameObject;
@@ -766,17 +1076,21 @@ namespace Luan.Dialogue
                 }
 
                 // Right Speaker
-                var avRight = container.Find("RightAvatarContainer");
+                var rootRight = container.Find("RightSpeaker");
+                var avRight = container.Find("RightSpeaker_AvatarContainer") ?? container.Find("RightAvatarContainer");
+                var nameRight = container.Find("RightSpeaker_NameTagContainer") ?? container.Find("RightNameTagContainer");
+                if (rootRight != null)
+                {
+                    rightSpeaker.rootContainer = rootRight.gameObject;
+                    rightSpeaker.canvasGroup = rootRight.GetComponent<CanvasGroup>();
+                }
                 if (avRight != null)
                 {
-                    rightSpeaker.rootContainer = avRight.gameObject;
-                    rightSpeaker.canvasGroup = avRight.GetComponent<CanvasGroup>() ?? avRight.gameObject.AddComponent<CanvasGroup>();
                     var frame = avRight.Find("AvatarFrame");
                     if (frame != null) rightSpeaker.avatarFrame = frame.GetComponent<Image>();
-                    var img = avRight.Find("AvatarImage") ?? frame?.Find("AvatarImage");
+                    var img = frame?.Find("AvatarImage") ?? avRight.Find("AvatarImage");
                     if (img != null) rightSpeaker.avatarImage = img.GetComponent<Image>();
                 }
-                var nameRight = container.Find("RightNameTagContainer");
                 if (nameRight != null)
                 {
                     rightSpeaker.nameTagContainer = nameRight.gameObject;
@@ -790,6 +1104,7 @@ namespace Luan.Dialogue
             var controls = root.Find("TopControls");
             if (controls != null)
             {
+                topControlsGroup = controls.gameObject;
                 var skip = controls.Find("SkipButton");
                 if (skip != null) skipButton = skip.GetComponent<Button>();
                 var auto = controls.Find("AutoButton");
@@ -856,10 +1171,13 @@ namespace Luan.Dialogue
             dimRt.anchorMax = Vector2.one;
             dimRt.offsetMin = dimRt.offsetMax = Vector2.zero;
             dimOverlay = dimGo.GetComponent<Image>();
-            dimOverlay.color = new Color(0.015f, 0.008f, 0.035f, 0.72f);
+            dimOverlay.color = new Color(0.015f, 0.008f, 0.035f, 0.88f);
             dimOverlay.raycastTarget = false;
 
-            // 3. Dialogue Container
+            // 3. Intro Container (Cốt truyện & Logo Chapter)
+            BuildIntroUI(canvasGo.transform, frameSpr);
+
+            // 4. Dialogue Container
             var containerGo = new GameObject("DialogueContainer", typeof(RectTransform));
             containerGo.transform.SetParent(canvasGo.transform, false);
             dialogueContainer = containerGo.GetComponent<RectTransform>();
@@ -869,7 +1187,7 @@ namespace Luan.Dialogue
             dialogueContainer.anchoredPosition = new Vector2(0f, 35f);
             dialogueContainer.sizeDelta = new Vector2(1920, 380);
 
-            // 4. Dialogue Box
+            // 5. Dialogue Box
             var boxGo = new GameObject("DialogueBox", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
             boxGo.transform.SetParent(containerGo.transform, false);
             var boxRt = boxGo.GetComponent<RectTransform>();
@@ -886,7 +1204,7 @@ namespace Luan.Dialogue
             clickAreaButton = boxGo.GetComponent<Button>();
             clickAreaButton.transition = Selectable.Transition.None;
 
-            // 5. Dialogue Text
+            // 6. Dialogue Text
             var textGo = new GameObject("DialogueText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
             textGo.transform.SetParent(boxGo.transform, false);
             var textRt = textGo.GetComponent<RectTransform>();
@@ -903,7 +1221,7 @@ namespace Luan.Dialogue
             dialogueText.textWrappingMode = TextWrappingModes.Normal;
             dialogueText.raycastTarget = false;
 
-            // 6. Next Indicator
+            // 7. Next Indicator
             var nextGo = new GameObject("NextIndicator", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             nextGo.transform.SetParent(boxGo.transform, false);
             var nextRt = nextGo.GetComponent<RectTransform>();
@@ -919,20 +1237,21 @@ namespace Luan.Dialogue
             nextImg.raycastTarget = false;
             nextIndicator = nextGo;
 
-            // 7. Left Speaker (Main 1 / Player DisplayName)
+            // 8. Left Speaker (Main 1 / Player DisplayName)
             string playerDisplayName = GetPlayerDisplayName();
             BuildSpeakerUI(containerGo.transform, "LeftSpeaker", -580f, -491f, frameSpr, nameTagSpr, playerAvatarSprite, playerDisplayName, new Color(0.2f, 0.95f, 1f, 1f), leftSpeaker);
 
-            // 8. Right Speaker (Boss 1)
-            BuildSpeakerUI(containerGo.transform, "RightSpeaker", 580f, 491f, frameSpr, nameTagSpr, opponentAvatarSprite, "BOSS 1", new Color(1f, 0.2f, 0.85f, 1f), rightSpeaker);
+            // 9. Right Speaker (Raze / Boss 1)
+            BuildSpeakerUI(containerGo.transform, "RightSpeaker", 580f, 491f, frameSpr, nameTagSpr, opponentAvatarSprite, "RAZE", new Color(1f, 0.2f, 0.85f, 1f), rightSpeaker);
 
-            // 9. Top Controls (Skip & Auto - Đặt góc trên bên phải màn hình để không che khung thoại)
+            // 10. Top Controls (Skip & Auto)
             var topControlsGo = new GameObject("TopControls", typeof(RectTransform));
             topControlsGo.transform.SetParent(canvasGo.transform, false);
             var topRt = topControlsGo.GetComponent<RectTransform>();
             topRt.anchorMin = Vector2.zero;
             topRt.anchorMax = Vector2.one;
             topRt.offsetMin = topRt.offsetMax = Vector2.zero;
+            topControlsGroup = topControlsGo;
 
             // Skip Button
             var skipGo = new GameObject("SkipButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
@@ -964,6 +1283,200 @@ namespace Luan.Dialogue
             autoButtonGlow = autoImg;
 
             HookEvents();
+        }
+
+        private void BuildIntroUI(Transform parent, Sprite frameSpr)
+        {
+            var introGo = new GameObject("IntroContainer", typeof(RectTransform), typeof(CanvasGroup));
+            introGo.transform.SetParent(parent, false);
+            var introRt = introGo.GetComponent<RectTransform>();
+            introRt.anchorMin = Vector2.zero;
+            introRt.anchorMax = Vector2.one;
+            introRt.offsetMin = introRt.offsetMax = Vector2.zero;
+
+            introContainer = introGo;
+            introCanvasGroup = introGo.GetComponent<CanvasGroup>();
+
+            // Dark Backdrop
+            var bgGo = new GameObject("IntroDarkOverlay", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            bgGo.transform.SetParent(introGo.transform, false);
+            var bgRt = bgGo.GetComponent<RectTransform>();
+            bgRt.anchorMin = Vector2.zero;
+            bgRt.anchorMax = Vector2.one;
+            bgRt.offsetMin = bgRt.offsetMax = Vector2.zero;
+            var bgImg = bgGo.GetComponent<Image>();
+            bgImg.color = new Color(0.02f, 0.015f, 0.04f, 0.94f);
+            bgImg.raycastTarget = false;
+
+            // Fullscreen invisible tap button
+            var tapGo = new GameObject("TapScreenButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+            tapGo.transform.SetParent(introGo.transform, false);
+            var tapRt = tapGo.GetComponent<RectTransform>();
+            tapRt.anchorMin = Vector2.zero;
+            tapRt.anchorMax = Vector2.one;
+            tapRt.offsetMin = tapRt.offsetMax = Vector2.zero;
+            var tapImg = tapGo.GetComponent<Image>();
+            tapImg.color = new Color(0f, 0f, 0f, 0f);
+            tapImg.raycastTarget = true;
+            tapToContinueButton = tapGo.GetComponent<Button>();
+
+            // Top Banner: Logo & Chapter Title
+            var bannerGo = new GameObject("TopBanner", typeof(RectTransform));
+            bannerGo.transform.SetParent(introGo.transform, false);
+            var bannerRt = bannerGo.GetComponent<RectTransform>();
+            bannerRt.anchorMin = new Vector2(0.5f, 1f);
+            bannerRt.anchorMax = new Vector2(0.5f, 1f);
+            bannerRt.pivot = new Vector2(0.5f, 1f);
+            bannerRt.anchoredPosition = new Vector2(0f, -30f);
+            bannerRt.sizeDelta = new Vector2(1200f, 140f);
+
+            // Chapter Logo Image (Placeholder sẵn sàng nhận Sprite)
+            var logoGo = new GameObject("ChapterLogo", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            logoGo.transform.SetParent(bannerGo.transform, false);
+            var logoRt = logoGo.GetComponent<RectTransform>();
+            logoRt.anchorMin = new Vector2(0.5f, 1f);
+            logoRt.anchorMax = new Vector2(0.5f, 1f);
+            logoRt.pivot = new Vector2(0.5f, 1f);
+            logoRt.anchoredPosition = new Vector2(0f, 0f);
+            logoRt.sizeDelta = new Vector2(280f, 80f);
+            chapterLogoImage = logoGo.GetComponent<Image>();
+            chapterLogoImage.preserveAspect = true;
+            chapterLogoImage.color = new Color(1f, 1f, 1f, 0f); // trong suốt mặc định nếu chưa có ảnh
+            chapterLogoImage.raycastTarget = false;
+
+            // Chapter Title Text
+            var titleGo = new GameObject("ChapterTitleText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            titleGo.transform.SetParent(bannerGo.transform, false);
+            var titleRt = titleGo.GetComponent<RectTransform>();
+            titleRt.anchorMin = new Vector2(0.5f, 0f);
+            titleRt.anchorMax = new Vector2(0.5f, 0f);
+            titleRt.pivot = new Vector2(0.5f, 0f);
+            titleRt.anchoredPosition = new Vector2(0f, 5f);
+            titleRt.sizeDelta = new Vector2(1000f, 50f);
+            chapterTitleText = titleGo.GetComponent<TextMeshProUGUI>();
+            chapterTitleText.fontSize = 36;
+            chapterTitleText.fontStyle = FontStyles.Bold;
+            chapterTitleText.color = new Color(0.2f, 0.95f, 1f, 1f);
+            chapterTitleText.alignment = TextAlignmentOptions.Center;
+            chapterTitleText.raycastTarget = false;
+            chapterTitleText.text = "CHAPTER 1: CONCRETE DREAMS";
+
+            // Character Story Card
+            var cardGo = new GameObject("CharacterStoryCard", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            cardGo.transform.SetParent(introGo.transform, false);
+            var cardRt = cardGo.GetComponent<RectTransform>();
+            cardRt.anchorMin = new Vector2(0.5f, 0.5f);
+            cardRt.anchorMax = new Vector2(0.5f, 0.5f);
+            cardRt.pivot = new Vector2(0.5f, 0.5f);
+            cardRt.anchoredPosition = new Vector2(0f, -20f);
+            cardRt.sizeDelta = new Vector2(1380f, 620f);
+
+            var cardBg = cardGo.GetComponent<Image>();
+            cardBg.color = new Color(0.045f, 0.035f, 0.085f, 0.94f);
+            cardBg.raycastTarget = false;
+
+            // Story Title (CÂU CHUYỆN CỦA RAZE)
+            var sTitleGo = new GameObject("StoryTitleText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            sTitleGo.transform.SetParent(cardGo.transform, false);
+            var sTitleRt = sTitleGo.GetComponent<RectTransform>();
+            sTitleRt.anchorMin = new Vector2(0.5f, 1f);
+            sTitleRt.anchorMax = new Vector2(0.5f, 1f);
+            sTitleRt.pivot = new Vector2(0.5f, 1f);
+            sTitleRt.anchoredPosition = new Vector2(0f, -25f);
+            sTitleRt.sizeDelta = new Vector2(1200f, 50f);
+            characterStoryTitleText = sTitleGo.GetComponent<TextMeshProUGUI>();
+            characterStoryTitleText.fontSize = 32;
+            characterStoryTitleText.fontStyle = FontStyles.Bold;
+            characterStoryTitleText.color = new Color(1f, 0.2f, 0.85f, 1f);
+            characterStoryTitleText.alignment = TextAlignmentOptions.Center;
+            characterStoryTitleText.raycastTarget = false;
+            characterStoryTitleText.text = "CÂU CHUYỆN CỦA RAZE";
+
+            // Opponent Portrait Container
+            var portGo = new GameObject("OpponentPortraitContainer", typeof(RectTransform));
+            portGo.transform.SetParent(cardGo.transform, false);
+            var portRt = portGo.GetComponent<RectTransform>();
+            portRt.anchorMin = new Vector2(0f, 0.5f);
+            portRt.anchorMax = new Vector2(0f, 0.5f);
+            portRt.pivot = new Vector2(0.5f, 0.5f);
+            portRt.anchoredPosition = new Vector2(250f, -20f);
+            portRt.sizeDelta = new Vector2(320f, 440f);
+
+            // Frame
+            var fGo = new GameObject("PortraitFrame", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            fGo.transform.SetParent(portGo.transform, false);
+            var fRt = fGo.GetComponent<RectTransform>();
+            fRt.anchorMin = new Vector2(0.5f, 0.5f);
+            fRt.anchorMax = new Vector2(0.5f, 0.5f);
+            fRt.pivot = new Vector2(0.5f, 0.5f);
+            fRt.anchoredPosition = new Vector2(0f, 30f);
+            fRt.sizeDelta = new Vector2(280f, 280f);
+            var fImg = fGo.GetComponent<Image>();
+            fImg.sprite = frameSpr;
+            fImg.preserveAspect = true;
+            fImg.raycastTarget = false;
+
+            // Inner Portrait Image
+            var pImgGo = new GameObject("PortraitImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            pImgGo.transform.SetParent(fGo.transform, false);
+            var pImgRt = pImgGo.GetComponent<RectTransform>();
+            pImgRt.anchorMin = new Vector2(0.12f, 0.12f);
+            pImgRt.anchorMax = new Vector2(0.88f, 0.88f);
+            pImgRt.offsetMin = pImgRt.offsetMax = Vector2.zero;
+            characterIntroArtImage = pImgGo.GetComponent<Image>();
+            characterIntroArtImage.sprite = opponentAvatarSprite;
+            characterIntroArtImage.preserveAspect = true;
+            characterIntroArtImage.raycastTarget = false;
+
+            // Opponent Name label
+            var oNameGo = new GameObject("OpponentIntroNameText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            oNameGo.transform.SetParent(portGo.transform, false);
+            var oNameRt = oNameGo.GetComponent<RectTransform>();
+            oNameRt.anchorMin = new Vector2(0.5f, 0f);
+            oNameRt.anchorMax = new Vector2(0.5f, 0f);
+            oNameRt.pivot = new Vector2(0.5f, 0f);
+            oNameRt.anchoredPosition = new Vector2(0f, 30f);
+            oNameRt.sizeDelta = new Vector2(280f, 45f);
+            var oNameTxt = oNameGo.GetComponent<TextMeshProUGUI>();
+            oNameTxt.fontSize = 28;
+            oNameTxt.fontStyle = FontStyles.Bold;
+            oNameTxt.color = new Color(1f, 0.25f, 0.85f, 1f);
+            oNameTxt.alignment = TextAlignmentOptions.Center;
+            oNameTxt.text = "RAZE";
+            oNameTxt.raycastTarget = false;
+
+            // Story Body Text
+            var sBodyGo = new GameObject("CharacterStoryBodyText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            sBodyGo.transform.SetParent(cardGo.transform, false);
+            var sBodyRt = sBodyGo.GetComponent<RectTransform>();
+            sBodyRt.anchorMin = new Vector2(0f, 0f);
+            sBodyRt.anchorMax = new Vector2(1f, 1f);
+            sBodyRt.offsetMin = new Vector2(450f, 50f);
+            sBodyRt.offsetMax = new Vector2(-60f, -85f);
+            characterStoryBodyText = sBodyGo.GetComponent<TextMeshProUGUI>();
+            characterStoryBodyText.fontSize = 25;
+            characterStoryBodyText.lineSpacing = 1.35f;
+            characterStoryBodyText.color = new Color(0.9f, 0.92f, 0.96f, 1f);
+            characterStoryBodyText.alignment = TextAlignmentOptions.TopLeft;
+            characterStoryBodyText.textWrappingMode = TextWrappingModes.Normal;
+            characterStoryBodyText.raycastTarget = false;
+
+            // Bottom Prompt (Blinking tap prompt)
+            var promptGo = new GameObject("BottomPrompt", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            promptGo.transform.SetParent(introGo.transform, false);
+            var promptRt = promptGo.GetComponent<RectTransform>();
+            promptRt.anchorMin = new Vector2(0.5f, 0f);
+            promptRt.anchorMax = new Vector2(0.5f, 0f);
+            promptRt.pivot = new Vector2(0.5f, 0f);
+            promptRt.anchoredPosition = new Vector2(0f, 35f);
+            promptRt.sizeDelta = new Vector2(900f, 45f);
+            tapPromptText = promptGo.GetComponent<TextMeshProUGUI>();
+            tapPromptText.fontSize = 22;
+            tapPromptText.fontStyle = FontStyles.Bold;
+            tapPromptText.color = new Color(0f, 1f, 0.7f, 1f);
+            tapPromptText.alignment = TextAlignmentOptions.Center;
+            tapPromptText.text = "CHẠM VÀO MÀN HÌNH ĐỂ TIẾP TỤC  ▶";
+            tapPromptText.raycastTarget = false;
         }
 
         private void BuildSpeakerUI(Transform parent, string prefix, float avatarX, float nameX, Sprite frameSpr, Sprite nameTagSpr, Sprite avatarSpr, string defaultName, Color nameCol, SpeakerUI targetUI)
