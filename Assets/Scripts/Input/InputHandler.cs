@@ -254,7 +254,7 @@ namespace RhythmGame
                     int lane = GetLaneFromScreenPos(touch.position);
                     if (lane < 0) continue;
 
-                    if (touch.phase == TouchPhase.Began)
+                    if (touch.phase == UnityEngine.TouchPhase.Began)
                     {
                         if (!touchFingerToLane.ContainsKey(touch.fingerId))
                         {
@@ -262,7 +262,7 @@ namespace RhythmGame
                             OnLanePressed?.Invoke(lane);
                         }
                     }
-                    else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                    else if (touch.phase == UnityEngine.TouchPhase.Ended || touch.phase == UnityEngine.TouchPhase.Canceled)
                     {
                         if (touchFingerToLane.TryGetValue(touch.fingerId, out int heldLane))
                         {
