@@ -264,21 +264,41 @@ namespace Luan.Dialogue
 
         public static bool HasPendingDialogue()
         {
-            if (Instance != null && Instance.testInEditor && Application.isEditor)
-                return !hasCompletedDialogueThisSession;
+            if (hasCompletedDialogueThisSession)
+                return false;
 
-            bool isStoryMode = StorySession.Active;
-            bool hasValidWeek = StorySession.Week != null && StorySession.Week.weekNumber > 0;
+            // 1. Nếu đang trong Story Mode (từ Thuan_SongList tab Story Mode)
+            if (StorySession.Active && StorySession.Week != null && StorySession.Week.weekNumber > 0)
+                return true;
 
-            return isStoryMode && hasValidWeek && !hasCompletedDialogueThisSession;
+            // 2. Nếu người chơi vào từ Free Play (chọn bài từ tab Free Play) -> Không chạy thoại
+            if (!StorySession.Active && GameSession.SelectedSong != null)
+                return false;
+
+            // 3. Chế độ kiểm thử trong Editor (bấm Play trực tiếp tại GameplayScene)
+            if (Application.isEditor)
+            {
+                if (Instance != null && Instance.testInEditor)
+                    return true;
+                if (GameSession.SelectedSong == null)
+                    return true;
+            }
+
+            return false;
         }
 
         public bool HasPendingPostBattleDialogue()
         {
-            if (hasCompletedPostBattleThisSession) return false;
+            if (hasCompletedPostBattleThisSession)
+                return false;
+
+            // Nếu người chơi vào từ Free Play -> Không chạy thoại sau trận
+            if (!StorySession.Active && GameSession.SelectedSong != null)
+                return false;
 
             bool isStory = StorySession.Active;
             if (testInEditor && Application.isEditor) isStory = true;
+            if (GameSession.SelectedSong == null && Application.isEditor) isStory = true;
 
             if (!isStory) return false;
 
