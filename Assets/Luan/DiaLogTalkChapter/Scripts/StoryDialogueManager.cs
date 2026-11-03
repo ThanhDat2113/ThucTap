@@ -335,6 +335,7 @@ namespace Luan.Dialogue
             currentPhase = DialoguePhase.None;
 
             EnsureUI();
+            BindControlsFallback();
             HookEvents();
 
             if (leftSpeaker != null && leftSpeaker.nameText != null)
@@ -410,6 +411,20 @@ namespace Luan.Dialogue
 
         private void Update()
         {
+            if (currentPhase == DialoguePhase.None) return;
+
+            if (IsSkipActionPressed())
+            {
+                OnSkipClicked();
+                return;
+            }
+
+            if (IsAutoActionPressed())
+            {
+                OnAutoToggleClicked();
+                return;
+            }
+
             if (currentPhase == DialoguePhase.Intro)
             {
                 if (IsNextActionPressed())
@@ -434,6 +449,58 @@ namespace Luan.Dialogue
                 return true;
 #endif
             return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return);
+        }
+
+        private bool IsSkipActionPressed()
+        {
+#if ENABLE_INPUT_SYSTEM
+            var kb = UnityEngine.InputSystem.Keyboard.current;
+            if (kb != null && (kb.tabKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame))
+                return true;
+#endif
+            return Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape);
+        }
+
+        private bool IsAutoActionPressed()
+        {
+#if ENABLE_INPUT_SYSTEM
+            var kb = UnityEngine.InputSystem.Keyboard.current;
+            if (kb != null && kb.aKey.wasPressedThisFrame)
+                return true;
+#endif
+            return Input.GetKeyDown(KeyCode.A);
+        }
+
+        private void BindControlsFallback()
+        {
+            if (dialogueCanvas == null)
+            {
+                var existingCanvas = GameObject.Find("StoryDialogueCanvas");
+                if (existingCanvas != null) dialogueCanvas = existingCanvas.GetComponent<Canvas>();
+            }
+
+            if (dialogueCanvas != null)
+            {
+                if (topControlsGroup == null)
+                {
+                    var tc = dialogueCanvas.transform.Find("TopControls");
+                    if (tc != null) topControlsGroup = tc.gameObject;
+                }
+                if (skipButton == null)
+                {
+                    var s = dialogueCanvas.transform.Find("TopControls/SkipButton");
+                    if (s != null) skipButton = s.GetComponent<Button>();
+                }
+                if (autoButton == null)
+                {
+                    var a = dialogueCanvas.transform.Find("TopControls/AutoButton");
+                    if (a != null)
+                    {
+                        autoButton = a.GetComponent<Button>();
+                        autoButtonGlow = a.GetComponent<Image>();
+                    }
+                }
+            }
         }
 
         private void HookEvents()
@@ -482,7 +549,8 @@ namespace Luan.Dialogue
 
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
-            if (topControlsGroup != null) topControlsGroup.SetActive(false);
+            if (topControlsGroup != null) topControlsGroup.SetActive(true);
+            UpdateAutoButtonVisual();
 
             if (mainCanvasGroup != null)
             {
@@ -553,6 +621,12 @@ namespace Luan.Dialogue
 
                 if (promptPulseRoutine != null) StopCoroutine(promptPulseRoutine);
                 promptPulseRoutine = StartCoroutine(AnimatePromptPulse());
+
+                if (isAutoMode)
+                {
+                    if (autoRoutine != null) StopCoroutine(autoRoutine);
+                    autoRoutine = StartCoroutine(WaitAndAutoAdvanceIntro());
+                }
             }
         }
 
@@ -622,7 +696,6 @@ namespace Luan.Dialogue
             }
 
             currentLineIndex = -1;
-            isAutoMode = false;
             UpdateAutoButtonVisual();
 
             if (transitionRoutine != null) StopCoroutine(transitionRoutine);
@@ -639,7 +712,6 @@ namespace Luan.Dialogue
             if (topControlsGroup != null) topControlsGroup.SetActive(true);
 
             currentLineIndex = -1;
-            isAutoMode = false;
             UpdateAutoButtonVisual();
 
             if (transitionRoutine != null) StopCoroutine(transitionRoutine);
@@ -839,15 +911,38 @@ namespace Luan.Dialogue
             isAutoMode = !isAutoMode;
             UpdateAutoButtonVisual();
 
-            if (isAutoMode && !isTyping)
+            if (isAutoMode)
             {
-                if (autoRoutine != null) StopCoroutine(autoRoutine);
-                autoRoutine = StartCoroutine(WaitAndAutoAdvance());
+                if (currentPhase == DialoguePhase.Intro)
+                {
+                    if (autoRoutine != null) StopCoroutine(autoRoutine);
+                    autoRoutine = StartCoroutine(WaitAndAutoAdvanceIntro());
+                }
+                else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
+                {
+                    if (!isTyping)
+                    {
+                        if (autoRoutine != null) StopCoroutine(autoRoutine);
+                        autoRoutine = StartCoroutine(WaitAndAutoAdvance());
+                    }
+                }
             }
-            else if (!isAutoMode && autoRoutine != null)
+            else
             {
-                StopCoroutine(autoRoutine);
-                autoRoutine = null;
+                if (autoRoutine != null)
+                {
+                    StopCoroutine(autoRoutine);
+                    autoRoutine = null;
+                }
+            }
+        }
+
+        private IEnumerator WaitAndAutoAdvanceIntro()
+        {
+            yield return new WaitForSecondsRealtime(3.5f);
+            if (currentPhase == DialoguePhase.Intro && isAutoMode)
+            {
+                OnTapToContinueClicked();
             }
         }
 
@@ -861,7 +956,7 @@ namespace Luan.Dialogue
 
         public void FinishDialogue()
         {
-            if (currentPhase == DialoguePhase.PreBattle)
+            if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.Intro)
             {
                 hasCompletedDialogueThisSession = true;
             }
@@ -872,6 +967,7 @@ namespace Luan.Dialogue
 
             if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
             if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
+            if (promptPulseRoutine != null) { StopCoroutine(promptPulseRoutine); promptPulseRoutine = null; }
             if (transitionRoutine != null) StopCoroutine(transitionRoutine);
 
             transitionRoutine = StartCoroutine(AnimateCloseDialogue());
@@ -891,7 +987,7 @@ namespace Luan.Dialogue
             Vector2 currentPos = dialogueContainer != null ? dialogueContainer.anchoredPosition : Vector2.zero;
             Vector2 targetPos = currentPos + new Vector2(0, -60f);
 
-            float duration = 0.3f;
+            float duration = 0.25f;
             float elapsed = 0f;
 
             while (elapsed < duration)
@@ -910,9 +1006,11 @@ namespace Luan.Dialogue
             }
 
             if (mainCanvasGroup != null) mainCanvasGroup.alpha = 0f;
+            if (introContainer != null) introContainer.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
 
-            if (finishedPhase == DialoguePhase.PreBattle)
+            if (finishedPhase == DialoguePhase.PreBattle || finishedPhase == DialoguePhase.Intro)
             {
                 StartGameplay();
             }
