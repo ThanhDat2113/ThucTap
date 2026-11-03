@@ -99,8 +99,8 @@ namespace Luan.Dialogue
     {
         public static StoryDialogueManager Instance { get; private set; }
 
-        private static bool hasCompletedDialogueThisSession = false;
-        private static bool hasCompletedPostBattleThisSession = false;
+        private bool hasCompletedDialogueThisSession = false;
+        private bool hasCompletedPostBattleThisSession = false;
 
         [Header("Chế độ kiểm thử")]
         [Tooltip("Bật để luôn chạy hội thoại khi bấm Play trực tiếp tại GameplayScene")]
@@ -264,11 +264,11 @@ namespace Luan.Dialogue
 
         public static bool HasPendingDialogue()
         {
-            if (hasCompletedDialogueThisSession)
+            if (Instance != null && Instance.hasCompletedDialogueThisSession)
                 return false;
 
-            // 1. Nếu đang trong Story Mode (từ Thuan_SongList tab Story Mode)
-            if (StorySession.Active && StorySession.Week != null && StorySession.Week.weekNumber > 0)
+            // 1. Nếu đang trong Story Mode (StorySession.Active) -> LUÔN CHẠY nếu chưa xong trong lượt này!
+            if (StorySession.Active)
                 return true;
 
             // 2. Nếu người chơi vào từ Free Play (chọn bài từ tab Free Play) -> Không chạy thoại
@@ -308,6 +308,15 @@ namespace Luan.Dialogue
 
         public static void ResetSessionState()
         {
+            if (Instance != null)
+            {
+                Instance.hasCompletedDialogueThisSession = false;
+                Instance.hasCompletedPostBattleThisSession = false;
+            }
+        }
+
+        private void OnEnable()
+        {
             hasCompletedDialogueThisSession = false;
             hasCompletedPostBattleThisSession = false;
         }
@@ -320,6 +329,10 @@ namespace Luan.Dialogue
                 return;
             }
             Instance = this;
+
+            hasCompletedDialogueThisSession = false;
+            hasCompletedPostBattleThisSession = false;
+            currentPhase = DialoguePhase.None;
 
             EnsureUI();
             HookEvents();

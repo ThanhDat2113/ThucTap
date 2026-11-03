@@ -162,6 +162,7 @@ public class StoryModeController : MonoBehaviour
     {
         if (selected == null || selected.Locked) return;
         StorySession.Begin(selected.Week);
+        Luan.Dialogue.StoryDialogueManager.ResetSessionState();
         if (GameSession.SelectedSong != null) SongStats.IncrementPlayCount(GameSession.SelectedSong);
         SceneManager.LoadScene(gameplayScene);
     }
