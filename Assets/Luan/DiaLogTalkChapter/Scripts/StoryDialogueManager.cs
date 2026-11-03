@@ -125,13 +125,21 @@ namespace Luan.Dialogue
         [Header("Intro Cốt Truyện & Nhân Vật")]
         [SerializeField] private GameObject introContainer;
         [SerializeField] private CanvasGroup introCanvasGroup;
+        [SerializeField] private GameObject topBanner;
+        [SerializeField] private CanvasGroup logoCanvasGroup;
         [SerializeField] private Image chapterLogoImage;
         [SerializeField] private TMP_Text chapterTitleText;
+        [SerializeField] private GameObject characterStoryCard;
+        [SerializeField] private CanvasGroup storyCardCanvasGroup;
         [SerializeField] private TMP_Text characterStoryTitleText;
         [SerializeField] private TMP_Text characterStoryBodyText;
         [SerializeField] private Image characterIntroArtImage;
         [SerializeField] private Button tapToContinueButton;
         [SerializeField] private TMP_Text tapPromptText;
+        [Tooltip("Thời gian hiển thị Logo chương (giây) trước khi fade nhẹ đi để hiện bảng câu chuyện")]
+        [SerializeField] private float logoDisplayDuration = 3.0f;
+        [Tooltip("Độ tối của overlay nền (0 = trong suốt, 1 = đen kịt). Giữ khoảng 0.6 - 0.65 để không đè tối mất khung cảnh")]
+        [SerializeField] private float dimOverlayAlpha = 0.65f;
 
         [Header("Speaker Bên Trái (Main 1 / Player)")]
         [SerializeField] private SpeakerUI leftSpeaker = new SpeakerUI();
@@ -174,6 +182,16 @@ namespace Luan.Dialogue
         private Coroutine transitionRoutine;
         private Coroutine autoRoutine;
         private Coroutine promptPulseRoutine;
+        private Coroutine introSequenceRoutine;
+
+        private enum IntroStep
+        {
+            None,
+            LogoShowcase,
+            StoryCardShowcase
+        }
+        private IntroStep currentIntroStep = IntroStep.None;
+        private bool skipLogoRequested = false;
 
         public List<ChapterDialogueEntry> Chapters => chapters;
         public int TestChapter { get => testChapter; set => testChapter = value; }
@@ -398,12 +416,18 @@ namespace Luan.Dialogue
 
         private void HideAllUI()
         {
+            if (introSequenceRoutine != null) { StopCoroutine(introSequenceRoutine); introSequenceRoutine = null; }
+            if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
+            if (promptPulseRoutine != null) { StopCoroutine(promptPulseRoutine); promptPulseRoutine = null; }
+
             if (mainCanvasGroup != null)
             {
                 mainCanvasGroup.alpha = 0f;
                 mainCanvasGroup.blocksRaycasts = false;
                 mainCanvasGroup.interactable = false;
             }
+            if (topBanner != null) topBanner.SetActive(false);
+            if (characterStoryCard != null) characterStoryCard.SetActive(false);
             if (introContainer != null) introContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
@@ -546,11 +570,16 @@ namespace Luan.Dialogue
         public void ShowIntroScreen()
         {
             currentPhase = DialoguePhase.Intro;
+            currentIntroStep = IntroStep.None;
+            skipLogoRequested = false;
 
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
             if (topControlsGroup != null) topControlsGroup.SetActive(true);
             UpdateAutoButtonVisual();
+
+            EnsureIntroReferences();
+            HookEvents();
 
             if (mainCanvasGroup != null)
             {
@@ -572,14 +601,15 @@ namespace Luan.Dialogue
                 var cfg = GetCurrentChapterConfig();
                 var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
 
-                // 1. Chapter Logo
+                // 1. Chapter Logo (Khởi tạo sẵn sàng cho Animation Fade In & Scale Pop)
                 Sprite logoSpr = data != null ? data.chapterLogo : null;
                 if (chapterLogoImage != null)
                 {
                     if (logoSpr != null)
                     {
                         chapterLogoImage.sprite = logoSpr;
-                        chapterLogoImage.color = Color.white;
+                        chapterLogoImage.color = new Color(1f, 1f, 1f, 0f); // Bắt đầu ẩn hoàn toàn để chạy Fade In
+                        chapterLogoImage.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
                         chapterLogoImage.gameObject.SetActive(true);
                     }
                     else
@@ -619,14 +649,226 @@ namespace Luan.Dialogue
                     characterIntroArtImage.color = introArt != null ? Color.white : new Color(0, 0, 0, 0);
                 }
 
-                if (promptPulseRoutine != null) StopCoroutine(promptPulseRoutine);
-                promptPulseRoutine = StartCoroutine(AnimatePromptPulse());
-
-                if (isAutoMode)
+                // Ban đầu: Ẩn Story Card và Prompt để màn hình chỉ tập trung vào Logo (tiết kiệm diện tích)
+                if (characterStoryCard != null)
                 {
-                    if (autoRoutine != null) StopCoroutine(autoRoutine);
-                    autoRoutine = StartCoroutine(WaitAndAutoAdvanceIntro());
+                    if (storyCardCanvasGroup != null)
+                    {
+                        storyCardCanvasGroup.alpha = 0f;
+                        storyCardCanvasGroup.blocksRaycasts = false;
+                        storyCardCanvasGroup.interactable = false;
+                    }
+                    characterStoryCard.SetActive(false);
                 }
+
+                if (tapPromptText != null)
+                {
+                    tapPromptText.gameObject.SetActive(false);
+                }
+
+                // Overlay mờ bắt đầu từ 0 và fade in mượt mà để không bị tối đè màn hình đột ngột
+                if (dimOverlay != null)
+                {
+                    var c = dimOverlay.color;
+                    dimOverlay.color = new Color(c.r, c.g, c.b, 0f);
+                }
+
+                if (introSequenceRoutine != null) StopCoroutine(introSequenceRoutine);
+                introSequenceRoutine = StartCoroutine(RunIntroSequence(logoSpr != null));
+            }
+        }
+
+        private IEnumerator RunIntroSequence(bool hasLogo)
+        {
+            float targetDim = Mathf.Clamp(dimOverlayAlpha, 0.4f, 0.85f);
+
+            // ==========================================
+            // GIAI ĐOẠN 1: ANIMATION LOGO CHAPTER (3 giây)
+            // ==========================================
+            if (hasLogo && (topBanner != null || chapterLogoImage != null))
+            {
+                currentIntroStep = IntroStep.LogoShowcase;
+                skipLogoRequested = false;
+
+                if (topBanner != null) topBanner.SetActive(true);
+                if (chapterLogoImage != null) chapterLogoImage.gameObject.SetActive(true);
+
+                if (logoCanvasGroup != null)
+                {
+                    logoCanvasGroup.alpha = 0f;
+                    logoCanvasGroup.blocksRaycasts = true;
+                    logoCanvasGroup.interactable = true;
+                }
+
+                // 1. ANIMATION FADE IN & SCALE POP (0.6s)
+                float fadeInTime = 0.6f;
+                float elapsed = 0f;
+                Vector3 initialScale = new Vector3(0.8f, 0.8f, 1f);
+                Vector3 baseScale = Vector3.one;
+
+                while (elapsed < fadeInTime)
+                {
+                    elapsed += Time.unscaledDeltaTime;
+                    float t = Mathf.Clamp01(elapsed / fadeInTime);
+                    float easeAlpha = Mathf.SmoothStep(0f, 1f, t);
+                    float easeScale = 1f - Mathf.Pow(1f - t, 3); // Cubic ease out pop
+
+                    if (logoCanvasGroup != null) logoCanvasGroup.alpha = easeAlpha;
+                    if (chapterLogoImage != null)
+                    {
+                        chapterLogoImage.color = new Color(1f, 1f, 1f, easeAlpha);
+                        chapterLogoImage.transform.localScale = Vector3.LerpUnclamped(initialScale, baseScale, easeScale);
+                    }
+                    if (chapterTitleText != null)
+                    {
+                        Color tc = chapterTitleText.color;
+                        chapterTitleText.color = new Color(tc.r, tc.g, tc.b, easeAlpha);
+                    }
+
+                    if (dimOverlay != null)
+                    {
+                        var c = dimOverlay.color;
+                        dimOverlay.color = new Color(c.r, c.g, c.b, Mathf.Lerp(0f, targetDim, easeAlpha));
+                    }
+                    yield return null;
+                }
+
+                if (logoCanvasGroup != null) logoCanvasGroup.alpha = 1f;
+                if (chapterLogoImage != null)
+                {
+                    chapterLogoImage.color = Color.white;
+                    chapterLogoImage.transform.localScale = Vector3.one;
+                }
+                if (dimOverlay != null)
+                {
+                    var c = dimOverlay.color;
+                    dimOverlay.color = new Color(c.r, c.g, c.b, targetDim);
+                }
+
+                // 2. GIỮ LOGO 3 GIÂY KÈM HIỆU ỨNG NHỊP THỞ (BREATHING PULSE)
+                float holdDuration = Mathf.Max(1.0f, logoDisplayDuration);
+                float holdTimer = 0f;
+                while (holdTimer < holdDuration && !skipLogoRequested)
+                {
+                    holdTimer += Time.unscaledDeltaTime;
+                    // Nhịp thở nhẹ nhàng 1.0 -> 1.03 để logo sống động
+                    float pulse = 1f + 0.025f * Mathf.Sin(holdTimer * 3.5f);
+                    if (chapterLogoImage != null)
+                    {
+                        chapterLogoImage.transform.localScale = new Vector3(pulse, pulse, 1f);
+                    }
+                    yield return null;
+                }
+
+                // 3. ANIMATION FADE OUT & SCALE EXPAND (0.45s)
+                float fadeOutTime = 0.45f;
+                elapsed = 0f;
+                Vector3 currentScale = chapterLogoImage != null ? chapterLogoImage.transform.localScale : Vector3.one;
+                Vector3 dissipateScale = currentScale * 1.07f; // bung nhẹ ra khi tan biến
+
+                while (elapsed < fadeOutTime)
+                {
+                    elapsed += Time.unscaledDeltaTime;
+                    float t = Mathf.Clamp01(elapsed / fadeOutTime);
+                    float ease = Mathf.SmoothStep(0f, 1f, t);
+
+                    if (logoCanvasGroup != null) logoCanvasGroup.alpha = 1f - ease;
+                    if (chapterLogoImage != null)
+                    {
+                        chapterLogoImage.color = new Color(1f, 1f, 1f, 1f - ease);
+                        chapterLogoImage.transform.localScale = Vector3.Lerp(currentScale, dissipateScale, ease);
+                    }
+                    if (chapterTitleText != null)
+                    {
+                        Color tc = chapterTitleText.color;
+                        chapterTitleText.color = new Color(tc.r, tc.g, tc.b, 1f - ease);
+                    }
+                    yield return null;
+                }
+
+                if (logoCanvasGroup != null) logoCanvasGroup.alpha = 0f;
+                if (chapterLogoImage != null)
+                {
+                    chapterLogoImage.color = new Color(1f, 1f, 1f, 0f);
+                    chapterLogoImage.transform.localScale = Vector3.one;
+                }
+                if (topBanner != null) topBanner.SetActive(false);
+            }
+            else
+            {
+                // Nếu không có logo, fade in Dim Overlay trực tiếp
+                float fadeInTime = 0.35f;
+                float elapsed = 0f;
+                while (elapsed < fadeInTime)
+                {
+                    elapsed += Time.unscaledDeltaTime;
+                    float t = Mathf.Clamp01(elapsed / fadeInTime);
+                    float ease = Mathf.SmoothStep(0f, 1f, t);
+                    if (dimOverlay != null)
+                    {
+                        var c = dimOverlay.color;
+                        dimOverlay.color = new Color(c.r, c.g, c.b, Mathf.Lerp(0f, targetDim, ease));
+                    }
+                    yield return null;
+                }
+                if (dimOverlay != null)
+                {
+                    var c = dimOverlay.color;
+                    dimOverlay.color = new Color(c.r, c.g, c.b, targetDim);
+                }
+            }
+
+            // ==========================================
+            // GIAI ĐOẠN 2: ANIMATION HIỆN BẢNG CÂU CHUYỆN (Story Card)
+            // ==========================================
+            currentIntroStep = IntroStep.StoryCardShowcase;
+
+            if (characterStoryCard != null)
+            {
+                characterStoryCard.SetActive(true);
+                characterStoryCard.transform.localScale = new Vector3(0.94f, 0.94f, 1f);
+                if (storyCardCanvasGroup != null)
+                {
+                    storyCardCanvasGroup.alpha = 0f;
+                    storyCardCanvasGroup.blocksRaycasts = true;
+                    storyCardCanvasGroup.interactable = true;
+                }
+            }
+
+            if (tapPromptText != null)
+            {
+                tapPromptText.gameObject.SetActive(true);
+            }
+
+            if (promptPulseRoutine != null) StopCoroutine(promptPulseRoutine);
+            promptPulseRoutine = StartCoroutine(AnimatePromptPulse());
+
+            // Fade in Story Card mượt mà kết hợp scale pop (0.5s)
+            float cardFadeTime = 0.5f;
+            float cardElapsed = 0f;
+            Vector3 cardStartScale = new Vector3(0.94f, 0.94f, 1f);
+            while (cardElapsed < cardFadeTime)
+            {
+                cardElapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(cardElapsed / cardFadeTime);
+                float easeAlpha = Mathf.SmoothStep(0f, 1f, t);
+                float easeScale = 1f - Mathf.Pow(1f - t, 3);
+
+                if (storyCardCanvasGroup != null) storyCardCanvasGroup.alpha = easeAlpha;
+                if (characterStoryCard != null)
+                {
+                    characterStoryCard.transform.localScale = Vector3.LerpUnclamped(cardStartScale, Vector3.one, easeScale);
+                }
+                yield return null;
+            }
+            if (storyCardCanvasGroup != null) storyCardCanvasGroup.alpha = 1f;
+            if (characterStoryCard != null) characterStoryCard.transform.localScale = Vector3.one;
+
+            // Nếu đang bật Auto Mode, tự động chờ người chơi đọc rồi chuyển tiếp
+            if (isAutoMode)
+            {
+                if (autoRoutine != null) StopCoroutine(autoRoutine);
+                autoRoutine = StartCoroutine(WaitAndAutoAdvanceIntro());
             }
         }
 
@@ -648,15 +890,26 @@ namespace Luan.Dialogue
         {
             if (currentPhase != DialoguePhase.Intro) return;
 
-            if (nextClip != null && SFXManager.Instance != null)
-                SFXManager.Instance.PlaySFX(nextClip);
+            if (currentIntroStep == IntroStep.LogoShowcase)
+            {
+                // Người chơi chạm vào màn hình khi logo đang hiện -> chuyển ngay sang fade logo và mở Story Card
+                skipLogoRequested = true;
+                return;
+            }
 
-            if (transitionRoutine != null) StopCoroutine(transitionRoutine);
-            transitionRoutine = StartCoroutine(TransitionFromIntroToPreBattle());
+            if (currentIntroStep == IntroStep.StoryCardShowcase)
+            {
+                if (nextClip != null && SFXManager.Instance != null)
+                    SFXManager.Instance.PlaySFX(nextClip);
+
+                if (transitionRoutine != null) StopCoroutine(transitionRoutine);
+                transitionRoutine = StartCoroutine(TransitionFromIntroToPreBattle());
+            }
         }
 
         private IEnumerator TransitionFromIntroToPreBattle()
         {
+            if (introSequenceRoutine != null) { StopCoroutine(introSequenceRoutine); introSequenceRoutine = null; }
             if (promptPulseRoutine != null) { StopCoroutine(promptPulseRoutine); promptPulseRoutine = null; }
 
             if (introCanvasGroup != null)
@@ -939,8 +1192,8 @@ namespace Luan.Dialogue
 
         private IEnumerator WaitAndAutoAdvanceIntro()
         {
-            yield return new WaitForSecondsRealtime(3.5f);
-            if (currentPhase == DialoguePhase.Intro && isAutoMode)
+            yield return new WaitForSecondsRealtime(4.0f);
+            if (currentPhase == DialoguePhase.Intro && isAutoMode && currentIntroStep == IntroStep.StoryCardShowcase)
             {
                 OnTapToContinueClicked();
             }
@@ -965,6 +1218,7 @@ namespace Luan.Dialogue
                 hasCompletedPostBattleThisSession = true;
             }
 
+            if (introSequenceRoutine != null) { StopCoroutine(introSequenceRoutine); introSequenceRoutine = null; }
             if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
             if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
             if (promptPulseRoutine != null) { StopCoroutine(promptPulseRoutine); promptPulseRoutine = null; }
@@ -1158,6 +1412,75 @@ namespace Luan.Dialogue
 
         [SerializeField, HideInInspector] private GameObject topControlsGroup;
 
+        private void EnsureIntroReferences()
+        {
+            if (dialogueCanvas == null)
+            {
+                var existingCanvas = GameObject.Find("StoryDialogueCanvas");
+                if (existingCanvas != null) dialogueCanvas = existingCanvas.GetComponent<Canvas>();
+            }
+
+            var root = dialogueCanvas != null ? dialogueCanvas.transform : null;
+            if (introContainer == null && root != null)
+            {
+                var t = root.Find("IntroContainer");
+                if (t != null) introContainer = t.gameObject;
+            }
+
+            if (introContainer != null)
+            {
+                if (introCanvasGroup == null)
+                    introCanvasGroup = introContainer.GetComponent<CanvasGroup>() ?? introContainer.AddComponent<CanvasGroup>();
+
+                if (topBanner == null)
+                {
+                    var t = introContainer.transform.Find("TopBanner");
+                    if (t != null) topBanner = t.gameObject;
+                    else if (chapterLogoImage != null)
+                        topBanner = chapterLogoImage.transform.parent != null ? chapterLogoImage.transform.parent.gameObject : chapterLogoImage.gameObject;
+                }
+
+                if (topBanner != null && logoCanvasGroup == null)
+                {
+                    logoCanvasGroup = topBanner.GetComponent<CanvasGroup>() ?? topBanner.AddComponent<CanvasGroup>();
+                }
+
+                if (characterStoryCard == null)
+                {
+                    var t = introContainer.transform.Find("CharacterStoryCard");
+                    if (t != null) characterStoryCard = t.gameObject;
+                    else if (characterStoryTitleText != null && characterStoryTitleText.transform.parent != null)
+                        characterStoryCard = characterStoryTitleText.transform.parent.gameObject;
+                }
+
+                if (characterStoryCard != null && storyCardCanvasGroup == null)
+                {
+                    storyCardCanvasGroup = characterStoryCard.GetComponent<CanvasGroup>() ?? characterStoryCard.AddComponent<CanvasGroup>();
+                }
+
+                if (tapPromptText == null)
+                {
+                    var t = introContainer.transform.Find("BottomPrompt");
+                    if (t != null) tapPromptText = t.GetComponent<TMP_Text>();
+                }
+
+                if (tapToContinueButton == null)
+                {
+                    var t = introContainer.transform.Find("TapScreenButton");
+                    if (t != null) tapToContinueButton = t.GetComponent<Button>();
+                }
+
+                // Ẩn lớp phủ đen thứ 2 trong Intro để không bị đè tối 2 lớp
+                var darkOverlay = introContainer.transform.Find("IntroDarkOverlay");
+                if (darkOverlay != null)
+                {
+                    var darkImg = darkOverlay.GetComponent<Image>();
+                    if (darkImg != null) darkImg.color = new Color(0, 0, 0, 0);
+                    darkOverlay.gameObject.SetActive(false);
+                }
+            }
+        }
+
         public void EnsureUI()
         {
             if (dialogueCanvas != null && mainCanvasGroup != null && dialogueText != null && introContainer != null)
@@ -1186,7 +1509,14 @@ namespace Luan.Dialogue
             if (intro != null)
             {
                 introContainer = intro.gameObject;
-                introCanvasGroup = intro.GetComponent<CanvasGroup>();
+                introCanvasGroup = intro.GetComponent<CanvasGroup>() ?? intro.gameObject.AddComponent<CanvasGroup>();
+
+                var topB = intro.Find("TopBanner");
+                if (topB != null)
+                {
+                    topBanner = topB.gameObject;
+                    logoCanvasGroup = topB.GetComponent<CanvasGroup>() ?? topB.gameObject.AddComponent<CanvasGroup>();
+                }
 
                 var logo = intro.Find("TopBanner/ChapterLogo");
                 if (logo != null) chapterLogoImage = logo.GetComponent<Image>();
@@ -1197,6 +1527,9 @@ namespace Luan.Dialogue
                 var card = intro.Find("CharacterStoryCard");
                 if (card != null)
                 {
+                    characterStoryCard = card.gameObject;
+                    storyCardCanvasGroup = card.GetComponent<CanvasGroup>() ?? card.gameObject.AddComponent<CanvasGroup>();
+
                     var sTitle = card.Find("StoryTitleText");
                     if (sTitle != null) characterStoryTitleText = sTitle.GetComponent<TMP_Text>();
 
@@ -1212,6 +1545,14 @@ namespace Luan.Dialogue
 
                 var tapBtn = intro.Find("TapScreenButton");
                 if (tapBtn != null) tapToContinueButton = tapBtn.GetComponent<Button>();
+
+                var darkOverlay = intro.Find("IntroDarkOverlay");
+                if (darkOverlay != null)
+                {
+                    var darkImg = darkOverlay.GetComponent<Image>();
+                    if (darkImg != null) darkImg.color = new Color(0, 0, 0, 0);
+                    darkOverlay.gameObject.SetActive(false);
+                }
             }
 
             // Dialogue Container
@@ -1502,15 +1843,17 @@ namespace Luan.Dialogue
             tapImg.raycastTarget = true;
             tapToContinueButton = tapGo.GetComponent<Button>();
 
-            // Top Banner: Logo & Chapter Title
-            var bannerGo = new GameObject("TopBanner", typeof(RectTransform));
+            // Top Banner: Logo & Chapter Title (Căn giữa màn hình cho giai đoạn hiện Logo 3s)
+            var bannerGo = new GameObject("TopBanner", typeof(RectTransform), typeof(CanvasGroup));
             bannerGo.transform.SetParent(introGo.transform, false);
             var bannerRt = bannerGo.GetComponent<RectTransform>();
-            bannerRt.anchorMin = new Vector2(0.5f, 1f);
-            bannerRt.anchorMax = new Vector2(0.5f, 1f);
-            bannerRt.pivot = new Vector2(0.5f, 1f);
-            bannerRt.anchoredPosition = new Vector2(0f, -30f);
-            bannerRt.sizeDelta = new Vector2(1200f, 140f);
+            bannerRt.anchorMin = new Vector2(0.5f, 0.5f);
+            bannerRt.anchorMax = new Vector2(0.5f, 0.5f);
+            bannerRt.pivot = new Vector2(0.5f, 0.5f);
+            bannerRt.anchoredPosition = Vector2.zero;
+            bannerRt.sizeDelta = new Vector2(960f, 360f);
+            topBanner = bannerGo;
+            logoCanvasGroup = bannerGo.GetComponent<CanvasGroup>();
 
             // Chapter Logo Image (Placeholder sẵn sàng nhận Sprite)
             var logoGo = new GameObject("ChapterLogo", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
@@ -1544,7 +1887,9 @@ namespace Luan.Dialogue
             chapterTitleText.text = "CHAPTER 1: CONCRETE DREAMS";
 
             // Character Story Card
-            var cardGo = new GameObject("CharacterStoryCard", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            var cardGo = new GameObject("CharacterStoryCard", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(CanvasGroup));
+            characterStoryCard = cardGo;
+            storyCardCanvasGroup = cardGo.GetComponent<CanvasGroup>();
             cardGo.transform.SetParent(introGo.transform, false);
             var cardRt = cardGo.GetComponent<RectTransform>();
             cardRt.anchorMin = new Vector2(0.5f, 0.5f);
