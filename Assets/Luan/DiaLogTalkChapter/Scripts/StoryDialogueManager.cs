@@ -1014,6 +1014,29 @@ namespace Luan.Dialogue
             {
                 StartGameplay();
             }
+            else if (finishedPhase == DialoguePhase.PostBattle)
+            {
+                ShowPostBattleResults();
+            }
+        }
+
+        private void ShowPostBattleResults()
+        {
+            var battleUI = FindFirstObjectByType<RhythmGame.BattleUIController>(FindObjectsInactive.Include);
+            RhythmGame.TurnResultPanel resultPanel = battleUI != null ? battleUI.turnResultPanel : null;
+            if (resultPanel == null)
+            {
+                resultPanel = FindFirstObjectByType<RhythmGame.TurnResultPanel>(FindObjectsInactive.Include);
+            }
+
+            if (resultPanel != null)
+            {
+                resultPanel.ShowFinalResult(RhythmGame.GameState.Finished);
+            }
+            else
+            {
+                Debug.LogWarning("[StoryDialogueManager] Không tìm thấy TurnResultPanel để hiển thị kết quả sau trận!");
+            }
         }
 
         private void StartGameplay()

@@ -79,18 +79,31 @@ namespace RhythmGame
             {
                 // Gameplay counters now live on BattleUIController; nothing to reset here.
             }
-            else if (state == GameState.Finished || state == GameState.Failed)
+            else if (state == GameState.Finished)
+            {
+                // Nếu Story Mode có lời thoại sau trận (Post-Battle Dialogue) -> để StoryDialogueManager chạy thoại xong mới hiện kết quả!
+                if (Luan.Dialogue.StoryDialogueManager.Instance != null && Luan.Dialogue.StoryDialogueManager.Instance.HasPendingPostBattleDialogue())
+                {
+                    return;
+                }
+                ShowFinalResult(state);
+            }
+            else if (state == GameState.Failed)
             {
                 // Game over - show final results
                 ShowFinalResult(state);
             }
         }
 
-
-
-        void ShowFinalResult(GameState endState)
+        public void ShowFinalResult(GameState endState)
         {
             if (panelRoot == null) return;
+
+            // Đảm bảo Canvas cha được kích hoạt nếu đang bị tắt trong scene
+            if (panelRoot.transform.parent != null && !panelRoot.transform.parent.gameObject.activeSelf)
+            {
+                panelRoot.transform.parent.gameObject.SetActive(true);
+            }
 
             // Update content
             if (songNameText != null && gameManager != null && gameManager.chart != null)
