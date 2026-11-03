@@ -3976,8 +3976,8 @@ MonoBehaviour:
   showPauseButton: 1
   pauseButtonPosition: {x: -30, y: -50}
   pauseOnFocusLost: 1
-  lobbySceneName: 
-  mainMenuSceneName: 
+  lobbySceneName: Thuan_SongList
+  mainMenuSceneName: MainMenu
   showLobbyButton: 1
   showMainMenuButton: 1
   onGoLobby:
