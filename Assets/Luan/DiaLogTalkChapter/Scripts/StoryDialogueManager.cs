@@ -408,6 +408,34 @@ namespace Luan.Dialogue
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
         }
 
+        private void Update()
+        {
+            if (currentPhase == DialoguePhase.Intro)
+            {
+                if (IsNextActionPressed())
+                {
+                    OnTapToContinueClicked();
+                }
+            }
+            else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
+            {
+                if (IsNextActionPressed())
+                {
+                    OnDialogueAreaClicked();
+                }
+            }
+        }
+
+        private bool IsNextActionPressed()
+        {
+#if ENABLE_INPUT_SYSTEM
+            var kb = UnityEngine.InputSystem.Keyboard.current;
+            if (kb != null && (kb.spaceKey.wasPressedThisFrame || kb.enterKey.wasPressedThisFrame))
+                return true;
+#endif
+            return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return);
+        }
+
         private void HookEvents()
         {
             if (clickAreaButton != null)

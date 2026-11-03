@@ -1,17 +1,39 @@
 using UnityEngine;
 using System.Collections.Generic;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+#endif
 
 namespace RhythmGame
 {
+    public enum KeyboardPreset
+    {
+        [Tooltip("D - F - J - K (Chuẩn Rhythm game 4 phím, ngón giữa và ngón trỏ 2 tay)")]
+        DFJK,
+        [Tooltip("F - G - J - K (Phím cho người chơi quen đặt ngón FG JK)")]
+        FGJK,
+        [Tooltip("Tự cài đặt phím tùy biến trong Inspector")]
+        Custom
+    }
+
     /// <summary>
     /// Chỉ lo đọc phím và bắn event. Không biết gì về note, lane rendering
     /// hay judgement — nhờ vậy sau này đổi sang touch/mobile chỉ cần sửa
     /// mỗi file này.
-    /// Phím: D F J K hoặc mũi tên Trái/Xuống/Lên/Phải. R để restart.
+    /// Hỗ trợ cả New Input System (hoạt động hoàn hảo trong Device Simulator) lẫn Legacy Input.
+    /// Phím: D F J K (hoặc F G J K) hoặc mũi tên Trái/Xuống/Lên/Phải. R để restart.
     /// </summary>
     public class InputHandler : MonoBehaviour
     {
         public int laneCount = 4;
+
+        [Header("Keyboard Controls (Hỗ trợ Device Simulator & Game View)")]
+        [Tooltip("Chọn kiểu phím bấm mặc định")]
+        public KeyboardPreset keyboardPreset = KeyboardPreset.DFJK;
+
+        [Tooltip("Phím tùy biến cho từng Lane nếu chọn Custom (mặc định D, F, J, K)")]
+        public KeyCode[] customKeys = new KeyCode[] { KeyCode.D, KeyCode.F, KeyCode.J, KeyCode.K };
 
         /// <summary>
         /// Các Receptor (vùng đánh note) trên màn hình. Nếu gán đủ, chạm màn hình chỉ được tính
@@ -56,18 +78,167 @@ namespace RhythmGame
 
         public bool IsHeld(int lane) => held != null && lane < held.Length && held[lane];
 
-        bool IsDown(int lane) => Input.GetKeyDown(PrimaryKey(lane)) || Input.GetKeyDown(SecondaryKey(lane));
-        bool IsUp(int lane) => !(Input.GetKey(PrimaryKey(lane)) || Input.GetKey(SecondaryKey(lane)));
-        bool RestartDown() => Input.GetKeyDown(KeyCode.R);
-
-        KeyCode PrimaryKey(int lane) => lane switch
+        bool IsDown(int lane)
         {
-            0 => KeyCode.D, 1 => KeyCode.F, 2 => KeyCode.J, _ => KeyCode.K
+#if ENABLE_INPUT_SYSTEM
+            if (IsInputSystemDown(lane)) return true;
+#endif
+            return Input.GetKeyDown(PrimaryKey(lane)) || Input.GetKeyDown(SecondaryKey(lane));
+        }
+
+        bool IsUp(int lane)
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null)
+            {
+                return !IsInputSystemHeld(lane) && !IsLegacyHeld(lane);
+            }
+#endif
+            return !IsLegacyHeld(lane);
+        }
+
+        bool IsLegacyHeld(int lane)
+        {
+            return Input.GetKey(PrimaryKey(lane)) || Input.GetKey(SecondaryKey(lane));
+        }
+
+        bool RestartDown()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame) return true;
+#endif
+            return Input.GetKeyDown(KeyCode.R);
+        }
+
+#if ENABLE_INPUT_SYSTEM
+        bool IsInputSystemDown(int lane)
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return false;
+
+            var primary = PrimaryKeyControl(kb, lane);
+            if (primary != null && primary.wasPressedThisFrame) return true;
+
+            var sec = SecondaryKeyControl(kb, lane);
+            if (sec != null && sec.wasPressedThisFrame) return true;
+
+            return false;
+        }
+
+        bool IsInputSystemHeld(int lane)
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return false;
+
+            var primary = PrimaryKeyControl(kb, lane);
+            if (primary != null && primary.isPressed) return true;
+
+            var sec = SecondaryKeyControl(kb, lane);
+            if (sec != null && sec.isPressed) return true;
+
+            return false;
+        }
+
+        KeyControl PrimaryKeyControl(Keyboard kb, int lane)
+        {
+            if (keyboardPreset == KeyboardPreset.FGJK)
+            {
+                return lane switch
+                {
+                    0 => kb.fKey,
+                    1 => kb.gKey,
+                    2 => kb.jKey,
+                    3 => kb.kKey,
+                    _ => null
+                };
+            }
+            else if (keyboardPreset == KeyboardPreset.Custom && customKeys != null && lane < customKeys.Length)
+            {
+                return KeyCodeToKeyControl(kb, customKeys[lane]);
+            }
+            else // DFJK mặc định
+            {
+                return lane switch
+                {
+                    0 => kb.dKey,
+                    1 => kb.fKey,
+                    2 => kb.jKey,
+                    3 => kb.kKey,
+                    _ => null
+                };
+            }
+        }
+
+        KeyControl SecondaryKeyControl(Keyboard kb, int lane) => lane switch
+        {
+            0 => kb.leftArrowKey,
+            1 => kb.downArrowKey,
+            2 => kb.upArrowKey,
+            3 => kb.rightArrowKey,
+            _ => null
         };
+
+        KeyControl KeyCodeToKeyControl(Keyboard kb, KeyCode kc)
+        {
+            return kc switch
+            {
+                KeyCode.A => kb.aKey,
+                KeyCode.B => kb.bKey,
+                KeyCode.C => kb.cKey,
+                KeyCode.D => kb.dKey,
+                KeyCode.E => kb.eKey,
+                KeyCode.F => kb.fKey,
+                KeyCode.G => kb.gKey,
+                KeyCode.H => kb.hKey,
+                KeyCode.I => kb.iKey,
+                KeyCode.J => kb.jKey,
+                KeyCode.K => kb.kKey,
+                KeyCode.L => kb.lKey,
+                KeyCode.S => kb.sKey,
+                KeyCode.Space => kb.spaceKey,
+                KeyCode.Return => kb.enterKey,
+                _ => null
+            };
+        }
+#endif
+
+        KeyCode PrimaryKey(int lane)
+        {
+            if (keyboardPreset == KeyboardPreset.FGJK)
+            {
+                return lane switch
+                {
+                    0 => KeyCode.F,
+                    1 => KeyCode.G,
+                    2 => KeyCode.J,
+                    3 => KeyCode.K,
+                    _ => KeyCode.None
+                };
+            }
+            else if (keyboardPreset == KeyboardPreset.Custom && customKeys != null && lane < customKeys.Length)
+            {
+                return customKeys[lane];
+            }
+            else // DFJK mặc định
+            {
+                return lane switch
+                {
+                    0 => KeyCode.D,
+                    1 => KeyCode.F,
+                    2 => KeyCode.J,
+                    3 => KeyCode.K,
+                    _ => KeyCode.None
+                };
+            }
+        }
 
         KeyCode SecondaryKey(int lane) => lane switch
         {
-            0 => KeyCode.LeftArrow, 1 => KeyCode.DownArrow, 2 => KeyCode.UpArrow, _ => KeyCode.RightArrow
+            0 => KeyCode.LeftArrow,
+            1 => KeyCode.DownArrow,
+            2 => KeyCode.UpArrow,
+            3 => KeyCode.RightArrow,
+            _ => KeyCode.None
         };
 
         /// <summary>
