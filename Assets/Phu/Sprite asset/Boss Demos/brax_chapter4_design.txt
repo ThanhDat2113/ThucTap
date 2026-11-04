@@ -1,0 +1,12 @@
+Brax — Chapter 4: Nhịp Trống Thép
+
+Vai trò: Boss vòng bán kết, tay trống rock/industrial dance.
+Ngoại hình chủ đạo: đen, gunmetal, cam cảnh báo, đèn LED xanh nhạt.
+Nhận diện: tóc thép có mái cam, hai dùi trống phát sáng, áo biker công nghiệp, quần cargo và giày biểu diễn nặng.
+
+Định hướng animation:
+- Idle: gõ nhịp dùi, vai và thân nảy nhẹ theo nhịp máy.
+- Dance: footwork nặng, stomp, body hit, xoay dùi, air-drum và những cú dập mạnh.
+- Miss: lệch nhịp, dùi trượt tay, cố bắt lại rồi khụy gối khó chịu.
+
+Yêu cầu khi tạo sprite: giữ trọn tóc, tay, hai dùi và giày; nền trong suốt; pivot chân ổn định; không dùng bóng mờ chồng frame.
