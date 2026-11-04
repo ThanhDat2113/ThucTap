@@ -81,10 +81,12 @@ public class HudDemoPlayer : MonoBehaviour
     private readonly bool[] pointerHeld = new bool[4];
     private readonly float[] autoHold = new float[4];
 
-    private void Start()
+    private System.Collections.IEnumerator Start()
     {
         SongData song = GameSession.SelectedSong != null ? GameSession.SelectedSong : fallbackSong;
         GameSession.SelectedSong = song; // de man tong ket / luu diem biet dang choi bai nao
+        // hien man thong tin bai hat truoc, xong moi bat nhac + chay not
+        yield return SongIntro.Run(song);
         if (song != null && MusicManager.Instance != null)
         {
             MusicManager.Instance.PlaySongFromStart(song);

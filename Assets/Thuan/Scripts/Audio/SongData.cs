@@ -10,4 +10,9 @@ public class SongData : ScriptableObject
     [Range(1, 5)] public int difficulty = 3;
     [Tooltip("0 = chua biet, se hien --")]
     public int bpm;
+
+    [Header("Thong tin hien o man gioi thieu bai (de trong thi hien ten ca si)")]
+    public string lyricist;
+    public string composer;
+    public string arranger;
 }
