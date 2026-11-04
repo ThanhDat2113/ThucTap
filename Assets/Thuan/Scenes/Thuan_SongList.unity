@@ -8015,7 +8015,7 @@ MonoBehaviour:
   startButton: {fileID: 980973602}
   startGroup: {fileID: 980973600}
   startHint: {fileID: 760191931}
-  gameplayScene: Thuan_Gameplay
+  gameplayScene: GameplayScene
   selectClip: {fileID: 8300000, guid: 3fd5400c2cda4d14895852a0a29b4ad5, type: 3}
   lockedClip: {fileID: 8300000, guid: eead91489824dca468aa334bfe954e2f, type: 3}
 --- !u!1 &872739187

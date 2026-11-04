@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f82e2ff20d89d40af9d8f994bac3f4, type: 3}
+  m_Name: Chapter2_Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Luan.Dialogue.DialogueStoryData
+  chapterTitle: 'Chapter 2: Higher Together'
+  lines:
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Gió trên tầng thượng này thật dữ dội... Và kia chính là sân khấu của DJ Null sao?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+  - speakerName: DJ NULL
+    side: 1
+    text: "Chào mừng đến với không phận của ta, {PLAYER}! Dưới mặt đất ngươi có thể là ngôi sao, nhưng ở độ cao này, chỉ có tần số của ta làm chủ!"
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Dù ở độ cao nào thì âm nhạc chân chính vẫn sẽ chạm tới trái tim người nghe. Tôi sẵn sàng rồi!"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+  - speakerName: DJ NULL
+    side: 1
+    text: "Tốt lắm! Để xem đôi tay của ngươi có bắt kịp những nhịp sóng Synthwave cuồng nhiệt nhất không. BẮT ĐẦU!"
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+

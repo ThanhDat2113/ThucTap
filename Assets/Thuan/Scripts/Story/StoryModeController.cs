@@ -33,7 +33,7 @@ public class StoryModeController : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private CanvasGroup startGroup;
     [SerializeField] private TMP_Text startHint;
-    [SerializeField] private string gameplayScene = "Thuan_Gameplay";
+    [SerializeField] private string gameplayScene = "GameplayScene";
 
     [Header("Audio")]
     [SerializeField] private AudioClip selectClip;
@@ -162,6 +162,7 @@ public class StoryModeController : MonoBehaviour
     {
         if (selected == null || selected.Locked) return;
         StorySession.Begin(selected.Week);
+        Luan.Dialogue.StoryDialogueManager.ResetSessionState();
         if (GameSession.SelectedSong != null) SongStats.IncrementPlayCount(GameSession.SelectedSong);
         SceneManager.LoadScene(gameplayScene);
     }

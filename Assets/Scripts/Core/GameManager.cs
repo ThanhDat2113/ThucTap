@@ -2,19 +2,23 @@ using UnityEngine;
 
 namespace RhythmGame
 {
-    public enum GameState { Countdown, Playing, Finished, Failed }
+    public enum GameState { Dialogue, Countdown, Playing, Finished, Failed }
 
     /// <summary>
-    /// Điều phối state machine (Countdown -> Playing -> Finished/Failed) và giữ
-    /// đồng hồ bài hát (SongTime). Mọi thứ khác (spawn, judgement, UI)
-    /// đều đi theo SongTime này, không tự đếm thời gian riêng.
+    /// Äiá»u phá»‘i state machine (Countdown -> Playing -> Finished/Failed) vÃ  giá»¯
+    /// Ä‘á»“ng há»“ bÃ i hÃ¡t (SongTime). Má»i thá»© khÃ¡c (spawn, judgement, UI)
+    /// Ä‘á»u Ä‘i theo SongTime nÃ y, khÃ´ng tá»± Ä‘áº¿m thá»i gian riÃªng.
     ///
-    /// SongTime được tính từ AudioSettings.dspTime (đồng hồ âm thanh thực)
-    /// thay vì dồn Time.deltaTime, giúp note spawn khớp chính xác với nhạc
-    /// cả lần đầu lẫn khi replay, không bị trôi lệch.
+    /// LÆ¯U Ã QUAN TRá»ŒNG khi thÃªm nháº¡c tháº­t: thay Ä‘oáº¡n "SongTime += Time.deltaTime"
+    /// báº±ng cÃ¡ch Ä‘á»c AudioSettings.dspTime (trá»« Ä‘i thá»i Ä‘iá»ƒm AudioSource.Play()),
+    /// vÃ¬ Time.deltaTime cá»™ng dá»“n sáº½ trÃ´i lá»‡ch dáº§n so vá»›i audio tháº­t.
     /// </summary>
     public class GameManager : MonoBehaviour
     {
+        public static GameManager Instance { get; private set; }
+
+        void Awake() { Instance = this; }
+
         [Header("Refs")]
         public NoteSpawner spawner;
         public JudgementSystem judgement;
@@ -35,30 +39,32 @@ namespace RhythmGame
 
         public System.Action<GameState> OnStateChanged;
 
+        Coroutine playMusicRoutine;
         bool clearNotesPending;
-        double dspMusicStartTime; // AudioSettings.dspTime khi nhạc được lên lịch phát
-        bool musicScheduled;
 
         void Start()
         {
             input.OnRestartPressed += Restart;
             if (healthSystem != null) healthSystem.OnHealthDepleted.AddListener(OnHealthDepleted);
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = Restart;
-            if (GameSession.SelectedSong != null && GameSession.SelectedSong.chart != null)
+            if (GameSession.SelectedSong != null)
             {
-                // Luôn ưu tiên chart của bài người dùng chọn ở Song List
-                chart = GameSession.SelectedSong.chart;
+                if (GameSession.SelectedSong.chart != null) chart = GameSession.SelectedSong.chart;
                 if (musicSource != null && GameSession.SelectedSong.clip != null) musicSource.clip = GameSession.SelectedSong.clip;
             }
-            else if (chart == null)
+
+            if (Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
             {
-                Debug.LogWarning("[GameManager] Chưa có ChartData nào. Chọn bài ở Song List hoặc gán chart trong Inspector.");
+                SetState(GameState.Dialogue);
+                CountdownRemaining = countdownSeconds;
+                return;
             }
             Restart();
         }
 
         void OnDestroy()
         {
+            if (Instance == this) Instance = null;
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = null;
             if (input != null) input.OnRestartPressed -= Restart;
             if (healthSystem != null) healthSystem.OnHealthDepleted.RemoveListener(OnHealthDepleted);
@@ -66,14 +72,14 @@ namespace RhythmGame
 
         public void Restart()
         {
-            // Đang pause mà Restart (phím R hoặc nút trong menu pause) -> bỏ pause trước
+            // Äang pause mÃ  Restart (phÃ­m R hoáº·c nÃºt trong menu pause) -> bá» pause trÆ°á»›c
             if (PauseManager.Instance != null) PauseManager.Instance.ForceUnpause();
             if (musicSource != null) musicSource.Stop();
+            if (playMusicRoutine != null) StopCoroutine(playMusicRoutine);
             spawner.Begin(chart);
             SongTime = 0f;
             CountdownRemaining = countdownSeconds;
             clearNotesPending = false;
-            musicScheduled = false;
             if (healthSystem != null) healthSystem.ResetHealth();
             SetState(GameState.Countdown);
         }
@@ -88,6 +94,7 @@ namespace RhythmGame
 
             switch (State)
             {
+                case GameState.Dialogue: break;
                 case GameState.Countdown: TickCountdown(); break;
                 case GameState.Playing: TickPlaying(); break;
             }
@@ -95,36 +102,24 @@ namespace RhythmGame
 
         void TickCountdown()
         {
-            // Giới hạn delta time để tránh trường hợp frame đầu sau khi load scene
-            // có unscaledDeltaTime lớn -> countdown bị nhảy từ 3 thẳng xuống 0.
-            float dt = Mathf.Min(Time.unscaledDeltaTime, 0.5f);
-            CountdownRemaining -= dt;
+            CountdownRemaining -= Time.deltaTime;
             if (CountdownRemaining > 0f) return;
 
+            SongTime = chart.notes.Count > 0 ? chart.BeatToTime(chart.notes[0].beat) - spawner.TravelTime : 0f;
             SetState(GameState.Playing);
         }
 
         void TickPlaying()
         {
-            if (!musicScheduled) return;
+            SongTime += Time.deltaTime;
+            judgement.SetSongTime(SongTime);
+            if (opponentAI != null) opponentAI.SetSongTime(SongTime);
 
-            // SongTime tính từ đồng hồ âm thanh thực (AudioSettings.dspTime),
-            // không dồn Time.deltaTime -> không trôi lệch so với nhạc.
-            double dspNow = AudioSettings.dspTime;
-            SongTime = (float)(dspNow - dspMusicStartTime);
-
-            // effectiveTime = thời gian hiệu lực cho note/judgement, được lùi theo noteStartDelay của chart
-            float noteDelay = chart != null ? chart.noteStartDelay : 0f;
-            float effectiveTime = Mathf.Max(0f, SongTime - noteDelay);
-
-            judgement.SetSongTime(effectiveTime);
-            if (opponentAI != null) opponentAI.SetSongTime(effectiveTime);
-
-            spawner.Tick(effectiveTime);
+            spawner.Tick(SongTime);
             judgement.CheckMisses();
 
-            // CheckMisses có thể làm cạn máu -> chuyển sang Failed giữa chừng,
-            // lúc này đã kết thúc lượt chơi nên không được ghi đè bằng Finished.
+            // CheckMisses cÃ³ thá»ƒ lÃ m cáº¡n mÃ¡u -> chuyá»ƒn sang Failed giá»¯a chá»«ng,
+            // lÃºc nÃ y Ä‘Ã£ káº¿t thÃºc lÆ°á»£t chÆ¡i nÃªn khÃ´ng Ä‘Æ°á»£c ghi Ä‘Ã¨ báº±ng Finished.
             if (State == GameState.Playing && spawner.Finished) SetState(GameState.Finished);
         }
 
@@ -132,11 +127,11 @@ namespace RhythmGame
         {
             if (State != GameState.Playing) return;
 
-            // Hết máu -> kết thúc lượt chơi: dừng nhạc và dừng hẳn gameplay.
+            // Háº¿t mÃ¡u -> káº¿t thÃºc lÆ°á»£t chÆ¡i: dá»«ng nháº¡c vÃ  dá»«ng háº³n gameplay.
             if (musicSource != null) musicSource.Stop();
 
-            // Hoãn xoá note tới frame sau: OnHealthDepleted được gọi từ giữa vòng
-            // lặp CheckMisses, xoá list lúc đó sẽ làm vỡ vòng lặp đang duyệt.
+            // HoÃ£n xoÃ¡ note tá»›i frame sau: OnHealthDepleted Ä‘Æ°á»£c gá»i tá»« giá»¯a vÃ²ng
+            // láº·p CheckMisses, xoÃ¡ list lÃºc Ä‘Ã³ sáº½ lÃ m vá»¡ vÃ²ng láº·p Ä‘ang duyá»‡t.
             clearNotesPending = true;
 
             SetState(GameState.Failed);
@@ -145,35 +140,25 @@ namespace RhythmGame
         void SetState(GameState s)
         {
             State = s;
-            // Chỉ cho pause khi đang đếm ngược hoặc đang chơi (không pause ở màn Finished/Failed)
+            // Chá»‰ cho pause khi Ä‘ang Ä‘áº¿m ngÆ°á»£c hoáº·c Ä‘ang chÆ¡i (khÃ´ng pause á»Ÿ mÃ n Finished/Failed)
             if (PauseManager.Instance != null)
                 PauseManager.Instance.canPause = s == GameState.Countdown || s == GameState.Playing;
             OnStateChanged?.Invoke(s);
-            if (s == GameState.Playing)
-            {
-                ScheduleMusic();
-                if (opponentAI != null) opponentAI.SetActive(true);
-            }
+            if (s == GameState.Playing) { playMusicRoutine = StartCoroutine(PlayMusicDelayed()); if (opponentAI != null) opponentAI.SetActive(true); }
             if (s != GameState.Playing && opponentAI != null) opponentAI.SetActive(false);
         }
 
-        /// <summary>
-        /// Lên lịch phát nhạc tại một thời điểm DSP chắc chắn (PlayScheduled),
-        /// tránh hitch/khựng màn hình do WaitForSeconds và Play() không chính xác mẫu.
-        /// </summary>
-        void ScheduleMusic()
+        System.Collections.IEnumerator PlayMusicDelayed()
         {
-            if (musicSource == null || chart == null || chart.audioClip == null) return;
+            float delay = chart != null ? chart.musicStartDelay : 0f;
+            if (delay > 0f) yield return new WaitForSeconds(delay);
 
-            // Bắt đầu nhạc sau một khoảng nghỉ. Đảm bảo có ít nhất 0.5s để
-            // countdown hiển thị rõ trước khi nhạc phát (tránh phát ngay lập tức).
-            float musicDelay = Mathf.Max(0.5f, chart != null ? chart.musicStartDelay : 0.5f);
-            double startDSP = AudioSettings.dspTime + musicDelay;
-            dspMusicStartTime = startDSP;
-            musicSource.clip = chart.audioClip;
-            musicSource.time = 0f;
-            musicSource.PlayScheduled(startDSP);
-            musicScheduled = true;
+            if (musicSource != null && chart != null && chart.audioClip != null)
+            {
+                musicSource.clip = chart.audioClip;
+                musicSource.time = 0f;
+                musicSource.Play();
+            }
         }
     }
 }
