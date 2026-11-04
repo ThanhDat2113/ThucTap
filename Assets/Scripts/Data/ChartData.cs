@@ -14,6 +14,10 @@ namespace RhythmGame
         public int laneCount = 4;
         public float firstNoteOffset = 0.5f;
 
+        [Header("Timing")]
+        [Tooltip("Độ trễ (giây) sau khi nhạc bắt đầu trước khi note mới bắt đầu xuất hiện.")]
+        public float noteStartDelay = 0f;
+
         [Header("Battle Settings")]
         [Range(0f, 1f)] public float opponentNoteRatio = 0.5f;
         [Range(0f, 1f)] public float opponentAccuracy = 0.85f;

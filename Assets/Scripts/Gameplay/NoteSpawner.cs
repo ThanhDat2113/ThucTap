@@ -52,6 +52,7 @@ namespace RhythmGame
 
         public void Tick(float songTime)
         {
+            if (chart == null) return;
             while (nextIndex < chart.notes.Count &&
                    chart.BeatToTime(chart.notes[nextIndex].beat) - songTime <= TravelTime)
                 Spawn(chart.notes[nextIndex++]);

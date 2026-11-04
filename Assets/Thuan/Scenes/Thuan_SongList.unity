@@ -276,7 +276,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 256140052}
   m_HandleRect: {fileID: 256140051}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13297,6 +13297,11 @@ MonoBehaviour:
   itemPrefab: {fileID: -8793168142156453074, guid: 5ad34c4875ddbc247b868ae94c07b116, type: 3}
   songs:
   - {fileID: 11400000, guid: 9a186b7e24226bf4ba2263e338909550, type: 2}
+  - {fileID: 11400000, guid: 1192c85b9053dbf4ea90fb67247f472e, type: 2}
+  - {fileID: 11400000, guid: 9f36a6c6c13963b42b7e169080c38f62, type: 2}
+  - {fileID: 11400000, guid: c64847698a793ca458a2dfe8226fe4de, type: 2}
+  - {fileID: 11400000, guid: ab6987a06c731d5438700ffd70ced4ce, type: 2}
+  - {fileID: 11400000, guid: feb79b8093c643d4d970571e699dd70c, type: 2}
   musicManager: {fileID: 943737166}
   ambientBgm: {fileID: 8300000, guid: 01c52dbad1c65544588d1de7cfef1e35, type: 3}
   detailPanel: {fileID: 63608723}
