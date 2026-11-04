@@ -178,6 +178,9 @@ namespace RhythmGame
                 Debug.LogWarning("[TurnResultPanel] Không thể lưu thành tích: Không tìm thấy SongData");
             }
 
+            // Ẩn nút pause + chặn Esc/P khi hiện kết quả
+            if (PauseManager.Instance != null) PauseManager.Instance.HideForResult();
+
             // Show panel with fade in
             panelRoot.SetActive(true);
             StopAllCoroutines();
@@ -243,6 +246,9 @@ namespace RhythmGame
         {
             if (panelRoot != null) panelRoot.SetActive(false);
             if (panelCanvasGroup != null) panelCanvasGroup.alpha = 0f;
+
+            // Trả lại nút pause khi đóng bảng kết quả
+            if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
         }
 
         Color GetGradeColor(Grade grade)
