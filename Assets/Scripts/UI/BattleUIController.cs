@@ -36,9 +36,6 @@ namespace RhythmGame
         public TMP_Text countdownText;
         public TMP_Text messageText;
 
-        [Header("Turn Results")]
-        public TurnResultPanel turnResultPanel;
-
         [Header("Grade Thresholds")]
         [Range(0f, 1f)] public float thresholdS = 0.95f;
         [Range(0f, 1f)] public float thresholdA = 0.80f;

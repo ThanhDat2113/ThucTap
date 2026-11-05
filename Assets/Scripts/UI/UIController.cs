@@ -261,6 +261,9 @@ namespace RhythmGame
 
         void Update()
         {
+            // ★ Nếu SongIntroScreen đang chạy, nó tự quản lý countdown — UIController không đụng
+            if (SongIntroScreen.Instance != null && SongIntroScreen.Instance.IsPlaying) return;
+
             bool counting = gameManager.State == GameState.Countdown;
             countdownText.gameObject.SetActive(counting);
             if (counting)

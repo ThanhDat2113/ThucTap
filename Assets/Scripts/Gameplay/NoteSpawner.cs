@@ -90,15 +90,17 @@ namespace RhythmGame
             OnNoteSpawned?.Invoke(n);
         }
 
-        public NoteView FindClosestUnjudged(int lane, float songTime)
+        public NoteView FindClosestUnjudged(int lane, float songTime, float maxDiff = float.MaxValue)
         {
             NoteView best = null;
-            float bestDiff = float.MaxValue;
+            float bestDiff = maxDiff;
             foreach (var n in active)
             {
                 if (n.Judged || n.Data.lane != lane) continue;
                 float diff = Mathf.Abs(songTime - n.TimeSeconds);
-                if (diff < bestDiff) { bestDiff = diff; best = n; }
+                if (diff >= bestDiff) continue;
+                bestDiff = diff;
+                best = n;
             }
             return best;
         }

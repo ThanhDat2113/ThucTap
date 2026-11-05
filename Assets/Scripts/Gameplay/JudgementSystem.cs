@@ -12,20 +12,20 @@ namespace RhythmGame
         public HealthSystem healthSystem;
         public FlowSystem flowSystem;
 
-        [Header("Timing window (giây)")]
-        public float perfectWindow = 0.045f;
-        public float goodWindow = 0.09f;
-        public float missWindow = 0.14f;
+        [Header("Timing window (giây) — nới rộng")]
+        public float perfectWindow = 0.075f;   // was 0.045
+        public float goodWindow    = 0.150f;   // was 0.090
+        public float missWindow    = 0.220f;   // was 0.140
 
         [Header("Hold note")]
         [Tooltip("Điểm thưởng khi giữ tới hết đuôi hold note.")]
         public int holdCompletePoints = 100;
         [Tooltip("Nhả phím sớm hơn đuôi tối đa bao nhiêu giây vẫn tính là giữ xong.")]
-        public float holdReleaseTolerance = 0.12f;
+        public float holdReleaseTolerance = 0.180f;   // was 0.120
         [Tooltip("Cửa sổ Perfect/Good/Bad cho việc nhả đuôi hold (giây).")]
-        public float holdTailPerfectWindow = 0.045f;
-        public float holdTailGoodWindow = 0.09f;
-        public float holdTailBadWindow = 0.14f;
+        public float holdTailPerfectWindow = 0.075f;  // was 0.045
+        public float holdTailGoodWindow = 0.150f;     // was 0.090
+        public float holdTailBadWindow = 0.220f;      // was 0.140
 
         [Header("SFX")]
         public AudioClip perfectSfx;
@@ -94,11 +94,10 @@ namespace RhythmGame
             if (PauseManager.IsPaused) return;
             OnLaneActivated?.Invoke(lane);
 
-            NoteView note = spawner.FindClosestUnjudged(lane, songTime);
-            if (note == null) return;
+            NoteView note = spawner.FindClosestUnjudged(lane, songTime, missWindow);
+            if (note == null) return;   // không có note nào trong cửa sổ miss → bỏ phím
 
             float diff = Mathf.Abs(songTime - note.TimeSeconds);
-            if (diff > missWindow) return;
 
             note.MarkJudged();
 

@@ -99,6 +99,9 @@ namespace Luan.Dialogue
     {
         public static StoryDialogueManager Instance { get; private set; }
 
+        // ★ Thêm: theo dõi xem dialogue đang chạy hay không (để GameManager không start gameplay lẫn vào)
+        public bool IsPlaying { get; private set; }
+
         private bool hasCompletedDialogueThisSession = false;
         private bool hasCompletedPostBattleThisSession = false;
 
@@ -366,6 +369,16 @@ namespace Luan.Dialogue
         {
             SubscribeGameManager();
 
+            // ★ Neu SongIntroScreen dang chay -> doi no goi BeginStoryFlow() sau khi xong.
+            //   Neu khong co SongIntroScreen (scene khong co intro) -> chay dialogue ngay.
+            if (RhythmGame.SongIntroScreen.Instance != null
+                && RhythmGame.SongIntroScreen.Instance.IsPlaying)
+            {
+                Debug.Log("[StoryDialogueManager] Doi SongIntroScreen xong...");
+                HideAllUI();
+                return;
+            }
+
             if (HasPendingDialogue())
             {
                 StartDialogue();
@@ -373,6 +386,25 @@ namespace Luan.Dialogue
             else
             {
                 HideAllUI();
+            }
+        }
+
+        /// <summary>
+        /// Duoc goi tu SongIntroScreen sau khi intro ket thuc.
+        /// - Co pending dialogue -> chay dialogue (Story Mode).
+        /// - Khong co -> bat dau gameplay ngay (Free Play hoac Chapter khong co thoai).
+        /// </summary>
+        public void BeginStoryFlow()
+        {
+            if (HasPendingDialogue())
+            {
+                Debug.Log("[StoryDialogueManager] BeginStoryFlow -> StartDialogue().");
+                StartDialogue();
+            }
+            else
+            {
+                Debug.Log("[StoryDialogueManager] BeginStoryFlow -> khong co dialogue, vao gameplay.");
+                StartGameplay();
             }
         }
 
@@ -553,6 +585,7 @@ namespace Luan.Dialogue
 
         public void StartDialogue()
         {
+            IsPlaying = true;
             var cfg = GetCurrentChapterConfig();
             var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
             bool hasIntro = introContainer != null && (data != null && (!string.IsNullOrEmpty(data.characterStory) || data.chapterLogo != null || !string.IsNullOrEmpty(data.characterStoryTitle)));
@@ -1195,6 +1228,7 @@ namespace Luan.Dialogue
 
         public void FinishDialogue()
         {
+            IsPlaying = false;
             if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.Intro)
             {
                 hasCompletedDialogueThisSession = true;
@@ -1262,20 +1296,14 @@ namespace Luan.Dialogue
 
         private void ShowPostBattleResults()
         {
-            var battleUI = FindFirstObjectByType<RhythmGame.BattleUIController>(FindObjectsInactive.Include);
-            RhythmGame.TurnResultPanel resultPanel = battleUI != null ? battleUI.turnResultPanel : null;
-            if (resultPanel == null)
-            {
-                resultPanel = FindFirstObjectByType<RhythmGame.TurnResultPanel>(FindObjectsInactive.Include);
-            }
-
+            var resultPanel = FindFirstObjectByType<RhythmGame.GameplayResultScreen>(FindObjectsInactive.Include);
             if (resultPanel != null)
             {
-                resultPanel.ShowFinalResult(RhythmGame.GameState.Finished);
+                resultPanel.ShowResult(true);
             }
             else
             {
-                Debug.LogWarning("[StoryDialogueManager] Không tìm thấy TurnResultPanel để hiển thị kết quả sau trận!");
+                Debug.LogWarning("[StoryDialogueManager] Không tìm thấy GameplayResultScreen để hiển thị kết quả sau trận!");
             }
         }
 

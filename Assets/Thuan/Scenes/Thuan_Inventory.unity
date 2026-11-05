@@ -3408,7 +3408,7 @@ MonoBehaviour:
   coinText: {fileID: 813522266}
   gemText: {fileID: 1228516477}
   backButton: {fileID: 282206836}
-  backScene: Thuan_MainMenu
+  backScene: MainMenu
   selectClip: {fileID: 8300000, guid: 3fd5400c2cda4d14895852a0a29b4ad5, type: 3}
   equipClip: {fileID: 8300000, guid: 12db13ef6984d90459a02b3802abad65, type: 3}
 --- !u!1 &1293580633

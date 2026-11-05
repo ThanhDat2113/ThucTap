@@ -71,10 +71,15 @@ public class SongDetailPanel : MonoBehaviour
         if (song == null) return;
         int best = SongStats.GetBestScore(song);
         float acc = SongStats.GetBestAccuracy(song);
+        int plays = SongStats.GetPlayCount(song);
+        bool hasPlayed = plays > 0;
         if (bestScoreText != null) bestScoreText.text = best > 0 ? best.ToString("N0") : "--";
-        if (bestComboText != null) bestComboText.text = best > 0 ? SongStats.GetBestCombo(song) + " COMBO" : "";
-        if (accuracyText != null) accuracyText.text = acc >= 0f ? (acc * 100f).ToString("0.0") + "%  <color=#FFD21C>" + GameplayResultScreen.RankOf(true, acc) + "</color>" : "--";
-        if (playCountText != null) playCountText.text = SongStats.GetPlayCount(song).ToString();
+        if (bestComboText != null) bestComboText.text = hasPlayed ? SongStats.GetBestCombo(song) + " COMBO" : "";
+        if (accuracyText != null)
+            accuracyText.text = hasPlayed && acc >= 0f
+                ? (acc * 100f).ToString("0.0") + "%  <color=#FFD21C>" + GameplayResultScreen.RankOf(true, acc * 100f) + "</color>"
+                : "--";
+        if (playCountText != null) playCountText.text = plays.ToString();
     }
 
     private void SelectDifficulty(int index)
