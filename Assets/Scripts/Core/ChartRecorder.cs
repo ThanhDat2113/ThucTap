@@ -100,6 +100,7 @@ namespace RhythmGame
             if (clearExistingNotes) chart.notes.Clear();
             chart.notes.AddRange(recorded);
             chart.notes.Sort((a, b) => a.beat.CompareTo(b.beat));
+            chart.latencyCompensation = latencyCompensation;
 
 #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(chart);

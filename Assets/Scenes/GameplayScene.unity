@@ -1885,7 +1885,7 @@ MonoBehaviour:
   input: {fileID: 443643779}
   healthSystem: {fileID: 443643784}
   opponentAI: {fileID: 443643787}
-  chart: {fileID: 11400000, guid: 57c4bd262aa2d0146897345b7d380ec7, type: 2}
+  chart: {fileID: 11400000, guid: 359f34cc4c2aded4485a8d208482ca50, type: 2}
   musicSource: {fileID: 1212483326}
   countdownSeconds: 3
 --- !u!114 &443643778
