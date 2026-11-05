@@ -22,7 +22,7 @@ public static class StoryDebugMenu
     [MenuItem("Thuan/Story/Danh dau da qua tat ca cac tuan")]
     public static void ClearAll()
     {
-        foreach (var w in AllWeeks()) StoryProgress.SaveWeek(w, GameSession.SelectedDifficulty, 0, -1f);
+        foreach (var w in AllWeeks()) StoryProgress.SaveWeek(w, 0, -1f);
         Debug.Log("[Story] Da danh dau qua tat ca cac tuan.");
     }
 }

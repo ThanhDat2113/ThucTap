@@ -28,6 +28,8 @@ public class SongDetailPanel : MonoBehaviour
     [SerializeField] private GameObject contentRoot;
     [SerializeField] private GameObject emptyHint;
 
+    private SongData current;
+
     private void Awake()
     {
         for (int i = 0; i < difficultyButtons.Length; i++)
@@ -47,6 +49,7 @@ public class SongDetailPanel : MonoBehaviour
 
     public void Show(SongData song)
     {
+        current = song;
         if (song == null) { ShowEmpty(); return; }
         if (contentRoot != null) contentRoot.SetActive(true);
         if (emptyHint != null) emptyHint.SetActive(false);
@@ -57,14 +60,21 @@ public class SongDetailPanel : MonoBehaviour
         if (bpmText != null) bpmText.text = song.bpm > 0 ? song.bpm.ToString() : "--";
         if (durationText != null) durationText.text = song.clip != null ? FormatTime(song.clip.length) : "--";
 
+        RefreshStats();
+        RefreshDifficulty();
+    }
+
+    // Diem / combo / do chinh xac / luot choi cua do kho dang chon
+    private void RefreshStats()
+    {
+        var song = current;
+        if (song == null) return;
         int best = SongStats.GetBestScore(song);
         float acc = SongStats.GetBestAccuracy(song);
         if (bestScoreText != null) bestScoreText.text = best > 0 ? best.ToString("N0") : "--";
         if (bestComboText != null) bestComboText.text = best > 0 ? SongStats.GetBestCombo(song) + " COMBO" : "";
         if (accuracyText != null) accuracyText.text = acc >= 0f ? (acc * 100f).ToString("0.0") + "%  <color=#FFD21C>" + GameplayResultScreen.RankOf(true, acc) + "</color>" : "--";
         if (playCountText != null) playCountText.text = SongStats.GetPlayCount(song).ToString();
-
-        RefreshDifficulty();
     }
 
     private void SelectDifficulty(int index)
@@ -72,6 +82,7 @@ public class SongDetailPanel : MonoBehaviour
         GameSession.SelectedDifficulty = (ChartDifficulty)index;
         if (SFXManager.Instance != null) SFXManager.Instance.PlaySFX(difficultyClip);
         RefreshDifficulty();
+        RefreshStats();
     }
 
     private void RefreshDifficulty()

@@ -41,7 +41,7 @@ public class StoryWeekCardUI : MonoBehaviour
             if (trackTexts[i] != null) trackTexts[i].text = has ? (i + 1) + ".  " + week.tracks[i].DisplayTitle : "";
             if (trackCrowns[i] != null)
             {
-                bool done = has && week.tracks[i].song != null && SongStats.GetBestScore(week.tracks[i].song) > 0;
+                bool done = has && week.tracks[i].song != null && SongStats.GetBestScore(week.tracks[i].song, StoryProgress.Difficulty) > 0;
                 trackCrowns[i].color = done ? crownDone : crownTodo;
                 trackCrowns[i].enabled = has;
             }
