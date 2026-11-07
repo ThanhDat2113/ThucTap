@@ -116,6 +116,8 @@ namespace Luan.Dialogue.Editor
                 }
             }
 
+            ConfigureChapter1Backstory(chap1Asset, boss1Avatar, main1Avatar);
+
             string chap2Path = "Assets/Luan/DiaLogTalkChapter/Data/Chapter2_Dialogue.asset";
             var chap2Asset = AssetDatabase.LoadAssetAtPath<DialogueStoryData>(chap2Path);
             Sprite boss2Avatar = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Luan/DiaLogTalkChapter/Avatars/avatar_boss2.png");
@@ -148,6 +150,85 @@ namespace Luan.Dialogue.Editor
             EditorSceneManager.SaveOpenScenes();
 
             Debug.Log("<color=#00FF99>[StoryDialogueSceneBuilder] Da build thanh cong Story Dialogue UI (Intro + Pre/Post Battle) vao GameplayScene!</color>");
+        }
+
+        public static void ConfigureChapter1Backstory(DialogueStoryData chap1Asset, Sprite boss1Avatar, Sprite main1Avatar)
+        {
+            if (chap1Asset == null) return;
+
+            string dir = "Assets/Luan/DiaLogTalkChapter/Backstory/";
+            Sprite act1 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act1_story_melodia.png");
+            Sprite act2 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act2_story_raze.png");
+            Sprite act3 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act3_story_crown.png");
+            Sprite act4 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act4_dialogue_who_are_you.png");
+            Sprite act5 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act5_dialogue_im_raze.png");
+            Sprite act6 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act6_dialogue_showdown.png");
+
+            chap1Asset.characterStoryTitle = "Câu chuyện của Raze";
+            chap1Asset.characterStory = "Raze lớn lên tại khu phố phía Tây. Khi còn nhỏ, anh thường bị đuổi khỏi những sân khấu lớn vì không được đào tạo bài bản.\n\nRaze cùng những người bạn biến một quảng trường bỏ hoang thành nơi biểu diễn. Anh phủ kín các bức tường bằng graffiti, tổ chức những cuộc dance battle và dần khiến khu vực này trở nên nổi tiếng.\n\nSau nhiều năm, Raze trở thành nhà vô địch của khu phố. Biểu tượng vương miện trên trang phục là lời nhắc rằng không ai được phép xem thường anh thêm lần nữa. Tuy nhiên, Raze ngày càng sợ mất đi vị trí mình đã rất vất vả mới giành được. Anh bắt đầu thách đấu và đuổi đi bất kỳ ai muốn bước qua khu phố.";
+            if (boss1Avatar != null) chap1Asset.characterIntroArt = boss1Avatar;
+
+            chap1Asset.backstorySlides.Clear();
+            chap1Asset.backstorySlides.Add(new BackstorySlide
+            {
+                illustration = act1,
+                speakerName = "DẪN CHUYỆN",
+                nameColor = new Color(0.2f, 0.95f, 1f, 1f),
+                actionDescription = "[Nhân vật chính đeo tai nghe, nhìn về thành phố Melodia]",
+                storyText = "Melodia tổ chức giải đấu đường phố Bắt Lấy Giai Điệu. Một vũ công trẻ quyết định dấn thân với một đôi giày, một chiếc máy nghe nhạc và một cơ hội duy nhất."
+            });
+            chap1Asset.backstorySlides.Add(new BackstorySlide
+            {
+                illustration = act2,
+                speakerName = "DẪN CHUYỆN",
+                nameColor = new Color(1f, 0.85f, 0.2f, 1f),
+                actionDescription = "[Raze nhảy breakdance, phủ kín quảng trường bỏ hoang bằng graffiti]",
+                storyText = "Từng bị đuổi khỏi các sân khấu lớn, Raze cùng bạn bè biến quảng trường hoang thành thánh địa vũ đạo và dần trở thành nhà vô địch của khu phố."
+            });
+            chap1Asset.backstorySlides.Add(new BackstorySlide
+            {
+                illustration = act3,
+                speakerName = "DẪN CHUYỆN",
+                nameColor = new Color(1f, 0.2f, 0.85f, 1f),
+                actionDescription = "[Raze đứng trước bức tường vương miện, đề phòng mọi kẻ thách đấu]",
+                storyText = "Biểu tượng vương miện là lời nhắc không ai được xem thường anh. Nhưng nỗi sợ mất ngôi khiến Raze bắt đầu thách đấu và đuổi bất kỳ ai muốn bước qua khu phố."
+            });
+            chap1Asset.backstorySlides.Add(new BackstorySlide
+            {
+                illustration = act4,
+                speakerName = "RAZE & {PLAYER}",
+                nameColor = new Color(1f, 0.2f, 0.85f, 1f),
+                actionDescription = "[Raze tựa tường khoanh tay nhìn xuống | Người chơi chỉ tay kiên định]",
+                storyText = "Raze: \"Cậu đang tìm ai?\"\n\nNgười chơi: \"Tôi tìm Raze. Tôi muốn lấy Huy hiệu Nhịp điệu.\""
+            });
+            chap1Asset.backstorySlides.Add(new BackstorySlide
+            {
+                illustration = act5,
+                speakerName = "RAZE & {PLAYER}",
+                nameColor = new Color(1f, 0.2f, 0.85f, 1f),
+                actionDescription = "[Raze lắc bình sơn, chỉ ngón cái ngạo nghễ | Người chơi siết chặt nắm đấm]",
+                storyText = "Raze: \"Tôi là Raze. Nhưng muốn lấy huy hiệu thì cậu phải thắng tôi.\"\n\nNgười chơi: \"Tôi biết.\""
+            });
+            chap1Asset.backstorySlides.Add(new BackstorySlide
+            {
+                illustration = act6,
+                speakerName = "RAZE & {PLAYER}",
+                nameColor = new Color(0.2f, 0.95f, 1f, 1f),
+                actionDescription = "[Raze chỉ ra sàn đấu thách thức | Người chơi vào thế nhảy rực lửa]",
+                storyText = "Raze: \"Tân binh mà gan đấy. Lên sân khấu đi.\"\n\nNgười chơi: \"Bắt đầu thôi!\""
+            });
+
+            // Post-Battle Lines (Thoại thắng / thua tiếp tục dùng Dialog)
+            chap1Asset.postBattleLines.Clear();
+            chap1Asset.postBattleLines.Add(new DialogueLine { speakerName = "Raze", side = SpeakerSide.Right, text = "Không tệ. Cậu thắng rồi.", customAvatar = boss1Avatar, nameColor = new Color(1f, 0.2f, 0.85f, 1f) });
+            chap1Asset.postBattleLines.Add(new DialogueLine { speakerName = "{PLAYER}", side = SpeakerSide.Left, text = "Vậy huy hiệu thuộc về tôi?", customAvatar = main1Avatar, nameColor = new Color(0.2f, 0.95f, 1f, 1f) });
+            chap1Asset.postBattleLines.Add(new DialogueLine { speakerName = "Raze", side = SpeakerSide.Right, text = "Phải. Cầm lấy và đừng để thua Nox.", customAvatar = boss1Avatar, nameColor = new Color(1f, 0.2f, 0.85f, 1f) });
+            chap1Asset.postBattleLines.Add(new DialogueLine { speakerName = "{PLAYER}", side = SpeakerSide.Left, text = "Anh đang cổ vũ tôi sao?", customAvatar = main1Avatar, nameColor = new Color(0.2f, 0.95f, 1f, 1f) });
+            chap1Asset.postBattleLines.Add(new DialogueLine { speakerName = "Raze", side = SpeakerSide.Right, text = "Tôi chỉ không muốn mình thua một kẻ yếu.", customAvatar = boss1Avatar, nameColor = new Color(1f, 0.2f, 0.85f, 1f) });
+            chap1Asset.postBattleLines.Add(new DialogueLine { speakerName = "{PLAYER}", side = SpeakerSide.Left, text = "Tôi sẽ nhớ câu đó.", customAvatar = main1Avatar, nameColor = new Color(0.2f, 0.95f, 1f, 1f) });
+
+            EditorUtility.SetDirty(chap1Asset);
+            AssetDatabase.SaveAssets();
         }
     }
 }

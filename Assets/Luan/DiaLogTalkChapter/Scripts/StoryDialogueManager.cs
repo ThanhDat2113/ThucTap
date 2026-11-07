@@ -17,6 +17,7 @@ namespace Luan.Dialogue
     {
         None,
         Intro,
+        Backstory,
         PreBattle,
         PostBattle
     }
@@ -30,6 +31,10 @@ namespace Luan.Dialogue
         public string text = "";
         public Sprite customAvatar = null;
         public Color nameColor = new Color(0.2f, 0.95f, 1f, 1f);
+        [Tooltip("Mô tả hành động của nhân vật theo thoại")]
+        public string actionDescription = "";
+        [Tooltip("Ảnh minh họa toàn cảnh / backstory cutscene")]
+        public Sprite illustration = null;
     }
 
     [System.Serializable]
@@ -141,6 +146,18 @@ namespace Luan.Dialogue
         [Tooltip("Độ tối của overlay nền (0 = trong suốt, 1 = đen kịt). Giữ khoảng 0.6 - 0.65 để không đè tối mất khung cảnh")]
         [SerializeField] private float dimOverlayAlpha = 0.65f;
 
+        [Header("Backstory Minh Họa & Cutscenes")]
+        [SerializeField] private GameObject backstoryContainer;
+        [SerializeField] private CanvasGroup backstoryCanvasGroup;
+        [SerializeField] private Image backstoryIllustrationImage;
+        [SerializeField] private GameObject backstorySubtitlePanel;
+        [SerializeField] private TMP_Text backstorySpeakerText;
+        [SerializeField] private TMP_Text backstoryActionText;
+        [SerializeField] private TMP_Text backstoryDialogueText;
+        [SerializeField] private TMP_Text backstorySlideCounterText;
+        [SerializeField] private GameObject backstoryNextIndicator;
+        [SerializeField] private Button backstoryTapButton;
+
         [Header("Speaker Bên Trái (Main 1 / Player)")]
         [SerializeField] private SpeakerUI leftSpeaker = new SpeakerUI();
 
@@ -183,6 +200,8 @@ namespace Luan.Dialogue
         private Coroutine autoRoutine;
         private Coroutine promptPulseRoutine;
         private Coroutine introSequenceRoutine;
+        private List<BackstorySlide> activeBackstorySlides;
+        private int currentBackstoryIndex = -1;
 
         private enum IntroStep
         {
@@ -429,6 +448,7 @@ namespace Luan.Dialogue
             if (topBanner != null) topBanner.SetActive(false);
             if (characterStoryCard != null) characterStoryCard.SetActive(false);
             if (introContainer != null) introContainer.SetActive(false);
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
         }
@@ -454,6 +474,13 @@ namespace Luan.Dialogue
                 if (IsNextActionPressed())
                 {
                     OnTapToContinueClicked();
+                }
+            }
+            else if (currentPhase == DialoguePhase.Backstory)
+            {
+                if (IsNextActionPressed())
+                {
+                    OnBackstoryTapClicked();
                 }
             }
             else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
@@ -555,6 +582,16 @@ namespace Luan.Dialogue
         {
             var cfg = GetCurrentChapterConfig();
             var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
+
+            // 1. Nếu có Backstory Slides minh họa (Câu chuyện nhân vật & Thoại đầu) -> Chạy Backstory Cutscenes!
+            if (data != null && data.backstorySlides != null && data.backstorySlides.Count > 0)
+            {
+                EnsureUI();
+                ShowBackstoryScreen(data.backstorySlides);
+                return;
+            }
+
+            // 2. Chế độ Intro thông thường
             bool hasIntro = introContainer != null && (data != null && (!string.IsNullOrEmpty(data.characterStory) || data.chapterLogo != null || !string.IsNullOrEmpty(data.characterStoryTitle)));
 
             if (hasIntro)
@@ -1142,6 +1179,12 @@ namespace Luan.Dialogue
             if (skipClip != null && SFXManager.Instance != null)
                 SFXManager.Instance.PlaySFX(skipClip);
 
+            if (currentPhase == DialoguePhase.Backstory)
+            {
+                FinishBackstory();
+                return;
+            }
+
             FinishDialogue();
         }
 
@@ -1156,6 +1199,14 @@ namespace Luan.Dialogue
                 {
                     if (autoRoutine != null) StopCoroutine(autoRoutine);
                     autoRoutine = StartCoroutine(WaitAndAutoAdvanceIntro());
+                }
+                else if (currentPhase == DialoguePhase.Backstory)
+                {
+                    if (!isTyping)
+                    {
+                        if (autoRoutine != null) StopCoroutine(autoRoutine);
+                        autoRoutine = StartCoroutine(WaitAndAutoAdvanceBackstory());
+                    }
                 }
                 else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
                 {
@@ -1191,6 +1242,190 @@ namespace Luan.Dialogue
             {
                 autoButtonGlow.color = isAutoMode ? new Color(0f, 1f, 0.7f, 1f) : new Color(1f, 1f, 1f, 0.5f);
             }
+        }
+
+        // ==========================================
+        // BACKSTORY MINH HỌA & STORYBOARD CUTSCENES
+        // ==========================================
+        public void ShowBackstoryScreen(List<BackstorySlide> slides)
+        {
+            currentPhase = DialoguePhase.Backstory;
+            currentBackstoryIndex = -1;
+            activeBackstorySlides = slides;
+
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+            if (introContainer != null) introContainer.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
+            if (topControlsGroup != null) topControlsGroup.SetActive(true);
+            if (backstoryContainer != null) backstoryContainer.SetActive(true);
+
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
+            if (backstoryCanvasGroup != null)
+            {
+                backstoryCanvasGroup.alpha = 1f;
+                backstoryCanvasGroup.blocksRaycasts = true;
+                backstoryCanvasGroup.interactable = true;
+            }
+
+            UpdateAutoButtonVisual();
+            AdvanceBackstorySlide();
+        }
+
+        public void AdvanceBackstorySlide()
+        {
+            if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
+            if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
+
+            currentBackstoryIndex++;
+            if (activeBackstorySlides == null || currentBackstoryIndex >= activeBackstorySlides.Count)
+            {
+                FinishBackstory();
+                return;
+            }
+
+            DisplayBackstorySlide(activeBackstorySlides[currentBackstoryIndex]);
+        }
+
+        private void DisplayBackstorySlide(BackstorySlide slide)
+        {
+            if (slide == null) return;
+
+            if (backstoryIllustrationImage != null)
+            {
+                backstoryIllustrationImage.sprite = slide.illustration;
+                backstoryIllustrationImage.color = slide.illustration != null ? Color.white : new Color(0, 0, 0, 0);
+            }
+
+            if (backstorySpeakerText != null)
+            {
+                backstorySpeakerText.text = ResolveSpeakerName(slide.speakerName, slide.speakerName != "RAZE");
+                backstorySpeakerText.color = slide.nameColor;
+            }
+
+            if (backstoryActionText != null)
+            {
+                backstoryActionText.text = slide.actionDescription;
+                backstoryActionText.gameObject.SetActive(!string.IsNullOrEmpty(slide.actionDescription));
+            }
+
+            if (backstorySlideCounterText != null)
+            {
+                backstorySlideCounterText.text = $"{(currentBackstoryIndex + 1)} / {activeBackstorySlides.Count}";
+            }
+
+            string resolvedContent = ResolveDialogueText(slide.storyText);
+            typingRoutine = StartCoroutine(BackstoryTypewriterRoutine(resolvedContent));
+        }
+
+        private IEnumerator BackstoryTypewriterRoutine(string fullText)
+        {
+            isTyping = true;
+            if (backstoryNextIndicator != null) backstoryNextIndicator.SetActive(false);
+            if (backstoryDialogueText != null) backstoryDialogueText.text = "";
+
+            if (nextClip != null && SFXManager.Instance != null)
+                SFXManager.Instance.PlaySFX(nextClip);
+
+            int totalChars = fullText.Length;
+            for (int i = 0; i <= totalChars; i++)
+            {
+                if (backstoryDialogueText != null)
+                    backstoryDialogueText.text = fullText.Substring(0, i);
+
+                if (i % 2 == 0 && typewriterClip != null && SFXManager.Instance != null)
+                {
+                    SFXManager.Instance.PlaySFX(typewriterClip);
+                }
+
+                yield return new WaitForSecondsRealtime(typingSpeed);
+            }
+
+            isTyping = false;
+            if (backstoryNextIndicator != null) backstoryNextIndicator.SetActive(true);
+
+            if (isAutoMode)
+            {
+                if (autoRoutine != null) StopCoroutine(autoRoutine);
+                autoRoutine = StartCoroutine(WaitAndAutoAdvanceBackstory());
+            }
+        }
+
+        private IEnumerator WaitAndAutoAdvanceBackstory()
+        {
+            yield return new WaitForSecondsRealtime(autoAdvanceDelay + 1.2f);
+            if (currentPhase == DialoguePhase.Backstory && isAutoMode)
+            {
+                AdvanceBackstorySlide();
+            }
+        }
+
+        public void OnBackstoryTapClicked()
+        {
+            if (currentPhase != DialoguePhase.Backstory) return;
+
+            if (isTyping)
+            {
+                if (typingRoutine != null) StopCoroutine(typingRoutine);
+                isTyping = false;
+                if (currentBackstoryIndex >= 0 && activeBackstorySlides != null && currentBackstoryIndex < activeBackstorySlides.Count && backstoryDialogueText != null)
+                {
+                    backstoryDialogueText.text = ResolveDialogueText(activeBackstorySlides[currentBackstoryIndex].storyText);
+                }
+                if (backstoryNextIndicator != null) backstoryNextIndicator.SetActive(true);
+
+                if (isAutoMode)
+                {
+                    if (autoRoutine != null) StopCoroutine(autoRoutine);
+                    autoRoutine = StartCoroutine(WaitAndAutoAdvanceBackstory());
+                }
+            }
+            else
+            {
+                AdvanceBackstorySlide();
+            }
+        }
+
+        private void FinishBackstory()
+        {
+            hasCompletedDialogueThisSession = true;
+            if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
+            if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
+            if (transitionRoutine != null) StopCoroutine(transitionRoutine);
+
+            transitionRoutine = StartCoroutine(AnimateCloseBackstory());
+        }
+
+        private IEnumerator AnimateCloseBackstory()
+        {
+            currentPhase = DialoguePhase.None;
+
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.interactable = false;
+                mainCanvasGroup.blocksRaycasts = false;
+            }
+
+            float duration = 0.35f;
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                if (backstoryCanvasGroup != null) backstoryCanvasGroup.alpha = 1f - t;
+                if (mainCanvasGroup != null) mainCanvasGroup.alpha = 1f - t;
+                yield return null;
+            }
+
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
+
+            StartGameplay();
         }
 
         public void FinishDialogue()
@@ -1541,6 +1776,36 @@ namespace Luan.Dialogue
                 }
             }
 
+            // Backstory Container
+            var bs = root.Find("BackstoryContainer");
+            if (bs != null)
+            {
+                backstoryContainer = bs.gameObject;
+                backstoryCanvasGroup = bs.GetComponent<CanvasGroup>() ?? bs.gameObject.AddComponent<CanvasGroup>();
+
+                var img = bs.Find("IllustrationContainer/IllustrationImage");
+                if (img != null) backstoryIllustrationImage = img.GetComponent<Image>();
+
+                var sub = bs.Find("SubtitlePanel");
+                if (sub != null)
+                {
+                    backstorySubtitlePanel = sub.gameObject;
+                    var spk = sub.Find("SpeakerTag");
+                    if (spk != null) backstorySpeakerText = spk.GetComponent<TMP_Text>();
+                    var act = sub.Find("ActionTag");
+                    if (act != null) backstoryActionText = act.GetComponent<TMP_Text>();
+                    var dlg = sub.Find("DialogueText");
+                    if (dlg != null) backstoryDialogueText = dlg.GetComponent<TMP_Text>();
+                    var cnt = sub.Find("SlideCounterText");
+                    if (cnt != null) backstorySlideCounterText = cnt.GetComponent<TMP_Text>();
+                    var nxt = sub.Find("NextPrompt");
+                    if (nxt != null) backstoryNextIndicator = nxt.gameObject;
+                }
+
+                var tapBtn = bs.Find("TapScreenButton");
+                if (tapBtn != null) backstoryTapButton = tapBtn.GetComponent<Button>();
+            }
+
             // Dialogue Container
             var container = root.Find("DialogueContainer");
             if (container != null)
@@ -1686,6 +1951,9 @@ namespace Luan.Dialogue
             // 3. Intro Container (Cốt truyện & Logo Chapter)
             BuildIntroUI(canvasGo.transform, frameSpr);
 
+            // 3.5 Backstory Container (Minh Họa Storyboard Cốt Truyện & Thoại Đầu)
+            BuildBackstoryUI(canvasGo.transform, boxSpr);
+
             // 4. Dialogue Container
             var containerGo = new GameObject("DialogueContainer", typeof(RectTransform));
             containerGo.transform.SetParent(canvasGo.transform, false);
@@ -1792,6 +2060,165 @@ namespace Luan.Dialogue
             autoButtonGlow = autoImg;
 
             HookEvents();
+        }
+
+        private void BuildBackstoryUI(Transform parent, Sprite boxSpr)
+        {
+            var bsGo = new GameObject("BackstoryContainer", typeof(RectTransform), typeof(CanvasGroup));
+            bsGo.transform.SetParent(parent, false);
+            var bsRt = bsGo.GetComponent<RectTransform>();
+            bsRt.anchorMin = Vector2.zero;
+            bsRt.anchorMax = Vector2.one;
+            bsRt.offsetMin = bsRt.offsetMax = Vector2.zero;
+
+            backstoryContainer = bsGo;
+            backstoryCanvasGroup = bsGo.GetComponent<CanvasGroup>();
+
+            // 1. Dark Backdrop
+            var bgGo = new GameObject("Backdrop", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            bgGo.transform.SetParent(bsGo.transform, false);
+            var bgRt = bgGo.GetComponent<RectTransform>();
+            bgRt.anchorMin = Vector2.zero;
+            bgRt.anchorMax = Vector2.one;
+            bgRt.offsetMin = bgRt.offsetMax = Vector2.zero;
+            var bgImg = bgGo.GetComponent<Image>();
+            bgImg.color = new Color(0.015f, 0.01f, 0.03f, 1f);
+            bgImg.raycastTarget = false;
+
+            // 2. Fullscreen Illustration Image
+            var illContainer = new GameObject("IllustrationContainer", typeof(RectTransform));
+            illContainer.transform.SetParent(bsGo.transform, false);
+            var illRt = illContainer.GetComponent<RectTransform>();
+            illRt.anchorMin = Vector2.zero;
+            illRt.anchorMax = Vector2.one;
+            illRt.offsetMin = illRt.offsetMax = Vector2.zero;
+
+            var imgGo = new GameObject("IllustrationImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            imgGo.transform.SetParent(illContainer.transform, false);
+            var imgRt = imgGo.GetComponent<RectTransform>();
+            imgRt.anchorMin = Vector2.zero;
+            imgRt.anchorMax = Vector2.one;
+            imgRt.offsetMin = imgRt.offsetMax = Vector2.zero;
+            backstoryIllustrationImage = imgGo.GetComponent<Image>();
+            backstoryIllustrationImage.preserveAspect = true;
+            backstoryIllustrationImage.raycastTarget = false;
+
+            // 3. Subtitle / Dialogue Panel at bottom
+            var subGo = new GameObject("SubtitlePanel", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            subGo.transform.SetParent(bsGo.transform, false);
+            var subRt = subGo.GetComponent<RectTransform>();
+            subRt.anchorMin = new Vector2(0.5f, 0f);
+            subRt.anchorMax = new Vector2(0.5f, 0f);
+            subRt.pivot = new Vector2(0.5f, 0f);
+            subRt.anchoredPosition = new Vector2(0f, 25f);
+            subRt.sizeDelta = new Vector2(1600f, 220f);
+            backstorySubtitlePanel = subGo;
+
+            var subBg = subGo.GetComponent<Image>();
+            if (boxSpr != null)
+            {
+                subBg.sprite = boxSpr;
+            }
+            else
+            {
+                subBg.color = new Color(0.04f, 0.025f, 0.08f, 0.94f);
+            }
+            subBg.raycastTarget = false;
+
+            // Speaker Tag
+            var spkGo = new GameObject("SpeakerTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            spkGo.transform.SetParent(subGo.transform, false);
+            var spkRt = spkGo.GetComponent<RectTransform>();
+            spkRt.anchorMin = new Vector2(0f, 1f);
+            spkRt.anchorMax = new Vector2(0f, 1f);
+            spkRt.pivot = new Vector2(0f, 1f);
+            spkRt.anchoredPosition = new Vector2(35f, -18f);
+            spkRt.sizeDelta = new Vector2(350f, 40f);
+            backstorySpeakerText = spkGo.GetComponent<TextMeshProUGUI>();
+            backstorySpeakerText.fontSize = 26;
+            backstorySpeakerText.fontStyle = FontStyles.Bold;
+            backstorySpeakerText.color = new Color(0.2f, 0.95f, 1f, 1f);
+            backstorySpeakerText.raycastTarget = false;
+
+            // Action Tag
+            var actGo = new GameObject("ActionTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            actGo.transform.SetParent(subGo.transform, false);
+            var actRt = actGo.GetComponent<RectTransform>();
+            actRt.anchorMin = new Vector2(0f, 1f);
+            actRt.anchorMax = new Vector2(1f, 1f);
+            actRt.pivot = new Vector2(0f, 1f);
+            actRt.anchoredPosition = new Vector2(390f, -18f);
+            actRt.sizeDelta = new Vector2(-540f, 40f);
+            backstoryActionText = actGo.GetComponent<TextMeshProUGUI>();
+            backstoryActionText.fontSize = 22;
+            backstoryActionText.fontStyle = FontStyles.Italic;
+            backstoryActionText.color = new Color(1f, 0.85f, 0.2f, 1f);
+            backstoryActionText.raycastTarget = false;
+
+            // Dialogue / Narration Text
+            var dlgGo = new GameObject("DialogueText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            dlgGo.transform.SetParent(subGo.transform, false);
+            var dlgRt = dlgGo.GetComponent<RectTransform>();
+            dlgRt.anchorMin = new Vector2(0f, 0f);
+            dlgRt.anchorMax = new Vector2(1f, 1f);
+            dlgRt.offsetMin = new Vector2(40f, 35f);
+            dlgRt.offsetMax = new Vector2(-40f, -65f);
+            backstoryDialogueText = dlgGo.GetComponent<TextMeshProUGUI>();
+            backstoryDialogueText.fontSize = 24;
+            backstoryDialogueText.lineSpacing = 1.3f;
+            backstoryDialogueText.color = Color.white;
+            backstoryDialogueText.textWrappingMode = TextWrappingModes.Normal;
+            backstoryDialogueText.raycastTarget = false;
+
+            // Slide Counter
+            var cntGo = new GameObject("SlideCounterText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            cntGo.transform.SetParent(subGo.transform, false);
+            var cntRt = cntGo.GetComponent<RectTransform>();
+            cntRt.anchorMin = new Vector2(1f, 1f);
+            cntRt.anchorMax = new Vector2(1f, 1f);
+            cntRt.pivot = new Vector2(1f, 1f);
+            cntRt.anchoredPosition = new Vector2(-35f, -18f);
+            cntRt.sizeDelta = new Vector2(120f, 40f);
+            backstorySlideCounterText = cntGo.GetComponent<TextMeshProUGUI>();
+            backstorySlideCounterText.fontSize = 22;
+            backstorySlideCounterText.fontStyle = FontStyles.Bold;
+            backstorySlideCounterText.color = new Color(0.2f, 0.95f, 1f, 1f);
+            backstorySlideCounterText.alignment = TextAlignmentOptions.Right;
+            backstorySlideCounterText.raycastTarget = false;
+
+            // Next Indicator
+            var nxtGo = new GameObject("NextPrompt", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            nxtGo.transform.SetParent(subGo.transform, false);
+            var nxtRt = nxtGo.GetComponent<RectTransform>();
+            nxtRt.anchorMin = new Vector2(1f, 0f);
+            nxtRt.anchorMax = new Vector2(1f, 0f);
+            nxtRt.pivot = new Vector2(1f, 0f);
+            nxtRt.anchoredPosition = new Vector2(-35f, 10f);
+            nxtRt.sizeDelta = new Vector2(400f, 30f);
+            var nxtTxt = nxtGo.GetComponent<TextMeshProUGUI>();
+            nxtTxt.fontSize = 20;
+            nxtTxt.fontStyle = FontStyles.Bold;
+            nxtTxt.color = new Color(0f, 1f, 0.7f, 1f);
+            nxtTxt.alignment = TextAlignmentOptions.Right;
+            nxtTxt.text = "[ Nhấp chuột / Chạm để tiếp tục ▶ ]";
+            nxtTxt.raycastTarget = false;
+            backstoryNextIndicator = nxtGo;
+
+            // 4. Tap Screen Button (Fullscreen)
+            var tapGo = new GameObject("TapScreenButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+            tapGo.transform.SetParent(bsGo.transform, false);
+            var tapRt = tapGo.GetComponent<RectTransform>();
+            tapRt.anchorMin = Vector2.zero;
+            tapRt.anchorMax = Vector2.one;
+            tapRt.offsetMin = tapRt.offsetMax = Vector2.zero;
+            var tapImg = tapGo.GetComponent<Image>();
+            tapImg.color = new Color(0f, 0f, 0f, 0f);
+            tapImg.raycastTarget = true;
+            backstoryTapButton = tapGo.GetComponent<Button>();
+            backstoryTapButton.onClick.AddListener(OnBackstoryTapClicked);
+
+            // Mặc định ẩn BackstoryContainer
+            bsGo.SetActive(false);
         }
 
         private void BuildIntroUI(Transform parent, Sprite frameSpr)

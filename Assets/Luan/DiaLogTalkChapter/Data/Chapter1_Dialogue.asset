@@ -18,336 +18,108 @@ MonoBehaviour:
   characterStoryTitle: "Câu chuyện của Raze"
   characterStory: "Raze lớn lên tại khu phố phía Tây. Khi còn nhỏ, anh thường bị đuổi khỏi những sân khấu lớn vì không được đào tạo bài bản.\n\nRaze cùng những người bạn biến một quảng trường bỏ hoang thành nơi biểu diễn. Anh phủ kín các bức tường bằng graffiti, tổ chức những cuộc dance battle và dần khiến khu vực này trở nên nổi tiếng.\n\nSau nhiều năm, Raze trở thành nhà vô địch của khu phố. Biểu tượng vương miện trên trang phục là lời nhắc rằng không ai được phép xem thường anh thêm lần nữa. Tuy nhiên, Raze ngày càng sợ mất đi vị trí mình đã rất vất vả mới giành được. Anh bắt đầu thách đấu và đuổi đi bất kỳ ai muốn bước qua khu phố."
   characterIntroArt: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+  backstorySlides:
+  - illustration: {fileID: 21300000, guid: 7ca6ecb41c7c40f6b90118b84bb09d5c, type: 3}
+    speakerName: "DẪN CHUYỆN"
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+    actionDescription: "[Nhân vật chính đeo tai nghe, nhìn về thành phố Melodia]"
+    storyText: "Melodia tổ chức giải đấu đường phố Bắt Lấy Giai Điệu. Một vũ công trẻ quyết định dấn thân với một đôi giày, một chiếc máy nghe nhạc và một cơ hội duy nhất."
+  - illustration: {fileID: 21300000, guid: 72ab1c6f143749e7b4a4557d717afc5d, type: 3}
+    speakerName: "DẪN CHUYỆN"
+    nameColor: {r: 1.0, g: 0.85, b: 0.2, a: 1.0}
+    actionDescription: "[Raze nhảy breakdance, phủ kín quảng trường bỏ hoang bằng graffiti]"
+    storyText: "Từng bị đuổi khỏi các sân khấu lớn, Raze cùng bạn bè biến quảng trường hoang thành thánh địa vũ đạo và dần trở thành nhà vô địch của khu phố."
+  - illustration: {fileID: 21300000, guid: 9623d4518c5148a6a90fe8d2a2503889, type: 3}
+    speakerName: "DẪN CHUYỆN"
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Raze đứng trước bức tường vương miện, đề phòng mọi kẻ thách đấu]"
+    storyText: "Biểu tượng vương miện là lời nhắc không ai được xem thường anh. Nhưng nỗi sợ mất ngôi khiến Raze bắt đầu thách đấu và đuổi bất kỳ ai muốn bước qua khu phố."
+  - illustration: {fileID: 21300000, guid: 788016df251f4a2e940ac17fc2a010e6, type: 3}
+    speakerName: "RAZE & {PLAYER}"
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Raze tựa tường khoanh tay nhìn xuống | Người chơi chỉ tay kiên định]"
+    storyText: "Raze: \"Cậu đang tìm ai?\"\n\nNgười chơi: \"Tôi tìm Raze. Tôi muốn lấy Huy hiệu Nhịp điệu.\""
+  - illustration: {fileID: 21300000, guid: 0c902bf420f54b789fe1475cb209a63b, type: 3}
+    speakerName: "RAZE & {PLAYER}"
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Raze lắc bình sơn, chỉ ngón cái ngạo nghễ | Người chơi siết chặt nắm đấm]"
+    storyText: "Raze: \"Tôi là Raze. Nhưng muốn lấy huy hiệu thì cậu phải thắng tôi.\"\n\nNgười chơi: \"Tôi biết.\""
+  - illustration: {fileID: 21300000, guid: b4c4e258280645869d74d650036bcaea, type: 3}
+    speakerName: "RAZE & {PLAYER}"
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+    actionDescription: "[Raze chỉ ra sàn đấu thách thức | Người chơi vào thế nhảy rực lửa]"
+    storyText: "Raze: \"Tân binh mà gan đấy. Lên sân khấu đi.\"\n\nNgười chơi: \"Bắt đầu thôi!\""
   preBattleLines:
   - speakerName: "Raze"
     side: 1
-    text: "Này, coi chừng."
+    text: "Cậu đang tìm ai?"
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Raze tựa tường khoanh tay nhìn xuống]"
+    illustration: {fileID: 21300000, guid: 788016df251f4a2e940ac17fc2a010e6, type: 3}
   - speakerName: "{PLAYER}"
     side: 0
-    text: "Của anh à?"
+    text: "Tôi tìm Raze. Tôi muốn lấy Huy hiệu Nhịp điệu."
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+    actionDescription: "[Người chơi ngẩng cao đầu, chỉ tay kiên định]"
+    illustration: {fileID: 21300000, guid: 788016df251f4a2e940ac17fc2a010e6, type: 3}
   - speakerName: "Raze"
     side: 1
-    text: "Ừ. Đá đổ là cậu tự lau đấy."
+    text: "Tôi là Raze. Nhưng muốn lấy huy hiệu thì cậu phải thắng tôi."
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Raze lắc bình sơn, chỉ ngón cái ngạo nghễ]"
+    illustration: {fileID: 21300000, guid: 0c902bf420f54b789fe1475cb209a63b, type: 3}
   - speakerName: "{PLAYER}"
     side: 0
-    text: "Tôi đang tìm Raze."
+    text: "Tôi biết."
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+    actionDescription: "[Người chơi siết chặt nắm đấm tự tin]"
+    illustration: {fileID: 21300000, guid: 0c902bf420f54b789fe1475cb209a63b, type: 3}
   - speakerName: "Raze"
     side: 1
-    text: "Có chuyện gì?"
+    text: "Tân binh mà gan đấy. Lên sân khấu đi."
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Raze chỉ bình sơn ra giữa sàn đấu]"
+    illustration: {fileID: 21300000, guid: b4c4e258280645869d74d650036bcaea, type: 3}
   - speakerName: "{PLAYER}"
     side: 0
-    text: "Tôi muốn thách đấu anh."
+    text: "Bắt đầu thôi."
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Cậu biết tôi là Raze mà vẫn hỏi?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tôi muốn chắc thôi."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Rồi. Chắc rồi đấy. Giờ nói lại xem, cậu muốn gì?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Huy hiệu của anh."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Cậu tên gì?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "{PLAYER}."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Chưa nghe bao giờ."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tôi mới tham gia."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Nhìn là biết."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Rõ đến vậy sao?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Cậu đứng cứng đờ từ lúc bước vào đây."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tôi không quen có nhiều người nhìn."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Vậy cậu chọn nhầm cuộc thi rồi."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Có thể."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Có thể?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tôi đã đến đây rồi. Ít nhất cũng phải thử."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Được. Tôi cho cậu thử."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Ngay bây giờ à?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Sao? Muốn về tập thêm?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Không. Bắt đầu đi."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Thả lỏng một chút. Tôi chưa làm gì mà mặt cậu căng thẳng quá rồi."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Anh nói thế không giúp tôi bớt căng thẳng đâu."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Tôi đâu định giúp."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+    actionDescription: "[Người chơi vào thế nhảy rực lửa]"
+    illustration: {fileID: 21300000, guid: b4c4e258280645869d74d650036bcaea, type: 3}
   postBattleLines:
   - speakerName: "Raze"
     side: 1
-    text: "Một điểm thật à?"
+    text: "Không tệ. Cậu thắng rồi."
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
   - speakerName: "{PLAYER}"
     side: 0
-    text: "Tôi cũng đang nhìn đây."
+    text: "Vậy huy hiệu thuộc về tôi?"
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
   - speakerName: "Raze"
     side: 1
-    text: "Cậu hơn tôi đúng một điểm."
+    text: "Phải. Cầm lấy và đừng để thua Nox."
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
   - speakerName: "{PLAYER}"
     side: 0
-    text: "Vậy là tôi thắng."
+    text: "Anh đang cổ vũ tôi sao?"
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
   - speakerName: "Raze"
     side: 1
-    text: "Cậu nói nhỏ thôi được không?"
+    text: "Tôi chỉ không muốn mình thua một kẻ yếu."
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
   - speakerName: "{PLAYER}"
     side: 0
-    text: "Anh vừa bảo tôi phải tự tin hơn mà."
+    text: "Tôi sẽ nhớ câu đó."
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Tôi bắt đầu thấy hối hận rồi đấy."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Anh ổn chứ?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Tôi vừa thua. Theo cậu thì sao?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Ý tôi là anh có cần nghỉ không?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Tôi chưa yếu đến mức đó."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Bắt lấy."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Anh đưa luôn sao?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Không thì tôi ném cho cậu làm gì?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tôi tưởng anh sẽ đòi đấu lại."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Có chứ. Nhưng không phải hôm nay."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Cảm ơn."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Đừng cảm ơn. Cậu tự thắng được mà."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Này."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Gì vậy?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Lần sau đừng nhìn xuống chân nhiều quá."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Anh vẫn thấy à?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Thấy hết. Mấy lần đầu cậu còn suýt tự vấp nữa."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Đừng kể với ai."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Hơi muộn rồi."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tuyệt thật."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Nhưng đoạn cuối khá đấy."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Đó là lời khen à?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Cậu hỏi nữa là tôi rút lại."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Được rồi. Tôi đi đây."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "{PLAYER}."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Sao nữa?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Nox không giống tôi. Cậu ta không quan tâm cậu cố gắng đến mức nào đâu."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Tôi sẽ nhớ."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Và đừng nói với cậu ta là tôi vừa thua một điểm."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  - speakerName: "{PLAYER}"
-    side: 0
-    text: "Raze, trận đấu được phát trực tiếp mà."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
-  - speakerName: "Raze"
-    side: 1
-    text: "Đi đi."
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
-  _legacyLines: []

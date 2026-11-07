@@ -4,6 +4,22 @@ using UnityEngine;
 
 namespace Luan.Dialogue
 {
+    [System.Serializable]
+    public class BackstorySlide
+    {
+        [Tooltip("Ảnh minh họa toàn cảnh / storyboard cutscene")]
+        public Sprite illustration;
+        [Tooltip("Tên người nói / phân vai (RAZE, NGƯỜI CHƠI, DẪN CHUYỆN)")]
+        public string speakerName = "DẪN CHUYỆN";
+        [Tooltip("Màu chữ tên người nói")]
+        public Color nameColor = new Color(0.2f, 0.95f, 1f, 1f);
+        [Tooltip("Mô tả hành động của nhân vật theo thoại hoặc cốt truyện")]
+        public string actionDescription = "";
+        [TextArea(2, 6)]
+        [Tooltip("Nội dung lời thoại hoặc lời dẫn câu chuyện")]
+        public string storyText = "";
+    }
+
     [CreateAssetMenu(fileName = "Chapter1_Dialogue", menuName = "Luan/Dialogue Story Data")]
     public class DialogueStoryData : ScriptableObject
     {
@@ -22,6 +38,10 @@ namespace Luan.Dialogue
 
         [Tooltip("Hình ảnh nhân vật trong phần giới thiệu")]
         public Sprite characterIntroArt;
+
+        [Header("Minh Họa Backstory & Thoại Đầu (Illustrated Cutscenes)")]
+        [Tooltip("Danh sách các khung hình minh họa backstory kèm hành động và lời thoại")]
+        public List<BackstorySlide> backstorySlides = new List<BackstorySlide>();
 
         [Header("Lời Thoại Trước Trận Đấu (Pre-Battle)")]
         public List<DialogueLine> preBattleLines = new List<DialogueLine>();
