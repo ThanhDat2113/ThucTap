@@ -18,6 +18,8 @@ MonoBehaviour:
   bpm: 120
   laneCount: 4
   firstNoteOffset: 0
+  noteStartDelay: 0
+  latencyCompensation: 0
   opponentNoteRatio: 0.5
   opponentAccuracy: 0.85
   battleSplitMode: 1

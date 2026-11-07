@@ -34,6 +34,13 @@ namespace RhythmGame
         [Header("Countdown")]
         public float countdownSeconds = 3f;
 
+        [Header("Lead-in")]
+        [Tooltip("Khoảng nghỉ tối thiểu từ lúc vào Playing tới lúc nhạc phát (giây).")]
+        public float minMusicDelay = 0.5f;
+
+        [Tooltip("Chừa thêm một chút để note đầu tiên chắc chắn spawn từ mép trên (giây).")]
+        public float spawnMargin = 0.1f;
+
         public GameState State { get; private set; }
         public float SongTime { get; private set; }
         public float CountdownRemaining { get; private set; }
@@ -146,22 +153,13 @@ namespace RhythmGame
         {
             if (!musicScheduled) return;
 
-            // SongTime tính từ đồng hồ âm thanh thực (AudioSettings.dspTime),
-            // không dồn Time.deltaTime -> không trôi lệch so với nhạc.
-            double dspNow = AudioSettings.dspTime;
-            float rawSongTime = (float)(dspNow - dspMusicStartTime);
+            // Thời gian theo nhạc. ÂM trong lúc pre-roll (note đã rơi nhưng nhạc chưa phát).
+            float musicTime = (float)(AudioSettings.dspTime - dspMusicStartTime);
+            SongTime = Mathf.Max(0f, musicTime);   // giữ nghĩa cũ cho các script khác đọc SongTime
 
-            // Trước khi nhạc phát (dspNow < dspMusicStartTime) thì rawSongTime âm -> chờ, không advance.
-            if (rawSongTime < 0f) return;
-
-            SongTime = rawSongTime;
-
-            // effectiveTime = thời gian hiệu lực cho note/judgement:
-            // - trừ noteStartDelay (note xuất hiện sau khi nhạc đã phát một lát)
-            // - cộng latencyCompensation (bù độ trễ khi thu, giúp note khớp lúc record)
             float noteDelay = chart != null ? chart.noteStartDelay : 0f;
             float latency = chart != null ? chart.latencyCompensation : 0f;
-            float effectiveTime = Mathf.Max(0f, SongTime - noteDelay + latency);
+            float effectiveTime = musicTime - noteDelay + latency;   // KHÔNG kẹp về 0 nữa
 
             judgement.SetSongTime(effectiveTime);
             if (opponentAI != null) opponentAI.SetSongTime(effectiveTime);
@@ -217,16 +215,36 @@ namespace RhythmGame
         /// </summary>
         void ScheduleMusic()
         {
-            if (musicSource == null || chart == null || chart.audioClip == null) return;
+            float leadIn = Mathf.Max(minMusicDelay, chart != null ? chart.musicStartDelay : 0f);
+            leadIn = Mathf.Max(leadIn, RequiredLeadIn());
 
-            // Bắt đầu nhạc sau một khoảng nghỉ (dùng musicStartDelay của chart, mặc định 0.5s)
-            float musicDelay = Mathf.Max(0.5f, chart != null ? chart.musicStartDelay : 0.5f);
-            double startDSP = AudioSettings.dspTime + musicDelay;
-            dspMusicStartTime = startDSP;
-            musicSource.clip = chart.audioClip;
-            musicSource.time = 0f;
-            musicSource.PlayScheduled(startDSP);
-            musicScheduled = true;
+            dspMusicStartTime = AudioSettings.dspTime + leadIn;
+
+            if (musicSource != null && chart != null && chart.audioClip != null)
+            {
+                musicSource.clip = chart.audioClip;
+                musicSource.time = 0f;
+                musicSource.PlayScheduled(dspMusicStartTime);
+            }
+            musicScheduled = true;   // chart không có clip vẫn chạy đồng hồ (im lặng), không bị treo
+        }
+
+        /// <summary>
+        /// Số giây nhạc phải phát muộn để note ĐẦU TIÊN bắt đầu đúng ở mép spawn.
+        /// Từ effective = musicTime - noteDelay + latency, với musicTime lúc bắt đầu = -leadIn,
+        /// cần effective_start <= T0 - TravelTime - margin.
+        /// </summary>
+        float RequiredLeadIn()
+        {
+            if (chart == null || chart.notes == null || chart.notes.Count == 0 || spawner == null) return 0f;
+
+            float firstBeat = float.MaxValue;
+            foreach (var n in chart.notes)
+                if (n.beat < firstBeat) firstBeat = n.beat;
+
+            float t0 = chart.BeatToTime(firstBeat);
+            float need = spawner.TravelTime + spawnMargin - t0 - chart.noteStartDelay + chart.latencyCompensation;
+            return Mathf.Max(0f, need);
         }
     }
 }
