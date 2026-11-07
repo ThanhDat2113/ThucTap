@@ -167,6 +167,7 @@
     <Compile Include="Assets\Scripts\UI\PlayerSession.cs" />
     <Compile Include="Assets\Thuan\Scripts\UI\SongListController.cs" />
     <Compile Include="Assets\Luan\MainMenu\Scripts\AspectRatioEnforcer.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\BattleHUD.cs" />
     <Compile Include="Assets\Luan\MainMenu\Scripts\VideoOptimizationManager.cs" />
     <Compile Include="Assets\Thuan\Scripts\UI\ButtonSFX.cs" />
     <Compile Include="Assets\Thuan\Scripts\Character\CharacterCardUI.cs" />

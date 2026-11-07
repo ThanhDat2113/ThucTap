@@ -11,6 +11,12 @@ namespace RhythmGame
         public JudgementSystem judgement;
         public FlowSystem flowSystem;
 
+        [Header("HUD mới (BattleHUD)")]
+        [Tooltip("Gán object BattleHUD. Khi gán, UI người chơi cũ (điểm, combo, hạng, flow) sẽ tự ẩn.")]
+        public BattleHUD hud;
+        [Tooltip("Ẩn thanh máu cũ của người chơi khi đã dùng BattleHUD.")]
+        public bool hideOldHealthBar = true;
+
         [Header("Player UI")]
         public TMP_Text playerScoreText;
         public TMP_Text playerComboText;
@@ -51,6 +57,8 @@ namespace RhythmGame
         public int opponentScore, opponentCombo, opponentMaxCombo;
         Grade playerGrade = Grade.F, opponentGrade = Grade.F;
         int playerMaxScore, opponentMaxScore;
+        bool flowActive;
+        HealthSystem hudHealthSource;
         public int playerTotalNotes, playerHitNotes;
         public int playerPerfect, playerGood;
         public int playerBad, playerMiss;
@@ -100,6 +108,8 @@ namespace RhythmGame
         {
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
+            HideOldPlayerUI();
+            BindHudHealth();
             if (flowSystem != null)
             {
                 flowSystem.OnFlowAmountChanged += HandleFlowAmountChanged;
@@ -115,6 +125,7 @@ namespace RhythmGame
         void OnDestroy()
         {
             if (gameManager != null) gameManager.OnStateChanged -= HandleStateChanged;
+            if (hudHealthSource != null) hudHealthSource.OnHealthChanged.RemoveListener(HandleHudHealth);
             if (judgement != null) judgement.OnJudged -= HandleJudged;
             if (flowSystem != null)
             {
@@ -156,6 +167,12 @@ namespace RhythmGame
                 playerTotalNotes = playerHitNotes = playerPerfect = playerGood = playerBad = playerMiss = 0;
                 opponentScore = opponentCombo = opponentMaxCombo = 0;
                 playerGrade = opponentGrade = Grade.F;
+                flowActive = false;
+                if (hud != null)
+                {
+                    hud.ResetHUD();
+                    if (hudHealthSource != null) hud.SetHealth(hudHealthSource.NormalizedHealth);
+                }
                 UpdatePlayerUI();
                 UpdateOpponentUI();
                 UpdateFlowUI();
@@ -194,6 +211,7 @@ namespace RhythmGame
 
         void HandleFlowStateChanged(bool isActive)
         {
+            flowActive = isActive;
             UpdateFlowUI();
             if (flowStatusText != null)
             {
@@ -208,6 +226,54 @@ namespace RhythmGame
                 flowBar.fillAmount = flowSystem != null ? flowSystem.NormalizedFlow : 0f;
             if (flowText != null && flowSystem != null)
                 flowText.text = $"FLOW: {flowSystem.FlowAmount:F0}/{flowSystem.maxFlow:F0}";
+            if (hud != null)
+                hud.SetFlow(flowSystem != null ? flowSystem.NormalizedFlow : 0f, flowActive);
+        }
+
+        // Ẩn UI người chơi cũ khi đã dùng BattleHUD mới
+        void HideOldPlayerUI()
+        {
+            if (hud == null) return;
+            HideSafe(playerScoreText);
+            HideSafe(playerComboText);
+            HideSafe(playerGradeText);
+            HideSafe(flowText);
+            HideSafe(flowStatusText);
+            HideSafe(flowBar);
+
+            // HealthBar có thể nằm ngay trên object Systems (chứa GameManager...),
+            // nên chỉ ẩn phần hình ảnh của nó, tuyệt đối không tắt cả object.
+            if (hideOldHealthBar && playerHealthBar != null)
+            {
+                HideSafe(playerHealthBar.fillRect);
+                HideSafe(playerHealthBar.ghostRect);
+                HideSafe(playerHealthBar.fillImage);
+                HideSafe(playerHealthBar.healthText);
+            }
+        }
+
+        // Tắt một object UI cũ, nhưng không bao giờ tắt chính object chứa script này
+        // hoặc object cha của nó (nếu tắt sẽ làm cả game ngừng chạy).
+        void HideSafe(Component c)
+        {
+            if (c == null) return;
+            GameObject go = c.gameObject;
+            if (go == gameObject || transform.IsChildOf(go.transform)) return;
+            go.SetActive(false);
+        }
+
+        // Lấy máu người chơi từ HealthSystem để đẩy sang HUD mới
+        void BindHudHealth()
+        {
+            if (hud == null || playerHealthBar == null || playerHealthBar.healthSystem == null) return;
+            hudHealthSource = playerHealthBar.healthSystem;
+            hudHealthSource.OnHealthChanged.AddListener(HandleHudHealth);
+            hud.SetHealth(hudHealthSource.NormalizedHealth);
+        }
+
+        void HandleHudHealth(float normalized)
+        {
+            if (hud != null) hud.SetHealth(normalized);
         }
 
         void UpdatePlayerUI()
@@ -220,6 +286,13 @@ namespace RhythmGame
             {
                 playerGradeText.text = g.ToString();
                 playerGradeText.color = GetGradeColor(g);
+            }
+
+            if (hud != null)
+            {
+                hud.SetScore(playerScore);
+                hud.SetCombo(playerCombo);
+                hud.SetAccuracy(playerTotalNotes > 0 ? PlayerHitRatio * 100f : -1f);
             }
         }
 

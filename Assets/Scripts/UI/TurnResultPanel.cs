@@ -180,6 +180,7 @@ namespace RhythmGame
 
             // Ẩn nút pause + chặn Esc/P khi hiện kết quả
             if (PauseManager.Instance != null) PauseManager.Instance.HideForResult();
+            if (battleUI != null && battleUI.hud != null) battleUI.hud.SetVisible(false);
 
             // Show panel with fade in
             panelRoot.SetActive(true);
@@ -249,6 +250,7 @@ namespace RhythmGame
 
             // Trả lại nút pause khi đóng bảng kết quả
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
+            if (battleUI != null && battleUI.hud != null) battleUI.hud.SetVisible(true);
         }
 
         Color GetGradeColor(Grade grade)
