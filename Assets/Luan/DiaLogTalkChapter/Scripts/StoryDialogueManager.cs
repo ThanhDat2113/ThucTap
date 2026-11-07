@@ -1302,6 +1302,12 @@ namespace Luan.Dialogue
                 backstoryIllustrationImage.color = slide.illustration != null ? Color.white : new Color(0, 0, 0, 0);
             }
 
+            if (backstorySubtitlePanel != null)
+            {
+                bool hasText = !string.IsNullOrEmpty(slide.storyText) || !string.IsNullOrEmpty(slide.actionDescription);
+                backstorySubtitlePanel.SetActive(hasText);
+            }
+
             if (backstorySpeakerText != null)
             {
                 backstorySpeakerText.text = ResolveSpeakerName(slide.speakerName, slide.speakerName != "RAZE");

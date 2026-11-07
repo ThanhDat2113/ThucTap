@@ -157,12 +157,11 @@ namespace Luan.Dialogue.Editor
             if (chap1Asset == null) return;
 
             string dir = "Assets/Luan/DiaLogTalkChapter/Backstory/";
-            Sprite act1 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act1_story_melodia.png");
-            Sprite act2 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act2_story_raze.png");
-            Sprite act3 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act3_story_crown.png");
-            Sprite act4 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act4_dialogue_who_are_you.png");
-            Sprite act5 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act5_dialogue_im_raze.png");
-            Sprite act6 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_act6_dialogue_showdown.png");
+            Sprite slide1 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide1_prologue.png");
+            Sprite slide2 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide2_raze_story.png");
+            Sprite slide3 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide3_dialogue_encounter.png");
+            Sprite slide4 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide4_dialogue_challenge.png");
+            Sprite slide5 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide5_dialogue_showdown.png");
 
             chap1Asset.characterStoryTitle = "Câu chuyện của Raze";
             chap1Asset.characterStory = "Raze lớn lên tại khu phố phía Tây. Khi còn nhỏ, anh thường bị đuổi khỏi những sân khấu lớn vì không được đào tạo bài bản.\n\nRaze cùng những người bạn biến một quảng trường bỏ hoang thành nơi biểu diễn. Anh phủ kín các bức tường bằng graffiti, tổ chức những cuộc dance battle và dần khiến khu vực này trở nên nổi tiếng.\n\nSau nhiều năm, Raze trở thành nhà vô địch của khu phố. Biểu tượng vương miện trên trang phục là lời nhắc rằng không ai được phép xem thường anh thêm lần nữa. Tuy nhiên, Raze ngày càng sợ mất đi vị trí mình đã rất vất vả mới giành được. Anh bắt đầu thách đấu và đuổi đi bất kỳ ai muốn bước qua khu phố.";
@@ -171,51 +170,43 @@ namespace Luan.Dialogue.Editor
             chap1Asset.backstorySlides.Clear();
             chap1Asset.backstorySlides.Add(new BackstorySlide
             {
-                illustration = act1,
+                illustration = slide1,
                 speakerName = "DẪN CHUYỆN",
                 nameColor = new Color(0.2f, 0.95f, 1f, 1f),
-                actionDescription = "[Nhân vật chính đeo tai nghe, nhìn về thành phố Melodia]",
-                storyText = "Melodia tổ chức giải đấu đường phố Bắt Lấy Giai Điệu. Một vũ công trẻ quyết định dấn thân với một đôi giày, một chiếc máy nghe nhạc và một cơ hội duy nhất."
+                actionDescription = "",
+                storyText = ""
             });
             chap1Asset.backstorySlides.Add(new BackstorySlide
             {
-                illustration = act2,
-                speakerName = "DẪN CHUYỆN",
-                nameColor = new Color(1f, 0.85f, 0.2f, 1f),
-                actionDescription = "[Raze nhảy breakdance, phủ kín quảng trường bỏ hoang bằng graffiti]",
-                storyText = "Từng bị đuổi khỏi các sân khấu lớn, Raze cùng bạn bè biến quảng trường hoang thành thánh địa vũ đạo và dần trở thành nhà vô địch của khu phố."
-            });
-            chap1Asset.backstorySlides.Add(new BackstorySlide
-            {
-                illustration = act3,
-                speakerName = "DẪN CHUYỆN",
+                illustration = slide2,
+                speakerName = "RAZE - VUA GRAFFITI",
                 nameColor = new Color(1f, 0.2f, 0.85f, 1f),
-                actionDescription = "[Raze đứng trước bức tường vương miện, đề phòng mọi kẻ thách đấu]",
-                storyText = "Biểu tượng vương miện là lời nhắc không ai được xem thường anh. Nhưng nỗi sợ mất ngôi khiến Raze bắt đầu thách đấu và đuổi bất kỳ ai muốn bước qua khu phố."
+                actionDescription = "",
+                storyText = ""
             });
             chap1Asset.backstorySlides.Add(new BackstorySlide
             {
-                illustration = act4,
+                illustration = slide3,
                 speakerName = "RAZE & {PLAYER}",
                 nameColor = new Color(1f, 0.2f, 0.85f, 1f),
-                actionDescription = "[Raze tựa tường khoanh tay nhìn xuống | Người chơi chỉ tay kiên định]",
-                storyText = "Raze: \"Cậu đang tìm ai?\"\n\nNgười chơi: \"Tôi tìm Raze. Tôi muốn lấy Huy hiệu Nhịp điệu.\""
+                actionDescription = "",
+                storyText = ""
             });
             chap1Asset.backstorySlides.Add(new BackstorySlide
             {
-                illustration = act5,
+                illustration = slide4,
                 speakerName = "RAZE & {PLAYER}",
                 nameColor = new Color(1f, 0.2f, 0.85f, 1f),
-                actionDescription = "[Raze lắc bình sơn, chỉ ngón cái ngạo nghễ | Người chơi siết chặt nắm đấm]",
-                storyText = "Raze: \"Tôi là Raze. Nhưng muốn lấy huy hiệu thì cậu phải thắng tôi.\"\n\nNgười chơi: \"Tôi biết.\""
+                actionDescription = "",
+                storyText = ""
             });
             chap1Asset.backstorySlides.Add(new BackstorySlide
             {
-                illustration = act6,
+                illustration = slide5,
                 speakerName = "RAZE & {PLAYER}",
                 nameColor = new Color(0.2f, 0.95f, 1f, 1f),
-                actionDescription = "[Raze chỉ ra sàn đấu thách thức | Người chơi vào thế nhảy rực lửa]",
-                storyText = "Raze: \"Tân binh mà gan đấy. Lên sân khấu đi.\"\n\nNgười chơi: \"Bắt đầu thôi!\""
+                actionDescription = "",
+                storyText = ""
             });
 
             // Post-Battle Lines (Thoại thắng / thua tiếp tục dùng Dialog)
