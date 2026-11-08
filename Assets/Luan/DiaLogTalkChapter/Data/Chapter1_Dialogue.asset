@@ -15,7 +15,7 @@ MonoBehaviour:
   chapterNumber: 1
   chapterTitle: "Chapter 1: Concrete Dreams"
   chapterLogo: {fileID: -2930057027171513213, guid: f363364938986ce4595b8b3ae6390bed, type: 3}
-  introVideoClip: {fileID: 0}
+  introVideoClip: {fileID: 32900000, guid: 6a543ca091acda94abab403056e56f21, type: 3}
   introVideoUrl: ""
   introVideoDuration: 8
   characterStoryTitle: "Câu chuyện của Raze"

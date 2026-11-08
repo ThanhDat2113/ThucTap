@@ -123,6 +123,14 @@ namespace Luan.Dialogue
         private Coroutine videoRoutine;
         private bool skipVideoRequested;
 
+        [Header("Backstory Transition & Pulse Prompt")]
+        [SerializeField] private CanvasGroup backstoryContentCanvasGroup;
+        [SerializeField] private TMPro.TMP_Text backstoryFirstSlidePromptText;
+        private Coroutine backstorySequenceRoutine;
+        private Coroutine backstoryPromptPulseRoutine;
+        private bool isWaitingForFirstSlideTap;
+        private bool slideTapRequested;
+
         [Header("Chế độ kiểm thử")]
         [Tooltip("Bật để luôn chạy hội thoại khi bấm Play trực tiếp tại GameplayScene")]
         [SerializeField] private bool testInEditor = false;
@@ -649,6 +657,19 @@ namespace Luan.Dialogue
             if (videoContainer != null) videoContainer.SetActive(true);
             if (videoCanvasGroup != null) videoCanvasGroup.alpha = 0f;
 
+            // Đảm bảo nút Bỏ qua ở góc trên bên phải (của dialog) luôn hiển thị trên video
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.SetActive(true);
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+            if (skipButton != null)
+            {
+                skipButton.gameObject.SetActive(true);
+                skipButton.onClick.RemoveAllListeners();
+                skipButton.onClick.AddListener(OnSkipClicked);
+            }
+
             float waitPrepare = 0f;
             while (!videoPlayer.isPrepared && waitPrepare < 3.0f && !skipVideoRequested)
             {
@@ -722,6 +743,8 @@ namespace Luan.Dialogue
 
         private void OnDestroy()
         {
+            if (backstorySequenceRoutine != null) { StopCoroutine(backstorySequenceRoutine); backstorySequenceRoutine = null; }
+            if (backstoryPromptPulseRoutine != null) { StopCoroutine(backstoryPromptPulseRoutine); backstoryPromptPulseRoutine = null; }
             CleanupVideoRenderTexture();
             if (Instance == this) Instance = null;
 
@@ -1622,19 +1645,34 @@ namespace Luan.Dialogue
 
         // ==========================================
         // BACKSTORY MINH HỌA & STORYBOARD CUTSCENES
+        // (Fade in/Fade out từng ảnh, ảnh 1 text nháy đợi bấm, các ảnh sau 3s tự qua, nút skip ở góc trên bên phải)
         // ==========================================
         public void ShowBackstoryScreen(List<BackstorySlide> slides)
         {
             IsPlaying = true;
             currentPhase = DialoguePhase.Backstory;
-            currentBackstoryIndex = -1;
             activeBackstorySlides = slides;
+
+            EnsureUI();
+            EnsureBackstoryUI();
 
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
             if (introContainer != null) introContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
-            if (topControlsGroup != null) topControlsGroup.SetActive(true);
             if (backstoryContainer != null) backstoryContainer.SetActive(true);
+
+            // Nút Bỏ qua ở góc trên bên phải (của dialog) luôn hiển thị và nằm trên cùng
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.SetActive(true);
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+            if (skipButton != null)
+            {
+                skipButton.gameObject.SetActive(true);
+                skipButton.onClick.RemoveAllListeners();
+                skipButton.onClick.AddListener(OnSkipClicked);
+            }
 
             if (mainCanvasGroup != null)
             {
@@ -1651,126 +1689,265 @@ namespace Luan.Dialogue
             }
 
             UpdateAutoButtonVisual();
-            AdvanceBackstorySlide();
+
+            if (backstorySequenceRoutine != null) StopCoroutine(backstorySequenceRoutine);
+            backstorySequenceRoutine = StartCoroutine(RunBackstorySequence());
         }
 
-        public void AdvanceBackstorySlide()
+        private IEnumerator RunBackstorySequence()
         {
-            if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
-            if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
-
-            currentBackstoryIndex++;
-            if (activeBackstorySlides == null || currentBackstoryIndex >= activeBackstorySlides.Count)
+            if (activeBackstorySlides == null || activeBackstorySlides.Count == 0)
             {
                 FinishBackstory();
-                return;
+                yield break;
             }
 
-            DisplayBackstorySlide(activeBackstorySlides[currentBackstoryIndex]);
+            // Đảm bảo nút Bỏ qua ở góc trên bên phải luôn nằm trên cùng
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.SetActive(true);
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+
+            // Đặt alpha nội dung ảnh bắt đầu ở 0 để Fade In
+            SetSlideContentAlpha(0f);
+
+            for (int i = 0; i < activeBackstorySlides.Count; i++)
+            {
+                currentBackstoryIndex = i;
+                var slide = activeBackstorySlides[i];
+
+                // Cài đặt dữ liệu cho slide này (ẩn/hiện panel thoại hoặc text nhấp nháy cho slide 0)
+                ApplySlideData(slide, i);
+
+                // --- 1. ANIMATION FADE IN CHO ẢNH (0.35s) ---
+                yield return StartCoroutine(FadeSlideContent(0f, 1f, 0.35f));
+
+                // --- 2. HIỂN THỊ NỘI DUNG ---
+                if (i == 0)
+                {
+                    // Ảnh đầu tiên: Giới thiệu câu chuyện nhân vật
+                    // Giữ nguyên trên màn hình, text nhấp nháy ở dưới "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA"
+                    isWaitingForFirstSlideTap = true;
+                    slideTapRequested = false;
+
+                    while (isWaitingForFirstSlideTap && currentPhase == DialoguePhase.Backstory)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                        {
+                            isWaitingForFirstSlideTap = false;
+                            break;
+                        }
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    // Các ảnh tiếp theo: Backstory có thoại -> 3s 1 ảnh tự động qua (hoặc bấm để qua sớm)
+                    float duration = 3.0f;
+                    float timer = 0f;
+                    slideTapRequested = false;
+
+                    while (timer < duration && !slideTapRequested && currentPhase == DialoguePhase.Backstory)
+                    {
+                        timer += Time.unscaledDeltaTime;
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                        {
+                            slideTapRequested = true;
+                            break;
+                        }
+                        yield return null;
+                    }
+                }
+
+                // Nếu người chơi đã bấm nút Skip hoặc kết thúc
+                if (currentPhase != DialoguePhase.Backstory)
+                    yield break;
+
+                // --- 3. ANIMATION FADE OUT CHO ẢNH (0.35s) ---
+                yield return StartCoroutine(FadeSlideContent(1f, 0f, 0.35f));
+
+                // Dừng pulse text nếu vừa xong slide 0
+                if (i == 0 && backstoryPromptPulseRoutine != null)
+                {
+                    StopCoroutine(backstoryPromptPulseRoutine);
+                    backstoryPromptPulseRoutine = null;
+                }
+            }
+
+            // Hết tất cả các ảnh -> Vào gameplay!
+            FinishBackstory();
         }
 
-        private void DisplayBackstorySlide(BackstorySlide slide)
+        private IEnumerator FadeSlideContent(float fromAlpha, float toAlpha, float duration)
         {
-            if (slide == null) return;
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                float a = Mathf.Lerp(fromAlpha, toAlpha, Mathf.SmoothStep(0f, 1f, t));
+
+                SetSlideContentAlpha(a);
+                yield return null;
+            }
+            SetSlideContentAlpha(toAlpha);
+        }
+
+        private void SetSlideContentAlpha(float a)
+        {
+            if (backstoryContentCanvasGroup != null)
+            {
+                backstoryContentCanvasGroup.alpha = a;
+            }
 
             if (backstoryIllustrationImage != null)
             {
-                backstoryIllustrationImage.sprite = slide.illustration;
-                backstoryIllustrationImage.color = slide.illustration != null ? Color.white : new Color(0, 0, 0, 0);
+                var c = backstoryIllustrationImage.color;
+                backstoryIllustrationImage.color = new Color(c.r, c.g, c.b, a);
             }
 
             if (backstorySubtitlePanel != null)
             {
-                bool hasText = !string.IsNullOrEmpty(slide.storyText) || !string.IsNullOrEmpty(slide.actionDescription);
-                backstorySubtitlePanel.SetActive(hasText);
+                var cg = backstorySubtitlePanel.GetComponent<CanvasGroup>();
+                if (cg != null) cg.alpha = a;
             }
 
-            if (backstorySpeakerText != null)
+            if (backstoryFirstSlidePromptText != null && currentBackstoryIndex == 0)
             {
-                backstorySpeakerText.text = ResolveSpeakerName(slide.speakerName, slide.speakerName != "RAZE");
-                backstorySpeakerText.color = slide.nameColor;
+                var c = backstoryFirstSlidePromptText.color;
+                backstoryFirstSlidePromptText.color = new Color(c.r, c.g, c.b, a);
             }
-
-            if (backstoryActionText != null)
-            {
-                backstoryActionText.text = slide.actionDescription;
-                backstoryActionText.gameObject.SetActive(!string.IsNullOrEmpty(slide.actionDescription));
-            }
-
-            if (backstorySlideCounterText != null)
-            {
-                backstorySlideCounterText.text = $"{(currentBackstoryIndex + 1)} / {activeBackstorySlides.Count}";
-            }
-
-            string resolvedContent = ResolveDialogueText(slide.storyText);
-            typingRoutine = StartCoroutine(BackstoryTypewriterRoutine(resolvedContent));
         }
 
-        private IEnumerator BackstoryTypewriterRoutine(string fullText)
+        private void ApplySlideData(BackstorySlide slide, int index)
         {
-            isTyping = true;
-            if (backstoryNextIndicator != null) backstoryNextIndicator.SetActive(false);
-            if (backstoryDialogueText != null) backstoryDialogueText.text = "";
+            if (slide == null) return;
 
-            if (nextClip != null && SFXManager.Instance != null)
-                SFXManager.Instance.PlaySFX(nextClip);
-
-            int totalChars = fullText.Length;
-            for (int i = 0; i <= totalChars; i++)
+            // Ảnh minh họa
+            if (backstoryIllustrationImage != null)
             {
-                if (backstoryDialogueText != null)
-                    backstoryDialogueText.text = fullText.Substring(0, i);
+                backstoryIllustrationImage.sprite = slide.illustration;
+                backstoryIllustrationImage.color = new Color(1f, 1f, 1f, 0f); // Bắt đầu ở alpha = 0 để Fade In
+            }
 
-                if (i % 2 == 0 && typewriterClip != null && SFXManager.Instance != null)
+            if (index == 0)
+            {
+                // ẢNH ĐẦU TIÊN: CÂU CHUYỆN NHÂN VẬT
+                // Ẩn bảng thoại bên dưới để tôn trọn vẹn hình ảnh
+                if (backstorySubtitlePanel != null)
+                    backstorySubtitlePanel.SetActive(false);
+
+                // Hiện text nhấp nháy "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA"
+                EnsureBackstoryPromptText();
+                if (backstoryFirstSlidePromptText != null)
                 {
-                    SFXManager.Instance.PlaySFX(typewriterClip);
+                    backstoryFirstSlidePromptText.gameObject.SetActive(true);
+                    backstoryFirstSlidePromptText.text = "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA ▶";
+                    if (backstoryPromptPulseRoutine != null) StopCoroutine(backstoryPromptPulseRoutine);
+                    backstoryPromptPulseRoutine = StartCoroutine(AnimateFirstSlidePromptPulse());
+                }
+            }
+            else
+            {
+                // CÁC ẢNH TIẾP THEO: BACKSTORY CÓ THOẠI
+                if (backstoryFirstSlidePromptText != null)
+                    backstoryFirstSlidePromptText.gameObject.SetActive(false);
+
+                if (backstorySubtitlePanel != null)
+                {
+                    backstorySubtitlePanel.SetActive(true);
+                    var cg = backstorySubtitlePanel.GetComponent<CanvasGroup>() ?? backstorySubtitlePanel.AddComponent<CanvasGroup>();
+                    cg.alpha = 0f;
                 }
 
-                yield return new WaitForSecondsRealtime(typingSpeed);
-            }
+                if (backstorySpeakerText != null)
+                {
+                    backstorySpeakerText.text = ResolveSpeakerName(slide.speakerName, slide.speakerName != "RAZE");
+                    backstorySpeakerText.color = slide.nameColor;
+                }
 
-            isTyping = false;
-            if (backstoryNextIndicator != null) backstoryNextIndicator.SetActive(true);
+                if (backstoryActionText != null)
+                {
+                    backstoryActionText.text = slide.actionDescription;
+                    backstoryActionText.gameObject.SetActive(!string.IsNullOrEmpty(slide.actionDescription));
+                }
 
-            if (isAutoMode)
-            {
-                if (autoRoutine != null) StopCoroutine(autoRoutine);
-                autoRoutine = StartCoroutine(WaitAndAutoAdvanceBackstory());
+                if (backstorySlideCounterText != null)
+                {
+                    backstorySlideCounterText.text = $"{index + 1} / {activeBackstorySlides.Count}";
+                }
+
+                if (backstoryDialogueText != null)
+                {
+                    backstoryDialogueText.text = ResolveDialogueText(slide.storyText);
+                }
             }
         }
 
-        private IEnumerator WaitAndAutoAdvanceBackstory()
+        private void EnsureBackstoryPromptText()
         {
-            yield return new WaitForSecondsRealtime(autoAdvanceDelay + 1.2f);
-            if (currentPhase == DialoguePhase.Backstory && isAutoMode)
+            if (backstoryFirstSlidePromptText != null) return;
+            if (backstoryContainer == null) return;
+
+            var existing = backstoryContainer.transform.Find("FirstSlidePromptText");
+            if (existing != null)
             {
-                AdvanceBackstorySlide();
+                backstoryFirstSlidePromptText = existing.GetComponent<TMPro.TextMeshProUGUI>();
+                return;
             }
+
+            var promptGo = new GameObject("FirstSlidePromptText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TMPro.TextMeshProUGUI));
+            promptGo.transform.SetParent(backstoryContainer.transform, false);
+            var rt = promptGo.GetComponent<RectTransform>();
+            rt.anchorMin = new Vector2(0.5f, 0f);
+            rt.anchorMax = new Vector2(0.5f, 0f);
+            rt.pivot = new Vector2(0.5f, 0f);
+            rt.anchoredPosition = new Vector2(0f, 45f);
+            rt.sizeDelta = new Vector2(850f, 50f);
+
+            var tmp = promptGo.GetComponent<TMPro.TextMeshProUGUI>();
+            tmp.text = "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA ▶";
+            tmp.font = ResolveFont();
+            tmp.fontSize = 24f;
+            tmp.fontStyle = FontStyles.Bold;
+            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.color = new Color(0.2f, 0.95f, 1f, 0.95f);
+            tmp.raycastTarget = false;
+            backstoryFirstSlidePromptText = tmp;
+        }
+
+        private IEnumerator AnimateFirstSlidePromptPulse()
+        {
+            if (backstoryFirstSlidePromptText == null) yield break;
+
+            Color baseColor = backstoryFirstSlidePromptText.color;
+            while (currentPhase == DialoguePhase.Backstory && currentBackstoryIndex == 0)
+            {
+                float alpha = Mathf.PingPong(Time.unscaledTime * 2.0f, 0.65f) + 0.35f;
+                backstoryFirstSlidePromptText.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+                yield return null;
+            }
+            if (backstoryFirstSlidePromptText != null)
+                backstoryFirstSlidePromptText.color = baseColor;
         }
 
         public void OnBackstoryTapClicked()
         {
             if (currentPhase != DialoguePhase.Backstory) return;
 
-            if (isTyping)
-            {
-                if (typingRoutine != null) StopCoroutine(typingRoutine);
-                isTyping = false;
-                if (currentBackstoryIndex >= 0 && activeBackstorySlides != null && currentBackstoryIndex < activeBackstorySlides.Count && backstoryDialogueText != null)
-                {
-                    backstoryDialogueText.text = ResolveDialogueText(activeBackstorySlides[currentBackstoryIndex].storyText);
-                }
-                if (backstoryNextIndicator != null) backstoryNextIndicator.SetActive(true);
+            if (nextClip != null && SFXManager.Instance != null)
+                SFXManager.Instance.PlaySFX(nextClip);
 
-                if (isAutoMode)
-                {
-                    if (autoRoutine != null) StopCoroutine(autoRoutine);
-                    autoRoutine = StartCoroutine(WaitAndAutoAdvanceBackstory());
-                }
+            if (currentBackstoryIndex == 0)
+            {
+                // Chạm vào ảnh đầu tiên -> tiếp tục chuyển sang các ảnh backstory có thoại
+                isWaitingForFirstSlideTap = false;
             }
             else
             {
-                AdvanceBackstorySlide();
+                // Chạm vào các ảnh backstory tiếp theo -> chuyển sớm qua ảnh kế tiếp không cần đợi hết 3s
+                slideTapRequested = true;
             }
         }
 
@@ -1778,6 +1955,10 @@ namespace Luan.Dialogue
         {
             IsPlaying = false;
             hasCompletedDialogueThisSession = true;
+            currentPhase = DialoguePhase.None;
+
+            if (backstorySequenceRoutine != null) { StopCoroutine(backstorySequenceRoutine); backstorySequenceRoutine = null; }
+            if (backstoryPromptPulseRoutine != null) { StopCoroutine(backstoryPromptPulseRoutine); backstoryPromptPulseRoutine = null; }
             if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
             if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
             if (transitionRoutine != null) StopCoroutine(transitionRoutine);
