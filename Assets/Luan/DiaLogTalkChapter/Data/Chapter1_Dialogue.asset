@@ -94,16 +94,10 @@ MonoBehaviour:
     nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
     actionDescription: 
     illustration: {fileID: 0}
-  - speakerName: Raze
-    side: 1
-    text: " Anh v\u1EABn cho t\xF4i \u0111\u1EA5u l\u1EA1i sao?"
-    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
-    nameColor: {r: 1, g: 0.2, b: 0.8509804, a: 1}
-    actionDescription: 
-    illustration: {fileID: 0}
   - speakerName: '{PLAYER}'
     side: 0
-    text: "Anh v\u1EABn cho t\xF4i \u0111\u1EA5u l\u1EA1i sao?"
+    text: "L\u1EA7n sau t\xF4i s\u1EBD kh\xF4ng \u0111\u1EC3 anh th\u1EAFng d\u1EC5
+      v\u1EADy \u0111\xE2u."
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.9490196, b: 1, a: 1}
     actionDescription: 
@@ -114,14 +108,6 @@ MonoBehaviour:
       ch\u01A1i h\u1EBFt s\u1EE9c."
     customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     nameColor: {r: 1, g: 0.2, b: 0.8509804, a: 1}
-    actionDescription: 
-    illustration: {fileID: 0}
-  - speakerName: '{PLAYER}'
-    side: 0
-    text: "L\u1EA7n sau t\xF4i s\u1EBD kh\xF4ng \u0111\u1EC3 anh th\u1EAFng d\u1EC5
-      v\u1EADy \u0111\xE2u."
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.9490196, b: 1, a: 1}
     actionDescription: 
     illustration: {fileID: 0}
   chapterLogo: {fileID: -2930057027171513213, guid: f363364938986ce4595b8b3ae6390bed, type: 3}

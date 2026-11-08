@@ -963,7 +963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &231219826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -980,7 +980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 475, y: 45}
+  m_AnchoredPosition: {x: 475, y: 90}
   m_SizeDelta: {x: 1000, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &231219827
@@ -6769,7 +6769,7 @@ MonoBehaviour:
   firstSlidePromptFontSize: 24
   firstSlidePromptColor: {r: 0.2, g: 0.95, b: 1, a: 0.95}
   firstSlidePromptOffsetX: 475
-  firstSlidePromptOffsetY: 45
+  firstSlidePromptOffsetY: 90
   firstSlidePromptBottomOffsetY: 45
   showFirstSlidePrompt: 1
   backstoryContentCanvasGroup: {fileID: 0}
