@@ -51,19 +51,32 @@ namespace Luan.Dialogue
         /// </summary>
         public List<Sprite> GetBackstorySprites()
         {
-            if (backstoryImages != null && backstoryImages.Count > 0)
-                return backstoryImages;
+            var imgList = new List<Sprite>();
+            if (backstoryImages != null)
+            {
+                foreach (var img in backstoryImages)
+                {
+                    if (img != null) imgList.Add(img);
+                }
+            }
 
-            var list = new List<Sprite>();
+            var slideList = new List<Sprite>();
             if (backstorySlides != null)
             {
                 foreach (var s in backstorySlides)
                 {
                     if (s != null && s.illustration != null)
-                        list.Add(s.illustration);
+                        slideList.Add(s.illustration);
                 }
             }
-            return list;
+
+            if (imgList.Count >= slideList.Count && imgList.Count > 0)
+                return imgList;
+
+            if (slideList.Count > 0)
+                return slideList;
+
+            return imgList;
         }
 
         public List<DialogueLine> GetWinLines()

@@ -124,9 +124,9 @@ namespace Luan.Dialogue
         private bool skipVideoRequested;
 
         [Header("Tùy Chỉnh Kích Thước Ảnh Backstory (Layout Settings)")]
-        [Tooltip("Tỉ lệ phóng to/thu nhỏ ảnh Backstory (1.0 = 100% full viền, 0.88 = 88% vừa vặn có lề viền đẹp)")]
+        [Tooltip("Tỉ lệ phóng to/thu nhỏ ảnh Backstory (1.0 = Phủ kín 100% full màn hình Mobile tràn viền)")]
         [Range(0.5f, 1.5f)]
-        [SerializeField] private float backstoryScale = 0.88f;
+        [SerializeField] private float backstoryScale = 1.0f;
         [Tooltip("Dịch chuyển vị trí ảnh lên / xuống theo trục Y (Pixel)")]
         [SerializeField] private float backstoryOffsetY = 0f;
 
@@ -481,6 +481,14 @@ namespace Luan.Dialogue
                 {
                     songIntroGo.SetActive(false);
                 }
+
+                // ★ Preload & Prepare video NGAY TỪ AWAKE để khi vào màn là phát được ngay, không bị chờ mất mấy giây
+                var cfg = GetCurrentChapterConfig();
+                var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
+                if (data != null && (data.introVideoClip != null || !string.IsNullOrEmpty(data.introVideoUrl)))
+                {
+                    PreloadChapterIntroVideo(data);
+                }
             }
 
             BindControlsFallback();
@@ -583,20 +591,17 @@ namespace Luan.Dialogue
             bgImg.color = Color.black;
             bgImg.raycastTarget = false;
 
-            // RawImage hiển thị texture video (tự động giữ tỉ lệ 16:9, căn giữa màn hình không méo)
-            var rawGo = new GameObject("VideoRawImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.RawImage), typeof(UnityEngine.UI.AspectRatioFitter));
+            // RawImage hiển thị texture video phủ kín full màn hình mobile tràn viền (anchor 0..1)
+            var rawGo = new GameObject("VideoRawImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.RawImage));
             rawGo.transform.SetParent(vGo.transform, false);
             var rawRt = rawGo.GetComponent<RectTransform>();
             rawRt.anchorMin = Vector2.zero;
             rawRt.anchorMax = Vector2.one;
             rawRt.offsetMin = Vector2.zero;
             rawRt.offsetMax = Vector2.zero;
+            rawRt.localScale = Vector3.one;
             videoRawImage = rawGo.GetComponent<UnityEngine.UI.RawImage>();
-            videoRawImage.color = Color.black;
-
-            var arf = rawGo.GetComponent<UnityEngine.UI.AspectRatioFitter>();
-            arf.aspectMode = UnityEngine.UI.AspectRatioFitter.AspectMode.FitInParent;
-            arf.aspectRatio = 16f / 9f;
+            videoRawImage.color = Color.white;
 
             // VideoPlayer component
             videoPlayer = vGo.AddComponent<UnityEngine.Video.VideoPlayer>();
@@ -640,6 +645,68 @@ namespace Luan.Dialogue
             vGo.SetActive(false);
         }
 
+        public void PreloadChapterIntroVideo(DialogueStoryData data)
+        {
+            EnsureVideoUI();
+            if (videoPlayer == null || data == null) return;
+            if (data.introVideoClip == null && string.IsNullOrEmpty(data.introVideoUrl)) return;
+
+            int width = 1920;
+            int height = 1080;
+            if (data.introVideoClip != null && data.introVideoClip.width > 0)
+            {
+                width = (int)data.introVideoClip.width;
+                height = (int)data.introVideoClip.height;
+            }
+
+            if (videoRenderTexture == null || videoRenderTexture.width != width || videoRenderTexture.height != height)
+            {
+                CleanupVideoRenderTexture();
+                videoRenderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.Default)
+                {
+                    name = $"RT_ChapterVideo_{data.chapterNumber}",
+                    filterMode = FilterMode.Bilinear,
+                    wrapMode = TextureWrapMode.Clamp
+                };
+                videoRenderTexture.Create();
+            }
+
+            videoPlayer.targetTexture = videoRenderTexture;
+            if (videoRawImage != null)
+            {
+                videoRawImage.texture = videoRenderTexture;
+                videoRawImage.color = Color.white;
+            }
+
+            if (data.introVideoClip != null)
+            {
+                videoPlayer.source = UnityEngine.Video.VideoSource.VideoClip;
+                videoPlayer.clip = data.introVideoClip;
+            }
+            else
+            {
+                videoPlayer.source = UnityEngine.Video.VideoSource.Url;
+                videoPlayer.url = data.introVideoUrl;
+            }
+
+            videoPlayer.isLooping = false;
+            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
+            for (ushort t = 0; t < videoPlayer.audioTrackCount; t++)
+            {
+                videoPlayer.EnableAudioTrack(t, false);
+            }
+            if (videoContainer != null)
+            {
+                var vAudio = videoContainer.GetComponent<AudioSource>();
+                if (vAudio != null) { vAudio.mute = true; vAudio.Stop(); }
+            }
+
+            if (!videoPlayer.isPrepared)
+            {
+                videoPlayer.Prepare();
+            }
+        }
+
         public void PlayChapterIntroVideo(DialogueStoryData data, System.Action onComplete)
         {
             if (videoRoutine != null) StopCoroutine(videoRoutine);
@@ -660,7 +727,7 @@ namespace Luan.Dialogue
             currentPhase = DialoguePhase.IntroVideo;
             skipVideoRequested = false;
 
-            // ★ QUAN TRỌNG: Kích hoạt dialogueCanvas và mainCanvasGroup để video hiển thị!
+            // Kích hoạt dialogueCanvas và mainCanvasGroup ngay lập tức để video hiển thị
             if (dialogueCanvas != null)
             {
                 dialogueCanvas.gameObject.SetActive(true);
@@ -673,58 +740,8 @@ namespace Luan.Dialogue
                 mainCanvasGroup.interactable = true;
             }
 
-            int width = 1920;
-            int height = 1080;
-            if (data.introVideoClip != null && data.introVideoClip.width > 0)
-            {
-                width = (int)data.introVideoClip.width;
-                height = (int)data.introVideoClip.height;
-            }
-
-            CleanupVideoRenderTexture();
-            videoRenderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32)
-            {
-                name = $"RT_ChapterVideo_{data.chapterNumber}",
-                filterMode = FilterMode.Bilinear,
-                wrapMode = TextureWrapMode.Clamp
-            };
-            videoRenderTexture.Create();
-
-            videoPlayer.targetTexture = videoRenderTexture;
-            if (videoRawImage != null)
-            {
-                videoRawImage.texture = videoRenderTexture;
-                videoRawImage.color = Color.white;
-                var arf = videoRawImage.GetComponent<UnityEngine.UI.AspectRatioFitter>() ?? videoRawImage.gameObject.AddComponent<UnityEngine.UI.AspectRatioFitter>();
-                arf.aspectMode = UnityEngine.UI.AspectRatioFitter.AspectMode.FitInParent;
-                arf.aspectRatio = height > 0 ? (float)width / height : (16f / 9f);
-            }
-
-            if (data.introVideoClip != null)
-            {
-                videoPlayer.source = UnityEngine.Video.VideoSource.VideoClip;
-                videoPlayer.clip = data.introVideoClip;
-            }
-            else
-            {
-                videoPlayer.source = UnityEngine.Video.VideoSource.Url;
-                videoPlayer.url = data.introVideoUrl;
-            }
-
-            videoPlayer.isLooping = false;
-            // Mute hoàn toàn âm thanh video intro theo yêu cầu người dùng
-            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
-            for (ushort t = 0; t < videoPlayer.audioTrackCount; t++)
-            {
-                videoPlayer.EnableAudioTrack(t, false);
-            }
-            if (videoContainer != null)
-            {
-                var vAudio = videoContainer.GetComponent<AudioSource>();
-                if (vAudio != null) { vAudio.mute = true; vAudio.Stop(); }
-            }
-
-            videoPlayer.Prepare();
+            // Đảm bảo video đã được nạp texture và chuẩn bị
+            PreloadChapterIntroVideo(data);
 
             // Ẩn tất cả các container khác khi chạy intro video để không che đè
             if (introContainer != null) introContainer.SetActive(false);
@@ -737,9 +754,9 @@ namespace Luan.Dialogue
                 videoContainer.SetActive(true);
                 videoContainer.transform.SetAsLastSibling();
             }
-            if (videoCanvasGroup != null) videoCanvasGroup.alpha = 0f;
+            if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f;
 
-            // Đảm bảo nút Bỏ qua ở góc trên bên phải (của dialog) luôn hiển thị trên video
+            // Đảm bảo nút Bỏ qua ở góc trên bên phải luôn hiển thị trên video
             if (topControlsGroup != null)
             {
                 topControlsGroup.SetActive(true);
@@ -752,26 +769,20 @@ namespace Luan.Dialogue
                 skipButton.onClick.AddListener(OnSkipClicked);
             }
 
-            float waitPrepare = 0f;
-            while (!videoPlayer.isPrepared && waitPrepare < 3.0f && !skipVideoRequested)
+            // Nếu chưa prepare xong, đợi tối đa nhưng không để alpha = 0 gây màn đen
+            if (!videoPlayer.isPrepared)
             {
-                waitPrepare += Time.unscaledDeltaTime;
-                yield return null;
+                float waitPrepare = 0f;
+                while (!videoPlayer.isPrepared && waitPrepare < 2.0f && !skipVideoRequested)
+                {
+                    waitPrepare += Time.unscaledDeltaTime;
+                    yield return null;
+                }
             }
 
             if (!skipVideoRequested)
             {
                 videoPlayer.Play();
-
-                // Fade In Video (0.35s)
-                float fadeIn = 0.35f;
-                float el = 0f;
-                while (el < fadeIn)
-                {
-                    el += Time.unscaledDeltaTime;
-                    if (videoCanvasGroup != null) videoCanvasGroup.alpha = Mathf.Clamp01(el / fadeIn);
-                    yield return null;
-                }
                 if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f;
 
                 float maxDuration = data.introVideoDuration > 0f ? data.introVideoDuration : 8f;
@@ -898,8 +909,12 @@ namespace Luan.Dialogue
             if (backstoryIllustrationImage != null)
             {
                 var rt = backstoryIllustrationImage.rectTransform;
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.offsetMin = Vector2.zero;
+                rt.offsetMax = new Vector2(0f, backstoryOffsetY);
                 rt.localScale = new Vector3(backstoryScale, backstoryScale, 1f);
-                rt.anchoredPosition = new Vector2(0f, backstoryOffsetY);
+                backstoryIllustrationImage.preserveAspect = false; // Phủ kín tràn viền full màn hình Mobile
             }
         }
 
@@ -2469,25 +2484,26 @@ namespace Luan.Dialogue
                 bgImg.color = new Color(0.015f, 0.01f, 0.03f, 1f);
                 bgImg.raycastTarget = false;
 
-                // 2. Illustration Image (căn giữa màn hình 1920x1080, giữ tỉ lệ gốc và áp dụng scale tùy chỉnh)
+                // 2. Illustration Image phủ kín tràn viền full màn hình Mobile (anchor 0..1 giống mẫu người dùng)
                 var illContainer = new GameObject("IllustrationContainer", typeof(RectTransform));
                 illContainer.transform.SetParent(bsGo.transform, false);
                 var illRt = illContainer.GetComponent<RectTransform>();
                 illRt.anchorMin = Vector2.zero;
                 illRt.anchorMax = Vector2.one;
-                illRt.offsetMin = illRt.offsetMax = Vector2.zero;
+                illRt.offsetMin = Vector2.zero;
+                illRt.offsetMax = Vector2.zero;
+                illRt.localScale = Vector3.one;
 
                 var imgGo = new GameObject("IllustrationImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
                 imgGo.transform.SetParent(illContainer.transform, false);
                 var imgRt = imgGo.GetComponent<RectTransform>();
-                imgRt.anchorMin = new Vector2(0.5f, 0.5f);
-                imgRt.anchorMax = new Vector2(0.5f, 0.5f);
-                imgRt.pivot = new Vector2(0.5f, 0.5f);
-                imgRt.anchoredPosition = new Vector2(0f, backstoryOffsetY);
-                imgRt.sizeDelta = new Vector2(1920f, 1080f);
+                imgRt.anchorMin = Vector2.zero;
+                imgRt.anchorMax = Vector2.one;
+                imgRt.offsetMin = Vector2.zero;
+                imgRt.offsetMax = Vector2.zero;
                 imgRt.localScale = new Vector3(backstoryScale, backstoryScale, 1f);
                 backstoryIllustrationImage = imgGo.GetComponent<Image>();
-                backstoryIllustrationImage.preserveAspect = true;
+                backstoryIllustrationImage.preserveAspect = false; // Phủ kín tràn viền toàn màn hình Mobile không bị viền đen
                 backstoryIllustrationImage.raycastTarget = false;
 
                 // 3. Fullscreen transparent button to capture screen tap

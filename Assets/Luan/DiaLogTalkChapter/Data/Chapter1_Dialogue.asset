@@ -17,10 +17,11 @@ MonoBehaviour:
   introVideoClip: {fileID: 32900000, guid: 6a543ca091acda94abab403056e56f21, type: 3}
   introVideoDuration: 8
   backstoryImages:
-  - {fileID: -8837768905556238398, guid: 751de15cfeea84b4f9d1e5c6e318db35, type: 3}
-  - {fileID: -7662263399865843508, guid: 168aec92f3a04a54fa6590f8c654545b, type: 3}
-  - {fileID: 238752463935767950, guid: 7659ec344f52d3c4da8e1d47257f9a9c, type: 3}
-  - {fileID: 705135154753200828, guid: fe0861580bb954c46b39ae3525ad3722, type: 3}
+  - {fileID: 21300000, guid: 2f6d289f2c722f84b8237059b4e4efed, type: 3}
+  - {fileID: 21300000, guid: 1b64ea4c3747b7e4aa5c567716fd2480, type: 3}
+  - {fileID: 21300000, guid: cb76b279ff1b7134d95462f867a21a1a, type: 3}
+  - {fileID: 21300000, guid: 5a564b5350a504f4bb998fbf47752820, type: 3}
+  - {fileID: 21300000, guid: 850b252e6cc2e22448aa05508aceac94, type: 3}
   winDialogueLines:
   - speakerName: Raze
     side: 1
