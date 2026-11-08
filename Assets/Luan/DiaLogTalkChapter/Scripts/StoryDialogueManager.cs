@@ -123,6 +123,13 @@ namespace Luan.Dialogue
         private Coroutine videoRoutine;
         private bool skipVideoRequested;
 
+        [Header("Tùy Chỉnh Kích Thước Ảnh Backstory (Layout Settings)")]
+        [Tooltip("Tỉ lệ phóng to/thu nhỏ ảnh Backstory (1.0 = 100% full viền, 0.88 = 88% vừa vặn có lề viền đẹp)")]
+        [Range(0.5f, 1.5f)]
+        [SerializeField] private float backstoryScale = 0.88f;
+        [Tooltip("Dịch chuyển vị trí ảnh lên / xuống theo trục Y (Pixel)")]
+        [SerializeField] private float backstoryOffsetY = 0f;
+
         [Header("Backstory Transition & Pulse Prompt")]
         private List<Sprite> activeBackstoryImages = new List<Sprite>();
         [SerializeField] private CanvasGroup backstoryContentCanvasGroup;
@@ -571,8 +578,13 @@ namespace Luan.Dialogue
             videoContainer = vGo;
             videoCanvasGroup = vGo.GetComponent<CanvasGroup>();
 
-            // RawImage hiển thị texture video
-            var rawGo = new GameObject("VideoRawImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.RawImage));
+            // Nền đen tuyệt đối phía sau video
+            var bgImg = vGo.GetComponent<UnityEngine.UI.Image>() ?? vGo.AddComponent<UnityEngine.UI.Image>();
+            bgImg.color = Color.black;
+            bgImg.raycastTarget = false;
+
+            // RawImage hiển thị texture video (tự động giữ tỉ lệ 16:9, căn giữa màn hình không méo)
+            var rawGo = new GameObject("VideoRawImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.RawImage), typeof(UnityEngine.UI.AspectRatioFitter));
             rawGo.transform.SetParent(vGo.transform, false);
             var rawRt = rawGo.GetComponent<RectTransform>();
             rawRt.anchorMin = Vector2.zero;
@@ -581,6 +593,10 @@ namespace Luan.Dialogue
             rawRt.offsetMax = Vector2.zero;
             videoRawImage = rawGo.GetComponent<UnityEngine.UI.RawImage>();
             videoRawImage.color = Color.black;
+
+            var arf = rawGo.GetComponent<UnityEngine.UI.AspectRatioFitter>();
+            arf.aspectMode = UnityEngine.UI.AspectRatioFitter.AspectMode.FitInParent;
+            arf.aspectRatio = 16f / 9f;
 
             // VideoPlayer component
             videoPlayer = vGo.AddComponent<UnityEngine.Video.VideoPlayer>();
@@ -644,6 +660,19 @@ namespace Luan.Dialogue
             currentPhase = DialoguePhase.IntroVideo;
             skipVideoRequested = false;
 
+            // ★ QUAN TRỌNG: Kích hoạt dialogueCanvas và mainCanvasGroup để video hiển thị!
+            if (dialogueCanvas != null)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.sortingOrder = 600;
+            }
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
             int width = 1920;
             int height = 1080;
             if (data.introVideoClip != null && data.introVideoClip.width > 0)
@@ -666,6 +695,9 @@ namespace Luan.Dialogue
             {
                 videoRawImage.texture = videoRenderTexture;
                 videoRawImage.color = Color.white;
+                var arf = videoRawImage.GetComponent<UnityEngine.UI.AspectRatioFitter>() ?? videoRawImage.gameObject.AddComponent<UnityEngine.UI.AspectRatioFitter>();
+                arf.aspectMode = UnityEngine.UI.AspectRatioFitter.AspectMode.FitInParent;
+                arf.aspectRatio = height > 0 ? (float)width / height : (16f / 9f);
             }
 
             if (data.introVideoClip != null)
@@ -861,9 +893,26 @@ namespace Luan.Dialogue
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
         }
 
+        public void ApplyBackstoryLayout()
+        {
+            if (backstoryIllustrationImage != null)
+            {
+                var rt = backstoryIllustrationImage.rectTransform;
+                rt.localScale = new Vector3(backstoryScale, backstoryScale, 1f);
+                rt.anchoredPosition = new Vector2(0f, backstoryOffsetY);
+            }
+        }
+
         private void Update()
         {
             if (currentPhase == DialoguePhase.None) return;
+
+#if UNITY_EDITOR
+            if (currentPhase == DialoguePhase.Backstory)
+            {
+                ApplyBackstoryLayout();
+            }
+#endif
 
             if (IsSkipActionPressed())
             {
@@ -989,6 +1038,20 @@ namespace Luan.Dialogue
         public void StartDialogue()
         {
             IsPlaying = true;
+
+            // Kích hoạt StoryDialogueCanvas ngay khi bắt đầu luồng cốt truyện
+            if (dialogueCanvas != null)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.sortingOrder = 600;
+            }
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
             var cfg = GetCurrentChapterConfig();
             var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
 
@@ -1708,6 +1771,8 @@ namespace Luan.Dialogue
                 backstoryContainer.transform.SetAsLastSibling();
             }
 
+            ApplyBackstoryLayout();
+
             // Ẩn bảng thoại bên dưới vì lời thoại đã được vẽ sẵn trực tiếp trên tranh ảnh
             if (backstorySubtitlePanel != null)
                 backstorySubtitlePanel.SetActive(false);
@@ -2404,7 +2469,7 @@ namespace Luan.Dialogue
                 bgImg.color = new Color(0.015f, 0.01f, 0.03f, 1f);
                 bgImg.raycastTarget = false;
 
-                // 2. Fullscreen Illustration Image
+                // 2. Illustration Image (căn giữa màn hình 1920x1080, giữ tỉ lệ gốc và áp dụng scale tùy chỉnh)
                 var illContainer = new GameObject("IllustrationContainer", typeof(RectTransform));
                 illContainer.transform.SetParent(bsGo.transform, false);
                 var illRt = illContainer.GetComponent<RectTransform>();
@@ -2415,9 +2480,12 @@ namespace Luan.Dialogue
                 var imgGo = new GameObject("IllustrationImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
                 imgGo.transform.SetParent(illContainer.transform, false);
                 var imgRt = imgGo.GetComponent<RectTransform>();
-                imgRt.anchorMin = Vector2.zero;
-                imgRt.anchorMax = Vector2.one;
-                imgRt.offsetMin = imgRt.offsetMax = Vector2.zero;
+                imgRt.anchorMin = new Vector2(0.5f, 0.5f);
+                imgRt.anchorMax = new Vector2(0.5f, 0.5f);
+                imgRt.pivot = new Vector2(0.5f, 0.5f);
+                imgRt.anchoredPosition = new Vector2(0f, backstoryOffsetY);
+                imgRt.sizeDelta = new Vector2(1920f, 1080f);
+                imgRt.localScale = new Vector3(backstoryScale, backstoryScale, 1f);
                 backstoryIllustrationImage = imgGo.GetComponent<Image>();
                 backstoryIllustrationImage.preserveAspect = true;
                 backstoryIllustrationImage.raycastTarget = false;
