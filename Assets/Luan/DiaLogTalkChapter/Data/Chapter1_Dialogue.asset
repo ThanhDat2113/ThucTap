@@ -21,6 +21,12 @@ MonoBehaviour:
   characterStoryTitle: "Câu chuyện của Raze"
   characterStory: "Raze lớn lên tại khu phố phía Tây. Khi còn nhỏ, anh thường bị đuổi khỏi những sân khấu lớn vì không được đào tạo bài bản.\n\nRaze cùng những người bạn biến một quảng trường bỏ hoang thành nơi biểu diễn. Anh phủ kín các bức tường bằng graffiti, tổ chức những cuộc dance battle và dần khiến khu vực này trở nên nổi tiếng.\n\nSau nhiều năm, Raze trở thành nhà vô địch của khu phố. Biểu tượng vương miện trên trang phục là lời nhắc rằng không ai được phép xem thường anh thêm lần nữa. Tuy nhiên, Raze ngày càng sợ mất đi vị trí mình đã rất vất vả mới giành được. Anh bắt đầu thách đấu và đuổi đi bất kỳ ai muốn bước qua khu phố."
   characterIntroArt: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+  backstoryImages:
+  - {fileID: 21300000, guid: 2f6d289f2c722f84b8237059b4e4efed, type: 3}
+  - {fileID: 21300000, guid: 1b64ea4c3747b7e4aa5c567716fd2480, type: 3}
+  - {fileID: 21300000, guid: cb76b279ff1b7134d95462f867a21a1a, type: 3}
+  - {fileID: 21300000, guid: 5a564b5350a504f4bb998fbf47752820, type: 3}
+  - {fileID: 21300000, guid: 850b252e6cc2e22448aa05508aceac94, type: 3}
   backstorySlides:
   - illustration: {fileID: 21300000, guid: 2f6d289f2c722f84b8237059b4e4efed, type: 3}
     speakerName: "DẪN CHUYỆN"

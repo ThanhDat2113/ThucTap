@@ -124,6 +124,7 @@ namespace Luan.Dialogue
         private bool skipVideoRequested;
 
         [Header("Backstory Transition & Pulse Prompt")]
+        private List<Sprite> activeBackstoryImages = new List<Sprite>();
         [SerializeField] private CanvasGroup backstoryContentCanvasGroup;
         [SerializeField] private TMPro.TMP_Text backstoryFirstSlidePromptText;
         private Coroutine backstorySequenceRoutine;
@@ -959,24 +960,16 @@ namespace Luan.Dialogue
 
         private void ProceedToBackstoryOrDialogue(DialogueStoryData data)
         {
-            // 2. Thoại đầu dùng Backstory (ảnh minh họa cutscenes) thay cho dialog box thoại đầu
-            if (data != null && data.backstorySlides != null && data.backstorySlides.Count > 0)
+            // 2. Thoại đầu dùng Backstory (ảnh minh họa đã vẽ sẵn thoại) thay cho dialog box thoại đầu
+            var images = data != null ? data.GetBackstorySprites() : null;
+            if (images != null && images.Count > 0)
             {
                 EnsureUI();
-                ShowBackstoryScreen(data.backstorySlides);
+                ShowBackstoryScreen(images);
                 return;
             }
 
-            // 3. Chế độ Intro thông thường (nếu có Logo Chapter hoặc bảng câu chuyện)
-            bool hasIntro = introContainer != null && (data != null && (!string.IsNullOrEmpty(data.characterStory) || data.chapterLogo != null || !string.IsNullOrEmpty(data.characterStoryTitle)));
-
-            if (hasIntro)
-            {
-                ShowIntroScreen();
-                return;
-            }
-
-            // 4. Fallback: Nếu không có backstory slides nhưng có preBattleLines
+            // 3. Fallback: Nếu không có ảnh backstory nhưng có preBattleLines cũ
             var preLines = GetPreBattleLines();
             if (preLines != null && preLines.Count > 0)
             {
@@ -1644,14 +1637,14 @@ namespace Luan.Dialogue
         }
 
         // ==========================================
-        // BACKSTORY MINH HỌA & STORYBOARD CUTSCENES
+        // BACKSTORY MINH HỌA (CHỈ CẦN THÊM ẢNH - ĐÃ CÓ SẴN THOẠI TRÊN TRANH)
         // (Fade in/Fade out từng ảnh, ảnh 1 text nháy đợi bấm, các ảnh sau 3s tự qua, nút skip ở góc trên bên phải)
         // ==========================================
-        public void ShowBackstoryScreen(List<BackstorySlide> slides)
+        public void ShowBackstoryScreen(List<Sprite> images)
         {
             IsPlaying = true;
             currentPhase = DialoguePhase.Backstory;
-            activeBackstorySlides = slides;
+            activeBackstoryImages = images;
 
             EnsureUI();
             EnsureBackstoryUI();
@@ -1660,6 +1653,10 @@ namespace Luan.Dialogue
             if (introContainer != null) introContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
             if (backstoryContainer != null) backstoryContainer.SetActive(true);
+
+            // Ẩn bảng thoại bên dưới vì lời thoại đã được vẽ sẵn trực tiếp trên tranh ảnh
+            if (backstorySubtitlePanel != null)
+                backstorySubtitlePanel.SetActive(false);
 
             // Nút Bỏ qua ở góc trên bên phải (của dialog) luôn hiển thị và nằm trên cùng
             if (topControlsGroup != null)
@@ -1694,9 +1691,24 @@ namespace Luan.Dialogue
             backstorySequenceRoutine = StartCoroutine(RunBackstorySequence());
         }
 
+        // Tương thích ngược nếu còn gọi theo kiểu cũ
+        public void ShowBackstoryScreen(List<BackstorySlide> slides)
+        {
+            var list = new List<Sprite>();
+            if (slides != null)
+            {
+                foreach (var s in slides)
+                {
+                    if (s != null && s.illustration != null)
+                        list.Add(s.illustration);
+                }
+            }
+            ShowBackstoryScreen(list);
+        }
+
         private IEnumerator RunBackstorySequence()
         {
-            if (activeBackstorySlides == null || activeBackstorySlides.Count == 0)
+            if (activeBackstoryImages == null || activeBackstoryImages.Count == 0)
             {
                 FinishBackstory();
                 yield break;
@@ -1709,16 +1721,43 @@ namespace Luan.Dialogue
                 topControlsGroup.transform.SetAsLastSibling();
             }
 
+            // Ẩn bảng thoại bên dưới để tranh ảnh được xem trọn vẹn 100% không bị che khuất
+            if (backstorySubtitlePanel != null)
+                backstorySubtitlePanel.SetActive(false);
+
             // Đặt alpha nội dung ảnh bắt đầu ở 0 để Fade In
             SetSlideContentAlpha(0f);
 
-            for (int i = 0; i < activeBackstorySlides.Count; i++)
+            for (int i = 0; i < activeBackstoryImages.Count; i++)
             {
                 currentBackstoryIndex = i;
-                var slide = activeBackstorySlides[i];
+                Sprite sprite = activeBackstoryImages[i];
 
-                // Cài đặt dữ liệu cho slide này (ẩn/hiện panel thoại hoặc text nhấp nháy cho slide 0)
-                ApplySlideData(slide, i);
+                // Gán ảnh trực tiếp
+                if (backstoryIllustrationImage != null)
+                {
+                    backstoryIllustrationImage.sprite = sprite;
+                    backstoryIllustrationImage.color = new Color(1f, 1f, 1f, 0f);
+                }
+
+                if (i == 0)
+                {
+                    // Ảnh đầu tiên: Giới thiệu câu chuyện nhân vật -> hiện text nhấp nháy "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA"
+                    EnsureBackstoryPromptText();
+                    if (backstoryFirstSlidePromptText != null)
+                    {
+                        backstoryFirstSlidePromptText.gameObject.SetActive(true);
+                        backstoryFirstSlidePromptText.text = "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA ▶";
+                        if (backstoryPromptPulseRoutine != null) StopCoroutine(backstoryPromptPulseRoutine);
+                        backstoryPromptPulseRoutine = StartCoroutine(AnimateFirstSlidePromptPulse());
+                    }
+                }
+                else
+                {
+                    // Từ ảnh thứ 2 trở đi: Ẩn text nhấp nháy của ảnh 1
+                    if (backstoryFirstSlidePromptText != null)
+                        backstoryFirstSlidePromptText.gameObject.SetActive(false);
+                }
 
                 // --- 1. ANIMATION FADE IN CHO ẢNH (0.35s) ---
                 yield return StartCoroutine(FadeSlideContent(0f, 1f, 0.35f));
@@ -1726,8 +1765,7 @@ namespace Luan.Dialogue
                 // --- 2. HIỂN THỊ NỘI DUNG ---
                 if (i == 0)
                 {
-                    // Ảnh đầu tiên: Giới thiệu câu chuyện nhân vật
-                    // Giữ nguyên trên màn hình, text nhấp nháy ở dưới "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA"
+                    // Ảnh đầu tiên: Đợi người chơi chạm màn hình
                     isWaitingForFirstSlideTap = true;
                     slideTapRequested = false;
 
@@ -1767,7 +1805,7 @@ namespace Luan.Dialogue
                 // --- 3. ANIMATION FADE OUT CHO ẢNH (0.35s) ---
                 yield return StartCoroutine(FadeSlideContent(1f, 0f, 0.35f));
 
-                // Dừng pulse text nếu vừa xong slide 0
+                // Dừng pulse text nếu vừa xong ảnh 0
                 if (i == 0 && backstoryPromptPulseRoutine != null)
                 {
                     StopCoroutine(backstoryPromptPulseRoutine);

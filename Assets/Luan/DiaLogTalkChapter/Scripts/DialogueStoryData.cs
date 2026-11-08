@@ -24,48 +24,47 @@ namespace Luan.Dialogue
     [CreateAssetMenu(fileName = "Chapter1_Dialogue", menuName = "Luan/Dialogue Story Data")]
     public class DialogueStoryData : ScriptableObject
     {
-        [Header("Thông Tin Chapter")]
+        [Header("1. THÔNG TIN CHAPTER")]
         public int chapterNumber = 1;
         public string chapterTitle = "Chapter 1: Concrete Dreams";
 
-        [Tooltip("Hình ảnh Logo Chapter (để trống nếu chưa có hình, bạn có thể kéo ảnh vào sau)")]
-        public Sprite chapterLogo;
-
-        [Header("Intro Video Cho Chapter (~8s)")]
-        [Tooltip("Video Clip intro cho chapter (kéo file video .mp4/.webm vào đây)")]
+        [Header("2. INTRO VIDEO CHO CHAPTER (~8s - THAY CHO LOGO)")]
+        [Tooltip("Kéo file video intro vào đây. Video này sẽ phát đầu tiên thay thế cho logo chapter.")]
         public VideoClip introVideoClip;
-        [Tooltip("Đường dẫn file video hoặc URL (nếu dùng StreamingAssets hoặc URL)")]
-        public string introVideoUrl = "";
         [Tooltip("Thời lượng tối đa của video intro (giây)")]
         public float introVideoDuration = 8f;
 
-        [Header("Giới Thiệu Nhân Vật (Story Intro)")]
-        public string characterStoryTitle = "Câu chuyện của Raze";
+        [Header("3. DANH SÁCH ẢNH BACKSTORY (ĐÃ CÓ THOẠI TRÊN ẢNH)")]
+        [Tooltip("Chỉ cần kéo ảnh vào đây! Ảnh 1 là câu chuyện nhân vật (bấm để qua), các ảnh sau là thoại (3s tự qua).")]
+        public List<Sprite> backstoryImages = new List<Sprite>();
 
-        [TextArea(6, 16)]
-        public string characterStory = "";
-
-        [Tooltip("Hình ảnh nhân vật trong phần giới thiệu")]
-        public Sprite characterIntroArt;
-
-        [Header("Minh Họa Backstory & Thoại Đầu (Thay Cho Dialog Box Thoại Đầu)")]
-        [Tooltip("Danh sách các slide minh họa backstory & thoại đầu")]
-        public List<BackstorySlide> backstorySlides = new List<BackstorySlide>();
-
-        [Header("Lời Thoại Trước Trận Đấu (Dự phòng nếu không có Backstory Slides)")]
-        public List<DialogueLine> preBattleLines = new List<DialogueLine>();
-
-        [Header("Lời Thoại Sau Trận Đấu - CHIẾN THẮNG (Win)")]
-        [Tooltip("Hội thoại xuất hiện sau khi người chơi CHIẾN THẮNG (vượt qua màn chơi)")]
+        [Header("4. THOẠI KHI THẮNG (WIN)")]
+        [Tooltip("Hội thoại xuất hiện sau khi người chơi CHIẾN THẮNG bài hát")]
         public List<DialogueLine> winDialogueLines = new List<DialogueLine>();
 
-        [Header("Lời Thoại Sau Trận Đấu - THẤT BẠI (Lose)")]
+        [Header("5. THOẠI KHI THUA (LOSE)")]
         [Tooltip("Hội thoại xuất hiện sau khi người chơi THẤT BẠI (hết máu / Fail)")]
         public List<DialogueLine> loseDialogueLines = new List<DialogueLine>();
 
-        [Header("Lời Thoại Sau Trận Đấu Cũ (Fallback)")]
-        [Tooltip("Dùng khi winDialogueLines rỗng")]
-        public List<DialogueLine> postBattleLines = new List<DialogueLine>();
+        /// <summary>
+        /// Lấy danh sách ảnh Backstory (ưu tiên backstoryImages, fallback sang backstorySlides cũ nếu có)
+        /// </summary>
+        public List<Sprite> GetBackstorySprites()
+        {
+            if (backstoryImages != null && backstoryImages.Count > 0)
+                return backstoryImages;
+
+            var list = new List<Sprite>();
+            if (backstorySlides != null)
+            {
+                foreach (var s in backstorySlides)
+                {
+                    if (s != null && s.illustration != null)
+                        list.Add(s.illustration);
+                }
+            }
+            return list;
+        }
 
         public List<DialogueLine> GetWinLines()
         {
@@ -83,7 +82,18 @@ namespace Luan.Dialogue
             return null;
         }
 
-        // Thuộc tính tương thích ngược cho code cũ
+        // ==========================================
+        // ẨN CÁC TRƯỜNG CŨ ĐỂ INSPECTOR GỌN GÀNG, DỄ DÙNG
+        // ==========================================
+        [HideInInspector] public Sprite chapterLogo;
+        [HideInInspector] public string characterStoryTitle = "";
+        [TextArea(3, 8), HideInInspector] public string characterStory = "";
+        [HideInInspector] public Sprite characterIntroArt;
+        [HideInInspector] public string introVideoUrl = "";
+        [HideInInspector] public List<BackstorySlide> backstorySlides = new List<BackstorySlide>();
+        [HideInInspector] public List<DialogueLine> preBattleLines = new List<DialogueLine>();
+        [HideInInspector] public List<DialogueLine> postBattleLines = new List<DialogueLine>();
+
         public List<DialogueLine> lines
         {
             get
