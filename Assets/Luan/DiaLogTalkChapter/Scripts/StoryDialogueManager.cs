@@ -16,6 +16,7 @@ namespace Luan.Dialogue
     public enum DialoguePhase
     {
         None,
+        IntroVideo,
         Intro,
         Backstory,
         PreBattle,
@@ -106,9 +107,21 @@ namespace Luan.Dialogue
 
         // ★ Thêm: theo dõi xem dialogue đang chạy hay không (để GameManager không start gameplay lẫn vào)
         public bool IsPlaying { get; private set; }
+        public bool LastBattleWon { get; private set; } = true;
 
         private bool hasCompletedDialogueThisSession = false;
         private bool hasCompletedPostBattleThisSession = false;
+
+        [Header("Chapter Intro Video (~8s)")]
+        [SerializeField] private GameObject videoContainer;
+        [SerializeField] private CanvasGroup videoCanvasGroup;
+        [SerializeField] private UnityEngine.UI.RawImage videoRawImage;
+        [SerializeField] private UnityEngine.Video.VideoPlayer videoPlayer;
+        [SerializeField] private UnityEngine.UI.Button videoSkipButton;
+        [SerializeField] private TMPro.TMP_Text videoSkipText;
+        private RenderTexture videoRenderTexture;
+        private Coroutine videoRoutine;
+        private bool skipVideoRequested;
 
         [Header("Chế độ kiểm thử")]
         [Tooltip("Bật để luôn chạy hội thoại khi bấm Play trực tiếp tại GameplayScene")]
@@ -271,16 +284,69 @@ namespace Luan.Dialogue
             return dialogueLines;
         }
 
-        public List<DialogueLine> GetPostBattleLines()
+        public List<DialogueLine> GetPostBattleLines(bool isWin)
         {
             var cfg = GetCurrentChapterConfig();
-            if (cfg != null && cfg.dialogueAsset != null && cfg.dialogueAsset.postBattleLines != null && cfg.dialogueAsset.postBattleLines.Count > 0)
-                return cfg.dialogueAsset.postBattleLines;
+            var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
 
-            if (dialogueDataAsset != null && dialogueDataAsset.postBattleLines != null && dialogueDataAsset.postBattleLines.Count > 0)
-                return dialogueDataAsset.postBattleLines;
+            if (data != null)
+            {
+                if (isWin)
+                {
+                    var win = data.GetWinLines();
+                    if (win != null && win.Count > 0) return win;
+                }
+                else
+                {
+                    var lose = data.GetLoseLines();
+                    if (lose != null && lose.Count > 0) return lose;
+                }
+            }
+
+            if (isWin)
+            {
+                if (dialogueDataAsset != null && dialogueDataAsset.postBattleLines != null && dialogueDataAsset.postBattleLines.Count > 0)
+                    return dialogueDataAsset.postBattleLines;
+            }
+            else
+            {
+                return GetDefaultDefeatLines();
+            }
 
             return null;
+        }
+
+        public List<DialogueLine> GetPostBattleLines()
+        {
+            return GetPostBattleLines(LastBattleWon);
+        }
+
+        private List<DialogueLine> GetDefaultDefeatLines()
+        {
+            string oppName = GetActiveOpponentName();
+            Sprite oppAvatar = GetActiveOpponentAvatar();
+            string pName = GetPlayerDisplayName();
+            Sprite pAvatar = PlayerAvatarSprite;
+
+            return new List<DialogueLine>
+            {
+                new DialogueLine
+                {
+                    speakerName = oppName,
+                    side = SpeakerSide.Right,
+                    text = "Chỉ có thế thôi sao? Cậu vẫn chưa theo kịp nhịp của tôi đâu.",
+                    customAvatar = oppAvatar,
+                    nameColor = new Color(1.0f, 0.2f, 0.85f, 1f)
+                },
+                new DialogueLine
+                {
+                    speakerName = pName,
+                    side = SpeakerSide.Left,
+                    text = "Chưa xong đâu... Tôi sẽ quay lại và lấy chiếc huy hiệu đó!",
+                    customAvatar = pAvatar,
+                    nameColor = new Color(0.2f, 0.95f, 1f, 1f)
+                }
+            };
         }
 
         public List<DialogueLine> DialogueLines
@@ -327,7 +393,7 @@ namespace Luan.Dialogue
             return false;
         }
 
-        public bool HasPendingPostBattleDialogue()
+        public bool HasPendingPostBattleDialogue(bool isWin)
         {
             if (hasCompletedPostBattleThisSession)
                 return false;
@@ -342,8 +408,13 @@ namespace Luan.Dialogue
 
             if (!isStory) return false;
 
-            var post = GetPostBattleLines();
+            var post = GetPostBattleLines(isWin);
             return post != null && post.Count > 0;
+        }
+
+        public bool HasPendingPostBattleDialogue()
+        {
+            return HasPendingPostBattleDialogue(LastBattleWon);
         }
 
         public static void ResetSessionState()
@@ -425,8 +496,233 @@ namespace Luan.Dialogue
             }
         }
 
+
+        // ==========================================
+        // CHAPTER INTRO VIDEO PLAYBACK (~8s)
+        // ==========================================
+        public void EnsureVideoUI()
+        {
+            if (videoContainer != null && videoPlayer != null && videoRawImage != null)
+                return;
+
+            if (dialogueCanvas == null)
+            {
+                EnsureUI();
+            }
+            if (dialogueCanvas == null) return;
+
+            var existing = dialogueCanvas.transform.Find("ChapterVideoContainer");
+            if (existing != null)
+            {
+                videoContainer = existing.gameObject;
+                videoCanvasGroup = existing.GetComponent<CanvasGroup>() ?? existing.gameObject.AddComponent<CanvasGroup>();
+                var raw = existing.Find("VideoRawImage");
+                if (raw != null) videoRawImage = raw.GetComponent<UnityEngine.UI.RawImage>();
+                videoPlayer = existing.GetComponent<UnityEngine.Video.VideoPlayer>() ?? existing.gameObject.AddComponent<UnityEngine.Video.VideoPlayer>();
+                var skip = existing.Find("VideoSkipButton");
+                if (skip != null) videoSkipButton = skip.GetComponent<UnityEngine.UI.Button>();
+                return;
+            }
+
+            // Tạo khung phát video tự động phủ kín 1080p
+            var vGo = new GameObject("ChapterVideoContainer", typeof(RectTransform), typeof(CanvasRenderer), typeof(CanvasGroup));
+            vGo.transform.SetParent(dialogueCanvas.transform, false);
+            var vRt = vGo.GetComponent<RectTransform>();
+            vRt.anchorMin = Vector2.zero;
+            vRt.anchorMax = Vector2.one;
+            vRt.offsetMin = Vector2.zero;
+            vRt.offsetMax = Vector2.zero;
+            videoContainer = vGo;
+            videoCanvasGroup = vGo.GetComponent<CanvasGroup>();
+
+            // RawImage hiển thị texture video
+            var rawGo = new GameObject("VideoRawImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.RawImage));
+            rawGo.transform.SetParent(vGo.transform, false);
+            var rawRt = rawGo.GetComponent<RectTransform>();
+            rawRt.anchorMin = Vector2.zero;
+            rawRt.anchorMax = Vector2.one;
+            rawRt.offsetMin = Vector2.zero;
+            rawRt.offsetMax = Vector2.zero;
+            videoRawImage = rawGo.GetComponent<UnityEngine.UI.RawImage>();
+            videoRawImage.color = Color.black;
+
+            // VideoPlayer component
+            videoPlayer = vGo.AddComponent<UnityEngine.Video.VideoPlayer>();
+            videoPlayer.playOnAwake = false;
+            videoPlayer.isLooping = false;
+            videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
+            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.Direct;
+
+            // Nút Bỏ Qua Video góc trên bên phải
+            var skipGo = new GameObject("VideoSkipButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
+            skipGo.transform.SetParent(vGo.transform, false);
+            var skipRt = skipGo.GetComponent<RectTransform>();
+            skipRt.anchorMin = new Vector2(1f, 1f);
+            skipRt.anchorMax = new Vector2(1f, 1f);
+            skipRt.pivot = new Vector2(1f, 1f);
+            skipRt.anchoredPosition = new Vector2(-40f, -40f);
+            skipRt.sizeDelta = new Vector2(160f, 44f);
+
+            var skipImg = skipGo.GetComponent<UnityEngine.UI.Image>();
+            skipImg.color = new Color(0.08f, 0.08f, 0.15f, 0.85f);
+
+            videoSkipButton = skipGo.GetComponent<UnityEngine.UI.Button>();
+            videoSkipButton.onClick.AddListener(() => skipVideoRequested = true);
+
+            var txtGo = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TMPro.TextMeshProUGUI));
+            txtGo.transform.SetParent(skipGo.transform, false);
+            var txtRt = txtGo.GetComponent<RectTransform>();
+            txtRt.anchorMin = Vector2.zero;
+            txtRt.anchorMax = Vector2.one;
+            txtRt.offsetMin = Vector2.zero;
+            txtRt.offsetMax = Vector2.zero;
+
+            var tmp = txtGo.GetComponent<TMPro.TextMeshProUGUI>();
+            tmp.text = "BỎ QUA ▶";
+            tmp.font = ResolveFont();
+            tmp.fontSize = 18f;
+            tmp.alignment = TMPro.TextAlignmentOptions.Center;
+            tmp.color = new Color(0.9f, 0.95f, 1f, 0.9f);
+            videoSkipText = tmp;
+
+            vGo.SetActive(false);
+        }
+
+        public void PlayChapterIntroVideo(DialogueStoryData data, System.Action onComplete)
+        {
+            if (videoRoutine != null) StopCoroutine(videoRoutine);
+            videoRoutine = StartCoroutine(RunChapterIntroVideo(data, onComplete));
+        }
+
+        private IEnumerator RunChapterIntroVideo(DialogueStoryData data, System.Action onComplete)
+        {
+            EnsureVideoUI();
+
+            if (videoContainer == null || videoPlayer == null || data == null ||
+                (data.introVideoClip == null && string.IsNullOrEmpty(data.introVideoUrl)))
+            {
+                onComplete?.Invoke();
+                yield break;
+            }
+
+            currentPhase = DialoguePhase.IntroVideo;
+            skipVideoRequested = false;
+
+            int width = 1920;
+            int height = 1080;
+            if (data.introVideoClip != null && data.introVideoClip.width > 0)
+            {
+                width = (int)data.introVideoClip.width;
+                height = (int)data.introVideoClip.height;
+            }
+
+            CleanupVideoRenderTexture();
+            videoRenderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32)
+            {
+                name = $"RT_ChapterVideo_{data.chapterNumber}",
+                filterMode = FilterMode.Bilinear,
+                wrapMode = TextureWrapMode.Clamp
+            };
+            videoRenderTexture.Create();
+
+            videoPlayer.targetTexture = videoRenderTexture;
+            if (videoRawImage != null)
+            {
+                videoRawImage.texture = videoRenderTexture;
+                videoRawImage.color = Color.white;
+            }
+
+            if (data.introVideoClip != null)
+            {
+                videoPlayer.source = UnityEngine.Video.VideoSource.VideoClip;
+                videoPlayer.clip = data.introVideoClip;
+            }
+            else
+            {
+                videoPlayer.source = UnityEngine.Video.VideoSource.Url;
+                videoPlayer.url = data.introVideoUrl;
+            }
+
+            videoPlayer.isLooping = false;
+            videoPlayer.Prepare();
+
+            if (videoContainer != null) videoContainer.SetActive(true);
+            if (videoCanvasGroup != null) videoCanvasGroup.alpha = 0f;
+
+            float waitPrepare = 0f;
+            while (!videoPlayer.isPrepared && waitPrepare < 3.0f && !skipVideoRequested)
+            {
+                waitPrepare += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            if (!skipVideoRequested)
+            {
+                videoPlayer.Play();
+
+                // Fade In Video (0.35s)
+                float fadeIn = 0.35f;
+                float el = 0f;
+                while (el < fadeIn)
+                {
+                    el += Time.unscaledDeltaTime;
+                    if (videoCanvasGroup != null) videoCanvasGroup.alpha = Mathf.Clamp01(el / fadeIn);
+                    yield return null;
+                }
+                if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f;
+
+                float maxDuration = data.introVideoDuration > 0f ? data.introVideoDuration : 8f;
+                if (data.introVideoClip != null && data.introVideoClip.length > 0)
+                {
+                    maxDuration = Mathf.Min(maxDuration, (float)data.introVideoClip.length);
+                }
+
+                float timer = 0f;
+                while (timer < maxDuration && !skipVideoRequested && videoPlayer.isPlaying)
+                {
+                    timer += Time.unscaledDeltaTime;
+                    if (IsSkipActionPressed() || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        skipVideoRequested = true;
+                        break;
+                    }
+                    yield return null;
+                }
+            }
+
+            // Fade Out Video (0.35s)
+            float fadeOut = 0.35f;
+            float elOut = 0f;
+            while (elOut < fadeOut)
+            {
+                elOut += Time.unscaledDeltaTime;
+                if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f - Mathf.Clamp01(elOut / fadeOut);
+                yield return null;
+            }
+
+            if (videoPlayer != null) videoPlayer.Stop();
+            if (videoContainer != null) videoContainer.SetActive(false);
+            CleanupVideoRenderTexture();
+
+            videoRoutine = null;
+            currentPhase = DialoguePhase.None;
+
+            onComplete?.Invoke();
+        }
+
+        private void CleanupVideoRenderTexture()
+        {
+            if (videoRenderTexture != null)
+            {
+                if (videoRenderTexture.IsCreated()) videoRenderTexture.Release();
+                Destroy(videoRenderTexture);
+                videoRenderTexture = null;
+            }
+        }
+
         private void OnDestroy()
         {
+            CleanupVideoRenderTexture();
             if (Instance == this) Instance = null;
 
             var gm = RhythmGame.GameManager.Instance ?? FindFirstObjectByType<RhythmGame.GameManager>();
@@ -450,17 +746,26 @@ namespace Luan.Dialogue
         {
             if (state == RhythmGame.GameState.Finished)
             {
-                if (HasPendingPostBattleDialogue())
+                LastBattleWon = true;
+                if (HasPendingPostBattleDialogue(true))
                 {
-                    StartCoroutine(DelayedStartPostBattle());
+                    StartCoroutine(DelayedStartPostBattle(true));
+                }
+            }
+            else if (state == RhythmGame.GameState.Failed)
+            {
+                LastBattleWon = false;
+                if (HasPendingPostBattleDialogue(false))
+                {
+                    StartCoroutine(DelayedStartPostBattle(false));
                 }
             }
         }
 
-        private IEnumerator DelayedStartPostBattle()
+        private IEnumerator DelayedStartPostBattle(bool isWin)
         {
             yield return new WaitForSecondsRealtime(0.2f);
-            StartPostBattleDialogue();
+            StartPostBattleDialogue(isWin);
         }
 
         private void HideAllUI()
@@ -614,7 +919,24 @@ namespace Luan.Dialogue
             var cfg = GetCurrentChapterConfig();
             var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
 
-            // 1. Nếu có Backstory Slides minh họa (Câu chuyện nhân vật & Thoại đầu) -> Chạy Backstory Cutscenes!
+            // 1. Kiểm tra phát Intro Video cho Chapter (~8s) nếu có cấu hình video
+            bool hasVideo = data != null && (data.introVideoClip != null || !string.IsNullOrEmpty(data.introVideoUrl));
+            if (hasVideo)
+            {
+                PlayChapterIntroVideo(data, () =>
+                {
+                    ProceedToBackstoryOrDialogue(data);
+                });
+            }
+            else
+            {
+                ProceedToBackstoryOrDialogue(data);
+            }
+        }
+
+        private void ProceedToBackstoryOrDialogue(DialogueStoryData data)
+        {
+            // 2. Thoại đầu dùng Backstory (ảnh minh họa cutscenes) thay cho dialog box thoại đầu
             if (data != null && data.backstorySlides != null && data.backstorySlides.Count > 0)
             {
                 EnsureUI();
@@ -622,17 +944,25 @@ namespace Luan.Dialogue
                 return;
             }
 
-            // 2. Chế độ Intro thông thường
+            // 3. Chế độ Intro thông thường (nếu có Logo Chapter hoặc bảng câu chuyện)
             bool hasIntro = introContainer != null && (data != null && (!string.IsNullOrEmpty(data.characterStory) || data.chapterLogo != null || !string.IsNullOrEmpty(data.characterStoryTitle)));
 
             if (hasIntro)
             {
                 ShowIntroScreen();
+                return;
             }
-            else
+
+            // 4. Fallback: Nếu không có backstory slides nhưng có preBattleLines
+            var preLines = GetPreBattleLines();
+            if (preLines != null && preLines.Count > 0)
             {
                 StartPreBattleDialogue();
+                return;
             }
+
+            // Nếu không có gì thì vào gameplay ngay
+            StartGameplay();
         }
 
         public void ShowIntroScreen()
@@ -1010,12 +1340,15 @@ namespace Luan.Dialogue
             transitionRoutine = StartCoroutine(AnimateOpenDialogue());
         }
 
-        public void StartPostBattleDialogue()
+        public void StartPostBattleDialogue(bool isWin)
         {
+            LastBattleWon = isWin;
             currentPhase = DialoguePhase.PostBattle;
+            IsPlaying = true;
 
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
             if (introContainer != null) introContainer.SetActive(false);
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(true);
             if (topControlsGroup != null) topControlsGroup.SetActive(true);
 
@@ -1024,6 +1357,11 @@ namespace Luan.Dialogue
 
             if (transitionRoutine != null) StopCoroutine(transitionRoutine);
             transitionRoutine = StartCoroutine(AnimateOpenDialogue());
+        }
+
+        public void StartPostBattleDialogue()
+        {
+            StartPostBattleDialogue(LastBattleWon);
         }
 
         private IEnumerator AnimateOpenDialogue()
@@ -1210,6 +1548,12 @@ namespace Luan.Dialogue
         {
             if (skipClip != null && SFXManager.Instance != null)
                 SFXManager.Instance.PlaySFX(skipClip);
+
+            if (currentPhase == DialoguePhase.IntroVideo)
+            {
+                skipVideoRequested = true;
+                return;
+            }
 
             if (currentPhase == DialoguePhase.Backstory)
             {
@@ -1542,7 +1886,7 @@ namespace Luan.Dialogue
             var resultPanel = FindFirstObjectByType<RhythmGame.GameplayResultScreen>(FindObjectsInactive.Include);
             if (resultPanel != null)
             {
-                resultPanel.ShowResult(true);
+                resultPanel.ShowResult(LastBattleWon);
             }
             else
             {

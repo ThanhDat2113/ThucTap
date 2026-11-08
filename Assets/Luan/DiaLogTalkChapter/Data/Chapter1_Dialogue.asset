@@ -15,6 +15,9 @@ MonoBehaviour:
   chapterNumber: 1
   chapterTitle: "Chapter 1: Concrete Dreams"
   chapterLogo: {fileID: -2930057027171513213, guid: f363364938986ce4595b8b3ae6390bed, type: 3}
+  introVideoClip: {fileID: 0}
+  introVideoUrl: ""
+  introVideoDuration: 8
   characterStoryTitle: "Câu chuyện của Raze"
   characterStory: "Raze lớn lên tại khu phố phía Tây. Khi còn nhỏ, anh thường bị đuổi khỏi những sân khấu lớn vì không được đào tạo bài bản.\n\nRaze cùng những người bạn biến một quảng trường bỏ hoang thành nơi biểu diễn. Anh phủ kín các bức tường bằng graffiti, tổ chức những cuộc dance battle và dần khiến khu vực này trở nên nổi tiếng.\n\nSau nhiều năm, Raze trở thành nhà vô địch của khu phố. Biểu tượng vương miện trên trang phục là lời nhắc rằng không ai được phép xem thường anh thêm lần nữa. Tuy nhiên, Raze ngày càng sợ mất đi vị trí mình đã rất vất vả mới giành được. Anh bắt đầu thách đấu và đuổi đi bất kỳ ai muốn bước qua khu phố."
   characterIntroArt: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
@@ -87,6 +90,58 @@ MonoBehaviour:
     nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
     actionDescription: "[Người chơi vào thế nhảy rực lửa]"
     illustration: {fileID: 21300000, guid: b4c4e258280645869d74d650036bcaea, type: 3}
+  winDialogueLines:
+  - speakerName: "Raze"
+    side: 1
+    text: "Không tệ. Cậu thắng rồi."
+    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+  - speakerName: "{PLAYER}"
+    side: 0
+    text: "Vậy huy hiệu thuộc về tôi?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+  - speakerName: "Raze"
+    side: 1
+    text: "Phải. Cầm lấy và đừng để thua Nox."
+    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+  - speakerName: "{PLAYER}"
+    side: 0
+    text: "Anh đang cổ vũ tôi sao?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+  - speakerName: "Raze"
+    side: 1
+    text: "Tôi chỉ không muốn mình thua một kẻ yếu."
+    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+  - speakerName: "{PLAYER}"
+    side: 0
+    text: "Tôi sẽ nhớ câu đó."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+  loseDialogueLines:
+  - speakerName: "Raze"
+    side: 1
+    text: "Chỉ có thế thôi sao? Cậu còn non lắm, quay về tập thêm đi."
+    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+  - speakerName: "{PLAYER}"
+    side: 0
+    text: "Khốn thật... Nhịp điệu của anh ta quá gắt."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
+  - speakerName: "Raze"
+    side: 1
+    text: "Khu phố này không có chỗ cho sự do dự. Lần sau hãy sẵn sàng hơn."
+    customAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
+    nameColor: {r: 1.0, g: 0.2, b: 0.85, a: 1.0}
+  - speakerName: "{PLAYER}"
+    side: 0
+    text: "Tôi sẽ không bỏ cuộc đâu. Tôi sẽ quay lại!"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1.0, a: 1.0}
   postBattleLines:
   - speakerName: "Raze"
     side: 1
