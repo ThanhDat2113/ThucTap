@@ -62,6 +62,44 @@ namespace Luan.Dialogue.Editor
 
             EditorGUILayout.Space(10);
 
+            // 2.5 Cấu hình Ảnh Backstory Cutscenes & Chữ Nhắc Chạm
+            EditorGUILayout.LabelField("🖼️ Cấu Hình Backstory Cutscene & Chữ Nhắc (Edit Mode)", EditorStyles.boldLabel);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("backstoryScale"), new GUIContent("Scale Ảnh (Thu nhỏ / Phóng to)", "1.0 = Phủ kín full màn hình Mobile tràn viền. Giảm xuống ví dụ 0.9 nếu muốn có viền."));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("backstoryOffsetY"), new GUIContent("Vị Trí Y Của Ảnh (Pixel)"));
+
+            EditorGUILayout.Space(6);
+            EditorGUILayout.LabelField("💬 Chữ Nhắc Chạm (Ở Ảnh Đầu Tiên)", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("showFirstSlidePrompt"), new GUIContent("Bật Chữ Nhắc Ở Ảnh 1"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptTextString"), new GUIContent("Nội Dung Chữ Nhắc"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptColor"), new GUIContent("Màu Chữ"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptFontSize"), new GUIContent("Cỡ Chữ"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptBottomOffsetY"), new GUIContent("Khoảng Cách Từ Đáy (Y Offset)"));
+
+            EditorGUILayout.Space(8);
+            EditorGUILayout.BeginHorizontal();
+            GUI.backgroundColor = new Color(0.2f, 0.95f, 0.7f);
+            if (GUILayout.Button("👁️ Bật Preview Ảnh & Chữ (Scene)", GUILayout.Height(30)))
+            {
+                manager.PreviewBackstoryInEditMode();
+                EditorUtility.SetDirty(manager);
+                SceneView.RepaintAll();
+            }
+            GUI.backgroundColor = new Color(1f, 0.45f, 0.45f);
+            if (GUILayout.Button("❌ Tắt Preview", GUILayout.Height(30)))
+            {
+                manager.HideBackstoryInEditMode();
+                EditorUtility.SetDirty(manager);
+                SceneView.RepaintAll();
+            }
+            GUI.backgroundColor = Color.white;
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.EndVertical();
+
+            EditorGUILayout.Space(10);
+
             // 3. Avatar Mặc Định
             EditorGUILayout.LabelField("🎭 Avatar Mặc Định", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
