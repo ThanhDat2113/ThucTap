@@ -388,22 +388,20 @@ namespace Luan.Dialogue
         {
             SubscribeGameManager();
 
-            // ★ Neu SongIntroScreen dang chay -> doi no goi BeginStoryFlow() sau khi xong.
-            //   Neu khong co SongIntroScreen (scene khong co intro) -> chay dialogue ngay.
-            if (RhythmGame.SongIntroScreen.Instance != null
-                && RhythmGame.SongIntroScreen.Instance.IsPlaying)
-            {
-                Debug.Log("[StoryDialogueManager] Doi SongIntroScreen xong...");
-                HideAllUI();
-                return;
-            }
-
             if (HasPendingDialogue())
             {
+                // Story Mode: Tắt hoàn toàn SongIntroScreen nếu có trong scene để không bị đè và không chạy countdown bài hát
+                if (RhythmGame.SongIntroScreen.Instance != null)
+                {
+                    RhythmGame.SongIntroScreen.Instance.IsPlaying = false;
+                    RhythmGame.SongIntroScreen.Instance.gameObject.SetActive(false);
+                }
+
                 StartDialogue();
             }
             else
             {
+                // Không có pending dialogue (Free Play hoặc Chapter đã hoàn thành thoại)
                 HideAllUI();
             }
         }
@@ -639,6 +637,7 @@ namespace Luan.Dialogue
 
         public void ShowIntroScreen()
         {
+            IsPlaying = true;
             currentPhase = DialoguePhase.Intro;
             currentIntroStep = IntroStep.None;
             skipLogoRequested = false;
@@ -1282,6 +1281,7 @@ namespace Luan.Dialogue
         // ==========================================
         public void ShowBackstoryScreen(List<BackstorySlide> slides)
         {
+            IsPlaying = true;
             currentPhase = DialoguePhase.Backstory;
             currentBackstoryIndex = -1;
             activeBackstorySlides = slides;
@@ -1432,6 +1432,7 @@ namespace Luan.Dialogue
 
         private void FinishBackstory()
         {
+            IsPlaying = false;
             hasCompletedDialogueThisSession = true;
             if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
             if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
@@ -1443,6 +1444,7 @@ namespace Luan.Dialogue
         private IEnumerator AnimateCloseBackstory()
         {
             currentPhase = DialoguePhase.None;
+            IsPlaying = false;
 
             if (mainCanvasGroup != null)
             {
