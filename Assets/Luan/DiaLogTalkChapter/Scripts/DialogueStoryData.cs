@@ -60,6 +60,10 @@ namespace Luan.Dialogue
                 }
             }
 
+            // Ưu tiên tuyệt đối danh sách backstoryImages được cấu hình trên Inspector
+            if (imgList.Count > 0)
+                return imgList;
+
             var slideList = new List<Sprite>();
             if (backstorySlides != null)
             {
@@ -69,14 +73,7 @@ namespace Luan.Dialogue
                         slideList.Add(s.illustration);
                 }
             }
-
-            if (imgList.Count >= slideList.Count && imgList.Count > 0)
-                return imgList;
-
-            if (slideList.Count > 0)
-                return slideList;
-
-            return imgList;
+            return slideList;
         }
 
         public List<DialogueLine> GetWinLines()

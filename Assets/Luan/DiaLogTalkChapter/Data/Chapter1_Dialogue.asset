@@ -17,7 +17,6 @@ MonoBehaviour:
   introVideoClip: {fileID: 32900000, guid: 6a543ca091acda94abab403056e56f21, type: 3}
   introVideoDuration: 8
   backstoryImages:
-  - {fileID: 21300000, guid: 2f6d289f2c722f84b8237059b4e4efed, type: 3}
   - {fileID: 21300000, guid: 1b64ea4c3747b7e4aa5c567716fd2480, type: 3}
   - {fileID: 21300000, guid: cb76b279ff1b7134d95462f867a21a1a, type: 3}
   - {fileID: 21300000, guid: 5a564b5350a504f4bb998fbf47752820, type: 3}
@@ -146,11 +145,6 @@ MonoBehaviour:
   characterIntroArt: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
   introVideoUrl: 
   backstorySlides:
-  - illustration: {fileID: 21300000, guid: 2f6d289f2c722f84b8237059b4e4efed, type: 3}
-    speakerName: "D\u1EAAN CHUY\u1EC6N"
-    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
-    actionDescription: 
-    storyText: 
   - illustration: {fileID: 21300000, guid: 1b64ea4c3747b7e4aa5c567716fd2480, type: 3}
     speakerName: RAZE - VUA GRAFFITI
     nameColor: {r: 1, g: 0.2, b: 0.85, a: 1}

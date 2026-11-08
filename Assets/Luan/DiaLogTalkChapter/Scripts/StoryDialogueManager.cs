@@ -625,37 +625,7 @@ namespace Luan.Dialogue
             videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
             videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
 
-            // Nút Bỏ Qua Video góc trên bên phải
-            var skipGo = new GameObject("VideoSkipButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
-            skipGo.transform.SetParent(vGo.transform, false);
-            var skipRt = skipGo.GetComponent<RectTransform>();
-            skipRt.anchorMin = new Vector2(1f, 1f);
-            skipRt.anchorMax = new Vector2(1f, 1f);
-            skipRt.pivot = new Vector2(1f, 1f);
-            skipRt.anchoredPosition = new Vector2(-40f, -40f);
-            skipRt.sizeDelta = new Vector2(160f, 44f);
-
-            var skipImg = skipGo.GetComponent<UnityEngine.UI.Image>();
-            skipImg.color = new Color(0.08f, 0.08f, 0.15f, 0.85f);
-
-            videoSkipButton = skipGo.GetComponent<UnityEngine.UI.Button>();
-            videoSkipButton.onClick.AddListener(() => skipVideoRequested = true);
-
-            var txtGo = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TMPro.TextMeshProUGUI));
-            txtGo.transform.SetParent(skipGo.transform, false);
-            var txtRt = txtGo.GetComponent<RectTransform>();
-            txtRt.anchorMin = Vector2.zero;
-            txtRt.anchorMax = Vector2.one;
-            txtRt.offsetMin = Vector2.zero;
-            txtRt.offsetMax = Vector2.zero;
-
-            var tmp = txtGo.GetComponent<TMPro.TextMeshProUGUI>();
-            tmp.text = "BỎ QUA ▶";
-            tmp.font = ResolveFont();
-            tmp.fontSize = 18f;
-            tmp.alignment = TMPro.TextAlignmentOptions.Center;
-            tmp.color = new Color(0.9f, 0.95f, 1f, 0.9f);
-            videoSkipText = tmp;
+            // Không tạo nút bỏ qua tạm ở video (ở intro video ẩn toàn bộ nút bỏ qua và tự động)
 
             vGo.SetActive(false);
         }
@@ -776,18 +746,10 @@ namespace Luan.Dialogue
             }
             if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f;
 
-            // Đảm bảo nút Bỏ qua ở góc trên bên phải luôn hiển thị trên video
-            if (topControlsGroup != null)
-            {
-                topControlsGroup.SetActive(true);
-                topControlsGroup.transform.SetAsLastSibling();
-            }
-            if (skipButton != null)
-            {
-                skipButton.gameObject.SetActive(true);
-                skipButton.onClick.RemoveAllListeners();
-                skipButton.onClick.AddListener(OnSkipClicked);
-            }
+            // Ở đoạn Intro Video: ẨN nút Bỏ qua và ẨN nút Tự động
+            if (topControlsGroup != null) topControlsGroup.SetActive(false);
+            if (skipButton != null) skipButton.gameObject.SetActive(false);
+            if (autoButton != null) autoButton.gameObject.SetActive(false);
 
             // Nếu chưa prepare xong, đợi tối đa
             if (!videoPlayer.isPrepared)
@@ -1596,7 +1558,24 @@ namespace Luan.Dialogue
             if (introContainer != null) introContainer.SetActive(false);
             if (backstoryContainer != null) backstoryContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(true);
-            if (topControlsGroup != null) topControlsGroup.SetActive(true);
+            // Lúc chiến thắng hoặc thua: HIỆN CẢ 2 NÚT (Tự động & Bỏ qua)
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.SetActive(true);
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+            if (skipButton != null)
+            {
+                skipButton.gameObject.SetActive(true);
+                skipButton.onClick.RemoveAllListeners();
+                skipButton.onClick.AddListener(OnSkipClicked);
+            }
+            if (autoButton != null)
+            {
+                autoButton.gameObject.SetActive(true);
+                autoButton.onClick.RemoveAllListeners();
+                autoButton.onClick.AddListener(OnAutoToggleClicked);
+            }
 
             currentLineIndex = -1;
             UpdateAutoButtonVisual();
@@ -1895,17 +1874,10 @@ namespace Luan.Dialogue
             if (backstorySubtitlePanel != null)
                 backstorySubtitlePanel.SetActive(false);
 
-            // Nút Bỏ qua ở góc trên bên phải (của dialog) luôn hiển thị và nằm trên cùng
+            // Điều khiển hiển thị nút Bỏ qua sẽ được quản lý theo từng slide trong RunBackstorySequence
             if (topControlsGroup != null)
             {
-                topControlsGroup.SetActive(true);
                 topControlsGroup.transform.SetAsLastSibling();
-            }
-            if (skipButton != null)
-            {
-                skipButton.gameObject.SetActive(true);
-                skipButton.onClick.RemoveAllListeners();
-                skipButton.onClick.AddListener(OnSkipClicked);
             }
 
             if (mainCanvasGroup != null)
@@ -1979,7 +1951,11 @@ namespace Luan.Dialogue
 
                 if (i == 0)
                 {
-                    // Ảnh đầu tiên: Giới thiệu câu chuyện nhân vật -> hiện text nhấp nháy
+                    // Ở ảnh backstory đầu tiên: vì là chạm vào màn để bỏ qua nên ẨN nút Bỏ qua và ẨN nút Tự động
+                    if (topControlsGroup != null) topControlsGroup.SetActive(false);
+                    if (skipButton != null) skipButton.gameObject.SetActive(false);
+                    if (autoButton != null) autoButton.gameObject.SetActive(false);
+
                     EnsureBackstoryPromptText();
                     if (backstoryFirstSlidePromptText != null && showFirstSlidePrompt)
                     {
@@ -1991,9 +1967,27 @@ namespace Luan.Dialogue
                 }
                 else
                 {
-                    // Từ ảnh thứ 2 trở đi: Ẩn text nhấp nháy của ảnh 1
+                    // Từ ảnh thứ 2 trở đi:
+                    // 1. Ẩn text nhấp nháy của ảnh 1
                     if (backstoryFirstSlidePromptText != null)
                         backstoryFirstSlidePromptText.gameObject.SetActive(false);
+
+                    // 2. Hiện MỖI nút Bỏ qua (nút dialog ở góc trên bên phải), ẨN nút Tự động
+                    if (topControlsGroup != null)
+                    {
+                        topControlsGroup.SetActive(true);
+                        topControlsGroup.transform.SetAsLastSibling();
+                    }
+                    if (skipButton != null)
+                    {
+                        skipButton.gameObject.SetActive(true);
+                        skipButton.onClick.RemoveAllListeners();
+                        skipButton.onClick.AddListener(OnSkipClicked);
+                    }
+                    if (autoButton != null)
+                    {
+                        autoButton.gameObject.SetActive(false);
+                    }
                 }
 
                 // --- 1. ANIMATION FADE IN CHO ẢNH (0.35s) ---
@@ -2164,13 +2158,19 @@ namespace Luan.Dialogue
         {
             if (backstoryContainer == null) return;
 
+            bool alreadyExisted = false;
             if (backstoryFirstSlidePromptText == null)
             {
                 var existing = backstoryContainer.transform.Find("FirstSlidePromptText");
                 if (existing != null)
                 {
                     backstoryFirstSlidePromptText = existing.GetComponent<TMPro.TextMeshProUGUI>();
+                    alreadyExisted = true;
                 }
+            }
+            else
+            {
+                alreadyExisted = true;
             }
 
             if (backstoryFirstSlidePromptText == null)
@@ -2181,7 +2181,8 @@ namespace Luan.Dialogue
                 rt.anchorMin = new Vector2(0.5f, 0f);
                 rt.anchorMax = new Vector2(0.5f, 0f);
                 rt.pivot = new Vector2(0.5f, 0f);
-                rt.anchoredPosition = new Vector2(0f, firstSlidePromptBottomOffsetY);
+                float y = firstSlidePromptOffsetY != 0f ? firstSlidePromptOffsetY : firstSlidePromptBottomOffsetY;
+                rt.anchoredPosition = new Vector2(firstSlidePromptOffsetX, y);
                 rt.sizeDelta = new Vector2(1000f, 60f);
 
                 var tmp = promptGo.GetComponent<TMPro.TextMeshProUGUI>();
@@ -2194,8 +2195,19 @@ namespace Luan.Dialogue
                 tmp.raycastTarget = false;
                 backstoryFirstSlidePromptText = tmp;
             }
+            else if (alreadyExisted)
+            {
+                // Đối tượng đã tồn tại sẵn trong Scene (người dùng đã chỉnh vị trí ở Hierarchy):
+                // Cập nhật text, font, màu nhưng GIỮ NGUYÊN vị trí người dùng đã kéo!
+                backstoryFirstSlidePromptText.text = firstSlidePromptTextString;
+                backstoryFirstSlidePromptText.fontSize = firstSlidePromptFontSize;
+                backstoryFirstSlidePromptText.color = firstSlidePromptColor;
+                var rt = backstoryFirstSlidePromptText.rectTransform;
+                // Cập nhật lại số liệu offsetX/Y theo đúng vị trí người dùng đã kéo trong Scene
+                firstSlidePromptOffsetX = rt.anchoredPosition.x;
+                firstSlidePromptOffsetY = rt.anchoredPosition.y;
+            }
 
-            ApplyPromptTextSettings();
             if (backstoryFirstSlidePromptText != null && currentPhase != DialoguePhase.Backstory)
             {
                 backstoryFirstSlidePromptText.gameObject.SetActive(false);
