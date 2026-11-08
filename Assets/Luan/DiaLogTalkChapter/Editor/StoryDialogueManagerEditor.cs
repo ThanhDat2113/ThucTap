@@ -63,38 +63,106 @@ namespace Luan.Dialogue.Editor
             EditorGUILayout.Space(10);
 
             // 2.5 Cấu hình Ảnh Backstory Cutscenes & Chữ Nhắc Chạm
-            EditorGUILayout.LabelField("🖼️ Cấu Hình Backstory Cutscene & Chữ Nhắc (Edit Mode)", EditorStyles.boldLabel);
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            // Tự động đồng bộ số liệu nếu người dùng vừa kéo thả đối tượng trong Scene / Hierarchy
+            if (!EditorApplication.isPlaying)
+            {
+                if (manager.BackstoryPromptText != null)
+                {
+                    var rtPrompt = manager.BackstoryPromptText.rectTransform;
+                    if (serializedObject.FindProperty("firstSlidePromptOffsetX").floatValue != rtPrompt.anchoredPosition.x ||
+                        serializedObject.FindProperty("firstSlidePromptOffsetY").floatValue != rtPrompt.anchoredPosition.y)
+                    {
+                        serializedObject.FindProperty("firstSlidePromptOffsetX").floatValue = rtPrompt.anchoredPosition.x;
+                        serializedObject.FindProperty("firstSlidePromptOffsetY").floatValue = rtPrompt.anchoredPosition.y;
+                    }
+                }
+                if (manager.BackstoryIllustrationImage != null)
+                {
+                    var rtImg = manager.BackstoryIllustrationImage.rectTransform;
+                    if (Mathf.Abs(serializedObject.FindProperty("backstoryScale").floatValue - rtImg.localScale.x) > 0.001f && rtImg.localScale.x > 0.05f)
+                    {
+                        serializedObject.FindProperty("backstoryScale").floatValue = rtImg.localScale.x;
+                    }
+                }
+            }
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("backstoryScale"), new GUIContent("Scale Ảnh (Thu nhỏ / Phóng to)", "1.0 = Phủ kín full màn hình Mobile tràn viền. Giảm xuống ví dụ 0.9 nếu muốn có viền."));
+            GUI.backgroundColor = new Color(0.1f, 0.85f, 1f, 1f);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            GUI.backgroundColor = Color.white;
+            EditorGUILayout.LabelField("🖼️ CHỈNH SCALE ẢNH BACKSTORY & VỊ TRÍ CHỮ NHẮC", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox("Bạn có thể chỉnh bằng 2 cách rất linh hoạt:\n1. Kéo thả tự do bằng chuột trong Scene: Bấm nút 'Bật Preview' bên dưới, rồi bấm 'Chọn Chữ' hoặc 'Chọn Ảnh' để kéo thả trực tiếp.\n2. Chỉnh thông số số học tại các thanh trượt bên dưới.", MessageType.Info);
+            
+            EditorGUILayout.Space(4);
+            EditorGUILayout.LabelField("📐 Scale & Vị Trí Ảnh Minh Họa", EditorStyles.boldLabel);
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("backstoryScale"), new GUIContent("Scale Ảnh (Phóng To / Thu Nhỏ)", "1.0 = Phủ kín 100% full màn hình Mobile. Kéo < 1.0 (vd: 0.9, 0.85) để có viền lề đẹp."));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("backstoryOffsetY"), new GUIContent("Vị Trí Y Của Ảnh (Pixel)"));
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.ApplyModifiedProperties();
+                manager.ApplyBackstoryLayout();
+                SceneView.RepaintAll();
+            }
 
             EditorGUILayout.Space(6);
-            EditorGUILayout.LabelField("💬 Chữ Nhắc Chạm (Ở Ảnh Đầu Tiên)", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("showFirstSlidePrompt"), new GUIContent("Bật Chữ Nhắc Ở Ảnh 1"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptTextString"), new GUIContent("Nội Dung Chữ Nhắc"));
+            EditorGUILayout.LabelField("💬 Vị Trí & Nội Dung Chữ Nhắc Chạm (Ở Ảnh Đầu)", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("showFirstSlidePrompt"), new GUIContent("Bật Chữ Nhắc"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptTextString"), new GUIContent("Nội Dung Chữ"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptColor"), new GUIContent("Màu Chữ"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptFontSize"), new GUIContent("Cỡ Chữ"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptOffsetX"), new GUIContent("Vị Trí X (Trái / Phải)", "0 = chính giữa. Số âm = dịch sang trái, số dương = dịch sang phải"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptOffsetY"), new GUIContent("Vị Trí Y (Lên / Xuống)", "Mặc định = 45. Tăng lên để đẩy chữ lên cao, giảm xuống để hạ sát đáy"));
+
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptOffsetX"), new GUIContent("Vị Trí X (Trái / Phải)", "0 = chính giữa. Âm = sang trái, Dương = sang phải."));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptOffsetY"), new GUIContent("Vị Trí Y (Lên / Xuống)", "Mặc định = 45. Tăng lên để đẩy chữ lên cao, giảm xuống để hạ sát đáy."));
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.ApplyModifiedProperties();
+                manager.SetPromptPosition(new Vector2(
+                    serializedObject.FindProperty("firstSlidePromptOffsetX").floatValue,
+                    serializedObject.FindProperty("firstSlidePromptOffsetY").floatValue
+                ));
+                SceneView.RepaintAll();
+            }
 
             EditorGUILayout.Space(8);
             EditorGUILayout.BeginHorizontal();
             GUI.backgroundColor = new Color(0.2f, 0.95f, 0.7f);
-            if (GUILayout.Button("👁️ Bật Preview Ảnh & Chữ (Scene)", GUILayout.Height(30)))
+            if (GUILayout.Button("👁️ Bật Preview (Scene)", GUILayout.Height(32)))
             {
                 manager.PreviewBackstoryInEditMode();
                 EditorUtility.SetDirty(manager);
                 SceneView.RepaintAll();
             }
             GUI.backgroundColor = new Color(1f, 0.45f, 0.45f);
-            if (GUILayout.Button("❌ Tắt Preview", GUILayout.Height(30)))
+            if (GUILayout.Button("❌ Tắt Preview", GUILayout.Height(32)))
             {
                 manager.HideBackstoryInEditMode();
                 EditorUtility.SetDirty(manager);
                 SceneView.RepaintAll();
             }
             GUI.backgroundColor = Color.white;
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.Space(4);
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("🎯 Chọn Chữ Trong Hierarchy", GUILayout.Height(26)))
+            {
+                manager.EnsureBackstoryUI();
+                if (manager.BackstoryPromptText != null)
+                {
+                    Selection.activeGameObject = manager.BackstoryPromptText.gameObject;
+                    EditorGUIUtility.PingObject(Selection.activeGameObject);
+                }
+            }
+            if (GUILayout.Button("🎯 Chọn Ảnh Trong Hierarchy", GUILayout.Height(26)))
+            {
+                manager.EnsureBackstoryUI();
+                if (manager.BackstoryIllustrationImage != null)
+                {
+                    Selection.activeGameObject = manager.BackstoryIllustrationImage.gameObject;
+                    EditorGUIUtility.PingObject(Selection.activeGameObject);
+                }
+            }
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.EndVertical();

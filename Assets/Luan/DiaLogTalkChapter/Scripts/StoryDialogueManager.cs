@@ -145,6 +145,12 @@ namespace Luan.Dialogue
         [Tooltip("Hiển thị chữ nhắc chạm ở ảnh đầu tiên")]
         [SerializeField] private bool showFirstSlidePrompt = true;
 
+        public TMPro.TMP_Text BackstoryPromptText => backstoryFirstSlidePromptText;
+        public Image BackstoryIllustrationImage => backstoryIllustrationImage;
+        public float BackstoryScale { get => backstoryScale; set => backstoryScale = value; }
+        public float FirstSlidePromptOffsetX { get => firstSlidePromptOffsetX; set => firstSlidePromptOffsetX = value; }
+        public float FirstSlidePromptOffsetY { get => firstSlidePromptOffsetY; set => firstSlidePromptOffsetY = value; }
+
         [Header("Backstory Transition & Pulse Prompt")]
         private List<Sprite> activeBackstoryImages = new List<Sprite>();
         [SerializeField] private CanvasGroup backstoryContentCanvasGroup;
@@ -934,15 +940,36 @@ namespace Luan.Dialogue
                 backstoryFirstSlidePromptText.text = firstSlidePromptTextString;
                 backstoryFirstSlidePromptText.fontSize = firstSlidePromptFontSize;
                 backstoryFirstSlidePromptText.color = firstSlidePromptColor;
-                var rt = backstoryFirstSlidePromptText.rectTransform;
-                float y = firstSlidePromptOffsetY != 0f ? firstSlidePromptOffsetY : firstSlidePromptBottomOffsetY;
-                rt.anchoredPosition = new Vector2(firstSlidePromptOffsetX, y);
+                // KHÔNG ghi đè rt.anchoredPosition ở đây để tôn trọng 100% vị trí người dùng kéo trong Hierarchy/Scene!
+            }
+        }
+
+        public void SetPromptPosition(Vector2 pos)
+        {
+            if (backstoryFirstSlidePromptText == null && backstoryContainer != null)
+            {
+                var existing = backstoryContainer.transform.Find("FirstSlidePromptText");
+                if (existing != null) backstoryFirstSlidePromptText = existing.GetComponent<TMPro.TMP_Text>();
+            }
+
+            if (backstoryFirstSlidePromptText != null)
+            {
+                backstoryFirstSlidePromptText.rectTransform.anchoredPosition = pos;
+                firstSlidePromptOffsetX = pos.x;
+                firstSlidePromptOffsetY = pos.y;
             }
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            // Nếu FirstSlidePromptText đã có, cập nhật biến offsetX/Y từ RectTransform để không bao giờ bị lệch hay reset
+            if (backstoryFirstSlidePromptText != null)
+            {
+                var rt = backstoryFirstSlidePromptText.rectTransform;
+                firstSlidePromptOffsetX = rt.anchoredPosition.x;
+                firstSlidePromptOffsetY = rt.anchoredPosition.y;
+            }
             ApplyBackstoryLayout();
             ApplyPromptTextSettings();
         }
