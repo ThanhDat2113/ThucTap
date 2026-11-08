@@ -379,26 +379,27 @@ namespace Luan.Dialogue
 
         public static bool HasPendingDialogue()
         {
+            if (Instance == null)
+            {
+                Instance = FindFirstObjectByType<StoryDialogueManager>();
+            }
+
             if (Instance != null && Instance.hasCompletedDialogueThisSession)
                 return false;
 
-            // 1. Nếu đang trong Story Mode (StorySession.Active) -> LUÔN CHẠY nếu chưa xong trong lượt này!
+            // 1. Chế độ kiểm thử trong Editor: Nếu testInEditor bật -> LUÔN CHẠY thoại Story!
+            if (Application.isEditor && Instance != null && Instance.testInEditor)
+                return true;
+
+            // 2. Nếu đang trong Story Mode (StorySession.Active) -> LUÔN CHẠY nếu chưa xong trong lượt này!
             if (StorySession.Active)
                 return true;
 
-            // 2. Nếu người chơi vào từ Free Play (chọn bài từ tab Free Play) -> Không chạy thoại
-            if (!StorySession.Active && GameSession.SelectedSong != null)
-                return false;
+            // 3. Trong Editor nếu chưa chọn bài -> Chạy thoại test
+            if (Application.isEditor && GameSession.SelectedSong == null)
+                return true;
 
-            // 3. Chế độ kiểm thử trong Editor (bấm Play trực tiếp tại GameplayScene)
-            if (Application.isEditor)
-            {
-                if (Instance != null && Instance.testInEditor)
-                    return true;
-                if (GameSession.SelectedSong == null)
-                    return true;
-            }
-
+            // 4. Nếu người chơi vào từ Free Play -> Không chạy thoại Story
             return false;
         }
 
@@ -455,6 +456,26 @@ namespace Luan.Dialogue
             currentPhase = DialoguePhase.None;
 
             EnsureUI();
+            EnsureBackstoryUI();
+            EnsureVideoUI();
+            HideAllUI();
+
+            // Nếu đang trong Story Mode / có Pending Dialogue, vô hiệu hoá hoàn toàn SongIntroScreen
+            if (HasPendingDialogue())
+            {
+                var songIntro = FindFirstObjectByType<RhythmGame.SongIntroScreen>();
+                if (songIntro != null)
+                {
+                    songIntro.IsPlaying = false;
+                    songIntro.gameObject.SetActive(false);
+                }
+                var songIntroGo = GameObject.Find("SongIntroCanvas");
+                if (songIntroGo != null)
+                {
+                    songIntroGo.SetActive(false);
+                }
+            }
+
             BindControlsFallback();
             HookEvents();
 
@@ -566,7 +587,7 @@ namespace Luan.Dialogue
             videoPlayer.playOnAwake = false;
             videoPlayer.isLooping = false;
             videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
-            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.Direct;
+            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
 
             // Nút Bỏ Qua Video góc trên bên phải
             var skipGo = new GameObject("VideoSkipButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button));
@@ -659,9 +680,31 @@ namespace Luan.Dialogue
             }
 
             videoPlayer.isLooping = false;
+            // Mute hoàn toàn âm thanh video intro theo yêu cầu người dùng
+            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
+            for (ushort t = 0; t < videoPlayer.audioTrackCount; t++)
+            {
+                videoPlayer.EnableAudioTrack(t, false);
+            }
+            if (videoContainer != null)
+            {
+                var vAudio = videoContainer.GetComponent<AudioSource>();
+                if (vAudio != null) { vAudio.mute = true; vAudio.Stop(); }
+            }
+
             videoPlayer.Prepare();
 
-            if (videoContainer != null) videoContainer.SetActive(true);
+            // Ẩn tất cả các container khác khi chạy intro video để không che đè
+            if (introContainer != null) introContainer.SetActive(false);
+            if (characterStoryCard != null) characterStoryCard.SetActive(false);
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
+
+            if (videoContainer != null)
+            {
+                videoContainer.SetActive(true);
+                videoContainer.transform.SetAsLastSibling();
+            }
             if (videoCanvasGroup != null) videoCanvasGroup.alpha = 0f;
 
             // Đảm bảo nút Bỏ qua ở góc trên bên phải (của dialog) luôn hiển thị trên video
@@ -1649,11 +1692,21 @@ namespace Luan.Dialogue
             activeBackstoryImages = images;
 
             EnsureUI();
+            EnsureBackstoryUI();
 
-            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+            if (dialogueCanvas != null)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.sortingOrder = 600;
+            }
             if (introContainer != null) introContainer.SetActive(false);
+            if (characterStoryCard != null) characterStoryCard.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
-            if (backstoryContainer != null) backstoryContainer.SetActive(true);
+            if (backstoryContainer != null)
+            {
+                backstoryContainer.SetActive(true);
+                backstoryContainer.transform.SetAsLastSibling();
+            }
 
             // Ẩn bảng thoại bên dưới vì lời thoại đã được vẽ sẵn trực tiếp trên tranh ảnh
             if (backstorySubtitlePanel != null)
@@ -1803,15 +1856,15 @@ namespace Luan.Dialogue
                 if (currentPhase != DialoguePhase.Backstory)
                     yield break;
 
-                // --- 3. ANIMATION FADE OUT CHO ẢNH (0.35s) ---
-                yield return StartCoroutine(FadeSlideContent(1f, 0f, 0.35f));
-
-                // Dừng pulse text nếu vừa xong ảnh 0
+                // Dừng pulse text nếu vừa xong ảnh 0 trước khi fade out
                 if (i == 0 && backstoryPromptPulseRoutine != null)
                 {
                     StopCoroutine(backstoryPromptPulseRoutine);
                     backstoryPromptPulseRoutine = null;
                 }
+
+                // --- 3. ANIMATION FADE OUT CHO ẢNH (0.35s) ---
+                yield return StartCoroutine(FadeSlideContent(1f, 0f, 0.35f));
             }
 
             // Hết tất cả các ảnh -> Vào gameplay!
@@ -2302,10 +2355,98 @@ namespace Luan.Dialogue
             }
         }
 
+        public void EnsureBackstoryUI()
+        {
+            if (dialogueCanvas == null) EnsureUI();
+            if (dialogueCanvas == null) return;
+
+            if (backstoryContainer == null)
+            {
+                var existing = dialogueCanvas.transform.Find("BackstoryContainer");
+                if (existing != null)
+                {
+                    backstoryContainer = existing.gameObject;
+                }
+            }
+
+            if (backstoryContainer != null)
+            {
+                backstoryCanvasGroup = backstoryContainer.GetComponent<CanvasGroup>() ?? backstoryContainer.AddComponent<CanvasGroup>();
+                var img = backstoryContainer.transform.Find("IllustrationContainer/IllustrationImage") ?? backstoryContainer.transform.Find("IllustrationImage");
+                if (img != null) backstoryIllustrationImage = img.GetComponent<Image>();
+                var tap = backstoryContainer.transform.Find("TapScreenButton");
+                if (tap != null)
+                {
+                    backstoryTapButton = tap.GetComponent<Button>();
+                    backstoryTapButton.onClick.RemoveAllListeners();
+                    backstoryTapButton.onClick.AddListener(OnBackstoryTapClicked);
+                }
+            }
+            else
+            {
+                var bsGo = new GameObject("BackstoryContainer", typeof(RectTransform), typeof(CanvasGroup));
+                bsGo.transform.SetParent(dialogueCanvas.transform, false);
+                var bsRt = bsGo.GetComponent<RectTransform>();
+                bsRt.anchorMin = Vector2.zero;
+                bsRt.anchorMax = Vector2.one;
+                bsRt.offsetMin = bsRt.offsetMax = Vector2.zero;
+                backstoryContainer = bsGo;
+                backstoryCanvasGroup = bsGo.GetComponent<CanvasGroup>();
+
+                // 1. Dark Backdrop
+                var bgGo = new GameObject("Backdrop", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                bgGo.transform.SetParent(bsGo.transform, false);
+                var bgRt = bgGo.GetComponent<RectTransform>();
+                bgRt.anchorMin = Vector2.zero;
+                bgRt.anchorMax = Vector2.one;
+                bgRt.offsetMin = bgRt.offsetMax = Vector2.zero;
+                var bgImg = bgGo.GetComponent<Image>();
+                bgImg.color = new Color(0.015f, 0.01f, 0.03f, 1f);
+                bgImg.raycastTarget = false;
+
+                // 2. Fullscreen Illustration Image
+                var illContainer = new GameObject("IllustrationContainer", typeof(RectTransform));
+                illContainer.transform.SetParent(bsGo.transform, false);
+                var illRt = illContainer.GetComponent<RectTransform>();
+                illRt.anchorMin = Vector2.zero;
+                illRt.anchorMax = Vector2.one;
+                illRt.offsetMin = illRt.offsetMax = Vector2.zero;
+
+                var imgGo = new GameObject("IllustrationImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                imgGo.transform.SetParent(illContainer.transform, false);
+                var imgRt = imgGo.GetComponent<RectTransform>();
+                imgRt.anchorMin = Vector2.zero;
+                imgRt.anchorMax = Vector2.one;
+                imgRt.offsetMin = imgRt.offsetMax = Vector2.zero;
+                backstoryIllustrationImage = imgGo.GetComponent<Image>();
+                backstoryIllustrationImage.preserveAspect = true;
+                backstoryIllustrationImage.raycastTarget = false;
+
+                // 3. Fullscreen transparent button to capture screen tap
+                var tapGo = new GameObject("TapScreenButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+                tapGo.transform.SetParent(bsGo.transform, false);
+                var tapRt = tapGo.GetComponent<RectTransform>();
+                tapRt.anchorMin = Vector2.zero;
+                tapRt.anchorMax = Vector2.one;
+                tapRt.offsetMin = tapRt.offsetMax = Vector2.zero;
+                var tapImg = tapGo.GetComponent<Image>();
+                tapImg.color = new Color(0f, 0f, 0f, 0f);
+                tapImg.raycastTarget = true;
+                backstoryTapButton = tapGo.GetComponent<Button>();
+                backstoryTapButton.onClick.RemoveAllListeners();
+                backstoryTapButton.onClick.AddListener(OnBackstoryTapClicked);
+            }
+
+            EnsureBackstoryPromptText();
+        }
+
         public void EnsureUI()
         {
             if (dialogueCanvas != null && mainCanvasGroup != null && dialogueText != null && introContainer != null)
+            {
+                EnsureBackstoryUI();
                 return;
+            }
 
             var existingCanvas = GameObject.Find("StoryDialogueCanvas");
             if (existingCanvas != null)
