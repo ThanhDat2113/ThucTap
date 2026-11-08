@@ -75,7 +75,8 @@ namespace Luan.Dialogue.Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptTextString"), new GUIContent("Nội Dung Chữ Nhắc"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptColor"), new GUIContent("Màu Chữ"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptFontSize"), new GUIContent("Cỡ Chữ"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptBottomOffsetY"), new GUIContent("Khoảng Cách Từ Đáy (Y Offset)"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptOffsetX"), new GUIContent("Vị Trí X (Trái / Phải)", "0 = chính giữa. Số âm = dịch sang trái, số dương = dịch sang phải"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("firstSlidePromptOffsetY"), new GUIContent("Vị Trí Y (Lên / Xuống)", "Mặc định = 45. Tăng lên để đẩy chữ lên cao, giảm xuống để hạ sát đáy"));
 
             EditorGUILayout.Space(8);
             EditorGUILayout.BeginHorizontal();

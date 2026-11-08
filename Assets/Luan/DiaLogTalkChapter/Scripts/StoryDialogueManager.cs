@@ -137,8 +137,11 @@ namespace Luan.Dialogue
         [SerializeField] private float firstSlidePromptFontSize = 24f;
         [Tooltip("Màu chữ nhắc chạm")]
         [SerializeField] private Color firstSlidePromptColor = new Color(0.2f, 0.95f, 1f, 0.95f);
-        [Tooltip("Vị trí cách mép dưới màn hình (Pixel)")]
-        [SerializeField] private float firstSlidePromptBottomOffsetY = 45f;
+        [Tooltip("Vị trí ngang X (Trái: âm, Phải: dương, Giữa: 0)")]
+        [SerializeField] private float firstSlidePromptOffsetX = 0f;
+        [Tooltip("Vị trí dọc Y (Lên: dương, Hạ thấp: nhỏ, Mặc định: 45)")]
+        [SerializeField] private float firstSlidePromptOffsetY = 45f;
+        [HideInInspector, SerializeField] private float firstSlidePromptBottomOffsetY = 45f;
         [Tooltip("Hiển thị chữ nhắc chạm ở ảnh đầu tiên")]
         [SerializeField] private bool showFirstSlidePrompt = true;
 
@@ -970,7 +973,8 @@ namespace Luan.Dialogue
                 backstoryFirstSlidePromptText.fontSize = firstSlidePromptFontSize;
                 backstoryFirstSlidePromptText.color = firstSlidePromptColor;
                 var rt = backstoryFirstSlidePromptText.rectTransform;
-                rt.anchoredPosition = new Vector2(0f, firstSlidePromptBottomOffsetY);
+                float y = firstSlidePromptOffsetY != 0f ? firstSlidePromptOffsetY : firstSlidePromptBottomOffsetY;
+                rt.anchoredPosition = new Vector2(firstSlidePromptOffsetX, y);
             }
         }
 
