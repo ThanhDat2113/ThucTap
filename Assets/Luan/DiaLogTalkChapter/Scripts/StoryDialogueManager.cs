@@ -509,6 +509,12 @@ namespace Luan.Dialogue
         // ==========================================
         // CHAPTER INTRO VIDEO PLAYBACK (~8s)
         // ==========================================
+        private TMPro.TMP_FontAsset ResolveFont()
+        {
+            if (dialogueText != null && dialogueText.font != null) return dialogueText.font;
+            return TMPro.TMP_Settings.defaultFontAsset;
+        }
+
         public void EnsureVideoUI()
         {
             if (videoContainer != null && videoPlayer != null && videoRawImage != null)
@@ -1594,11 +1600,7 @@ namespace Luan.Dialogue
                 }
                 else if (currentPhase == DialoguePhase.Backstory)
                 {
-                    if (!isTyping)
-                    {
-                        if (autoRoutine != null) StopCoroutine(autoRoutine);
-                        autoRoutine = StartCoroutine(WaitAndAutoAdvanceBackstory());
-                    }
+                    // Backstory đã tự động chuyển sau 3 giây mỗi slide
                 }
                 else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
                 {
@@ -1647,7 +1649,6 @@ namespace Luan.Dialogue
             activeBackstoryImages = images;
 
             EnsureUI();
-            EnsureBackstoryUI();
 
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
             if (introContainer != null) introContainer.SetActive(false);

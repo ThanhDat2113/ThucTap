@@ -18,7 +18,7 @@ namespace RhythmGame
     public class SongIntroScreen : MonoBehaviour
     {
         public static SongIntroScreen Instance { get; private set; }
-        public bool IsPlaying { get; private set; }
+        public bool IsPlaying { get; set; }
 
         [Header("Refs")]
         public GameManager gameManager;
