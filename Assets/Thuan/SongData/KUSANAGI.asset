@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e93c0ac3ea28f440a9088754dac35c7, type: 3}
-  m_Name: NewSong 1
+  m_Name: KUSANAGI
   m_EditorClassIdentifier: Assembly-CSharp::SongData
-  songName: "Em C\u1EE7a Ng\xE0y H\xF4m Qua"
-  artist: "S\u01A1n T\xF9ng M-TP"
-  clip: {fileID: 8300000, guid: 97770861381ee6a48ad8dfdf8353f4b8, type: 3}
-  coverArt: {fileID: 2807854067368473934, guid: cb692c8bba4f2b94e9d960995016fcc7, type: 3}
+  songName: KUSANAGI
+  artist: aran
+  clip: {fileID: 8300000, guid: d5333195a2ed04e49b949dd31f569c1f, type: 3}
+  coverArt: {fileID: 21300000, guid: 070e0406c385d564f9b0e7b06ff041da, type: 3}
   difficulty: 3
   bpm: 0
+  chart: {fileID: 11400000, guid: 16bf62ea0859a144f9e9762fa294dc15, type: 2}

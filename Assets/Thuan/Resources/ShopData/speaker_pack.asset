@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe08a2b557c1842b41d03ab785f7cc, type: 3}
+  m_Name: speaker_pack
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
+  displayName: Speaker Pack
+  description: 'Massive speakers.
+
+    Feel the bass drop!'
+  category: 0
+  currency: 0
+  price: 600
+  isHot: 0
+  cardSprite: {fileID: 21300000, guid: f31562c9cd4558e4692bd06be4c38e02, type: 3}
+  cardOwnedSprite: {fileID: 21300000, guid: 9dbddab3cf589f542b6e89abfdc1d59e, type: 3}
+  artSprite: {fileID: 21300000, guid: 323e8d186a3ece34fbed1df33127ddd9, type: 3}
+  priceRect: {x: 0.3084, y: 0.0576, z: 0.63, w: 0.2346}
+  cartRect: {x: 0.674, y: 0.0494, z: 0.9427, w: 0.2305}

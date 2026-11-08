@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7305261791956740662, guid: 1b35093b59a13194f9ea61f9cd826da3, type: 3}
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,6 +113,13 @@ MonoBehaviour:
   tailScale: 1
   tailSortingOffset: 1
   visuals: {fileID: 0}
+  useTrail: 1
+  trailLength: 1.1
+  trailAlpha: 0.55
+  trailWidthRatio: 0.7
+  spawnFadeTime: 0.18
+  useSkin: 1
+  skin: {fileID: 0}
 --- !u!114 &2311442274747404014
 MonoBehaviour:
   m_ObjectHideFlags: 0

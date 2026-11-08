@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6172238577747386070, guid: 7e52e2714c46304418860028b57e4da4, type: 3}
+  m_Sprite: {fileID: -8809683428275636464, guid: 27aa112b02a1cdf48a06029ef5b4eff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,6 +114,11 @@ MonoBehaviour:
   tailScale: 1
   tailSortingOffset: 1
   visuals: {fileID: 0}
+  useTrail: 1
+  trailLength: 1.1
+  trailAlpha: 0.55
+  trailWidthRatio: 0.7
+  spawnFadeTime: 0.18
   useSkin: 1
   skin: {fileID: -7981443939660325999}
 --- !u!114 &2311442274747404014
@@ -166,6 +171,10 @@ MonoBehaviour:
   fallbackTop: {r: 0.2, g: 0.08, b: 0.45, a: 1}
   fallbackMiddle: {r: 1, g: 0.25, b: 0.85, a: 1}
   fallbackBottom: {r: 0.25, g: 0.9, b: 1, a: 1}
+  ignoreGlobalStyle: 0
+  hollowFill: 0
+  fillLift: 0.55
+  solidFill: 1
   edgeShadow: 0.5
   cornerRadius: 0.3
   borderWidth: 0.12

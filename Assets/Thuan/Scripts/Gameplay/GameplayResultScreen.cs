@@ -58,7 +58,7 @@ public class GameplayResultScreen : MonoBehaviour
         resultLogo.sprite = cleared ? clearLogoSprite : failedLogoSprite;
         songText.text = song != null ? song.songName : "RHYTHM BATTLE";
         artistText.text = song != null && !string.IsNullOrWhiteSpace(song.artist) ? song.artist : "UNKNOWN ARTIST";
-        difficultyText.text = GameSession.SelectedDifficulty.ToString().ToUpperInvariant();
+        difficultyText.text = StorySession.Active ? "STORY" : GameSession.SelectedDifficulty.ToString().ToUpperInvariant();
         coverArt.sprite = song != null ? song.coverArt : null;
         coverArt.enabled = coverArt.sprite != null;
         perfectText.text = perfect.ToString("N0");

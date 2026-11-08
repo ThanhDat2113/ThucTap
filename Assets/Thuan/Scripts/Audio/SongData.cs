@@ -12,4 +12,9 @@ public class SongData : ScriptableObject
     [Tooltip("0 = chua biet, se hien --")]
     public int bpm;
     public ChartData chart;
+
+    [Header("Thong tin hien o man gioi thieu bai (de trong thi hien ten ca si)")]
+    public string lyricist;
+    public string composer;
+    public string arranger;
 }

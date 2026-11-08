@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Pay.meta
+guid: a5987889634824f48aaca7e35863ca56
+folderAsset: yes
+========
 guid: 4b90468ac9cd10b47b519d63f5931c32
+>>>>>>>> Dat:Assets/Scenes/Inventory.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

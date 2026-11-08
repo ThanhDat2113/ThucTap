@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e93c0ac3ea28f440a9088754dac35c7, type: 3}
-  m_Name: NewSong 2
+  m_Name: Dance Alone
   m_EditorClassIdentifier: Assembly-CSharp::SongData
-  songName: "L\u1EA1c Tr\xF4i"
-  artist: "S\u01A1n T\xF9ng M-TP"
-  clip: {fileID: 8300000, guid: 075ec273e7ba82344951cb7800ab5a88, type: 3}
-  coverArt: {fileID: -9144814465567412023, guid: f105d0fca68c1a246afda9dac776ee5a, type: 3}
+  songName: DANCE ALONE
+  artist: The Vanished People
+  clip: {fileID: 8300000, guid: e4fdf436ba5f81e4b8c5a1c71230e9a2, type: 3}
+  coverArt: {fileID: 21300000, guid: 9633634708e52664f97609230ff351c3, type: 3}
   difficulty: 3
   bpm: 0
+  chart: {fileID: 11400000, guid: 57c4bd262aa2d0146897345b7d380ec7, type: 2}

@@ -38,9 +38,9 @@ public class PauseManager : MonoBehaviour
 
     [Header("Quay về sảnh / menu chính")]
     [Tooltip("Tên scene sảnh (chọn bài). Phải có trong File > Build Settings > Scenes In Build. Trống = bấm nút sẽ chỉ báo cảnh báo trong Console")]
-    public string lobbySceneName = "";
+    public string lobbySceneName = "Thuan_SongList";
     [Tooltip("Tên scene menu chính (màn hình tiêu đề). Trống = bấm nút sẽ chỉ báo cảnh báo trong Console")]
-    public string mainMenuSceneName = "";
+    public string mainMenuSceneName = "MainMenu";
     [Tooltip("Hiện nút LOBBY / MAIN MENU trong menu pause (tắt nếu game bạn không cần)")]
     public bool showLobbyButton = true;
     public bool showMainMenuButton = true;

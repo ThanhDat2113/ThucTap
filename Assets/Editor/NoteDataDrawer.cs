@@ -17,6 +17,8 @@ namespace RhythmGame.Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("songName"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("audioClip"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("musicStartDelay"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("noteStartDelay"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("latencyCompensation"));
             EditorGUILayout.PropertyField(bpmProp);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("laneCount"));
             EditorGUILayout.PropertyField(offsetProp);

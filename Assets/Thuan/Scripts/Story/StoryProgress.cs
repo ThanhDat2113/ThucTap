@@ -6,14 +6,18 @@ public static class StoryProgress
     private static string Key(StoryWeekData w, string f) { return "story_" + w.Id + "_" + f; }
 
     public static bool IsCleared(StoryWeekData w) { return w != null && PlayerPrefs.GetInt(Key(w, "clear"), 0) == 1; }
-    public static int GetBestScore(StoryWeekData w, ChartDifficulty d) { return PlayerPrefs.GetInt(Key(w, "best_" + (int)d), 0); }
-    public static float GetClearRate(StoryWeekData w, ChartDifficulty d) { return PlayerPrefs.GetFloat(Key(w, "acc_" + (int)d), -1f); }
+    // Story Mode khong chon do kho: luon choi muc Normal
+    public const ChartDifficulty Difficulty = ChartDifficulty.Normal;
+    private static string Slot { get { return ((int)Difficulty).ToString(); } }
 
-    public static void SaveWeek(StoryWeekData w, ChartDifficulty d, int totalScore, float accuracy)
+    public static int GetBestScore(StoryWeekData w) { return PlayerPrefs.GetInt(Key(w, "best_" + Slot), 0); }
+    public static float GetClearRate(StoryWeekData w) { return PlayerPrefs.GetFloat(Key(w, "acc_" + Slot), -1f); }
+
+    public static void SaveWeek(StoryWeekData w, int totalScore, float accuracy)
     {
         PlayerPrefs.SetInt(Key(w, "clear"), 1);
-        if (totalScore > GetBestScore(w, d)) PlayerPrefs.SetInt(Key(w, "best_" + (int)d), totalScore);
-        if (accuracy > GetClearRate(w, d)) PlayerPrefs.SetFloat(Key(w, "acc_" + (int)d), accuracy);
+        if (totalScore > GetBestScore(w)) PlayerPrefs.SetInt(Key(w, "best_" + Slot), totalScore);
+        if (accuracy > GetClearRate(w)) PlayerPrefs.SetFloat(Key(w, "acc_" + Slot), accuracy);
         PlayerPrefs.Save();
     }
 
@@ -43,6 +47,7 @@ public static class StorySession
     public static bool WeekCompleted { get; private set; }
 
     private static float accSum;
+    private static ChartDifficulty savedDifficulty;
     private static int accCount;
 
     public static int TrackCount { get { return Week != null && Week.tracks != null ? Week.tracks.Length : 0; } }
@@ -53,6 +58,9 @@ public static class StorySession
     {
         Active = true; Week = week; TrackIndex = 0; TotalScore = 0; accSum = 0f; accCount = 0; pendingScore = 0; pendingAcc = -1f;
         LastCleared = false; WeekCompleted = false;
+        // giu lai do kho cua Free Play, Story luon choi Normal
+        savedDifficulty = GameSession.SelectedDifficulty;
+        GameSession.SelectedDifficulty = StoryProgress.Difficulty;
         GameSession.SelectedSong = week.tracks[0].song;
     }
 
@@ -72,7 +80,7 @@ public static class StorySession
             int total = TotalScore + pendingScore;
             float sum = accSum + (pendingAcc >= 0f ? pendingAcc : 0f);
             int cnt = accCount + (pendingAcc >= 0f ? 1 : 0);
-            StoryProgress.SaveWeek(Week, GameSession.SelectedDifficulty, total, cnt > 0 ? sum / cnt : -1f);
+            StoryProgress.SaveWeek(Week, total, cnt > 0 ? sum / cnt : -1f);
         }
     }
 
@@ -89,5 +97,9 @@ public static class StorySession
         GameSession.SelectedSong = Week.tracks[TrackIndex].song;
     }
 
-    public static void End() { Active = false; }
+    public static void End()
+    {
+        if (Active) GameSession.SelectedDifficulty = savedDifficulty;
+        Active = false;
+    }
 }
