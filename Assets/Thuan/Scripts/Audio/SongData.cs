@@ -15,4 +15,7 @@ public class SongData : ScriptableObject
     public string lyricist;
     public string composer;
     public string arranger;
+
+    [Tooltip("Giay bat dau doan nghe thu o man chon nhac (-1 = tu dong lay khoang 30% bai)")]
+    public float previewStart = -1f;
 }
