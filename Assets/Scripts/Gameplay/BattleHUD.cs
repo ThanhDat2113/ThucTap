@@ -20,6 +20,10 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] private float smooth = 10f;
     [SerializeField] private float trailDelay = 0.35f;
     [SerializeField, Range(0f, 1f)] private float lowHealth = 0.25f;
+    [Tooltip("Vệt trắng mờ hiện phần máu vừa mất")]
+    [SerializeField] private bool showDamageTrail = false;
+    [Tooltip("Vạch sáng nhỏ ở đầu thanh HP / FLOW")]
+    [SerializeField] private bool showBarTip = true;
 
     private static readonly Color Pink = Hex("FF2E88");
     private static readonly Color Cyan = Hex("22D9FF");
@@ -32,8 +36,10 @@ public class BattleHUD : MonoBehaviour
     private readonly Dictionary<string, Sprite> slantCache = new Dictionary<string, Sprite>();
     private RectTransform root, comboRoot, rankRoot;
     private CanvasGroup comboGroup;
-    private Image healthFill, healthTrail, flowFill;
-    private TMP_Text flowLabel, scoreText, comboText, rankText;
+    private Image healthFill, healthTrail, healthTip, flowFill, flowTip;
+    private Sprite hpSprite, flowNormalSprite, flowGoldSprite;
+    private TMP_Text flowLabel, scoreText, comboText, rankText, healthValue;
+    private int shownHpInt = -1;
 
     private float targetHealth = 1f, shownHealth = 1f, trailHealth = 1f, trailTimer;
     private float targetFlow, shownFlow;
@@ -47,6 +53,9 @@ public class BattleHUD : MonoBehaviour
     private void Awake()
     {
         if (displayFont == null) displayFont = TMP_Settings.defaultFontAsset;
+        hpSprite = MakeBarSprite(Hex("C2105F"), Pink, Hex("FF8AB5"));                 // máu: hồng đậm -> hồng sáng
+        flowNormalSprite = MakeBarSprite(Cyan, Hex("7B6CFF"), Hex("D455FF"));         // flow: cyan -> tím -> hồng tím
+        flowGoldSprite = MakeBarSprite(Hex("FF8A00"), Yellow, Hex("FFF3A0"));         // đang Flow: cam -> vàng
         Build();
         ResetHUD();
     }
@@ -119,21 +128,31 @@ public class BattleHUD : MonoBehaviour
         else trailHealth = Mathf.Lerp(trailHealth, shownHealth, k);
         if (trailHealth < shownHealth) trailHealth = shownHealth;
         SetFill(healthFill, shownHealth);
-        SetFill(healthTrail, trailHealth);
+        if (healthTrail != null) SetFill(healthTrail, trailHealth);
+        SetTip(healthTip, shownHealth);
         healthFill.color = targetHealth <= lowHealth
-            ? Color.Lerp(Pink, Red, 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 9f))
-            : Pink;
+            ? Color.Lerp(Color.white, new Color(1f, 0.4f, 0.45f), 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 9f))
+            : Color.white;
+        int hpInt = Mathf.CeilToInt(shownHealth * 100f);
+        if (hpInt != shownHpInt)
+        {
+            shownHpInt = hpInt;
+            healthValue.text = hpInt.ToString();
+        }
 
         // --- Flow ---
         shownFlow = Mathf.Lerp(shownFlow, targetFlow, k);
         SetFill(flowFill, shownFlow);
+        SetTip(flowTip, shownFlow);
         bool full = shownFlow >= 0.995f;
+        Sprite wantSprite = flowActive ? flowGoldSprite : flowNormalSprite;
+        if (flowFill.sprite != wantSprite) flowFill.sprite = wantSprite;
         if (flowActive)
-            flowFill.color = Color.Lerp(Yellow, Color.white, 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 12f));
+            flowFill.color = Color.Lerp(Color.white, new Color(0.8f, 0.8f, 0.8f), 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 12f));
         else if (full)
-            flowFill.color = Color.Lerp(Cyan, Color.white, 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 7f));
+            flowFill.color = Color.Lerp(Color.white, new Color(0.8f, 0.8f, 0.8f), 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 7f));
         else
-            flowFill.color = Color.Lerp(Cyan, Purple, shownFlow);
+            flowFill.color = Color.white;
         string wantLabel = flowActive ? "FLOW!" : (full ? "READY" : "FLOW");
         if (flowLabel.text != wantLabel) { flowLabel.text = wantLabel; flowLabel.color = flowActive ? Yellow : Cyan; }
 
@@ -160,7 +179,20 @@ public class BattleHUD : MonoBehaviour
 
     private static void SetFill(Image fill, float value)
     {
-        fill.rectTransform.anchorMax = new Vector2(Mathf.Clamp01(value), 1f);
+        value = Mathf.Clamp01(value);
+        if (fill.type == Image.Type.Filled) fill.fillAmount = value;
+        else fill.rectTransform.anchorMax = new Vector2(value, 1f);
+    }
+
+    // Vạch sáng ở đầu thanh, chạy theo giá trị
+    private void SetTip(Image tip, float value)
+    {
+        bool show = showBarTip && value > 0.01f;
+        if (tip.gameObject.activeSelf != show) tip.gameObject.SetActive(show);
+        if (!show) return;
+        RectTransform r = tip.rectTransform;
+        r.anchorMin = r.anchorMax = new Vector2(Mathf.Clamp01(value), 0.5f);
+        r.anchoredPosition = Vector2.zero;
     }
 
     // ================= Dựng UI =================
@@ -178,13 +210,19 @@ public class BattleHUD : MonoBehaviour
         RectTransform hp = CreateNode("Health", root);
         Place(hp, tl, tl, new Vector2(600f, 50f), new Vector2(x, -y));
         BuildBadge(hp, "HP", Pink, new Vector2(112f, 50f), Vector2.zero);
-        BuildBar(hp, new Vector2(480f, 50f), new Vector2(120f, 0f), Pink, true, out healthFill, out healthTrail);
+        Vector2 hpSize = new Vector2(480f, 50f);
+        RectTransform hpBar = BuildBar(hp, hpSize, new Vector2(120f, 0f), hpSprite, showDamageTrail, 0, out healthFill, out healthTrail, out healthTip);
+        healthValue = CreateText("HealthValue", hpBar, "100", 30, Color.white, TextAlignmentOptions.Right);
+        Place(healthValue.rectTransform, new Vector2(1f, .5f), new Vector2(1f, .5f), new Vector2(120f, hpSize.y), new Vector2(-28f, 0f));
+        healthValue.fontStyle = FontStyles.Bold | FontStyles.Italic;
+        healthValue.outlineWidth = 0.22f;
+        healthValue.outlineColor = new Color32(40, 0, 70, 255);
 
         // ----- Flow (ngay dưới máu) -----
         RectTransform flow = CreateNode("Flow", root);
         Place(flow, tl, tl, new Vector2(600f, 36f), new Vector2(x, -(y + 62f)));
         flowLabel = BuildBadge(flow, "FLOW", Cyan, new Vector2(112f, 36f), Vector2.zero);
-        BuildBar(flow, new Vector2(400f, 36f), new Vector2(120f, 0f), Cyan, false, out flowFill, out _);
+        BuildBar(flow, new Vector2(400f, 36f), new Vector2(120f, 0f), flowNormalSprite, false, 0, out flowFill, out _, out flowTip);
 
         // ----- Điểm (dưới flow) -----
         RectTransform sp = CreateNode("ScorePanel", root);
@@ -243,8 +281,8 @@ public class BattleHUD : MonoBehaviour
         comboLabel.fontStyle = FontStyles.Bold | FontStyles.Italic;
     }
 
-    private void BuildBar(Transform parent, Vector2 size, Vector2 pos, Color fillColor, bool withTrail,
-        out Image fill, out Image trail)
+    private RectTransform BuildBar(Transform parent, Vector2 size, Vector2 pos, Sprite fillSprite, bool withTrail,
+        int segments, out Image fill, out Image trail, out Image tip)
     {
         RectTransform bar = CreateNode("Bar", parent);
         Place(bar, new Vector2(0f, .5f), new Vector2(0f, .5f), size, pos);
@@ -259,8 +297,43 @@ public class BattleHUD : MonoBehaviour
         inner.color = Dark;
         inner.gameObject.AddComponent<Mask>().showMaskGraphic = true;
 
-        trail = withTrail ? BarFill("Trail", inner.transform, new Color(1f, 1f, 1f, .6f)) : null;
-        fill = BarFill("Fill", inner.transform, fillColor);
+        // vệt "máu vừa mất" (trắng mờ) nằm sau lớp chính
+        trail = withTrail ? BarFill("Trail", inner.transform, new Color(1f, 1f, 1f, .55f)) : null;
+
+        // lớp chính: sprite gradient + kiểu Filled nên màu không bị co theo giá trị
+        fill = BarFill("Fill", inner.transform, Color.white);
+        fill.sprite = fillSprite;
+        fill.type = Image.Type.Filled;
+        fill.fillMethod = Image.FillMethod.Horizontal;
+        fill.fillOrigin = 0;
+        fill.fillAmount = 0f;
+
+        // vạch chia, nghiêng song song với khung
+        float angle = -Mathf.Atan(SlantRatio) * Mathf.Rad2Deg;
+        for (int i = 1; i < segments; i++)
+        {
+            Image tick = CreateImage("Tick" + i, inner.transform, null);
+            RectTransform tr = tick.rectTransform;
+            tr.anchorMin = tr.anchorMax = new Vector2((float)i / segments, .5f);
+            tr.pivot = new Vector2(.5f, .5f);
+            tr.sizeDelta = new Vector2(2f, size.y + 20f);
+            tr.anchoredPosition = Vector2.zero;
+            tr.localEulerAngles = new Vector3(0f, 0f, angle);
+            tick.color = new Color(0.05f, 0f, 0.12f, 0.5f);
+        }
+
+        // đầu thanh phát sáng
+        tip = CreateImage("Tip", inner.transform, null);
+        RectTransform trt = tip.rectTransform;
+        trt.pivot = new Vector2(.5f, .5f);
+        trt.sizeDelta = new Vector2(4f, size.y + 10f);
+        tip.color = new Color(1f, 1f, 1f, 0.9f);
+        Image tipGlow = CreateImage("TipGlow", tip.transform, null);
+        Place(tipGlow.rectTransform, new Vector2(.5f, .5f), new Vector2(.5f, .5f), new Vector2(18f, size.y + 10f), Vector2.zero);
+        tipGlow.color = new Color(1f, 1f, 1f, 0.22f);
+        tip.gameObject.SetActive(false);
+
+        return bar;
     }
 
     private Image BarFill(string name, Transform parent, Color color)
@@ -378,6 +451,33 @@ public class BattleHUD : MonoBehaviour
                 Color32 col = gradient ? (Color32)GradientAt((x + 0.5f) / w) : new Color32(255, 255, 255, 255);
                 col.a = (byte)(a * 255f);
                 px[y * w + x] = col;
+            }
+        }
+        tex.SetPixels32(px);
+        tex.Apply();
+        return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(.5f, .5f), 100f);
+    }
+
+    /// <summary>Sprite gradient ngang 3 màu, có đổ bóng dọc + vệt bóng nhẹ nửa trên để thanh trông nổi khối.</summary>
+    private static Sprite MakeBarSprite(Color left, Color mid, Color right)
+    {
+        const int w = 256, h = 32;
+        Texture2D tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
+        tex.wrapMode = TextureWrapMode.Clamp;
+        tex.filterMode = FilterMode.Bilinear;
+        Color32[] px = new Color32[w * h];
+        for (int y = 0; y < h; y++)
+        {
+            float v = y / (float)(h - 1);
+            float shade = Mathf.Lerp(0.72f, 1.08f, v);
+            float gloss = v > 0.5f ? 0.16f : 0f;
+            for (int x = 0; x < w; x++)
+            {
+                float t = x / (float)(w - 1);
+                Color c = t < 0.5f ? Color.Lerp(left, mid, t * 2f) : Color.Lerp(mid, right, (t - 0.5f) * 2f);
+                c = new Color(Mathf.Clamp01(c.r * shade), Mathf.Clamp01(c.g * shade), Mathf.Clamp01(c.b * shade), 1f);
+                c = Color.Lerp(c, Color.white, gloss);
+                px[y * w + x] = (Color32)c;
             }
         }
         tex.SetPixels32(px);

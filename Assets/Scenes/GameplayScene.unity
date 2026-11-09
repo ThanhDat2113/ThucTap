@@ -641,6 +641,8 @@ MonoBehaviour:
   smooth: 10
   trailDelay: 0.35
   lowHealth: 0.25
+  showDamageTrail: 0
+  showBarTip: 0
 --- !u!1 &257773906
 GameObject:
   m_ObjectHideFlags: 0
