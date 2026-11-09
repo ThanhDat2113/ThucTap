@@ -1,0 +1,1755 @@
+fileFormatVersion: 2
+guid: bc0af42df649e204e8af983340b5a6dd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3176618858500187783
+    second: airi_nova_dance_keyposes_30_0
+  - first:
+      213: -8631341743359847668
+    second: airi_nova_dance_keyposes_30_1
+  - first:
+      213: -7394016736455341671
+    second: airi_nova_dance_keyposes_30_2
+  - first:
+      213: 7582147066222956895
+    second: airi_nova_dance_keyposes_30_3
+  - first:
+      213: -4466350906932614265
+    second: airi_nova_dance_keyposes_30_4
+  - first:
+      213: 4818180518433018739
+    second: airi_nova_dance_keyposes_30_5
+  - first:
+      213: 1562836077307682840
+    second: airi_nova_dance_keyposes_30_6
+  - first:
+      213: 1698771917804217146
+    second: airi_nova_dance_keyposes_30_7
+  - first:
+      213: -4295573047749325842
+    second: airi_nova_dance_keyposes_30_8
+  - first:
+      213: -6282928637346715730
+    second: airi_nova_dance_keyposes_30_9
+  - first:
+      213: 72193333079488595
+    second: airi_nova_dance_keyposes_30_10
+  - first:
+      213: -892512135420880417
+    second: airi_nova_dance_keyposes_30_11
+  - first:
+      213: -2170048855484318885
+    second: airi_nova_dance_keyposes_30_12
+  - first:
+      213: -2765782041543387413
+    second: airi_nova_dance_keyposes_30_13
+  - first:
+      213: -3623854485732523255
+    second: airi_nova_dance_keyposes_30_14
+  - first:
+      213: 6898802831426988781
+    second: airi_nova_dance_keyposes_30_15
+  - first:
+      213: -8944909192664161282
+    second: airi_nova_dance_keyposes_30_16
+  - first:
+      213: 8353963801909879276
+    second: airi_nova_dance_keyposes_30_17
+  - first:
+      213: -3704233682453407608
+    second: airi_nova_dance_keyposes_30_18
+  - first:
+      213: -9159171673248758771
+    second: airi_nova_dance_keyposes_30_19
+  - first:
+      213: 8650453764182342241
+    second: airi_nova_dance_keyposes_30_20
+  - first:
+      213: 5514460401987372383
+    second: airi_nova_dance_keyposes_30_21
+  - first:
+      213: -6617437890066861015
+    second: airi_nova_dance_keyposes_30_22
+  - first:
+      213: 3228262300350007637
+    second: airi_nova_dance_keyposes_30_23
+  - first:
+      213: -7418331188024154639
+    second: airi_nova_dance_keyposes_30_24
+  - first:
+      213: -6968585574535502267
+    second: airi_nova_dance_keyposes_30_25
+  - first:
+      213: -1954671224966633991
+    second: airi_nova_dance_keyposes_30_26
+  - first:
+      213: -4817467824591957922
+    second: airi_nova_dance_keyposes_30_27
+  - first:
+      213: 4333111677612048322
+    second: airi_nova_dance_keyposes_30_28
+  - first:
+      213: -1338082944693129490
+    second: airi_nova_dance_keyposes_30_29
+  - first:
+      213: 2533379130939107212
+    second: airi_nova_dance_keyposes_30_30
+  - first:
+      213: -7718049301563897303
+    second: airi_nova_dance_keyposes_30_31
+  - first:
+      213: 1883170690811220655
+    second: airi_nova_dance_keyposes_30_32
+  - first:
+      213: 6594068207228049332
+    second: airi_nova_dance_keyposes_30_33
+  - first:
+      213: -6501481600979119661
+    second: airi_nova_dance_keyposes_30_34
+  - first:
+      213: -5342186357337481734
+    second: airi_nova_dance_keyposes_30_35
+  - first:
+      213: 7143630530657153660
+    second: airi_nova_dance_keyposes_30_36
+  - first:
+      213: 2054752190289436657
+    second: airi_nova_dance_keyposes_30_37
+  - first:
+      213: 6096292725079658938
+    second: airi_nova_dance_keyposes_30_38
+  - first:
+      213: 8932043489812826607
+    second: airi_nova_dance_keyposes_30_39
+  - first:
+      213: -7628050390305475698
+    second: airi_nova_dance_keyposes_30_40
+  - first:
+      213: 966630988906848413
+    second: airi_nova_dance_keyposes_30_41
+  - first:
+      213: -8673279830265552693
+    second: airi_nova_dance_keyposes_30_42
+  - first:
+      213: -4886751565331645129
+    second: airi_nova_dance_keyposes_30_43
+  - first:
+      213: 1848483044489567077
+    second: airi_nova_dance_keyposes_30_44
+  - first:
+      213: -4077568895891131972
+    second: airi_nova_dance_keyposes_30_45
+  - first:
+      213: -6995460781802742852
+    second: airi_nova_dance_keyposes_30_46
+  - first:
+      213: 3545860020275646479
+    second: airi_nova_dance_keyposes_30_47
+  - first:
+      213: -7793536554390411445
+    second: airi_nova_dance_keyposes_30_48
+  - first:
+      213: -6490725953498711797
+    second: airi_nova_dance_keyposes_30_49
+  - first:
+      213: 1093364806426820951
+    second: airi_nova_dance_keyposes_30_50
+  - first:
+      213: 1602209805350265720
+    second: airi_nova_dance_keyposes_30_51
+  - first:
+      213: 5285771718321606429
+    second: airi_nova_dance_keyposes_30_52
+  - first:
+      213: -8088140750510633969
+    second: airi_nova_dance_keyposes_30_53
+  - first:
+      213: 4876235228343236423
+    second: airi_nova_dance_keyposes_30_54
+  - first:
+      213: -8818300954933055894
+    second: airi_nova_dance_keyposes_30_55
+  - first:
+      213: -2251602865779882107
+    second: airi_nova_dance_keyposes_30_56
+  - first:
+      213: -7826492594895174256
+    second: airi_nova_dance_keyposes_30_57
+  - first:
+      213: 1615317862612646882
+    second: airi_nova_dance_keyposes_30_58
+  - first:
+      213: -2284815944174874535
+    second: airi_nova_dance_keyposes_30_59
+  - first:
+      213: -2814629232497561029
+    second: airi_nova_dance_keyposes_30_60
+  - first:
+      213: 4327261765378970777
+    second: airi_nova_dance_keyposes_30_61
+  - first:
+      213: -1600932730726256163
+    second: airi_nova_dance_keyposes_30_62
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 975
+        width: 319
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 786e5b7750e951c20800000000000000
+      internalID: 3176618858500187783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_1
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 975
+        width: 321
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c03190c4a60573880800000000000000
+      internalID: -8631341743359847668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_2
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 975
+        width: 324
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 999494014fc236990800000000000000
+      internalID: -7394016736455341671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_3
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 975
+        width: 329
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f515df4b592393960800000000000000
+      internalID: 7582147066222956895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_4
+      rect:
+        serializedVersion: 2
+        x: 3606
+        y: 1344
+        width: 97
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78ba90e83855402c0800000000000000
+      internalID: -4466350906932614265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_5
+      rect:
+        serializedVersion: 2
+        x: 3731
+        y: 1367
+        width: 79
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37358e857ad9dd240800000000000000
+      internalID: 4818180518433018739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_6
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 975
+        width: 337
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 810e61ec12f40b510800000000000000
+      internalID: 1562836077307682840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_7
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1253
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a33212b0f00439710800000000000000
+      internalID: 1698771917804217146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_8
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 979
+        width: 354
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eebc82e621f0364c0800000000000000
+      internalID: -4295573047749325842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_9
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 980
+        width: 354
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7e1d551bd8ec8a0800000000000000
+      internalID: -6282928637346715730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_10
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 975
+        width: 354
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 358ba55347b700100800000000000000
+      internalID: 72193333079488595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_11
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 975
+        width: 353
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9538a01f82d93f0800000000000000
+      internalID: -892512135420880417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_12
+      rect:
+        serializedVersion: 2
+        x: 3471
+        y: 975
+        width: 353
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5b3d97301072e1e0800000000000000
+      internalID: -2170048855484318885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_13
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 1199
+        width: 15
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6d6af03e7fd99d0800000000000000
+      internalID: -2765782041543387413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_14
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 1150
+        width: 13
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90305349b8b75bdc0800000000000000
+      internalID: -3623854485732523255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_15
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 1192
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dea2aaeaf987dbf50800000000000000
+      internalID: 6898802831426988781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_16
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 1095
+        width: 13
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef3602f3b7c4dd380800000000000000
+      internalID: -8944909192664161282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_17
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 1156
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce16f4f01dd3fe370800000000000000
+      internalID: 8353963801909879276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_18
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 1153
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 888d358771be79cc0800000000000000
+      internalID: -3704233682453407608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_19
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 975
+        width: 46
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d04003bf3e514e080800000000000000
+      internalID: -9159171673248758771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_20
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 495
+        width: 320
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a7700ddd59c0870800000000000000
+      internalID: 8650453764182342241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_21
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 736
+        width: 36
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f554a6cc48c478c40800000000000000
+      internalID: 5514460401987372383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_22
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 495
+        width: 328
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 924ba57bc432a24a0800000000000000
+      internalID: -6617437890066861015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_23
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 499
+        width: 353
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 559c52645771dcc20800000000000000
+      internalID: 3228262300350007637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_24
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 770
+        width: 28
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f56e97a61bcc0990800000000000000
+      internalID: -7418331188024154639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_25
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 495
+        width: 286
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54666e2575c9a4f90800000000000000
+      internalID: -6968585574535502267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_26
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 499
+        width: 316
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f5af2f80ec9fd4e0800000000000000
+      internalID: -1954671224966633991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_27
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 495
+        width: 354
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e50925e998ae42db0800000000000000
+      internalID: -4817467824591957922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_28
+      rect:
+        serializedVersion: 2
+        x: 2319
+        y: 495
+        width: 354
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cfb92cec1e422c30800000000000000
+      internalID: 4333111677612048322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_29
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 495
+        width: 354
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeeae89b6ac2e6de0800000000000000
+      internalID: -1338082944693129490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_30
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 495
+        width: 346
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c87630da5ee582320800000000000000
+      internalID: 2533379130939107212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_31
+      rect:
+        serializedVersion: 2
+        x: 3471
+        y: 495
+        width: 351
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a055d5d0bf3e490800000000000000
+      internalID: -7718049301563897303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_32
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 711
+        width: 46
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa2da3d04cd522a10800000000000000
+      internalID: 1883170690811220655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_33
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 704
+        width: 28
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b7568cf816d28b50800000000000000
+      internalID: 6594068207228049332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_34
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 683
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d1d6e32ee816c5a0800000000000000
+      internalID: -6501481600979119661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_35
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 718
+        width: 11
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afd16f6efcdbcd5b0800000000000000
+      internalID: -5342186357337481734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_36
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 673
+        width: 32
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c72747a7e16432360800000000000000
+      internalID: 7143630530657153660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_37
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 719
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ff58a30b32f38c10800000000000000
+      internalID: 2054752190289436657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_38
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 680
+        width: 20
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab1db251fe16a9450800000000000000
+      internalID: 6096292725079658938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_39
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 636
+        width: 35
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe942a0ea3ef4fb70800000000000000
+      internalID: 8932043489812826607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_40
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 688
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83ff0dc598b32690800000000000000
+      internalID: -7628050390305475698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_41
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 676
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d906da253c92a6d00800000000000000
+      internalID: 966630988906848413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_42
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 678
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc0267782f152a780800000000000000
+      internalID: -8673279830265552693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_43
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 666
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73db2daa755ce2cb0800000000000000
+      internalID: -4886751565331645129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_44
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 667
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b1228098127a910800000000000000
+      internalID: 1848483044489567077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_45
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 654
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb13a3d61b09967c0800000000000000
+      internalID: -4077568895891131972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_46
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 622
+        width: 38
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbb98748b712bee90800000000000000
+      internalID: -6995460781802742852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_47
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 505
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f001ac3d6ec653130800000000000000
+      internalID: 3545860020275646479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_48
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 508
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b47a983bbcbc7d390800000000000000
+      internalID: -7793536554390411445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_49
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 498
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b09fc47722f4ce5a0800000000000000
+      internalID: -6490725953498711797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_50
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 495
+        width: 86
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7510cf0af796c2f00800000000000000
+      internalID: 1093364806426820951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_51
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 500
+        width: 36
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 873ec8f34513c3610800000000000000
+      internalID: 1602209805350265720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_52
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 15
+        width: 347
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1f8d526f55da5940800000000000000
+      internalID: 5285771718321606429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_53
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 15
+        width: 354
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0cc37817d621cf80800000000000000
+      internalID: -8088140750510633969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_54
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 15
+        width: 354
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 747f4a2da1edba340800000000000000
+      internalID: 4876235228343236423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_55
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 15
+        width: 350
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6e2abab00a1f9580800000000000000
+      internalID: -8818300954933055894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_56
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 15
+        width: 354
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58740f18f13b0c0e0800000000000000
+      internalID: -2251602865779882107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_57
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 15
+        width: 350
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0954c049376b26390800000000000000
+      internalID: -7826492594895174256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_58
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 210
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ebbe58a903ca6610800000000000000
+      internalID: 1615317862612646882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_59
+      rect:
+        serializedVersion: 2
+        x: 2319
+        y: 15
+        width: 354
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 950de461104ba40e0800000000000000
+      internalID: -2284815944174874535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_60
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 15
+        width: 354
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b327d8620ad60f8d0800000000000000
+      internalID: -2814629232497561029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_61
+      rect:
+        serializedVersion: 2
+        x: 3092
+        y: 15
+        width: 384
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9941b8716a58d0c30800000000000000
+      internalID: 4327261765378970777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_dance_keyposes_30_62
+      rect:
+        serializedVersion: 2
+        x: 3545
+        y: 15
+        width: 280
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd1f3cbd92858c9e0800000000000000
+      internalID: -1600932730726256163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      airi_nova_dance_keyposes_30_0: 3176618858500187783
+      airi_nova_dance_keyposes_30_1: -8631341743359847668
+      airi_nova_dance_keyposes_30_10: 72193333079488595
+      airi_nova_dance_keyposes_30_11: -892512135420880417
+      airi_nova_dance_keyposes_30_12: -2170048855484318885
+      airi_nova_dance_keyposes_30_13: -2765782041543387413
+      airi_nova_dance_keyposes_30_14: -3623854485732523255
+      airi_nova_dance_keyposes_30_15: 6898802831426988781
+      airi_nova_dance_keyposes_30_16: -8944909192664161282
+      airi_nova_dance_keyposes_30_17: 8353963801909879276
+      airi_nova_dance_keyposes_30_18: -3704233682453407608
+      airi_nova_dance_keyposes_30_19: -9159171673248758771
+      airi_nova_dance_keyposes_30_2: -7394016736455341671
+      airi_nova_dance_keyposes_30_20: 8650453764182342241
+      airi_nova_dance_keyposes_30_21: 5514460401987372383
+      airi_nova_dance_keyposes_30_22: -6617437890066861015
+      airi_nova_dance_keyposes_30_23: 3228262300350007637
+      airi_nova_dance_keyposes_30_24: -7418331188024154639
+      airi_nova_dance_keyposes_30_25: -6968585574535502267
+      airi_nova_dance_keyposes_30_26: -1954671224966633991
+      airi_nova_dance_keyposes_30_27: -4817467824591957922
+      airi_nova_dance_keyposes_30_28: 4333111677612048322
+      airi_nova_dance_keyposes_30_29: -1338082944693129490
+      airi_nova_dance_keyposes_30_3: 7582147066222956895
+      airi_nova_dance_keyposes_30_30: 2533379130939107212
+      airi_nova_dance_keyposes_30_31: -7718049301563897303
+      airi_nova_dance_keyposes_30_32: 1883170690811220655
+      airi_nova_dance_keyposes_30_33: 6594068207228049332
+      airi_nova_dance_keyposes_30_34: -6501481600979119661
+      airi_nova_dance_keyposes_30_35: -5342186357337481734
+      airi_nova_dance_keyposes_30_36: 7143630530657153660
+      airi_nova_dance_keyposes_30_37: 2054752190289436657
+      airi_nova_dance_keyposes_30_38: 6096292725079658938
+      airi_nova_dance_keyposes_30_39: 8932043489812826607
+      airi_nova_dance_keyposes_30_4: -4466350906932614265
+      airi_nova_dance_keyposes_30_40: -7628050390305475698
+      airi_nova_dance_keyposes_30_41: 966630988906848413
+      airi_nova_dance_keyposes_30_42: -8673279830265552693
+      airi_nova_dance_keyposes_30_43: -4886751565331645129
+      airi_nova_dance_keyposes_30_44: 1848483044489567077
+      airi_nova_dance_keyposes_30_45: -4077568895891131972
+      airi_nova_dance_keyposes_30_46: -6995460781802742852
+      airi_nova_dance_keyposes_30_47: 3545860020275646479
+      airi_nova_dance_keyposes_30_48: -7793536554390411445
+      airi_nova_dance_keyposes_30_49: -6490725953498711797
+      airi_nova_dance_keyposes_30_5: 4818180518433018739
+      airi_nova_dance_keyposes_30_50: 1093364806426820951
+      airi_nova_dance_keyposes_30_51: 1602209805350265720
+      airi_nova_dance_keyposes_30_52: 5285771718321606429
+      airi_nova_dance_keyposes_30_53: -8088140750510633969
+      airi_nova_dance_keyposes_30_54: 4876235228343236423
+      airi_nova_dance_keyposes_30_55: -8818300954933055894
+      airi_nova_dance_keyposes_30_56: -2251602865779882107
+      airi_nova_dance_keyposes_30_57: -7826492594895174256
+      airi_nova_dance_keyposes_30_58: 1615317862612646882
+      airi_nova_dance_keyposes_30_59: -2284815944174874535
+      airi_nova_dance_keyposes_30_6: 1562836077307682840
+      airi_nova_dance_keyposes_30_60: -2814629232497561029
+      airi_nova_dance_keyposes_30_61: 4327261765378970777
+      airi_nova_dance_keyposes_30_62: -1600932730726256163
+      airi_nova_dance_keyposes_30_7: 1698771917804217146
+      airi_nova_dance_keyposes_30_8: -4295573047749325842
+      airi_nova_dance_keyposes_30_9: -6282928637346715730
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

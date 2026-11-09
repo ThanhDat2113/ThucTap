@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 98a6310e63b3ba94f84079583005b0d2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7716063110118449166
+    second: airi_nova_miss_12_0
+  - first:
+      213: 4257484708069830037
+    second: airi_nova_miss_12_1
+  - first:
+      213: -3412823015391359183
+    second: airi_nova_miss_12_2
+  - first:
+      213: -8773417327769564406
+    second: airi_nova_miss_12_3
+  - first:
+      213: -8538037852289002194
+    second: airi_nova_miss_12_4
+  - first:
+      213: 2654312652631958950
+    second: airi_nova_miss_12_5
+  - first:
+      213: -2973235947331209947
+    second: airi_nova_miss_12_6
+  - first:
+      213: 8549885966699106170
+    second: airi_nova_miss_12_7
+  - first:
+      213: 3303405756116871550
+    second: airi_nova_miss_12_8
+  - first:
+      213: -2678343140338236325
+    second: airi_nova_miss_12_9
+  - first:
+      213: -7976905119240268310
+    second: airi_nova_miss_12_10
+  - first:
+      213: -28346871425897944
+    second: airi_nova_miss_12_11
+  - first:
+      213: 6622536975571762058
+    second: airi_nova_miss_12_12
+  - first:
+      213: -7899057527220714398
+    second: airi_nova_miss_12_13
+  - first:
+      213: 1437174606998922949
+    second: airi_nova_miss_12_14
+  - first:
+      213: -8420283282099188172
+    second: airi_nova_miss_12_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: airi_nova_miss_12_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 496
+        width: 345
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ffd4e89b790be490800000000000000
+      internalID: -7716063110118449166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_1
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 497
+        width: 319
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59de82de8cf951b30800000000000000
+      internalID: 4257484708069830037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_2
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 496
+        width: 350
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f0256ac8733a0d0800000000000000
+      internalID: -3412823015391359183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_3
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 501
+        width: 349
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0bc9088c6f8e3680800000000000000
+      internalID: -8773417327769564406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_4
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 500
+        width: 354
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e25997f4fcbc28980800000000000000
+      internalID: -8538037852289002194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_5
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 502
+        width: 350
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a5e3fe5b4306d420800000000000000
+      internalID: 2654312652631958950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_6
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 510
+        width: 346
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 525b6e5a8a1fcb6d0800000000000000
+      internalID: -2973235947331209947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_7
+      rect:
+        serializedVersion: 2
+        x: 2722
+        y: 511
+        width: 305
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f823bccfb47a670800000000000000
+      internalID: 8549885966699106170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_8
+      rect:
+        serializedVersion: 2
+        x: 3020
+        y: 657
+        width: 37
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e79a352780e08dd20800000000000000
+      internalID: 3303405756116871550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_9
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 499
+        width: 352
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b540985ba1d94dad0800000000000000
+      internalID: -2678343140338236325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_10
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 496
+        width: 341
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae550b8be075c4190800000000000000
+      internalID: -7976905119240268310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_11
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 551
+        width: 20
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82a6a2eabaa4b9ff0800000000000000
+      internalID: -28346871425897944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_12
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 181
+        width: 25
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b38d4aa4af7eb50800000000000000
+      internalID: 6622536975571762058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_13
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 17
+        width: 313
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26442ada709e06290800000000000000
+      internalID: -7899057527220714398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_14
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 17
+        width: 343
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c6e16ac0bed1f310800000000000000
+      internalID: 1437174606998922949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: airi_nova_miss_12_15
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 111
+        width: 7
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43e415ea7f4252b80800000000000000
+      internalID: -8420283282099188172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      airi_nova_miss_12_0: -7716063110118449166
+      airi_nova_miss_12_1: 4257484708069830037
+      airi_nova_miss_12_10: -7976905119240268310
+      airi_nova_miss_12_11: -28346871425897944
+      airi_nova_miss_12_12: 6622536975571762058
+      airi_nova_miss_12_13: -7899057527220714398
+      airi_nova_miss_12_14: 1437174606998922949
+      airi_nova_miss_12_15: -8420283282099188172
+      airi_nova_miss_12_2: -3412823015391359183
+      airi_nova_miss_12_3: -8773417327769564406
+      airi_nova_miss_12_4: -8538037852289002194
+      airi_nova_miss_12_5: 2654312652631958950
+      airi_nova_miss_12_6: -2973235947331209947
+      airi_nova_miss_12_7: 8549885966699106170
+      airi_nova_miss_12_8: 3303405756116871550
+      airi_nova_miss_12_9: -2678343140338236325
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

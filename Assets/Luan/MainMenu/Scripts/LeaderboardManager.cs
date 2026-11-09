@@ -49,6 +49,7 @@ namespace Luan.MainMenu
     {
         public string StatisticName;
         public int MaxResultsCount;
+        public string PlayFabId;
     }
 
     [Serializable]
@@ -174,6 +175,9 @@ namespace Luan.MainMenu
         [Tooltip("Ký tự hiển thị khi hàng chưa có người chơi")]
         [SerializeField] private string emptyPlaceholder = "-";
 
+        [Tooltip("Hiển thị dữ liệu mẫu (Mock Data) khi chưa đăng nhập hoặc khi chạy thử để UI không bị trống")]
+        [SerializeField] private bool useMockDataWhenUnauthenticated = true;
+
         [Tooltip("Độ dài tối đa của tên trước khi thêm '...' để không bị tràn khung")]
         [Range(4, 25)]
         [SerializeField] private int maxNameLength = 12;
@@ -241,6 +245,9 @@ namespace Luan.MainMenu
 
             // Tải dữ liệu cache từ PlayerPrefs nếu có
             LoadPersistentCache();
+
+            // Khởi tạo hiển thị người chơi hiện tại ngay từ đầu để không bị trống
+            PopulateCurrentPlayerUI(_cachedPlayerEntry);
         }
 
         private void LoadPersistentCache()
@@ -358,6 +365,9 @@ namespace Luan.MainMenu
 
         private void OnEnable()
         {
+            // Hiển thị ngay dữ liệu người chơi hiện tại (từ cache hoặc tài khoản) để không bao giờ bị trống
+            PopulateCurrentPlayerUI(_cachedPlayerEntry);
+
             // Tự động tải lại bảng xếp hạng mỗi khi mở panel Thành Tích (dùng cache nếu có)
             FetchLeaderboard();
 
@@ -446,15 +456,30 @@ namespace Luan.MainMenu
             if (string.IsNullOrEmpty(titleId) || titleId == "YOUR_TITLE_ID")
             {
                 if (!isSilentBackground) SetStatus("Chưa cấu hình PlayFab Title ID!");
-                ClearLeaderboardUI();
+                if (useMockDataWhenUnauthenticated)
+                {
+                    FillMockDataForTesting();
+                }
+                else
+                {
+                    ClearLeaderboardUI();
+                    UpdateCurrentPlayerDisplayUnauthenticated();
+                }
                 return;
             }
 
             if (string.IsNullOrEmpty(sessionTicket))
             {
-                if (!isSilentBackground) SetStatus("Chưa đăng nhập! Vui lòng đăng nhập để xem thành tích.");
-                ClearLeaderboardUI();
-                UpdateCurrentPlayerDisplayUnauthenticated();
+                if (!isSilentBackground) SetStatus("Chưa đăng nhập! Vui lòng đăng nhập để xem thành tích thực tế.");
+                if (useMockDataWhenUnauthenticated)
+                {
+                    FillMockDataForTesting();
+                }
+                else
+                {
+                    ClearLeaderboardUI();
+                    UpdateCurrentPlayerDisplayUnauthenticated();
+                }
                 return;
             }
 
@@ -536,7 +561,7 @@ namespace Luan.MainMenu
             }
             if (string.IsNullOrEmpty(myPlayFabId))
             {
-                myPlayFabId = PlayerPrefs.GetString("PLAYFAB_ID", "");
+                myPlayFabId = PlayerPrefs.GetString("PLAYFAB_USER_ID", PlayerPrefs.GetString("PLAYFAB_ID", ""));
             }
 
             if (top10Entries != null && !string.IsNullOrEmpty(myPlayFabId))
@@ -558,7 +583,8 @@ namespace Luan.MainMenu
                 PlayFabGetLeaderboardAroundPlayerRequest reqAroundData = new PlayFabGetLeaderboardAroundPlayerRequest
                 {
                     StatisticName = statisticName,
-                    MaxResultsCount = 1
+                    MaxResultsCount = 1,
+                    PlayFabId = !string.IsNullOrEmpty(myPlayFabId) ? myPlayFabId : null
                 };
 
                 string jsonAround = JsonUtility.ToJson(reqAroundData);
@@ -581,6 +607,11 @@ namespace Luan.MainMenu
                             if (res != null && res.data != null && res.data.Leaderboard != null && res.data.Leaderboard.Length > 0)
                             {
                                 playerEntry = res.data.Leaderboard[0];
+                                Debug.Log($"[LeaderboardManager] Đã lấy dữ liệu người chơi từ PlayFab: Hạng #{playerEntry.Position + 1}, Tên: '{playerEntry.DisplayName}', Điểm: {playerEntry.StatValue}");
+                            }
+                            else
+                            {
+                                Debug.Log("[LeaderboardManager] PlayFab chưa có bản ghi điểm của tài khoản hiện tại.");
                             }
                         }
                         catch (Exception ex)
@@ -696,13 +727,27 @@ namespace Luan.MainMenu
                     ? AccountManager.Instance.CurrentUser.displayName
                     : AccountManager.Instance.CurrentUser.username;
             }
+            if (string.IsNullOrEmpty(myDisplayName))
+            {
+                myDisplayName = PlayerPrefs.GetString("PLAYFAB_CACHED_DISPLAYNAME", "");
+            }
+            if (string.IsNullOrEmpty(myDisplayName))
+            {
+                myDisplayName = PlayerPrefs.GetString("PLAYFAB_CACHED_USERNAME", "");
+            }
+            if (string.IsNullOrEmpty(myDisplayName))
+            {
+                myDisplayName = PlayerPrefs.GetString("SAVED_USERNAME", "");
+            }
 
-            // Chỉ hiển thị thứ hạng (Top 1, 2,...) khi người chơi thực sự có điểm (> 0)
+            // Chỉ hiển thị thứ hạng (#1, #2,...) khi người chơi thực sự có điểm (> 0) trên PlayFab
             if (entry != null && entry.StatValue > 0)
             {
                 int rank = entry.Position + 1; // PlayFab Position là 0-indexed
                 string rankText = FormatRank(rank);
-                string nameText = FormatName(!string.IsNullOrEmpty(entry.DisplayName) ? entry.DisplayName : myDisplayName);
+                string rawName = !string.IsNullOrEmpty(entry.DisplayName) ? entry.DisplayName : myDisplayName;
+                string nameText = FormatName(rawName);
+                if (string.IsNullOrEmpty(nameText)) nameText = "Người chơi";
                 string scoreText = FormatScore(entry.StatValue);
 
                 if (currentRankTMP != null)
@@ -726,7 +771,14 @@ namespace Luan.MainMenu
             }
             else
             {
-                // Người chơi chưa có điểm nào (> 0) trên PlayFab -> Chưa xếp hạng!
+                // Người chơi chưa có điểm nào (> 0) trên PlayFab -> Bắt buộc để "-" (chưa xếp hạng), tuyệt đối không để #1!
+                string rawName = (entry != null && !string.IsNullOrEmpty(entry.DisplayName)) ? entry.DisplayName : myDisplayName;
+                string nameText = FormatName(rawName);
+                if (string.IsNullOrEmpty(nameText))
+                {
+                    nameText = (AccountManager.Instance != null && AccountManager.Instance.IsLoggedIn) ? "Tôi" : "Chưa đăng nhập";
+                }
+
                 if (currentRankTMP != null)
                 {
                     currentRankTMP.textWrappingMode = TextWrappingModes.NoWrap;
@@ -736,7 +788,7 @@ namespace Luan.MainMenu
                 {
                     currentDisplayNameTMP.textWrappingMode = TextWrappingModes.NoWrap;
                     currentDisplayNameTMP.overflowMode = TextOverflowModes.Ellipsis;
-                    currentDisplayNameTMP.text = FormatName(myDisplayName);
+                    currentDisplayNameTMP.text = nameText;
                 }
                 if (currentScoreTMP != null)
                 {
@@ -748,6 +800,9 @@ namespace Luan.MainMenu
 
         private void UpdateCurrentPlayerDisplayUnauthenticated()
         {
+            string savedUser = PlayerPrefs.GetString("PLAYFAB_CACHED_DISPLAYNAME", PlayerPrefs.GetString("PLAYFAB_CACHED_USERNAME", ""));
+            string nameText = !string.IsNullOrEmpty(savedUser) ? FormatName(savedUser) : "Chưa đăng nhập";
+
             if (currentRankTMP != null)
             {
                 currentRankTMP.textWrappingMode = TextWrappingModes.NoWrap;
@@ -756,12 +811,13 @@ namespace Luan.MainMenu
             if (currentDisplayNameTMP != null)
             {
                 currentDisplayNameTMP.textWrappingMode = TextWrappingModes.NoWrap;
-                currentDisplayNameTMP.text = "Chưa đăng nhập";
+                currentDisplayNameTMP.overflowMode = TextOverflowModes.Ellipsis;
+                currentDisplayNameTMP.text = nameText;
             }
             if (currentScoreTMP != null)
             {
                 currentScoreTMP.textWrappingMode = TextWrappingModes.NoWrap;
-                currentScoreTMP.text = emptyPlaceholder;
+                currentScoreTMP.text = "0";
             }
         }
 
@@ -1012,6 +1068,23 @@ namespace Luan.MainMenu
             if (currentDisplayNameTMP != null) currentDisplayNameTMP.text = "BanDangChoi";
             if (currentScoreTMP != null) currentScoreTMP.text = FormatScore(75000);
 
+            #if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
+                foreach (var row in top10Rows)
+                {
+                    if (row != null)
+                    {
+                        if (row.displayNameTMP != null) UnityEditor.EditorUtility.SetDirty(row.displayNameTMP);
+                        if (row.scoreTMP != null) UnityEditor.EditorUtility.SetDirty(row.scoreTMP);
+                    }
+                }
+                if (currentRankTMP != null) UnityEditor.EditorUtility.SetDirty(currentRankTMP);
+                if (currentDisplayNameTMP != null) UnityEditor.EditorUtility.SetDirty(currentDisplayNameTMP);
+                if (currentScoreTMP != null) UnityEditor.EditorUtility.SetDirty(currentScoreTMP);
+            }
+#endif
             Debug.Log("[LeaderboardManager] Đã điền dữ liệu mẫu (rút gọn k, M và Rank) lên UI để bạn xem trước!");
         }
 

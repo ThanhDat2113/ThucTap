@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: 1aac373c828acd34b9d88dca97f0532b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4356151395398822211
+    second: velvet_miss_12_0
+  - first:
+      213: -7293270267758074027
+    second: velvet_miss_12_1
+  - first:
+      213: 1323332394777705122
+    second: velvet_miss_12_2
+  - first:
+      213: 7760461736502253044
+    second: velvet_miss_12_3
+  - first:
+      213: 8468943379920918513
+    second: velvet_miss_12_4
+  - first:
+      213: 7719668597697544755
+    second: velvet_miss_12_5
+  - first:
+      213: -7003698772885360944
+    second: velvet_miss_12_6
+  - first:
+      213: -5394528723071692244
+    second: velvet_miss_12_7
+  - first:
+      213: 3113026480356536580
+    second: velvet_miss_12_8
+  - first:
+      213: -1065049465531930630
+    second: velvet_miss_12_9
+  - first:
+      213: -7091374974988911325
+    second: velvet_miss_12_10
+  - first:
+      213: 505129750345804136
+    second: velvet_miss_12_11
+  - first:
+      213: -8044700524862801317
+    second: velvet_miss_12_12
+  - first:
+      213: 5317166291460537817
+    second: velvet_miss_12_13
+  - first:
+      213: -6911100731730322203
+    second: velvet_miss_12_14
+  - first:
+      213: 7866784646578701902
+    second: velvet_miss_12_15
+  - first:
+      213: -6002744253073248414
+    second: velvet_miss_12_16
+  - first:
+      213: 3110450741528420596
+    second: velvet_miss_12_17
+  - first:
+      213: 3312572171369410583
+    second: velvet_miss_12_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: velvet_miss_12_0
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 491
+        width: 285
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 349a19e3d98247c30800000000000000
+      internalID: 4356151395398822211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_1
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 491
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 557ac57355919ca90800000000000000
+      internalID: -7293270267758074027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_2
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 491
+        width: 309
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aafd7e3dcb6d5210800000000000000
+      internalID: 1323332394777705122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_3
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 491
+        width: 226
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f55a3925d2b2bb60800000000000000
+      internalID: 7760461736502253044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_4
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 498
+        width: 232
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f71517322bb78570800000000000000
+      internalID: 8468943379920918513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_5
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 494
+        width: 234
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 332008560b5c12b60800000000000000
+      internalID: 7719668597697544755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_6
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 11
+        width: 323
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0de2450c21dddce90800000000000000
+      internalID: -7003698772885360944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_7
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 160
+        width: 33
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c229ba235b8c225b0800000000000000
+      internalID: -5394528723071692244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_8
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 11
+        width: 305
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40139022711b33b20800000000000000
+      internalID: 3113026480356536580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_9
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 11
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af7efba672f2831f0800000000000000
+      internalID: -1065049465531930630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_10
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 297
+        width: 15
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32df0be2800669d90800000000000000
+      internalID: -7091374974988911325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_11
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 11
+        width: 286
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 869e7d6e4d4920700800000000000000
+      internalID: 505129750345804136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_12
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 11
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5a772bce7b7b5090800000000000000
+      internalID: -8044700524862801317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_13
+      rect:
+        serializedVersion: 2
+        x: 1969
+        y: 15
+        width: 285
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ddbf2e029e5ac940800000000000000
+      internalID: 5317166291460537817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_14
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 246
+        width: 8
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ec95464086d610a0800000000000000
+      internalID: -6911100731730322203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_15
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 159
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4602dfb4fe6c2d60800000000000000
+      internalID: 7866784646578701902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_16
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 11
+        width: 35
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f2d0ed7e7f1bca0800000000000000
+      internalID: -6002744253073248414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_17
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 11
+        width: 28
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f0e624387a8a2b20800000000000000
+      internalID: 3110450741528420596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_miss_12_18
+      rect:
+        serializedVersion: 2
+        x: 2025
+        y: 11
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 710715fc6de98fd20800000000000000
+      internalID: 3312572171369410583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      velvet_miss_12_0: 4356151395398822211
+      velvet_miss_12_1: -7293270267758074027
+      velvet_miss_12_10: -7091374974988911325
+      velvet_miss_12_11: 505129750345804136
+      velvet_miss_12_12: -8044700524862801317
+      velvet_miss_12_13: 5317166291460537817
+      velvet_miss_12_14: -6911100731730322203
+      velvet_miss_12_15: 7866784646578701902
+      velvet_miss_12_16: -6002744253073248414
+      velvet_miss_12_17: 3110450741528420596
+      velvet_miss_12_18: 3312572171369410583
+      velvet_miss_12_2: 1323332394777705122
+      velvet_miss_12_3: 7760461736502253044
+      velvet_miss_12_4: 8468943379920918513
+      velvet_miss_12_5: 7719668597697544755
+      velvet_miss_12_6: -7003698772885360944
+      velvet_miss_12_7: -5394528723071692244
+      velvet_miss_12_8: 3113026480356536580
+      velvet_miss_12_9: -1065049465531930630
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
