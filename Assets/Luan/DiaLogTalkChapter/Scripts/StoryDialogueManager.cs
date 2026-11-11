@@ -16,7 +16,9 @@ namespace Luan.Dialogue
     public enum DialoguePhase
     {
         None,
+        IntroVideo,
         Intro,
+        Backstory,
         PreBattle,
         PostBattle
     }
@@ -30,6 +32,10 @@ namespace Luan.Dialogue
         public string text = "";
         public Sprite customAvatar = null;
         public Color nameColor = new Color(0.2f, 0.95f, 1f, 1f);
+        [Tooltip("Mô tả hành động của nhân vật theo thoại")]
+        public string actionDescription = "";
+        [Tooltip("Ảnh minh họa toàn cảnh / backstory cutscene")]
+        public Sprite illustration = null;
     }
 
     [System.Serializable]
@@ -101,9 +107,58 @@ namespace Luan.Dialogue
 
         // ★ Thêm: theo dõi xem dialogue đang chạy hay không (để GameManager không start gameplay lẫn vào)
         public bool IsPlaying { get; private set; }
+        public bool LastBattleWon { get; private set; } = true;
 
         private bool hasCompletedDialogueThisSession = false;
         private bool hasCompletedPostBattleThisSession = false;
+
+        [Header("Chapter Intro Video (~8s)")]
+        [SerializeField] private GameObject videoContainer;
+        [SerializeField] private CanvasGroup videoCanvasGroup;
+        [SerializeField] private UnityEngine.UI.RawImage videoRawImage;
+        [SerializeField] private UnityEngine.Video.VideoPlayer videoPlayer;
+        [SerializeField] private UnityEngine.UI.Button videoSkipButton;
+        [SerializeField] private TMPro.TMP_Text videoSkipText;
+        private RenderTexture videoRenderTexture;
+        private Coroutine videoRoutine;
+        private bool skipVideoRequested;
+
+        [Header("Tùy Chỉnh Kích Thước Ảnh Backstory (Layout Settings)")]
+        [Tooltip("Tỉ lệ phóng to/thu nhỏ ảnh Backstory (1.0 = Phủ kín 100% full màn hình Mobile tràn viền)")]
+        [Range(0.5f, 2.0f)]
+        [SerializeField] private float backstoryScale = 1.0f;
+        [Tooltip("Dịch chuyển vị trí ảnh lên / xuống theo trục Y (Pixel)")]
+        [SerializeField] private float backstoryOffsetY = 0f;
+
+        [Header("Tùy Chỉnh Chữ Nhắc Chạm Ảnh Đầu (First Slide Prompt Text)")]
+        [Tooltip("Nội dung text nhấp nháy ở ảnh đầu tiên")]
+        [SerializeField] private string firstSlidePromptTextString = "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA ▶";
+        [Tooltip("Cỡ chữ nhắc chạm")]
+        [SerializeField] private float firstSlidePromptFontSize = 24f;
+        [Tooltip("Màu chữ nhắc chạm")]
+        [SerializeField] private Color firstSlidePromptColor = new Color(0.2f, 0.95f, 1f, 0.95f);
+        [Tooltip("Vị trí ngang X (Trái: âm, Phải: dương, Giữa: 0)")]
+        [SerializeField] private float firstSlidePromptOffsetX = 0f;
+        [Tooltip("Vị trí dọc Y (Lên: dương, Hạ thấp: nhỏ, Mặc định: 45)")]
+        [SerializeField] private float firstSlidePromptOffsetY = 45f;
+        [HideInInspector, SerializeField] private float firstSlidePromptBottomOffsetY = 45f;
+        [Tooltip("Hiển thị chữ nhắc chạm ở ảnh đầu tiên")]
+        [SerializeField] private bool showFirstSlidePrompt = true;
+
+        public TMPro.TMP_Text BackstoryPromptText => backstoryFirstSlidePromptText;
+        public Image BackstoryIllustrationImage => backstoryIllustrationImage;
+        public float BackstoryScale { get => backstoryScale; set => backstoryScale = value; }
+        public float FirstSlidePromptOffsetX { get => firstSlidePromptOffsetX; set => firstSlidePromptOffsetX = value; }
+        public float FirstSlidePromptOffsetY { get => firstSlidePromptOffsetY; set => firstSlidePromptOffsetY = value; }
+
+        [Header("Backstory Transition & Pulse Prompt")]
+        private List<Sprite> activeBackstoryImages = new List<Sprite>();
+        [SerializeField] private CanvasGroup backstoryContentCanvasGroup;
+        [SerializeField] private TMPro.TMP_Text backstoryFirstSlidePromptText;
+        private Coroutine backstorySequenceRoutine;
+        private Coroutine backstoryPromptPulseRoutine;
+        private bool isWaitingForFirstSlideTap;
+        private bool slideTapRequested;
 
         [Header("Chế độ kiểm thử")]
         [Tooltip("Bật để luôn chạy hội thoại khi bấm Play trực tiếp tại GameplayScene")]
@@ -143,6 +198,18 @@ namespace Luan.Dialogue
         [SerializeField] private float logoDisplayDuration = 3.0f;
         [Tooltip("Độ tối của overlay nền (0 = trong suốt, 1 = đen kịt). Giữ khoảng 0.6 - 0.65 để không đè tối mất khung cảnh")]
         [SerializeField] private float dimOverlayAlpha = 0.65f;
+
+        [Header("Backstory Minh Họa & Cutscenes")]
+        [SerializeField] private GameObject backstoryContainer;
+        [SerializeField] private CanvasGroup backstoryCanvasGroup;
+        [SerializeField] private Image backstoryIllustrationImage;
+        [SerializeField] private GameObject backstorySubtitlePanel;
+        [SerializeField] private TMP_Text backstorySpeakerText;
+        [SerializeField] private TMP_Text backstoryActionText;
+        [SerializeField] private TMP_Text backstoryDialogueText;
+        [SerializeField] private TMP_Text backstorySlideCounterText;
+        [SerializeField] private GameObject backstoryNextIndicator;
+        [SerializeField] private Button backstoryTapButton;
 
         [Header("Speaker Bên Trái (Main 1 / Player)")]
         [SerializeField] private SpeakerUI leftSpeaker = new SpeakerUI();
@@ -186,6 +253,8 @@ namespace Luan.Dialogue
         private Coroutine autoRoutine;
         private Coroutine promptPulseRoutine;
         private Coroutine introSequenceRoutine;
+        private List<BackstorySlide> activeBackstorySlides;
+        private int currentBackstoryIndex = -1;
 
         private enum IntroStep
         {
@@ -252,16 +321,69 @@ namespace Luan.Dialogue
             return dialogueLines;
         }
 
-        public List<DialogueLine> GetPostBattleLines()
+        public List<DialogueLine> GetPostBattleLines(bool isWin)
         {
             var cfg = GetCurrentChapterConfig();
-            if (cfg != null && cfg.dialogueAsset != null && cfg.dialogueAsset.postBattleLines != null && cfg.dialogueAsset.postBattleLines.Count > 0)
-                return cfg.dialogueAsset.postBattleLines;
+            var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
 
-            if (dialogueDataAsset != null && dialogueDataAsset.postBattleLines != null && dialogueDataAsset.postBattleLines.Count > 0)
-                return dialogueDataAsset.postBattleLines;
+            if (data != null)
+            {
+                if (isWin)
+                {
+                    var win = data.GetWinLines();
+                    if (win != null && win.Count > 0) return win;
+                }
+                else
+                {
+                    var lose = data.GetLoseLines();
+                    if (lose != null && lose.Count > 0) return lose;
+                }
+            }
+
+            if (isWin)
+            {
+                if (dialogueDataAsset != null && dialogueDataAsset.postBattleLines != null && dialogueDataAsset.postBattleLines.Count > 0)
+                    return dialogueDataAsset.postBattleLines;
+            }
+            else
+            {
+                return GetDefaultDefeatLines();
+            }
 
             return null;
+        }
+
+        public List<DialogueLine> GetPostBattleLines()
+        {
+            return GetPostBattleLines(LastBattleWon);
+        }
+
+        private List<DialogueLine> GetDefaultDefeatLines()
+        {
+            string oppName = GetActiveOpponentName();
+            Sprite oppAvatar = GetActiveOpponentAvatar();
+            string pName = GetPlayerDisplayName();
+            Sprite pAvatar = PlayerAvatarSprite;
+
+            return new List<DialogueLine>
+            {
+                new DialogueLine
+                {
+                    speakerName = oppName,
+                    side = SpeakerSide.Right,
+                    text = "Chỉ có thế thôi sao? Cậu vẫn chưa theo kịp nhịp của tôi đâu.",
+                    customAvatar = oppAvatar,
+                    nameColor = new Color(1.0f, 0.2f, 0.85f, 1f)
+                },
+                new DialogueLine
+                {
+                    speakerName = pName,
+                    side = SpeakerSide.Left,
+                    text = "Chưa xong đâu... Tôi sẽ quay lại và lấy chiếc huy hiệu đó!",
+                    customAvatar = pAvatar,
+                    nameColor = new Color(0.2f, 0.95f, 1f, 1f)
+                }
+            };
         }
 
         public List<DialogueLine> DialogueLines
@@ -285,30 +407,31 @@ namespace Luan.Dialogue
 
         public static bool HasPendingDialogue()
         {
+            if (Instance == null)
+            {
+                Instance = FindFirstObjectByType<StoryDialogueManager>();
+            }
+
             if (Instance != null && Instance.hasCompletedDialogueThisSession)
                 return false;
 
-            // 1. Nếu đang trong Story Mode (StorySession.Active) -> LUÔN CHẠY nếu chưa xong trong lượt này!
+            // 1. Chế độ kiểm thử trong Editor: Nếu testInEditor bật -> LUÔN CHẠY thoại Story!
+            if (Application.isEditor && Instance != null && Instance.testInEditor)
+                return true;
+
+            // 2. Nếu đang trong Story Mode (StorySession.Active) -> LUÔN CHẠY nếu chưa xong trong lượt này!
             if (StorySession.Active)
                 return true;
 
-            // 2. Nếu người chơi vào từ Free Play (chọn bài từ tab Free Play) -> Không chạy thoại
-            if (!StorySession.Active && GameSession.SelectedSong != null)
-                return false;
+            // 3. Trong Editor nếu chưa chọn bài -> Chạy thoại test
+            if (Application.isEditor && GameSession.SelectedSong == null)
+                return true;
 
-            // 3. Chế độ kiểm thử trong Editor (bấm Play trực tiếp tại GameplayScene)
-            if (Application.isEditor)
-            {
-                if (Instance != null && Instance.testInEditor)
-                    return true;
-                if (GameSession.SelectedSong == null)
-                    return true;
-            }
-
+            // 4. Nếu người chơi vào từ Free Play -> Không chạy thoại Story
             return false;
         }
 
-        public bool HasPendingPostBattleDialogue()
+        public bool HasPendingPostBattleDialogue(bool isWin)
         {
             if (hasCompletedPostBattleThisSession)
                 return false;
@@ -323,8 +446,13 @@ namespace Luan.Dialogue
 
             if (!isStory) return false;
 
-            var post = GetPostBattleLines();
+            var post = GetPostBattleLines(isWin);
             return post != null && post.Count > 0;
+        }
+
+        public bool HasPendingPostBattleDialogue()
+        {
+            return HasPendingPostBattleDialogue(LastBattleWon);
         }
 
         public static void ResetSessionState()
@@ -356,6 +484,34 @@ namespace Luan.Dialogue
             currentPhase = DialoguePhase.None;
 
             EnsureUI();
+            EnsureBackstoryUI();
+            EnsureVideoUI();
+            HideAllUI();
+
+            // Nếu đang trong Story Mode / có Pending Dialogue, vô hiệu hoá hoàn toàn SongIntroScreen
+            if (HasPendingDialogue())
+            {
+                var songIntro = FindFirstObjectByType<RhythmGame.SongIntroScreen>();
+                if (songIntro != null)
+                {
+                    songIntro.IsPlaying = false;
+                    songIntro.gameObject.SetActive(false);
+                }
+                var songIntroGo = GameObject.Find("SongIntroCanvas");
+                if (songIntroGo != null)
+                {
+                    songIntroGo.SetActive(false);
+                }
+
+                // ★ Preload & Prepare video NGAY TỪ AWAKE để khi vào màn là phát được ngay, không bị chờ mất mấy giây
+                var cfg = GetCurrentChapterConfig();
+                var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
+                if (data != null && (data.introVideoClip != null || !string.IsNullOrEmpty(data.introVideoUrl)))
+                {
+                    PreloadChapterIntroVideo(data);
+                }
+            }
+
             BindControlsFallback();
             HookEvents();
 
@@ -369,22 +525,20 @@ namespace Luan.Dialogue
         {
             SubscribeGameManager();
 
-            // ★ Neu SongIntroScreen dang chay -> doi no goi BeginStoryFlow() sau khi xong.
-            //   Neu khong co SongIntroScreen (scene khong co intro) -> chay dialogue ngay.
-            if (RhythmGame.SongIntroScreen.Instance != null
-                && RhythmGame.SongIntroScreen.Instance.IsPlaying)
-            {
-                Debug.Log("[StoryDialogueManager] Doi SongIntroScreen xong...");
-                HideAllUI();
-                return;
-            }
-
             if (HasPendingDialogue())
             {
+                // Story Mode: Tắt hoàn toàn SongIntroScreen nếu có trong scene để không bị đè và không chạy countdown bài hát
+                if (RhythmGame.SongIntroScreen.Instance != null)
+                {
+                    RhythmGame.SongIntroScreen.Instance.IsPlaying = false;
+                    RhythmGame.SongIntroScreen.Instance.gameObject.SetActive(false);
+                }
+
                 StartDialogue();
             }
             else
             {
+                // Không có pending dialogue (Free Play hoặc Chapter đã hoàn thành thoại)
                 HideAllUI();
             }
         }
@@ -408,8 +562,286 @@ namespace Luan.Dialogue
             }
         }
 
+
+        // ==========================================
+        // CHAPTER INTRO VIDEO PLAYBACK (~8s)
+        // ==========================================
+        private TMPro.TMP_FontAsset ResolveFont()
+        {
+            if (dialogueText != null && dialogueText.font != null) return dialogueText.font;
+            return TMPro.TMP_Settings.defaultFontAsset;
+        }
+
+        public void EnsureVideoUI()
+        {
+            if (videoContainer != null && videoPlayer != null && videoRawImage != null)
+                return;
+
+            if (dialogueCanvas == null)
+            {
+                EnsureUI();
+            }
+            if (dialogueCanvas == null) return;
+
+            var existing = dialogueCanvas.transform.Find("ChapterVideoContainer");
+            if (existing != null)
+            {
+                videoContainer = existing.gameObject;
+                videoCanvasGroup = existing.GetComponent<CanvasGroup>() ?? existing.gameObject.AddComponent<CanvasGroup>();
+                var raw = existing.Find("VideoRawImage");
+                if (raw != null) videoRawImage = raw.GetComponent<UnityEngine.UI.RawImage>();
+                videoPlayer = existing.GetComponent<UnityEngine.Video.VideoPlayer>() ?? existing.gameObject.AddComponent<UnityEngine.Video.VideoPlayer>();
+                var skip = existing.Find("VideoSkipButton");
+                if (skip != null) videoSkipButton = skip.GetComponent<UnityEngine.UI.Button>();
+                return;
+            }
+
+            // Tạo khung phát video tự động phủ kín 1080p
+            var vGo = new GameObject("ChapterVideoContainer", typeof(RectTransform), typeof(CanvasRenderer), typeof(CanvasGroup));
+            vGo.transform.SetParent(dialogueCanvas.transform, false);
+            var vRt = vGo.GetComponent<RectTransform>();
+            vRt.anchorMin = Vector2.zero;
+            vRt.anchorMax = Vector2.one;
+            vRt.offsetMin = Vector2.zero;
+            vRt.offsetMax = Vector2.zero;
+            videoContainer = vGo;
+            videoCanvasGroup = vGo.GetComponent<CanvasGroup>();
+
+            // Nền đen tuyệt đối phía sau video
+            var bgImg = vGo.GetComponent<UnityEngine.UI.Image>() ?? vGo.AddComponent<UnityEngine.UI.Image>();
+            bgImg.color = Color.black;
+            bgImg.raycastTarget = false;
+
+            // RawImage hiển thị texture video phủ kín full màn hình mobile tràn viền (anchor 0..1)
+            var rawGo = new GameObject("VideoRawImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.RawImage));
+            rawGo.transform.SetParent(vGo.transform, false);
+            var rawRt = rawGo.GetComponent<RectTransform>();
+            rawRt.anchorMin = Vector2.zero;
+            rawRt.anchorMax = Vector2.one;
+            rawRt.offsetMin = Vector2.zero;
+            rawRt.offsetMax = Vector2.zero;
+            rawRt.localScale = Vector3.one;
+            videoRawImage = rawGo.GetComponent<UnityEngine.UI.RawImage>();
+            videoRawImage.color = Color.white;
+
+            // VideoPlayer component
+            videoPlayer = vGo.AddComponent<UnityEngine.Video.VideoPlayer>();
+            videoPlayer.playOnAwake = false;
+            videoPlayer.isLooping = false;
+            videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
+            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
+
+            // Không tạo nút bỏ qua tạm ở video (ở intro video ẩn toàn bộ nút bỏ qua và tự động)
+
+            vGo.SetActive(false);
+        }
+
+        public void PreloadChapterIntroVideo(DialogueStoryData data)
+        {
+            EnsureVideoUI();
+            if (videoPlayer == null || data == null) return;
+            if (data.introVideoClip == null && string.IsNullOrEmpty(data.introVideoUrl)) return;
+
+            int width = 1920;
+            int height = 1080;
+            if (data.introVideoClip != null && data.introVideoClip.width > 0 && data.introVideoClip.height > 0)
+            {
+                width = (int)data.introVideoClip.width;
+                height = (int)data.introVideoClip.height;
+            }
+
+            if (videoRenderTexture == null || videoRenderTexture.width != width || videoRenderTexture.height != height)
+            {
+                CleanupVideoRenderTexture();
+                videoRenderTexture = new RenderTexture(width, height, 0, RenderTextureFormat.Default)
+                {
+                    name = $"RT_ChapterVideo_{data.chapterNumber}",
+                    filterMode = FilterMode.Bilinear,
+                    wrapMode = TextureWrapMode.Clamp
+                };
+                videoRenderTexture.Create();
+            }
+
+            videoPlayer.targetTexture = videoRenderTexture;
+            if (videoRawImage != null)
+            {
+                videoRawImage.texture = videoRenderTexture;
+                videoRawImage.color = Color.white;
+            }
+
+            if (data.introVideoClip != null)
+            {
+                videoPlayer.source = UnityEngine.Video.VideoSource.VideoClip;
+                videoPlayer.clip = data.introVideoClip;
+            }
+            else
+            {
+                videoPlayer.source = UnityEngine.Video.VideoSource.Url;
+                videoPlayer.url = data.introVideoUrl;
+            }
+
+            videoPlayer.isLooping = false;
+            videoPlayer.audioOutputMode = UnityEngine.Video.VideoAudioOutputMode.None;
+            for (ushort t = 0; t < videoPlayer.audioTrackCount; t++)
+            {
+                videoPlayer.EnableAudioTrack(t, false);
+            }
+            if (videoContainer != null)
+            {
+                var vAudio = videoContainer.GetComponent<AudioSource>();
+                if (vAudio != null) { vAudio.mute = true; vAudio.Stop(); }
+            }
+
+            // Kích hoạt videoContainer với alpha = 0 để Unity có thể Prepare trong nền mà không lộ
+            if (videoContainer != null) videoContainer.SetActive(true);
+            if (videoCanvasGroup != null) videoCanvasGroup.alpha = 0f;
+
+            if (!videoPlayer.isPrepared)
+            {
+                videoPlayer.Prepare();
+            }
+        }
+
+        public void PlayChapterIntroVideo(DialogueStoryData data, System.Action onComplete)
+        {
+            if (videoRoutine != null) StopCoroutine(videoRoutine);
+            videoRoutine = StartCoroutine(RunChapterIntroVideo(data, onComplete));
+        }
+
+        private IEnumerator RunChapterIntroVideo(DialogueStoryData data, System.Action onComplete)
+        {
+            EnsureVideoUI();
+
+            if (videoContainer == null || videoPlayer == null || data == null ||
+                (data.introVideoClip == null && string.IsNullOrEmpty(data.introVideoUrl)))
+            {
+                onComplete?.Invoke();
+                yield break;
+            }
+
+            currentPhase = DialoguePhase.IntroVideo;
+            skipVideoRequested = false;
+
+            // Kích hoạt dialogueCanvas và mainCanvasGroup ngay lập tức để video hiển thị
+            if (dialogueCanvas != null)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.sortingOrder = 600;
+            }
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
+            // Đảm bảo video đã được nạp texture và chuẩn bị
+            PreloadChapterIntroVideo(data);
+
+            // Ẩn tất cả các container khác khi chạy intro video để không che đè hay hiện nhầm
+            if (introContainer != null) introContainer.SetActive(false);
+            if (characterStoryCard != null) characterStoryCard.SetActive(false);
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
+            if (backstoryFirstSlidePromptText != null) backstoryFirstSlidePromptText.gameObject.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
+
+            if (videoContainer != null)
+            {
+                videoContainer.SetActive(true);
+                videoContainer.transform.SetAsLastSibling();
+            }
+            if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f;
+
+            // Ở đoạn Intro Video: ẨN nút Bỏ qua và ẨN nút Tự động
+            if (topControlsGroup != null) topControlsGroup.SetActive(false);
+            if (skipButton != null) skipButton.gameObject.SetActive(false);
+            if (autoButton != null) autoButton.gameObject.SetActive(false);
+
+            // Nếu chưa prepare xong, đợi tối đa
+            if (!videoPlayer.isPrepared)
+            {
+                videoPlayer.Prepare();
+                float waitPrepare = 0f;
+                while (!videoPlayer.isPrepared && waitPrepare < 3.0f && !skipVideoRequested)
+                {
+                    waitPrepare += Time.unscaledDeltaTime;
+                    yield return null;
+                }
+            }
+
+            if (!skipVideoRequested)
+            {
+                bool videoEndReached = false;
+                UnityEngine.Video.VideoPlayer.EventHandler onLoopPoint = (vp) => { videoEndReached = true; };
+                videoPlayer.loopPointReached += onLoopPoint;
+
+                videoPlayer.Play();
+                if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f;
+
+                // Chờ video bắt đầu phát thực sự (videoPlayer.isPlaying hoặc frame bắt đầu render)
+                float waitPlay = 0f;
+                while (!videoPlayer.isPlaying && waitPlay < 1.0f && !skipVideoRequested && !videoEndReached)
+                {
+                    waitPlay += Time.unscaledDeltaTime;
+                    yield return null;
+                }
+
+                float maxDuration = data.introVideoDuration > 0f ? data.introVideoDuration : 8f;
+                if (data.introVideoClip != null && data.introVideoClip.length > 0)
+                {
+                    maxDuration = Mathf.Min(maxDuration, (float)data.introVideoClip.length);
+                }
+
+                float timer = 0f;
+                while (timer < maxDuration && !skipVideoRequested && !videoEndReached)
+                {
+                    timer += Time.unscaledDeltaTime;
+                    if (IsSkipActionPressed() || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        skipVideoRequested = true;
+                        break;
+                    }
+                    yield return null;
+                }
+
+                videoPlayer.loopPointReached -= onLoopPoint;
+            }
+
+            // Fade Out Video (0.35s)
+            float fadeOut = 0.35f;
+            float elOut = 0f;
+            while (elOut < fadeOut)
+            {
+                elOut += Time.unscaledDeltaTime;
+                if (videoCanvasGroup != null) videoCanvasGroup.alpha = 1f - Mathf.Clamp01(elOut / fadeOut);
+                yield return null;
+            }
+
+            if (videoPlayer != null) videoPlayer.Stop();
+            if (videoContainer != null) videoContainer.SetActive(false);
+            CleanupVideoRenderTexture();
+
+            videoRoutine = null;
+            currentPhase = DialoguePhase.None;
+
+            onComplete?.Invoke();
+        }
+
+        private void CleanupVideoRenderTexture()
+        {
+            if (videoRenderTexture != null)
+            {
+                if (videoRenderTexture.IsCreated()) videoRenderTexture.Release();
+                Destroy(videoRenderTexture);
+                videoRenderTexture = null;
+            }
+        }
+
         private void OnDestroy()
         {
+            if (backstorySequenceRoutine != null) { StopCoroutine(backstorySequenceRoutine); backstorySequenceRoutine = null; }
+            if (backstoryPromptPulseRoutine != null) { StopCoroutine(backstoryPromptPulseRoutine); backstoryPromptPulseRoutine = null; }
+            CleanupVideoRenderTexture();
             if (Instance == this) Instance = null;
 
             var gm = RhythmGame.GameManager.Instance ?? FindFirstObjectByType<RhythmGame.GameManager>();
@@ -433,17 +865,26 @@ namespace Luan.Dialogue
         {
             if (state == RhythmGame.GameState.Finished)
             {
-                if (HasPendingPostBattleDialogue())
+                LastBattleWon = true;
+                if (HasPendingPostBattleDialogue(true))
                 {
-                    StartCoroutine(DelayedStartPostBattle());
+                    StartCoroutine(DelayedStartPostBattle(true));
+                }
+            }
+            else if (state == RhythmGame.GameState.Failed)
+            {
+                LastBattleWon = false;
+                if (HasPendingPostBattleDialogue(false))
+                {
+                    StartCoroutine(DelayedStartPostBattle(false));
                 }
             }
         }
 
-        private IEnumerator DelayedStartPostBattle()
+        private IEnumerator DelayedStartPostBattle(bool isWin)
         {
             yield return new WaitForSecondsRealtime(0.2f);
-            StartPostBattleDialogue();
+            StartPostBattleDialogue(isWin);
         }
 
         private void HideAllUI()
@@ -461,13 +902,124 @@ namespace Luan.Dialogue
             if (topBanner != null) topBanner.SetActive(false);
             if (characterStoryCard != null) characterStoryCard.SetActive(false);
             if (introContainer != null) introContainer.SetActive(false);
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
         }
 
+        public void ApplyBackstoryLayout()
+        {
+            if (backstoryIllustrationImage == null && backstoryContainer != null)
+            {
+                var img = backstoryContainer.transform.Find("IllustrationContainer/IllustrationImage") ?? backstoryContainer.transform.Find("IllustrationImage");
+                if (img != null) backstoryIllustrationImage = img.GetComponent<Image>();
+            }
+
+            if (backstoryIllustrationImage != null)
+            {
+                var rt = backstoryIllustrationImage.rectTransform;
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.offsetMin = Vector2.zero;
+                rt.offsetMax = new Vector2(0f, backstoryOffsetY);
+                rt.localScale = new Vector3(backstoryScale, backstoryScale, 1f);
+                backstoryIllustrationImage.preserveAspect = false; // Phủ kín tràn viền full màn hình Mobile
+            }
+        }
+
+        public void ApplyPromptTextSettings()
+        {
+            if (backstoryFirstSlidePromptText == null && backstoryContainer != null)
+            {
+                var existing = backstoryContainer.transform.Find("FirstSlidePromptText");
+                if (existing != null) backstoryFirstSlidePromptText = existing.GetComponent<TMPro.TMP_Text>();
+            }
+
+            if (backstoryFirstSlidePromptText != null)
+            {
+                backstoryFirstSlidePromptText.text = firstSlidePromptTextString;
+                backstoryFirstSlidePromptText.fontSize = firstSlidePromptFontSize;
+                backstoryFirstSlidePromptText.color = firstSlidePromptColor;
+                // KHÔNG ghi đè rt.anchoredPosition ở đây để tôn trọng 100% vị trí người dùng kéo trong Hierarchy/Scene!
+            }
+        }
+
+        public void SetPromptPosition(Vector2 pos)
+        {
+            if (backstoryFirstSlidePromptText == null && backstoryContainer != null)
+            {
+                var existing = backstoryContainer.transform.Find("FirstSlidePromptText");
+                if (existing != null) backstoryFirstSlidePromptText = existing.GetComponent<TMPro.TMP_Text>();
+            }
+
+            if (backstoryFirstSlidePromptText != null)
+            {
+                backstoryFirstSlidePromptText.rectTransform.anchoredPosition = pos;
+                firstSlidePromptOffsetX = pos.x;
+                firstSlidePromptOffsetY = pos.y;
+            }
+        }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            // Nếu FirstSlidePromptText đã có, cập nhật biến offsetX/Y từ RectTransform để không bao giờ bị lệch hay reset
+            if (backstoryFirstSlidePromptText != null)
+            {
+                var rt = backstoryFirstSlidePromptText.rectTransform;
+                firstSlidePromptOffsetX = rt.anchoredPosition.x;
+                firstSlidePromptOffsetY = rt.anchoredPosition.y;
+            }
+            ApplyBackstoryLayout();
+            ApplyPromptTextSettings();
+        }
+
+        [ContextMenu("Preview Backstory In Edit Mode")]
+        public void PreviewBackstoryInEditMode()
+        {
+            EnsureBackstoryUI();
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+            if (mainCanvasGroup != null) mainCanvasGroup.alpha = 1f;
+            if (backstoryContainer != null) backstoryContainer.SetActive(true);
+            if (backstoryCanvasGroup != null) backstoryCanvasGroup.alpha = 1f;
+
+            var cfg = GetCurrentChapterConfig();
+            var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
+            var sprites = data != null ? data.GetBackstorySprites() : null;
+            if (sprites != null && sprites.Count > 0 && backstoryIllustrationImage != null)
+            {
+                backstoryIllustrationImage.sprite = sprites[0];
+                backstoryIllustrationImage.color = Color.white;
+            }
+
+            ApplyBackstoryLayout();
+            EnsureBackstoryPromptText();
+            if (backstoryFirstSlidePromptText != null)
+            {
+                backstoryFirstSlidePromptText.gameObject.SetActive(showFirstSlidePrompt);
+                backstoryFirstSlidePromptText.text = firstSlidePromptTextString;
+            }
+        }
+
+        [ContextMenu("Hide Backstory In Edit Mode")]
+        public void HideBackstoryInEditMode()
+        {
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
+            if (videoContainer != null) videoContainer.SetActive(false);
+            if (backstoryFirstSlidePromptText != null) backstoryFirstSlidePromptText.gameObject.SetActive(false);
+        }
+#endif
+
         private void Update()
         {
             if (currentPhase == DialoguePhase.None) return;
+
+#if UNITY_EDITOR
+            if (currentPhase == DialoguePhase.Backstory)
+            {
+                ApplyBackstoryLayout();
+            }
+#endif
 
             if (IsSkipActionPressed())
             {
@@ -486,6 +1038,13 @@ namespace Luan.Dialogue
                 if (IsNextActionPressed())
                 {
                     OnTapToContinueClicked();
+                }
+            }
+            else if (currentPhase == DialoguePhase.Backstory)
+            {
+                if (IsNextActionPressed())
+                {
+                    OnBackstoryTapClicked();
                 }
             }
             else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
@@ -586,22 +1145,64 @@ namespace Luan.Dialogue
         public void StartDialogue()
         {
             IsPlaying = true;
+
+            // Kích hoạt StoryDialogueCanvas ngay khi bắt đầu luồng cốt truyện
+            if (dialogueCanvas != null)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.sortingOrder = 600;
+            }
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
             var cfg = GetCurrentChapterConfig();
             var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
-            bool hasIntro = introContainer != null && (data != null && (!string.IsNullOrEmpty(data.characterStory) || data.chapterLogo != null || !string.IsNullOrEmpty(data.characterStoryTitle)));
 
-            if (hasIntro)
+            // 1. Kiểm tra phát Intro Video cho Chapter (~8s) nếu có cấu hình video
+            bool hasVideo = data != null && (data.introVideoClip != null || !string.IsNullOrEmpty(data.introVideoUrl));
+            if (hasVideo)
             {
-                ShowIntroScreen();
+                PlayChapterIntroVideo(data, () =>
+                {
+                    ProceedToBackstoryOrDialogue(data);
+                });
             }
             else
             {
-                StartPreBattleDialogue();
+                ProceedToBackstoryOrDialogue(data);
             }
+        }
+
+        private void ProceedToBackstoryOrDialogue(DialogueStoryData data)
+        {
+            // 2. Thoại đầu dùng Backstory (ảnh minh họa đã vẽ sẵn thoại) thay cho dialog box thoại đầu
+            var images = data != null ? data.GetBackstorySprites() : null;
+            if (images != null && images.Count > 0)
+            {
+                EnsureUI();
+                ShowBackstoryScreen(images);
+                return;
+            }
+
+            // 3. Fallback: Nếu không có ảnh backstory nhưng có preBattleLines cũ
+            var preLines = GetPreBattleLines();
+            if (preLines != null && preLines.Count > 0)
+            {
+                StartPreBattleDialogue();
+                return;
+            }
+
+            // Nếu không có gì thì vào gameplay ngay
+            StartGameplay();
         }
 
         public void ShowIntroScreen()
         {
+            IsPlaying = true;
             currentPhase = DialoguePhase.Intro;
             currentIntroStep = IntroStep.None;
             skipLogoRequested = false;
@@ -974,20 +1575,45 @@ namespace Luan.Dialogue
             transitionRoutine = StartCoroutine(AnimateOpenDialogue());
         }
 
-        public void StartPostBattleDialogue()
+        public void StartPostBattleDialogue(bool isWin)
         {
+            LastBattleWon = isWin;
             currentPhase = DialoguePhase.PostBattle;
+            IsPlaying = true;
 
             if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
             if (introContainer != null) introContainer.SetActive(false);
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
             if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(true);
-            if (topControlsGroup != null) topControlsGroup.SetActive(true);
+            // Lúc chiến thắng hoặc thua: HIỆN CẢ 2 NÚT (Tự động & Bỏ qua)
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.SetActive(true);
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+            if (skipButton != null)
+            {
+                skipButton.gameObject.SetActive(true);
+                skipButton.onClick.RemoveAllListeners();
+                skipButton.onClick.AddListener(OnSkipClicked);
+            }
+            if (autoButton != null)
+            {
+                autoButton.gameObject.SetActive(true);
+                autoButton.onClick.RemoveAllListeners();
+                autoButton.onClick.AddListener(OnAutoToggleClicked);
+            }
 
             currentLineIndex = -1;
             UpdateAutoButtonVisual();
 
             if (transitionRoutine != null) StopCoroutine(transitionRoutine);
             transitionRoutine = StartCoroutine(AnimateOpenDialogue());
+        }
+
+        public void StartPostBattleDialogue()
+        {
+            StartPostBattleDialogue(LastBattleWon);
         }
 
         private IEnumerator AnimateOpenDialogue()
@@ -1175,6 +1801,18 @@ namespace Luan.Dialogue
             if (skipClip != null && SFXManager.Instance != null)
                 SFXManager.Instance.PlaySFX(skipClip);
 
+            if (currentPhase == DialoguePhase.IntroVideo)
+            {
+                skipVideoRequested = true;
+                return;
+            }
+
+            if (currentPhase == DialoguePhase.Backstory)
+            {
+                FinishBackstory();
+                return;
+            }
+
             FinishDialogue();
         }
 
@@ -1189,6 +1827,10 @@ namespace Luan.Dialogue
                 {
                     if (autoRoutine != null) StopCoroutine(autoRoutine);
                     autoRoutine = StartCoroutine(WaitAndAutoAdvanceIntro());
+                }
+                else if (currentPhase == DialoguePhase.Backstory)
+                {
+                    // Backstory đã tự động chuyển sau 3 giây mỗi slide
                 }
                 else if (currentPhase == DialoguePhase.PreBattle || currentPhase == DialoguePhase.PostBattle)
                 {
@@ -1224,6 +1866,456 @@ namespace Luan.Dialogue
             {
                 autoButtonGlow.color = isAutoMode ? new Color(0f, 1f, 0.7f, 1f) : new Color(1f, 1f, 1f, 0.5f);
             }
+        }
+
+        // ==========================================
+        // BACKSTORY MINH HỌA (CHỈ CẦN THÊM ẢNH - ĐÃ CÓ SẴN THOẠI TRÊN TRANH)
+        // (Fade in/Fade out từng ảnh, ảnh 1 text nháy đợi bấm, các ảnh sau 3s tự qua, nút skip ở góc trên bên phải)
+        // ==========================================
+        public void ShowBackstoryScreen(List<Sprite> images)
+        {
+            IsPlaying = true;
+            currentPhase = DialoguePhase.Backstory;
+            activeBackstoryImages = images;
+
+            EnsureUI();
+            EnsureBackstoryUI();
+
+            if (dialogueCanvas != null)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.sortingOrder = 600;
+            }
+            if (introContainer != null) introContainer.SetActive(false);
+            if (characterStoryCard != null) characterStoryCard.SetActive(false);
+            if (dialogueContainer != null) dialogueContainer.gameObject.SetActive(false);
+            if (backstoryContainer != null)
+            {
+                backstoryContainer.SetActive(true);
+                backstoryContainer.transform.SetAsLastSibling();
+            }
+
+            ApplyBackstoryLayout();
+
+            // Ẩn bảng thoại bên dưới vì lời thoại đã được vẽ sẵn trực tiếp trên tranh ảnh
+            if (backstorySubtitlePanel != null)
+                backstorySubtitlePanel.SetActive(false);
+
+            // Điều khiển hiển thị nút Bỏ qua sẽ được quản lý theo từng slide trong RunBackstorySequence
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.alpha = 1f;
+                mainCanvasGroup.blocksRaycasts = true;
+                mainCanvasGroup.interactable = true;
+            }
+
+            if (backstoryCanvasGroup != null)
+            {
+                backstoryCanvasGroup.alpha = 1f;
+                backstoryCanvasGroup.blocksRaycasts = true;
+                backstoryCanvasGroup.interactable = true;
+            }
+
+            UpdateAutoButtonVisual();
+
+            if (backstorySequenceRoutine != null) StopCoroutine(backstorySequenceRoutine);
+            backstorySequenceRoutine = StartCoroutine(RunBackstorySequence());
+        }
+
+        // Tương thích ngược nếu còn gọi theo kiểu cũ
+        public void ShowBackstoryScreen(List<BackstorySlide> slides)
+        {
+            var list = new List<Sprite>();
+            if (slides != null)
+            {
+                foreach (var s in slides)
+                {
+                    if (s != null && s.illustration != null)
+                        list.Add(s.illustration);
+                }
+            }
+            ShowBackstoryScreen(list);
+        }
+
+        private IEnumerator RunBackstorySequence()
+        {
+            if (activeBackstoryImages == null || activeBackstoryImages.Count == 0)
+            {
+                FinishBackstory();
+                yield break;
+            }
+
+            // Đảm bảo nút Bỏ qua ở góc trên bên phải luôn nằm trên cùng
+            if (topControlsGroup != null)
+            {
+                topControlsGroup.SetActive(true);
+                topControlsGroup.transform.SetAsLastSibling();
+            }
+
+            // Ẩn bảng thoại bên dưới để tranh ảnh được xem trọn vẹn 100% không bị che khuất
+            if (backstorySubtitlePanel != null)
+                backstorySubtitlePanel.SetActive(false);
+
+            // Đặt alpha nội dung ảnh bắt đầu ở 0 để Fade In
+            SetSlideContentAlpha(0f);
+
+            for (int i = 0; i < activeBackstoryImages.Count; i++)
+            {
+                currentBackstoryIndex = i;
+                Sprite sprite = activeBackstoryImages[i];
+
+                // Gán ảnh trực tiếp
+                if (backstoryIllustrationImage != null)
+                {
+                    backstoryIllustrationImage.sprite = sprite;
+                    backstoryIllustrationImage.color = new Color(1f, 1f, 1f, 0f);
+                }
+
+                if (i == 0)
+                {
+                    // Ở ảnh backstory đầu tiên: vì là chạm vào màn để bỏ qua nên ẨN nút Bỏ qua và ẨN nút Tự động
+                    if (topControlsGroup != null) topControlsGroup.SetActive(false);
+                    if (skipButton != null) skipButton.gameObject.SetActive(false);
+                    if (autoButton != null) autoButton.gameObject.SetActive(false);
+
+                    EnsureBackstoryPromptText();
+                    if (backstoryFirstSlidePromptText != null && showFirstSlidePrompt)
+                    {
+                        backstoryFirstSlidePromptText.gameObject.SetActive(true);
+                        backstoryFirstSlidePromptText.text = firstSlidePromptTextString;
+                        if (backstoryPromptPulseRoutine != null) StopCoroutine(backstoryPromptPulseRoutine);
+                        backstoryPromptPulseRoutine = StartCoroutine(AnimateFirstSlidePromptPulse());
+                    }
+                }
+                else
+                {
+                    // Từ ảnh thứ 2 trở đi:
+                    // 1. Ẩn text nhấp nháy của ảnh 1
+                    if (backstoryFirstSlidePromptText != null)
+                        backstoryFirstSlidePromptText.gameObject.SetActive(false);
+
+                    // 2. Hiện MỖI nút Bỏ qua (nút dialog ở góc trên bên phải), ẨN nút Tự động
+                    if (topControlsGroup != null)
+                    {
+                        topControlsGroup.SetActive(true);
+                        topControlsGroup.transform.SetAsLastSibling();
+                    }
+                    if (skipButton != null)
+                    {
+                        skipButton.gameObject.SetActive(true);
+                        skipButton.onClick.RemoveAllListeners();
+                        skipButton.onClick.AddListener(OnSkipClicked);
+                    }
+                    if (autoButton != null)
+                    {
+                        autoButton.gameObject.SetActive(false);
+                    }
+                }
+
+                // --- 1. ANIMATION FADE IN CHO ẢNH (0.35s) ---
+                yield return StartCoroutine(FadeSlideContent(0f, 1f, 0.35f));
+
+                // --- 2. HIỂN THỊ NỘI DUNG ---
+                if (i == 0)
+                {
+                    // Ảnh đầu tiên: Đợi người chơi chạm màn hình
+                    isWaitingForFirstSlideTap = true;
+                    slideTapRequested = false;
+
+                    while (isWaitingForFirstSlideTap && currentPhase == DialoguePhase.Backstory)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                        {
+                            isWaitingForFirstSlideTap = false;
+                            break;
+                        }
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    // Các ảnh tiếp theo: Backstory có thoại -> 3s 1 ảnh tự động qua (hoặc bấm để qua sớm)
+                    float duration = 3.0f;
+                    float timer = 0f;
+                    slideTapRequested = false;
+
+                    while (timer < duration && !slideTapRequested && currentPhase == DialoguePhase.Backstory)
+                    {
+                        timer += Time.unscaledDeltaTime;
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                        {
+                            slideTapRequested = true;
+                            break;
+                        }
+                        yield return null;
+                    }
+                }
+
+                // Nếu người chơi đã bấm nút Skip hoặc kết thúc
+                if (currentPhase != DialoguePhase.Backstory)
+                    yield break;
+
+                // Dừng pulse text nếu vừa xong ảnh 0 trước khi fade out
+                if (i == 0 && backstoryPromptPulseRoutine != null)
+                {
+                    StopCoroutine(backstoryPromptPulseRoutine);
+                    backstoryPromptPulseRoutine = null;
+                }
+
+                // --- 3. ANIMATION FADE OUT CHO ẢNH (0.35s) ---
+                yield return StartCoroutine(FadeSlideContent(1f, 0f, 0.35f));
+            }
+
+            // Hết tất cả các ảnh -> Vào gameplay!
+            FinishBackstory();
+        }
+
+        private IEnumerator FadeSlideContent(float fromAlpha, float toAlpha, float duration)
+        {
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                float a = Mathf.Lerp(fromAlpha, toAlpha, Mathf.SmoothStep(0f, 1f, t));
+
+                SetSlideContentAlpha(a);
+                yield return null;
+            }
+            SetSlideContentAlpha(toAlpha);
+        }
+
+        private void SetSlideContentAlpha(float a)
+        {
+            if (backstoryContentCanvasGroup != null)
+            {
+                backstoryContentCanvasGroup.alpha = a;
+            }
+
+            if (backstoryIllustrationImage != null)
+            {
+                var c = backstoryIllustrationImage.color;
+                backstoryIllustrationImage.color = new Color(c.r, c.g, c.b, a);
+            }
+
+            if (backstorySubtitlePanel != null)
+            {
+                var cg = backstorySubtitlePanel.GetComponent<CanvasGroup>();
+                if (cg != null) cg.alpha = a;
+            }
+
+            if (backstoryFirstSlidePromptText != null && currentBackstoryIndex == 0)
+            {
+                var c = backstoryFirstSlidePromptText.color;
+                backstoryFirstSlidePromptText.color = new Color(c.r, c.g, c.b, a);
+            }
+        }
+
+        private void ApplySlideData(BackstorySlide slide, int index)
+        {
+            if (slide == null) return;
+
+            // Ảnh minh họa
+            if (backstoryIllustrationImage != null)
+            {
+                backstoryIllustrationImage.sprite = slide.illustration;
+                backstoryIllustrationImage.color = new Color(1f, 1f, 1f, 0f); // Bắt đầu ở alpha = 0 để Fade In
+            }
+
+            if (index == 0)
+            {
+                // ẢNH ĐẦU TIÊN: CÂU CHUYỆN NHÂN VẬT
+                // Ẩn bảng thoại bên dưới để tôn trọn vẹn hình ảnh
+                if (backstorySubtitlePanel != null)
+                    backstorySubtitlePanel.SetActive(false);
+
+                // Hiện text nhấp nháy "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA"
+                EnsureBackstoryPromptText();
+                if (backstoryFirstSlidePromptText != null)
+                {
+                    backstoryFirstSlidePromptText.gameObject.SetActive(true);
+                    backstoryFirstSlidePromptText.text = "BẤM VÀO MÀN HÌNH ĐỂ BỎ QUA ▶";
+                    if (backstoryPromptPulseRoutine != null) StopCoroutine(backstoryPromptPulseRoutine);
+                    backstoryPromptPulseRoutine = StartCoroutine(AnimateFirstSlidePromptPulse());
+                }
+            }
+            else
+            {
+                // CÁC ẢNH TIẾP THEO: BACKSTORY CÓ THOẠI
+                if (backstoryFirstSlidePromptText != null)
+                    backstoryFirstSlidePromptText.gameObject.SetActive(false);
+
+                if (backstorySubtitlePanel != null)
+                {
+                    backstorySubtitlePanel.SetActive(true);
+                    var cg = backstorySubtitlePanel.GetComponent<CanvasGroup>() ?? backstorySubtitlePanel.AddComponent<CanvasGroup>();
+                    cg.alpha = 0f;
+                }
+
+                if (backstorySpeakerText != null)
+                {
+                    backstorySpeakerText.text = ResolveSpeakerName(slide.speakerName, slide.speakerName != "RAZE");
+                    backstorySpeakerText.color = slide.nameColor;
+                }
+
+                if (backstoryActionText != null)
+                {
+                    backstoryActionText.text = slide.actionDescription;
+                    backstoryActionText.gameObject.SetActive(!string.IsNullOrEmpty(slide.actionDescription));
+                }
+
+                if (backstorySlideCounterText != null)
+                {
+                    backstorySlideCounterText.text = $"{index + 1} / {activeBackstorySlides.Count}";
+                }
+
+                if (backstoryDialogueText != null)
+                {
+                    backstoryDialogueText.text = ResolveDialogueText(slide.storyText);
+                }
+            }
+        }
+
+        private void EnsureBackstoryPromptText()
+        {
+            if (backstoryContainer == null) return;
+
+            bool alreadyExisted = false;
+            if (backstoryFirstSlidePromptText == null)
+            {
+                var existing = backstoryContainer.transform.Find("FirstSlidePromptText");
+                if (existing != null)
+                {
+                    backstoryFirstSlidePromptText = existing.GetComponent<TMPro.TextMeshProUGUI>();
+                    alreadyExisted = true;
+                }
+            }
+            else
+            {
+                alreadyExisted = true;
+            }
+
+            if (backstoryFirstSlidePromptText == null)
+            {
+                var promptGo = new GameObject("FirstSlidePromptText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TMPro.TextMeshProUGUI));
+                promptGo.transform.SetParent(backstoryContainer.transform, false);
+                var rt = promptGo.GetComponent<RectTransform>();
+                rt.anchorMin = new Vector2(0.5f, 0f);
+                rt.anchorMax = new Vector2(0.5f, 0f);
+                rt.pivot = new Vector2(0.5f, 0f);
+                float y = firstSlidePromptOffsetY != 0f ? firstSlidePromptOffsetY : firstSlidePromptBottomOffsetY;
+                rt.anchoredPosition = new Vector2(firstSlidePromptOffsetX, y);
+                rt.sizeDelta = new Vector2(1000f, 60f);
+
+                var tmp = promptGo.GetComponent<TMPro.TextMeshProUGUI>();
+                tmp.text = firstSlidePromptTextString;
+                tmp.font = ResolveFont();
+                tmp.fontSize = firstSlidePromptFontSize;
+                tmp.fontStyle = FontStyles.Bold;
+                tmp.alignment = TextAlignmentOptions.Center;
+                tmp.color = firstSlidePromptColor;
+                tmp.raycastTarget = false;
+                backstoryFirstSlidePromptText = tmp;
+            }
+            else if (alreadyExisted)
+            {
+                // Đối tượng đã tồn tại sẵn trong Scene (người dùng đã chỉnh vị trí ở Hierarchy):
+                // Cập nhật text, font, màu nhưng GIỮ NGUYÊN vị trí người dùng đã kéo!
+                backstoryFirstSlidePromptText.text = firstSlidePromptTextString;
+                backstoryFirstSlidePromptText.fontSize = firstSlidePromptFontSize;
+                backstoryFirstSlidePromptText.color = firstSlidePromptColor;
+                var rt = backstoryFirstSlidePromptText.rectTransform;
+                // Cập nhật lại số liệu offsetX/Y theo đúng vị trí người dùng đã kéo trong Scene
+                firstSlidePromptOffsetX = rt.anchoredPosition.x;
+                firstSlidePromptOffsetY = rt.anchoredPosition.y;
+            }
+
+            if (backstoryFirstSlidePromptText != null && currentPhase != DialoguePhase.Backstory)
+            {
+                backstoryFirstSlidePromptText.gameObject.SetActive(false);
+            }
+        }
+
+        private IEnumerator AnimateFirstSlidePromptPulse()
+        {
+            if (backstoryFirstSlidePromptText == null) yield break;
+
+            Color baseColor = backstoryFirstSlidePromptText.color;
+            while (currentPhase == DialoguePhase.Backstory && currentBackstoryIndex == 0)
+            {
+                float alpha = Mathf.PingPong(Time.unscaledTime * 2.0f, 0.65f) + 0.35f;
+                backstoryFirstSlidePromptText.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+                yield return null;
+            }
+            if (backstoryFirstSlidePromptText != null)
+                backstoryFirstSlidePromptText.color = baseColor;
+        }
+
+        public void OnBackstoryTapClicked()
+        {
+            if (currentPhase != DialoguePhase.Backstory) return;
+
+            if (nextClip != null && SFXManager.Instance != null)
+                SFXManager.Instance.PlaySFX(nextClip);
+
+            if (currentBackstoryIndex == 0)
+            {
+                // Chạm vào ảnh đầu tiên -> tiếp tục chuyển sang các ảnh backstory có thoại
+                isWaitingForFirstSlideTap = false;
+            }
+            else
+            {
+                // Chạm vào các ảnh backstory tiếp theo -> chuyển sớm qua ảnh kế tiếp không cần đợi hết 3s
+                slideTapRequested = true;
+            }
+        }
+
+        private void FinishBackstory()
+        {
+            IsPlaying = false;
+            hasCompletedDialogueThisSession = true;
+            currentPhase = DialoguePhase.None;
+
+            if (backstorySequenceRoutine != null) { StopCoroutine(backstorySequenceRoutine); backstorySequenceRoutine = null; }
+            if (backstoryPromptPulseRoutine != null) { StopCoroutine(backstoryPromptPulseRoutine); backstoryPromptPulseRoutine = null; }
+            if (autoRoutine != null) { StopCoroutine(autoRoutine); autoRoutine = null; }
+            if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
+            if (transitionRoutine != null) StopCoroutine(transitionRoutine);
+
+            transitionRoutine = StartCoroutine(AnimateCloseBackstory());
+        }
+
+        private IEnumerator AnimateCloseBackstory()
+        {
+            currentPhase = DialoguePhase.None;
+            IsPlaying = false;
+
+            if (mainCanvasGroup != null)
+            {
+                mainCanvasGroup.interactable = false;
+                mainCanvasGroup.blocksRaycasts = false;
+            }
+
+            float duration = 0.35f;
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                if (backstoryCanvasGroup != null) backstoryCanvasGroup.alpha = 1f - t;
+                if (mainCanvasGroup != null) mainCanvasGroup.alpha = 1f - t;
+                yield return null;
+            }
+
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
+            if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(false);
+
+            StartGameplay();
         }
 
         public void FinishDialogue()
@@ -1299,7 +2391,7 @@ namespace Luan.Dialogue
             var resultPanel = FindFirstObjectByType<RhythmGame.GameplayResultScreen>(FindObjectsInactive.Include);
             if (resultPanel != null)
             {
-                resultPanel.ShowResult(true);
+                resultPanel.ShowResult(LastBattleWon);
             }
             else
             {
@@ -1495,10 +2587,103 @@ namespace Luan.Dialogue
             }
         }
 
+        public void EnsureBackstoryUI()
+        {
+            if (dialogueCanvas == null) EnsureUI();
+            if (dialogueCanvas == null) return;
+
+            if (backstoryContainer == null)
+            {
+                var existing = dialogueCanvas.transform.Find("BackstoryContainer");
+                if (existing != null)
+                {
+                    backstoryContainer = existing.gameObject;
+                }
+            }
+
+            if (backstoryContainer != null)
+            {
+                backstoryCanvasGroup = backstoryContainer.GetComponent<CanvasGroup>() ?? backstoryContainer.AddComponent<CanvasGroup>();
+                var img = backstoryContainer.transform.Find("IllustrationContainer/IllustrationImage") ?? backstoryContainer.transform.Find("IllustrationImage");
+                if (img != null) backstoryIllustrationImage = img.GetComponent<Image>();
+                var tap = backstoryContainer.transform.Find("TapScreenButton");
+                if (tap != null)
+                {
+                    backstoryTapButton = tap.GetComponent<Button>();
+                    backstoryTapButton.onClick.RemoveAllListeners();
+                    backstoryTapButton.onClick.AddListener(OnBackstoryTapClicked);
+                }
+            }
+            else
+            {
+                var bsGo = new GameObject("BackstoryContainer", typeof(RectTransform), typeof(CanvasGroup));
+                bsGo.transform.SetParent(dialogueCanvas.transform, false);
+                var bsRt = bsGo.GetComponent<RectTransform>();
+                bsRt.anchorMin = Vector2.zero;
+                bsRt.anchorMax = Vector2.one;
+                bsRt.offsetMin = bsRt.offsetMax = Vector2.zero;
+                backstoryContainer = bsGo;
+                backstoryCanvasGroup = bsGo.GetComponent<CanvasGroup>();
+
+                // 1. Dark Backdrop
+                var bgGo = new GameObject("Backdrop", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                bgGo.transform.SetParent(bsGo.transform, false);
+                var bgRt = bgGo.GetComponent<RectTransform>();
+                bgRt.anchorMin = Vector2.zero;
+                bgRt.anchorMax = Vector2.one;
+                bgRt.offsetMin = bgRt.offsetMax = Vector2.zero;
+                var bgImg = bgGo.GetComponent<Image>();
+                bgImg.color = new Color(0.015f, 0.01f, 0.03f, 1f);
+                bgImg.raycastTarget = false;
+
+                // 2. Illustration Image phủ kín tràn viền full màn hình Mobile (anchor 0..1 giống mẫu người dùng)
+                var illContainer = new GameObject("IllustrationContainer", typeof(RectTransform));
+                illContainer.transform.SetParent(bsGo.transform, false);
+                var illRt = illContainer.GetComponent<RectTransform>();
+                illRt.anchorMin = Vector2.zero;
+                illRt.anchorMax = Vector2.one;
+                illRt.offsetMin = Vector2.zero;
+                illRt.offsetMax = Vector2.zero;
+                illRt.localScale = Vector3.one;
+
+                var imgGo = new GameObject("IllustrationImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                imgGo.transform.SetParent(illContainer.transform, false);
+                var imgRt = imgGo.GetComponent<RectTransform>();
+                imgRt.anchorMin = Vector2.zero;
+                imgRt.anchorMax = Vector2.one;
+                imgRt.offsetMin = Vector2.zero;
+                imgRt.offsetMax = Vector2.zero;
+                imgRt.localScale = new Vector3(backstoryScale, backstoryScale, 1f);
+                backstoryIllustrationImage = imgGo.GetComponent<Image>();
+                backstoryIllustrationImage.preserveAspect = false; // Phủ kín tràn viền toàn màn hình Mobile không bị viền đen
+                backstoryIllustrationImage.raycastTarget = false;
+
+                // 3. Fullscreen transparent button to capture screen tap
+                var tapGo = new GameObject("TapScreenButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+                tapGo.transform.SetParent(bsGo.transform, false);
+                var tapRt = tapGo.GetComponent<RectTransform>();
+                tapRt.anchorMin = Vector2.zero;
+                tapRt.anchorMax = Vector2.one;
+                tapRt.offsetMin = tapRt.offsetMax = Vector2.zero;
+                var tapImg = tapGo.GetComponent<Image>();
+                tapImg.color = new Color(0f, 0f, 0f, 0f);
+                tapImg.raycastTarget = true;
+                backstoryTapButton = tapGo.GetComponent<Button>();
+                backstoryTapButton.onClick.RemoveAllListeners();
+                backstoryTapButton.onClick.AddListener(OnBackstoryTapClicked);
+                bsGo.SetActive(false);
+            }
+
+            EnsureBackstoryPromptText();
+        }
+
         public void EnsureUI()
         {
             if (dialogueCanvas != null && mainCanvasGroup != null && dialogueText != null && introContainer != null)
+            {
+                EnsureBackstoryUI();
                 return;
+            }
 
             var existingCanvas = GameObject.Find("StoryDialogueCanvas");
             if (existingCanvas != null)
@@ -1567,6 +2752,36 @@ namespace Luan.Dialogue
                     if (darkImg != null) darkImg.color = new Color(0, 0, 0, 0);
                     darkOverlay.gameObject.SetActive(false);
                 }
+            }
+
+            // Backstory Container
+            var bs = root.Find("BackstoryContainer");
+            if (bs != null)
+            {
+                backstoryContainer = bs.gameObject;
+                backstoryCanvasGroup = bs.GetComponent<CanvasGroup>() ?? bs.gameObject.AddComponent<CanvasGroup>();
+
+                var img = bs.Find("IllustrationContainer/IllustrationImage");
+                if (img != null) backstoryIllustrationImage = img.GetComponent<Image>();
+
+                var sub = bs.Find("SubtitlePanel");
+                if (sub != null)
+                {
+                    backstorySubtitlePanel = sub.gameObject;
+                    var spk = sub.Find("SpeakerTag");
+                    if (spk != null) backstorySpeakerText = spk.GetComponent<TMP_Text>();
+                    var act = sub.Find("ActionTag");
+                    if (act != null) backstoryActionText = act.GetComponent<TMP_Text>();
+                    var dlg = sub.Find("DialogueText");
+                    if (dlg != null) backstoryDialogueText = dlg.GetComponent<TMP_Text>();
+                    var cnt = sub.Find("SlideCounterText");
+                    if (cnt != null) backstorySlideCounterText = cnt.GetComponent<TMP_Text>();
+                    var nxt = sub.Find("NextPrompt");
+                    if (nxt != null) backstoryNextIndicator = nxt.gameObject;
+                }
+
+                var tapBtn = bs.Find("TapScreenButton");
+                if (tapBtn != null) backstoryTapButton = tapBtn.GetComponent<Button>();
             }
 
             // Dialogue Container
@@ -1711,8 +2926,16 @@ namespace Luan.Dialogue
             dimOverlay.color = new Color(0.015f, 0.008f, 0.035f, 0.88f);
             dimOverlay.raycastTarget = false;
 
+            // 2.5 Video Container (Intro Video Chapter)
+            EnsureVideoUI();
+            if (videoContainer != null) videoContainer.SetActive(false);
+
             // 3. Intro Container (Cốt truyện & Logo Chapter)
             BuildIntroUI(canvasGo.transform, frameSpr);
+
+            // 3.5 Backstory Container (Minh Họa Storyboard Cốt Truyện & Thoại Đầu)
+            EnsureBackstoryUI();
+            if (backstoryContainer != null) backstoryContainer.SetActive(false);
 
             // 4. Dialogue Container
             var containerGo = new GameObject("DialogueContainer", typeof(RectTransform));
@@ -1820,6 +3043,165 @@ namespace Luan.Dialogue
             autoButtonGlow = autoImg;
 
             HookEvents();
+        }
+
+        private void BuildBackstoryUI(Transform parent, Sprite boxSpr)
+        {
+            var bsGo = new GameObject("BackstoryContainer", typeof(RectTransform), typeof(CanvasGroup));
+            bsGo.transform.SetParent(parent, false);
+            var bsRt = bsGo.GetComponent<RectTransform>();
+            bsRt.anchorMin = Vector2.zero;
+            bsRt.anchorMax = Vector2.one;
+            bsRt.offsetMin = bsRt.offsetMax = Vector2.zero;
+
+            backstoryContainer = bsGo;
+            backstoryCanvasGroup = bsGo.GetComponent<CanvasGroup>();
+
+            // 1. Dark Backdrop
+            var bgGo = new GameObject("Backdrop", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            bgGo.transform.SetParent(bsGo.transform, false);
+            var bgRt = bgGo.GetComponent<RectTransform>();
+            bgRt.anchorMin = Vector2.zero;
+            bgRt.anchorMax = Vector2.one;
+            bgRt.offsetMin = bgRt.offsetMax = Vector2.zero;
+            var bgImg = bgGo.GetComponent<Image>();
+            bgImg.color = new Color(0.015f, 0.01f, 0.03f, 1f);
+            bgImg.raycastTarget = false;
+
+            // 2. Fullscreen Illustration Image
+            var illContainer = new GameObject("IllustrationContainer", typeof(RectTransform));
+            illContainer.transform.SetParent(bsGo.transform, false);
+            var illRt = illContainer.GetComponent<RectTransform>();
+            illRt.anchorMin = Vector2.zero;
+            illRt.anchorMax = Vector2.one;
+            illRt.offsetMin = illRt.offsetMax = Vector2.zero;
+
+            var imgGo = new GameObject("IllustrationImage", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            imgGo.transform.SetParent(illContainer.transform, false);
+            var imgRt = imgGo.GetComponent<RectTransform>();
+            imgRt.anchorMin = Vector2.zero;
+            imgRt.anchorMax = Vector2.one;
+            imgRt.offsetMin = imgRt.offsetMax = Vector2.zero;
+            backstoryIllustrationImage = imgGo.GetComponent<Image>();
+            backstoryIllustrationImage.preserveAspect = true;
+            backstoryIllustrationImage.raycastTarget = false;
+
+            // 3. Subtitle / Dialogue Panel at bottom
+            var subGo = new GameObject("SubtitlePanel", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            subGo.transform.SetParent(bsGo.transform, false);
+            var subRt = subGo.GetComponent<RectTransform>();
+            subRt.anchorMin = new Vector2(0.5f, 0f);
+            subRt.anchorMax = new Vector2(0.5f, 0f);
+            subRt.pivot = new Vector2(0.5f, 0f);
+            subRt.anchoredPosition = new Vector2(0f, 25f);
+            subRt.sizeDelta = new Vector2(1600f, 220f);
+            backstorySubtitlePanel = subGo;
+
+            var subBg = subGo.GetComponent<Image>();
+            if (boxSpr != null)
+            {
+                subBg.sprite = boxSpr;
+            }
+            else
+            {
+                subBg.color = new Color(0.04f, 0.025f, 0.08f, 0.94f);
+            }
+            subBg.raycastTarget = false;
+
+            // Speaker Tag
+            var spkGo = new GameObject("SpeakerTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            spkGo.transform.SetParent(subGo.transform, false);
+            var spkRt = spkGo.GetComponent<RectTransform>();
+            spkRt.anchorMin = new Vector2(0f, 1f);
+            spkRt.anchorMax = new Vector2(0f, 1f);
+            spkRt.pivot = new Vector2(0f, 1f);
+            spkRt.anchoredPosition = new Vector2(35f, -18f);
+            spkRt.sizeDelta = new Vector2(350f, 40f);
+            backstorySpeakerText = spkGo.GetComponent<TextMeshProUGUI>();
+            backstorySpeakerText.fontSize = 26;
+            backstorySpeakerText.fontStyle = FontStyles.Bold;
+            backstorySpeakerText.color = new Color(0.2f, 0.95f, 1f, 1f);
+            backstorySpeakerText.raycastTarget = false;
+
+            // Action Tag
+            var actGo = new GameObject("ActionTag", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            actGo.transform.SetParent(subGo.transform, false);
+            var actRt = actGo.GetComponent<RectTransform>();
+            actRt.anchorMin = new Vector2(0f, 1f);
+            actRt.anchorMax = new Vector2(1f, 1f);
+            actRt.pivot = new Vector2(0f, 1f);
+            actRt.anchoredPosition = new Vector2(390f, -18f);
+            actRt.sizeDelta = new Vector2(-540f, 40f);
+            backstoryActionText = actGo.GetComponent<TextMeshProUGUI>();
+            backstoryActionText.fontSize = 22;
+            backstoryActionText.fontStyle = FontStyles.Italic;
+            backstoryActionText.color = new Color(1f, 0.85f, 0.2f, 1f);
+            backstoryActionText.raycastTarget = false;
+
+            // Dialogue / Narration Text
+            var dlgGo = new GameObject("DialogueText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            dlgGo.transform.SetParent(subGo.transform, false);
+            var dlgRt = dlgGo.GetComponent<RectTransform>();
+            dlgRt.anchorMin = new Vector2(0f, 0f);
+            dlgRt.anchorMax = new Vector2(1f, 1f);
+            dlgRt.offsetMin = new Vector2(40f, 35f);
+            dlgRt.offsetMax = new Vector2(-40f, -65f);
+            backstoryDialogueText = dlgGo.GetComponent<TextMeshProUGUI>();
+            backstoryDialogueText.fontSize = 24;
+            backstoryDialogueText.lineSpacing = 1.3f;
+            backstoryDialogueText.color = Color.white;
+            backstoryDialogueText.textWrappingMode = TextWrappingModes.Normal;
+            backstoryDialogueText.raycastTarget = false;
+
+            // Slide Counter
+            var cntGo = new GameObject("SlideCounterText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            cntGo.transform.SetParent(subGo.transform, false);
+            var cntRt = cntGo.GetComponent<RectTransform>();
+            cntRt.anchorMin = new Vector2(1f, 1f);
+            cntRt.anchorMax = new Vector2(1f, 1f);
+            cntRt.pivot = new Vector2(1f, 1f);
+            cntRt.anchoredPosition = new Vector2(-35f, -18f);
+            cntRt.sizeDelta = new Vector2(120f, 40f);
+            backstorySlideCounterText = cntGo.GetComponent<TextMeshProUGUI>();
+            backstorySlideCounterText.fontSize = 22;
+            backstorySlideCounterText.fontStyle = FontStyles.Bold;
+            backstorySlideCounterText.color = new Color(0.2f, 0.95f, 1f, 1f);
+            backstorySlideCounterText.alignment = TextAlignmentOptions.Right;
+            backstorySlideCounterText.raycastTarget = false;
+
+            // Next Indicator
+            var nxtGo = new GameObject("NextPrompt", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            nxtGo.transform.SetParent(subGo.transform, false);
+            var nxtRt = nxtGo.GetComponent<RectTransform>();
+            nxtRt.anchorMin = new Vector2(1f, 0f);
+            nxtRt.anchorMax = new Vector2(1f, 0f);
+            nxtRt.pivot = new Vector2(1f, 0f);
+            nxtRt.anchoredPosition = new Vector2(-35f, 10f);
+            nxtRt.sizeDelta = new Vector2(400f, 30f);
+            var nxtTxt = nxtGo.GetComponent<TextMeshProUGUI>();
+            nxtTxt.fontSize = 20;
+            nxtTxt.fontStyle = FontStyles.Bold;
+            nxtTxt.color = new Color(0f, 1f, 0.7f, 1f);
+            nxtTxt.alignment = TextAlignmentOptions.Right;
+            nxtTxt.text = "[ Nhấp chuột / Chạm để tiếp tục ▶ ]";
+            nxtTxt.raycastTarget = false;
+            backstoryNextIndicator = nxtGo;
+
+            // 4. Tap Screen Button (Fullscreen)
+            var tapGo = new GameObject("TapScreenButton", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+            tapGo.transform.SetParent(bsGo.transform, false);
+            var tapRt = tapGo.GetComponent<RectTransform>();
+            tapRt.anchorMin = Vector2.zero;
+            tapRt.anchorMax = Vector2.one;
+            tapRt.offsetMin = tapRt.offsetMax = Vector2.zero;
+            var tapImg = tapGo.GetComponent<Image>();
+            tapImg.color = new Color(0f, 0f, 0f, 0f);
+            tapImg.raycastTarget = true;
+            backstoryTapButton = tapGo.GetComponent<Button>();
+            backstoryTapButton.onClick.AddListener(OnBackstoryTapClicked);
+
+            // Mặc định ẩn BackstoryContainer
+            bsGo.SetActive(false);
         }
 
         private void BuildIntroUI(Transform parent, Sprite frameSpr)

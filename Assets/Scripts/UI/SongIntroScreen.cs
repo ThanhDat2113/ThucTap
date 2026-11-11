@@ -18,7 +18,7 @@ namespace RhythmGame
     public class SongIntroScreen : MonoBehaviour
     {
         public static SongIntroScreen Instance { get; private set; }
-        public bool IsPlaying { get; private set; }
+        public bool IsPlaying { get; set; }
 
         [Header("Refs")]
         public GameManager gameManager;
@@ -71,13 +71,29 @@ namespace RhythmGame
         private void Awake()
         {
             Instance = this;
+
+            // ★ Story Mode có hệ thống Chapter Intro / Dialogue riêng của StoryDialogueManager.
+            // Không chạy SongIntroScreen trong Story Mode để tránh xung đột UI và không đếm ngược vào game trước thoại.
+            if (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
+            {
+                IsPlaying = false;
+                gameObject.SetActive(false);
+                return;
+            }
+
             IsPlaying = true;
             KeepOnTop();
         }
 
         private void Start()
         {
-            // ★ Intro phải chạy CẢ trong Story Mode (flow: Intro → Dialogue → Gameplay)
+            if (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
+            {
+                IsPlaying = false;
+                gameObject.SetActive(false);
+                return;
+            }
+
             StartCoroutine(IntroSequence());
         }
 
@@ -106,6 +122,13 @@ namespace RhythmGame
 
         private IEnumerator IntroSequence()
         {
+            if (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
+            {
+                IsPlaying = false;
+                gameObject.SetActive(false);
+                yield break;
+            }
+
             // Lay thong tin bai tu GameSession (Thuan.SongData, global namespace)
             var song = GameSession.SelectedSong;
             if (song == null)
@@ -309,19 +332,7 @@ namespace RhythmGame
             if (stage != null) stage.gameObject.SetActive(false);
             if (background != null) background.gameObject.SetActive(false);
 
-            // ★ Story Mode: chuyen sang Pre-battle Dialogue (không gọi Restart ngay)
-            var storyDlg = Luan.Dialogue.StoryDialogueManager.Instance;
-            if (StorySession.Active
-                && storyDlg != null
-                && Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
-            {
-                Debug.Log("[SongIntroScreen] Intro xong -> chuyen sang dialogue cot truyen.");
-                IsPlaying = false;
-                storyDlg.BeginStoryFlow();
-                yield break;
-            }
-
-            // ★ Free Play hoac Story Mode khong co dialogue: vao gameplay luon
+            // ★ Free Play: vao gameplay sau khi countdown xong
             if (gameManager != null)
             {
                 float saved = gameManager.countdownSeconds;

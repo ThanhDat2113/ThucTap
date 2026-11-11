@@ -141,14 +141,14 @@ namespace RhythmGame
 
             if (state == GameState.Finished)
             {
-                // ★ Story Mode + co post-battle dialogue -> doi StoryDialogueManager
-                //   goi ShowPostBattleResults() -> ShowResult(true) sau khi dialogue xong.
+                // ★ Story Mode + có post-battle dialogue (chiến thắng) -> đợi StoryDialogueManager
+                //   gọi ShowPostBattleResults() -> ShowResult(true) sau khi dialogue xong.
                 if (StorySession.Active)
                 {
                     var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
-                    if (dlg != null && dlg.HasPendingPostBattleDialogue())
+                    if (dlg != null && dlg.HasPendingPostBattleDialogue(true))
                     {
-                        Debug.Log("[GameplayResultScreen] Doi post-battle dialogue xong moi hien ket qua.");
+                        Debug.Log("[GameplayResultScreen] Đợi post-battle victory dialogue xong mới hiện kết quả.");
                         return;
                     }
                 }
@@ -156,7 +156,17 @@ namespace RhythmGame
             }
             else if (state == GameState.Failed)
             {
-                // Thua -> khong cho dialogue, hien ket qua ngay
+                // ★ Story Mode + có post-battle dialogue (thất bại) -> đợi StoryDialogueManager
+                //   gọi ShowPostBattleResults() -> ShowResult(false) sau khi dialogue xong.
+                if (StorySession.Active)
+                {
+                    var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
+                    if (dlg != null && dlg.HasPendingPostBattleDialogue(false))
+                    {
+                        Debug.Log("[GameplayResultScreen] Đợi post-battle defeat dialogue xong mới hiện kết quả.");
+                        return;
+                    }
+                }
                 ShowResult(false);
             }
             else
