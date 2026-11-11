@@ -1,0 +1,3237 @@
+fileFormatVersion: 2
+guid: acecf6c1a2c06a74cb67284a3e481761
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8691387147142550538
+    second: brax_dance_120_0
+  - first:
+      213: 9221898437792940519
+    second: brax_dance_120_1
+  - first:
+      213: 2929168206598347160
+    second: brax_dance_120_2
+  - first:
+      213: 693866733566653049
+    second: brax_dance_120_3
+  - first:
+      213: -1343311509840266572
+    second: brax_dance_120_4
+  - first:
+      213: -6288540392978187697
+    second: brax_dance_120_5
+  - first:
+      213: -6076966353885436377
+    second: brax_dance_120_6
+  - first:
+      213: 1460893491774247781
+    second: brax_dance_120_7
+  - first:
+      213: 1525443028516694052
+    second: brax_dance_120_8
+  - first:
+      213: -4986213524880898624
+    second: brax_dance_120_9
+  - first:
+      213: 5289881124052924331
+    second: brax_dance_120_10
+  - first:
+      213: -2784913818686120715
+    second: brax_dance_120_11
+  - first:
+      213: -5357640757066914940
+    second: brax_dance_120_12
+  - first:
+      213: 3148028485347461343
+    second: brax_dance_120_13
+  - first:
+      213: 1409552375834284921
+    second: brax_dance_120_14
+  - first:
+      213: -8577009469536439928
+    second: brax_dance_120_15
+  - first:
+      213: 1287081633965332680
+    second: brax_dance_120_16
+  - first:
+      213: 3621215001561145114
+    second: brax_dance_120_17
+  - first:
+      213: 7891079692984512284
+    second: brax_dance_120_18
+  - first:
+      213: 5712578468560928773
+    second: brax_dance_120_19
+  - first:
+      213: -8061656806783116363
+    second: brax_dance_120_20
+  - first:
+      213: -5535442773548553220
+    second: brax_dance_120_21
+  - first:
+      213: 41322287247682394
+    second: brax_dance_120_22
+  - first:
+      213: -4430313342951386038
+    second: brax_dance_120_23
+  - first:
+      213: -2162669750684936282
+    second: brax_dance_120_24
+  - first:
+      213: -8317924475173045106
+    second: brax_dance_120_25
+  - first:
+      213: -9116506301547175684
+    second: brax_dance_120_26
+  - first:
+      213: 1119193332822351559
+    second: brax_dance_120_27
+  - first:
+      213: 1850236146181444014
+    second: brax_dance_120_28
+  - first:
+      213: -8145225829814956183
+    second: brax_dance_120_29
+  - first:
+      213: -8056961149450513217
+    second: brax_dance_120_30
+  - first:
+      213: -576722388302379734
+    second: brax_dance_120_31
+  - first:
+      213: 4739294608132437015
+    second: brax_dance_120_32
+  - first:
+      213: 6995748795457285704
+    second: brax_dance_120_33
+  - first:
+      213: 4347613866883886451
+    second: brax_dance_120_34
+  - first:
+      213: 3561408828621903290
+    second: brax_dance_120_35
+  - first:
+      213: -6754869507726627863
+    second: brax_dance_120_36
+  - first:
+      213: -1037012681208116778
+    second: brax_dance_120_37
+  - first:
+      213: 3494701800142396082
+    second: brax_dance_120_38
+  - first:
+      213: 5063558985047439786
+    second: brax_dance_120_39
+  - first:
+      213: -468851171884414237
+    second: brax_dance_120_40
+  - first:
+      213: -7368051906276118533
+    second: brax_dance_120_41
+  - first:
+      213: 2533191951032098136
+    second: brax_dance_120_42
+  - first:
+      213: 3501865969166611286
+    second: brax_dance_120_43
+  - first:
+      213: 1143383664474793791
+    second: brax_dance_120_44
+  - first:
+      213: 6089151201688892839
+    second: brax_dance_120_45
+  - first:
+      213: 3643133995993267187
+    second: brax_dance_120_46
+  - first:
+      213: 4830633636628467700
+    second: brax_dance_120_47
+  - first:
+      213: 5863096049427078713
+    second: brax_dance_120_48
+  - first:
+      213: 6395528210824968455
+    second: brax_dance_120_49
+  - first:
+      213: -7029175363182400205
+    second: brax_dance_120_50
+  - first:
+      213: 1107255048118499225
+    second: brax_dance_120_51
+  - first:
+      213: -8320554799159654641
+    second: brax_dance_120_52
+  - first:
+      213: -7338007227080309295
+    second: brax_dance_120_53
+  - first:
+      213: -7698015156166439768
+    second: brax_dance_120_54
+  - first:
+      213: 2697538950074073213
+    second: brax_dance_120_55
+  - first:
+      213: 5320088345051318826
+    second: brax_dance_120_56
+  - first:
+      213: -6860146000335099694
+    second: brax_dance_120_57
+  - first:
+      213: -1803075564218393590
+    second: brax_dance_120_58
+  - first:
+      213: 6996796251428919366
+    second: brax_dance_120_59
+  - first:
+      213: -2687631814341700153
+    second: brax_dance_120_60
+  - first:
+      213: 2017954544689227775
+    second: brax_dance_120_61
+  - first:
+      213: -1366104062916957047
+    second: brax_dance_120_62
+  - first:
+      213: 5849650436857471751
+    second: brax_dance_120_63
+  - first:
+      213: 3713373535331300750
+    second: brax_dance_120_64
+  - first:
+      213: -393673496657517317
+    second: brax_dance_120_65
+  - first:
+      213: -4158029192853958414
+    second: brax_dance_120_66
+  - first:
+      213: -3398087237264806850
+    second: brax_dance_120_67
+  - first:
+      213: -929707007582731670
+    second: brax_dance_120_68
+  - first:
+      213: 4078203049975586020
+    second: brax_dance_120_69
+  - first:
+      213: -8499620348076207535
+    second: brax_dance_120_70
+  - first:
+      213: -2729526449315396037
+    second: brax_dance_120_71
+  - first:
+      213: 2120694550653257426
+    second: brax_dance_120_72
+  - first:
+      213: 1286903478667261907
+    second: brax_dance_120_73
+  - first:
+      213: -672438275294538234
+    second: brax_dance_120_74
+  - first:
+      213: 2189459404520687762
+    second: brax_dance_120_75
+  - first:
+      213: -6054976667503546754
+    second: brax_dance_120_76
+  - first:
+      213: 7939988609957654660
+    second: brax_dance_120_77
+  - first:
+      213: 8995312909793189099
+    second: brax_dance_120_78
+  - first:
+      213: -7163417339476761855
+    second: brax_dance_120_79
+  - first:
+      213: 9057260508878635520
+    second: brax_dance_120_80
+  - first:
+      213: 5870450742895201615
+    second: brax_dance_120_81
+  - first:
+      213: -4521598528757508748
+    second: brax_dance_120_82
+  - first:
+      213: -2586855757123630274
+    second: brax_dance_120_83
+  - first:
+      213: -1895837610321626661
+    second: brax_dance_120_84
+  - first:
+      213: -6972742461490669166
+    second: brax_dance_120_85
+  - first:
+      213: -2681057913545327071
+    second: brax_dance_120_86
+  - first:
+      213: 1806643942395321866
+    second: brax_dance_120_87
+  - first:
+      213: 2074689192224308292
+    second: brax_dance_120_88
+  - first:
+      213: -5448672047325875787
+    second: brax_dance_120_89
+  - first:
+      213: -2070127170897658258
+    second: brax_dance_120_90
+  - first:
+      213: -3466964138782863758
+    second: brax_dance_120_91
+  - first:
+      213: -7795653684892194794
+    second: brax_dance_120_92
+  - first:
+      213: -1517414600626651984
+    second: brax_dance_120_93
+  - first:
+      213: -6398738789738868488
+    second: brax_dance_120_94
+  - first:
+      213: 1342917302223707114
+    second: brax_dance_120_95
+  - first:
+      213: 3557625598179598601
+    second: brax_dance_120_96
+  - first:
+      213: 8219426619154105037
+    second: brax_dance_120_97
+  - first:
+      213: -4394626164290654473
+    second: brax_dance_120_98
+  - first:
+      213: 4259677020478132713
+    second: brax_dance_120_99
+  - first:
+      213: 1713043890730074685
+    second: brax_dance_120_100
+  - first:
+      213: 6874662163198166155
+    second: brax_dance_120_101
+  - first:
+      213: -5393296901380250472
+    second: brax_dance_120_102
+  - first:
+      213: 1718028359903026298
+    second: brax_dance_120_103
+  - first:
+      213: -6006974968827508403
+    second: brax_dance_120_104
+  - first:
+      213: 8483120660927723003
+    second: brax_dance_120_105
+  - first:
+      213: 6015042736902817808
+    second: brax_dance_120_106
+  - first:
+      213: 5525787707475333043
+    second: brax_dance_120_107
+  - first:
+      213: -3381336465918771307
+    second: brax_dance_120_108
+  - first:
+      213: 2637758100395760791
+    second: brax_dance_120_109
+  - first:
+      213: -6103045488304720973
+    second: brax_dance_120_110
+  - first:
+      213: 5922521218147303901
+    second: brax_dance_120_111
+  - first:
+      213: 5369721256761479448
+    second: brax_dance_120_112
+  - first:
+      213: 8911080618167395374
+    second: brax_dance_120_113
+  - first:
+      213: -4107125994818420212
+    second: brax_dance_120_114
+  - first:
+      213: 7857935989093795365
+    second: brax_dance_120_115
+  - first:
+      213: -561248843079124329
+    second: brax_dance_120_116
+  - first:
+      213: -5380970113417053801
+    second: brax_dance_120_117
+  - first:
+      213: 24817602449612571
+    second: brax_dance_120_118
+  - first:
+      213: -4263757677218134194
+    second: brax_dance_120_119
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_dance_120_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 5299
+        width: 346
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fb2c29407df16780800000000000000
+      internalID: -8691387147142550538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_1
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 5299
+        width: 346
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e1c06bf4c3caff70800000000000000
+      internalID: 9221898437792940519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_2
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 5299
+        width: 346
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89999a9e6fe76a820800000000000000
+      internalID: 2929168206598347160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_3
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 5299
+        width: 346
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97273bf2e1c11a900800000000000000
+      internalID: 693866733566653049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_4
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 5299
+        width: 346
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4baf6498c499b5de0800000000000000
+      internalID: -1343311509840266572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_5
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 5299
+        width: 346
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4af6d8a4dd9ab8a0800000000000000
+      internalID: -6288540392978187697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_6
+      rect:
+        serializedVersion: 2
+        x: 2324
+        y: 5299
+        width: 343
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72668ac5c474aaba0800000000000000
+      internalID: -6076966353885436377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_7
+      rect:
+        serializedVersion: 2
+        x: 2708
+        y: 5299
+        width: 343
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56352eff3e2264410800000000000000
+      internalID: 1460893491774247781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_8
+      rect:
+        serializedVersion: 2
+        x: 3092
+        y: 5299
+        width: 343
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42865df2a567b2510800000000000000
+      internalID: 1525443028516694052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_9
+      rect:
+        serializedVersion: 2
+        x: 3476
+        y: 5299
+        width: 343
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c5c93b97396dcab0800000000000000
+      internalID: -4986213524880898624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_10
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 4819
+        width: 343
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7f737fade696940800000000000000
+      internalID: 5289881124052924331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_11
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 4819
+        width: 343
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fc132313aff959d0800000000000000
+      internalID: -2784913818686120715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_12
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 4819
+        width: 346
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4832fd01e16d5a5b0800000000000000
+      internalID: -5357640757066914940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_13
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 4819
+        width: 346
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd842fb7a3b00bb20800000000000000
+      internalID: 3148028485347461343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_14
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 4819
+        width: 346
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97319edea6cbf8310800000000000000
+      internalID: 1409552375834284921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_15
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 4819
+        width: 346
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8817e15945758f880800000000000000
+      internalID: -8577009469536439928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_16
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 4819
+        width: 346
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c8de654de1acd110800000000000000
+      internalID: 1287081633965332680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_17
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 4819
+        width: 346
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f1e5f9bd3214230800000000000000
+      internalID: 3621215001561145114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_18
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 4819
+        width: 346
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1fe3aa0c2fb28d60800000000000000
+      internalID: 7891079692984512284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_19
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 4819
+        width: 346
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5008e12c9d7274f40800000000000000
+      internalID: 5712578468560928773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_20
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 4339
+        width: 346
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb1592c8dd3f1090800000000000000
+      internalID: -8061656806783116363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_21
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 4339
+        width: 346
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfba22020282e23b0800000000000000
+      internalID: -5535442773548553220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_22
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 4339
+        width: 346
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5b64bcb66ec29000800000000000000
+      internalID: 41322287247682394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_23
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 4339
+        width: 346
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4495b5cc7d5482c0800000000000000
+      internalID: -4430313342951386038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_24
+      rect:
+        serializedVersion: 2
+        x: 1578
+        y: 4339
+        width: 300
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a711ffe157acf1e0800000000000000
+      internalID: -2162669750684936282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_25
+      rect:
+        serializedVersion: 2
+        x: 1962
+        y: 4339
+        width: 300
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8c78c492cbc09c80800000000000000
+      internalID: -8317924475173045106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_26
+      rect:
+        serializedVersion: 2
+        x: 2346
+        y: 4339
+        width: 300
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf0abafe1d9ab7180800000000000000
+      internalID: -9116506301547175684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_27
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 4339
+        width: 300
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ce9cdd086c288f00800000000000000
+      internalID: 1119193332822351559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_28
+      rect:
+        serializedVersion: 2
+        x: 3114
+        y: 4339
+        width: 300
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea19bb3d8fb5da910800000000000000
+      internalID: 1850236146181444014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_29
+      rect:
+        serializedVersion: 2
+        x: 3498
+        y: 4339
+        width: 300
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96f0b86534856fe80800000000000000
+      internalID: -8145225829814956183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_30
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 3859
+        width: 346
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb411eda58cef2090800000000000000
+      internalID: -8056961149450513217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_31
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 3859
+        width: 346
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a25c83f1b021ff7f0800000000000000
+      internalID: -576722388302379734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_32
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 3859
+        width: 346
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71478a3165b55c140800000000000000
+      internalID: 4739294608132437015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_33
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 3859
+        width: 346
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e2913e674e51160800000000000000
+      internalID: 6995748795457285704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_34
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 3859
+        width: 346
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37d2d2cf6c3d55c30800000000000000
+      internalID: 4347613866883886451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_35
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 3859
+        width: 346
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab5d2f1e57aac6130800000000000000
+      internalID: 3561408828621903290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_36
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 3859
+        width: 346
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eb26d7b8f1e142a0800000000000000
+      internalID: -6754869507726627863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_37
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 3859
+        width: 346
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d9c305f57acb91f0800000000000000
+      internalID: -1037012681208116778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_38
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 3859
+        width: 346
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bad76185ccaf7030800000000000000
+      internalID: 3494701800142396082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_39
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 3859
+        width: 346
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa97dfaa110654640800000000000000
+      internalID: 5063558985047439786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_40
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 3379
+        width: 346
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eacd4fd75e4e79f0800000000000000
+      internalID: -468851171884414237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_41
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 3379
+        width: 346
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bffa5cf24db6fb990800000000000000
+      internalID: -7368051906276118533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_42
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 3379
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85d952578a4b72320800000000000000
+      internalID: 2533191951032098136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_43
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 3379
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65374379b80299030800000000000000
+      internalID: 3501865969166611286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_44
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 3379
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f37210b826d1edf00800000000000000
+      internalID: 1143383664474793791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_45
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 3379
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a53f4891c2018450800000000000000
+      internalID: 6089151201688892839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_46
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 3379
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fbf35431130f8230800000000000000
+      internalID: 3643133995993267187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_47
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 3379
+        width: 346
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ff0b4fd2bbd90340800000000000000
+      internalID: 4830633636628467700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_48
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 3379
+        width: 346
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93ed81efac6ed5150800000000000000
+      internalID: 5863096049427078713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_49
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 3379
+        width: 346
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7093635d50b71c850800000000000000
+      internalID: 6395528210824968455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_50
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 2899
+        width: 346
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33de595df3a537e90800000000000000
+      internalID: -7029175363182400205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_51
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 2899
+        width: 346
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9977cda8992cd5f00800000000000000
+      internalID: 1107255048118499225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_52
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 2899
+        width: 346
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07caed8e73778c80800000000000000
+      internalID: -8320554799159654641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_53
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 2899
+        width: 346
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d501ae2e492a2a90800000000000000
+      internalID: -7338007227080309295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_54
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 2899
+        width: 346
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ac402550082b2590800000000000000
+      internalID: -7698015156166439768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_55
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 2899
+        width: 346
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7002f602659f6520800000000000000
+      internalID: 2697538950074073213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_56
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 2899
+        width: 346
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2aca7ca920c4d940800000000000000
+      internalID: 5320088345051318826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_57
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 2899
+        width: 346
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8a5be2f8ddbc0a0800000000000000
+      internalID: -6860146000335099694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_58
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 2899
+        width: 346
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c5393d3503af6e0800000000000000
+      internalID: -1803075564218393590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_59
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 2899
+        width: 346
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 648943cbe1d991160800000000000000
+      internalID: 6996796251428919366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_60
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 2419
+        width: 346
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c5df13ca1d93bad0800000000000000
+      internalID: -2687631814341700153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_61
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 2419
+        width: 346
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff7261187f6310c10800000000000000
+      internalID: 2017954544689227775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_62
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 2419
+        width: 346
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ced9bb79f9a0de0800000000000000
+      internalID: -1366104062916957047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_63
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 2419
+        width: 346
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703291d54122e2150800000000000000
+      internalID: 5849650436857471751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_64
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 2419
+        width: 346
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8532cb5e8d888330800000000000000
+      internalID: 3713373535331300750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_65
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 2419
+        width: 346
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf42e326a04698af0800000000000000
+      internalID: -393673496657517317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_66
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 2419
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f05c32ba76bb46c0800000000000000
+      internalID: -4158029192853958414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_67
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 2419
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3cea0b59a197d0d0800000000000000
+      internalID: -3398087237264806850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_68
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 2419
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6207d307640913f0800000000000000
+      internalID: -929707007582731670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_69
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 2419
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ec95b31110b89830800000000000000
+      internalID: 4078203049975586020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_70
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1939
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1525c3b83584b0a80800000000000000
+      internalID: -8499620348076207535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_71
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 1939
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b36c58fe726ce1ad0800000000000000
+      internalID: -2729526449315396037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_72
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d64bc835783e6d10800000000000000
+      internalID: 2120694550653257426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_73
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d73d2245effbd110800000000000000
+      internalID: 1286903478667261907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_74
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60651bb83f40ba6f0800000000000000
+      internalID: -672438275294538234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_75
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29808986ab5826e10800000000000000
+      internalID: 2189459404520687762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_76
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7e2c223dc668fba0800000000000000
+      internalID: -6054976667503546754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_77
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4807c29a291803e60800000000000000
+      internalID: 7939988609957654660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_78
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bec55b7ae65c5dc70800000000000000
+      internalID: 8995312909793189099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_79
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 1939
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1032d9612ed669c90800000000000000
+      internalID: -7163417339476761855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_80
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1459
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00282e5027ad1bd70800000000000000
+      internalID: 9057260508878635520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_81
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 1459
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d42b109d7087150800000000000000
+      internalID: 5870450742895201615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_82
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 1459
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 475da74381e0041c0800000000000000
+      internalID: -4521598528757508748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_83
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 1459
+        width: 346
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3bc8770564a91cd0800000000000000
+      internalID: -2586855757123630274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_84
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 1459
+        width: 346
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd934fcecb1a0b5e0800000000000000
+      internalID: -1895837610321626661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_85
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 1459
+        width: 346
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299d098aca7db3f90800000000000000
+      internalID: -6972742461490669166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_86
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 1459
+        width: 346
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12e71e05808facad0800000000000000
+      internalID: -2681057913545327071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_87
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 1459
+        width: 346
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0e9516f71d721910800000000000000
+      internalID: 1806643942395321866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_88
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 1459
+        width: 346
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44c3fd104d6cacc10800000000000000
+      internalID: 2074689192224308292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_89
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 1459
+        width: 346
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b17a8924ad6264b0800000000000000
+      internalID: -5448672047325875787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_90
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 979
+        width: 346
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6eb2ca5e4e6543e0800000000000000
+      internalID: -2070127170897658258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_91
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 979
+        width: 346
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27e44da0c7ed2efc0800000000000000
+      internalID: -3466964138782863758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_92
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 979
+        width: 346
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6182908d64640d390800000000000000
+      internalID: -7795653684892194794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_93
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 979
+        width: 346
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bc38a8d57f01fae0800000000000000
+      internalID: -1517414600626651984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_94
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 979
+        width: 346
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f01a1309fc1337a0800000000000000
+      internalID: -6398738789738868488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_95
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 979
+        width: 346
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeb15c9db2003a210800000000000000
+      internalID: 1342917302223707114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_96
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 979
+        width: 346
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 901e457e1a93f5130800000000000000
+      internalID: 3557625598179598601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_97
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 979
+        width: 346
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc2021436f4411270800000000000000
+      internalID: 8219426619154105037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_98
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 979
+        width: 346
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fe61dc89c62303c0800000000000000
+      internalID: -4394626164290654473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_99
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 979
+        width: 346
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e15e7f6ea96d1b30800000000000000
+      internalID: 4259677020478132713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_100
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 499
+        width: 346
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d328e9fa754f5c710800000000000000
+      internalID: 1713043890730074685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_101
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 499
+        width: 346
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b84ce3c50d4b76f50800000000000000
+      internalID: 6874662163198166155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_102
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 894e3090b092725b0800000000000000
+      internalID: -5393296901380250472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_103
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c111ad0b9a7d710800000000000000
+      internalID: 1718028359903026298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_104
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d498f589710f2aca0800000000000000
+      internalID: -6006974968827508403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_105
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf5bf5dab491ab570800000000000000
+      internalID: 8483120660927723003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_106
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 018c2e90089b97350800000000000000
+      internalID: 6015042736902817808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_107
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bf8940a4aa8fac40800000000000000
+      internalID: 5525787707475333043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_108
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 499
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f36da36641311d0800000000000000
+      internalID: -3381336465918771307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_109
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 499
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c9f7154033b9420800000000000000
+      internalID: 2637758100395760791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_110
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 19
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b3fb85b670ad4ba0800000000000000
+      internalID: -6103045488304720973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_111
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 19
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd142664ba5013250800000000000000
+      internalID: 5922521218147303901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_112
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 19
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 811d1247805158a40800000000000000
+      internalID: 5369721256761479448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_113
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 19
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e246cbafb948aab70800000000000000
+      internalID: 8911080618167395374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_114
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 19
+        width: 346
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c02431f0bae8007c0800000000000000
+      internalID: -4107125994818420212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_115
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 19
+        width: 346
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52681b1262ffc0d60800000000000000
+      internalID: 7857935989093795365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_116
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 19
+        width: 346
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79a7bad962b0638f0800000000000000
+      internalID: -561248843079124329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_117
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 19
+        width: 346
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79978c20134f255b0800000000000000
+      internalID: -5380970113417053801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_118
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 19
+        width: 346
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f9f2a5a7b285000800000000000000
+      internalID: 24817602449612571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_120_119
+      rect:
+        serializedVersion: 2
+        x: 3475
+        y: 19
+        width: 346
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e478111abf614d4c0800000000000000
+      internalID: -4263757677218134194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_dance_120_0: -8691387147142550538
+      brax_dance_120_1: 9221898437792940519
+      brax_dance_120_10: 5289881124052924331
+      brax_dance_120_100: 1713043890730074685
+      brax_dance_120_101: 6874662163198166155
+      brax_dance_120_102: -5393296901380250472
+      brax_dance_120_103: 1718028359903026298
+      brax_dance_120_104: -6006974968827508403
+      brax_dance_120_105: 8483120660927723003
+      brax_dance_120_106: 6015042736902817808
+      brax_dance_120_107: 5525787707475333043
+      brax_dance_120_108: -3381336465918771307
+      brax_dance_120_109: 2637758100395760791
+      brax_dance_120_11: -2784913818686120715
+      brax_dance_120_110: -6103045488304720973
+      brax_dance_120_111: 5922521218147303901
+      brax_dance_120_112: 5369721256761479448
+      brax_dance_120_113: 8911080618167395374
+      brax_dance_120_114: -4107125994818420212
+      brax_dance_120_115: 7857935989093795365
+      brax_dance_120_116: -561248843079124329
+      brax_dance_120_117: -5380970113417053801
+      brax_dance_120_118: 24817602449612571
+      brax_dance_120_119: -4263757677218134194
+      brax_dance_120_12: -5357640757066914940
+      brax_dance_120_13: 3148028485347461343
+      brax_dance_120_14: 1409552375834284921
+      brax_dance_120_15: -8577009469536439928
+      brax_dance_120_16: 1287081633965332680
+      brax_dance_120_17: 3621215001561145114
+      brax_dance_120_18: 7891079692984512284
+      brax_dance_120_19: 5712578468560928773
+      brax_dance_120_2: 2929168206598347160
+      brax_dance_120_20: -8061656806783116363
+      brax_dance_120_21: -5535442773548553220
+      brax_dance_120_22: 41322287247682394
+      brax_dance_120_23: -4430313342951386038
+      brax_dance_120_24: -2162669750684936282
+      brax_dance_120_25: -8317924475173045106
+      brax_dance_120_26: -9116506301547175684
+      brax_dance_120_27: 1119193332822351559
+      brax_dance_120_28: 1850236146181444014
+      brax_dance_120_29: -8145225829814956183
+      brax_dance_120_3: 693866733566653049
+      brax_dance_120_30: -8056961149450513217
+      brax_dance_120_31: -576722388302379734
+      brax_dance_120_32: 4739294608132437015
+      brax_dance_120_33: 6995748795457285704
+      brax_dance_120_34: 4347613866883886451
+      brax_dance_120_35: 3561408828621903290
+      brax_dance_120_36: -6754869507726627863
+      brax_dance_120_37: -1037012681208116778
+      brax_dance_120_38: 3494701800142396082
+      brax_dance_120_39: 5063558985047439786
+      brax_dance_120_4: -1343311509840266572
+      brax_dance_120_40: -468851171884414237
+      brax_dance_120_41: -7368051906276118533
+      brax_dance_120_42: 2533191951032098136
+      brax_dance_120_43: 3501865969166611286
+      brax_dance_120_44: 1143383664474793791
+      brax_dance_120_45: 6089151201688892839
+      brax_dance_120_46: 3643133995993267187
+      brax_dance_120_47: 4830633636628467700
+      brax_dance_120_48: 5863096049427078713
+      brax_dance_120_49: 6395528210824968455
+      brax_dance_120_5: -6288540392978187697
+      brax_dance_120_50: -7029175363182400205
+      brax_dance_120_51: 1107255048118499225
+      brax_dance_120_52: -8320554799159654641
+      brax_dance_120_53: -7338007227080309295
+      brax_dance_120_54: -7698015156166439768
+      brax_dance_120_55: 2697538950074073213
+      brax_dance_120_56: 5320088345051318826
+      brax_dance_120_57: -6860146000335099694
+      brax_dance_120_58: -1803075564218393590
+      brax_dance_120_59: 6996796251428919366
+      brax_dance_120_6: -6076966353885436377
+      brax_dance_120_60: -2687631814341700153
+      brax_dance_120_61: 2017954544689227775
+      brax_dance_120_62: -1366104062916957047
+      brax_dance_120_63: 5849650436857471751
+      brax_dance_120_64: 3713373535331300750
+      brax_dance_120_65: -393673496657517317
+      brax_dance_120_66: -4158029192853958414
+      brax_dance_120_67: -3398087237264806850
+      brax_dance_120_68: -929707007582731670
+      brax_dance_120_69: 4078203049975586020
+      brax_dance_120_7: 1460893491774247781
+      brax_dance_120_70: -8499620348076207535
+      brax_dance_120_71: -2729526449315396037
+      brax_dance_120_72: 2120694550653257426
+      brax_dance_120_73: 1286903478667261907
+      brax_dance_120_74: -672438275294538234
+      brax_dance_120_75: 2189459404520687762
+      brax_dance_120_76: -6054976667503546754
+      brax_dance_120_77: 7939988609957654660
+      brax_dance_120_78: 8995312909793189099
+      brax_dance_120_79: -7163417339476761855
+      brax_dance_120_8: 1525443028516694052
+      brax_dance_120_80: 9057260508878635520
+      brax_dance_120_81: 5870450742895201615
+      brax_dance_120_82: -4521598528757508748
+      brax_dance_120_83: -2586855757123630274
+      brax_dance_120_84: -1895837610321626661
+      brax_dance_120_85: -6972742461490669166
+      brax_dance_120_86: -2681057913545327071
+      brax_dance_120_87: 1806643942395321866
+      brax_dance_120_88: 2074689192224308292
+      brax_dance_120_89: -5448672047325875787
+      brax_dance_120_9: -4986213524880898624
+      brax_dance_120_90: -2070127170897658258
+      brax_dance_120_91: -3466964138782863758
+      brax_dance_120_92: -7795653684892194794
+      brax_dance_120_93: -1517414600626651984
+      brax_dance_120_94: -6398738789738868488
+      brax_dance_120_95: 1342917302223707114
+      brax_dance_120_96: 3557625598179598601
+      brax_dance_120_97: 8219426619154105037
+      brax_dance_120_98: -4394626164290654473
+      brax_dance_120_99: 4259677020478132713
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

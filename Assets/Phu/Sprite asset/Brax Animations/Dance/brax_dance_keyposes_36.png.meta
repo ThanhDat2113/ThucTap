@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: 84e4cb8c9d4eced47bb7a4cfc962cc4a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3491812749504982186
+    second: brax_dance_keyposes_36_0
+  - first:
+      213: -8164644775183380626
+    second: brax_dance_keyposes_36_1
+  - first:
+      213: 3589372462737148128
+    second: brax_dance_keyposes_36_2
+  - first:
+      213: -1088357845700708642
+    second: brax_dance_keyposes_36_3
+  - first:
+      213: 2658427681107454528
+    second: brax_dance_keyposes_36_4
+  - first:
+      213: -333284074657970003
+    second: brax_dance_keyposes_36_5
+  - first:
+      213: 7439451280951567507
+    second: brax_dance_keyposes_36_6
+  - first:
+      213: 3570785800537347313
+    second: brax_dance_keyposes_36_7
+  - first:
+      213: -3051009825134039457
+    second: brax_dance_keyposes_36_8
+  - first:
+      213: 6606399118446163022
+    second: brax_dance_keyposes_36_9
+  - first:
+      213: 3590883594117979977
+    second: brax_dance_keyposes_36_10
+  - first:
+      213: 8018159799660140533
+    second: brax_dance_keyposes_36_11
+  - first:
+      213: -2274238419867841439
+    second: brax_dance_keyposes_36_12
+  - first:
+      213: 6061938418119862307
+    second: brax_dance_keyposes_36_13
+  - first:
+      213: 6541875518897245995
+    second: brax_dance_keyposes_36_14
+  - first:
+      213: -8681200071363588227
+    second: brax_dance_keyposes_36_15
+  - first:
+      213: -1769814782634940863
+    second: brax_dance_keyposes_36_16
+  - first:
+      213: 5030686520337873215
+    second: brax_dance_keyposes_36_17
+  - first:
+      213: -7115613750026567531
+    second: brax_dance_keyposes_36_18
+  - first:
+      213: 8494579664543182933
+    second: brax_dance_keyposes_36_19
+  - first:
+      213: -935140266680174983
+    second: brax_dance_keyposes_36_20
+  - first:
+      213: -2150011148444000146
+    second: brax_dance_keyposes_36_21
+  - first:
+      213: -2277599902923092229
+    second: brax_dance_keyposes_36_22
+  - first:
+      213: -1528541386396198102
+    second: brax_dance_keyposes_36_23
+  - first:
+      213: 4336246251268855331
+    second: brax_dance_keyposes_36_24
+  - first:
+      213: 9078960492159948250
+    second: brax_dance_keyposes_36_25
+  - first:
+      213: 4328676982732235904
+    second: brax_dance_keyposes_36_26
+  - first:
+      213: -1837602471272643052
+    second: brax_dance_keyposes_36_27
+  - first:
+      213: 1323970443520349201
+    second: brax_dance_keyposes_36_28
+  - first:
+      213: -7384866532468522793
+    second: brax_dance_keyposes_36_29
+  - first:
+      213: -5625017081017519470
+    second: brax_dance_keyposes_36_30
+  - first:
+      213: -5178235097149650139
+    second: brax_dance_keyposes_36_31
+  - first:
+      213: 2815515757237221395
+    second: brax_dance_keyposes_36_32
+  - first:
+      213: -5033083226090335074
+    second: brax_dance_keyposes_36_33
+  - first:
+      213: 3036703321315758377
+    second: brax_dance_keyposes_36_34
+  - first:
+      213: 4573049221925094496
+    second: brax_dance_keyposes_36_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_0
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1459
+        width: 235
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65353930ec69a8fc0800000000000000
+      internalID: -3491812749504982186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_1
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 1459
+        width: 216
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6f02f9c5da51be80800000000000000
+      internalID: -8164644775183380626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_2
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 1459
+        width: 264
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e84400dc3300d130800000000000000
+      internalID: 3589372462737148128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_3
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 1459
+        width: 215
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed6ff724e4065e0f0800000000000000
+      internalID: -1088357845700708642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_4
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 1459
+        width: 218
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04aa97914e1a4e420800000000000000
+      internalID: 2658427681107454528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_5
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1459
+        width: 270
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da887b066efef5bf0800000000000000
+      internalID: -333284074657970003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_6
+      rect:
+        serializedVersion: 2
+        x: 2380
+        y: 1459
+        width: 232
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39461fc268d3e3760800000000000000
+      internalID: 7439451280951567507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_7
+      rect:
+        serializedVersion: 2
+        x: 2759
+        y: 1459
+        width: 241
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f4990a44cafd8130800000000000000
+      internalID: 3570785800537347313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_8
+      rect:
+        serializedVersion: 2
+        x: 3150
+        y: 1459
+        width: 228
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5ea8ae9ab2a8a5d0800000000000000
+      internalID: -3051009825134039457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_9
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 979
+        width: 268
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e44ff6bfef4aeab50800000000000000
+      internalID: 6606399118446163022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_10
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 979
+        width: 257
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94f1e218a9165d130800000000000000
+      internalID: 3590883594117979977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_11
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 979
+        width: 263
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f75f031bd9364f60800000000000000
+      internalID: 8018159799660140533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_12
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 979
+        width: 346
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16c4b31e4384070e0800000000000000
+      internalID: -2274238419867841439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_13
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 979
+        width: 346
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 328e35eafd4502450800000000000000
+      internalID: 6061938418119862307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_14
+      rect:
+        serializedVersion: 2
+        x: 1946
+        y: 979
+        width: 331
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2fc1b4cf1969ca50800000000000000
+      internalID: 6541875518897245995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_15
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 979
+        width: 346
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7f0742b78e268780800000000000000
+      internalID: -8681200071363588227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_16
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 979
+        width: 346
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1462fc205da5077e0800000000000000
+      internalID: -1769814782634940863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_17
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 979
+        width: 346
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f39b51d8cb690d540800000000000000
+      internalID: 5030686520337873215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_18
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 499
+        width: 346
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59008c69ef2404d90800000000000000
+      internalID: -7115613750026567531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_19
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 499
+        width: 346
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5507a5dd23fc2e570800000000000000
+      internalID: 8494579664543182933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_20
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 499
+        width: 346
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9763d5dc1e6b503f0800000000000000
+      internalID: -935140266680174983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_21
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 499
+        width: 346
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e60add17040a922e0800000000000000
+      internalID: -2150011148444000146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_22
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 499
+        width: 346
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfe0ecd94f65460e0800000000000000
+      internalID: -2277599902923092229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_23
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 499
+        width: 346
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b1f5725b789cae0800000000000000
+      internalID: -1528541386396198102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_24
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 499
+        width: 346
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 326df79bdf07d2c30800000000000000
+      internalID: 4336246251268855331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_25
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 499
+        width: 346
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad5dff81772fefd70800000000000000
+      internalID: 9078960492159948250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_26
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 499
+        width: 346
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0842a2f08cc821c30800000000000000
+      internalID: 4328676982732235904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_27
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 19
+        width: 346
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4160a65d9468f76e0800000000000000
+      internalID: -1837602471272643052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_28
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 19
+        width: 346
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 114952b8a10bf5210800000000000000
+      internalID: 1323970443520349201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_29
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 19
+        width: 346
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d00b82f30fa38990800000000000000
+      internalID: -7384866532468522793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_30
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 19
+        width: 346
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 292327674ccefe1b0800000000000000
+      internalID: -5625017081017519470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_31
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 19
+        width: 346
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52b4fe65d963328b0800000000000000
+      internalID: -5178235097149650139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_32
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 19
+        width: 346
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 318b3a9f9a8b21720800000000000000
+      internalID: 2815515757237221395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_33
+      rect:
+        serializedVersion: 2
+        x: 2323
+        y: 19
+        width: 346
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9498e7e875e62ab0800000000000000
+      internalID: -5033083226090335074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_34
+      rect:
+        serializedVersion: 2
+        x: 2707
+        y: 19
+        width: 346
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9215643e499842a20800000000000000
+      internalID: 3036703321315758377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_dance_keyposes_36_35
+      rect:
+        serializedVersion: 2
+        x: 3091
+        y: 19
+        width: 346
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 064c83dc90cb67f30800000000000000
+      internalID: 4573049221925094496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_dance_keyposes_36_0: -3491812749504982186
+      brax_dance_keyposes_36_1: -8164644775183380626
+      brax_dance_keyposes_36_10: 3590883594117979977
+      brax_dance_keyposes_36_11: 8018159799660140533
+      brax_dance_keyposes_36_12: -2274238419867841439
+      brax_dance_keyposes_36_13: 6061938418119862307
+      brax_dance_keyposes_36_14: 6541875518897245995
+      brax_dance_keyposes_36_15: -8681200071363588227
+      brax_dance_keyposes_36_16: -1769814782634940863
+      brax_dance_keyposes_36_17: 5030686520337873215
+      brax_dance_keyposes_36_18: -7115613750026567531
+      brax_dance_keyposes_36_19: 8494579664543182933
+      brax_dance_keyposes_36_2: 3589372462737148128
+      brax_dance_keyposes_36_20: -935140266680174983
+      brax_dance_keyposes_36_21: -2150011148444000146
+      brax_dance_keyposes_36_22: -2277599902923092229
+      brax_dance_keyposes_36_23: -1528541386396198102
+      brax_dance_keyposes_36_24: 4336246251268855331
+      brax_dance_keyposes_36_25: 9078960492159948250
+      brax_dance_keyposes_36_26: 4328676982732235904
+      brax_dance_keyposes_36_27: -1837602471272643052
+      brax_dance_keyposes_36_28: 1323970443520349201
+      brax_dance_keyposes_36_29: -7384866532468522793
+      brax_dance_keyposes_36_3: -1088357845700708642
+      brax_dance_keyposes_36_30: -5625017081017519470
+      brax_dance_keyposes_36_31: -5178235097149650139
+      brax_dance_keyposes_36_32: 2815515757237221395
+      brax_dance_keyposes_36_33: -5033083226090335074
+      brax_dance_keyposes_36_34: 3036703321315758377
+      brax_dance_keyposes_36_35: 4573049221925094496
+      brax_dance_keyposes_36_4: 2658427681107454528
+      brax_dance_keyposes_36_5: -333284074657970003
+      brax_dance_keyposes_36_6: 7439451280951567507
+      brax_dance_keyposes_36_7: 3570785800537347313
+      brax_dance_keyposes_36_8: -3051009825134039457
+      brax_dance_keyposes_36_9: 6606399118446163022
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

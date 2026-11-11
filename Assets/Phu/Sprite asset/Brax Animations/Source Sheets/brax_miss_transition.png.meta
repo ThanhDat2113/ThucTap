@@ -1,0 +1,1079 @@
+fileFormatVersion: 2
+guid: b3e24fdbd21aad74295bc7ccb4e286f9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 572387279560192020
+    second: brax_miss_transition_0
+  - first:
+      213: -2194836841817362226
+    second: brax_miss_transition_1
+  - first:
+      213: 7951657317022406271
+    second: brax_miss_transition_2
+  - first:
+      213: -8594206151091386112
+    second: brax_miss_transition_3
+  - first:
+      213: -7876957772212123026
+    second: brax_miss_transition_4
+  - first:
+      213: 2617043022974405706
+    second: brax_miss_transition_5
+  - first:
+      213: 472214753737559166
+    second: brax_miss_transition_6
+  - first:
+      213: -3363477400756252157
+    second: brax_miss_transition_7
+  - first:
+      213: 5153595500963971364
+    second: brax_miss_transition_8
+  - first:
+      213: -3572645785458686716
+    second: brax_miss_transition_9
+  - first:
+      213: 1216785186481251159
+    second: brax_miss_transition_10
+  - first:
+      213: 3762068264657769441
+    second: brax_miss_transition_11
+  - first:
+      213: -6778568839292179384
+    second: brax_miss_transition_12
+  - first:
+      213: 1365470023870895160
+    second: brax_miss_transition_13
+  - first:
+      213: 3052695452020560459
+    second: brax_miss_transition_14
+  - first:
+      213: 4453566449817142913
+    second: brax_miss_transition_15
+  - first:
+      213: 2373662997059633105
+    second: brax_miss_transition_16
+  - first:
+      213: 4285358519184139795
+    second: brax_miss_transition_17
+  - first:
+      213: -3058580957192942200
+    second: brax_miss_transition_18
+  - first:
+      213: 9155779868136186647
+    second: brax_miss_transition_19
+  - first:
+      213: 1268068014191639246
+    second: brax_miss_transition_20
+  - first:
+      213: -8780820616907015698
+    second: brax_miss_transition_21
+  - first:
+      213: 5039148373015113189
+    second: brax_miss_transition_22
+  - first:
+      213: -8548118122979031206
+    second: brax_miss_transition_23
+  - first:
+      213: -3250097769239538383
+    second: brax_miss_transition_24
+  - first:
+      213: -8522032048034360767
+    second: brax_miss_transition_25
+  - first:
+      213: 1109706802565615024
+    second: brax_miss_transition_26
+  - first:
+      213: -6841581101720032655
+    second: brax_miss_transition_27
+  - first:
+      213: 5562100801208539781
+    second: brax_miss_transition_28
+  - first:
+      213: -1413065909904572295
+    second: brax_miss_transition_29
+  - first:
+      213: 4847693590406415731
+    second: brax_miss_transition_30
+  - first:
+      213: 7770940180739023479
+    second: brax_miss_transition_31
+  - first:
+      213: -3081875399608887196
+    second: brax_miss_transition_32
+  - first:
+      213: -5586067642622030362
+    second: brax_miss_transition_33
+  - first:
+      213: -378011012219220713
+    second: brax_miss_transition_34
+  - first:
+      213: -7392720534153637006
+    second: brax_miss_transition_35
+  - first:
+      213: -970787128085102009
+    second: brax_miss_transition_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_miss_transition_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 390
+        width: 1536
+        height: 630
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4103328b23781f700800000000000000
+      internalID: 572387279560192020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 971
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec03987658f5a81e0800000000000000
+      internalID: -2194836841817362226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 962
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7691cc3336f95e60800000000000000
+      internalID: 7951657317022406271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_3
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 970
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00988b52a0f3bb880800000000000000
+      internalID: -8594206151091386112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_4
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 983
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6a4b8cd3ac6fa290800000000000000
+      internalID: -7876957772212123026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_5
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 977
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4ccd4283ca915420800000000000000
+      internalID: 2617043022974405706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_6
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 993
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7cc93e01d4ad8600800000000000000
+      internalID: 472214753737559166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_7
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 941
+        width: 78
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3029edddf178251d0800000000000000
+      internalID: -3363477400756252157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_8
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 987
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 421420f9dcf358740800000000000000
+      internalID: 5153595500963971364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_9
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 987
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 405407936996b6ec0800000000000000
+      internalID: -3572645785458686716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_10
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 869
+        width: 121
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7532c282ea3e2e010800000000000000
+      internalID: 1216785186481251159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_11
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 927
+        width: 57
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e352b7872d853430800000000000000
+      internalID: 3762068264657769441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_12
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 959
+        width: 7
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84c25781e8fade1a0800000000000000
+      internalID: -6778568839292179384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_13
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 976
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 834d44c80cf13f210800000000000000
+      internalID: 1365470023870895160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_14
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 901
+        width: 76
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b42d229f65a5d5a20800000000000000
+      internalID: 3052695452020560459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 925
+        width: 6
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186c2f0171f3ecd30800000000000000
+      internalID: 4453566449817142913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_16
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 467
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df7a3c6be1f0f020800000000000000
+      internalID: 2373662997059633105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_17
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 455
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3162a2f4ed6a87b30800000000000000
+      internalID: 4285358519184139795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_18
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 0
+        width: 507
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88d8db113dcbd85d0800000000000000
+      internalID: -3058580957192942200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 453
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7132ee9d74ddf0f70800000000000000
+      internalID: 9155779868136186647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_20
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 443
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eca7de0f325199110800000000000000
+      internalID: 1268068014191639246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_21
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 443
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9b4d4fb22442680800000000000000
+      internalID: -8780820616907015698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_22
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 445
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5edad082fb6aee540800000000000000
+      internalID: 5039148373015113189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 777
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5781c56bdbfe5980800000000000000
+      internalID: -8548118122979031206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_24
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 441
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13510337c4555e2d0800000000000000
+      internalID: -3250097769239538383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_25
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 432
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 142da640109abb980800000000000000
+      internalID: -8522032048034360767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_26
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 431
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bd02cb1578766f00800000000000000
+      internalID: 1109706802565615024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_27
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 415
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17aa3f97c32dd01a0800000000000000
+      internalID: -6841581101720032655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_28
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 9
+        width: 255
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58a53fc953d803d40800000000000000
+      internalID: 5562100801208539781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_29
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 382
+        width: 27
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9708cebaa08c36ce0800000000000000
+      internalID: -1413065909904572295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_30
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 391
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375cc14e2a7764340800000000000000
+      internalID: 4847693590406415731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_31
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 390
+        width: 9
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77262c31cece7db60800000000000000
+      internalID: 7770940180739023479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_32
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 383
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4681c4c07aafa35d0800000000000000
+      internalID: -3081875399608887196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_33
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 391
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6edc536431d4a72b0800000000000000
+      internalID: -5586067642622030362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_34
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 385
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71dcc77bcf801caf0800000000000000
+      internalID: -378011012219220713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_35
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 343
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273590ea7d7c76990800000000000000
+      internalID: -7392720534153637006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_transition_36
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 19
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74247fd10421782f0800000000000000
+      internalID: -970787128085102009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_miss_transition_0: 572387279560192020
+      brax_miss_transition_1: -2194836841817362226
+      brax_miss_transition_10: 1216785186481251159
+      brax_miss_transition_11: 3762068264657769441
+      brax_miss_transition_12: -6778568839292179384
+      brax_miss_transition_13: 1365470023870895160
+      brax_miss_transition_14: 3052695452020560459
+      brax_miss_transition_15: 4453566449817142913
+      brax_miss_transition_16: 2373662997059633105
+      brax_miss_transition_17: 4285358519184139795
+      brax_miss_transition_18: -3058580957192942200
+      brax_miss_transition_19: 9155779868136186647
+      brax_miss_transition_2: 7951657317022406271
+      brax_miss_transition_20: 1268068014191639246
+      brax_miss_transition_21: -8780820616907015698
+      brax_miss_transition_22: 5039148373015113189
+      brax_miss_transition_23: -8548118122979031206
+      brax_miss_transition_24: -3250097769239538383
+      brax_miss_transition_25: -8522032048034360767
+      brax_miss_transition_26: 1109706802565615024
+      brax_miss_transition_27: -6841581101720032655
+      brax_miss_transition_28: 5562100801208539781
+      brax_miss_transition_29: -1413065909904572295
+      brax_miss_transition_3: -8594206151091386112
+      brax_miss_transition_30: 4847693590406415731
+      brax_miss_transition_31: 7770940180739023479
+      brax_miss_transition_32: -3081875399608887196
+      brax_miss_transition_33: -5586067642622030362
+      brax_miss_transition_34: -378011012219220713
+      brax_miss_transition_35: -7392720534153637006
+      brax_miss_transition_36: -970787128085102009
+      brax_miss_transition_4: -7876957772212123026
+      brax_miss_transition_5: 2617043022974405706
+      brax_miss_transition_6: 472214753737559166
+      brax_miss_transition_7: -3363477400756252157
+      brax_miss_transition_8: 5153595500963971364
+      brax_miss_transition_9: -3572645785458686716
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

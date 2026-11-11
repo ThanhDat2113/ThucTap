@@ -1,0 +1,437 @@
+fileFormatVersion: 2
+guid: bc5f85fd320417148b44e2c20bb8ad29
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6789674828810286138
+    second: brax_miss_12_0
+  - first:
+      213: -5410158761090821574
+    second: brax_miss_12_1
+  - first:
+      213: 1317735058189196444
+    second: brax_miss_12_2
+  - first:
+      213: 3664161226180135172
+    second: brax_miss_12_3
+  - first:
+      213: 8101220733143078853
+    second: brax_miss_12_4
+  - first:
+      213: -7576324196559648156
+    second: brax_miss_12_5
+  - first:
+      213: -7785216438258715578
+    second: brax_miss_12_6
+  - first:
+      213: -1829386492215472532
+    second: brax_miss_12_7
+  - first:
+      213: 3562241800735539580
+    second: brax_miss_12_8
+  - first:
+      213: -4264310870837033556
+    second: brax_miss_12_9
+  - first:
+      213: 4248212172010349769
+    second: brax_miss_12_10
+  - first:
+      213: -4290896934226288490
+    second: brax_miss_12_11
+  - first:
+      213: 4319609231427707877
+    second: brax_miss_12_12
+  - first:
+      213: 4645269707107820156
+    second: brax_miss_12_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_miss_12_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 499
+        width: 346
+        height: 452
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a34f5a79845c93e50800000000000000
+      internalID: 6789674828810286138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_1
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 499
+        width: 346
+        height: 454
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a32d6b265414be4b0800000000000000
+      internalID: -5410158761090821574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_2
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 499
+        width: 346
+        height: 452
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9c1273cd09894210800000000000000
+      internalID: 1317735058189196444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_3
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 499
+        width: 346
+        height: 447
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4090a3eb837b9d230800000000000000
+      internalID: 3664161226180135172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_6
+      rect:
+        serializedVersion: 2
+        x: 1997
+        y: 499
+        width: 289
+        height: 455
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 644be02b5ea55f390800000000000000
+      internalID: -7785216438258715578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_7
+      rect:
+        serializedVersion: 2
+        x: 1625
+        y: 499
+        width: 244
+        height: 451
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6e49968da6bc96e0800000000000000
+      internalID: -1829386492215472532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_8
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 19
+        width: 346
+        height: 434
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c71c3e05b00af6130800000000000000
+      internalID: 3562241800735539580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_9
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 22
+        width: 346
+        height: 452
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca50ce33bdf12d4c0800000000000000
+      internalID: -4264310870837033556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_10
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 19
+        width: 346
+        height: 462
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c4ea23667ea4fa30800000000000000
+      internalID: 4248212172010349769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_11
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 19
+        width: 346
+        height: 462
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69021a3f8fba374c0800000000000000
+      internalID: -4290896934226288490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_12
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 19
+        width: 346
+        height: 458
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e32fbfa5b552fb30800000000000000
+      internalID: 4319609231427707877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_miss_12_13
+      rect:
+        serializedVersion: 2
+        x: 1974
+        y: 19
+        width: 275
+        height: 442
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c726b0adf20577040800000000000000
+      internalID: 4645269707107820156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 265cc2df5645a1a449cccc99b76c4749
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_miss_12_0: 6789674828810286138
+      brax_miss_12_1: -5410158761090821574
+      brax_miss_12_10: 4248212172010349769
+      brax_miss_12_11: -4290896934226288490
+      brax_miss_12_12: 4319609231427707877
+      brax_miss_12_13: 4645269707107820156
+      brax_miss_12_2: 1317735058189196444
+      brax_miss_12_3: 3664161226180135172
+      brax_miss_12_4: 8101220733143078853
+      brax_miss_12_5: -7576324196559648156
+      brax_miss_12_6: -7785216438258715578
+      brax_miss_12_7: -1829386492215472532
+      brax_miss_12_8: 3562241800735539580
+      brax_miss_12_9: -4264310870837033556
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

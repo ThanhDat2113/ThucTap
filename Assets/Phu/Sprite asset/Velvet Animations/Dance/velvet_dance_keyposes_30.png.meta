@@ -1,0 +1,1469 @@
+fileFormatVersion: 2
+guid: ce1de7be5462646408e41306914950ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4700698038126563495
+    second: velvet_dance_keyposes_30_0
+  - first:
+      213: 6640946226144938692
+    second: velvet_dance_keyposes_30_1
+  - first:
+      213: 6814490112889491477
+    second: velvet_dance_keyposes_30_2
+  - first:
+      213: -2023677678998827282
+    second: velvet_dance_keyposes_30_3
+  - first:
+      213: 552100882398246660
+    second: velvet_dance_keyposes_30_4
+  - first:
+      213: -9111360896563368442
+    second: velvet_dance_keyposes_30_5
+  - first:
+      213: 5904172950878326570
+    second: velvet_dance_keyposes_30_6
+  - first:
+      213: -8693234956653825436
+    second: velvet_dance_keyposes_30_7
+  - first:
+      213: -2160757705069577100
+    second: velvet_dance_keyposes_30_8
+  - first:
+      213: 2708144097170118879
+    second: velvet_dance_keyposes_30_9
+  - first:
+      213: -840002446093445584
+    second: velvet_dance_keyposes_30_10
+  - first:
+      213: -8934203872182246130
+    second: velvet_dance_keyposes_30_11
+  - first:
+      213: -1265489263299211191
+    second: velvet_dance_keyposes_30_12
+  - first:
+      213: 9006574028934501040
+    second: velvet_dance_keyposes_30_13
+  - first:
+      213: -7539457817618123607
+    second: velvet_dance_keyposes_30_14
+  - first:
+      213: -5644790593995494935
+    second: velvet_dance_keyposes_30_15
+  - first:
+      213: 2906013833611389954
+    second: velvet_dance_keyposes_30_16
+  - first:
+      213: 2317538529429784014
+    second: velvet_dance_keyposes_30_17
+  - first:
+      213: 8956169540500887317
+    second: velvet_dance_keyposes_30_18
+  - first:
+      213: 4116796698699248418
+    second: velvet_dance_keyposes_30_19
+  - first:
+      213: 2348220118199799656
+    second: velvet_dance_keyposes_30_20
+  - first:
+      213: 4992890389389330384
+    second: velvet_dance_keyposes_30_21
+  - first:
+      213: -1016224774824042543
+    second: velvet_dance_keyposes_30_22
+  - first:
+      213: -766391997684772451
+    second: velvet_dance_keyposes_30_23
+  - first:
+      213: -6428622294636774513
+    second: velvet_dance_keyposes_30_24
+  - first:
+      213: 1961380702187981500
+    second: velvet_dance_keyposes_30_25
+  - first:
+      213: -7783624805699505283
+    second: velvet_dance_keyposes_30_26
+  - first:
+      213: 6885266929693788976
+    second: velvet_dance_keyposes_30_27
+  - first:
+      213: 6370334696063866794
+    second: velvet_dance_keyposes_30_28
+  - first:
+      213: 6587494887265683706
+    second: velvet_dance_keyposes_30_29
+  - first:
+      213: -2794104832631567448
+    second: velvet_dance_keyposes_30_30
+  - first:
+      213: 9097452727392327726
+    second: velvet_dance_keyposes_30_31
+  - first:
+      213: 5704849260892862827
+    second: velvet_dance_keyposes_30_32
+  - first:
+      213: -856960078084815288
+    second: velvet_dance_keyposes_30_33
+  - first:
+      213: -4921976620152759180
+    second: velvet_dance_keyposes_30_34
+  - first:
+      213: -6027431359348515661
+    second: velvet_dance_keyposes_30_35
+  - first:
+      213: 8901972854488919481
+    second: velvet_dance_keyposes_30_36
+  - first:
+      213: -8163033568949672074
+    second: velvet_dance_keyposes_30_37
+  - first:
+      213: 5320083780357241770
+    second: velvet_dance_keyposes_30_38
+  - first:
+      213: 2349070922279694996
+    second: velvet_dance_keyposes_30_39
+  - first:
+      213: 8369716950421626157
+    second: velvet_dance_keyposes_30_40
+  - first:
+      213: 4791441437536820593
+    second: velvet_dance_keyposes_30_41
+  - first:
+      213: -2501458453611218752
+    second: velvet_dance_keyposes_30_42
+  - first:
+      213: -5685552940916413812
+    second: velvet_dance_keyposes_30_43
+  - first:
+      213: 1600062343294995080
+    second: velvet_dance_keyposes_30_44
+  - first:
+      213: 350031463256006362
+    second: velvet_dance_keyposes_30_45
+  - first:
+      213: -5668562087569652923
+    second: velvet_dance_keyposes_30_46
+  - first:
+      213: 1279063122142717512
+    second: velvet_dance_keyposes_30_47
+  - first:
+      213: -3913765027020239262
+    second: velvet_dance_keyposes_30_48
+  - first:
+      213: 1115667778104960216
+    second: velvet_dance_keyposes_30_49
+  - first:
+      213: -7017480901100417005
+    second: velvet_dance_keyposes_30_50
+  - first:
+      213: -6614349415564772285
+    second: velvet_dance_keyposes_30_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 971
+        width: 357
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0d8e6d5fb3c3140800000000000000
+      internalID: 4700698038126563495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_1
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 971
+        width: 362
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca07dd4861692c50800000000000000
+      internalID: 6640946226144938692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_2
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 971
+        width: 362
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510903827aee19e50800000000000000
+      internalID: 6814490112889491477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_3
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 971
+        width: 312
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee43637fd37ae3e0800000000000000
+      internalID: -2023677678998827282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_4
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 1295
+        width: 12
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407f68fc3d479a700800000000000000
+      internalID: 552100882398246660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_5
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 971
+        width: 307
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ea4f3e981fd8180800000000000000
+      internalID: -9111360896563368442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_6
+      rect:
+        serializedVersion: 2
+        x: 1960
+        y: 971
+        width: 304
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2f82956406dfe150800000000000000
+      internalID: 5904172950878326570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_7
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 971
+        width: 321
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 462f3ab9ddc6b5780800000000000000
+      internalID: -8693234956653825436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_8
+      rect:
+        serializedVersion: 2
+        x: 2713
+        y: 971
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47cb3afb0527302e0800000000000000
+      internalID: -2160757705069577100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_9
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 971
+        width: 333
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd8556045b2459520800000000000000
+      internalID: 2708144097170118879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_10
+      rect:
+        serializedVersion: 2
+        x: 3480
+        y: 971
+        width: 336
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 036142ec936b754f0800000000000000
+      internalID: -840002446093445584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_11
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 491
+        width: 324
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0568a7e9e4530480800000000000000
+      internalID: -8934203872182246130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_12
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 491
+        width: 338
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940daf94834107ee0800000000000000
+      internalID: -1265489263299211191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_13
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 491
+        width: 328
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b256e54c57cdfc70800000000000000
+      internalID: 9006574028934501040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_14
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 491
+        width: 362
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a474d58f077e5790800000000000000
+      internalID: -7539457817618123607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_15
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 899
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e9ae65bcdca9a1b0800000000000000
+      internalID: -5644790593995494935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_16
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 491
+        width: 319
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20c27c85f2c345820800000000000000
+      internalID: 2906013833611389954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_17
+      rect:
+        serializedVersion: 2
+        x: 1969
+        y: 491
+        width: 285
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec581ff730d892020800000000000000
+      internalID: 2317538529429784014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_18
+      rect:
+        serializedVersion: 2
+        x: 2362
+        y: 491
+        width: 281
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5179ab9ceb4ba4c70800000000000000
+      internalID: 8956169540500887317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_19
+      rect:
+        serializedVersion: 2
+        x: 2729
+        y: 491
+        width: 301
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 223387629ccc12930800000000000000
+      internalID: 4116796698699248418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_20
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 722
+        width: 24
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86f89bf81cd869020800000000000000
+      internalID: 2348220118199799656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_21
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 813
+        width: 25
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d7430e0b5f4a4540800000000000000
+      internalID: 4992890389389330384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_22
+      rect:
+        serializedVersion: 2
+        x: 3085
+        y: 491
+        width: 360
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df59a493f4a5e1f0800000000000000
+      internalID: -1016224774824042543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_23
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 491
+        width: 318
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d911c43e98a3d55f0800000000000000
+      internalID: -766391997684772451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_24
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 749
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8bb4055512f8c6a0800000000000000
+      internalID: -6428622294636774513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_25
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 703
+        width: 17
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cba88375b59383b10800000000000000
+      internalID: 1961380702187981500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_26
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 640
+        width: 9
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73bc578a720bf390800000000000000
+      internalID: -7783624805699505283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_27
+      rect:
+        serializedVersion: 2
+        x: 3785
+        y: 650
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b8428fac16d8f50800000000000000
+      internalID: 6885266929693788976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_28
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 528
+        width: 18
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa79b3397a9f76850800000000000000
+      internalID: 6370334696063866794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_29
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 580
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af84c2ba2bb7b6b50800000000000000
+      internalID: 6587494887265683706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_30
+      rect:
+        serializedVersion: 2
+        x: 3799
+        y: 497
+        width: 30
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ab0bc165785939d0800000000000000
+      internalID: -2794104832631567448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_31
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 491
+        width: 24
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e28d0212e05a04e70800000000000000
+      internalID: 9097452727392327726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_32
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 496
+        width: 7
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b693bac5d22bb2f40800000000000000
+      internalID: 5704849260892862827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_33
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 11
+        width: 362
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 846401f69577b14f0800000000000000
+      internalID: -856960078084815288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_34
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 11
+        width: 362
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47c540b7750a1bbb0800000000000000
+      internalID: -4921976620152759180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_35
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 18
+        width: 362
+        height: 435
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bc5bf50d134a5ca0800000000000000
+      internalID: -6027431359348515661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_36
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 331
+        width: 26
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bd6bff75292a8b70800000000000000
+      internalID: 8901972854488919481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_37
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 11
+        width: 321
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6776a29f73417be80800000000000000
+      internalID: -8163033568949672074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_38
+      rect:
+        serializedVersion: 2
+        x: 1597
+        y: 11
+        width: 269
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aabb28fd20cb4d940800000000000000
+      internalID: 5320083780357241770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_39
+      rect:
+        serializedVersion: 2
+        x: 1964
+        y: 11
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4923ea2de83999020800000000000000
+      internalID: 2349070922279694996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_40
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 353
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d5274c835372470800000000000000
+      internalID: 8369716950421626157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_41
+      rect:
+        serializedVersion: 2
+        x: 2360
+        y: 11
+        width: 282
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d187ee99e9e7240800000000000000
+      internalID: 4791441437536820593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_42
+      rect:
+        serializedVersion: 2
+        x: 2715
+        y: 12
+        width: 330
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c8fa1c2ac8094dd0800000000000000
+      internalID: -2501458453611218752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_43
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 324
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8aeffc39bbd811b0800000000000000
+      internalID: -5685552940916413812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_44
+      rect:
+        serializedVersion: 2
+        x: 3107
+        y: 11
+        width: 326
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ac3964930943610800000000000000
+      internalID: 1600062343294995080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_45
+      rect:
+        serializedVersion: 2
+        x: 3482
+        y: 327
+        width: 9
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ade9593e2cf8bd400800000000000000
+      internalID: 350031463256006362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_46
+      rect:
+        serializedVersion: 2
+        x: 3493
+        y: 16
+        width: 320
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5430a2f80d83551b0800000000000000
+      internalID: -5668562087569652923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_47
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 271
+        width: 12
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8466e90022520c110800000000000000
+      internalID: 1279063122142717512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_48
+      rect:
+        serializedVersion: 2
+        x: 3482
+        y: 187
+        width: 8
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e8c16a1738fa9c0800000000000000
+      internalID: -3913765027020239262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_49
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 127
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d4ab41eee5ab7f00800000000000000
+      internalID: 1115667778104960216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_50
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 11
+        width: 65
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31052d7fc46ec9e90800000000000000
+      internalID: -7017480901100417005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_dance_keyposes_30_51
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 21
+        width: 21
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34cf2f8304c1534a0800000000000000
+      internalID: -6614349415564772285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      velvet_dance_keyposes_30_0: 4700698038126563495
+      velvet_dance_keyposes_30_1: 6640946226144938692
+      velvet_dance_keyposes_30_10: -840002446093445584
+      velvet_dance_keyposes_30_11: -8934203872182246130
+      velvet_dance_keyposes_30_12: -1265489263299211191
+      velvet_dance_keyposes_30_13: 9006574028934501040
+      velvet_dance_keyposes_30_14: -7539457817618123607
+      velvet_dance_keyposes_30_15: -5644790593995494935
+      velvet_dance_keyposes_30_16: 2906013833611389954
+      velvet_dance_keyposes_30_17: 2317538529429784014
+      velvet_dance_keyposes_30_18: 8956169540500887317
+      velvet_dance_keyposes_30_19: 4116796698699248418
+      velvet_dance_keyposes_30_2: 6814490112889491477
+      velvet_dance_keyposes_30_20: 2348220118199799656
+      velvet_dance_keyposes_30_21: 4992890389389330384
+      velvet_dance_keyposes_30_22: -1016224774824042543
+      velvet_dance_keyposes_30_23: -766391997684772451
+      velvet_dance_keyposes_30_24: -6428622294636774513
+      velvet_dance_keyposes_30_25: 1961380702187981500
+      velvet_dance_keyposes_30_26: -7783624805699505283
+      velvet_dance_keyposes_30_27: 6885266929693788976
+      velvet_dance_keyposes_30_28: 6370334696063866794
+      velvet_dance_keyposes_30_29: 6587494887265683706
+      velvet_dance_keyposes_30_3: -2023677678998827282
+      velvet_dance_keyposes_30_30: -2794104832631567448
+      velvet_dance_keyposes_30_31: 9097452727392327726
+      velvet_dance_keyposes_30_32: 5704849260892862827
+      velvet_dance_keyposes_30_33: -856960078084815288
+      velvet_dance_keyposes_30_34: -4921976620152759180
+      velvet_dance_keyposes_30_35: -6027431359348515661
+      velvet_dance_keyposes_30_36: 8901972854488919481
+      velvet_dance_keyposes_30_37: -8163033568949672074
+      velvet_dance_keyposes_30_38: 5320083780357241770
+      velvet_dance_keyposes_30_39: 2349070922279694996
+      velvet_dance_keyposes_30_4: 552100882398246660
+      velvet_dance_keyposes_30_40: 8369716950421626157
+      velvet_dance_keyposes_30_41: 4791441437536820593
+      velvet_dance_keyposes_30_42: -2501458453611218752
+      velvet_dance_keyposes_30_43: -5685552940916413812
+      velvet_dance_keyposes_30_44: 1600062343294995080
+      velvet_dance_keyposes_30_45: 350031463256006362
+      velvet_dance_keyposes_30_46: -5668562087569652923
+      velvet_dance_keyposes_30_47: 1279063122142717512
+      velvet_dance_keyposes_30_48: -3913765027020239262
+      velvet_dance_keyposes_30_49: 1115667778104960216
+      velvet_dance_keyposes_30_5: -9111360896563368442
+      velvet_dance_keyposes_30_50: -7017480901100417005
+      velvet_dance_keyposes_30_51: -6614349415564772285
+      velvet_dance_keyposes_30_6: 5904172950878326570
+      velvet_dance_keyposes_30_7: -8693234956653825436
+      velvet_dance_keyposes_30_8: -2160757705069577100
+      velvet_dance_keyposes_30_9: 2708144097170118879
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
