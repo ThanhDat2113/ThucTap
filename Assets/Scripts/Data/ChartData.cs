@@ -21,6 +21,9 @@ namespace RhythmGame
         [Tooltip("Độ trễ bù khi thu (giây), sao chép từ ChartRecorder.latencyCompensation. Cộng lại khi phát để note khớp lúc ghi.")]
         public float latencyCompensation = 0f;
 
+        [Tooltip("Tốc độ chạy của note trên màn hình (đơn vị/giây). Mỗi ChartData có thể đặt khác nhau cho Easy/Normal/Hard.")]
+        public float scrollSpeed = 7f;
+
         [Header("Battle Settings")]
         [Range(0f, 1f)] public float opponentNoteRatio = 0.5f;
         [Range(0f, 1f)] public float opponentAccuracy = 0.85f;

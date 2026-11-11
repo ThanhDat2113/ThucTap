@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e7e584fd1d5c94b90c1caf7089ed02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartRecorder
-  chart: {fileID: 11400000, guid: 16bf62ea0859a144f9e9762fa294dc15, type: 2}
+  chart: {fileID: 11400000, guid: 54cabbbe42243ec4b9532ce6447ea150, type: 2}
   input: {fileID: 87905823}
   snapDivision: 0
   latencyCompensation: 0

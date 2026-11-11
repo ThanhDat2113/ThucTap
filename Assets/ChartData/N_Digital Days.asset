@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
-  m_Name: Digital Days
+  m_Name: N_Digital Days
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
   songName: Digital Days
   audioClip: {fileID: 8300000, guid: 1a2fac4d7362261488716c54e156324e, type: 3}
@@ -18,6 +18,9 @@ MonoBehaviour:
   bpm: 120
   laneCount: 4
   firstNoteOffset: 0
+  noteStartDelay: 0
+  latencyCompensation: 0
+  scrollSpeed: 25
   opponentNoteRatio: 0.5
   opponentAccuracy: 0.85
   battleSplitMode: 1
