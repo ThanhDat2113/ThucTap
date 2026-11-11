@@ -10,21 +10,26 @@ namespace Luan.MainMenu
     // Mobile shortcut drawer; its hierarchy is created once so existing menu panels stay untouched.
     public sealed class QuickMenu : MonoBehaviour
     {
-        private static readonly string[] Labels = { "Shop", "LuckyWheel", "Chọn Nhân Vật", "Điểm danh hằng ngày" };
-        private static readonly string[] Icons = { "Shop", "LuckyWheel", "Character", "Daily" };
-        public enum Item { Shop, LuckyWheel, Character, Daily }
+        private static readonly string[] Labels = { "Shop", "LuckyWheel", "Chọn Nhân Vật", "Điểm danh hằng ngày", "Túi đồ" };
+        private static readonly string[] Icons = { "Shop", "LuckyWheel", "Character", "Daily", "Inventory" };
+        private static int Count => Labels.Length;
+        public enum Item { Shop, LuckyWheel, Character, Daily, Inventory }
 
         [Header("Dấu chấm thông báo")]
         [SerializeField] private bool shopHasNotification;
         [SerializeField] private bool wheelHasNotification;
         [SerializeField] private bool characterHasNotification;
         [SerializeField] private bool dailyHasNotification;
+        [SerializeField] private bool inventoryHasNotification;
 
-        private readonly Button[] entries = new Button[4];
-        private readonly Image[] badges = new Image[4];
+        [Header("Icon rieng (khong nam trong atlas MucLuc)")]
+        [SerializeField] private Sprite inventoryIcon;
+
+        private readonly Button[] entries = new Button[5];
+        private readonly Image[] badges = new Image[5];
         private Image toggleBadge;
-        private readonly CanvasGroup[] groups = new CanvasGroup[4];
-        private readonly RectTransform[] rects = new RectTransform[4];
+        private readonly CanvasGroup[] groups = new CanvasGroup[5];
+        private readonly RectTransform[] rects = new RectTransform[5];
         private RectTransform root;
         private RectTransform canvasRect;
         private Rect lastSafeArea;
@@ -75,7 +80,7 @@ namespace Luan.MainMenu
             if (anim == null) anim = existing.gameObject.AddComponent<UIPanelAnimator>();
             anim.ConfigureSlide(UIPanelAnimator.TransitionType.SlideHorizontal, UIPanelAnimator.SlideDirection.FromRight, 0.4f);
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Count; i++)
             {
                 var row = FindRow(existing, i);
                 if (row == null)
@@ -99,7 +104,7 @@ namespace Luan.MainMenu
                 var rowImage = row.GetComponent<Image>();
                 if (rowImage != null)
                 {
-                    var s = AtlasSprite(Icons[i]);
+                    var s = IconFor(i);
                     if (s != null) rowImage.sprite = s;
                 }
 
@@ -141,7 +146,7 @@ namespace Luan.MainMenu
                 toggle.onClick.AddListener(Toggle);
             }
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Count; i++)
             {
                 if (rects[i] == null) continue;
                 var dotObj = rects[i].Find("NotificationDot");
@@ -219,6 +224,9 @@ namespace Luan.MainMenu
                     case 3:
                         if (lower.Contains("điểm") || lower.Contains("diem") || lower.Contains("daily") || lower.Contains("checkin")) return ch;
                         break;
+                    case 4:
+                        if (lower.Contains("túi") || lower.Contains("tui") || lower.Contains("inventory")) return ch;
+                        break;
                 }
             }
 
@@ -249,7 +257,7 @@ namespace Luan.MainMenu
             root.sizeDelta = new Vector2(550, 108);
             root.SetAsLastSibling();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Count; i++)
             {
                 int index = i;
                 var row = NewRect(Labels[i], root);
@@ -258,7 +266,8 @@ namespace Luan.MainMenu
                 row.sizeDelta = new Vector2(104, 104);
                 row.anchoredPosition = Vector2.zero;
                 var rowImage = row.gameObject.AddComponent<Image>();
-                rowImage.sprite = AtlasSprite(Icons[i]);
+                rowImage.sprite = IconFor(i);
+                rowImage.preserveAspect = true;
                 var button = row.gameObject.AddComponent<Button>();
                 button.targetGraphic = rowImage;
                 button.transition = Selectable.Transition.ColorTint;
@@ -290,6 +299,13 @@ namespace Luan.MainMenu
             RefreshNotifications();
         }
 
+
+        // Icon cua tung muc: Tui do dung anh rieng, cac muc khac lay tu atlas MucLuc
+        private Sprite IconFor(int index)
+        {
+            if (Icons[index] == "Inventory" && inventoryIcon != null) return inventoryIcon;
+            return AtlasSprite(Icons[index]);
+        }
 
         private static Sprite AtlasSprite(string name)
         {
@@ -333,6 +349,10 @@ namespace Luan.MainMenu
                     changed = (dailyHasNotification != visible);
                     dailyHasNotification = visible;
                     break;
+                case Item.Inventory:
+                    changed = (inventoryHasNotification != visible);
+                    inventoryHasNotification = visible;
+                    break;
             }
             if (changed || lastNotificationMask == -1)
             {
@@ -343,9 +363,9 @@ namespace Luan.MainMenu
         private void RefreshNotifications()
         {
             bool[] values = { shopHasNotification, wheelHasNotification,
-                characterHasNotification, dailyHasNotification };
+                characterHasNotification, dailyHasNotification, inventoryHasNotification };
             lastNotificationMask = NotificationMask();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Count; i++)
             {
                 if (badges[i] != null)
                 {
@@ -356,7 +376,7 @@ namespace Luan.MainMenu
             if (toggleBadge != null)
             {
                 bool anyActive = shopHasNotification || wheelHasNotification ||
-                    characterHasNotification || dailyHasNotification;
+                    characterHasNotification || dailyHasNotification || inventoryHasNotification;
                 toggleBadge.gameObject.SetActive(anyActive);
                 toggleBadge.transform.SetAsLastSibling();
             }
@@ -393,7 +413,8 @@ namespace Luan.MainMenu
         private int NotificationMask()
         {
             return (shopHasNotification ? 1 : 0) | (wheelHasNotification ? 2 : 0) |
-                (characterHasNotification ? 4 : 0) | (dailyHasNotification ? 8 : 0);
+                (characterHasNotification ? 4 : 0) | (dailyHasNotification ? 8 : 0) |
+                (inventoryHasNotification ? 16 : 0);
         }
 
         private void UpdateSafeArea()
@@ -417,7 +438,7 @@ namespace Luan.MainMenu
             if (!expanded) return;
             expanded = false;
             if (animation != null) StopCoroutine(animation);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Count; i++)
             {
                 if (rects != null && rects[i] != null)
                 {
@@ -453,8 +474,8 @@ namespace Luan.MainMenu
         {
             const float duration = .32f;
             const float stagger = .04f;
-            float[] from = new float[4];
-            for (int i = 0; i < 4; i++)
+            float[] from = new float[Count];
+            for (int i = 0; i < Count; i++)
             {
                 if (rects[i] == null) continue;
                 from[i] = rects[i].anchoredPosition.x;
@@ -469,14 +490,14 @@ namespace Luan.MainMenu
             }
 
             float elapsed = 0f;
-            float total = duration + 3 * stagger;
+            float total = duration + (Count - 1) * stagger;
             while (elapsed < total)
             {
                 elapsed += Time.unscaledDeltaTime;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < Count; i++)
                 {
                     if (rects[i] == null) continue;
-                    float delay = (expanded ? i : (3 - i)) * stagger;
+                    float delay = (expanded ? i : (Count - 1 - i)) * stagger;
                     float t = Mathf.Clamp01((elapsed - delay) / duration);
                     // Smooth ease out cubic
                     t = 1f - Mathf.Pow(1f - t, 3);
@@ -490,7 +511,7 @@ namespace Luan.MainMenu
                 yield return null;
             }
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Count; i++)
             {
                 if (rects[i] == null) continue;
                 rects[i].anchoredPosition = new Vector2(expanded ? -108f * (i + 1) : 0f, 0f);
@@ -511,12 +532,14 @@ namespace Luan.MainMenu
         public void OpenLuckyWheel() => Select(1);
         public void OpenCharacter() => Select(2);
         public void OpenDaily() => Select(3);
+        public void OpenInventory() => Select(4);
 
         private static readonly string[] SceneNames = {
             "Thuan_Shop",
             "LuckyWheel",
             "Thuan_CharacterSelect",
-            "Thuan_DailyCheckin"
+            "Thuan_DailyCheckin",
+            "Thuan_Inventory"
         };
 
         private void Select(int index)

@@ -28,6 +28,9 @@ public class SongData : ScriptableObject
     public string composer;
     public string arranger;
 
+    [Tooltip("Giay bat dau doan nghe thu o man chon nhac (-1 = tu dong lay khoang 30% bai)")]
+    public float previewStart = -1f;
+
     /// <summary>
     /// Lay ChartData phu hop voi do kho hien tai (GameSession.SelectedDifficulty).
     /// Neu chua gan chart cho do kho do, fallback ve chart cu (de khong gap loi o cac asset cu).
