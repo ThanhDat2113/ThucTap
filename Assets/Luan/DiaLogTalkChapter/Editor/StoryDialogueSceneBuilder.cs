@@ -156,7 +156,7 @@ namespace Luan.Dialogue.Editor
         {
             if (chap1Asset == null) return;
 
-            string dir = "Assets/Luan/DiaLogTalkChapter/Backstory/";
+            string dir = "Assets/Luan/DiaLogTalkChapter/Backstory/Chapter1/";
             Sprite slide1 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide1_prologue.png");
             Sprite slide2 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide2_raze_story.png");
             Sprite slide3 = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "chapter1_slide3_dialogue_encounter.png");
