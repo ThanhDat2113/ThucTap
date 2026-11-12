@@ -135,13 +135,13 @@ namespace RhythmGame
                 // ===== UI MỚI =====
                 bool cleared = endState == GameState.Finished;
                 resultScreen.Show(
-                    cleared, songToSave, null,
+                    cleared, songToSave,
                     battleUI != null ? battleUI.playerScore : 0,
                     battleUI != null ? battleUI.playerMaxCombo : 0,
                     hitRatio * 100f,
+                    grade,
                     p, g, b, m,
-                    false,   // newBest: chưa có dữ liệu, nối sau nếu cần
-                    false);  // hasNext: chỉ true khi có bài kế tiếp trong Story Mode
+                    false);  // newBest: chưa có dữ liệu, nối sau nếu cần
             }
             else
             {
