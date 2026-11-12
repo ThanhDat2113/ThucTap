@@ -6838,10 +6838,10 @@ MonoBehaviour:
     opponentAvatar: {fileID: 21300000, guid: 88c9d4bdaab44864a8c5e4337ec32c0c, type: 3}
     defaultOpponentName: Raze
   - chapterNumber: 2
-    chapterTitle: Higher Together
+    chapterTitle: "Nh\u1ECBp \u0111i\u1EC7u ho\xE0n h\u1EA3o"
     dialogueAsset: {fileID: 11400000, guid: 3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b, type: 2}
     opponentAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
-    defaultOpponentName: DJ NULL
+    defaultOpponentName: Nox
   dialogueDataAsset: {fileID: 11400000, guid: 74901fbc65f618a4ba121c2299d6d3e1, type: 2}
   dialogueLines:
   - speakerName: MAIN 1

@@ -12,26 +12,217 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f82e2ff20d89d40af9d8f994bac3f4, type: 3}
   m_Name: Chapter2_Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::Luan.Dialogue.DialogueStoryData
-  chapterTitle: 'Chapter 2: Higher Together'
-  lines:
-  - speakerName: '{PLAYER}'
-    side: 0
-    text: "Gió trên tầng thượng này thật dữ dội... Và kia chính là sân khấu của DJ Null sao?"
-    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
-    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
-  - speakerName: DJ NULL
+  chapterNumber: 2
+  chapterTitle: "Chapter 2: Nh\u1ECBp \u0111i\u1EC7u ho\xE0n h\u1EA3o"
+  introVideoClip: {fileID: 32900000, guid: 25e22e643f7605c42ac2a89d4db7b66d, type: 3}
+  introVideoDuration: 8
+  backstoryImages:
+  - {fileID: 21300000, guid: 0021c85438fb5df47a0d330e92aadf8c, type: 3}
+  - {fileID: 21300000, guid: 9b77af664efc1d549a4c930e3db278e6, type: 3}
+  - {fileID: 21300000, guid: 336c81d7c08af4245a22e771851971f1, type: 3}
+  - {fileID: 21300000, guid: 7f646b2193a8d57419b0b005388fadac, type: 3}
+  winDialogueLines:
+  - speakerName: Nox
     side: 1
-    text: "Chào mừng đến với không phận của ta, {PLAYER}! Dưới mặt đất ngươi có thể là ngôi sao, nhưng ở độ cao này, chỉ có tần số của ta làm chủ!"
+    text: "C\u1EADu \u0111\xE3 b\u1ECF l\u1EE1 m\u1ED9t n\u1ED1t nh\u01B0ng v\u1EABn
+      th\u1EAFng."
     customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
     nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
   - speakerName: '{PLAYER}'
     side: 0
-    text: "Dù ở độ cao nào thì âm nhạc chân chính vẫn sẽ chạm tới trái tim người nghe. Tôi sẵn sàng rồi!"
+    text: "V\xEC anh kh\xF4ng \u0111o\xE1n \u0111\u01B0\u1EE3c nh\u1ECBp ti\u1EBFp
+      theo c\u1EE7a t\xF4i."
     customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
     nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
-  - speakerName: DJ NULL
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
     side: 1
-    text: "Tốt lắm! Để xem đôi tay của ngươi có bắt kịp những nhịp sóng Synthwave cuồng nhiệt nhất không. BẮT ĐẦU!"
+    text: "Li\u1EC1u l\u0129nh, nh\u01B0ng c\xF3 hi\u1EC7u qu\u1EA3. \u0110\xE2y
+      l\xE0 huy hi\u1EC7u."
     customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
     nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
-
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\u1EA3m \u01A1n. Anh n\xEAn \u0111\u1EC3 nh\u1EEFng v\u0169 c\xF4ng kia
+      t\u1EF1 ch\u1ECDn nh\u1ECBp c\u1EE7a m\xECnh."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "T\xF4i s\u1EBD c\xE2n nh\u1EAFc."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\u1EDBi anh, nh\u01B0 v\u1EADy \u0111\xE3 l\xE0 ti\u1EBFn b\u1ED9 r\u1ED3i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  loseDialogueLines:
+  - speakerName: Nox
+    side: 1
+    text: "K\u1EBFt qu\u1EA3 \u0111\xFAng nh\u01B0 t\xF4i d\u1EF1 \u0111o\xE1n."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Anh \u0111\u1ECDc \u0111\u01B0\u1EE3c m\u1ECDi \u0111\u1ED9ng t\xE1c c\u1EE7a
+      t\xF4i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "V\xEC c\u1EADu lu\xF4n l\u1EB7p l\u1EA1i c\xF9ng m\u1ED9t chu\u1ED7i."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\u1EADy l\u1EA7n sau t\xF4i s\u1EBD thay \u0111\u1ED5i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "Thay \u0111\u1ED5i m\xE0 kh\xF4ng m\u1EA5t ki\u1EC3m so\xE1t kh\xF4ng
+      d\u1EC5 \u0111\xE2u."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i s\u1EBD t\xECm ra c\xE1ch."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  chapterLogo: {fileID: -3009564542125834607, guid: fd41e4ce9cf697542ab14fedf81e10a6, type: 3}
+  characterStoryTitle: "C\xE2u chuy\u1EC7n c\u1EE7a Nox"
+  characterStory: "Nox l\xE0 m\u1ED9t DJ n\u1ED5i ti\u1EBFng v\u1EDBi kh\u1EA3 n\u0103ng
+    t\u1EA1o ra nh\u1EEFng m\xE0n tr\xECnh di\u1EC5n c\xF3 \u0111\u1ED9 ch\xEDnh
+    x\xE1c g\u1EA7n nh\u01B0 tuy\u1EC7t \u0111\u1ED1i. M\u1ECDi \xE1nh s\xE1ng, hi\u1EC7u
+    \u1EE9ng v\xE0 chuy\u1EC3n \u0111\u1ED9ng tr\xEAn s\xE2n kh\u1EA5u c\u1EE7a anh
+    \u0111\u1EC1u \u0111\u01B0\u1EE3c l\u1EADp tr\xECnh \u0111\u1EBFn t\u1EEBng ph\u1EA7n
+    nh\u1ECF c\u1EE7a gi\xE2y.\nTrong m\u1ED9t cu\u1ED9c thi tr\u01B0\u1EDBc \u0111\xE2y,
+    Nox t\u1EEBng t\u1EF1 \xFD thay \u0111\u1ED5i b\xE0i nh\u1EA1c ngay tr\xEAn s\xE2n
+    kh\u1EA5u. Nh\u1EEFng ng\u01B0\u1EDDi bi\u1EC3u di\u1EC5n c\xF9ng anh kh\xF4ng
+    k\u1ECBp th\xEDch nghi, h\u1EC7 th\u1ED1ng \xE2m thanh b\u1ECB qu\xE1 t\u1EA3i
+    v\xE0 to\xE0n b\u1ED9 ti\u1EBFt m\u1EE5c th\u1EA5t b\u1EA1i.\nSau s\u1EF1 c\u1ED1
+    \u0111\xF3, Nox kh\xF4ng c\xF2n tin v\xE0o s\u1EF1 ng\u1EABu h\u1EE9ng. Anh cho
+    r\u1EB1ng c\u1EA3m x\xFAc ch\u1EC9 khi\u1EBFn con ng\u01B0\u1EDDi m\u1EAFc sai
+    l\u1EA7m. T\u1EA1i C\xE2u l\u1EA1c b\u1ED9 Null, t\u1EA5t c\u1EA3 v\u0169 c\xF4ng
+    ph\u1EA3i di chuy\u1EC3n theo nh\u1ECBp do Nox t\u1EA1o ra. Kh\xF4ng ai \u0111\u01B0\u1EE3c
+    ph\xE9p th\u1EF1c hi\u1EC7n \u0111\u1ED9ng t\xE1c n\u1EB1m ngo\xE0i k\u1EBF ho\u1EA1ch."
+  characterIntroArt: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+  introVideoUrl: 
+  backstorySlides: []
+  preBattleLines:
+  - speakerName: Nox
+    side: 1
+    text: "{PLAYER}. Ng\u01B0\u1EDDi \u0111\xE3 th\u1EAFng Raze m\u1ED9t \u0111i\u1EC3m."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "M\u1ECDi ng\u01B0\u1EDDi c\xF3 th\u1EC3 ng\u1EEBng nh\u1EAFc \u0111\u1EBFn
+      m\u1ED9t \u0111i\u1EC3m kh\xF4ng?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "C\u1EADu mu\u1ED1n huy hi\u1EC7u c\u1EE7a t\xF4i, nh\u01B0ng k\u1EF9 n\u0103ng
+      hi\u1EC7n t\u1EA1i ch\u01B0a \u0111\u1EE7."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\u1EADy h\xE3y tr\u1EF1c ti\u1EBFp ki\u1EC3m tra \u0111i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "C\u1EADu \u0111ang c\u1ED1 ch\u1ECDc gi\u1EADn t\xF4i?"
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\xF3 hi\u1EC7u qu\u1EA3 kh\xF4ng?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  postBattleLines:
+  - speakerName: Nox
+    side: 1
+    text: "C\u1EADu \u0111\xE3 b\u1ECF l\u1EE1 m\u1ED9t n\u1ED1t nh\u01B0ng v\u1EABn
+      th\u1EAFng."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\xEC anh kh\xF4ng \u0111o\xE1n \u0111\u01B0\u1EE3c nh\u1ECBp ti\u1EBFp
+      theo c\u1EE7a t\xF4i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "Li\u1EC1u l\u0129nh, nh\u01B0ng c\xF3 hi\u1EC7u qu\u1EA3. \u0110\xE2y
+      l\xE0 huy hi\u1EC7u."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\u1EA3m \u01A1n. Anh n\xEAn \u0111\u1EC3 nh\u1EEFng v\u0169 c\xF4ng kia
+      t\u1EF1 ch\u1ECDn nh\u1ECBp c\u1EE7a m\xECnh."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Nox
+    side: 1
+    text: "T\xF4i s\u1EBD c\xE2n nh\u1EAFc."
+    customAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
+    nameColor: {r: 0.85, g: 0.35, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\u1EDBi anh, nh\u01B0 v\u1EADy \u0111\xE3 l\xE0 ti\u1EBFn b\u1ED9 r\u1ED3i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  _legacyLines: []

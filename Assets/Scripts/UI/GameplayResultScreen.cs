@@ -216,6 +216,18 @@ namespace RhythmGame
         /// </summary>
         private bool SaveAchievements(SongData song, bool cleared, int score, int maxCombo, float accuracyPercent)
         {
+            // Bao cao ket qua ve Story Mode (thang 1 tran -> unlock Chapter tiep theo ngay)
+            if (StorySession.Active && StorySession.Week != null)
+            {
+                StorySession.Report(cleared, score, accuracyPercent);
+            }
+            else if (cleared && Luan.Dialogue.StoryDialogueManager.Instance != null)
+            {
+                int chapterNum = Luan.Dialogue.StoryDialogueManager.Instance.GetCurrentChapterNumber();
+                if (chapterNum > 0)
+                    StoryProgress.SaveChapterByNumber(chapterNum, score, accuracyPercent);
+            }
+
             if (song == null)
             {
                 Debug.LogWarning("[GameplayResultScreen] Không có SongData — bỏ qua lưu thành tích.");
@@ -335,6 +347,7 @@ namespace RhythmGame
         private void OnMenuClicked()
         {
             Time.timeScale = 1f;
+            StorySession.End();
             if (MenuRequested != null) { MenuRequested.Invoke(); return; }
             if (!string.IsNullOrEmpty(songListSceneName))
                 SceneManager.LoadScene(songListSceneName);
