@@ -361,8 +361,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1727351121}
+  - {fileID: 1644181213}
   - {fileID: 246223223}
+  - {fileID: 1727351121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -476,6 +477,11 @@ MonoBehaviour:
   danceBool: IsDancing
   danceTrigger: 
   owner: 1
+--- !u!4 &187200504 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6799179496873089108, guid: f295e26211799284ca4b8b1460ceafbc, type: 3}
+  m_PrefabInstance: {fileID: 187200499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &225792401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1894,6 @@ GameObject:
   - component: {fileID: 772989731}
   - component: {fileID: 772989734}
   - component: {fileID: 772989735}
-  - component: {fileID: 772989736}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2050,7 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d026163250599a478726c8bda994bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldBackgroundSelector
-  scene: 4
+  scene: 7
   includeGradient: 1
   cleanLeftovers: 1
   dynamicBackground: 1
@@ -2076,35 +2081,6 @@ MonoBehaviour:
   debugLog: 1
   useFixedStyle: 0
   fixedStyle: 0
---- !u!114 &772989736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772989722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125082bd515360940bed64355f88a3ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.FlowAuroraEffect
-  flowSystem: {fileID: 1127100800}
-  particleCount: 150
-  particleColor: {r: 1, g: 0.9, b: 0.4, a: 0.9}
-  speed: 20
-  flyDirection: {x: 0, y: 45, z: 60}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  lifetime: 5
-  spawnOnSides: 1
-  sideBandWidth: 5
-  spawnHalfWidth: 8
-  spawnHalfHeight: 6
-  recycleMargin: 1
-  sortingLayerName: Default
-  sortingOrder: -10
-  baseSize: 0.08
-  sizePulse: 0.15
-  pulseSpeed: 2
 --- !u!1 &837932949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,6 +2668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1127100801}
   - component: {fileID: 1127100800}
+  - component: {fileID: 1127100802}
   m_Layer: 0
   m_Name: Flow
   m_TagString: Untagged
@@ -2731,6 +2708,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127100802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127100799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125082bd515360940bed64355f88a3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.FlowAuroraEffect
+  flowSystem: {fileID: 1127100800}
+  particleCount: 60
+  particleColor: {r: 1, g: 0.9, b: 0.4, a: 0.3}
+  speed: 1.2
+  flyDirection: {x: 0, y: 1, z: 0}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  lifetime: 3.5
+  useNeonPalette: 1
+  palette:
+  - {r: 0.13, g: 0.85, b: 1, a: 1}
+  - {r: 1, g: 0.18, b: 0.53, a: 1}
+  - {r: 0.71, g: 0.33, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  diamondRatio: 0.5
+  peakAlpha: 1
+  visualBoost: 3
+  swayAmount: 0.25
+  spinSpeed: 60
+  lowFlowDensity: 0.35
+  fadeSpeed: 3
+  spawnOnSides: 1
+  sideBandWidth: 2
+  spawnHalfWidth: 8
+  spawnHalfHeight: 6
+  recycleMargin: 1
+  sortingLayerName: Default
+  sortingOrder: -10
+  baseSize: 0.08
+  sizePulse: 0.15
+  pulseSpeed: 2
 --- !u!1 &1133791183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3218,6 +3237,11 @@ MonoBehaviour:
   danceBool: IsDancing
   danceTrigger: 
   owner: 0
+--- !u!4 &1234858303 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6221223677703287596, guid: 8ea9ca8336c90994eb2921981981abc8, type: 3}
+  m_PrefabInstance: {fileID: 1234858298}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1298120547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3725,6 +3749,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510705370}
   m_CullTransparentMesh: 1
+--- !u!1 &1644181212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1644181213}
+  - component: {fileID: 1644181214}
+  m_Layer: 5
+  m_Name: FlowVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1644181213
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644181212}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 152976269}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: 0}
+  m_SizeDelta: {x: 100, y: -980}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1644181214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644181212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f62dbcf136bdc6478e234d9c746a6e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlowVFX
+  flowSystem: {fileID: 1127100800}
+  showFlash: 0
+  showExplosionFlash: 0
+  showRings: 0
+  useSpray: 0
+  useEdgeGlow: 0
+  useParticles: 0
+  burstCount: 300
+  streamRate: 45
+  burstPower: 3
+  burstSize: 1
+  useFireworks: 1
+  fireworksPerSide: 4
+  sparksPerFirework: 90
+  fireworkScale: 1
+  leftCharacter: {fileID: 1234858303}
+  rightCharacter: {fileID: 187200504}
+  aboveHeadMin: 160
+  aboveHeadMax: 420
+  sideSpreadPx: 80
+  headYOffset: 0
+  sideX: 0.4
+  autoDetectCharacters: 1
+  leftHeadAt: {x: -0.435, y: 0.14}
+  rightHeadAt: {x: 0.425, y: 0.13}
+  feetAtY: -0.2
+  burstCenter: {x: 0, y: -150}
+  edgeIntensity: 1
+  particleRate: 70
 --- !u!1 &1703029446
 GameObject:
   m_ObjectHideFlags: 0

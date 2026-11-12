@@ -57,6 +57,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Thuan\Scripts\Story\StoryWeekData.cs" />
+    <Compile Include="Assets\Scripts\VFX\FlowVFX.cs" />
     <Compile Include="Assets\Thuan\Scripts\DailyCheckin\DailyCheckinController.cs" />
     <Compile Include="Assets\Scripts\Pay\PaymentZaloPayWithQR.cs" />
     <Compile Include="Assets\Thuan\Scripts\Shop\Wallet.cs" />

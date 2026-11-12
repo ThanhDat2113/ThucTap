@@ -55,7 +55,7 @@ public class BattleHUD : MonoBehaviour
         if (displayFont == null) displayFont = TMP_Settings.defaultFontAsset;
         hpSprite = MakeBarSprite(Hex("C2105F"), Pink, Hex("FF8AB5"));                 // máu: hồng đậm -> hồng sáng
         flowNormalSprite = MakeBarSprite(Cyan, Hex("7B6CFF"), Hex("D455FF"));         // flow: cyan -> tím -> hồng tím
-        flowGoldSprite = MakeBarSprite(Hex("FF8A00"), Yellow, Hex("FFF3A0"));         // đang Flow: cam -> vàng
+        flowGoldSprite = MakeBarSprite(Pink, Hex("FF6EC7"), Color.white);               // đang Flow: hồng -> hồng sáng -> trắng
         Build();
         ResetHUD();
     }
@@ -154,7 +154,7 @@ public class BattleHUD : MonoBehaviour
         else
             flowFill.color = Color.white;
         string wantLabel = flowActive ? "FLOW!" : (full ? "READY" : "FLOW");
-        if (flowLabel.text != wantLabel) { flowLabel.text = wantLabel; flowLabel.color = flowActive ? Yellow : Cyan; }
+        if (flowLabel.text != wantLabel) { flowLabel.text = wantLabel; flowLabel.color = flowActive ? Hex("FF6EC7") : Cyan; }
 
         // --- Điểm (đếm lên) ---
         shownScore = Mathf.Lerp(shownScore, targetScore, 1f - Mathf.Exp(-14f * dt));
