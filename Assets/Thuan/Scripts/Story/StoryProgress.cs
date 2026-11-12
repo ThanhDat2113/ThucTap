@@ -1,9 +1,34 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 // Tien do Story Mode (luu PlayerPrefs) + luot choi dang chay (StorySession)
 public static class StoryProgress
 {
+#if UNITY_EDITOR
+    public const string AutoResetPlayModeEditorPref = "Story_AutoResetOnPlayMode";
+
+    public static bool AutoResetOnPlayMode
+    {
+        get { return EditorPrefs.GetBool(AutoResetPlayModeEditorPref, true); }
+        set { EditorPrefs.SetBool(AutoResetPlayModeEditorPref, value); }
+    }
+
+    public static void ResetAllInEditor()
+    {
+        var guids = AssetDatabase.FindAssets("t:StoryWeekData");
+        var weeks = new StoryWeekData[guids.Length];
+        for (int i = 0; i < guids.Length; i++)
+            weeks[i] = AssetDatabase.LoadAssetAtPath<StoryWeekData>(AssetDatabase.GUIDToAssetPath(guids[i]));
+        ResetAll(weeks);
+        PlayerPrefs.DeleteKey("story_last_week");
+        PlayerPrefs.Save();
+    }
+#endif
+
     private static string Key(StoryWeekData w, string f) { return "story_" + w.Id + "_" + f; }
+    private static string KeyByNumber(int weekNumber, string f) { return "story_Week" + weekNumber + "_" + f; }
 
     public static bool IsCleared(StoryWeekData w) { return w != null && PlayerPrefs.GetInt(Key(w, "clear"), 0) == 1; }
     // Story Mode khong chon do kho: luon choi muc Normal
@@ -15,9 +40,22 @@ public static class StoryProgress
 
     public static void SaveWeek(StoryWeekData w, int totalScore, float accuracy)
     {
+        if (w == null) return;
         PlayerPrefs.SetInt(Key(w, "clear"), 1);
         if (totalScore > GetBestScore(w)) PlayerPrefs.SetInt(Key(w, "best_" + Slot), totalScore);
         if (accuracy > GetClearRate(w)) PlayerPrefs.SetFloat(Key(w, "acc_" + Slot), accuracy);
+        PlayerPrefs.Save();
+    }
+
+    // Dung khi thang 1 tran truc tiep trong GameplayScene (khong di qua StoryModeController)
+    public static void SaveChapterByNumber(int weekNumber, int totalScore, float accuracy)
+    {
+        if (weekNumber <= 0) return;
+        PlayerPrefs.SetInt(KeyByNumber(weekNumber, "clear"), 1);
+        string bestKey = KeyByNumber(weekNumber, "best_" + Slot);
+        string accKey = KeyByNumber(weekNumber, "acc_" + Slot);
+        if (totalScore > PlayerPrefs.GetInt(bestKey, 0)) PlayerPrefs.SetInt(bestKey, totalScore);
+        if (accuracy > PlayerPrefs.GetFloat(accKey, -1f)) PlayerPrefs.SetFloat(accKey, accuracy);
         PlayerPrefs.Save();
     }
 
@@ -67,21 +105,18 @@ public static class StorySession
     private static int pendingScore;
     private static float pendingAcc = -1f;
 
-    // Goi khi 1 bai ket thuc. Diem chi duoc cong khi sang bai tiep (choi lai bai thi ghi de).
+    // Goi khi 1 bai ket thuc. Thang 1 tran trong Story Mode se hoan thanh Chapter & unlock Chapter ke tiep ngay.
     public static void Report(bool cleared, int score, float accuracy)
     {
         if (!Active) return;
         LastCleared = cleared;
         if (!cleared) return;
         pendingScore = score; pendingAcc = accuracy;
-        if (TrackIndex >= TrackCount - 1)
-        {
-            WeekCompleted = true;
-            int total = TotalScore + pendingScore;
-            float sum = accSum + (pendingAcc >= 0f ? pendingAcc : 0f);
-            int cnt = accCount + (pendingAcc >= 0f ? 1 : 0);
-            StoryProgress.SaveWeek(Week, total, cnt > 0 ? sum / cnt : -1f);
-        }
+        WeekCompleted = true;
+        int total = TotalScore + pendingScore;
+        float sum = accSum + (pendingAcc >= 0f ? pendingAcc : 0f);
+        int cnt = accCount + (pendingAcc >= 0f ? 1 : 0);
+        StoryProgress.SaveWeek(Week, total, cnt > 0 ? sum / cnt : -1f);
     }
 
     public static int RunScore { get { return TotalScore + (LastCleared ? pendingScore : 0); } }
@@ -102,4 +137,33 @@ public static class StorySession
         if (Active) GameSession.SelectedDifficulty = savedDifficulty;
         Active = false;
     }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStaticStateOnPlay()
+    {
+        Active = false;
+        Week = null;
+        TrackIndex = 0;
+        TotalScore = 0;
+        LastCleared = false;
+        WeekCompleted = false;
+        accSum = 0f;
+        savedDifficulty = ChartDifficulty.Normal;
+        accCount = 0;
+        pendingScore = 0;
+        pendingAcc = -1f;
+        GameSession.SelectedSong = null;
+    }
+
+#if UNITY_EDITOR
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void ResetStoryProgressOnPlayInEditor()
+    {
+        if (StoryProgress.AutoResetOnPlayMode)
+        {
+            StoryProgress.ResetAllInEditor();
+            Debug.Log("[Story] Da restart tien do Story Mode khi vao Play Mode.");
+        }
+    }
+#endif
 }

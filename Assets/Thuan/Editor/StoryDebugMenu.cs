@@ -25,4 +25,21 @@ public static class StoryDebugMenu
         foreach (var w in AllWeeks()) StoryProgress.SaveWeek(w, 0, -1f);
         Debug.Log("[Story] Da danh dau qua tat ca cac tuan.");
     }
+
+    private const string AutoResetMenu = "Thuan/Story/Tu dong reset tien do khi Play Mode";
+
+    [MenuItem(AutoResetMenu)]
+    public static void ToggleAutoResetOnPlay()
+    {
+        bool next = !StoryProgress.AutoResetOnPlayMode;
+        StoryProgress.AutoResetOnPlayMode = next;
+        Debug.Log("[Story] Tu dong reset khi Play Mode: " + (next ? "BAT" : "TAT"));
+    }
+
+    [MenuItem(AutoResetMenu, true)]
+    private static bool ValidateToggleAutoResetOnPlay()
+    {
+        Menu.SetChecked(AutoResetMenu, StoryProgress.AutoResetOnPlayMode);
+        return true;
+    }
 }
