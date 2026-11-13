@@ -415,19 +415,23 @@ namespace Luan.Dialogue
             if (Instance != null && Instance.hasCompletedDialogueThisSession)
                 return false;
 
-            // 1. Chế độ kiểm thử trong Editor: Nếu testInEditor bật -> LUÔN CHẠY thoại Story!
+            // 1. Free Play: đã chọn bài nhưng KHÔNG phải story session -> KHÔNG chạy story
+            //    (đặt ưu tiên cao nhất để Free Play luôn sạch story, kể cả khi testInEditor bật)
+            if (GameSession.SelectedSong != null && !StorySession.Active)
+                return false;
+
+            // 2. Editor test mode: bật testInEditor -> luôn chạy story
             if (Application.isEditor && Instance != null && Instance.testInEditor)
                 return true;
 
-            // 2. Nếu đang trong Story Mode (StorySession.Active) -> LUÔN CHẠY nếu chưa xong trong lượt này!
+            // 3. Story Mode thật sự (có StorySession.Active)
             if (StorySession.Active)
                 return true;
 
-            // 3. Trong Editor nếu chưa chọn bài -> Chạy thoại test
+            // 4. Editor chưa chọn bài -> chạy test
             if (Application.isEditor && GameSession.SelectedSong == null)
                 return true;
 
-            // 4. Nếu người chơi vào từ Free Play -> Không chạy thoại Story
             return false;
         }
 
@@ -488,22 +492,10 @@ namespace Luan.Dialogue
             EnsureVideoUI();
             HideAllUI();
 
-            // Nếu đang trong Story Mode / có Pending Dialogue, vô hiệu hoá hoàn toàn SongIntroScreen
             if (HasPendingDialogue())
             {
-                var songIntro = FindFirstObjectByType<RhythmGame.SongIntroScreen>();
-                if (songIntro != null)
-                {
-                    songIntro.IsPlaying = false;
-                    songIntro.gameObject.SetActive(false);
-                }
-                var songIntroGo = GameObject.Find("SongIntroCanvas");
-                if (songIntroGo != null)
-                {
-                    songIntroGo.SetActive(false);
-                }
-
-                // ★ Preload & Prepare video NGAY TỪ AWAKE để khi vào màn là phát được ngay, không bị chờ mất mấy giây
+                // SongIntro tự disable chính nó trong Awake của nó khi phát hiện Story Mode.
+                // Chỉ cần preload video intro của Chapter tại đây.
                 var cfg = GetCurrentChapterConfig();
                 var data = cfg != null ? cfg.dialogueAsset : dialogueDataAsset;
                 if (data != null && (data.introVideoClip != null || !string.IsNullOrEmpty(data.introVideoUrl)))
@@ -527,13 +519,6 @@ namespace Luan.Dialogue
 
             if (HasPendingDialogue())
             {
-                // Story Mode: Tắt hoàn toàn SongIntroScreen nếu có trong scene để không bị đè và không chạy countdown bài hát
-                if (RhythmGame.SongIntroScreen.Instance != null)
-                {
-                    RhythmGame.SongIntroScreen.Instance.IsPlaying = false;
-                    RhythmGame.SongIntroScreen.Instance.gameObject.SetActive(false);
-                }
-
                 StartDialogue();
             }
             else
@@ -2401,6 +2386,16 @@ namespace Luan.Dialogue
 
         private void StartGameplay()
         {
+            // ★ Story Mode: chạy SongIntro trước gameplay
+            //   (SongIntro tự gọi gameManager.Restart() ở cuối IntroSequence() của nó)
+            if (StorySession.Active && RhythmGame.SongIntroScreen.Instance != null)
+            {
+                Debug.Log("[StoryDialogueManager] Story mode: chuyển sang SongIntro trước khi vào gameplay.");
+                RhythmGame.SongIntroScreen.Instance.PlayStoryIntro();
+                return;
+            }
+
+            // Free Play hoặc không có SongIntro -> vào gameplay trực tiếp
             var gm = FindFirstObjectByType<RhythmGame.GameManager>();
             if (gm != null)
             {

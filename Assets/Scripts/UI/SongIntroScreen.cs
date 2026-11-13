@@ -85,14 +85,30 @@ namespace RhythmGame
             KeepOnTop();
         }
 
-        private void Start()
+        /// <summary>
+        /// Story Mode: StoryDialogueManager gọi hàm này sau khi pre-battle dialogue kết thúc.
+        /// SongIntro sẽ bật lại chính nó, chạy animation, đếm ngược 3-2-1, rồi gọi gameManager.Restart()
+        /// để vào gameplay — đúng flow Story → SongIntro → Countdown → Gameplay → Story → Result.
+        /// </summary>
+        public void PlayStoryIntro()
         {
-            if (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
+            if (gameObject.activeInHierarchy && IsPlaying)
             {
-                IsPlaying = false;
-                gameObject.SetActive(false);
+                Debug.Log("[SongIntroScreen] PlayStoryIntro: đang chạy, bỏ qua.");
                 return;
             }
+
+            Debug.Log("[SongIntroScreen] PlayStoryIntro: bắt đầu intro story mode.");
+            IsPlaying = true;
+            gameObject.SetActive(true);
+            KeepOnTop();
+            StartCoroutine(IntroSequence());
+        }
+
+        private void Start()
+        {
+            // Nếu Awake đã disable (Story Mode), Start không chạy. Nếu vẫn chạy -> chỉ auto-play khi IsPlaying.
+            if (!gameObject.activeInHierarchy || !IsPlaying) return;
 
             StartCoroutine(IntroSequence());
         }
@@ -122,13 +138,6 @@ namespace RhythmGame
 
         private IEnumerator IntroSequence()
         {
-            if (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
-            {
-                IsPlaying = false;
-                gameObject.SetActive(false);
-                yield break;
-            }
-
             // Lay thong tin bai tu GameSession (Thuan.SongData, global namespace)
             var song = GameSession.SelectedSong;
             if (song == null)
@@ -145,6 +154,18 @@ namespace RhythmGame
             }
 
             Fill(song);
+
+            // Nếu đây là lần chạy lại (gọi từ PlayStoryIntro), re-enable các phần tử đã bị HideInfoElements() tắt
+            if (background != null) background.gameObject.SetActive(true);
+            if (stage != null) stage.gameObject.SetActive(true);
+            if (songNameText != null) songNameText.gameObject.SetActive(true);
+            if (artistText != null) artistText.gameObject.SetActive(true);
+            if (difficultyText != null) difficultyText.gameObject.SetActive(true);
+            if (coverImage != null) coverImage.gameObject.SetActive(true);
+            if (coverRoot != null) coverRoot.gameObject.SetActive(true);
+            if (badgeRoot != null) badgeRoot.gameObject.SetActive(true);
+            if (floaters != null)
+                foreach (var f in floaters) if (f != null) f.gameObject.SetActive(true);
 
             // Nhac chi bat dau sau countdown (trong GameManager.ScheduleMusic), khong phat o day.
 

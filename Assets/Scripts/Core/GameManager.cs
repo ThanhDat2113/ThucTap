@@ -58,10 +58,10 @@ namespace RhythmGame
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = Restart;
             if (GameSession.SelectedSong != null)
             {
-                if (GameSession.SelectedSong.chart != null) chart = GameSession.SelectedSong.chart;
+                chart = GameSession.SelectedSong.GetChartForDifficulty(GameSession.SelectedDifficulty);
+                if (chart == null) chart = GameSession.SelectedSong.chart;
                 if (musicSource != null && GameSession.SelectedSong.clip != null) musicSource.clip = GameSession.SelectedSong.clip;
             }
-
             if (Luan.Dialogue.StoryDialogueManager.HasPendingDialogue() || StorySession.Active)
             {
                 SetState(GameState.Dialogue);
@@ -205,6 +205,10 @@ namespace RhythmGame
             {
                 ScheduleMusic();
                 if (opponentAI != null) opponentAI.SetActive(true);
+
+                // Áp dụng tốc độ chạy note từ ChartData của độ khó hiện tại
+                if (spawner != null && chart != null)
+                    spawner.scrollSpeed = chart.scrollSpeed;
             }
             if (s != GameState.Playing && opponentAI != null) opponentAI.SetActive(false);
         }

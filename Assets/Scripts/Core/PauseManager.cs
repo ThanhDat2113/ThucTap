@@ -118,6 +118,7 @@ public class PauseManager : MonoBehaviour
     Text countdownText;
     float prevTimeScale = 1f;
     bool counting;
+    bool hiddenByResult;
 
     bool HasLobby => showLobbyButton;
     bool HasMainMenu => showMainMenuButton;
@@ -217,7 +218,7 @@ public class PauseManager : MonoBehaviour
         IsPaused = false;
         counting = false;
         RefreshPauseButton(false);
-        pauseButton.gameObject.SetActive(showPauseButton);
+        pauseButton.gameObject.SetActive(showPauseButton && !hiddenByResult);
         onResume.Invoke();
     }
 
@@ -262,8 +263,24 @@ public class PauseManager : MonoBehaviour
         if (pauseButton)
         {
             RefreshPauseButton(false);
-            pauseButton.gameObject.SetActive(showPauseButton);
+            pauseButton.gameObject.SetActive(showPauseButton && !hiddenByResult);
         }
+    }
+
+    /// <summary>Gọi khi hiện bảng kết quả: ẩn nút pause và chặn Esc / P.</summary>
+    public void HideForResult()
+    {
+        hiddenByResult = true;
+        canPause = false;
+        if (pauseButton) pauseButton.gameObject.SetActive(false);
+    }
+
+    /// <summary>Gọi khi đóng bảng kết quả (retry / continue): trả lại như cũ.</summary>
+    public void ShowAfterResult()
+    {
+        hiddenByResult = false;
+        canPause = true;
+        if (pauseButton) pauseButton.gameObject.SetActive(showPauseButton);
     }
 
     static void ResetState()

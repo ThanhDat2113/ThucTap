@@ -1,11 +1,11 @@
 {
-  "projectId": "cmuaysv14017o7q972vwosmy2",
-  "projectName": "VS Code",
-  "groupCode": "OJT06",
-  "repositoryUrl": null,
-  "trackerUrl": "https://datn.unifolio.io.vn",
-  "keyId": "qldk_bLuJ1KvN4VM_0Cmcvp1IOzXJNLAtiGnt",
-  "secret": "6fefQ2pFk3NVOlVPMz4auL_8TCq9D-bZquzVJk3ag1c",
-  "deviceId": "66d890c6454c539ac7f05c843f1db44c",
-  "updatedAt": "2026-10-23T13:54:32.584Z"
+    "trackerUrl": "https://datn.unifolio.io.vn/api/project-tracker/heartbeat",
+    "deviceSecret": "YAwyDSRWd4NOe5_2NdEhq5kW_ob20t2lVt6DjxunLkk",
+    "deviceKeyId": "qldk_1atHDgjN3sK0ELuhf7-ALend5YF90MW9",
+    "deviceId": "06e42413e74b443db4a7ba3c34d63d6d",
+    "enrollmentCode": "qlde_BbSpAGwA3C9Y1PdxInWcXcDWxiLAX9BBO2lVWC4cVlI",
+    "projectId": "cmuayspom017n7q97pqqgdqgd",
+    "projectName": "Unity",
+    "groupCode": "OJT06",
+    "repositoryUrl": "https://github.com/ThanhDat2113/ThucTap"
 }

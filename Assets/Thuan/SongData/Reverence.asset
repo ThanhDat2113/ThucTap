@@ -18,4 +18,11 @@ MonoBehaviour:
   coverArt: {fileID: 21300000, guid: db50c7f99e6604b4c84840d68c867f6f, type: 3}
   difficulty: 3
   bpm: 0
+  easyChart: {fileID: 11400000, guid: 359f34cc4c2aded4485a8d208482ca50, type: 2}
+  normalChart: {fileID: 11400000, guid: ef657b0f36695bf4e98b6187c6e383f3, type: 2}
+  hardChart: {fileID: 11400000, guid: 3e138c355538a49418da96c3a48379db, type: 2}
   chart: {fileID: 11400000, guid: 359f34cc4c2aded4485a8d208482ca50, type: 2}
+  lyricist: 
+  composer: 
+  arranger: 
+  previewStart: -1

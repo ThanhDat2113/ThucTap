@@ -1,0 +1,763 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f89e09754d618d4e96eb56372a33f67, type: 3}
+  m_Name: H_Digital Days
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.ChartData
+  songName: Digital Days
+  audioClip: {fileID: 8300000, guid: 1a2fac4d7362261488716c54e156324e, type: 3}
+  musicStartDelay: 1
+  bpm: 120
+  laneCount: 4
+  firstNoteOffset: 0
+  noteStartDelay: 0
+  latencyCompensation: 0
+  scrollSpeed: 35
+  opponentNoteRatio: 0.5
+  opponentAccuracy: 0.85
+  battleSplitMode: 1
+  sectionLengthBeats: 8
+  notes:
+  - beat: 1.3706666
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 1.7973334
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 2.1813333
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 2.5226667
+    lane: 3
+    type: 1
+    holdBeats: 1.9626667
+    owner: 0
+  - beat: 4.4426665
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 4.912
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 5.2533336
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 5.808
+    lane: 3
+    type: 1
+    holdBeats: 1.1946664
+    owner: 0
+  - beat: 6.8746667
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 7.344
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 7.6853333
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 8.154667
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 8.624
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 9.050667
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 9.52
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 10.032
+    lane: 3
+    type: 1
+    holdBeats: 1.5360003
+    owner: 0
+  - beat: 11.568
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 12.0373335
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 12.506667
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 13.018666
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 13.658667
+    lane: 1
+    type: 1
+    holdBeats: 0.59733295
+    owner: 0
+  - beat: 14.128
+    lane: 2
+    type: 1
+    holdBeats: 4.2666664
+    owner: 0
+  - beat: 18.565332
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 18.906666
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 19.418667
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 20.016
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 20.485332
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 20.954666
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 21.552
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 21.978666
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 22.576
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 23.002666
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 23.514668
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 24.069334
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 24.581333
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 24.965334
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 25.52
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 26.074667
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 26.544
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 27.056
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 27.610666
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 28.122667
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 28.549334
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 28.933332
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 29.530666
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 30
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 30.426666
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 30.981333
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 31.493334
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 32.048
+    lane: 3
+    type: 1
+    holdBeats: 0.9813347
+    owner: 0
+  - beat: 33.072
+    lane: 0
+    type: 1
+    holdBeats: 1.6213341
+    owner: 0
+  - beat: 34.608
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 35.07733
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 35.504
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 36.101334
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 36.570667
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 37.08267
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 37.552
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 38.192
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 38.576
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 39.002666
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 39.514668
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 40.069332
+    lane: 2
+    type: 1
+    holdBeats: 1.0666695
+    owner: 0
+  - beat: 41.178665
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 41.562668
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 42.032
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 42.501335
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 42.970665
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 43.525333
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 43.994667
+    lane: 0
+    type: 1
+    holdBeats: 0.5546646
+    owner: 0
+  - beat: 44.506668
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 45.061333
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 45.488
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 46
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 46.55467
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 47.109333
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 47.536
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 48.048
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 48.517334
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 48.986668
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 49.498665
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 50.096
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 50.522667
+    lane: 2
+    type: 1
+    holdBeats: 0.5546646
+    owner: 0
+  - beat: 51.12
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 51.589333
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 52.058666
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 52.485332
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 53.04
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 53.466667
+    lane: 3
+    type: 1
+    holdBeats: 0.5546646
+    owner: 0
+  - beat: 54.064
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 54.533333
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 55.088
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 55.514668
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 56.069332
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 56.496
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 56.965332
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 57.562668
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 58.117332
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 58.629333
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 59.098667
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 59.525333
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 60.08
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 60.506668
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 61.061333
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 61.530666
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 62.170666
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 62.64
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 63.109333
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 63.536
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 64.048
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 64.56
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 64.944
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 65.541336
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 66.010666
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 66.48
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 66.94933
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 67.461334
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 68.05867
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 68.528
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 69.04
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 69.46667
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 70.064
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 70.49067
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 71.00267
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 71.557335
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 71.984
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 72.538666
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 73.05067
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 73.52
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 74.032
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 74.544
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 75.056
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 75.482666
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 76.03733
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 76.50667
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 77.01867
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 77.488
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 78.04266
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 78.554665
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 79.024
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 79.49333
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 80.00533
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 80.517334
+    lane: 2
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 81.029335
+    lane: 0
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 81.541336
+    lane: 3
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 82.010666
+    lane: 1
+    type: 0
+    holdBeats: 0
+    owner: 0
+  - beat: 82.52267
+    lane: 2
+    type: 1
+    holdBeats: 6.954666
+    owner: 0

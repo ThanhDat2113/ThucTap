@@ -19,6 +19,9 @@ public class SongListController : MonoBehaviour
     [SerializeField] private string gameplaySceneName = "Thuan_Gameplay";
 
     private readonly List<SongItemUI> spawnedItems = new List<SongItemUI>();
+    private bool built;
+    private bool leavingScene;
+    private bool freePlayVisible;
 
     private void Start()
     {
@@ -33,6 +36,35 @@ public class SongListController : MonoBehaviour
         }
 
         BuildList();
+        built = true;
+        freePlayVisible = IsFreePlayVisible();
+    }
+
+    private bool IsFreePlayVisible()
+    {
+        return detailPanel != null && detailPanel.gameObject.activeInHierarchy;
+    }
+
+    // Theo doi doi tab: moi lan vao Free Play deu bat dau chua chon bai nao + nhac nen
+    private void Update()
+    {
+        if (!built || leavingScene) return;
+        bool visible = IsFreePlayVisible();
+        if (visible == freePlayVisible) return;
+        freePlayVisible = visible;
+        if (visible) ClearSelection();
+        if (musicManager != null && ambientBgm != null) musicManager.CrossFade(ambientBgm, 0f, true);
+    }
+
+    // Bo chon tat ca: khung chi tiet trong, nut PLAY tat
+    private void ClearSelection()
+    {
+        foreach (SongItemUI item in spawnedItems)
+            item.SetSelected(false);
+        if (musicManager != null) musicManager.ClearSelection();
+        if (detailPanel != null) detailPanel.ShowEmpty();
+        if (playButton != null) playButton.interactable = false;
+        if (scrollRect != null) scrollRect.verticalNormalizedPosition = 1f;
     }
 
     private void BuildList()
@@ -41,35 +73,18 @@ public class SongListController : MonoBehaviour
             Destroy(child.gameObject);
         spawnedItems.Clear();
 
-        string savedName = musicManager != null ? musicManager.GetSavedSongName() : string.Empty;
-        int selectedIndex = -1;
-
         for (int i = 0; i < songs.Count; i++)
         {
             SongData song = songs[i];
             SongItemUI item = Instantiate(itemPrefab, content);
             item.Setup(song, this, i);
             spawnedItems.Add(item);
-
-            if (selectedIndex < 0 && song.name == savedName)
-            {
-                SelectSong(song, item);
-                selectedIndex = i;
-            }
         }
 
-        // Man chon bai luon phat nhac nen; bai hat chi phat khi bam PLAY
+        // Vao man chua chon bai nao: phat nhac nen, nguoi choi bam bai nao thi moi nghe thu bai do
+        ClearSelection();
         if (musicManager != null && ambientBgm != null)
             musicManager.PlayMusic(ambientBgm);
-
-        if (selectedIndex < 0)
-        {
-            if (detailPanel != null) detailPanel.ShowEmpty();
-        }
-        else
-        {
-            StartCoroutine(ScrollToIndex(selectedIndex));
-        }
     }
 
     public void SelectSong(SongData song, SongItemUI selectedItem)
@@ -78,7 +93,11 @@ public class SongListController : MonoBehaviour
             item.SetSelected(item == selectedItem);
 
         if (musicManager != null)
+        {
             musicManager.SelectSong(song);
+            // bam vao bai nao thi nhac nen chuyen sang nghe thu bai do
+            musicManager.PlayPreview(song);
+        }
 
         if (detailPanel != null)
             detailPanel.Show(song);
@@ -97,23 +116,9 @@ public class SongListController : MonoBehaviour
             MusicManager.Instance.StopMusic();
 
         StorySession.End();
+        leavingScene = true;
         GameSession.SelectedSong = song;
         SongStats.IncrementPlayCount(song);
         SceneManager.LoadScene(gameplaySceneName);
-    }
-
-    // Cuon danh sach toi bai da chon lan truoc
-    private IEnumerator ScrollToIndex(int index)
-    {
-        yield return null;
-        if (scrollRect == null || spawnedItems.Count <= 1) yield break;
-        Canvas.ForceUpdateCanvases();
-        float contentH = scrollRect.content.rect.height;
-        float viewH = scrollRect.viewport.rect.height;
-        if (contentH <= viewH) yield break;
-        var itemRt = (RectTransform)spawnedItems[index].transform;
-        float itemCenter = -itemRt.anchoredPosition.y;
-        float target = Mathf.Clamp(itemCenter - viewH * 0.5f, 0f, contentH - viewH);
-        scrollRect.verticalNormalizedPosition = 1f - target / (contentH - viewH);
     }
 }
