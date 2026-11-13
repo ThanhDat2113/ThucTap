@@ -15,6 +15,8 @@ public class BattleHUD : MonoBehaviour
     [Header("Vị trí (hệ 1920x1080)")]
     [Tooltip("Khoảng cách từ góc trên-trái màn hình tới cụm HP / Flow / Điểm / Combo / Hạng")]
     [SerializeField] private Vector2 hudOrigin = new Vector2(40f, 30f);
+    [Tooltip("Hiện huy hiệu hạng (S, A, B...) dưới khung điểm")]
+    [SerializeField] private bool showRank = false;
 
     [Header("Hiệu ứng")]
     [SerializeField] private float smooth = 10f;
@@ -95,7 +97,7 @@ public class BattleHUD : MonoBehaviour
             rank = newRank;
             if (rank != "") rankPop = 1f;
         }
-        rankRoot.gameObject.SetActive(rank != "");
+        rankRoot.gameObject.SetActive(showRank && rank != "");
         rankText.text = rank;
         rankText.color = RankColor(rank);
     }
@@ -264,7 +266,7 @@ public class BattleHUD : MonoBehaviour
         rankText.fontStyle = FontStyles.Bold | FontStyles.Italic;
 
         comboRoot = CreateNode("Combo", root);
-        Place(comboRoot, tl, mid, new Vector2(290f, 120f), new Vector2(x + 92f + 20f + 145f, rowY));
+        Place(comboRoot, tl, mid, new Vector2(290f, 120f), new Vector2(showRank ? x + 92f + 20f + 145f : x + 150f, rowY));
         comboRoot.localEulerAngles = new Vector3(0f, 0f, 3f);
         comboGroup = comboRoot.gameObject.AddComponent<CanvasGroup>();
         comboGroup.blocksRaycasts = false;
