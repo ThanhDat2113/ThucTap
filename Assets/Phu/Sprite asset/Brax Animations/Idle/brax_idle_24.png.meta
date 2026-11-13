@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 977e17f3cdd746e4aae395c4b1b4956f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4857492896372182538
+    second: brax_idle_24_0
+  - first:
+      213: 6155983063200188664
+    second: brax_idle_24_1
+  - first:
+      213: 1294209956363348638
+    second: brax_idle_24_2
+  - first:
+      213: 8229378765772829991
+    second: brax_idle_24_3
+  - first:
+      213: -6841777125891998800
+    second: brax_idle_24_4
+  - first:
+      213: -7970610297590574527
+    second: brax_idle_24_5
+  - first:
+      213: 3318169633682383444
+    second: brax_idle_24_6
+  - first:
+      213: -7741376944463427486
+    second: brax_idle_24_7
+  - first:
+      213: -2423609584482958942
+    second: brax_idle_24_8
+  - first:
+      213: 307155456020497391
+    second: brax_idle_24_9
+  - first:
+      213: 2663368353883801425
+    second: brax_idle_24_10
+  - first:
+      213: -3389646236713079230
+    second: brax_idle_24_11
+  - first:
+      213: -3065573900948896123
+    second: brax_idle_24_12
+  - first:
+      213: -516365623127372618
+    second: brax_idle_24_13
+  - first:
+      213: -5640526976019579437
+    second: brax_idle_24_14
+  - first:
+      213: -3880775447428021186
+    second: brax_idle_24_15
+  - first:
+      213: 3076235158333500384
+    second: brax_idle_24_16
+  - first:
+      213: 7539134226436678124
+    second: brax_idle_24_17
+  - first:
+      213: -7080159372590575278
+    second: brax_idle_24_18
+  - first:
+      213: -8629784010230047653
+    second: brax_idle_24_19
+  - first:
+      213: 1022505578694920796
+    second: brax_idle_24_20
+  - first:
+      213: 5709020439730524828
+    second: brax_idle_24_21
+  - first:
+      213: -6070695250466753668
+    second: brax_idle_24_22
+  - first:
+      213: -2821087676911808471
+    second: brax_idle_24_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_idle_24_0
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1459
+        width: 225
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0e4f3b9d08496340800000000000000
+      internalID: 4857492896372182538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_1
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 1459
+        width: 223
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f84e5deaf17e6550800000000000000
+      internalID: 6155983063200188664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_2
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 1459
+        width: 206
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9aafc92915f5f110800000000000000
+      internalID: 1294209956363348638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_3
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 1459
+        width: 210
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7253808e260a43270800000000000000
+      internalID: 8229378765772829991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_4
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 1459
+        width: 214
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb70da04ff1d01a0800000000000000
+      internalID: -6841777125891998800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_5
+      rect:
+        serializedVersion: 2
+        x: 2005
+        y: 1459
+        width: 213
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1421b091a24b26190800000000000000
+      internalID: -7970610297590574527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_6
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 979
+        width: 208
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 452602093b18c0e20800000000000000
+      internalID: 3318169633682383444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_7
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 979
+        width: 211
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 268cbd04faa119490800000000000000
+      internalID: -7741376944463427486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_8
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 979
+        width: 212
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a149aa7ceb9d5ed0800000000000000
+      internalID: -2423609584482958942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_9
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 979
+        width: 213
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe3cce6824c334400800000000000000
+      internalID: 307155456020497391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_10
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 979
+        width: 214
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 157c24f186f26f420800000000000000
+      internalID: 2663368353883801425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_11
+      rect:
+        serializedVersion: 2
+        x: 2005
+        y: 979
+        width: 213
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24e2a72f4be85f0d0800000000000000
+      internalID: -3389646236713079230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_12
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 499
+        width: 220
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5868b3977c4e475d0800000000000000
+      internalID: -3065573900948896123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_13
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 499
+        width: 220
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bc054b933085d8f0800000000000000
+      internalID: -516365623127372618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_14
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 499
+        width: 216
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dd3850a992d8b1b0800000000000000
+      internalID: -5640526976019579437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_15
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 499
+        width: 218
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e34cef2ba47b42ac0800000000000000
+      internalID: -3880775447428021186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_16
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 499
+        width: 212
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb2902f39bf0ba20800000000000000
+      internalID: 3076235158333500384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_17
+      rect:
+        serializedVersion: 2
+        x: 2005
+        y: 499
+        width: 214
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce16fb882a260a860800000000000000
+      internalID: 7539134226436678124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_18
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 19
+        width: 225
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251169b10983ebd90800000000000000
+      internalID: -7080159372590575278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_19
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 19
+        width: 226
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c54ed4a29dc3880800000000000000
+      internalID: -8629784010230047653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_20
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 19
+        width: 221
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a47f6086ba03e00800000000000000
+      internalID: 1022505578694920796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_21
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 19
+        width: 223
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c92159d97d38a3f40800000000000000
+      internalID: 5709020439730524828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_22
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 19
+        width: 219
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c73374865de80cba0800000000000000
+      internalID: -6070695250466753668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_idle_24_23
+      rect:
+        serializedVersion: 2
+        x: 2001
+        y: 19
+        width: 222
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 920907164bb79d8d0800000000000000
+      internalID: -2821087676911808471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_idle_24_0: 4857492896372182538
+      brax_idle_24_1: 6155983063200188664
+      brax_idle_24_10: 2663368353883801425
+      brax_idle_24_11: -3389646236713079230
+      brax_idle_24_12: -3065573900948896123
+      brax_idle_24_13: -516365623127372618
+      brax_idle_24_14: -5640526976019579437
+      brax_idle_24_15: -3880775447428021186
+      brax_idle_24_16: 3076235158333500384
+      brax_idle_24_17: 7539134226436678124
+      brax_idle_24_18: -7080159372590575278
+      brax_idle_24_19: -8629784010230047653
+      brax_idle_24_2: 1294209956363348638
+      brax_idle_24_20: 1022505578694920796
+      brax_idle_24_21: 5709020439730524828
+      brax_idle_24_22: -6070695250466753668
+      brax_idle_24_23: -2821087676911808471
+      brax_idle_24_3: 8229378765772829991
+      brax_idle_24_4: -6841777125891998800
+      brax_idle_24_5: -7970610297590574527
+      brax_idle_24_6: 3318169633682383444
+      brax_idle_24_7: -7741376944463427486
+      brax_idle_24_8: -2423609584482958942
+      brax_idle_24_9: 307155456020497391
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 454777e18c8f08044bb3e8d437a6c5b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1552373529554856681
+    second: velvet_idle_12_0
+  - first:
+      213: -7761660852163654837
+    second: velvet_idle_12_1
+  - first:
+      213: -7694482438541020123
+    second: velvet_idle_12_2
+  - first:
+      213: -7001855495932015928
+    second: velvet_idle_12_3
+  - first:
+      213: 250257367399282206
+    second: velvet_idle_12_4
+  - first:
+      213: 653770053519829128
+    second: velvet_idle_12_5
+  - first:
+      213: -7183950444990114183
+    second: velvet_idle_12_6
+  - first:
+      213: 8134017147850151644
+    second: velvet_idle_12_7
+  - first:
+      213: -121272729285210693
+    second: velvet_idle_12_8
+  - first:
+      213: -3271191498608561584
+    second: velvet_idle_12_9
+  - first:
+      213: -2548840724075226476
+    second: velvet_idle_12_10
+  - first:
+      213: 7346226386711011823
+    second: velvet_idle_12_11
+  - first:
+      213: -1080839802361713708
+    second: velvet_idle_12_12
+  - first:
+      213: 9113137287628983512
+    second: velvet_idle_12_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: velvet_idle_12_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 491
+        width: 289
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 715d92cef7cd47ae0800000000000000
+      internalID: -1552373529554856681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_1
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 496
+        width: 296
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4bcab7f39a094490800000000000000
+      internalID: -7761660852163654837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_2
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 491
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 524f7404df4b73590800000000000000
+      internalID: -7694482438541020123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_3
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 491
+        width: 311
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ca0b5c168964de90800000000000000
+      internalID: -7001855495932015928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_4
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 491
+        width: 306
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16324eefb7197300800000000000000
+      internalID: 250257367399282206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_5
+      rect:
+        serializedVersion: 2
+        x: 1969
+        y: 491
+        width: 291
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88866dc5668a21900800000000000000
+      internalID: 653770053519829128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_6
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 11
+        width: 300
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 976da5ae12b7d4c90800000000000000
+      internalID: -7183950444990114183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_7
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 11
+        width: 300
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd65b860085d1e070800000000000000
+      internalID: 8134017147850151644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_8
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 105
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbd43026817215ef0800000000000000
+      internalID: -121272729285210693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_9
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 11
+        width: 287
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 052b82dd9a46a92d0800000000000000
+      internalID: -3271191498608561584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_10
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 11
+        width: 299
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49a5274add2b0acd0800000000000000
+      internalID: -2548840724075226476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_11
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 11
+        width: 288
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe1e28b0af903f560800000000000000
+      internalID: 7346226386711011823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_12
+      rect:
+        serializedVersion: 2
+        x: 1966
+        y: 11
+        width: 292
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4db60212de51001f0800000000000000
+      internalID: -1080839802361713708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_idle_12_13
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 92
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dc0e72641e587e70800000000000000
+      internalID: 9113137287628983512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      velvet_idle_12_0: -1552373529554856681
+      velvet_idle_12_1: -7761660852163654837
+      velvet_idle_12_10: -2548840724075226476
+      velvet_idle_12_11: 7346226386711011823
+      velvet_idle_12_12: -1080839802361713708
+      velvet_idle_12_13: 9113137287628983512
+      velvet_idle_12_2: -7694482438541020123
+      velvet_idle_12_3: -7001855495932015928
+      velvet_idle_12_4: 250257367399282206
+      velvet_idle_12_5: 653770053519829128
+      velvet_idle_12_6: -7183950444990114183
+      velvet_idle_12_7: 8134017147850151644
+      velvet_idle_12_8: -121272729285210693
+      velvet_idle_12_9: -3271191498608561584
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

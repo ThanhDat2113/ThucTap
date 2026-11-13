@@ -6842,6 +6842,16 @@ MonoBehaviour:
     dialogueAsset: {fileID: 11400000, guid: 3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b, type: 2}
     opponentAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
     defaultOpponentName: Nox
+  - chapterNumber: 3
+    chapterTitle: "\xC1nh \u0111\xE8n gi\u1EA3 t\u1EA1o"
+    dialogueAsset: {fileID: 11400000, guid: 912dafc993851d24aa41feecc2c16c12, type: 2}
+    opponentAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    defaultOpponentName: Velvet
+  - chapterNumber: 4
+    chapterTitle: "Nh\u1ECBp tr\u1ED1ng th\xE9p"
+    dialogueAsset: {fileID: 11400000, guid: 730e83ac00170b74eba86832cc0d9632, type: 2}
+    opponentAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    defaultOpponentName: Brax
   dialogueDataAsset: {fileID: 11400000, guid: 74901fbc65f618a4ba121c2299d6d3e1, type: 2}
   dialogueLines:
   - speakerName: MAIN 1
