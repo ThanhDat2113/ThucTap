@@ -18,6 +18,13 @@ public class BattleHUD : MonoBehaviour
     [Tooltip("Hiện huy hiệu hạng (S, A, B...) dưới khung điểm")]
     [SerializeField] private bool showRank = false;
 
+    [Header("Chữ điểm khi Flow")]
+    [Tooltip("Tắt = chữ điểm đổi gradient chạy màu liên tục. Bật = đổi sang một màu cố định (ô bên dưới).")]
+    [SerializeField] private bool solidColorInFlow = false;
+    [SerializeField] private Color flowScoreColor = new Color(1f, 0.43f, 0.78f);
+    [Tooltip("Cỡ chữ huy hiệu hệ số điểm (x2)")]
+    [SerializeField] private float multiplierFontSize = 52f;
+
     [Header("Hiệu ứng")]
     [SerializeField] private float smooth = 10f;
     [SerializeField] private float trailDelay = 0.35f;
@@ -48,6 +55,11 @@ public class BattleHUD : MonoBehaviour
     private bool flowActive;
     private float targetScore, shownScore;
     private int shownScoreInt = -1;
+    private Image[] scoreGlow;
+    private TMP_Text flowMultText;
+    private float flowMultiplier = 1.5f;
+    private bool scoreFx;
+    private float scorePunch, scorePop;
     private int combo, lastRankPop;
     private float comboPop, rankPop;
     private string rank = "";
@@ -79,7 +91,20 @@ public class BattleHUD : MonoBehaviour
         flowActive = active;
     }
 
-    public void SetScore(int score) { targetScore = Mathf.Max(0, score); }
+    public void SetScore(int score)
+    {
+        int v = Mathf.Max(0, score);
+        if (v > targetScore) scorePop = 1f;     // điểm tăng -> chữ nảy nhẹ
+        targetScore = v;
+    }
+
+    /// <summary>Hệ số điểm khi đang Flow, hiện thành huy hiệu "x1.5" cạnh khung điểm.</summary>
+    public void SetFlowMultiplier(float m)
+    {
+        flowMultiplier = m;
+        if (flowMultText != null)
+            flowMultText.text = "x" + m.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture);
+    }
 
     public void SetCombo(int value)
     {
@@ -111,6 +136,7 @@ public class BattleHUD : MonoBehaviour
         flowActive = false;
         targetScore = shownScore = 0f;
         shownScoreInt = -1;
+        scorePunch = scorePop = 0f;
         combo = 0;
         comboText.text = "0";
         comboGroup.alpha = 0f;
@@ -167,6 +193,30 @@ public class BattleHUD : MonoBehaviour
             shownScoreInt = s;
             scoreText.text = s.ToString("N0");
         }
+
+        // --- Hiệu ứng điểm khi đang Flow ---
+        float tt = Time.unscaledTime;
+        if (flowActive != scoreFx)
+        {
+            scoreFx = flowActive;
+            ApplyScoreStyle(scoreFx);
+            if (scoreFx) scorePunch = 1f;        // nảy mạnh lúc thanh Flow đầy
+        }
+        scorePunch = Mathf.MoveTowards(scorePunch, 0f, dt * 2.5f);
+        scorePop = Mathf.MoveTowards(scorePop, 0f, dt * 6f);
+        float sScale = 1f + 0.4f * scorePunch * scorePunch + 0.1f * scorePop;
+        if (scoreFx)
+        {
+            sScale += 0.04f * Mathf.Sin(tt * 9f);                       // nhịp thở
+            Color bottom = GradientAt(0.5f + 0.5f * Mathf.Sin(tt * 2.5f)); // màu chạy hồng -> tím -> cyan
+            if (!solidColorInFlow) scoreText.colorGradient = new VertexGradient(Color.white, Color.white, bottom, bottom);
+            float pulse = 0.5f + 0.5f * Mathf.Sin(tt * 6f);
+            scoreGlow[0].color = new Color(bottom.r, bottom.g, bottom.b, 0.28f + 0.25f * pulse);
+            scoreGlow[1].color = new Color(bottom.r, bottom.g, bottom.b, 0.5f + 0.3f * pulse);
+            float bs = 1f + 0.5f * scorePunch + 0.08f * Mathf.Sin(tt * 8f);
+            flowMultText.rectTransform.localScale = new Vector3(bs, bs, 1f);
+        }
+        scoreText.rectTransform.localScale = new Vector3(sScale, sScale, 1f);
 
         // --- Combo ---
         float wantAlpha = combo >= 2 ? 1f : 0f;
@@ -229,7 +279,7 @@ public class BattleHUD : MonoBehaviour
         // ----- Điểm (dưới flow) -----
         RectTransform sp = CreateNode("ScorePanel", root);
         Place(sp, tl, tl, new Vector2(440f, 80f), new Vector2(x, -(y + 112f)));
-        AddGlow(sp, new Vector2(440f, 80f), Purple);
+        scoreGlow = AddGlow(sp, new Vector2(440f, 80f), Purple);
         Image sFrame = CreateImage("Frame", sp, Slant(new Vector2(440f, 80f), true));
         Stretch(sFrame.rectTransform, 0f);
         sFrame.color = Color.white;
@@ -247,6 +297,14 @@ public class BattleHUD : MonoBehaviour
         scoreText.enableAutoSizing = true;
         scoreText.fontSizeMin = 30f;
         scoreText.fontSizeMax = 58f;
+
+        // huy hiệu hệ số điểm "x1.5", chỉ hiện khi đang Flow
+        flowMultText = CreateText("FlowMult", sp, "x2", multiplierFontSize, Color.white, TextAlignmentOptions.Left);
+        Place(flowMultText.rectTransform, new Vector2(1f, .5f), new Vector2(0f, .5f), new Vector2(220f, 80f), new Vector2(18f, 0f));
+        flowMultText.fontStyle = FontStyles.Bold | FontStyles.Italic;
+        flowMultText.outlineWidth = 0.25f;
+        flowMultText.outlineColor = new Color32(255, 46, 136, 255);
+        flowMultText.gameObject.SetActive(false);
 
         // ----- Hàng dưới điểm: Hạng (trái) + Combo (phải) -----
         float rowY = -(y + 212f + 46f);
@@ -493,7 +551,39 @@ public class BattleHUD : MonoBehaviour
     }
 
     /// <summary>Quầng sáng mờ phía sau khung (2 lớp chồng nhau).</summary>
-    private void AddGlow(Transform parent, Vector2 size, Color c)
+    // Đổi kiểu chữ điểm: bình thường (vàng) <-> đang Flow (gradient chạy màu, viền hồng, quầng sáng nhịp)
+    private void ApplyScoreStyle(bool fx)
+    {
+        if (fx)
+        {
+            if (solidColorInFlow)
+            {
+                scoreText.enableVertexGradient = false;
+                scoreText.color = flowScoreColor;
+            }
+            else
+            {
+                scoreText.color = Color.white;           // để gradient hiện đúng màu
+                scoreText.enableVertexGradient = true;
+            }
+            scoreText.outlineWidth = 0.22f;
+            scoreText.outlineColor = new Color32(255, 46, 136, 255);
+            flowMultText.text = "x" + flowMultiplier.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture);
+            flowMultText.gameObject.SetActive(true);
+        }
+        else
+        {
+            scoreText.enableVertexGradient = false;
+            scoreText.color = Yellow;
+            scoreText.outlineWidth = 0f;
+            scoreText.rectTransform.localScale = Vector3.one;
+            flowMultText.gameObject.SetActive(false);
+            scoreGlow[0].color = new Color(Purple.r, Purple.g, Purple.b, 0.14f);
+            scoreGlow[1].color = new Color(Purple.r, Purple.g, Purple.b, 0.28f);
+        }
+    }
+
+    private Image[] AddGlow(Transform parent, Vector2 size, Color c)
     {
         Image outer = CreateImage("GlowOuter", parent, Slant(size + new Vector2(20f, 20f)));
         Stretch(outer.rectTransform, -10f);
@@ -501,6 +591,7 @@ public class BattleHUD : MonoBehaviour
         Image inner = CreateImage("GlowInner", parent, Slant(size + new Vector2(10f, 10f)));
         Stretch(inner.rectTransform, -5f);
         inner.color = new Color(c.r, c.g, c.b, 0.28f);
+        return new[] { outer, inner };
     }
 
     private static Color RankColor(string r)

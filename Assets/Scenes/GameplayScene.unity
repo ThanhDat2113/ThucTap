@@ -644,6 +644,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleHUD
   displayFont: {fileID: 11400000, guid: 173110cc9e4f96c4fa947e71af9bc0f1, type: 2}
   hudOrigin: {x: 40, y: 30}
+  showRank: 0
+  solidColorInFlow: 0
+  flowScoreColor: {r: 1, g: 0.43, b: 0.78, a: 1}
+  multiplierFontSize: 52
   smooth: 10
   trailDelay: 0.35
   lowHealth: 0.25
@@ -2692,7 +2696,7 @@ MonoBehaviour:
   flowBuildPerCombo: 2
   maxFlow: 100
   flowDrainRate: 20
-  flowScoreMultiplier: 1.5
+  flowScoreMultiplier: 2
 --- !u!4 &1127100801
 Transform:
   m_ObjectHideFlags: 0
