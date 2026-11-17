@@ -1,0 +1,221 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f82e2ff20d89d40af9d8f994bac3f4, type: 3}
+  m_Name: Chapter3_Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Luan.Dialogue.DialogueStoryData
+  chapterNumber: 3
+  chapterTitle: "Chapter 3: \xC1nh \u0111\xE8n gi\u1EA3 t\u1EA1o"
+  introVideoClip: {fileID: 32900000, guid: b2880bc143b5cb149b516e666653e0d3, type: 3}
+  introVideoDuration: 8.958333
+  backstoryImages:
+  - {fileID: 21300000, guid: 73e8554324514bf0b125c96991ebeeea, type: 3}
+  - {fileID: 21300000, guid: e7b40a304afc4f1f9d1134f4b7bae74e, type: 3}
+  - {fileID: 21300000, guid: 59dc4733f5c5431e9039a70379c45189, type: 3}
+  - {fileID: 21300000, guid: b7658e5ede734af8bae6d0055fb20073, type: 3}
+  winDialogueLines:
+  - speakerName: Velvet
+    side: 1
+    text: "Kh\xE1n gi\u1EA3 \u0111ang g\u1ECDi t\xEAn c\u1EADu."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "H\u1ECD c\u0169ng \u0111ang ch\u1EDD c\xF4 \u0111\u1EE9ng d\u1EADy."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "C\u1EADu th\u1EAFng m\xE0 v\u1EABn quan t\xE2m \u0111\u1EBFn \u0111\u1ED1i
+      th\u1EE7 sao?"
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Th\u1EAFng kh\xF4ng c\xF3 ngh\u0129a l\xE0 ph\u1EA3i xem th\u01B0\u1EDDng
+      ng\u01B0\u1EDDi kh\xE1c."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "\u0110\u1EEBng \u0111\u1EC3 thua \u1EDF v\xF2ng sau."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i s\u1EBD xem \u0111\xF3 l\xE0 l\u1EDDi c\u1ED5 v\u0169."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  loseDialogueLines:
+  - speakerName: Velvet
+    side: 1
+    text: "\xC1nh \u0111\xE8n s\xE2n kh\u1EA5u kh\xF4ng d\u1EC5 ch\u1ECBu nh\u01B0
+      c\u1EADu ngh\u0129 \u0111\xE2u."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i \u0111\xE3 \u0111\u1EC3 kh\xE1n gi\u1EA3 l\xE0m m\xECnh m\u1EA5t
+      t\u1EADp trung."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "N\u1EBFu ch\u1EC9 nh\xECn h\u1ECD, c\u1EADu s\u1EBD qu\xEAn m\u1EA5t m\xECnh
+      \u0111ang bi\u1EC3u di\u1EC5n v\xEC \u0111i\u1EC1u g\xEC."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\xF4 c\u0169ng t\u1EEBng nh\u01B0 v\u1EADy sao?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "C\xF3 l\u1EBD. Nh\u01B0ng c\u1EADu ph\u1EA3i t\u1EF1 t\xECm c\xE2u tr\u1EA3
+      l\u1EDDi."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i s\u1EBD quay l\u1EA1i khi t\xECm \u0111\u01B0\u1EE3c n\xF3."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  chapterLogo: {fileID: 3082836855904265221, guid: 9cc328277b7e5e84ba6f790474341c7b, type: 3}
+  characterStoryTitle: "C\xE2u chuy\u1EC7n c\u1EE7a Velvet"
+  characterStory: "Sau khi gi\xE0nh \u0111\u01B0\u1EE3c hai Huy hi\u1EC7u Nh\u1ECBp
+    \u0111i\u1EC7u t\u1EEB Raze v\xE0 Nox, ng\u01B0\u1EDDi ch\u01A1i \u0111\u01B0\u1EE3c
+    b\u01B0\u1EDBc v\xE0o v\xF2ng lo\u1EA1i t\u1EA1i S\xE2n kh\u1EA5u Trung t\xE2m.\n\u0110\u1ED1i
+    th\u1EE7 \u0111\u1EA7u ti\xEAn t\u1EA1i \u0111\xE2y l\xE0 Velvet, m\u1ED9t th\u1EA7n
+    t\u01B0\u1EE3ng n\u1ED5i ti\u1EBFng v\u1EDBi nh\u1EEFng m\xE0n tr\xECnh di\u1EC5n
+    g\u1EA7n nh\u01B0 ho\xE0n h\u1EA3o.\nTr\u01B0\u1EDBc kh\xE1n gi\u1EA3, Velvet
+    lu\xF4n xu\u1EA5t hi\u1EC7n v\u1EDBi n\u1EE5 c\u01B0\u1EDDi t\u1EF1 tin. Nh\u01B0ng
+    sau s\xE2n kh\u1EA5u, c\xF4 li\xEAn t\u1EE5c theo d\xF5i l\u01B0\u1EE3t xem,
+    th\u1EE9 h\u1EA1ng v\xE0 m\u1EE9c \u0111\u1ED9 y\xEAu th\xEDch c\u1EE7a m\xECnh.\nVelvet
+    kh\xF4ng gh\xE9t ng\u01B0\u1EDDi ch\u01A1i. C\xF4 ch\u1EC9 s\u1EE3 m\u1ED9t g\u01B0\u01A1ng
+    m\u1EB7t m\u1EDBi s\u1EBD chi\u1EBFm l\u1EA5y s\u1EF1 ch\xFA \xFD m\xE0 c\xF4
+    \u0111\xE3 c\u1ED1 g\u1EAFng r\u1EA5t l\xE2u m\u1EDBi c\xF3 \u0111\u01B0\u1EE3c."
+  characterIntroArt: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+  introVideoUrl: 
+  backstorySlides: []
+  preBattleLines:
+  - speakerName: Velvet
+    side: 1
+    text: "C\u1EADu l\xE0 ng\u01B0\u1EDDi \u0111\xE3 th\u1EAFng Raze v\xE0 Nox?"
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Ph\u1EA3i. C\xF2n c\xF4 l\xE0 Velvet?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "Tr\xF4ng c\u1EADu b\xECnh th\u01B0\u1EDDng h\u01A1n t\xF4i ngh\u0129."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Tay c\xF4 \u0111ang si\u1EBFt ch\u1EB7t micro. C\xF4 lo sao?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "T\xF4i kh\xF4ng c\u1EA7n lo v\u1EC1 m\u1ED9t t\xE2n binh."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\u1EADy h\xE3y b\u1EAFt \u0111\u1EA7u \u0111i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  postBattleLines:
+  - speakerName: Velvet
+    side: 1
+    text: "Kh\xE1n gi\u1EA3 \u0111ang g\u1ECDi t\xEAn c\u1EADu."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "H\u1ECD c\u0169ng \u0111ang ch\u1EDD c\xF4 \u0111\u1EE9ng d\u1EADy."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "C\u1EADu th\u1EAFng m\xE0 v\u1EABn quan t\xE2m \u0111\u1EBFn \u0111\u1ED1i
+      th\u1EE7 sao?"
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Th\u1EAFng kh\xF4ng c\xF3 ngh\u0129a l\xE0 ph\u1EA3i xem th\u01B0\u1EDDng
+      ng\u01B0\u1EDDi kh\xE1c."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Velvet
+    side: 1
+    text: "\u0110\u1EEBng \u0111\u1EC3 thua \u1EDF v\xF2ng sau."
+    customAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    nameColor: {r: 1, g: 0.25, b: 0.55, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i s\u1EBD xem \u0111\xF3 l\xE0 l\u1EDDi c\u1ED5 v\u0169."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  _legacyLines: []

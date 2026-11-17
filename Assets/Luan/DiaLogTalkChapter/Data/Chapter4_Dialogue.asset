@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f82e2ff20d89d40af9d8f994bac3f4, type: 3}
+  m_Name: Chapter4_Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::Luan.Dialogue.DialogueStoryData
+  chapterNumber: 4
+  chapterTitle: "Chapter 4: Nh\u1ECBp tr\u1ED1ng th\xE9p"
+  introVideoClip: {fileID: 32900000, guid: f1ef229afe0e21248a6d9fcbfa56b08a, type: 3}
+  introVideoDuration: 7.92
+  backstoryImages:
+  - {fileID: 21300000, guid: 2e913aaf144640ceab7ca34da1c74c96, type: 3}
+  - {fileID: 21300000, guid: 319f23c06ae54ecbbec4877d521b1d62, type: 3}
+  - {fileID: 21300000, guid: b3e7741f5a8149ec83424e72f1b8bed9, type: 3}
+  - {fileID: 21300000, guid: 273893e8b7994152ada76425da4eba41, type: 3}
+  winDialogueLines:
+  - speakerName: Brax
+    side: 1
+    text: "C\u1EADu th\u1EAFng r\u1ED3i. Kh\xF4ng c\u1EA7n gi\xFAp t\xF4i \u0111\u1EE9ng
+      d\u1EADy."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i ch\u1EC9 \u0111ang \u0111\u01B0a anh chi\u1EBFc d\xF9i tr\u1ED1ng."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "T\xF4i kh\xF4ng quen nh\u1EADn gi\xFAp \u0111\u1EE1."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\xF3 l\u1EBD \u0111\xF3 l\xE0 l\xFD do ban nh\u1EA1c c\u1EE7a anh r\u1EDDi
+      \u0111i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "Tr\u1EADn chung k\u1EBFt \u0111ang ch\u1EDD c\u1EADu."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\xF2n anh c\xF3 v\xE0i ng\u01B0\u1EDDi c\u1EA7n g\u1ECDi l\u1EA1i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  loseDialogueLines:
+  - speakerName: Brax
+    side: 1
+    text: "C\u1EADu \u0111\xE3 c\u1ED1 theo nh\u1ECBp c\u1EE7a t\xF4i v\xE0 qu\xEAn
+      m\u1EA5t nh\u1ECBp c\u1EE7a m\xECnh."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i kh\xF4ng t\xECm \u0111\u01B0\u1EE3c kho\u1EA3ng tr\u1ED1ng \u0111\u1EC3
+      ph\u1EA3n c\xF4ng."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "\u0110\u1EEBng ch\u1EDD kho\u1EA3ng tr\u1ED1ng. H\xE3y t\u1EF1 t\u1EA1o
+      ra n\xF3."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Anh \u0111ang ch\u1EC9 c\xE1ch \u0111\xE1nh b\u1EA1i m\xECnh sao?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "T\xF4i mu\u1ED1n th\u1EAFng \u0111\u1ED1i th\u1EE7 m\u1EA1nh nh\u1EA5t."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "V\u1EADy l\u1EA7n sau t\xF4i s\u1EBD kh\xF4ng l\xE0m anh th\u1EA5t v\u1ECDng."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  chapterLogo: {fileID: 7346848934363275058, guid: 65776e7bb07ce0a44ba6142d1848ce54, type: 3}
+  characterStoryTitle: "C\xE2u chuy\u1EC7n c\u1EE7a Brax"
+  characterStory: "Sau khi \u0111\xE1nh b\u1EA1i Velvet, ng\u01B0\u1EDDi ch\u01A1i
+    b\u01B0\u1EDBc v\xE0o v\xF2ng b\xE1n k\u1EBFt. Tr\u1EADn \u0111\u1EA5u \u0111\u01B0\u1EE3c
+    t\u1ED5 ch\u1EE9c t\u1EA1i X\u01B0\u1EDFng \xC2m Thanh, m\u1ED9t ph\xF2ng bi\u1EC3u
+    di\u1EC5n c\u0169 ch\u1EE9a \u0111\u1EA7y tr\u1ED1ng, loa v\xE0 nh\u1EEFng thi\u1EBFt
+    b\u1ECB c\u01A1 kh\xED.\n\u0110\u1ED1i th\u1EE7 c\u1EE7a ng\u01B0\u1EDDi ch\u01A1i
+    l\xE0 Brax, m\u1ED9t tay tr\u1ED1ng n\u1ED5i ti\u1EBFng v\u1EDBi s\u1EE9c m\u1EA1nh
+    v\xE0 kh\u1EA3 n\u0103ng gi\u1EEF nh\u1ECBp g\u1EA7n nh\u01B0 tuy\u1EC7t \u0111\u1ED1i.\nBrax
+    t\u1EEBng bi\u1EC3u di\u1EC5n c\xF9ng m\u1ED9t ban nh\u1EA1c \u0111\u01B0\u1EDDng
+    ph\u1ED1. Sau nhi\u1EC1u l\u1EA7n th\u1EA5t b\u1EA1i, c\xE1c th\xE0nh vi\xEAn
+    b\u1EAFt \u0111\u1EA7u tranh c\xE3i r\u1ED3i l\u1EA7n l\u01B0\u1EE3t r\u1EDDi
+    \u0111i.\nBrax \u1EDF l\u1EA1i m\u1ED9t m\xECnh v\xE0 tin r\u1EB1ng ban nh\u1EA1c
+    tan r\xE3 v\xEC anh \u0111\xE3 ph\u1EE5 thu\u1ED9c qu\xE1 nhi\u1EC1u v\xE0o ng\u01B0\u1EDDi
+    kh\xE1c. T\u1EEB \u0111\xF3, anh t\u1EF1 s\xE1ng t\xE1c, t\u1EF1 ch\u01A1i nh\u1EA1c
+    v\xE0 t\u1EF1 v\u1EADn h\xE0nh s\xE2n kh\u1EA5u.\nBrax ngh\u0129 r\u1EB1ng m\u1EA1nh
+    m\u1EBD ngh\u0129a l\xE0 kh\xF4ng c\u1EA7n s\u1EF1 gi\xFAp \u0111\u1EE1. Nh\u01B0ng
+    c\xE0ng c\u1ED1 l\xE0m m\u1ECDi vi\u1EC7c m\u1ED9t m\xECnh, \xE2m nh\u1EA1c c\u1EE7a
+    anh c\xE0ng tr\u1EDF n\xEAn n\u1EB7ng n\u1EC1 v\xE0 tr\u1ED1ng r\u1ED7ng."
+  characterIntroArt: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+  introVideoUrl: 
+  backstorySlides: []
+  preBattleLines:
+  - speakerName: Brax
+    side: 1
+    text: "C\u1EADu \u0111\u1EBFn s\u1EDBm."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Nox b\u1EA3o t\xF4i \u0111\u1EEBng \u0111\u1EBFn mu\u1ED9n."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "\xCDt nh\u1EA5t c\u1EADu bi\u1EBFt nghe l\u1EDDi khuy\xEAn."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Anh lu\xF4n bi\u1EC3u di\u1EC5n m\u1ED9t m\xECnh sao?"
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "M\u1ED9t m\xECnh th\xEC \xEDt sai s\xF3t h\u01A1n."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "Nh\u01B0ng ch\u01B0a ch\u1EAFc s\u1EBD t\u1ED1t h\u01A1n."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  postBattleLines:
+  - speakerName: Brax
+    side: 1
+    text: "C\u1EADu th\u1EAFng r\u1ED3i. Kh\xF4ng c\u1EA7n gi\xFAp t\xF4i \u0111\u1EE9ng
+      d\u1EADy."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "T\xF4i ch\u1EC9 \u0111ang \u0111\u01B0a anh chi\u1EBFc d\xF9i tr\u1ED1ng."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "T\xF4i kh\xF4ng quen nh\u1EADn gi\xFAp \u0111\u1EE1."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\xF3 l\u1EBD \u0111\xF3 l\xE0 l\xFD do ban nh\u1EA1c c\u1EE7a anh r\u1EDDi
+      \u0111i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: Brax
+    side: 1
+    text: "Tr\u1EADn chung k\u1EBFt \u0111ang ch\u1EDD c\u1EADu."
+    customAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    nameColor: {r: 1, g: 0.45, b: 0, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  - speakerName: '{PLAYER}'
+    side: 0
+    text: "C\xF2n anh c\xF3 v\xE0i ng\u01B0\u1EDDi c\u1EA7n g\u1ECDi l\u1EA1i."
+    customAvatar: {fileID: 21300000, guid: ff10bfe60da849879042d61c0c0ccc3e, type: 3}
+    nameColor: {r: 0.2, g: 0.95, b: 1, a: 1}
+    actionDescription: 
+    illustration: {fileID: 0}
+  _legacyLines: []

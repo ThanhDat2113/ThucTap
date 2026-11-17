@@ -266,6 +266,7 @@ namespace Luan.Dialogue
         private bool skipLogoRequested = false;
 
         public List<ChapterDialogueEntry> Chapters => chapters;
+        public bool TestInEditor { get => testInEditor; set => testInEditor = value; }
         public int TestChapter { get => testChapter; set => testChapter = value; }
         public DialoguePhase CurrentPhase => currentPhase;
 
