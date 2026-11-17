@@ -224,7 +224,10 @@ namespace RhythmGame
             if (flowText != null && flowSystem != null)
                 flowText.text = $"FLOW: {flowSystem.FlowAmount:F0}/{flowSystem.maxFlow:F0}";
             if (hud != null)
+            {
+                if (flowSystem != null) hud.SetFlowMultiplier(flowSystem.flowScoreMultiplier);
                 hud.SetFlow(flowSystem != null ? flowSystem.NormalizedFlow : 0f, flowActive);
+            }
         }
 
         // Ẩn UI người chơi cũ khi đã dùng BattleHUD mới
