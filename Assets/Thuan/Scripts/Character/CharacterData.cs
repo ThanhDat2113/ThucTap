@@ -27,6 +27,9 @@ public class CharacterData : ScriptableObject
     [Tooltip("Anh mat nhan vat - dung cho avatar tren thanh HP o man choi")]
     public Sprite avatar;
 
+    [Tooltip("Prefab model hien thi tren san khau gameplay")]
+    public GameObject gameplayPrefab;
+
     [Header("Man choi")]
     [Tooltip("Nhan vat hien tren san khau: 0 = Main1 (nam), 1 = Main2 (nu)")]
     public int gameplayModel;

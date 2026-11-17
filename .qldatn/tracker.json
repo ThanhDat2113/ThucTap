@@ -1,9 +1,9 @@
 {
     "trackerUrl": "https://datn.unifolio.io.vn/api/project-tracker/heartbeat",
-    "deviceSecret": "YAwyDSRWd4NOe5_2NdEhq5kW_ob20t2lVt6DjxunLkk",
-    "deviceKeyId": "qldk_1atHDgjN3sK0ELuhf7-ALend5YF90MW9",
-    "deviceId": "06e42413e74b443db4a7ba3c34d63d6d",
-    "enrollmentCode": "qlde_BbSpAGwA3C9Y1PdxInWcXcDWxiLAX9BBO2lVWC4cVlI",
+    "deviceSecret": "3wZoVrxogWcPpew318RK69VLEUMKd8YhA1jldFphpfc",
+    "deviceKeyId": "qldk_gXQ_c54OYLwOs8v3tEfPZM-3MgtHXJV2",
+    "deviceId": "577c20cd574a4dec9db25c54a1fe91d1",
+    "enrollmentCode": "qlde_vFIL3rm2gAoECBGDOCXlxB9jpzrn1HY41ARBLg9Y1EA",
     "projectId": "cmuayspom017n7q97pqqgdqgd",
     "projectName": "Unity",
     "groupCode": "OJT06",

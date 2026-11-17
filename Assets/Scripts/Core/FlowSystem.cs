@@ -6,23 +6,26 @@ namespace RhythmGame
     /// Quản lý thanh Flow (gauge combo).
     /// - Hit note liên tục (combo) làm tăng flow.
     /// - Khi flow đạt max -> vào trạng thái "In the Flow".
-    /// - Trong trạng thái In the Flow: flow tiêu hao dần theo thời gian, điểm nhan duoc duoc nhan theo he so.
-    /// - Miss hoac het flow -> thoat trang thai In the Flow, flow ve 0.
-    /// Khong tac dong den toc do nhac hay chart.
+    /// - Trong trạng thái In the Flow: flow GIỮ NGUYÊN (không tiêu hao theo thời gian).
+    /// - Miss note -> thoát In the Flow NGAY LẬP TỨC (flow về 0).
+    /// Không tác động đến tốc độ nhạc hay chart.
     /// </summary>
     public class FlowSystem : MonoBehaviour
     {
         [Header("Flow Settings")]
-        [Tooltip("Luong flow tang mot lan hit note thanh cong.")]
+        [Tooltip("Lượng flow tăng mỗi lần hit note thành công.")]
         public float flowBuildPerHit = 10f;
-        [Tooltip("Luong flow tang them moi cap combo (them vao flowBuildPerHit).")]
+        [Tooltip("Lượng flow tăng thêm mỗi cấp combo (cộng vào flowBuildPerHit).")]
         public float flowBuildPerCombo = 2f;
-        [Tooltip("Gioi han toi da cua thanh flow (0-100).")]
+        [Tooltip("Giới hạn tối đa của thanh flow (0-100).")]
         public float maxFlow = 100f;
-        [Tooltip("Toc do tieu hao flow khi dang o trang thai In the Flow (don vi flow / giay).")]
-        public float flowDrainRate = 20f;
-        [Tooltip("He so diem khi dang o trang thai In the Flow (1.0 = khong thay doi).")]
+        [Tooltip("Hệ số điểm khi đang In the Flow (1.0 = không thay đổi).")]
         public float flowScoreMultiplier = 1.5f;
+        [Tooltip("Lượng flow mất khi miss trong lúc CHƯA In the Flow. Khi đang In the Flow, miss sẽ thoát state ngay (không cần trừ).")]
+        public float flowLossPerMiss = 30f;
+
+        // Field cũ — không còn dùng. Giữ lại để prefab cũ không mất dữ liệu serialize.
+        [HideInInspector] public float flowDrainRate = 0f;
 
         [Header("Events")]
         public System.Action<float> OnFlowAmountChanged;
@@ -49,65 +52,60 @@ namespace RhythmGame
         }
 
         /// <summary>
-        /// Goi khi hit note thanh cong. Tang flow, kiem tra chuyen sang trang thai In the Flow.
+        /// Gọi khi hit note thành công. Tăng flow, kiểm tra chuyển sang In the Flow.
         /// </summary>
         public void OnNoteJudged(bool isHit, int combo)
         {
             if (!isHit)
             {
-                ResetFlow();
+                OnMiss();
                 return;
             }
 
             _currentCombo = combo;
 
-            // Khi dang o trang thai In the Flow, flow tiep tuc tut xuong, khong tang len nua
+            // Đang In the Flow: flow đã max, giữ nguyên — không cộng thêm, cũng không drain
             if (_isFlowActive) return;
 
-float build;
-if (_flowJustDeactivated)
-{
-    build = flowBuildPerHit;
-}
-else
-{
-    build = flowBuildPerHit + (flowBuildPerCombo * Mathf.Max(0, _currentCombo - 1));
-}
-_flowAmount = Mathf.Clamp(_flowAmount + build, 0f, maxFlow);
+            float build;
+            if (_flowJustDeactivated)
+            {
+                build = flowBuildPerHit;
+            }
+            else
+            {
+                build = flowBuildPerHit + (flowBuildPerCombo * Mathf.Max(0, _currentCombo - 1));
+            }
+            _flowAmount = Mathf.Clamp(_flowAmount + build, 0f, maxFlow);
 
-if (!_isFlowActive && _flowAmount >= maxFlow)
-{
-    _flowJustDeactivated = false;
-    ActivateFlow();
-}
+            if (_flowAmount >= maxFlow)
+            {
+                _flowJustDeactivated = false;
+                ActivateFlow();
+            }
 
             OnFlowAmountChanged?.Invoke(NormalizedFlow);
         }
 
         /// <summary>
-        /// Goi khi miss note. Reset flow ve 0 va thoat trang thai In the Flow.
+        /// Gọi khi miss note.
+        /// - Đang In the Flow: THOÁT ngay lập tức (flow về 0). Không trừ dần.
+        /// - Chưa In the Flow: giảm một lượng nhỏ flow đang tích.
         /// </summary>
         public void OnMiss()
         {
-            // Miss khong reset flow ve 0, chi giam mot luong nho
             _currentCombo = 0;
+
             if (_isFlowActive)
             {
-                // Dang In the Flow: khong deactivates, chi giam flow
-                _flowAmount = Mathf.Max(_flowAmount - flowBuildPerHit * 2f, 0f);
-                OnFlowAmountChanged?.Invoke(NormalizedFlow);
-                if (_flowAmount <= 0f)
-                {
-                    DeactivateFlow();
-                    _flowJustDeactivated = false;
-                }
+                // ★ Miss = kết thúc In the Flow ngay
+                DeactivateFlow();
+                _flowJustDeactivated = true;
+                return;
             }
-            else
-            {
-                // Chua active: giam flow mot luong, khong reset ve 0
-                _flowAmount = Mathf.Max(_flowAmount - flowBuildPerHit * 3f, 0f);
-                OnFlowAmountChanged?.Invoke(NormalizedFlow);
-            }
+
+            _flowAmount = Mathf.Max(_flowAmount - flowLossPerMiss, 0f);
+            OnFlowAmountChanged?.Invoke(NormalizedFlow);
         }
 
         void ActivateFlow()
@@ -123,7 +121,6 @@ if (!_isFlowActive && _flowAmount >= maxFlow)
             _isFlowActive = false;
             _flowAmount = 0f;
             _currentCombo = 0;
-            _flowJustDeactivated = true;
             OnFlowAmountChanged?.Invoke(NormalizedFlow);
             OnFlowStateChanged?.Invoke(false);
         }
@@ -143,19 +140,6 @@ if (!_isFlowActive && _flowAmount >= maxFlow)
             }
         }
 
-        void Update()
-        {
-            if (!_isFlowActive) return;
-
-            _flowAmount = Mathf.Max(_flowAmount - flowDrainRate * Time.deltaTime, 0f);
-            OnFlowAmountChanged?.Invoke(NormalizedFlow);
-
-            if (_flowAmount <= 0f)
-            {
-                DeactivateFlow();
-            }
-        }
-
         public void Reset()
         {
             _flowAmount = 0f;
@@ -165,5 +149,8 @@ if (!_isFlowActive && _flowAmount >= maxFlow)
             OnFlowAmountChanged?.Invoke(NormalizedFlow);
             OnFlowStateChanged?.Invoke(false);
         }
+
+        // Không còn Update() drain theo thời gian.
+        // Flow chỉ kết thúc khi có sự kiện miss (hoặc Reset).
     }
 }

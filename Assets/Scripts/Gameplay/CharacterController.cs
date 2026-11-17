@@ -27,10 +27,30 @@ namespace RhythmGame
             animator = GetComponent<Animator>();
         }
 
+        /// <summary>
+        /// Wire JudgementSystem từ ngoài (dùng khi spawn prefab runtime).
+        /// Đảm bảo subscribe đúng ngay cả khi judgementSystem được gán SAU Start().
+        /// </summary>
+        public void Initialize(JudgementSystem js)
+        {
+            // Hủy subscribe hệ cũ (nếu có)
+            if (judgementSystem != null)
+                judgementSystem.OnJudged -= OnJudged;
+
+            judgementSystem = js;
+
+            if (judgementSystem != null)
+                judgementSystem.OnJudged += OnJudged;
+
+            SetDancing(false);
+        }
+
         void Start()
         {
             if (judgementSystem != null)
             {
+                // Tránh double-subscribe nếu Initialize() đã gọi
+                judgementSystem.OnJudged -= OnJudged;
                 judgementSystem.OnJudged += OnJudged;
             }
             SetDancing(false);
