@@ -23,8 +23,8 @@ MonoBehaviour:
   opponent: 0
   tracks:
   - title: Come My Way
-    song: {fileID: 11400000, guid: 1192c85b9053dbf4ea90fb67247f472e, type: 2}
-  - title: "Em C\u1EE7a Ng\xE0y H\xF4m Qua"
+    song: {fileID: 11400000, guid: feb79b8093c643d4d970571e699dd70c, type: 2}
+  - title: Come My Way
+    song: {fileID: 11400000, guid: e2f3a4b5c6d7e8f90293a4b5c6d7e8f2, type: 2}
+  - title: Come My Way
     song: {fileID: 11400000, guid: 9f36a6c6c13963b42b7e169080c38f62, type: 2}
-  - title: "L\u1EA1c Tr\xF4i"
-    song: {fileID: 11400000, guid: c64847698a793ca458a2dfe8226fe4de, type: 2}

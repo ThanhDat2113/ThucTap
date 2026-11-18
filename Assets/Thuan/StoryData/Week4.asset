@@ -22,8 +22,8 @@ MonoBehaviour:
   opponent: 0
   tracks:
   - title: Shred
-    song: {fileID: 11400000, guid: feb79b8093c643d4d970571e699dd70c, type: 2}
-  - title: KUSANAGI
-    song: {fileID: 11400000, guid: c64847698a793ca458a2dfe8226fe4de, type: 2}
-  - title: Gathers Under Night
     song: {fileID: 11400000, guid: 9f36a6c6c13963b42b7e169080c38f62, type: 2}
+  - title: Shred
+    song: {fileID: 11400000, guid: c64847698a793ca458a2dfe8226fe4de, type: 2}
+  - title: Shred
+    song: {fileID: 11400000, guid: feb79b8093c643d4d970571e699dd70c, type: 2}

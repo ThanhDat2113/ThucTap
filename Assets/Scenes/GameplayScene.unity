@@ -1952,6 +1952,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleHUD
   displayFont: {fileID: 11400000, guid: 173110cc9e4f96c4fa947e71af9bc0f1, type: 2}
   hudOrigin: {x: 40, y: 30}
+  showRank: 0
+  solidColorInFlow: 0
+  flowScoreColor: {r: 1, g: 0.43, b: 0.78, a: 1}
+  multiplierFontSize: 52
   smooth: 10
   trailDelay: 0.35
   lowHealth: 0.25
@@ -2115,6 +2119,7 @@ GameObject:
   - component: {fileID: 443643784}
   - component: {fileID: 443643787}
   - component: {fileID: 443643786}
+  - component: {fileID: 443643788}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -2464,6 +2469,23 @@ MonoBehaviour:
   goodRate: 0.3
   badRate: 0.1
   showTapEffect: 1
+--- !u!114 &443643788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443643774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3918515a4e69ee7469064ca95066126f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.PlayerCharacterApplier
+  allCharacters:
+  - {fileID: 11400000, guid: ffb9d6b53cb9e6746a2a94cd6187e97b, type: 2}
+  - {fileID: 11400000, guid: 7a34897d44822af49a8119a56d8b2acc, type: 2}
+  spawnPoint: {fileID: 888079951}
+  spawnPointFallbackName: Main1
 --- !u!1 &446133510
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,6 +4115,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &888079950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 888079951}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &888079951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888079950}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0, z: -0, w: 0.8660254}
+  m_LocalPosition: {x: -12.8, y: 10.3, z: 7.1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &920695016
 GameObject:
   m_ObjectHideFlags: 0
@@ -5231,8 +5284,9 @@ MonoBehaviour:
   flowBuildPerHit: 10
   flowBuildPerCombo: 2
   maxFlow: 100
-  flowDrainRate: 20
   flowScoreMultiplier: 1.5
+  flowLossPerMiss: 30
+  flowDrainRate: 20
 --- !u!4 &1127100801
 Transform:
   m_ObjectHideFlags: 0
@@ -10262,3 +10316,4 @@ SceneRoots:
   - {fileID: 926877156}
   - {fileID: 302872367}
   - {fileID: 920695018}
+  - {fileID: 888079951}
