@@ -17,6 +17,9 @@ public class GameplayResultScreen : MonoBehaviour
     private Sprite stageBackground;
     private Sprite clearLogoSprite;
     private Sprite failedLogoSprite;
+    private Sprite characterSprite;
+    private Sprite characterFailSprite;   // Resources/Result/stage_failed_character (bieu cam thua, neu co)
+    private Material grayMaterial;        // Resources/Result/UIGrayscale (lam mat mau khi thua)
     private Image resultLogo;
     private Image coverArt;
     private TMP_Text songText;
@@ -32,6 +35,10 @@ public class GameplayResultScreen : MonoBehaviour
     private TMP_Text comboText;
     private TMP_Text scoreText;
     private TMP_Text rankText;
+    // lam noi chu RANK: dia toi phia sau + vong mau + glow/bong do bang underlay cua TMP
+    private Image rankDisc, rankRing, rankRing2;
+    private Material rankMat;
+    private static Sprite discTex;
     private TMP_Text newBestText;
 
     // cac khoi de chay animation
@@ -56,6 +63,15 @@ public class GameplayResultScreen : MonoBehaviour
 
     private static Sprite rayTex, starTex, ringTex, glowTex, bandTex, vignetteTex, beamTex;
 
+    // ---- VFX: hat co trong luc (phao hoa, tia lua, nuoc ban) + khoi, set, vet nut man hinh ----
+    private class Particle { public RectTransform rt; public Image img; public Vector2 vel; public float life, age, gravity, drag, size, spin; public bool rocket; public Color color; public float trailTimer; }
+    private readonly List<Particle> particles = new List<Particle>();
+    private readonly List<GameObject> transients = new List<GameObject>(); // vet tam thoi (vet ngang, bong mo...) - xoa khi hien lai
+    private readonly List<Image> fog = new List<Image>();
+    private Image crackImage, boltImage, sweepImage;
+    private float nextFirework, nextLightning, nextStarRain;
+    private static Sprite smokeTex, crackTex, boltTex;
+
     // ---- hieu ung chay lien tuc sau khi hien xong ----
     private RectTransform backLayer;
     private readonly List<Image> spotlights = new List<Image>();
@@ -66,10 +82,16 @@ public class GameplayResultScreen : MonoBehaviour
     private float idleStart, idleBlend, nextHype, nextGlint;
     private class Bokeh { public RectTransform rt; public Image img; public float speed, sway, phase, baseA; }
 
-    [Header("Am thanh (tuy chon)")]
-    [SerializeField] private AudioClip slamClip;
-    [SerializeField] private AudioClip tickClip;
-    [SerializeField] private AudioClip rankClip;
+    // ---- man THUA: den trang, mua roi, logo treo lung lang, nhan vat khoc ----
+    private Color bgBaseColor;
+    private readonly List<RectTransform> rain = new List<RectTransform>();
+    private Image failBanner;
+    private static readonly Color FailTint = new Color(0.78f, 0.78f, 0.8f, 1f);
+
+    // ---- AM THANH man tong ket: tu nap trong Resources/Result/SFX (khong can keo tha) ----
+    private AudioClip sWhoosh, sSlamClear, sSlamFail, sTick, sRankStamp, sWinJingle, sFailJingle,
+        sFwLaunch, sFwBoom, sGlass, sThunder, sRain, sSparkle, sPop;
+    private AudioSource sfxMain, sfxTick, sfxRain;
 
     private static readonly Color Yellow = Hex("FFD21C");
     private static readonly Color Cyan = Hex("22D9FF");
@@ -82,10 +104,19 @@ public class GameplayResultScreen : MonoBehaviour
         if (displayFont == null) displayFont = TMP_Settings.defaultFontAsset;
         stageBackground = Resources.Load<Sprite>("Result/result_stage_background");
         clearLogoSprite = Resources.Load<Sprite>("Result/stage_clear");
+        characterFailSprite = Resources.Load<Sprite>("Result/stage_failed_character");
+        grayMaterial = Resources.Load<Material>("Result/UIGrayscale");
         failedLogoSprite = Resources.Load<Sprite>("Result/stage_failed");
         foreach (Sprite sprite in Resources.LoadAll<Sprite>("Result/result_assets")) sprites[sprite.name] = sprite;
+        // ban cat lai sach cua cac nut (ban cat tu sheet bi dinh manh cua nut ben canh)
+        foreach (var name in new[] { "retry_button", "next_button", "menu_button" })
+        {
+            var clean = Resources.Load<Sprite>("Result/" + name + "_clean");
+            if (clean != null) sprites[name] = clean;
+        }
         foreach (Transform child in transform) child.gameObject.SetActive(false);
         Build();
+        LoadSfx(); // tao nguon am SAU khi an cac object cu
     }
 
     public void Show(bool cleared, SongData song, Sprite performer, int score, int maxCombo, float accuracy,
@@ -117,6 +148,7 @@ public class GameplayResultScreen : MonoBehaviour
         Stretch(background.rectTransform);
         background.color = stageBackground != null ? new Color(.67f, .67f, .72f, 1f) : new Color(0.018f, 0.02f, 0.045f, 1f);
         background.preserveAspect = false;
+        bgBaseColor = background.color;
         content = CreateNode("ResultContent", transform);
         Stretch(content);
 
@@ -177,13 +209,13 @@ public class GameplayResultScreen : MonoBehaviour
         missText = ValueText("MissValue", statsPanel.transform, -93f);
         comboText = ValueText("ComboValue", statsPanel.transform, -175f);
 
-        rankText = CreateText("RankValue", rankPanel.transform, "S", 205, Yellow, TextAlignmentOptions.Center);
-        SetRect(rankText.rectTransform, new Vector2(300f, 265f), new Vector2(6f, -5f));
+        rankText = CreateText("RankValue", rankPanel.transform, "S", 230, Yellow, TextAlignmentOptions.Center);
+        SetRect(rankText.rectTransform, new Vector2(300f, 280f), new Vector2(6f, -62f));
         rankText.fontStyle = FontStyles.Bold | FontStyles.Italic;
-        rankText.outlineWidth = 0.22f;
-        rankText.outlineColor = new Color32(25, 0, 20, 255);
+        rankText.outlineWidth = 0.28f;
+        rankText.outlineColor = new Color32(15, 0, 15, 255);
         newBestText = CreateText("NewRecord", rankPanel.transform, "NEW RECORD!", 27, Color.white, TextAlignmentOptions.Center);
-        SetRect(newBestText.rectTransform, new Vector2(260f, 50f), new Vector2(10f, -153f));
+        SetRect(newBestText.rectTransform, new Vector2(260f, 50f), new Vector2(10f, -228f));
         newBestText.fontStyle = FontStyles.Bold | FontStyles.Italic;
 
         scoreText = CreateText("ScoreValue", scoreBar.transform, "0", 62, Yellow, TextAlignmentOptions.Right);
@@ -199,7 +231,7 @@ public class GameplayResultScreen : MonoBehaviour
 
         // vong sang sau chu rank (nhap nhay khi hien rank)
         Image glow = CreateImage("RankFlash", rankPanel.transform, null);
-        SetRect(glow.rectTransform, new Vector2(330f, 330f), new Vector2(6f, -5f));
+        SetRect(glow.rectTransform, new Vector2(320f, 320f), new Vector2(6f, -62f));
         glow.color = new Color(1f, 1f, 1f, 0f);
         glow.raycastTarget = false;
         glow.transform.SetSiblingIndex(0);
@@ -322,34 +354,69 @@ public class GameplayResultScreen : MonoBehaviour
         SetA(background, 0f);
         Fade(character, 0f); Fade(resultLogo, 0f); Fade(songPanel, 0f); Fade(statsPanel, 0f); Fade(rankPanel, 0f); Fade(scoreBar, 0f);
         rankText.alpha = 0f;
+        SetA(rankDisc, 0f); SetA(rankRing, 0f); SetA(rankRing2, 0f);
         newBestText.alpha = 0f;
         foreach (var b in buttons) { b.localScale = Vector3.zero; SetButtonsInteractable(false); }
         ClearConfetti();
         ResetEffects();
+        ApplyMood(cleared);
 
         // 1. nen + vet sang luot ngang man hinh
         StartCoroutine(SpeedLines(cleared));
+        StopRainSound();
         yield return Tween(0.25f, k => SetA(background, k));
 
         // 2. nhan vat truot tu trai vao + logo dap xuong
         StartCoroutine(SlideIn(character.rectTransform, new Vector2(-520f, 0f), 0.45f));
         StartCoroutine(AfterImages(character, new Vector2(-520f, 0f), 0.45f));
-        StartCoroutine(FadeImage(raysBehindCharacter, cleared ? 0.35f : 0.12f, 0.6f));
+        if (!cleared) StartCoroutine(Slump());
+        if (cleared) StartCoroutine(FadeImage(raysBehindCharacter, 0.35f, 0.6f));
         yield return Wait(0.12f);
-        Play(slamClip);
-        yield return Tween(0.28f, k =>
+        Sfx(cleared ? sSlamClear : sSlamFail, 0.75f);
+        if (!cleared) StartRainSound();
+        if (cleared)
         {
+            yield return Tween(0.28f, k =>
+            {
+                var rt = resultLogo.rectTransform;
+                float e = EaseOut(k);
+                rt.localScale = Vector3.one * Mathf.Lerp(2.4f, 1f, e);
+                rt.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(-14f, 0f, e));
+                Fade(resultLogo, Mathf.Clamp01(k * 3f));
+            });
+        }
+        else
+        {
+            // THUA: logo roi tu tren xuong, nay 2 lan roi nghieng lech nhu bien hieu bi gay
             var rt = resultLogo.rectTransform;
-            float e = EaseOut(k);
-            rt.localScale = Vector3.one * Mathf.Lerp(2.4f, 1f, e);
-            rt.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(-14f, 0f, e));
-            Fade(resultLogo, Mathf.Clamp01(k * 3f));
-        });
+            var end = basePos[rt];
+            rt.localScale = Vector3.one;
+            yield return Tween(0.55f, k =>
+            {
+                rt.anchoredPosition = end + new Vector2(0f, 520f * (1f - BounceOut(k)));
+                rt.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0f, -7f, SStep(0.5f, 1f, k)));
+                Fade(resultLogo, Mathf.Clamp01(k * 4f));
+            });
+            rt.anchoredPosition = end;
+        }
         StartCoroutine(Shake(content, 0.25f, cleared ? 10f : 18f));
         StartCoroutine(Flash(cleared ? new Color(1f, 1f, 1f, 0.55f) : new Color(1f, 0.1f, 0.25f, 0.45f), 0.3f));
         StartCoroutine(Shockwave(FxPos(resultLogo.rectTransform), cleared ? Hex("FF3FA4") : Red, 1.6f));
         Burst(FxPos(resultLogo.rectTransform), 18, cleared ? Yellow : Red, 420f);
-        if (!cleared) StartCoroutine(FadeImage(vignette, 0.35f, 0.5f));
+        if (!cleared)
+        {
+            StartCoroutine(FadeImage(vignette, 0.6f, 0.5f));
+            StartRain(70);
+            StartCoroutine(ShowFailBanner());
+            StartCoroutine(CrackScreen(FxPos(resultLogo.rectTransform) + new Vector2(120f, -30f)));
+            StartCoroutine(FadeFog(0.32f, 1.2f));
+            Debris(FxPos(resultLogo.rectTransform), 26);
+        }
+        else
+        {
+            // 3 phao hoa no cung luc khi logo dap xuong
+            for (int i = 0; i < 3; i++) LaunchFirework(new Vector2(-700f + i * 700f, -560f), 0.15f * i);
+        }
 
         // 3. cac khung bay vao lan luot
         StartCoroutine(SlideIn(songPanel.rectTransform, new Vector2(0f, 260f), 0.4f));
@@ -366,19 +433,22 @@ public class GameplayResultScreen : MonoBehaviour
         {
             StartCoroutine(Punch(values[i].rectTransform, 1.35f, 0.2f));
             StartCoroutine(RowFlash(values[i].rectTransform.anchoredPosition.y));
+            tickPitch = 1f + i * 0.08f;
             yield return CountUp(values[i], stats[i], 0.28f);
         }
 
         // 5. dem diem
         StartCoroutine(ScoreSparks(0.8f));
+        tickPitch = 1.4f; tickRise = 0.7f;
         yield return CountUp(scoreText, score, 0.8f);
+        tickRise = 0.15f;
         StartCoroutine(Punch(scoreText.rectTransform, 1.25f, 0.25f));
         StartCoroutine(Shockwave(FxPos(scoreText.rectTransform), Yellow, 0.9f));
         StartCoroutine(Shine(shines[1]));
 
         // 6. dong dau RANK
         yield return Wait(skip ? 0f : 0.15f);
-        Play(rankClip);
+        Sfx(sRankStamp, 0.65f);
         var rk = rankText.rectTransform;
         yield return Tween(0.3f, k =>
         {
@@ -386,18 +456,33 @@ public class GameplayResultScreen : MonoBehaviour
             rk.localScale = Vector3.one * Mathf.Lerp(3f, 1f, e);
             rk.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(25f, 0f, e));
             rankText.alpha = Mathf.Clamp01(k * 2.5f);
+            rankDisc.rectTransform.localScale = Vector3.one * Mathf.LerpUnclamped(0.2f, 1f, EaseOutBack(k));
+            SetA(rankDisc, 0.88f * Mathf.Clamp01(k * 3f));
+            SetA(rankRing, Mathf.Clamp01(k * 3f));
+            SetA(rankRing2, 0.6f * Mathf.Clamp01(k * 3f));
         }, true);
+        StartCoroutine(Flash(new Color(rankText.color.r, rankText.color.g, rankText.color.b, 0.35f), 0.25f));
         StartCoroutine(Shake(rankPanel.rectTransform, 0.22f, 12f));
         StartCoroutine(RankBurst());
         StartCoroutine(Shockwave(FxPos(rankText.rectTransform), rankText.color, 1.3f));
         Burst(FxPos(rankText.rectTransform), 28, rankText.color, 520f);
         raysBehindRank.color = new Color(rankText.color.r, rankText.color.g, rankText.color.b, 0f);
-        StartCoroutine(FadeImage(raysBehindRank, cleared ? 0.55f : 0.18f, 0.4f));
-        if (cleared) SpawnConfetti(70);
+        if (cleared) StartCoroutine(FadeImage(raysBehindRank, 0.55f, 0.4f));
+        if (cleared)
+        {
+            SpawnConfetti(70);
+            StartCoroutine(LightSweep());
+            StarShower(FxPos(rankText.rectTransform), 30);
+        }
+        else
+        {
+            StartCoroutine(Lightning());
+        }
         if (newBest)
         {
             yield return Tween(0.25f, k =>
             {
+                if (k <= 0.05f) Sfx(sSparkle, 0.35f, 0f, 1.25f);
                 newBestText.alpha = k;
                 newBestText.rectTransform.localScale = Vector3.one * Mathf.Lerp(1.6f, 1f, EaseOut(k));
             }, true);
@@ -413,9 +498,13 @@ public class GameplayResultScreen : MonoBehaviour
         yield return Wait(0.25f, true);
         SetButtonsInteractable(true);
 
+
         // 8. chuyen dong nhe lien tuc
         nextShine = Time.unscaledTime + 0.6f;
         idleStart = Time.unscaledTime;
+        nextFirework = idleStart + 0.4f;
+        nextStarRain = idleStart + 2f;
+        nextLightning = idleStart + 2.5f;
         nextHype = idleStart + 1.5f;
         nextGlint = idleStart + 0.8f;
         foreach (var b in bokeh) ResetBokeh(b, true);
@@ -430,15 +519,34 @@ public class GameplayResultScreen : MonoBehaviour
         {
             // nhan vat tho nhe, logo nhun theo nhip, rank lap lanh, NEW RECORD nhap nhay
             var c = character.rectTransform;
-            c.anchoredPosition = basePos[c] + new Vector2(0f, Mathf.Sin(t * 1.8f) * 8f);
-            c.localScale = new Vector3(1f, 1f + Mathf.Sin(t * 1.8f + 1f) * 0.012f, 1f);
             float beat = Mathf.Pow(1f - Mathf.Repeat(t * 1.9f, 1f), 4f);
-            resultLogo.rectTransform.localScale = Vector3.one * (1f + 0.035f * beat);
-            resultLogo.rectTransform.localEulerAngles = new Vector3(0f, 0f, Mathf.Sin(t * 1.3f) * 1.5f);
-            rankText.rectTransform.localScale = Vector3.one * (1f + 0.05f * beat);
+            if (lastCleared)
+            {
+                c.anchoredPosition = basePos[c] + new Vector2(0f, Mathf.Sin(t * 1.8f) * 8f);
+                c.localScale = new Vector3(1f, 1f + Mathf.Sin(t * 1.8f + 1f) * 0.012f, 1f);
+                resultLogo.rectTransform.localScale = Vector3.one * (1f + 0.035f * beat);
+                resultLogo.rectTransform.localEulerAngles = new Vector3(0f, 0f, Mathf.Sin(t * 1.3f) * 1.5f);
+                rankText.rectTransform.localScale = Vector3.one * (1f + 0.05f * beat);
+                for (int i = 0; i < buttons.Count; i++)
+                    buttons[i].localScale = Vector3.one * (1f + Mathf.Sin(t * 2.4f + i * 0.8f) * 0.015f);
+            }
+            else
+            {
+                // THUA: nhan vat guc xuong tho cham, logo treo lech lung lang, chu F run nhe, nut RETRY nhap nhay goi y
+                c.anchoredPosition = basePos[c] + new Vector2(0f, -40f + Mathf.Sin(t * 0.9f) * 4f);
+                c.localScale = new Vector3(1f, 0.985f + Mathf.Sin(t * 0.9f) * 0.008f, 1f);
+                c.localEulerAngles = new Vector3(0f, 0f, -3f);
+                resultLogo.rectTransform.localScale = Vector3.one;
+                resultLogo.rectTransform.localEulerAngles = new Vector3(0f, 0f, -7f + Mathf.Sin(t * 1.4f) * 3f);
+                rankText.rectTransform.localScale = Vector3.one;
+                rankText.rectTransform.localEulerAngles = new Vector3(0f, 0f, Mathf.Sin(t * 37f) * (Mathf.Repeat(t, 2.2f) < 0.25f ? 6f : 0f));
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    bool retry = buttons[i] == retryButton;
+                    buttons[i].localScale = Vector3.one * (retry ? 1f + 0.06f * Mathf.Abs(Mathf.Sin(t * 3f)) : 1f);
+                }
+            }
             if (newBestText.gameObject.activeSelf) newBestText.alpha = 0.55f + 0.45f * Mathf.Abs(Mathf.Sin(t * 4f));
-            for (int i = 0; i < buttons.Count; i++)
-                buttons[i].localScale = Vector3.one * (1f + Mathf.Sin(t * 2.4f + i * 0.8f) * 0.015f);
             IdleEffects(t, beat);
         }
         if (raysBehindCharacter != null)
@@ -446,9 +554,14 @@ public class GameplayResultScreen : MonoBehaviour
             raysBehindCharacter.rectTransform.localEulerAngles = new Vector3(0f, 0f, t * 8f);
             raysBehindRank.rectTransform.localEulerAngles = new Vector3(0f, 0f, -t * 14f);
         }
+        UpdateRankBadge(t);
+        UpdateVfx(t);
         UpdateSparkles();
         UpdateConfetti();
+        UpdateRain();
     }
+
+    private float tickPitch = 1f, tickRise = 0.15f;
 
     private IEnumerator CountUp(TMP_Text text, int target, float time)
     {
@@ -459,7 +572,11 @@ public class GameplayResultScreen : MonoBehaviour
         {
             e += Step();
             int v = Mathf.RoundToInt(target * EaseOut(e / time));
-            if (v != last) { text.text = v.ToString("N0"); last = v; if (tickClip != null && Time.frameCount % 3 == 0) Play(tickClip); }
+            if (v != last)
+            {
+                text.text = v.ToString("N0"); last = v;
+                if (Time.frameCount % 4 == 0) Tick(tickPitch + tickRise * (e / time));
+            }
             yield return null;
         }
         text.text = target.ToString("N0");
@@ -574,10 +691,519 @@ public class GameplayResultScreen : MonoBehaviour
         return skip && !ignoreSkip ? d * 6f : d;
     }
 
+    // ================== VFX THANG / THUA ==================
+    private void BuildVfx()
+    {
+        MakeVfxTextures();
+        // khoi/suong mu sat day (thua)
+        for (int i = 0; i < 7; i++)
+        {
+            Image f = CreateImage("Fog", fxLayer, smokeTex);
+            f.raycastTarget = false;
+            var rt = f.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = new Vector2(UnityEngine.Random.Range(700f, 1100f), UnityEngine.Random.Range(260f, 380f));
+            rt.anchoredPosition = new Vector2(-1100f + i * 380f, -470f + UnityEngine.Random.Range(-40f, 50f));
+            f.color = new Color(0.75f, 0.75f, 0.8f, 0f);
+            fog.Add(f);
+        }
+        // vet nut man hinh (thua)
+        crackImage = CreateImage("ScreenCrack", fxLayer, crackTex);
+        crackImage.raycastTarget = false;
+        crackImage.rectTransform.anchorMin = crackImage.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        crackImage.rectTransform.sizeDelta = new Vector2(760f, 760f);
+        crackImage.color = new Color(1f, 1f, 1f, 0f);
+        // tia set (thua)
+        boltImage = CreateImage("Lightning", fxLayer, boltTex);
+        boltImage.raycastTarget = false;
+        boltImage.rectTransform.anchorMin = boltImage.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        boltImage.rectTransform.pivot = new Vector2(0.5f, 1f);
+        boltImage.rectTransform.sizeDelta = new Vector2(260f, 820f);
+        boltImage.color = new Color(1f, 1f, 1f, 0f);
+        // vet sang quet ngang ca man (thang)
+        sweepImage = CreateImage("LightSweep", fxLayer, bandTex);
+        sweepImage.raycastTarget = false;
+        sweepImage.rectTransform.anchorMin = sweepImage.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        sweepImage.rectTransform.sizeDelta = new Vector2(2600f, 260f);
+        sweepImage.rectTransform.localEulerAngles = new Vector3(0f, 0f, 70f);
+        sweepImage.color = new Color(1f, 1f, 1f, 0f);
+    }
+
+    private void ClearVfx()
+    {
+        StopRainSound();
+        foreach (var go in transients) if (go != null) Destroy(go);
+        transients.Clear();
+        foreach (var p in particles) if (p.rt != null) Destroy(p.rt.gameObject);
+        particles.Clear();
+        foreach (var f in fog) SetA(f, 0f);
+        if (crackImage != null) SetA(crackImage, 0f);
+        if (boltImage != null) SetA(boltImage, 0f);
+        if (sweepImage != null) SetA(sweepImage, 0f);
+    }
+
+    private Particle Emit(RectTransform parent, Sprite sprite, Vector2 pos, Vector2 vel, Color color, float size, float life, float gravity, float drag)
+    {
+        if (particles.Count > 450) return null;
+        Image img = CreateImage("P", parent, sprite);
+        img.raycastTarget = false;
+        var rt = img.rectTransform;
+        SetRect(rt, new Vector2(size, size), pos);
+        img.color = color;
+        var p = new Particle { rt = rt, img = img, vel = vel, life = life, gravity = gravity, drag = drag, size = size, color = color, spin = UnityEngine.Random.Range(-240f, 240f) };
+        particles.Add(p);
+        return p;
+    }
+
+    private void UpdateVfx(float t)
+    {
+        float d = Mathf.Min(Time.unscaledDeltaTime, 1f / 30f);
+        for (int i = particles.Count - 1; i >= 0; i--)
+        {
+            var p = particles[i];
+            if (p.rt == null) { particles.RemoveAt(i); continue; }
+            p.age += d;
+            p.vel.y -= p.gravity * d;
+            p.vel *= 1f - p.drag * d;
+            p.rt.anchoredPosition += p.vel * d;
+            p.rt.localEulerAngles += new Vector3(0f, 0f, p.spin * d);
+            if (p.rocket)
+            {
+                // ten lua: de lai vet tia lua, het gio thi no
+                p.trailTimer -= d;
+                if (p.trailTimer <= 0f)
+                {
+                    p.trailTimer = 0.02f;
+                    Emit(fxLayer, glowTex, p.rt.anchoredPosition, new Vector2(UnityEngine.Random.Range(-20f, 20f), -40f), new Color(1f, 0.9f, 0.6f, 0.8f), 14f, 0.35f, 0f, 2f);
+                }
+                if (p.age >= p.life)
+                {
+                    Explode(p.rt.anchoredPosition, p.color);
+                    Destroy(p.rt.gameObject);
+                    particles.RemoveAt(i);
+                }
+                continue;
+            }
+            if (p.age >= p.life) { Destroy(p.rt.gameObject); particles.RemoveAt(i); continue; }
+            float k = p.age / p.life;
+            var c = p.color; c.a = p.color.a * (1f - k * k);
+            // lap lanh khi gan tat
+            if (k > 0.6f && UnityEngine.Random.value < 0.25f) c.a *= 0.3f;
+            p.img.color = c;
+            p.rt.localScale = Vector3.one * Mathf.Lerp(1f, 0.4f, k);
+        }
+
+        // khoi troi ngang cham
+        for (int i = 0; i < fog.Count; i++)
+        {
+            var rt = fog[i].rectTransform;
+            rt.anchoredPosition += new Vector2((i % 2 == 0 ? 22f : -16f) * d, 0f);
+            if (rt.anchoredPosition.x > 1300f) rt.anchoredPosition = new Vector2(-1300f, rt.anchoredPosition.y);
+            if (rt.anchoredPosition.x < -1300f) rt.anchoredPosition = new Vector2(1300f, rt.anchoredPosition.y);
+            rt.localScale = new Vector3(1f, 1f + 0.08f * Mathf.Sin(t * 0.6f + i), 1f);
+        }
+    }
+
+    // ---- THANG: phao hoa ----
+    private void LaunchFirework(Vector2 from, float delay)
+    {
+        StartCoroutine(LaunchLater(from, delay));
+    }
+
+    private IEnumerator LaunchLater(Vector2 from, float delay)
+    {
+        if (delay > 0f) yield return Wait(delay, true);
+        Color[] cols = { Hex("FF3FA4"), Cyan, Yellow, Hex("B05CFF"), Hex("7CFF4F"), Color.white };
+        var col = cols[UnityEngine.Random.Range(0, cols.Length)];
+        var p = Emit(fxLayer, starTex, from, new Vector2(UnityEngine.Random.Range(-120f, 120f), UnityEngine.Random.Range(1500f, 1700f)), col, 34f, UnityEngine.Random.Range(0.75f, 0.9f), 900f, 0f);
+        if (p != null) { p.rocket = true; p.spin = 0f; }
+    }
+
+    private void Explode(Vector2 pos, Color col)
+    {
+        // chi 3 qua phao hoa dau co tieng no, phao hoa lap lai ve sau im lang cho do on
+        if (!idle) Sfx(sFwBoom, 0.25f, 0f, UnityEngine.Random.Range(0.85f, 1.15f));
+        int n = 42;
+        float power = UnityEngine.Random.Range(380f, 560f);
+        for (int i = 0; i < n; i++)
+        {
+            float a = i / (float)n * Mathf.PI * 2f;
+            var v = new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * power * UnityEngine.Random.Range(0.75f, 1.05f);
+            var c = i % 5 == 0 ? Color.white : col;
+            Emit(fxLayer, starTex, pos, v, c, UnityEngine.Random.Range(24f, 40f), UnityEngine.Random.Range(0.9f, 1.4f), 260f, 1.6f);
+        }
+        // vong sang trung tam
+        Emit(fxLayer, glowTex, pos, Vector2.zero, new Color(col.r, col.g, col.b, 0.7f), 300f, 0.35f, 0f, 0f);
+    }
+
+    // sao vang roi tu chu RANK xuong
+    private void StarShower(Vector2 from, int count)
+    {
+        for (int i = 0; i < count; i++)
+            Emit(fxLayer, starTex, from + new Vector2(UnityEngine.Random.Range(-60f, 60f), UnityEngine.Random.Range(-40f, 40f)),
+                new Vector2(UnityEngine.Random.Range(-420f, 420f), UnityEngine.Random.Range(150f, 650f)),
+                i % 3 == 0 ? Color.white : Yellow, UnityEngine.Random.Range(18f, 34f), UnityEngine.Random.Range(1.1f, 1.8f), 900f, 0.4f);
+    }
+
+    // vet sang lon quet cheo qua man hinh
+    private IEnumerator LightSweep()
+    {
+        var rt = sweepImage.rectTransform;
+        float e = 0f;
+        while (e < 0.7f)
+        {
+            e += Step(true);
+            float k = Mathf.Clamp01(e / 0.7f);
+            rt.anchoredPosition = new Vector2(Mathf.Lerp(-1400f, 1400f, EaseOut(k)), 0f);
+            SetA(sweepImage, Mathf.Sin(k * Mathf.PI) * 0.4f);
+            yield return null;
+        }
+        SetA(sweepImage, 0f);
+    }
+
+    // ---- THUA: vet nut, manh vo, khoi, tia set ----
+    private IEnumerator CrackScreen(Vector2 pos)
+    {
+        var rt = crackImage.rectTransform;
+        rt.anchoredPosition = pos;
+        rt.localEulerAngles = new Vector3(0f, 0f, UnityEngine.Random.Range(0f, 360f));
+        float e = 0f;
+        while (e < 0.12f)
+        {
+            e += Step(true);
+            float k = Mathf.Clamp01(e / 0.12f);
+            rt.localScale = Vector3.one * Mathf.Lerp(0.3f, 1f, k);
+            SetA(crackImage, k * 0.75f);
+            yield return null;
+        }
+    }
+
+    private void Debris(Vector2 pos, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            var p = Emit(fxLayer, null, pos + new Vector2(UnityEngine.Random.Range(-160f, 160f), 0f),
+                new Vector2(UnityEngine.Random.Range(-380f, 380f), UnityEngine.Random.Range(150f, 520f)),
+                i % 2 == 0 ? new Color(0.9f, 0.9f, 0.92f, 0.9f) : new Color(0.35f, 0.35f, 0.38f, 0.9f),
+                UnityEngine.Random.Range(8f, 20f), UnityEngine.Random.Range(1f, 1.6f), 1300f, 0.2f);
+            if (p != null) p.rt.sizeDelta = new Vector2(p.size, p.size * UnityEngine.Random.Range(0.4f, 1.2f));
+        }
+    }
+
+    private IEnumerator FadeFog(float target, float time)
+    {
+        float e = 0f;
+        while (e < time)
+        {
+            e += Step(true);
+            foreach (var f in fog) SetA(f, Mathf.Lerp(0f, target, e / time));
+            yield return null;
+        }
+    }
+
+    private IEnumerator Lightning()
+    {
+        var rt = boltImage.rectTransform;
+        rt.anchoredPosition = new Vector2(UnityEngine.Random.Range(-500f, 850f), 560f);
+        rt.localScale = new Vector3(UnityEngine.Random.value < 0.5f ? -1f : 1f, UnityEngine.Random.Range(0.8f, 1.1f), 1f);
+        StartCoroutine(Shake(content, 0.2f, 7f));
+        // chop 2 lan nhu set that
+        for (int n = 0; n < 2; n++)
+        {
+            SetA(boltImage, 1f);
+            flashImage.color = new Color(0.9f, 0.92f, 1f, n == 0 ? 0.45f : 0.3f);
+            background.color = new Color(0.75f, 0.75f, 0.78f, 1f);
+            yield return Wait(0.06f, true);
+            SetA(boltImage, 0.2f);
+            flashImage.color = new Color(1f, 1f, 1f, 0f);
+            background.color = new Color(0.42f, 0.42f, 0.44f, 1f);
+            yield return Wait(0.08f, true);
+        }
+        float e = 0f;
+        while (e < 0.3f)
+        {
+            e += Step(true);
+            SetA(boltImage, 0.6f * (1f - e / 0.3f));
+            yield return null;
+        }
+        SetA(boltImage, 0f);
+    }
+
+    private static void MakeVfxTextures()
+    {
+        if (smokeTex != null) return;
+        smokeTex = Procedural(128, 64, (x, y) =>
+        {
+            float r = Mathf.Sqrt(x * x + y * y);
+            float n = Mathf.PerlinNoise(x * 2.5f + 3f, y * 2.5f + 7f) * 0.6f + Mathf.PerlinNoise(x * 6f, y * 6f) * 0.4f;
+            return Mathf.Clamp01((1f - r) * 1.6f) * n;
+        });
+        crackTex = DrawCrack(512, 13);
+        boltTex = DrawBolt(128, 512, 21);
+    }
+
+    // ve vet nut kinh: cac duong gay khuc toa ra tu tam + 1 vong nut
+    private static Sprite DrawCrack(int size, int seed)
+    {
+        var rnd = new System.Random(seed);
+        var px = new Color32[size * size];
+        float cx = size * 0.5f, cy = size * 0.5f;
+        System.Action<float, float, float, float, float, byte> Line = null;
+        Line = (x0, y0, x1, y1, w, a) =>
+        {
+            int steps = (int)(Mathf.Max(Mathf.Abs(x1 - x0), Mathf.Abs(y1 - y0)) * 1.5f) + 1;
+            for (int s = 0; s <= steps; s++)
+            {
+                float t = s / (float)steps; float x = Mathf.Lerp(x0, x1, t), y = Mathf.Lerp(y0, y1, t);
+                for (int ox = -(int)w; ox <= (int)w; ox++) for (int oy = -(int)w; oy <= (int)w; oy++)
+                {
+                    int ix = (int)x + ox, iy = (int)y + oy;
+                    if (ix < 0 || iy < 0 || ix >= size || iy >= size) continue;
+                    float dist = Mathf.Sqrt(ox * ox + oy * oy);
+                    if (dist > w) continue;
+                    byte val = (byte)(a * (1f - dist / (w + 0.5f) * 0.6f));
+                    int id = iy * size + ix;
+                    if (px[id].a < val) px[id] = new Color32(255, 255, 255, val);
+                }
+            }
+        };
+        int arms = 10;
+        for (int i = 0; i < arms; i++)
+        {
+            float ang = i / (float)arms * Mathf.PI * 2f + (float)rnd.NextDouble() * 0.4f;
+            float x = cx, y = cy; float len = size * (0.28f + 0.2f * (float)rnd.NextDouble());
+            float seg = len / 6f;
+            for (int k = 0; k < 6; k++)
+            {
+                ang += ((float)rnd.NextDouble() - 0.5f) * 0.7f;
+                float nx = x + Mathf.Cos(ang) * seg, ny = y + Mathf.Sin(ang) * seg;
+                float w = Mathf.Lerp(2.2f, 0.6f, k / 6f);
+                Line(x, y, nx, ny, w, 235);
+                if (rnd.NextDouble() < 0.35)
+                {
+                    float ba = ang + ((float)rnd.NextDouble() < 0.5 ? 0.8f : -0.8f);
+                    Line(nx, ny, nx + Mathf.Cos(ba) * seg * 0.8f, ny + Mathf.Sin(ba) * seg * 0.8f, 0.7f, 180);
+                }
+                x = nx; y = ny;
+            }
+        }
+        // vong nut quanh tam
+        float rr = size * 0.09f; float prevX = cx + rr, prevY = cy;
+        for (int k = 1; k <= 12; k++)
+        {
+            float a = k / 12f * Mathf.PI * 2f; float r2 = rr * (0.8f + 0.4f * (float)rnd.NextDouble());
+            float nx = cx + Mathf.Cos(a) * r2, ny = cy + Mathf.Sin(a) * r2;
+            Line(prevX, prevY, nx, ny, 1.2f, 210); prevX = nx; prevY = ny;
+        }
+        var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        tex.SetPixels32(px); tex.Apply();
+        return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+    }
+
+    // ve tia set: duong gay khuc tu tren xuong, loi trang + quang sang
+    private static Sprite DrawBolt(int w, int h, int seed)
+    {
+        var rnd = new System.Random(seed);
+        var alpha = new float[w * h];
+        var pts = new List<Vector2>();
+        float x = w * 0.5f;
+        for (int y = h - 1; y >= 0; y -= 24) { pts.Add(new Vector2(x, y)); x = Mathf.Clamp(x + ((float)rnd.NextDouble() - 0.5f) * 46f, 16f, w - 16f); }
+        pts.Add(new Vector2(x, 0));
+        for (int j = 0; j < h; j++)
+            for (int i = 0; i < w; i++)
+            {
+                float best = 999f;
+                for (int k = 0; k < pts.Count - 1; k++)
+                {
+                    Vector2 a = pts[k], b = pts[k + 1], p = new Vector2(i, j);
+                    Vector2 ab = b - a; float tt = Mathf.Clamp01(Vector2.Dot(p - a, ab) / ab.sqrMagnitude);
+                    float dd = Vector2.Distance(p, a + ab * tt); if (dd < best) best = dd;
+                }
+                float core = best < 2.5f ? 1f : 0f;
+                float glow = Mathf.Exp(-best * best / 60f) * 0.55f;
+                alpha[j * w + i] = Mathf.Clamp01(core + glow);
+            }
+        var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
+        var px = new Color32[w * h];
+        for (int i = 0; i < px.Length; i++) px[i] = new Color32(255, 255, 255, (byte)(alpha[i] * 255f));
+        tex.SetPixels32(px); tex.Apply();
+        return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 1f), 100f);
+    }
+
+    // ================== CHU RANK NOI BAT ==================
+    private void BuildRankBadge()
+    {
+        if (discTex == null)
+            discTex = Procedural(128, 128, (x, y) => 1f - SStep(0.9f, 1f, Mathf.Sqrt(x * x + y * y)));
+        var pos = rankText.rectTransform.anchoredPosition;
+        int idx = rankText.transform.GetSiblingIndex();
+
+        // vong mau ngoai (xoay) + vong trong
+        rankRing2 = CreateImage("RankRing2", rankPanel.transform, ringTex);
+        SetRect(rankRing2.rectTransform, new Vector2(300f, 300f), pos);
+        rankRing2.raycastTarget = false;
+        rankRing = CreateImage("RankRing", rankPanel.transform, ringTex);
+        SetRect(rankRing.rectTransform, new Vector2(288f, 288f), pos);
+        rankRing.raycastTarget = false;
+        // dia toi o giua de chu mau noi len tren nen hong
+        rankDisc = CreateImage("RankDisc", rankPanel.transform, discTex);
+        SetRect(rankDisc.rectTransform, new Vector2(252f, 252f), pos);
+        rankDisc.color = new Color(0.07f, 0.03f, 0.1f, 0f);
+        rankDisc.raycastTarget = false;
+        rankRing2.transform.SetSiblingIndex(idx);
+        rankRing.transform.SetSiblingIndex(idx + 1);
+        rankDisc.transform.SetSiblingIndex(idx + 2);
+        rankText.transform.SetAsLastSibling();
+        newBestText.transform.SetAsLastSibling();
+
+        // glow + bong do: dung underlay rieng cho chu rank (khong anh huong chu khac)
+        rankMat = new Material(rankText.fontSharedMaterial);
+        rankMat.EnableKeyword("UNDERLAY_ON");
+        rankMat.SetFloat("_UnderlayOffsetX", 0.6f);
+        rankMat.SetFloat("_UnderlayOffsetY", -0.6f);
+        rankMat.SetFloat("_UnderlayDilate", 0.6f);
+        rankMat.SetFloat("_UnderlaySoftness", 0.5f);
+        rankText.fontSharedMaterial = rankMat;
+        rankText.outlineWidth = 0.28f;
+        rankText.outlineColor = new Color32(15, 0, 15, 255);
+    }
+
+    private void UpdateRankBadge(float t)
+    {
+        if (rankRing == null) return;
+        Color c = rankText.color;
+        float a = rankText.alpha;
+        float pulse = 0.5f + 0.5f * Mathf.Sin(t * 4f);
+        rankRing.color = new Color(c.r, c.g, c.b, rankRing.color.a);
+        rankRing2.color = new Color(c.r, c.g, c.b, rankRing2.color.a);
+        rankRing.rectTransform.localScale = Vector3.one * (1f + 0.03f * pulse);
+        rankRing2.rectTransform.localScale = Vector3.one * (1f + 0.06f * Mathf.Repeat(t * 0.8f, 1f));
+        if (a > 0.99f) SetA(rankRing2, 0.55f * (1f - Mathf.Repeat(t * 0.8f, 1f)));
+        rankRing2.rectTransform.localEulerAngles = new Vector3(0f, 0f, -t * 30f);
+        // glow mau rank sau chu, nhap nho
+        if (rankMat != null)
+            rankMat.SetColor("_UnderlayColor", new Color(c.r * 0.6f, c.g * 0.6f, c.b * 0.6f, (0.55f + 0.35f * pulse) * a));
+    }
+
+    // ================== MAN THUA ==================
+    // Doi tong mau: thang = sang/hong, thua = toi, lanh, xam
+    private void ApplyMood(bool cleared)
+    {
+        // THUA = den trang: nen, nhan vat, cac khung mat mau; chi logo FAILED va chu F con mau do
+        if (characterSprite == null) characterSprite = character.sprite;
+        bool hasFailArt = characterFailSprite != null;
+        character.sprite = !cleared && hasFailArt ? characterFailSprite : characterSprite;
+        Material gray = cleared ? null : grayMaterial;
+        foreach (var img in new[] { background, character, songPanel, statsPanel, scoreBar, rankPanel, coverArt })
+            if (img != null) img.material = gray;
+
+        Color panel = cleared ? Color.white : FailTint;
+        background.color = cleared ? bgBaseColor : new Color(0.42f, 0.42f, 0.44f, background.color.a);
+        character.color = cleared ? Color.white : (hasFailArt ? new Color(0.85f, 0.85f, 0.85f, 1f) : new Color(0.7f, 0.7f, 0.72f, 1f));
+        character.rectTransform.localEulerAngles = Vector3.zero;
+        songPanel.color = panel;
+        statsPanel.color = panel;
+        scoreBar.color = panel;
+        rankPanel.color = cleared ? Color.white : new Color(0.45f, 0.45f, 0.48f, 1f);
+        if (coverArt != null) coverArt.color = cleared ? Color.white : new Color(0.8f, 0.8f, 0.8f, 1f);
+        if (!cleared) rankText.color = Red;
+        // vien toi: thua = den
+        vignette.color = cleared ? new Color(0.6f, 0f, 0.08f, 0f) : new Color(0f, 0f, 0f, 0f);
+        rankText.rectTransform.localEulerAngles = Vector3.zero;
+        if (failBanner != null) SetA(failBanner, 0f);
+        foreach (var r in rain) if (r != null) Destroy(r.gameObject);
+        rain.Clear();
+    }
+
+    // Nhan vat gục xuong sau khi truot vao
+    private IEnumerator Slump()
+    {
+        yield return Wait(0.5f, true);
+        var c = character.rectTransform;
+        var start = c.anchoredPosition;
+        float e = 0f;
+        while (e < 0.6f)
+        {
+            e += Step(true);
+            float k = EaseOut(e / 0.6f);
+            c.anchoredPosition = basePos[c] + new Vector2(0f, -40f * k);
+            c.localEulerAngles = new Vector3(0f, 0f, -3f * k);
+            yield return null;
+        }
+    }
+
+    // Dai bang cheo mau do "GAME OVER" chay ngang phia sau
+    private IEnumerator ShowFailBanner()
+    {
+        if (failBanner == null) yield break;
+        yield return FadeImage(failBanner, 0.85f, 0.35f);
+    }
+
+    private void StartRain(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Image drop = CreateImage("Rain", fxLayer, null);
+            drop.raycastTarget = false;
+            var rt = drop.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = new Vector2(UnityEngine.Random.Range(2f, 4f), UnityEngine.Random.Range(40f, 90f));
+            rt.localEulerAngles = new Vector3(0f, 0f, 12f);
+            rt.anchoredPosition = new Vector2(UnityEngine.Random.Range(-1100f, 1000f), UnityEngine.Random.Range(-560f, 620f));
+            drop.color = new Color(0.85f, 0.85f, 0.88f, UnityEngine.Random.Range(0.12f, 0.32f));
+            rain.Add(rt);
+        }
+    }
+
+    private void UpdateRain()
+    {
+        if (rain.Count == 0) return;
+        float d = Mathf.Min(Time.unscaledDeltaTime, 1f / 30f);
+        for (int i = 0; i < rain.Count; i++)
+        {
+            var rt = rain[i];
+            float speed = 1300f + (i % 5) * 120f;
+            rt.anchoredPosition += new Vector2(-0.21f, -1f) * speed * d;
+            if (rt.anchoredPosition.y < -520f)
+            {
+                // giot mua cham dat -> ban tia nuoc nho
+                if (i % 2 == 0)
+                    for (int k = 0; k < 2; k++)
+                        Emit(fxLayer, glowTex, new Vector2(rt.anchoredPosition.x, -530f), new Vector2(UnityEngine.Random.Range(-90f, 90f), UnityEngine.Random.Range(120f, 240f)),
+                            new Color(0.85f, 0.85f, 0.9f, 0.6f), UnityEngine.Random.Range(5f, 9f), 0.35f, 900f, 0f);
+                rt.anchoredPosition = new Vector2(UnityEngine.Random.Range(-900f, 1150f), UnityEngine.Random.Range(580f, 700f));
+            }
+        }
+    }
+
+    private static float BounceOut(float x)
+    {
+        x = Mathf.Clamp01(x);
+        const float n1 = 7.5625f, d1 = 2.75f;
+        if (x < 1f / d1) return n1 * x * x;
+        if (x < 2f / d1) { x -= 1.5f / d1; return n1 * x * x + 0.75f; }
+        if (x < 2.5f / d1) { x -= 2.25f / d1; return n1 * x * x + 0.9375f; }
+        x -= 2.625f / d1; return n1 * x * x + 0.984375f;
+    }
+
+    private void BuildFailExtras()
+    {
+        // dai bang cheo do sam phia sau noi dung
+        failBanner = CreateImage("FailBanner", content, bandTex);
+        SetRect(failBanner.rectTransform, new Vector2(2600f, 300f), new Vector2(0f, -40f));
+        failBanner.rectTransform.localEulerAngles = new Vector3(0f, 0f, -12f);
+        failBanner.color = new Color(0f, 0f, 0f, 0f);
+        failBanner.raycastTarget = false;
+        failBanner.transform.SetSiblingIndex(0);
+    }
+
     // ================== HIEU UNG THEM ==================
     private void BuildEffects()
     {
         MakeTextures();
+        BuildRankBadge();
+        // vong loe sau chu rank: dung hinh tron mo thay vi o vuong
+        rankFlash.GetComponent<Image>().sprite = glowTex;
         // tia sang xoay phia sau nhan vat
         raysBehindCharacter = CreateImage("RaysCharacter", content, rayTex);
         SetRect(raysBehindCharacter.rectTransform, new Vector2(1500f, 1500f), character.rectTransform.anchoredPosition + new Vector2(0f, 120f));
@@ -598,9 +1224,11 @@ public class GameplayResultScreen : MonoBehaviour
         vignette.transform.SetSiblingIndex(content.GetSiblingIndex() + 1);
         // lop hat sang / song xung kich / vet ngang (tren noi dung)
         fxLayer = CreateNode("FX", transform);
+        BuildVfx();
         Stretch(fxLayer);
         // vet bong luot qua logo, thanh diem, cac nut
         BuildAmbient();
+        BuildFailExtras();
         shines.Add(AddShine(resultLogo));
         shines.Add(AddShine(scoreBar));
         foreach (var b in buttons) shines.Add(AddShine(b.GetComponent<Image>()));
@@ -633,6 +1261,7 @@ public class GameplayResultScreen : MonoBehaviour
         resultLogo.color = Color.white;
         idleBlend = 0f;
         ApplyAmbientAlpha(0f);
+        ClearVfx();
     }
 
     // Lop phia sau noi dung: den san khau, hat sang bay, cot equalizer
@@ -719,7 +1348,7 @@ public class GameplayResultScreen : MonoBehaviour
         b.baseA = UnityEngine.Random.Range(0.3f, 0.7f) * (size < 30f ? 1.3f : 0.9f);
         b.rt.anchoredPosition = new Vector2(UnityEngine.Random.Range(-960f, 960f), anywhere ? UnityEngine.Random.Range(-560f, 560f) : -580f);
         Color[] clear = { new Color(1f, 0.35f, 0.8f), new Color(0.35f, 0.9f, 1f), new Color(0.75f, 0.5f, 1f), new Color(1f, 0.85f, 0.3f) };
-        Color[] fail = { new Color(1f, 0.25f, 0.2f), new Color(1f, 0.5f, 0.15f), new Color(0.8f, 0.1f, 0.3f) };
+        Color[] fail = { new Color(0.8f, 0.8f, 0.82f), new Color(0.6f, 0.6f, 0.62f), new Color(1f, 1f, 1f) };
         var pool = lastCleared ? clear : fail;
         var c = pool[UnityEngine.Random.Range(0, pool.Length)];
         b.img.color = new Color(c.r, c.g, c.b, 0f);
@@ -747,7 +1376,8 @@ public class GameplayResultScreen : MonoBehaviour
         {
             float dir = i == 0 ? 1f : -1f;
             spotlights[i].rectTransform.localEulerAngles = new Vector3(0f, 0f, dir * (18f + 16f * Mathf.Sin(t * 0.7f + i * 1.7f)));
-            SetA(spotlights[i], k * (lastCleared ? 0.22f : 0.12f) * (0.75f + 0.25f * beat));
+            var sc = lastCleared ? (i == 0 ? new Color(1f, 0.3f, 0.8f) : new Color(0.3f, 0.85f, 1f)) : new Color(0.85f, 0.85f, 0.9f);
+            spotlights[i].color = new Color(sc.r, sc.g, sc.b, k * (lastCleared ? 0.22f : 0.1f) * (lastCleared ? 0.75f + 0.25f * beat : 0.6f + 0.4f * Mathf.PerlinNoise(t * 3f, i)));
         }
 
         // hat sang troi len
@@ -770,12 +1400,15 @@ public class GameplayResultScreen : MonoBehaviour
             var sz = eqBars[i].sizeDelta;
             sz.y = Mathf.Lerp(sz.y, target, 1f - Mathf.Exp(-12f * d));
             eqBars[i].sizeDelta = sz;
-            SetA(eqBars[i].GetComponent<Image>(), k * 0.32f);
+            var eqImg = eqBars[i].GetComponent<Image>();
+            if (!lastCleared) eqImg.color = new Color(0.7f, 0.7f, 0.72f, eqImg.color.a);
+            else eqImg.color = Color.Lerp(new Color(1f, 0.25f, 0.75f), new Color(0.25f, 0.85f, 1f), i / (float)(eqBars.Count - 1));
+            SetA(eqImg, k * (lastCleared ? 0.32f : 0.2f));
         }
 
         // quang sang bang thong ke doi mau
-        statsGlow.color = Color.Lerp(new Color(1f, 0.3f, 0.8f), new Color(0.3f, 0.85f, 1f), 0.5f + 0.5f * Mathf.Sin(t * 1.2f));
-        SetA(statsGlow, k * (0.5f + 0.25f * beat));
+        statsGlow.color = lastCleared ? Color.Lerp(new Color(1f, 0.3f, 0.8f), new Color(0.3f, 0.85f, 1f), 0.5f + 0.5f * Mathf.Sin(t * 1.2f)) : new Color(0.7f, 0.05f, 0.15f);
+        SetA(statsGlow, lastCleared ? k * (0.5f + 0.25f * beat) : 0f);
 
         // ngoi sao bay vong quanh RANK
         var center = rankText.rectTransform.anchoredPosition;
@@ -789,15 +1422,15 @@ public class GameplayResultScreen : MonoBehaviour
             // phia sau (nua tren cua vong) thi mo hon
             float front = Mathf.Sin(a) < 0f ? 1f : 0.45f;
             orbiters[i].color = lastCleared ? Color.Lerp(Yellow, Color.white, 0.4f) : new Color(1f, 0.45f, 0.5f);
-            SetA(orbiters[i], k * front);
+            SetA(orbiters[i], lastCleared ? k * front : 0f);
         }
 
         // tia loe chop tren so diem
         if (t >= nextGlint) { nextGlint = t + 1.9f; StartCoroutine(Glint()); }
 
         // man hinh nhun nhe theo nhip + nhan vat "hype" nhay len moi 4 nhip
-        content.localScale = Vector3.one * (1f + 0.006f * beat * k);
-        if (t >= nextHype)
+        content.localScale = Vector3.one * (1f + (lastCleared ? 0.006f * beat * k : 0f));
+        if (lastCleared && t >= nextHype)
         {
             nextHype = t + 4f / 1.9f;
             StartCoroutine(Hype());
@@ -839,6 +1472,24 @@ public class GameplayResultScreen : MonoBehaviour
     private void IdleEffects(float t, float beat)
     {
         AmbientEffects(t, beat);
+        if (lastCleared)
+        {
+            if (t >= nextFirework)
+            {
+                nextFirework = t + UnityEngine.Random.Range(0.7f, 1.5f);
+                LaunchFirework(new Vector2(UnityEngine.Random.Range(-900f, 900f), -560f), 0f);
+            }
+            if (t >= nextStarRain)
+            {
+                nextStarRain = t + 4f;
+                StarShower(FxPos(rankText.rectTransform), 14);
+            }
+        }
+        else if (t >= nextLightning)
+        {
+            nextLightning = t + UnityEngine.Random.Range(4f, 7f);
+            StartCoroutine(Lightning());
+        }
         // nen phong to/thu nho rat cham
         background.rectTransform.localScale = Vector3.one * (1.03f + 0.03f * Mathf.Sin(t * 0.25f));
 
@@ -846,7 +1497,7 @@ public class GameplayResultScreen : MonoBehaviour
         if (rankText.text == "S") rankText.color = Color.Lerp(Yellow, Color.HSVToRGB(Mathf.Repeat(t * 0.3f, 1f), 0.45f, 1f), 0.3f);
 
         // lap lanh ngau nhien quanh rank va logo
-        if (t >= nextTwinkle)
+        if (lastCleared && t >= nextTwinkle)
         {
             nextTwinkle = t + (lastCleared ? 0.09f : 0.25f);
             var around = UnityEngine.Random.value < 0.6f ? rankText.rectTransform : resultLogo.rectTransform;
@@ -864,7 +1515,7 @@ public class GameplayResultScreen : MonoBehaviour
         // thua: vien do nhap nho + logo bi "glitch" giat ngang
         if (!lastCleared)
         {
-            vignette.color = new Color(0.6f, 0f, 0.08f, 0.32f + 0.1f * Mathf.Sin(t * 3f));
+            vignette.color = new Color(0f, 0f, 0f, 0.62f + 0.08f * Mathf.Sin(t * 1.5f));
             var lrt = resultLogo.rectTransform;
             if (Mathf.Repeat(t, 1.7f) < 0.12f)
             {
@@ -912,6 +1563,7 @@ public class GameplayResultScreen : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
             Image img = CreateImage("Streak", fxLayer, bandTex);
+            transients.Add(img.gameObject);
             img.raycastTarget = false;
             var rt = img.rectTransform;
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
@@ -938,6 +1590,7 @@ public class GameplayResultScreen : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Image g = CreateImage("Ghost", content, source.sprite);
+            transients.Add(g.gameObject);
             g.raycastTarget = false;
             g.rectTransform.anchorMin = g.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
             g.rectTransform.sizeDelta = source.rectTransform.sizeDelta;
@@ -965,6 +1618,7 @@ public class GameplayResultScreen : MonoBehaviour
     private IEnumerator RowFlash(float y)
     {
         Image bar = CreateImage("RowFlash", statsPanel.transform, bandTex);
+        transients.Add(bar.gameObject);
         bar.raycastTarget = false;
         var rt = bar.rectTransform;
         SetRect(rt, new Vector2(statsPanel.rectTransform.rect.width * 0.5f, 50f), new Vector2(0f, y));
@@ -999,6 +1653,7 @@ public class GameplayResultScreen : MonoBehaviour
     private IEnumerator Shockwave(Vector2 pos, Color color, float maxScale)
     {
         Image ring = CreateImage("Shockwave", fxLayer, ringTex);
+        transients.Add(ring.gameObject);
         ring.raycastTarget = false;
         var rt = ring.rectTransform;
         SetRect(rt, new Vector2(420f, 420f), pos);
@@ -1219,6 +1874,83 @@ public class GameplayResultScreen : MonoBehaviour
 #endif
     }
 
+    // ================== AM THANH ==================
+    private void LoadSfx()
+    {
+        AudioClip L(string n) { return Resources.Load<AudioClip>("Result/SFX/" + n); }
+        sWhoosh = L("res_whoosh"); sSlamClear = L("res_slam_clear"); sSlamFail = L("res_slam_fail");
+        sTick = L("res_tick"); sRankStamp = L("res_rank_stamp"); sWinJingle = L("res_win_jingle");
+        sFailJingle = L("res_fail_jingle"); sFwLaunch = L("res_firework_launch"); sFwBoom = L("res_firework_boom");
+        sGlass = L("res_glass_crack"); sThunder = L("res_thunder"); sRain = L("res_rain_loop");
+        sSparkle = L("res_sparkle"); sPop = L("res_pop");
+        sfxMain = NewSource("SfxMain", false);
+        sfxTick = NewSource("SfxTick", false);
+        sfxRain = NewSource("SfxRain", true);
+    }
+
+    private AudioSource NewSource(string name, bool loop)
+    {
+        var go = new GameObject(name);
+        go.transform.SetParent(transform, false);
+        var src = go.AddComponent<AudioSource>();
+        src.playOnAwake = false;
+        src.loop = loop;
+        src.spatialBlend = 0f;
+        src.ignoreListenerPause = true;
+        return src;
+    }
+
+    private static float SfxVolume { get { return SFXManager.Instance != null ? SFXManager.Instance.Volume : 1f; } }
+
+    // phat 1 hieu ung am thanh (co the tre + doi cao do)
+    private void Sfx(AudioClip clip, float volume, float delay = 0f, float pitch = 1f)
+    {
+        if (clip == null || sfxMain == null) return;
+        if (delay > 0f || !Mathf.Approximately(pitch, 1f)) { StartCoroutine(SfxRoutine(clip, volume, delay, pitch)); return; }
+        sfxMain.PlayOneShot(clip, volume * SfxVolume);
+    }
+
+    private IEnumerator SfxRoutine(AudioClip clip, float volume, float delay, float pitch)
+    {
+        if (delay > 0f) yield return new WaitForSecondsRealtime(delay);
+        // nguon rieng de doi pitch khong anh huong am khac
+        var src = NewSource("Sfx_" + clip.name, false);
+        src.pitch = pitch;
+        src.PlayOneShot(clip, volume * SfxVolume);
+        Destroy(src.gameObject, clip.length / Mathf.Max(0.1f, pitch) + 0.2f);
+    }
+
+    // tieng tick khi dem so: cao dan len
+    private void Tick(float pitch)
+    {
+        if (sTick == null || sfxTick == null) return;
+        sfxTick.pitch = Mathf.Clamp(pitch, 0.5f, 3f);
+        sfxTick.PlayOneShot(sTick, 0.2f * SfxVolume);
+    }
+
+    private void StartRainSound()
+    {
+        if (sRain == null || sfxRain == null) return;
+        sfxRain.clip = sRain;
+        sfxRain.volume = 0f;
+        sfxRain.Play();
+        StartCoroutine(FadeSource(sfxRain, 0.12f * SfxVolume, 1.2f));
+    }
+
+    private void StopRainSound()
+    {
+        if (sfxRain != null) sfxRain.Stop();
+    }
+
+    private IEnumerator FadeSource(AudioSource src, float target, float time)
+    {
+        float from = src.volume, e = 0f;
+        while (e < time) { e += Time.unscaledDeltaTime; src.volume = Mathf.Lerp(from, target, e / time); yield return null; }
+        src.volume = target;
+    }
+
+    private void OnDisable() { StopRainSound(); }
+
     private static void Play(AudioClip clip)
     {
         if (clip != null && SFXManager.Instance != null) SFXManager.Instance.PlaySFX(clip);
@@ -1238,10 +1970,12 @@ public class GameplayResultScreen : MonoBehaviour
 
     private static Color RankColor(string rank)
     {
-        if (rank == "S" || rank == "A") return Yellow;
+        if (rank == "S") return Yellow;
+        if (rank == "A") return Hex("FF9F1C");
         if (rank == "B") return Cyan;
-        if (rank == "F") return Color.white;
-        return Color.white;
+        if (rank == "C") return Hex("7CFF4F");
+        if (rank == "D") return Hex("B05CFF");
+        return Red;
     }
 
     private static Color Hex(string value)
