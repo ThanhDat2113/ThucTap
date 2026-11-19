@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: d8a25d269d2f5f846ae258e1528f27ce
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1913687338496761175
+    second: brax_chibi_dance_keys_08_0
+  - first:
+      213: 1871040458737754623
+    second: brax_chibi_dance_keys_08_1
+  - first:
+      213: 4787749744824807788
+    second: brax_chibi_dance_keys_08_2
+  - first:
+      213: -9131374987298467708
+    second: brax_chibi_dance_keys_08_3
+  - first:
+      213: 6064673179177728459
+    second: brax_chibi_dance_keys_08_4
+  - first:
+      213: 1887778679360942394
+    second: brax_chibi_dance_keys_08_5
+  - first:
+      213: -7184031779885215093
+    second: brax_chibi_dance_keys_08_6
+  - first:
+      213: -7704663211406838997
+    second: brax_chibi_dance_keys_08_7
+  - first:
+      213: -2347284833551867812
+    second: brax_chibi_dance_keys_08_8
+  - first:
+      213: -2182796325172388844
+    second: brax_chibi_dance_keys_08_9
+  - first:
+      213: -5972921346325820589
+    second: brax_chibi_dance_keys_08_10
+  - first:
+      213: 4213416954062197216
+    second: brax_chibi_dance_keys_08_11
+  - first:
+      213: -7144469652639654744
+    second: brax_chibi_dance_keys_08_12
+  - first:
+      213: -6463816655777395880
+    second: brax_chibi_dance_keys_08_13
+  - first:
+      213: -3352139097762890404
+    second: brax_chibi_dance_keys_08_14
+  - first:
+      213: 6272392642110765268
+    second: brax_chibi_dance_keys_08_15
+  - first:
+      213: 7120765917436551802
+    second: brax_chibi_dance_keys_08_16
+  - first:
+      213: -4691570647936113670
+    second: brax_chibi_dance_keys_08_17
+  - first:
+      213: -1163224420090913889
+    second: brax_chibi_dance_keys_08_18
+  - first:
+      213: -7740964405750047248
+    second: brax_chibi_dance_keys_08_19
+  - first:
+      213: 6719552954402713933
+    second: brax_chibi_dance_keys_08_20
+  - first:
+      213: -1968632435915254259
+    second: brax_chibi_dance_keys_08_21
+  - first:
+      213: 6839173517760298300
+    second: brax_chibi_dance_keys_08_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 442
+        width: 445
+        height: 445
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a2ecb931873175e0800000000000000
+      internalID: -1913687338496761175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_1
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 440
+        width: 440
+        height: 447
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff1a27f426547f910800000000000000
+      internalID: 1871040458737754623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_2
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 763
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c61ffbdb601817240800000000000000
+      internalID: 4787749744824807788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_3
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 759
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 480103344d6d64180800000000000000
+      internalID: -9131374987298467708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_4
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 443
+        width: 386
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc93abbdf1c0a2450800000000000000
+      internalID: 6064673179177728459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_5
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 444
+        width: 405
+        height: 438
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a317dddf4bcb23a10800000000000000
+      internalID: 1887778679360942394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_6
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 709
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8213d8a8213d4c90800000000000000
+      internalID: -7184031779885215093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_7
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 680
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b23331a51a9831590800000000000000
+      internalID: -7704663211406838997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_8
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 682
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c50aa7d51e4cc6fd0800000000000000
+      internalID: -2347284833551867812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_9
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 658
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c5215ae4625b1e0800000000000000
+      internalID: -2182796325172388844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_10
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 628
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35bc6e07eabeb1da0800000000000000
+      internalID: -5972921346325820589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_11
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 523
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e15c756560197a30800000000000000
+      internalID: 4213416954062197216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_12
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 450
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8acdad534beb9dc90800000000000000
+      internalID: -7144469652639654744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_13
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 410
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85b82239ff8eb46a0800000000000000
+      internalID: -6463816655777395880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_14
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 410
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5df420404fca71d0800000000000000
+      internalID: -3352139097762890404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_15
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 13
+        width: 414
+        height: 424
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d839cc10e30c0750800000000000000
+      internalID: 6272392642110765268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_16
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 14
+        width: 346
+        height: 424
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72a38ddfda02d260800000000000000
+      internalID: 7120765917436551802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_17
+      rect:
+        serializedVersion: 2
+        x: 1310
+        y: 0
+        width: 409
+        height: 439
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af36e1b4a5134eeb0800000000000000
+      internalID: -4691570647936113670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 430
+        height: 408
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9bdb6e8d856bdfe0800000000000000
+      internalID: -1163224420090913889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_19
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 372
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fd5358e2e1929490800000000000000
+      internalID: -7740964405750047248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_20
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 330
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41b9907fc5a04d50800000000000000
+      internalID: 6719552954402713933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_21
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 276
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0695f3da330ea4e0800000000000000
+      internalID: -1968632435915254259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_dance_keys_08_22
+      rect:
+        serializedVersion: 2
+        x: 1322
+        y: 217
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3d7c533410a9ee50800000000000000
+      internalID: 6839173517760298300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_chibi_dance_keys_08_0: -1913687338496761175
+      brax_chibi_dance_keys_08_1: 1871040458737754623
+      brax_chibi_dance_keys_08_10: -5972921346325820589
+      brax_chibi_dance_keys_08_11: 4213416954062197216
+      brax_chibi_dance_keys_08_12: -7144469652639654744
+      brax_chibi_dance_keys_08_13: -6463816655777395880
+      brax_chibi_dance_keys_08_14: -3352139097762890404
+      brax_chibi_dance_keys_08_15: 6272392642110765268
+      brax_chibi_dance_keys_08_16: 7120765917436551802
+      brax_chibi_dance_keys_08_17: -4691570647936113670
+      brax_chibi_dance_keys_08_18: -1163224420090913889
+      brax_chibi_dance_keys_08_19: -7740964405750047248
+      brax_chibi_dance_keys_08_2: 4787749744824807788
+      brax_chibi_dance_keys_08_20: 6719552954402713933
+      brax_chibi_dance_keys_08_21: -1968632435915254259
+      brax_chibi_dance_keys_08_22: 6839173517760298300
+      brax_chibi_dance_keys_08_3: -9131374987298467708
+      brax_chibi_dance_keys_08_4: 6064673179177728459
+      brax_chibi_dance_keys_08_5: 1887778679360942394
+      brax_chibi_dance_keys_08_6: -7184031779885215093
+      brax_chibi_dance_keys_08_7: -7704663211406838997
+      brax_chibi_dance_keys_08_8: -2347284833551867812
+      brax_chibi_dance_keys_08_9: -2182796325172388844
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

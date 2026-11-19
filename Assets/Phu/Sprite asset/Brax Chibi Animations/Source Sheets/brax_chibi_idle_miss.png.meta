@@ -1,0 +1,1079 @@
+fileFormatVersion: 2
+guid: d9231bbf03591f341ae38b2881e3271e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3202673600178775772
+    second: brax_chibi_idle_miss_0
+  - first:
+      213: 901349891774969610
+    second: brax_chibi_idle_miss_1
+  - first:
+      213: 1553815582953605755
+    second: brax_chibi_idle_miss_2
+  - first:
+      213: -792207211551312424
+    second: brax_chibi_idle_miss_3
+  - first:
+      213: 7068014339183070360
+    second: brax_chibi_idle_miss_4
+  - first:
+      213: -5074568229065940978
+    second: brax_chibi_idle_miss_5
+  - first:
+      213: 1569972781647934375
+    second: brax_chibi_idle_miss_6
+  - first:
+      213: -4249871004801374755
+    second: brax_chibi_idle_miss_7
+  - first:
+      213: -6846403348983797078
+    second: brax_chibi_idle_miss_8
+  - first:
+      213: -9213001095576881167
+    second: brax_chibi_idle_miss_9
+  - first:
+      213: -7129639850762736552
+    second: brax_chibi_idle_miss_10
+  - first:
+      213: 8066337400004674142
+    second: brax_chibi_idle_miss_11
+  - first:
+      213: 5542450018459505559
+    second: brax_chibi_idle_miss_12
+  - first:
+      213: 4827953313777232399
+    second: brax_chibi_idle_miss_13
+  - first:
+      213: 8389641860483980598
+    second: brax_chibi_idle_miss_14
+  - first:
+      213: 6641482253209831086
+    second: brax_chibi_idle_miss_15
+  - first:
+      213: -1575678941209823370
+    second: brax_chibi_idle_miss_16
+  - first:
+      213: 5821179675423641917
+    second: brax_chibi_idle_miss_17
+  - first:
+      213: -5142328410397163675
+    second: brax_chibi_idle_miss_18
+  - first:
+      213: 5450115822591883728
+    second: brax_chibi_idle_miss_19
+  - first:
+      213: 7028227395814618609
+    second: brax_chibi_idle_miss_20
+  - first:
+      213: -7831347988661020269
+    second: brax_chibi_idle_miss_21
+  - first:
+      213: 7780856771700477630
+    second: brax_chibi_idle_miss_22
+  - first:
+      213: 2813902465672995567
+    second: brax_chibi_idle_miss_23
+  - first:
+      213: -7198883972712083083
+    second: brax_chibi_idle_miss_24
+  - first:
+      213: -7351643739440952337
+    second: brax_chibi_idle_miss_25
+  - first:
+      213: -7406932310167461651
+    second: brax_chibi_idle_miss_26
+  - first:
+      213: -3380571176472373906
+    second: brax_chibi_idle_miss_27
+  - first:
+      213: -618022699549433208
+    second: brax_chibi_idle_miss_28
+  - first:
+      213: -2736231881689331448
+    second: brax_chibi_idle_miss_29
+  - first:
+      213: -8945380110056933539
+    second: brax_chibi_idle_miss_30
+  - first:
+      213: 4147078176483648193
+    second: brax_chibi_idle_miss_31
+  - first:
+      213: -5049793266515762794
+    second: brax_chibi_idle_miss_32
+  - first:
+      213: 2702326638782360057
+    second: brax_chibi_idle_miss_33
+  - first:
+      213: -7882680079187319904
+    second: brax_chibi_idle_miss_34
+  - first:
+      213: -2964814327348176008
+    second: brax_chibi_idle_miss_35
+  - first:
+      213: -4766262092698925580
+    second: brax_chibi_idle_miss_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 639
+        width: 416
+        height: 655
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd66d2ebbae227c20800000000000000
+      internalID: 3202673600178775772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_1
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 645
+        width: 406
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a07759573fc328c00800000000000000
+      internalID: 901349891774969610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_2
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 1140
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a8a6c4a03409510800000000000000
+      internalID: 1553815582953605755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_3
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 593
+        width: 383
+        height: 703
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d53bf60db38105f0800000000000000
+      internalID: -792207211551312424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_4
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 1127
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ccf52f791a61260800000000000000
+      internalID: 7068014339183070360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_5
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 1097
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e00aa06f4138399b0800000000000000
+      internalID: -5074568229065940978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_6
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 1063
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a338254de9a9c510800000000000000
+      internalID: 1569972781647934375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_7
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 935
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd5e49186dc6505c0800000000000000
+      internalID: -4249871004801374755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_8
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 905
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaaa6ca8d60bcf0a0800000000000000
+      internalID: -6846403348983797078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_9
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 871
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7fadee058d42080800000000000000
+      internalID: -9213001095576881167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_10
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 683
+        width: 19
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85c61d6845e6e0d90800000000000000
+      internalID: -7129639850762736552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_11
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 657
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e520ab5c02361ff60800000000000000
+      internalID: 8066337400004674142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_12
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 657
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 793d2a73decbaec40800000000000000
+      internalID: 5542450018459505559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_13
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 663
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0aacd395f5500340800000000000000
+      internalID: 4827953313777232399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_14
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 653
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63d15e662defd6470800000000000000
+      internalID: 8389641860483980598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_15
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 661
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea602a4dbe84b2c50800000000000000
+      internalID: 6641482253209831086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_16
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 639
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 677ff1de950122ae0800000000000000
+      internalID: -1575678941209823370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 392
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d319957a21cf8c050800000000000000
+      internalID: 5821179675423641917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_18
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 633
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56fb0e35e87c2a8b0800000000000000
+      internalID: -5142328410397163675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 614
+        width: 33
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d93356f673b2ab40800000000000000
+      internalID: 5450115822591883728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_20
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 0
+        width: 446
+        height: 644
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f5f2305497498160800000000000000
+      internalID: 7028227395814618609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_21
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 625
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 399d36f1f76715390800000000000000
+      internalID: -7831347988661020269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_22
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 625
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe466552082bfb60800000000000000
+      internalID: 7780856771700477630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_23
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 631
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe2e803426dfc0720800000000000000
+      internalID: 2813902465672995567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_24
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 529
+        width: 111
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5715e3b0b2d681c90800000000000000
+      internalID: -7198883972712083083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_25
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 609
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: febc56b38f6b9f990800000000000000
+      internalID: -7351643739440952337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_26
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 605
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de0ea19be4a453990800000000000000
+      internalID: -7406932310167461651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_27
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 603
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6590701d6cc511d0800000000000000
+      internalID: -3380571176472373906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_28
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 603
+        width: 17
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8826a3211a75c67f0800000000000000
+      internalID: -618022699549433208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 593
+        width: 5
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8090fccc993f60ad0800000000000000
+      internalID: -2736231881689331448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_30
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 564
+        width: 62
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d57363f3f20abd380800000000000000
+      internalID: -8945380110056933539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_31
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 567
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c2251d11a16d8930800000000000000
+      internalID: 4147078176483648193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_32
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 599
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6912b2077c78be9b0800000000000000
+      internalID: -5049793266515762794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_33
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 0
+        width: 366
+        height: 597
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f9a2bba2c7908520800000000000000
+      internalID: 2702326638782360057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_34
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 580
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a3edf17b381b9290800000000000000
+      internalID: -7882680079187319904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_35
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 527
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87b5c69d31ddad6d0800000000000000
+      internalID: -2964814327348176008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brax_chibi_idle_miss_36
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 19
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f5454221e5daddb0800000000000000
+      internalID: -4766262092698925580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      brax_chibi_idle_miss_0: 3202673600178775772
+      brax_chibi_idle_miss_1: 901349891774969610
+      brax_chibi_idle_miss_10: -7129639850762736552
+      brax_chibi_idle_miss_11: 8066337400004674142
+      brax_chibi_idle_miss_12: 5542450018459505559
+      brax_chibi_idle_miss_13: 4827953313777232399
+      brax_chibi_idle_miss_14: 8389641860483980598
+      brax_chibi_idle_miss_15: 6641482253209831086
+      brax_chibi_idle_miss_16: -1575678941209823370
+      brax_chibi_idle_miss_17: 5821179675423641917
+      brax_chibi_idle_miss_18: -5142328410397163675
+      brax_chibi_idle_miss_19: 5450115822591883728
+      brax_chibi_idle_miss_2: 1553815582953605755
+      brax_chibi_idle_miss_20: 7028227395814618609
+      brax_chibi_idle_miss_21: -7831347988661020269
+      brax_chibi_idle_miss_22: 7780856771700477630
+      brax_chibi_idle_miss_23: 2813902465672995567
+      brax_chibi_idle_miss_24: -7198883972712083083
+      brax_chibi_idle_miss_25: -7351643739440952337
+      brax_chibi_idle_miss_26: -7406932310167461651
+      brax_chibi_idle_miss_27: -3380571176472373906
+      brax_chibi_idle_miss_28: -618022699549433208
+      brax_chibi_idle_miss_29: -2736231881689331448
+      brax_chibi_idle_miss_3: -792207211551312424
+      brax_chibi_idle_miss_30: -8945380110056933539
+      brax_chibi_idle_miss_31: 4147078176483648193
+      brax_chibi_idle_miss_32: -5049793266515762794
+      brax_chibi_idle_miss_33: 2702326638782360057
+      brax_chibi_idle_miss_34: -7882680079187319904
+      brax_chibi_idle_miss_35: -2964814327348176008
+      brax_chibi_idle_miss_36: -4766262092698925580
+      brax_chibi_idle_miss_4: 7068014339183070360
+      brax_chibi_idle_miss_5: -5074568229065940978
+      brax_chibi_idle_miss_6: 1569972781647934375
+      brax_chibi_idle_miss_7: -4249871004801374755
+      brax_chibi_idle_miss_8: -6846403348983797078
+      brax_chibi_idle_miss_9: -9213001095576881167
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

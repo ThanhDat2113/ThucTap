@@ -1,0 +1,923 @@
+fileFormatVersion: 2
+guid: 1bdd0cd2b3d5b4a4e8467c016dd3179b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3445812847213766873
+    second: velvet_chibi_idle_miss_0
+  - first:
+      213: -8191720808700590378
+    second: velvet_chibi_idle_miss_1
+  - first:
+      213: -8486887023356900524
+    second: velvet_chibi_idle_miss_2
+  - first:
+      213: 4698105110688577782
+    second: velvet_chibi_idle_miss_3
+  - first:
+      213: 4510041100036772383
+    second: velvet_chibi_idle_miss_4
+  - first:
+      213: -5175681906766857397
+    second: velvet_chibi_idle_miss_5
+  - first:
+      213: -3639663859032031139
+    second: velvet_chibi_idle_miss_6
+  - first:
+      213: 2625114098419156632
+    second: velvet_chibi_idle_miss_7
+  - first:
+      213: 6925650391740052001
+    second: velvet_chibi_idle_miss_8
+  - first:
+      213: 6146416231273255828
+    second: velvet_chibi_idle_miss_9
+  - first:
+      213: -7808545634176567171
+    second: velvet_chibi_idle_miss_10
+  - first:
+      213: -3899210529948623973
+    second: velvet_chibi_idle_miss_11
+  - first:
+      213: 4360659856336142965
+    second: velvet_chibi_idle_miss_12
+  - first:
+      213: -7033922535232062592
+    second: velvet_chibi_idle_miss_13
+  - first:
+      213: -1540704428610132154
+    second: velvet_chibi_idle_miss_14
+  - first:
+      213: 7415840702957762946
+    second: velvet_chibi_idle_miss_15
+  - first:
+      213: 3438364397733979270
+    second: velvet_chibi_idle_miss_16
+  - first:
+      213: -4864862130806781318
+    second: velvet_chibi_idle_miss_17
+  - first:
+      213: -7711856880265714596
+    second: velvet_chibi_idle_miss_18
+  - first:
+      213: 7149915523896322115
+    second: velvet_chibi_idle_miss_19
+  - first:
+      213: 8093036667298453393
+    second: velvet_chibi_idle_miss_20
+  - first:
+      213: -8024471916625639527
+    second: velvet_chibi_idle_miss_21
+  - first:
+      213: -8191566877616324178
+    second: velvet_chibi_idle_miss_22
+  - first:
+      213: -4675514443506798444
+    second: velvet_chibi_idle_miss_23
+  - first:
+      213: 3811145695434765979
+    second: velvet_chibi_idle_miss_24
+  - first:
+      213: -7515766793965874610
+    second: velvet_chibi_idle_miss_25
+  - first:
+      213: 2045932967387902601
+    second: velvet_chibi_idle_miss_26
+  - first:
+      213: -5647969404517063615
+    second: velvet_chibi_idle_miss_27
+  - first:
+      213: -5480692117767859447
+    second: velvet_chibi_idle_miss_28
+  - first:
+      213: 7124442459269524753
+    second: velvet_chibi_idle_miss_29
+  - first:
+      213: 1387863706009594045
+    second: velvet_chibi_idle_miss_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 685
+        width: 398
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 727985fd8730e20d0800000000000000
+      internalID: -3445812847213766873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_1
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 1215
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d6c93a7359215e80800000000000000
+      internalID: -8191720808700590378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_2
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 677
+        width: 392
+        height: 623
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45b80fbb735883a80800000000000000
+      internalID: -8486887023356900524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_3
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 677
+        width: 400
+        height: 621
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f83a00e4b5033140800000000000000
+      internalID: 4698105110688577782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_4
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 823
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f129a1a3c72e69e30800000000000000
+      internalID: 4510041100036772383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 725
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4bbebc4ab84c28b0800000000000000
+      internalID: -5175681906766857397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_6
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 734
+        width: 37
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d50819401015d7dc0800000000000000
+      internalID: -3639663859032031139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_7
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 721
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 896c4233d574e6420800000000000000
+      internalID: 2625114098419156632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_8
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 719
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 122f53e665adc1060800000000000000
+      internalID: 6925650391740052001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_9
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 687
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 493dcba4ff47c4550800000000000000
+      internalID: 6146416231273255828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_10
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 703
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d787a7efd1972a390800000000000000
+      internalID: -7808545634176567171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_11
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 705
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9b13f19ea833e9c0800000000000000
+      internalID: -3899210529948623973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1189
+        height: 680
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572c83b190d248c30800000000000000
+      internalID: 4360659856336142965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_13
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 677
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08bb0e5b8bc726e90800000000000000
+      internalID: -7033922535232062592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_14
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 680
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64762d43c715e9ae0800000000000000
+      internalID: -1540704428610132154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_15
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 679
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2893eaa14db5ae660800000000000000
+      internalID: 7415840702957762946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_16
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 655
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 684a847d33687bf20800000000000000
+      internalID: 3438364397733979270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_17
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 663
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7a030ccaa98c7cb0800000000000000
+      internalID: -4864862130806781318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_18
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 655
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c542c1dc60bf9f490800000000000000
+      internalID: -7711856880265714596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_19
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 49
+        width: 102
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34824ef794a993360800000000000000
+      internalID: 7149915523896322115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_20
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 43
+        width: 25
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197198c58fd305070800000000000000
+      internalID: 8093036667298453393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_21
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 51
+        width: 30
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9974e6bae4953a090800000000000000
+      internalID: -8024471916625639527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_22
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 49
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea1c2d95355b15e80800000000000000
+      internalID: -8191566877616324178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_23
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 47
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 490b194b26c3d1fb0800000000000000
+      internalID: -4675514443506798444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_24
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 43
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b96f5a351d8e3e430800000000000000
+      internalID: 3811145695434765979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 6
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e42dcfecbe1a2b790800000000000000
+      internalID: -7515766793965874610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_26
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 23
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 982ba6ba13d946c10800000000000000
+      internalID: 2045932967387902601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_27
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 23
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1446c7530c16e91b0800000000000000
+      internalID: -5647969404517063615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_28
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 34
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903d92d8e8ba0f3b0800000000000000
+      internalID: -5480692117767859447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_29
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 35
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11d68777baa1fd260800000000000000
+      internalID: 7124442459269524753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_idle_miss_30
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 17
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db8eb59ffaea24310800000000000000
+      internalID: 1387863706009594045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      velvet_chibi_idle_miss_0: -3445812847213766873
+      velvet_chibi_idle_miss_1: -8191720808700590378
+      velvet_chibi_idle_miss_10: -7808545634176567171
+      velvet_chibi_idle_miss_11: -3899210529948623973
+      velvet_chibi_idle_miss_12: 4360659856336142965
+      velvet_chibi_idle_miss_13: -7033922535232062592
+      velvet_chibi_idle_miss_14: -1540704428610132154
+      velvet_chibi_idle_miss_15: 7415840702957762946
+      velvet_chibi_idle_miss_16: 3438364397733979270
+      velvet_chibi_idle_miss_17: -4864862130806781318
+      velvet_chibi_idle_miss_18: -7711856880265714596
+      velvet_chibi_idle_miss_19: 7149915523896322115
+      velvet_chibi_idle_miss_2: -8486887023356900524
+      velvet_chibi_idle_miss_20: 8093036667298453393
+      velvet_chibi_idle_miss_21: -8024471916625639527
+      velvet_chibi_idle_miss_22: -8191566877616324178
+      velvet_chibi_idle_miss_23: -4675514443506798444
+      velvet_chibi_idle_miss_24: 3811145695434765979
+      velvet_chibi_idle_miss_25: -7515766793965874610
+      velvet_chibi_idle_miss_26: 2045932967387902601
+      velvet_chibi_idle_miss_27: -5647969404517063615
+      velvet_chibi_idle_miss_28: -5480692117767859447
+      velvet_chibi_idle_miss_29: 7124442459269524753
+      velvet_chibi_idle_miss_3: 4698105110688577782
+      velvet_chibi_idle_miss_30: 1387863706009594045
+      velvet_chibi_idle_miss_4: 4510041100036772383
+      velvet_chibi_idle_miss_5: -5175681906766857397
+      velvet_chibi_idle_miss_6: -3639663859032031139
+      velvet_chibi_idle_miss_7: 2625114098419156632
+      velvet_chibi_idle_miss_8: 6925650391740052001
+      velvet_chibi_idle_miss_9: 6146416231273255828
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

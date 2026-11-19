@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: d2b7fe84c9d488a47b514101f243160e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6631243488680514848
+    second: velvet_chibi_dance_keys_08_0
+  - first:
+      213: 8434788987202630453
+    second: velvet_chibi_dance_keys_08_1
+  - first:
+      213: 438404525145405161
+    second: velvet_chibi_dance_keys_08_2
+  - first:
+      213: 8985333422152289739
+    second: velvet_chibi_dance_keys_08_3
+  - first:
+      213: 6705287455023239414
+    second: velvet_chibi_dance_keys_08_4
+  - first:
+      213: -5912172353901549113
+    second: velvet_chibi_dance_keys_08_5
+  - first:
+      213: 5951975189727324958
+    second: velvet_chibi_dance_keys_08_6
+  - first:
+      213: 5791723758657037191
+    second: velvet_chibi_dance_keys_08_7
+  - first:
+      213: 7734086993067757648
+    second: velvet_chibi_dance_keys_08_8
+  - first:
+      213: 6014894825546432884
+    second: velvet_chibi_dance_keys_08_9
+  - first:
+      213: -8409401453351496162
+    second: velvet_chibi_dance_keys_08_10
+  - first:
+      213: -1920328968774305702
+    second: velvet_chibi_dance_keys_08_11
+  - first:
+      213: 6628662459050299147
+    second: velvet_chibi_dance_keys_08_12
+  - first:
+      213: 6507657590621053489
+    second: velvet_chibi_dance_keys_08_13
+  - first:
+      213: -6113688447035797643
+    second: velvet_chibi_dance_keys_08_14
+  - first:
+      213: -3054569376856210465
+    second: velvet_chibi_dance_keys_08_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 445
+        width: 425
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0259ce1b1d8e60c50800000000000000
+      internalID: 6631243488680514848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_1
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 0
+        width: 435
+        height: 887
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533f699f4e36e0570800000000000000
+      internalID: 8434788987202630453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_2
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 434
+        width: 458
+        height: 437
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e63735c796851600800000000000000
+      internalID: 438404525145405161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_3
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 727
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcd05df142152bc70800000000000000
+      internalID: 8985333422152289739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_4
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 757
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f01b890a67fd0d50800000000000000
+      internalID: 6705287455023239414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_5
+      rect:
+        serializedVersion: 2
+        x: 1322
+        y: 442
+        width: 419
+        height: 445
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c920d2719eb3fda0800000000000000
+      internalID: -5912172353901549113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_6
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 680
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ba2af66e9a99250800000000000000
+      internalID: 5951975189727324958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_7
+      rect:
+        serializedVersion: 2
+        x: 1330
+        y: 620
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78361f79216506050800000000000000
+      internalID: 5791723758657037191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_8
+      rect:
+        serializedVersion: 2
+        x: 1324
+        y: 551
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 050d5cba42ff45b60800000000000000
+      internalID: 7734086993067757648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_9
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 523
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 471c70eb9f2397350800000000000000
+      internalID: 6014894825546432884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_10
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 397
+        height: 445
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16945fdeedcb4b80800000000000000
+      internalID: -8409401453351496162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_11
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 442
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a58b05c2afe9955e0800000000000000
+      internalID: -1920328968774305702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_12
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 0
+        width: 421
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0f09a7e26dbdfb50800000000000000
+      internalID: 6628662459050299147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_13
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 0
+        width: 426
+        height: 421
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132a7d08918df4a50800000000000000
+      internalID: 6507657590621053489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_14
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 129
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57f8507cfb0d72ba0800000000000000
+      internalID: -6113688447035797643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: velvet_chibi_dance_keys_08_15
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 130
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd303b6e55dfb95d0800000000000000
+      internalID: -3054569376856210465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      velvet_chibi_dance_keys_08_0: 6631243488680514848
+      velvet_chibi_dance_keys_08_1: 8434788987202630453
+      velvet_chibi_dance_keys_08_10: -8409401453351496162
+      velvet_chibi_dance_keys_08_11: -1920328968774305702
+      velvet_chibi_dance_keys_08_12: 6628662459050299147
+      velvet_chibi_dance_keys_08_13: 6507657590621053489
+      velvet_chibi_dance_keys_08_14: -6113688447035797643
+      velvet_chibi_dance_keys_08_15: -3054569376856210465
+      velvet_chibi_dance_keys_08_2: 438404525145405161
+      velvet_chibi_dance_keys_08_3: 8985333422152289739
+      velvet_chibi_dance_keys_08_4: 6705287455023239414
+      velvet_chibi_dance_keys_08_5: -5912172353901549113
+      velvet_chibi_dance_keys_08_6: 5951975189727324958
+      velvet_chibi_dance_keys_08_7: 5791723758657037191
+      velvet_chibi_dance_keys_08_8: 7734086993067757648
+      velvet_chibi_dance_keys_08_9: 6014894825546432884
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
