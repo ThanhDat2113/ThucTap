@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 587720167}
   - component: {fileID: 587720166}
   m_Layer: 0
-  m_Name: idle_001
+  m_Name: Boss4 chibi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
