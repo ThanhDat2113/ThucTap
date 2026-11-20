@@ -56,8 +56,22 @@ namespace RhythmGame
         float countdownPopTimer = 999f;
         Vector3 countdownBaseScale = Vector3.one;
 
+        void Awake()
+        {
+            if (messageText != null)
+            {
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
+            }
+        }
+
         void Start()
         {
+            if (messageText != null)
+            {
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
+            }
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
             if (flowSystem != null)

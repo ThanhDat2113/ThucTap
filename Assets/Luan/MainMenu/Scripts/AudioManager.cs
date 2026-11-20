@@ -22,8 +22,16 @@ namespace Luan.MainMenu
                     _instance = FindFirstObjectByType<AudioManager>();
                     if (_instance == null)
                     {
-                        GameObject audioObj = new GameObject("AudioManager");
-                        _instance = audioObj.AddComponent<AudioManager>();
+                        var managers = GameObject.Find("AudioManagers");
+                        if (managers != null)
+                        {
+                            _instance = managers.GetComponent<AudioManager>() ?? managers.AddComponent<AudioManager>();
+                        }
+                        else
+                        {
+                            GameObject audioObj = new GameObject("AudioManager");
+                            _instance = audioObj.AddComponent<AudioManager>();
+                        }
                     }
                 }
                 return _instance;
@@ -65,6 +73,16 @@ namespace Luan.MainMenu
         [Tooltip("Âm thanh trúng thưởng vòng quay (wheel_win.wav hoặc daily_claim.wav)")]
         [SerializeField] private AudioClip wheelWinClip;
 
+        [Header("--- Âm Thanh Gameplay & Shop & Điểm Danh ---")]
+        [Tooltip("Âm thanh mua đồ thành công trong Shop (shop_purchase.wav)")]
+        [SerializeField] private AudioClip shopPurchaseClip;
+
+        [Tooltip("Âm thanh nhận thưởng điểm danh (daily_claim.wav)")]
+        [SerializeField] private AudioClip dailyClaimClip;
+
+        [Tooltip("Âm thanh gõ trúng Note trong Gameplay (Note.mp3)")]
+        [SerializeField] private AudioClip noteHitClip;
+
         [Header("--- Mức Âm Lượng Mặc Định (0.0 đến 1.0) ---")]
         [Range(0f, 1f)] [SerializeField] private float defaultMasterVolume = 1f;
         [Range(0f, 1f)] [SerializeField] private float defaultMusicVolume = 0.8f;
@@ -85,6 +103,9 @@ namespace Luan.MainMenu
         public AudioClip WheelSpinClip => wheelSpinClip;
         public AudioClip WheelTickClip => wheelTickClip;
         public AudioClip WheelWinClip => wheelWinClip;
+        public AudioClip ShopPurchaseClip => shopPurchaseClip;
+        public AudioClip DailyClaimClip => dailyClaimClip;
+        public AudioClip NoteHitClip => noteHitClip;
 
         // Sự kiện thông báo khi âm lượng thay đổi (để UI hoặc các hệ thống khác cập nhật)
         public static event Action<float, float, float> OnVolumeChanged;
@@ -190,6 +211,33 @@ namespace Luan.MainMenu
 #endif
                 }
             }
+
+            if (shopPurchaseClip == null)
+            {
+                shopPurchaseClip = Resources.Load<AudioClip>("Audio/shop_purchase");
+#if UNITY_EDITOR
+                if (shopPurchaseClip == null)
+                    shopPurchaseClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/shop_purchase.wav");
+#endif
+            }
+
+            if (dailyClaimClip == null)
+            {
+                dailyClaimClip = Resources.Load<AudioClip>("Audio/daily_claim");
+#if UNITY_EDITOR
+                if (dailyClaimClip == null)
+                    dailyClaimClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Thuan/Audio/SFX/daily_claim.wav");
+#endif
+            }
+
+            if (noteHitClip == null)
+            {
+                noteHitClip = Resources.Load<AudioClip>("Audio/Note");
+#if UNITY_EDITOR
+                if (noteHitClip == null)
+                    noteHitClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/SFX/Note.mp3");
+#endif
+            }
         }
 
         private void InitAudioSources()
@@ -233,9 +281,13 @@ namespace Luan.MainMenu
             {
                 MusicManager.Instance.SetVolume(_musicVolume);
             }
-            else if (musicSource != null)
+            if (musicSource != null)
             {
                 musicSource.volume = Mathf.Clamp01(_musicVolume);
+            }
+            if (RhythmGame.GameManager.Instance != null && RhythmGame.GameManager.Instance.musicSource != null)
+            {
+                RhythmGame.GameManager.Instance.musicSource.volume = Mathf.Clamp01(_musicVolume);
             }
 
             // 3. SFX Volume
@@ -277,9 +329,13 @@ namespace Luan.MainMenu
             {
                 MusicManager.Instance.SetVolume(_musicVolume);
             }
-            else if (musicSource != null)
+            if (musicSource != null)
             {
                 musicSource.volume = _musicVolume;
+            }
+            if (RhythmGame.GameManager.Instance != null && RhythmGame.GameManager.Instance.musicSource != null)
+            {
+                RhythmGame.GameManager.Instance.musicSource.volume = _musicVolume;
             }
 
             PlayerPrefs.SetFloat(PrefsMusicVolKey, _musicVolume);
@@ -431,6 +487,47 @@ namespace Luan.MainMenu
             else if (buttonConfirmClip != null)
             {
                 PlaySFX(buttonConfirmClip, volumeScale);
+            }
+        }
+
+        /// <summary>
+        /// Phát âm thanh mua sắm vật phẩm thành công (shop_purchase.wav).
+        /// </summary>
+        public void PlayShopPurchase(float volumeScale = 1f)
+        {
+            if (shopPurchaseClip != null)
+            {
+                PlaySFX(shopPurchaseClip, volumeScale);
+            }
+            else if (buttonConfirmClip != null)
+            {
+                PlaySFX(buttonConfirmClip, volumeScale);
+            }
+        }
+
+        /// <summary>
+        /// Phát âm thanh nhận thưởng điểm danh (daily_claim.wav).
+        /// </summary>
+        public void PlayDailyClaim(float volumeScale = 1f)
+        {
+            if (dailyClaimClip != null)
+            {
+                PlaySFX(dailyClaimClip, volumeScale);
+            }
+            else if (buttonConfirmClip != null)
+            {
+                PlaySFX(buttonConfirmClip, volumeScale);
+            }
+        }
+
+        /// <summary>
+        /// Phát âm thanh gõ trúng Note trong Gameplay (Note.mp3).
+        /// </summary>
+        public void PlayNoteHit(float volumeScale = 1f)
+        {
+            if (noteHitClip != null)
+            {
+                PlaySFX(noteHitClip, volumeScale);
             }
         }
 

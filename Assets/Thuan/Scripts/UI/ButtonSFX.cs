@@ -15,11 +15,22 @@ public class ButtonSFX : MonoBehaviour, IPointerEnterHandler
 
     private void PlayClick()
     {
-        SFXManager.Instance.PlaySFX(clickClip);
+        if (clickClip == null && Luan.MainMenu.AudioManager.Instance != null)
+            clickClip = Luan.MainMenu.AudioManager.Instance.ButtonSelectClip;
+
+        if (clickClip == null) return;
+        if (SFXManager.Instance != null)
+            SFXManager.Instance.PlaySFX(clickClip);
+        else if (Luan.MainMenu.AudioManager.Instance != null)
+            Luan.MainMenu.AudioManager.Instance.PlaySFX(clickClip);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SFXManager.Instance.PlaySFX(hoverClip);
+        if (hoverClip == null) return;
+        if (SFXManager.Instance != null)
+            SFXManager.Instance.PlaySFX(hoverClip);
+        else if (Luan.MainMenu.AudioManager.Instance != null)
+            Luan.MainMenu.AudioManager.Instance.PlaySFX(hoverClip);
     }
 }

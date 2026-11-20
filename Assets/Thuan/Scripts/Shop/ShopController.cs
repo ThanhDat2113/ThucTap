@@ -64,6 +64,13 @@ public class ShopController : MonoBehaviour
 
     private void Start()
     {
+        if (buyClip == null && Luan.MainMenu.AudioManager.Instance != null)
+            buyClip = Luan.MainMenu.AudioManager.Instance.ShopPurchaseClip;
+        if (failClip == null && Luan.MainMenu.AudioManager.Instance != null)
+            failClip = Luan.MainMenu.AudioManager.Instance.ButtonCloseClip;
+        if (tabClip == null && Luan.MainMenu.AudioManager.Instance != null)
+            tabClip = Luan.MainMenu.AudioManager.Instance.ButtonSelectClip;
+
         if (messageText != null) messageText.gameObject.SetActive(false);
         RefreshWallet();
         ShowCategory(ShopCategory.Characters);
@@ -179,6 +186,14 @@ public class ShopController : MonoBehaviour
 
     private static void PlayClip(AudioClip clip)
     {
-        if (SFXManager.Instance != null) SFXManager.Instance.PlaySFX(clip);
+        if (clip == null) return;
+        if (SFXManager.Instance != null)
+        {
+            SFXManager.Instance.PlaySFX(clip);
+        }
+        else if (Luan.MainMenu.AudioManager.Instance != null)
+        {
+            Luan.MainMenu.AudioManager.Instance.PlaySFX(clip);
+        }
     }
 }

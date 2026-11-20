@@ -101,6 +101,15 @@ namespace RhythmGame
             }
         }
 
+        void Awake()
+        {
+            if (messageText != null)
+            {
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
+            }
+        }
+
         void Start()
         {
             gameManager.OnStateChanged += HandleStateChanged;

@@ -62,6 +62,17 @@ namespace RhythmGame
                 if (chart == null) chart = GameSession.SelectedSong.chart;
                 if (musicSource != null && GameSession.SelectedSong.clip != null) musicSource.clip = GameSession.SelectedSong.clip;
             }
+
+            // Đồng bộ âm lượng nhạc gameplay từ Settings (SETTINGS_MUSIC_VOL)
+            if (musicSource != null)
+            {
+                float musicVol = PlayerPrefs.GetFloat("SETTINGS_MUSIC_VOL", 0.8f);
+                if (Luan.MainMenu.AudioManager.Instance != null)
+                    musicVol = Luan.MainMenu.AudioManager.Instance.MusicVolume;
+                else if (MusicManager.Instance != null)
+                    musicVol = MusicManager.Instance.Volume;
+                musicSource.volume = musicVol;
+            }
             if (Luan.Dialogue.StoryDialogueManager.HasPendingDialogue() || StorySession.Active)
             {
                 SetState(GameState.Dialogue);
@@ -116,6 +127,16 @@ namespace RhythmGame
 
             // Tắt nhạc nền scene trước (Song List / Menu) nếu SceneBackgroundMusic tự phát khi load scene
             if (MusicManager.Instance != null) MusicManager.Instance.StopMusic();
+
+            if (musicSource != null)
+            {
+                float musicVol = PlayerPrefs.GetFloat("SETTINGS_MUSIC_VOL", 0.8f);
+                if (Luan.MainMenu.AudioManager.Instance != null)
+                    musicVol = Luan.MainMenu.AudioManager.Instance.MusicVolume;
+                else if (MusicManager.Instance != null)
+                    musicVol = MusicManager.Instance.Volume;
+                musicSource.volume = musicVol;
+            }
 
             spawner.Begin(chart);
             SongTime = 0f;

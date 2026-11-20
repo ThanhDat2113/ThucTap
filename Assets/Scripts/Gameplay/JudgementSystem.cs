@@ -239,6 +239,12 @@ namespace RhythmGame
         void PlaySfx(Judgement j)
         {
             if (audioSource == null) return;
+
+            float sfxVol = Luan.MainMenu.AudioManager.Instance != null
+                ? Luan.MainMenu.AudioManager.Instance.SFXVolume
+                : PlayerPrefs.GetFloat("SETTINGS_SFX_VOL", 1f);
+            audioSource.volume = Mathf.Clamp01(sfxVol);
+
             AudioClip clip = j switch
             {
                 Judgement.Perfect => perfectSfx,
@@ -247,7 +253,16 @@ namespace RhythmGame
                 Judgement.HoldComplete => holdCompleteSfx,
                 _ => missSfx
             };
-            if (clip != null) audioSource.PlayOneShot(clip);
+
+            if (clip == null && (j == Judgement.Perfect || j == Judgement.Good || j == Judgement.HoldComplete))
+            {
+                if (Luan.MainMenu.AudioManager.Instance != null)
+                {
+                    clip = Luan.MainMenu.AudioManager.Instance.NoteHitClip;
+                }
+            }
+
+            if (clip != null) audioSource.PlayOneShot(clip, Mathf.Clamp01(sfxVol));
         }
 
         public void ResetCombo()

@@ -76,6 +76,9 @@ public class DailyCheckinController : MonoBehaviour
 
     private void Start()
     {
+        if (claimClip == null && Luan.MainMenu.AudioManager.Instance != null)
+            claimClip = Luan.MainMenu.AudioManager.Instance.DailyClaimClip;
+
         if (toastText != null) toastText.gameObject.SetActive(false);
         RefreshWallet();
         Refresh();
@@ -154,7 +157,17 @@ public class DailyCheckinController : MonoBehaviour
         if (index < 0) return;
 
         string msg = Grant(days[index]);
-        if (claimClip != null && SFXManager.Instance != null) SFXManager.Instance.PlaySFX(claimClip);
+        if (claimClip != null)
+        {
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.PlaySFX(claimClip);
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlaySFX(claimClip);
+            }
+        }
         ShowToast(msg);
         if (index < dayCards.Length && dayCards[index] != null) StartCoroutine(Punch(dayCards[index].rectTransform, 0.18f));
         if (rewardIcon != null) StartCoroutine(Punch(rewardIcon.rectTransform, 0.25f));
