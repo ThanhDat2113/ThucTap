@@ -155,9 +155,6 @@ namespace Luan.Background
 
         private void Start()
         {
-            // Trả lại kiểu note và receptor nguyên bản của prefab (Style 16: Street), không bị theme khác ghi đè
-            NoteSkin.ClearGlobalStyle();
-
             targetCamera = Camera.main;
             if (targetCamera == null)
                 targetCamera = GetComponent<Camera>();
@@ -544,9 +541,6 @@ namespace Luan.Background
                 disabledOldQuad.SetActive(true);
                 disabledOldQuad = null;
             }
-
-            // Luôn đảm bảo giải phóng kiểu note toàn cục
-            NoteSkin.ClearGlobalStyle();
         }
     }
 }

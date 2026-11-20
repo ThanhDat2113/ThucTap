@@ -44,7 +44,7 @@ public class WorldBackgroundSelector : MonoBehaviour
     [Tooltip("Bật = mọi cảnh đều động: đập theo nhịp, phản ứng theo nhạc và combo, chớp khi Miss / Perfect")]
     public bool dynamicBackground = true;
     [Tooltip("Bật = note đổi kiểu và màu lane cho khớp từng cảnh (receptor đổi theo)")]
-    public bool matchNotesToScene = false;
+    public bool matchNotesToScene = true;
     [Tooltip("Để trống = tự thêm vào cùng object với Selector")]
     public NoteThemeApplier noteTheme;
 

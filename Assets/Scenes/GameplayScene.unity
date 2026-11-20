@@ -3541,7 +3541,7 @@ MonoBehaviour:
   includeGradient: 1
   cleanLeftovers: 1
   dynamicBackground: 1
-  matchNotesToScene: 0
+  matchNotesToScene: 1
   noteTheme: {fileID: 0}
 --- !u!114 &772989735
 MonoBehaviour:
