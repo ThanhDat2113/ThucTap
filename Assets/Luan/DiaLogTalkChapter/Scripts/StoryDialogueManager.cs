@@ -449,6 +449,10 @@ namespace Luan.Dialogue
             if (hasCompletedPostBattleThisSession || IsRetrying)
                 return false;
 
+            // Khi thua trận (Failed / !isWin): Luôn bỏ qua thoại sau trận để chuyển thẳng sang Result screen
+            if (!isWin)
+                return false;
+
             // Nếu người chơi vào từ Free Play -> Không chạy thoại sau trận
             if (!StorySession.Active && GameSession.SelectedSong != null)
                 return false;
@@ -875,11 +879,18 @@ namespace Luan.Dialogue
             else if (state == RhythmGame.GameState.Failed)
             {
                 LastBattleWon = false;
-                if (HasPendingPostBattleDialogue(false))
-                {
-                    StartCoroutine(DelayedStartPostBattle(false));
-                }
+                // Khi thua (Failed): Bỏ qua hoàn toàn thoại thua để GameplayResultScreen tự động hiển thị kết quả ngay.
+                ForceCloseDialogue();
             }
+        }
+
+        public void ForceCloseDialogue()
+        {
+            IsPlaying = false;
+            currentPhase = DialoguePhase.None;
+            if (transitionRoutine != null) { StopCoroutine(transitionRoutine); transitionRoutine = null; }
+            if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
+            HideAllUI();
         }
 
         private IEnumerator DelayedStartPostBattle(bool isWin)

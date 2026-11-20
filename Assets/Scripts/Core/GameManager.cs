@@ -104,9 +104,14 @@ namespace RhythmGame
 
         public void Restart()
         {
+            // Nếu đang trong luồng retry: tắt mọi dialogue còn sót và cho phép restart ngay
+            if (Luan.Dialogue.StoryDialogueManager.IsRetrying && StoryDialogueManager.Instance != null)
+            {
+                StoryDialogueManager.Instance.ForceCloseDialogue();
+            }
             // ★ Chặn khi dialogue cốt truyện đang chạy — chỉ StoryDialogueManager.StartGameplay()
             //   được phép khởi động gameplay sau khi dialogue kết thúc.
-            if (StoryDialogueManager.Instance != null &&
+            else if (StoryDialogueManager.Instance != null &&
                 StoryDialogueManager.Instance.IsPlaying)
             {
                 Debug.LogWarning("[GameManager] Restart() bị chặn — dialogue cốt truyện đang chạy.");

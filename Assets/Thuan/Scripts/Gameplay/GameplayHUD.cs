@@ -260,6 +260,7 @@ public class GameplayHUD : MonoBehaviour
     private void Restart()
     {
         Time.timeScale = 1f;
+        Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
         if (GameSession.SelectedSong != null) SongStats.IncrementPlayCount(GameSession.SelectedSong);
         if (RestartRequested != null) RestartRequested();
     }
