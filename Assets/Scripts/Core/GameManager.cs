@@ -98,24 +98,16 @@ namespace RhythmGame
 
         void OnRestartPressed()
         {
-            Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
             Restart();
         }
 
         public void Restart()
         {
-            // Nếu đang trong luồng retry: tắt mọi dialogue còn sót và cho phép restart ngay
-            if (Luan.Dialogue.StoryDialogueManager.IsRetrying && StoryDialogueManager.Instance != null)
+            // Reset trạng thái thoại sau trận và dọn sạch UI cũ để lượt chơi mới luôn có đầy đủ thoại thắng/thua
+            if (StoryDialogueManager.Instance != null)
             {
                 StoryDialogueManager.Instance.ForceCloseDialogue();
-            }
-            // ★ Chặn khi dialogue cốt truyện đang chạy — chỉ StoryDialogueManager.StartGameplay()
-            //   được phép khởi động gameplay sau khi dialogue kết thúc.
-            else if (StoryDialogueManager.Instance != null &&
-                StoryDialogueManager.Instance.IsPlaying)
-            {
-                Debug.LogWarning("[GameManager] Restart() bị chặn — dialogue cốt truyện đang chạy.");
-                return;
+                StoryDialogueManager.Instance.ResetPostBattleState();
             }
 
             // Đang pause mà Restart (phím R hoặc nút trong menu pause) -> bỏ pause trước

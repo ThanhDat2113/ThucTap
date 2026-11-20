@@ -209,7 +209,10 @@ namespace RhythmGame
         void OnRetryClicked()
         {
             Time.timeScale = 1f;
-            Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
+            if (Luan.Dialogue.StoryDialogueManager.Instance != null)
+            {
+                Luan.Dialogue.StoryDialogueManager.Instance.ResetPostBattleState();
+            }
             StartCoroutine(FadeAndRetry());
         }
 

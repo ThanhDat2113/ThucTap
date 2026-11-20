@@ -224,7 +224,10 @@ public class PauseManager : MonoBehaviour
 
     public void Restart()
     {
-        Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
+        if (Luan.Dialogue.StoryDialogueManager.Instance != null)
+        {
+            Luan.Dialogue.StoryDialogueManager.Instance.ResetPostBattleState();
+        }
         if (RestartHandler != null)
         {
             ForceUnpause();

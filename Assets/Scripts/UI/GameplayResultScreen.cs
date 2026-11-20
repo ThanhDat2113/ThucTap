@@ -178,9 +178,11 @@ namespace RhythmGame
         {
             Debug.Log($"[GameplayResultScreen] State -> {state} (isShown={isShown})");
 
+            bool isStory = StorySession.Active || (Application.isEditor && GameSession.SelectedSong == null);
+
             if (state == GameState.Finished)
             {
-                if (StorySession.Active && !Luan.Dialogue.StoryDialogueManager.IsRetrying)
+                if (isStory)
                 {
                     var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
                     if (dlg != null && dlg.HasPendingPostBattleDialogue(true))
@@ -193,7 +195,15 @@ namespace RhythmGame
             }
             else if (state == GameState.Failed)
             {
-                // Khi thua cuộc (Failed): Luôn chuyển thẳng sang Result Screen, không bao giờ kẹt hay chờ thoại thua
+                if (isStory)
+                {
+                    var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
+                    if (dlg != null && dlg.HasPendingPostBattleDialogue(false))
+                    {
+                        Debug.Log("[GameplayResultScreen] Đợi post-battle defeat dialogue xong mới hiện kết quả.");
+                        return;
+                    }
+                }
                 ShowResult(false);
             }
             else
@@ -359,7 +369,10 @@ namespace RhythmGame
         private void OnRetryClicked()
         {
             Time.timeScale = 1f;
-            Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
+            if (Luan.Dialogue.StoryDialogueManager.Instance != null)
+            {
+                Luan.Dialogue.StoryDialogueManager.Instance.ResetPostBattleState();
+            }
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
             ForceHide();
             if (RetryRequested != null) { RetryRequested.Invoke(); return; }

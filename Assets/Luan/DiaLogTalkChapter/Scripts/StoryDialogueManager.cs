@@ -446,13 +446,6 @@ namespace Luan.Dialogue
 
         public bool HasPendingPostBattleDialogue(bool isWin)
         {
-            // Thua cuộc: Không bao giờ chạy thoại thua (qua thẳng Result Screen)
-            if (!isWin)
-                return false;
-
-            if (hasCompletedPostBattleThisSession || IsRetrying)
-                return false;
-
             // Nếu người chơi vào từ Free Play -> Không chạy thoại sau trận
             if (!StorySession.Active && GameSession.SelectedSong != null)
                 return false;
@@ -462,6 +455,9 @@ namespace Luan.Dialogue
             if (GameSession.SelectedSong == null && Application.isEditor) isStory = true;
 
             if (!isStory) return false;
+
+            if (hasCompletedPostBattleThisSession)
+                return false;
 
             var post = GetPostBattleLines(isWin);
             return post != null && post.Count > 0;
@@ -862,12 +858,6 @@ namespace Luan.Dialogue
 
         private void HandleGameStateChanged(RhythmGame.GameState state)
         {
-            if (IsRetrying)
-            {
-                Debug.Log("[StoryDialogueManager] Đang trong lượt Retry -> Bỏ qua thoại thắng/thua, chuyển thẳng sang Result.");
-                return;
-            }
-
             if (state == RhythmGame.GameState.Finished)
             {
                 LastBattleWon = true;
@@ -879,9 +869,18 @@ namespace Luan.Dialogue
             else if (state == RhythmGame.GameState.Failed)
             {
                 LastBattleWon = false;
-                // Khi thua (Failed): Bỏ qua hoàn toàn thoại thua để GameplayResultScreen tự động hiển thị kết quả ngay.
-                ForceCloseDialogue();
+                if (HasPendingPostBattleDialogue(false))
+                {
+                    StartCoroutine(DelayedStartPostBattle(false));
+                }
             }
+        }
+
+        public void ResetPostBattleState()
+        {
+            hasCompletedPostBattleThisSession = false;
+            currentPhase = DialoguePhase.None;
+            IsPlaying = false;
         }
 
         public void ForceCloseDialogue()
