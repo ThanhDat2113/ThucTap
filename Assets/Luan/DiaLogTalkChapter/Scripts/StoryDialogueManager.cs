@@ -446,11 +446,11 @@ namespace Luan.Dialogue
 
         public bool HasPendingPostBattleDialogue(bool isWin)
         {
-            if (hasCompletedPostBattleThisSession || IsRetrying)
+            // Thua cuộc: Không bao giờ chạy thoại thua (qua thẳng Result Screen)
+            if (!isWin)
                 return false;
 
-            // Khi thua trận (Failed / !isWin): Luôn bỏ qua thoại sau trận để chuyển thẳng sang Result screen
-            if (!isWin)
+            if (hasCompletedPostBattleThisSession || IsRetrying)
                 return false;
 
             // Nếu người chơi vào từ Free Play -> Không chạy thoại sau trận
