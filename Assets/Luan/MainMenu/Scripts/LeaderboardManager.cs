@@ -365,16 +365,18 @@ namespace Luan.MainMenu
 
         private void OnEnable()
         {
-            // Hiển thị ngay dữ liệu người chơi hiện tại (từ cache hoặc tài khoản) để không bao giờ bị trống
+            // Tính và hiển thị ngay lập tức điểm tích lũy của người chơi
+            int currentLocalScore = AccountScoreManager.CalculateTotalAccountScore();
+            if (_cachedPlayerEntry != null && currentLocalScore > _cachedPlayerEntry.StatValue)
+            {
+                _cachedPlayerEntry.StatValue = currentLocalScore;
+            }
             PopulateCurrentPlayerUI(_cachedPlayerEntry);
 
-            // Tự động tính toán lại tổng điểm thành tựu toàn bộ bài hát và đồng bộ lên PlayFab
+            // Đồng bộ lên PlayFab (kể cả khi thất bại trên server thì vẫn đảm bảo UI hiển thị đủ điểm)
             AccountScoreManager.SyncScoreToPlayFab((success, totalScore) =>
             {
-                if (success)
-                {
-                    NotifyLocalScoreUpdated(totalScore);
-                }
+                NotifyLocalScoreUpdated(totalScore);
             });
 
             // Tự động tải lại bảng xếp hạng mỗi khi mở panel Thành Tích (dùng cache nếu có)
@@ -686,6 +688,27 @@ namespace Luan.MainMenu
                 }
             }
 
+            int localTotal = AccountScoreManager.CalculateTotalAccountScore();
+            // Nếu PlayFab chưa trả về người chơi nào trong Top 10 nhưng tài khoản hiện tại có điểm tích lũy
+            if (validEntries.Count == 0 && localTotal > 0)
+            {
+                string myName = "";
+                if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
+                {
+                    myName = !string.IsNullOrEmpty(AccountManager.Instance.CurrentUser.displayName)
+                        ? AccountManager.Instance.CurrentUser.displayName
+                        : AccountManager.Instance.CurrentUser.username;
+                }
+                if (string.IsNullOrEmpty(myName)) myName = PlayerPrefs.GetString("SAVED_USERNAME", "Tôi");
+
+                validEntries.Add(new PlayFabLeaderboardEntry
+                {
+                    DisplayName = myName,
+                    StatValue = localTotal,
+                    Position = 0
+                });
+            }
+
             int entryCount = validEntries.Count;
 
             for (int i = 0; i < top10Rows.Length; i++)
@@ -749,15 +772,19 @@ namespace Luan.MainMenu
                 myDisplayName = PlayerPrefs.GetString("SAVED_USERNAME", "");
             }
 
-            // Chỉ hiển thị thứ hạng (#1, #2,...) khi người chơi thực sự có điểm (> 0) trên PlayFab
-            if (entry != null && entry.StatValue > 0)
+            // Tính tổng điểm thành tựu thực tế (cộng dồn toàn bộ bài hát Free Play & Story Chapters)
+            int localTotal = AccountScoreManager.CalculateTotalAccountScore();
+            int effectiveScore = Mathf.Max(localTotal, (entry != null ? entry.StatValue : 0));
+
+            // Chỉ hiển thị điểm và thứ hạng khi người chơi thực sự có điểm (> 0)
+            if (effectiveScore > 0)
             {
-                int rank = entry.Position + 1; // PlayFab Position là 0-indexed
+                int rank = (entry != null && entry.StatValue > 0) ? (entry.Position + 1) : 1;
                 string rankText = FormatRank(rank);
-                string rawName = !string.IsNullOrEmpty(entry.DisplayName) ? entry.DisplayName : myDisplayName;
+                string rawName = (entry != null && !string.IsNullOrEmpty(entry.DisplayName)) ? entry.DisplayName : myDisplayName;
                 string nameText = FormatName(rawName);
                 if (string.IsNullOrEmpty(nameText)) nameText = "Người chơi";
-                string scoreText = FormatScore(entry.StatValue);
+                string scoreText = FormatScore(effectiveScore);
 
                 if (currentRankTMP != null)
                 {
@@ -780,7 +807,7 @@ namespace Luan.MainMenu
             }
             else
             {
-                // Người chơi chưa có điểm nào (> 0) trên PlayFab -> Bắt buộc để "-" (chưa xếp hạng), tuyệt đối không để #1!
+                // Người chơi chưa có điểm nào (> 0)
                 string rawName = (entry != null && !string.IsNullOrEmpty(entry.DisplayName)) ? entry.DisplayName : myDisplayName;
                 string nameText = FormatName(rawName);
                 if (string.IsNullOrEmpty(nameText))
@@ -849,11 +876,19 @@ namespace Luan.MainMenu
         {
             if (currentScoreTMP != null)
             {
-                currentScoreTMP.text = newScore.ToString("N0");
+                currentScoreTMP.text = FormatScore(newScore);
+            }
+            if (currentRankTMP != null && (currentRankTMP.text == emptyPlaceholder || string.IsNullOrEmpty(currentRankTMP.text)))
+            {
+                currentRankTMP.text = "#1";
             }
             if (_cachedPlayerEntry != null)
             {
                 _cachedPlayerEntry.StatValue = newScore;
+            }
+            if (_cachedTop10Entries == null || _cachedTop10Entries.Length == 0)
+            {
+                PopulateTop10UI(_cachedTop10Entries);
             }
         }
 

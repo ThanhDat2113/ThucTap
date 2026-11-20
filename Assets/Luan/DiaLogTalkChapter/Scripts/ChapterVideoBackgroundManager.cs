@@ -63,7 +63,7 @@ namespace Luan.Background
         [Header("Editor Test")]
         [Tooltip("Khi Play trực tiếp từ GameplayScene trong Editor: 0 = Free Mode (mặc định), 1-4 = Test Chapter tương ứng")]
         [Range(0, 4)]
-        [SerializeField] private int editorTestChapter = 1;
+        [SerializeField] private int editorTestChapter = 0;
 
         // Runtime objects
         private Camera targetCamera;
@@ -71,6 +71,7 @@ namespace Luan.Background
         private MeshRenderer quadRenderer;
         private Material blendMaterial;
         private MaterialPropertyBlock propBlock;
+        private GameObject disabledOldQuad = null;
 
         private VideoPlayer playerNoCombo;
         private VideoPlayer playerCombo;
@@ -154,6 +155,9 @@ namespace Luan.Background
 
         private void Start()
         {
+            // Trả lại kiểu note và receptor nguyên bản của prefab (Style 16: Street), không bị theme khác ghi đè
+            NoteSkin.ClearGlobalStyle();
+
             targetCamera = Camera.main;
             if (targetCamera == null)
                 targetCamera = GetComponent<Camera>();
@@ -167,10 +171,10 @@ namespace Luan.Background
 
             if (activeChapter <= 0)
             {
-                // Free Mode: Giữ nguyên background mặc định (WorldBackgroundSelector / Night Sky), không can thiệp
+                // Free Mode: Giữ nguyên 100% background mặc định (WorldBackgroundSelector / Night Sky), tuyệt đối không can thiệp
                 isStoryActive = false;
                 if (quadObject != null) quadObject.SetActive(false);
-                Debug.Log("[ChapterVideoBackground] FREE MODE: Sử dụng background mặc định.");
+                Debug.Log("[ChapterVideoBackground] FREE MODE: Giữ nguyên background mặc định.");
                 return;
             }
 
@@ -186,21 +190,15 @@ namespace Luan.Background
                 return;
             }
 
-            // Dọn sạch / tắt WorldBackgroundSelector và các hiệu ứng con (Moon, Stars, Gradient...) để không đè lên video
+            // Chỉ tạm thời tắt quad gradient cũ để video không bị đè (KHÔNG gọi selector.SetScene để không làm đổi note/line)
             if (targetCamera != null)
             {
-                var selector = targetCamera.GetComponent<WorldBackgroundSelector>();
-                if (selector != null)
-                {
-                    selector.SetScene(BgScene.None);
-                    selector.enabled = false;
-                }
-
-                var bgNight = targetCamera.GetComponent<BackgroundNightSky>();
-                if (bgNight != null) bgNight.enabled = false;
-
                 Transform oldQuad = targetCamera.transform.Find("WorldBackgroundGradientPro");
-                if (oldQuad != null) oldQuad.gameObject.SetActive(false);
+                if (oldQuad != null && oldQuad.gameObject.activeSelf)
+                {
+                    disabledOldQuad = oldQuad.gameObject;
+                    disabledOldQuad.SetActive(false);
+                }
             }
 
             SetupVideoPlayers(cfg);
@@ -228,7 +226,13 @@ namespace Luan.Background
                 if (ch > 0) return ch;
             }
 
-            // 3. Test trực tiếp trong Unity Editor (khi play trực tiếp GameplayScene)
+            // 3. Nếu là Free Play (đã chọn bài hát từ Free Play song selection) -> luôn luôn là Free Mode (0)
+            if (GameSession.SelectedSong != null && !StorySession.Active)
+            {
+                return 0;
+            }
+
+            // 4. Test trực tiếp trong Unity Editor (khi play trực tiếp GameplayScene và không có StorySession)
             if (Application.isEditor && !StorySession.Active)
             {
                 if (Luan.Dialogue.StoryDialogueManager.Instance != null && Luan.Dialogue.StoryDialogueManager.Instance.TestInEditor)
@@ -238,7 +242,7 @@ namespace Luan.Background
                 return editorTestChapter; // 0 = Free Mode, 1-4 = Chapter tương ứng
             }
 
-            // 4. Free Mode thông thường (đã chọn bài từ Free Play list)
+            // 5. Mặc định là Free Mode
             return 0;
         }
 
@@ -535,15 +539,14 @@ namespace Luan.Background
                 Destroy(quadObject);
             }
 
-            if (targetCamera != null)
+            if (disabledOldQuad != null)
             {
-                var selector = targetCamera.GetComponent<WorldBackgroundSelector>();
-                if (selector != null)
-                {
-                    selector.enabled = true;
-                    selector.SetScene(BgScene.Night);
-                }
+                disabledOldQuad.SetActive(true);
+                disabledOldQuad = null;
             }
+
+            // Luôn đảm bảo giải phóng kiểu note toàn cục
+            NoteSkin.ClearGlobalStyle();
         }
     }
 }

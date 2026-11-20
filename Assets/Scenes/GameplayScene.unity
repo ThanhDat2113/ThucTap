@@ -3541,7 +3541,7 @@ MonoBehaviour:
   includeGradient: 1
   cleanLeftovers: 1
   dynamicBackground: 1
-  matchNotesToScene: 1
+  matchNotesToScene: 0
   noteTheme: {fileID: 0}
 --- !u!114 &772989735
 MonoBehaviour:
@@ -4202,7 +4202,7 @@ MonoBehaviour:
   overscan: 1.12
   brightness: 1
   vignette: 0.12
-  editorTestChapter: 1
+  editorTestChapter: 0
 --- !u!4 &920695018
 Transform:
   m_ObjectHideFlags: 0

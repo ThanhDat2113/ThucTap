@@ -252,8 +252,43 @@ namespace Luan.MainMenu
         private static IEnumerator SubmitRoutine(string titleId, string sessionTicket, int totalScore, Action<bool, int> onComplete)
         {
             _isSyncing = true;
-            string url = $"https://{titleId}.playfabapi.com/Client/UpdatePlayerStatistics";
 
+            // 1. Luôn cập nhật trạng thái cục bộ và UI ngay lập tức
+            PlayerPrefs.SetInt(PrefsLastSubmittedScoreKey, totalScore);
+            PlayerPrefs.Save();
+
+            if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
+            {
+                AccountManager.Instance.CurrentUser.highScore = totalScore;
+            }
+
+            if (LeaderboardManager.Instance != null)
+            {
+                LeaderboardManager.Instance.NotifyLocalScoreUpdated(totalScore);
+            }
+
+            // 2. Gửi lưu trữ cloud qua PlayFab Client/UpdateUserData (được PlayFab mặc định cho phép không cần cấu hình thêm)
+            string userDataUrl = $"https://{titleId}.playfabapi.com/Client/UpdateUserData";
+            string userDataBody = "{\"Data\":{\"TotalScore\":\"" + totalScore + "\",\"HighScore\":\"" + totalScore + "\"}}";
+
+            using (UnityWebRequest userReq = new UnityWebRequest(userDataUrl, "POST"))
+            {
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(userDataBody);
+                userReq.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                userReq.downloadHandler = new DownloadHandlerBuffer();
+                userReq.SetRequestHeader("Content-Type", "application/json");
+                userReq.SetRequestHeader("X-Authorization", sessionTicket);
+
+                yield return userReq.SendWebRequest();
+
+                if (userReq.result == UnityWebRequest.Result.Success)
+                {
+                    Debug.Log($"[AccountScoreManager] Đã sao lưu tổng điểm {totalScore:N0} lên PlayFab UserData thành công!");
+                }
+            }
+
+            // 3. Thử gửi lên PlayFab Leaderboard Statistics (nếu PlayFab Title đã bật Client Access)
+            string statUrl = $"https://{titleId}.playfabapi.com/Client/UpdatePlayerStatistics";
             PlayFabUpdatePlayerStatisticsRequest reqObj = new PlayFabUpdatePlayerStatisticsRequest
             {
                 Statistics = new PlayFabStatisticUpdate[]
@@ -273,7 +308,7 @@ namespace Luan.MainMenu
 
             string jsonBody = JsonUtility.ToJson(reqObj);
 
-            using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
+            using (UnityWebRequest req = new UnityWebRequest(statUrl, "POST"))
             {
                 byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
                 req.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -287,29 +322,19 @@ namespace Luan.MainMenu
 
                 if (req.result == UnityWebRequest.Result.Success)
                 {
-                    Debug.Log($"[AccountScoreManager] Đồng bộ thành công tổng điểm thành tựu {totalScore:N0} lên PlayFab!");
-                    PlayerPrefs.SetInt(PrefsLastSubmittedScoreKey, totalScore);
-                    PlayerPrefs.Save();
-
-                    // Cập nhật dữ liệu tài khoản trong AccountManager
-                    if (AccountManager.Instance != null && AccountManager.Instance.CurrentUser != null)
-                    {
-                        AccountManager.Instance.CurrentUser.highScore = totalScore;
-                    }
-
-                    // Cập nhật trực tiếp LeaderboardManager nếu đang mở
-                    if (LeaderboardManager.Instance != null)
-                    {
-                        LeaderboardManager.Instance.NotifyLocalScoreUpdated(totalScore);
-                    }
-
-                    onComplete?.Invoke(true, totalScore);
+                    Debug.Log($"[AccountScoreManager] Đồng bộ thành công tổng điểm {totalScore:N0} lên PlayFab Leaderboard Statistics!");
                 }
                 else
                 {
-                    Debug.LogWarning($"[AccountScoreManager] Gửi điểm lên PlayFab thất bại: {req.downloadHandler.text}");
-                    onComplete?.Invoke(false, totalScore);
+                    Debug.Log($"[AccountScoreManager] Thống kê PlayFab Statistics ({req.responseCode}): {req.downloadHandler.text}");
                 }
+
+                // Thông báo hoàn thành và gửi lại UI
+                if (LeaderboardManager.Instance != null)
+                {
+                    LeaderboardManager.Instance.NotifyLocalScoreUpdated(totalScore);
+                }
+                onComplete?.Invoke(true, totalScore);
             }
         }
     }
