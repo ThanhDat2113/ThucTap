@@ -109,6 +109,11 @@ namespace Luan.Dialogue
         public bool IsPlaying { get; private set; }
         public bool LastBattleWon { get; private set; } = true;
 
+        /// <summary>
+        /// Đánh dấu đang trong lượt chơi lại (Retry). Khi true, bỏ qua thoại thắng/thua sau trận và chuyển thẳng sang kết quả.
+        /// </summary>
+        public static bool IsRetrying { get; set; } = false;
+
         private bool hasCompletedDialogueThisSession = false;
         private bool hasCompletedPostBattleThisSession = false;
 
@@ -408,6 +413,9 @@ namespace Luan.Dialogue
 
         public static bool HasPendingDialogue()
         {
+            if (IsRetrying)
+                return false;
+
             if (Instance == null)
             {
                 Instance = FindFirstObjectByType<StoryDialogueManager>();
@@ -438,7 +446,7 @@ namespace Luan.Dialogue
 
         public bool HasPendingPostBattleDialogue(bool isWin)
         {
-            if (hasCompletedPostBattleThisSession)
+            if (hasCompletedPostBattleThisSession || IsRetrying)
                 return false;
 
             // Nếu người chơi vào từ Free Play -> Không chạy thoại sau trận
@@ -462,6 +470,7 @@ namespace Luan.Dialogue
 
         public static void ResetSessionState()
         {
+            IsRetrying = false;
             if (Instance != null)
             {
                 Instance.hasCompletedDialogueThisSession = false;
@@ -849,6 +858,12 @@ namespace Luan.Dialogue
 
         private void HandleGameStateChanged(RhythmGame.GameState state)
         {
+            if (IsRetrying)
+            {
+                Debug.Log("[StoryDialogueManager] Đang trong lượt Retry -> Bỏ qua thoại thắng/thua, chuyển thẳng sang Result.");
+                return;
+            }
+
             if (state == RhythmGame.GameState.Finished)
             {
                 LastBattleWon = true;

@@ -106,6 +106,11 @@ namespace RhythmGame
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
             HideOldPlayerUI();
+            if (messageText != null)
+            {
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
+            }
             BindHudHealth();
             if (flowSystem != null)
             {
@@ -145,17 +150,11 @@ namespace RhythmGame
 
         void HandleStateChanged(GameState state)
         {
-            switch (state)
+            // Ẩn dòng chữ banner kết thúc "THẮNG/THUA! Nhấn R để chơi lại" trên cả Free Mode & Story Mode
+            if (messageText != null)
             {
-                case GameState.Finished:
-                    if (messageText != null) { messageText.text = "THẮNG! Nhấn R để chơi lại"; messageText.color = Color.green; }
-                    break;
-                case GameState.Failed:
-                    if (messageText != null) { messageText.text = "THUA! Nhấn R để chơi lại"; messageText.color = Color.red; }
-                    break;
-                default:
-                    if (messageText != null) { messageText.text = ""; messageText.color = Color.white; }
-                    break;
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
             }
 
             if (state == GameState.Playing)

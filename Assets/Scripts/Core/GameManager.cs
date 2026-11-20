@@ -53,7 +53,7 @@ namespace RhythmGame
 
         void Start()
         {
-            input.OnRestartPressed += Restart;
+            input.OnRestartPressed += OnRestartPressed;
             if (healthSystem != null) healthSystem.OnHealthDepleted.AddListener(OnHealthDepleted);
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = Restart;
             if (GameSession.SelectedSong != null)
@@ -92,8 +92,14 @@ namespace RhythmGame
         {
             if (Instance == this) Instance = null;
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = null;
-            if (input != null) input.OnRestartPressed -= Restart;
+            if (input != null) input.OnRestartPressed -= OnRestartPressed;
             if (healthSystem != null) healthSystem.OnHealthDepleted.RemoveListener(OnHealthDepleted);
+        }
+
+        void OnRestartPressed()
+        {
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
+            Restart();
         }
 
         public void Restart()

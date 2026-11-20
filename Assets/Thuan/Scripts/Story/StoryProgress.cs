@@ -94,6 +94,7 @@ public static class StorySession
 
     public static void Begin(StoryWeekData week)
     {
+        Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
         Active = true; Week = week; TrackIndex = 0; TotalScore = 0; accSum = 0f; accCount = 0; pendingScore = 0; pendingAcc = -1f;
         LastCleared = false; WeekCompleted = false;
         // giu lai do kho cua Free Play, Story luon choi Normal
@@ -123,6 +124,7 @@ public static class StorySession
 
     public static void Advance()
     {
+        Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
         if (!HasNext || !LastCleared) return;
         TotalScore += pendingScore;
         if (pendingAcc >= 0f) { accSum += pendingAcc; accCount++; }
@@ -134,6 +136,7 @@ public static class StorySession
 
     public static void End()
     {
+        Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
         if (Active) GameSession.SelectedDifficulty = savedDifficulty;
         Active = false;
     }

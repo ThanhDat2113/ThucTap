@@ -224,6 +224,7 @@ public class PauseManager : MonoBehaviour
 
     public void Restart()
     {
+        Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
         if (RestartHandler != null)
         {
             ForceUnpause();
@@ -240,6 +241,7 @@ public class PauseManager : MonoBehaviour
     // Rời gameplay: trả timeScale + âm thanh về bình thường, chạy sự kiện (nếu có), rồi load scene (nếu có tên)
     void LeaveGameplay(string sceneName, UnityEvent customEvent)
     {
+        Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
         bool hasEvent = customEvent != null && customEvent.GetPersistentEventCount() > 0;
         if (string.IsNullOrEmpty(sceneName) && !hasEvent)
         {

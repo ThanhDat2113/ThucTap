@@ -209,6 +209,7 @@ namespace RhythmGame
         void OnRetryClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
             StartCoroutine(FadeAndRetry());
         }
 
@@ -222,6 +223,7 @@ namespace RhythmGame
         void OnConfirmClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
             StartCoroutine(FadeAndGoToSongList());
         }
 

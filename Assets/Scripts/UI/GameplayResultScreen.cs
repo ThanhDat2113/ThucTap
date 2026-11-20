@@ -180,7 +180,7 @@ namespace RhythmGame
 
             if (state == GameState.Finished)
             {
-                if (StorySession.Active)
+                if (StorySession.Active && !Luan.Dialogue.StoryDialogueManager.IsRetrying)
                 {
                     var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
                     if (dlg != null && dlg.HasPendingPostBattleDialogue(true))
@@ -193,7 +193,7 @@ namespace RhythmGame
             }
             else if (state == GameState.Failed)
             {
-                if (StorySession.Active)
+                if (StorySession.Active && !Luan.Dialogue.StoryDialogueManager.IsRetrying)
                 {
                     var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
                     if (dlg != null && dlg.HasPendingPostBattleDialogue(false))
@@ -361,6 +361,7 @@ namespace RhythmGame
         private void OnRetryClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = true;
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
             if (RetryRequested != null) { RetryRequested.Invoke(); return; }
             if (GameManager.Instance != null) GameManager.Instance.Restart();
@@ -369,6 +370,7 @@ namespace RhythmGame
         private void OnContinueClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
             if (ContinueRequested != null) ContinueRequested.Invoke();
             ForceHide();
@@ -377,6 +379,7 @@ namespace RhythmGame
         private void OnMenuClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
             StorySession.End();
             if (MenuRequested != null) { MenuRequested.Invoke(); return; }
