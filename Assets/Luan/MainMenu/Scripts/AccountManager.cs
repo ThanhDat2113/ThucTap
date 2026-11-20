@@ -607,6 +607,9 @@ namespace Luan.MainMenu
             }
             PlayerPrefs.Save();
 
+            // Tự động tính toán tổng điểm thành tựu toàn bộ bài hát và đồng bộ lên PlayFab cho tài khoản vừa đăng nhập
+            AccountScoreManager.SyncScoreToPlayFab(null);
+
             ShowLoginFeedback("Đăng nhập thành công!", Color.green);
             PlaySound(successSound);
 

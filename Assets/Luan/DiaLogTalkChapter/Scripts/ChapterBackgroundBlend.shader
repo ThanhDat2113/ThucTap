@@ -17,7 +17,7 @@ Shader "Custom/ChapterBackgroundBlend"
         Tags 
         { 
             "RenderType"="Opaque" 
-            "Queue"="Geometry-500" 
+            "Queue"="Background" 
             "RenderPipeline"="UniversalPipeline" 
         }
         LOD 100
@@ -110,7 +110,7 @@ Shader "Custom/ChapterBackgroundBlend"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue"="Geometry-500" }
+        Tags { "RenderType"="Opaque" "Queue"="Background" }
         LOD 100
         Cull Off
         ZWrite Off
@@ -188,5 +188,5 @@ Shader "Custom/ChapterBackgroundBlend"
             ENDCG
         }
     }
-    FallBack "Unlit/Texture"
+    FallBack "Universal Render Pipeline/Unlit"
 }

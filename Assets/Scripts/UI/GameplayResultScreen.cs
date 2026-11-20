@@ -270,6 +270,17 @@ namespace RhythmGame
 
             if (newBest) PlayerPrefs.SetInt(keyScore, score);
             PlayerPrefs.Save();
+
+            // Cập nhật tổng điểm thành tựu tài khoản (cộng dồn các bài Free Play & Story Chapters) và đồng bộ PlayFab
+            try
+            {
+                Luan.MainMenu.AccountScoreManager.OnSongCompleted(song, score, cleared);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning("[GameplayResultScreen] AccountScoreManager.OnSongCompleted error: " + ex.Message);
+            }
+
             return newBest;
         }
 

@@ -368,6 +368,15 @@ namespace Luan.MainMenu
             // Hiển thị ngay dữ liệu người chơi hiện tại (từ cache hoặc tài khoản) để không bao giờ bị trống
             PopulateCurrentPlayerUI(_cachedPlayerEntry);
 
+            // Tự động tính toán lại tổng điểm thành tựu toàn bộ bài hát và đồng bộ lên PlayFab
+            AccountScoreManager.SyncScoreToPlayFab((success, totalScore) =>
+            {
+                if (success)
+                {
+                    NotifyLocalScoreUpdated(totalScore);
+                }
+            });
+
             // Tự động tải lại bảng xếp hạng mỗi khi mở panel Thành Tích (dùng cache nếu có)
             FetchLeaderboard();
 
@@ -830,6 +839,21 @@ namespace Luan.MainMenu
 
                 if (row.displayNameTMP != null) row.displayNameTMP.text = emptyPlaceholder;
                 if (row.scoreTMP != null) row.scoreTMP.text = emptyPlaceholder;
+            }
+        }
+
+        /// <summary>
+        /// Cập nhật hiển thị điểm tích lũy thành tựu của người chơi lên UI Leaderboard ngay lập tức.
+        /// </summary>
+        public void NotifyLocalScoreUpdated(int newScore)
+        {
+            if (playerScoreTMP != null)
+            {
+                playerScoreTMP.text = newScore.ToString("N0");
+            }
+            if (_cachedPlayerEntry != null)
+            {
+                _cachedPlayerEntry.StatValue = newScore;
             }
         }
 
