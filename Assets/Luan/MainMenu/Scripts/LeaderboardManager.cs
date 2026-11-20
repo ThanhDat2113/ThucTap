@@ -847,9 +847,9 @@ namespace Luan.MainMenu
         /// </summary>
         public void NotifyLocalScoreUpdated(int newScore)
         {
-            if (playerScoreTMP != null)
+            if (currentScoreTMP != null)
             {
-                playerScoreTMP.text = newScore.ToString("N0");
+                currentScoreTMP.text = newScore.ToString("N0");
             }
             if (_cachedPlayerEntry != null)
             {
