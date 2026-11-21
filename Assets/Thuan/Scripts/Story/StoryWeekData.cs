@@ -27,6 +27,10 @@ public class StoryWeekData : ScriptableObject
     [Header("Doi thu tren san khau: 0 = Graffiti King, 1 = DJ Null")]
     public int opponent;
 
+    [Header("Doi thu prefab (tuong tu player, chon theo tung tuan)")]
+    [Tooltip("Keo prefab doi thu cua tuan nay vao day. Neu trong bo, se fallback dung index opponent o tren.")]
+    public GameObject opponentPrefab;
+
     [Header("Bai hat")]
     public StoryTrack[] tracks = new StoryTrack[3];
 

@@ -21,6 +21,7 @@ MonoBehaviour:
   cardSelected: {fileID: 21300000, guid: 1206dff3e8f04d442afc34c309fc9a59, type: 3}
   detailArt: {fileID: 21300000, guid: 74575a56796349d49b05f9f12734a8a5, type: 3}
   opponent: 1
+  opponentPrefab: {fileID: 8428212374481371165, guid: 0f49d3dc563f6ab4eb344531e1ce0cec, type: 3}
   tracks:
   - title: Digital Days
     song: {fileID: 11400000, guid: c64847698a793ca458a2dfe8226fe4de, type: 2}

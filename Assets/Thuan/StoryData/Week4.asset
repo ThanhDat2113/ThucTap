@@ -20,6 +20,7 @@ MonoBehaviour:
   cardSelected: {fileID: 21300000, guid: 629f45b6a9bb3f9469fa5bd49239471f, type: 3}
   detailArt: {fileID: 21300000, guid: ac092d626fcaf0541a22f755a388a40b, type: 3}
   opponent: 0
+  opponentPrefab: {fileID: 1741471833576238685, guid: e893609d59408c04ea4ceab15131dd4b, type: 3}
   tracks:
   - title: Shred
     song: {fileID: 11400000, guid: 9f36a6c6c13963b42b7e169080c38f62, type: 2}

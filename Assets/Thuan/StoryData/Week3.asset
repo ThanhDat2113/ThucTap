@@ -20,6 +20,7 @@ MonoBehaviour:
   cardSelected: {fileID: 21300000, guid: abb0ff9eb34283b4fb281b8b10a49259, type: 3}
   detailArt: {fileID: 21300000, guid: 23d71fd3364ac5d4eb4400d97ff8cda5, type: 3}
   opponent: 1
+  opponentPrefab: {fileID: 8805949682985604253, guid: 7f87afcec1c00ce4bba62f159aad517b, type: 3}
   tracks:
   - title: Nevada
     song: {fileID: 11400000, guid: ab6987a06c731d5438700ffd70ced4ce, type: 2}
