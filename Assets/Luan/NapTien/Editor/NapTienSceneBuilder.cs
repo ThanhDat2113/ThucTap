@@ -139,7 +139,7 @@ namespace Luan.NapTien.Editor
 
             var boltGo = CreateUIObject("deco_bolt", decorGo.transform);
             var boltRt = boltGo.GetComponent<RectTransform>();
-            boltRt.anchoredPosition = new Vector2(-800, 330);
+            boltRt.anchoredPosition = new Vector2(-780, 240);
             boltRt.sizeDelta = new Vector2(240, 140);
             var boltImg = boltGo.AddComponent<Image>();
             boltImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "deco_bolt.png");
@@ -246,47 +246,30 @@ namespace Luan.NapTien.Editor
             headerRt.anchoredPosition = new Vector2(0, 0);
             headerRt.sizeDelta = new Vector2(0, 120);
 
-            // Back button
+            // Back button (Exact aspect ratio of btn_back_shop)
             var backBtnGo = CreateUIObject("BackButton", headerGo.transform);
             var backBtnRt = backBtnGo.GetComponent<RectTransform>();
             backBtnRt.anchorMin = backBtnRt.anchorMax = new Vector2(0, 1);
             backBtnRt.pivot = new Vector2(0, 1);
-            backBtnRt.anchoredPosition = new Vector2(40, -25);
-            backBtnRt.sizeDelta = new Vector2(70, 70);
+            backBtnRt.anchoredPosition = new Vector2(36, -26);
+            backBtnRt.sizeDelta = new Vector2(210, 54);
             var backBtnImg = backBtnGo.AddComponent<Image>();
             backBtnImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "btn_back_shop.png");
+            backBtnImg.preserveAspect = true;
             var backBtn = backBtnGo.AddComponent<Button>();
             SetButtonColors(backBtn);
 
-            // Title Banner (Cyber graffiti style)
-            var titleBoxGo = CreateUIObject("TitleContainer", headerGo.transform);
-            var titleBoxRt = titleBoxGo.GetComponent<RectTransform>();
-            titleBoxRt.anchorMin = titleBoxRt.anchorMax = new Vector2(0, 1);
-            titleBoxRt.pivot = new Vector2(0, 1);
-            titleBoxRt.anchoredPosition = new Vector2(130, -18);
-            titleBoxRt.sizeDelta = new Vector2(620, 85);
-
-            var titleBannerGo = CreateUIObject("TitleBanner", titleBoxGo.transform);
-            var bannerRt = titleBannerGo.GetComponent<RectTransform>();
-            bannerRt.anchorMin = bannerRt.anchorMax = new Vector2(0, 1);
-            bannerRt.pivot = new Vector2(0, 1);
-            bannerRt.anchoredPosition = new Vector2(0, 0);
-            bannerRt.sizeDelta = new Vector2(300, 68);
-            var bannerImg = titleBannerGo.AddComponent<Image>();
-            bannerImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "title_naptien_banner.png");
-            bannerImg.preserveAspect = true;
-
-            var subtitleTextGo = CreateUIObject("SubtitleText", titleBoxGo.transform);
-            var subRt = subtitleTextGo.GetComponent<RectTransform>();
-            subRt.anchorMin = new Vector2(0, 0);
-            subRt.anchorMax = new Vector2(1, 0.32f);
-            subRt.offsetMin = subRt.offsetMax = Vector2.zero;
-            var subTMP = subtitleTextGo.AddComponent<TextMeshProUGUI>();
-            subTMP.font = fontSans;
-            subTMP.text = "CỔNG NẠP KIM CƯƠNG & XU VÀNG CHÍNH HÃNG - NHẬN TỨC THÌ";
-            subTMP.fontSize = 15;
-            subTMP.color = new Color(0.6f, 0.95f, 1f, 0.9f);
-            subTMP.alignment = TextAlignmentOptions.Left;
+            // Title Logo: Authentic street-art graffiti logo matching SONG LIST and SHOP
+            var titleGo = CreateUIObject("TitleLogo", headerGo.transform);
+            var titleRt = titleGo.GetComponent<RectTransform>();
+            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0, 1);
+            titleRt.pivot = new Vector2(0, 1);
+            titleRt.anchoredPosition = new Vector2(265, -10);
+            titleRt.sizeDelta = new Vector2(360, 145);
+            var titleImg = titleGo.AddComponent<Image>();
+            titleImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "title_naptien_graffiti.png");
+            titleImg.preserveAspect = true;
+            titleImg.raycastTarget = false;
 
             // Wallet Container at top right
             var walletBoxGo = CreateUIObject("WalletContainer", headerGo.transform);
