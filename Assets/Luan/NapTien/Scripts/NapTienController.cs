@@ -51,6 +51,16 @@ namespace Luan.NapTien
         [SerializeField] private TMP_Text tabCoinsText;
         [SerializeField] private TMP_Text tabSpecialText;
 
+        [SerializeField] private Image tabGemsIcon;
+        [SerializeField] private Image tabCoinsIcon;
+        [SerializeField] private Image tabSpecialIcon;
+
+        [Header("--- Tab Sprites ---")]
+        [SerializeField] private Sprite tabNormalSprite;
+        [SerializeField] private Sprite tabActiveCyanSprite;
+        [SerializeField] private Sprite tabActiveGoldSprite;
+        [SerializeField] private Sprite tabActivePinkSprite;
+
         [Header("--- Pack Grid Containers ---")]
         [SerializeField] private GameObject gemsContainer;
         [SerializeField] private GameObject coinsContainer;
@@ -208,18 +218,41 @@ namespace Luan.NapTien
 
         private void UpdateTabButtonVisuals()
         {
-            Color activeColor = new Color(0f, 1f, 0.9f, 1f);     // Neon Cyan
-            Color normalColor = new Color(0.6f, 0.65f, 0.8f, 1f); // Dim Cyan/Grey
-            Color activeBg = new Color(0.12f, 0.35f, 0.6f, 0.9f);
-            Color normalBg = new Color(0.08f, 0.08f, 0.18f, 0.75f);
+            Color activeCyanTxt = new Color(0f, 1f, 0.95f, 1f);     // Neon Cyan
+            Color activeGoldTxt = new Color(1f, 0.88f, 0.2f, 1f);    // Neon Gold
+            Color activePinkTxt = new Color(1f, 0.35f, 0.75f, 1f);   // Neon Pink
+            Color normalTxt = new Color(0.62f, 0.68f, 0.82f, 0.9f);  // Sleek Dim Grey/Blue
 
-            if (tabGemsText != null) tabGemsText.color = _currentCategory == TopUpCategory.Gems ? activeColor : normalColor;
-            if (tabCoinsText != null) tabCoinsText.color = _currentCategory == TopUpCategory.Coins ? activeColor : normalColor;
-            if (tabSpecialText != null) tabSpecialText.color = _currentCategory == TopUpCategory.Special ? activeColor : normalColor;
+            bool isGems = _currentCategory == TopUpCategory.Gems;
+            bool isCoins = _currentCategory == TopUpCategory.Coins;
+            bool isSpecial = _currentCategory == TopUpCategory.Special;
 
-            if (tabGemsBg != null) tabGemsBg.color = _currentCategory == TopUpCategory.Gems ? activeBg : normalBg;
-            if (tabCoinsBg != null) tabCoinsBg.color = _currentCategory == TopUpCategory.Coins ? activeBg : normalBg;
-            if (tabSpecialBg != null) tabSpecialBg.color = _currentCategory == TopUpCategory.Special ? activeBg : normalBg;
+            // Sprites
+            if (tabGemsBg != null)
+            {
+                tabGemsBg.sprite = isGems ? (tabActiveCyanSprite != null ? tabActiveCyanSprite : tabGemsBg.sprite) : (tabNormalSprite != null ? tabNormalSprite : tabGemsBg.sprite);
+                tabGemsBg.color = Color.white;
+            }
+            if (tabCoinsBg != null)
+            {
+                tabCoinsBg.sprite = isCoins ? (tabActiveGoldSprite != null ? tabActiveGoldSprite : tabCoinsBg.sprite) : (tabNormalSprite != null ? tabNormalSprite : tabCoinsBg.sprite);
+                tabCoinsBg.color = Color.white;
+            }
+            if (tabSpecialBg != null)
+            {
+                tabSpecialBg.sprite = isSpecial ? (tabActivePinkSprite != null ? tabActivePinkSprite : tabSpecialBg.sprite) : (tabNormalSprite != null ? tabNormalSprite : tabSpecialBg.sprite);
+                tabSpecialBg.color = Color.white;
+            }
+
+            // Text colors
+            if (tabGemsText != null) tabGemsText.color = isGems ? activeCyanTxt : normalTxt;
+            if (tabCoinsText != null) tabCoinsText.color = isCoins ? activeGoldTxt : normalTxt;
+            if (tabSpecialText != null) tabSpecialText.color = isSpecial ? activePinkTxt : normalTxt;
+
+            // Icon opacity & colors
+            if (tabGemsIcon != null) tabGemsIcon.color = isGems ? Color.white : new Color(1f, 1f, 1f, 0.45f);
+            if (tabCoinsIcon != null) tabCoinsIcon.color = isCoins ? Color.white : new Color(1f, 1f, 1f, 0.45f);
+            if (tabSpecialIcon != null) tabSpecialIcon.color = isSpecial ? Color.white : new Color(1f, 1f, 1f, 0.45f);
         }
 
         public void OnPackSelected(TopUpPackData pack)

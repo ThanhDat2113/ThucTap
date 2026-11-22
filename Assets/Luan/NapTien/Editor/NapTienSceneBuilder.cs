@@ -325,7 +325,7 @@ namespace Luan.NapTien.Editor
             gemTMP.text = "1,000";
             gemTMP.alignment = TextAlignmentOptions.Center;
 
-            // 7. Category Tabs (Stylized Cyberpunk Frames like Story Mode / Free Play)
+            // 7. Category Tabs (Stylized Cyberpunk Frames with dedicated icons and clean neon borders)
             var tabsBoxGo = CreateUIObject("CategoryTabs", canvasGo.transform);
             var tabsBoxRt = tabsBoxGo.GetComponent<RectTransform>();
             tabsBoxRt.anchorMin = tabsBoxRt.anchorMax = new Vector2(0.5f, 1f);
@@ -333,9 +333,26 @@ namespace Luan.NapTien.Editor
             tabsBoxRt.anchoredPosition = new Vector2(0, -114);
             tabsBoxRt.sizeDelta = new Vector2(980, 54);
 
-            var (tabGemsBtn, tabGemsBg, tabGemsTxt) = CreateCategoryTab("Tab_Gems", tabsBoxGo.transform, new Vector2(-320, 0), "GÓI KIM CƯƠNG", fontBangers);
-            var (tabCoinsBtn, tabCoinsBg, tabCoinsTxt) = CreateCategoryTab("Tab_Coins", tabsBoxGo.transform, new Vector2(0, 0), "GÓI TIỀN VÀNG", fontBangers);
-            var (tabSpecialBtn, tabSpecialBg, tabSpecialTxt) = CreateCategoryTab("Tab_Special", tabsBoxGo.transform, new Vector2(320, 0), "ƯU ĐÃI ĐẶC BIỆT", fontBangers);
+            var tabNormalSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_normal.png");
+            var tabActiveCyanSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_active_cyan.png");
+            var tabActiveGoldSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_active_gold.png");
+            var tabActivePinkSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_active_pink.png");
+
+            var gemIconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "icon_gem.png");
+            var coinIconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "icon_coin.png");
+            var specialIconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "deco_crown_pink.png");
+
+            var (tabGemsBtn, tabGemsBg, tabGemsTxt, tabGemsIcon) = CreateCategoryTab(
+                "Tab_Gems", tabsBoxGo.transform, new Vector2(-320, 0), "GÓI KIM CƯƠNG", 
+                tabActiveCyanSprite, gemIconSprite, new Vector2(34, 32), fontBangers);
+
+            var (tabCoinsBtn, tabCoinsBg, tabCoinsTxt, tabCoinsIcon) = CreateCategoryTab(
+                "Tab_Coins", tabsBoxGo.transform, new Vector2(0, 0), "GÓI TIỀN VÀNG", 
+                tabNormalSprite, coinIconSprite, new Vector2(36, 34), fontBangers);
+
+            var (tabSpecialBtn, tabSpecialBg, tabSpecialTxt, tabSpecialIcon) = CreateCategoryTab(
+                "Tab_Special", tabsBoxGo.transform, new Vector2(320, 0), "ƯU ĐÃI ĐẶC BIỆT", 
+                tabNormalSprite, specialIconSprite, new Vector2(34, 34), fontBangers);
 
             // 8. Main UI Frame / Pack Areas (UI Background: 9-sliced panel_list with cyber paint borders)
             var packAreaGo = CreateUIObject("PackArea", canvasGo.transform);
@@ -429,6 +446,15 @@ namespace Luan.NapTien.Editor
             so.FindProperty("tabCoinsText").objectReferenceValue = tabCoinsTxt;
             so.FindProperty("tabSpecialText").objectReferenceValue = tabSpecialTxt;
 
+            so.FindProperty("tabGemsIcon").objectReferenceValue = tabGemsIcon;
+            so.FindProperty("tabCoinsIcon").objectReferenceValue = tabCoinsIcon;
+            so.FindProperty("tabSpecialIcon").objectReferenceValue = tabSpecialIcon;
+
+            so.FindProperty("tabNormalSprite").objectReferenceValue = tabNormalSprite;
+            so.FindProperty("tabActiveCyanSprite").objectReferenceValue = tabActiveCyanSprite;
+            so.FindProperty("tabActiveGoldSprite").objectReferenceValue = tabActiveGoldSprite;
+            so.FindProperty("tabActivePinkSprite").objectReferenceValue = tabActivePinkSprite;
+
             so.FindProperty("gemsContainer").objectReferenceValue = gemsContainerGo;
             so.FindProperty("coinsContainer").objectReferenceValue = coinsContainerGo;
             so.FindProperty("specialContainer").objectReferenceValue = specialContainerGo;
@@ -498,31 +524,52 @@ namespace Luan.NapTien.Editor
             Debug.Log($"NapTien scene successfully created at: {scenePath}");
         }
 
-        private static (Button, Image, TMP_Text) CreateCategoryTab(string name, Transform parent, Vector2 pos, string label, TMP_FontAsset font)
+        private static (Button, Image, TMP_Text, Image) CreateCategoryTab(
+            string name, Transform parent, Vector2 pos, string label, Sprite bgSprite, Sprite iconSprite, Vector2 iconSize, TMP_FontAsset font)
         {
             var tabGo = CreateUIObject(name, parent);
             var tabRt = tabGo.GetComponent<RectTransform>();
             tabRt.anchorMin = tabRt.anchorMax = new Vector2(0.5f, 0.5f);
             tabRt.pivot = new Vector2(0.5f, 0.5f);
             tabRt.anchoredPosition = pos;
-            tabRt.sizeDelta = new Vector2(300, 52);
+            tabRt.sizeDelta = new Vector2(310, 54);
 
             var bgImg = tabGo.AddComponent<Image>();
-            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "tab_currency_selected.png");
-            bgImg.color = new Color(0.12f, 0.15f, 0.32f, 0.95f);
+            bgImg.sprite = bgSprite;
+            bgImg.color = Color.white;
             var btn = tabGo.AddComponent<Button>();
             SetButtonColors(btn);
 
+            // Icon on the left
+            var iconGo = CreateUIObject("Icon", tabGo.transform);
+            var iconRt = iconGo.GetComponent<RectTransform>();
+            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0, 0.5f);
+            iconRt.pivot = new Vector2(0.5f, 0.5f);
+            iconRt.anchoredPosition = new Vector2(38, 0);
+            iconRt.sizeDelta = iconSize;
+            var iconImg = iconGo.AddComponent<Image>();
+            iconImg.sprite = iconSprite;
+            iconImg.preserveAspect = true;
+            iconImg.raycastTarget = false;
+
+            // Text
             var textGo = CreateUIObject("Text", tabGo.transform);
-            SetStretch(textGo);
+            var textRt = textGo.GetComponent<RectTransform>();
+            textRt.anchorMin = new Vector2(0, 0);
+            textRt.anchorMax = new Vector2(1, 1);
+            textRt.pivot = new Vector2(0.5f, 0.5f);
+            textRt.offsetMin = new Vector2(65, 0);
+            textRt.offsetMax = new Vector2(-12, 0);
+
             var tmp = textGo.AddComponent<TextMeshProUGUI>();
             tmp.font = font;
-            tmp.fontSize = 22;
+            tmp.fontSize = 25;
             tmp.text = label;
-            tmp.color = new Color(0.85f, 0.95f, 1f, 1f);
+            tmp.color = Color.white;
             tmp.alignment = TextAlignmentOptions.Center;
+            tmp.raycastTarget = false;
 
-            return (btn, bgImg, tmp);
+            return (btn, bgImg, tmp, iconImg);
         }
 
         private static NapTienCardView CreatePackCard(string name, Transform parent, Vector2 pos, TopUpPackData pack, TMP_FontAsset fontBangers, TMP_FontAsset fontSans, bool isLarge = false)
