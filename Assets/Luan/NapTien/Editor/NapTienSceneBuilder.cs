@@ -1,0 +1,1032 @@
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
+using TMPro;
+
+namespace Luan.NapTien.Editor
+{
+    public static class NapTienSceneBuilder
+    {
+        private const string SpritesRoot = "Assets/Luan/NapTien/Sprites/";
+        private const string ShopSpritesRoot = "Assets/UI/Shop/Sprites/";
+        private const string SongListSpritesRoot = "Assets/UI/SongList/Sprites/";
+
+        [MenuItem("Tools/Luan/Build NapTien Scene")]
+        public static void Build()
+        {
+            ConfigureAllSprites();
+
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+
+            // 1. Camera
+            var cameraGo = new GameObject("Main Camera", typeof(Camera));
+            cameraGo.tag = "MainCamera";
+            var camera = cameraGo.GetComponent<Camera>();
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = new Color(0.04f, 0.03f, 0.08f, 1f);
+            camera.orthographic = true;
+            cameraGo.transform.position = new Vector3(0, 0, -10);
+
+            // 2. Canvas
+            var canvasGo = new GameObject("NapTienCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+            var canvas = canvasGo.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            var scaler = canvasGo.GetComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            scaler.matchWidthOrHeight = 0.5f;
+
+            var controller = canvasGo.AddComponent<NapTienController>();
+
+            // 3. Fonts
+            var fontBangers = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Thuan/UI/Fonts/Bangers SDF.asset");
+            var fontSans = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
+
+            // 4. Background
+            var bgGo = CreateUIObject("Background", canvasGo.transform);
+            SetStretch(bgGo);
+            var bgImg = bgGo.AddComponent<Image>();
+            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "bg_songlist.png");
+            bgImg.preserveAspect = false;
+            bgImg.color = new Color(0.85f, 0.85f, 0.95f, 1f);
+
+            // Vignette dark overlay
+            var vigGo = CreateUIObject("VignetteOverlay", canvasGo.transform);
+            SetStretch(vigGo);
+            var vigImg = vigGo.AddComponent<Image>();
+            vigImg.color = new Color(0.03f, 0.02f, 0.08f, 0.65f);
+            vigImg.raycastTarget = false;
+
+            // 5. Header Bar
+            var headerGo = CreateUIObject("HeaderBar", canvasGo.transform);
+            var headerRt = headerGo.GetComponent<RectTransform>();
+            headerRt.anchorMin = new Vector2(0, 1);
+            headerRt.anchorMax = new Vector2(1, 1);
+            headerRt.pivot = new Vector2(0.5f, 1f);
+            headerRt.anchoredPosition = new Vector2(0, 0);
+            headerRt.sizeDelta = new Vector2(0, 120);
+
+            // Back button
+            var backBtnGo = CreateUIObject("BackButton", headerGo.transform);
+            var backBtnRt = backBtnGo.GetComponent<RectTransform>();
+            backBtnRt.anchorMin = backBtnRt.anchorMax = new Vector2(0, 1);
+            backBtnRt.pivot = new Vector2(0, 1);
+            backBtnRt.anchoredPosition = new Vector2(40, -25);
+            backBtnRt.sizeDelta = new Vector2(70, 70);
+            var backBtnImg = backBtnGo.AddComponent<Image>();
+            backBtnImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "btn_back_shop.png");
+            var backBtn = backBtnGo.AddComponent<Button>();
+            SetButtonColors(backBtn);
+
+            // Title Container
+            var titleBoxGo = CreateUIObject("TitleContainer", headerGo.transform);
+            var titleBoxRt = titleBoxGo.GetComponent<RectTransform>();
+            titleBoxRt.anchorMin = titleBoxRt.anchorMax = new Vector2(0, 1);
+            titleBoxRt.pivot = new Vector2(0, 1);
+            titleBoxRt.anchoredPosition = new Vector2(130, -20);
+            titleBoxRt.sizeDelta = new Vector2(600, 80);
+
+            var titleTextGo = CreateUIObject("TitleText", titleBoxGo.transform);
+            var titleTextRt = titleTextGo.GetComponent<RectTransform>();
+            titleTextRt.anchorMin = new Vector2(0, 0.4f);
+            titleTextRt.anchorMax = new Vector2(1, 1);
+            titleTextRt.offsetMin = titleTextRt.offsetMax = Vector2.zero;
+            var titleTMP = titleTextGo.AddComponent<TextMeshProUGUI>();
+            titleTMP.font = fontBangers != null ? fontBangers : fontSans;
+            titleTMP.text = "TIỆM NẠP TIỀN";
+            titleTMP.fontSize = 52;
+            titleTMP.color = new Color(0f, 1f, 0.95f, 1f); // Neon Cyan
+            titleTMP.alignment = TextAlignmentOptions.Left;
+
+            var subtitleTextGo = CreateUIObject("SubtitleText", titleBoxGo.transform);
+            var subRt = subtitleTextGo.GetComponent<RectTransform>();
+            subRt.anchorMin = new Vector2(0, 0);
+            subRt.anchorMax = new Vector2(1, 0.4f);
+            subRt.offsetMin = subRt.offsetMax = Vector2.zero;
+            var subTMP = subtitleTextGo.AddComponent<TextMeshProUGUI>();
+            subTMP.font = fontSans;
+            subTMP.text = "CỔNG NẠP KIM CƯƠNG & XU VÀNG CHÍNH HÃNG - NHẬN TỨC THÌ";
+            subTMP.fontSize = 16;
+            subTMP.color = new Color(0.7f, 0.75f, 0.9f, 0.85f);
+            subTMP.alignment = TextAlignmentOptions.Left;
+
+            // Wallet Container at top right
+            var walletBoxGo = CreateUIObject("WalletContainer", headerGo.transform);
+            var walletBoxRt = walletBoxGo.GetComponent<RectTransform>();
+            walletBoxRt.anchorMin = walletBoxRt.anchorMax = new Vector2(1, 1);
+            walletBoxRt.pivot = new Vector2(1, 1);
+            walletBoxRt.anchoredPosition = new Vector2(-40, -30);
+            walletBoxRt.sizeDelta = new Vector2(500, 60);
+
+            // Coin Bar
+            var coinBarGo = CreateUIObject("CoinBar", walletBoxGo.transform);
+            var coinBarRt = coinBarGo.GetComponent<RectTransform>();
+            coinBarRt.anchorMin = coinBarRt.anchorMax = new Vector2(0, 0.5f);
+            coinBarRt.pivot = new Vector2(0, 0.5f);
+            coinBarRt.anchoredPosition = new Vector2(0, 0);
+            coinBarRt.sizeDelta = new Vector2(230, 50);
+            var coinBarImg = coinBarGo.AddComponent<Image>();
+            coinBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_coin.png");
+
+            var coinIconGo = CreateUIObject("CoinIcon", coinBarGo.transform);
+            var coinIconRt = coinIconGo.GetComponent<RectTransform>();
+            coinIconRt.anchorMin = coinIconRt.anchorMax = new Vector2(0, 0.5f);
+            coinIconRt.pivot = new Vector2(0.5f, 0.5f);
+            coinIconRt.anchoredPosition = new Vector2(18, 0);
+            coinIconRt.sizeDelta = new Vector2(40, 40);
+            var coinIconImg = coinIconGo.AddComponent<Image>();
+            coinIconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "icon_coin.png");
+
+            var coinTextGo = CreateUIObject("CoinText", coinBarGo.transform);
+            var coinTextRt = coinTextGo.GetComponent<RectTransform>();
+            coinTextRt.anchorMin = new Vector2(0.2f, 0);
+            coinTextRt.anchorMax = new Vector2(0.95f, 1);
+            coinTextRt.offsetMin = coinTextRt.offsetMax = Vector2.zero;
+            var coinTMP = coinTextGo.AddComponent<TextMeshProUGUI>();
+            coinTMP.font = fontBangers != null ? fontBangers : fontSans;
+            coinTMP.fontSize = 24;
+            coinTMP.color = new Color(1f, 0.95f, 0.6f, 1f);
+            coinTMP.text = "10,000";
+            coinTMP.alignment = TextAlignmentOptions.MidlineRight;
+
+            // Gem Bar
+            var gemBarGo = CreateUIObject("GemBar", walletBoxGo.transform);
+            var gemBarRt = gemBarGo.GetComponent<RectTransform>();
+            gemBarRt.anchorMin = gemBarRt.anchorMax = new Vector2(1, 0.5f);
+            gemBarRt.pivot = new Vector2(1, 0.5f);
+            gemBarRt.anchoredPosition = new Vector2(0, 0);
+            gemBarRt.sizeDelta = new Vector2(230, 50);
+            var gemBarImg = gemBarGo.AddComponent<Image>();
+            gemBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_gem.png");
+
+            var gemIconGo = CreateUIObject("GemIcon", gemBarGo.transform);
+            var gemIconRt = gemIconGo.GetComponent<RectTransform>();
+            gemIconRt.anchorMin = gemIconRt.anchorMax = new Vector2(0, 0.5f);
+            gemIconRt.pivot = new Vector2(0.5f, 0.5f);
+            gemIconRt.anchoredPosition = new Vector2(18, 0);
+            gemIconRt.sizeDelta = new Vector2(40, 40);
+            var gemIconImg = gemIconGo.AddComponent<Image>();
+            gemIconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "icon_gem.png");
+
+            var gemTextGo = CreateUIObject("GemText", gemBarGo.transform);
+            var gemTextRt = gemTextGo.GetComponent<RectTransform>();
+            gemTextRt.anchorMin = new Vector2(0.2f, 0);
+            gemTextRt.anchorMax = new Vector2(0.95f, 1);
+            gemTextRt.offsetMin = gemTextRt.offsetMax = Vector2.zero;
+            var gemTMP = gemTextGo.AddComponent<TextMeshProUGUI>();
+            gemTMP.font = fontBangers != null ? fontBangers : fontSans;
+            gemTMP.fontSize = 24;
+            gemTMP.color = new Color(0.6f, 1f, 1f, 1f);
+            gemTMP.text = "1,000";
+            gemTMP.alignment = TextAlignmentOptions.MidlineRight;
+
+            // 6. Category Tabs
+            var tabsBoxGo = CreateUIObject("CategoryTabs", canvasGo.transform);
+            var tabsBoxRt = tabsBoxGo.GetComponent<RectTransform>();
+            tabsBoxRt.anchorMin = tabsBoxRt.anchorMax = new Vector2(0.5f, 1f);
+            tabsBoxRt.pivot = new Vector2(0.5f, 1f);
+            tabsBoxRt.anchoredPosition = new Vector2(0, -118);
+            tabsBoxRt.sizeDelta = new Vector2(960, 54);
+
+            var (tabGemsBtn, tabGemsBg, tabGemsTxt) = CreateCategoryTab("Tab_Gems", tabsBoxGo.transform, new Vector2(-320, 0), "GÓI KIM CƯƠNG", fontBangers);
+            var (tabCoinsBtn, tabCoinsBg, tabCoinsTxt) = CreateCategoryTab("Tab_Coins", tabsBoxGo.transform, new Vector2(0, 0), "GÓI TIỀN VÀNG", fontBangers);
+            var (tabSpecialBtn, tabSpecialBg, tabSpecialTxt) = CreateCategoryTab("Tab_Special", tabsBoxGo.transform, new Vector2(320, 0), "ƯU ĐÃI ĐẶC BIỆT", fontBangers);
+
+            // 7. Pack Areas / Containers
+            var packAreaGo = CreateUIObject("PackArea", canvasGo.transform);
+            var packAreaRt = packAreaGo.GetComponent<RectTransform>();
+            packAreaRt.anchorMin = new Vector2(0.5f, 0.5f);
+            packAreaRt.anchorMax = new Vector2(0.5f, 0.5f);
+            packAreaRt.pivot = new Vector2(0.5f, 0.5f);
+            packAreaRt.anchoredPosition = new Vector2(0, -70);
+            packAreaRt.sizeDelta = new Vector2(1720, 780);
+
+            // A. Gems Container (2 rows x 3 columns)
+            var gemsContainerGo = CreateUIObject("GemsContainer", packAreaGo.transform);
+            SetStretch(gemsContainerGo);
+
+            var gemPacks = GetDefaultGemPacks();
+            var gemCardViews = new List<NapTienCardView>();
+            Vector2[] gridPositions = new Vector2[]
+            {
+                new Vector2(-540, 185),  new Vector2(0, 185),  new Vector2(540, 185),
+                new Vector2(-540, -185), new Vector2(0, -185), new Vector2(540, -185)
+            };
+
+            for (int i = 0; i < gemPacks.Length; i++)
+            {
+                var cardView = CreatePackCard($"GemCard_{i}", gemsContainerGo.transform, gridPositions[i], gemPacks[i], fontBangers, fontSans);
+                gemCardViews.Add(cardView);
+            }
+
+            // B. Coins Container (2 rows x 3 columns)
+            var coinsContainerGo = CreateUIObject("CoinsContainer", packAreaGo.transform);
+            SetStretch(coinsContainerGo);
+
+            var coinPacks = GetDefaultCoinPacks();
+            var coinCardViews = new List<NapTienCardView>();
+            for (int i = 0; i < coinPacks.Length; i++)
+            {
+                var cardView = CreatePackCard($"CoinCard_{i}", coinsContainerGo.transform, gridPositions[i], coinPacks[i], fontBangers, fontSans);
+                coinCardViews.Add(cardView);
+            }
+
+            // C. Special Container (3 Large Cards)
+            var specialContainerGo = CreateUIObject("SpecialContainer", packAreaGo.transform);
+            SetStretch(specialContainerGo);
+
+            var specialPacks = GetDefaultSpecialPacks();
+            var specialCardViews = new List<NapTienCardView>();
+            Vector2[] specialPositions = new Vector2[]
+            {
+                new Vector2(-540, 0), new Vector2(0, 0), new Vector2(540, 0)
+            };
+            for (int i = 0; i < specialPacks.Length; i++)
+            {
+                var cardView = CreatePackCard($"SpecialCard_{i}", specialContainerGo.transform, specialPositions[i], specialPacks[i], fontBangers, fontSans, isLarge: true);
+                specialCardViews.Add(cardView);
+            }
+
+            // 8. Payment Modal
+            var modalBuilder = BuildPaymentModal(canvasGo.transform, fontBangers, fontSans);
+
+            // 9. Success Toast
+            var (successToastGo, successDialogRt, successMsgTmp, successOkBtn) = BuildSuccessToast(canvasGo.transform, fontBangers, fontSans);
+
+            // 10. Copy Toast
+            var (copyToastGo, copyToastTmp) = BuildCopyToast(canvasGo.transform, fontSans);
+
+            // 11. Wire Serialized Fields on Controller
+            var so = new SerializedObject(controller);
+            so.FindProperty("backButton").objectReferenceValue = backBtn;
+            so.FindProperty("returnSceneName").stringValue = "Thuan_Shop";
+            so.FindProperty("coinText").objectReferenceValue = coinTMP;
+            so.FindProperty("gemText").objectReferenceValue = gemTMP;
+
+            so.FindProperty("tabGemsButton").objectReferenceValue = tabGemsBtn;
+            so.FindProperty("tabCoinsButton").objectReferenceValue = tabCoinsBtn;
+            so.FindProperty("tabSpecialButton").objectReferenceValue = tabSpecialBtn;
+
+            so.FindProperty("tabGemsBg").objectReferenceValue = tabGemsBg;
+            so.FindProperty("tabCoinsBg").objectReferenceValue = tabCoinsBg;
+            so.FindProperty("tabSpecialBg").objectReferenceValue = tabSpecialBg;
+
+            so.FindProperty("tabGemsText").objectReferenceValue = tabGemsTxt;
+            so.FindProperty("tabCoinsText").objectReferenceValue = tabCoinsTxt;
+            so.FindProperty("tabSpecialText").objectReferenceValue = tabSpecialTxt;
+
+            so.FindProperty("gemsContainer").objectReferenceValue = gemsContainerGo;
+            so.FindProperty("coinsContainer").objectReferenceValue = coinsContainerGo;
+            so.FindProperty("specialContainer").objectReferenceValue = specialContainerGo;
+
+            SetArrayProperty(so.FindProperty("gemCardViews"), gemCardViews);
+            SetArrayProperty(so.FindProperty("coinCardViews"), coinCardViews);
+            SetArrayProperty(so.FindProperty("specialCardViews"), specialCardViews);
+
+            so.FindProperty("paymentModal").objectReferenceValue = modalBuilder.modalGo;
+            so.FindProperty("paymentModalDialog").objectReferenceValue = modalBuilder.dialogRt;
+            so.FindProperty("modalPackIcon").objectReferenceValue = modalBuilder.packIconImg;
+            so.FindProperty("modalPackTitle").objectReferenceValue = modalBuilder.packTitleTmp;
+            so.FindProperty("modalPackValue").objectReferenceValue = modalBuilder.packValueTmp;
+            so.FindProperty("modalPackPrice").objectReferenceValue = modalBuilder.packPriceTmp;
+
+            so.FindProperty("btnVietQR").objectReferenceValue = modalBuilder.btnVietQR;
+            so.FindProperty("btnZaloPay").objectReferenceValue = modalBuilder.btnZaloPay;
+            so.FindProperty("btnMoMo").objectReferenceValue = modalBuilder.btnMoMo;
+            so.FindProperty("imgVietQRSelect").objectReferenceValue = modalBuilder.imgVietQRSelect;
+            so.FindProperty("imgZaloPaySelect").objectReferenceValue = modalBuilder.imgZaloPaySelect;
+            so.FindProperty("imgMoMoSelect").objectReferenceValue = modalBuilder.imgMoMoSelect;
+
+            so.FindProperty("qrImage").objectReferenceValue = modalBuilder.qrImg;
+            so.FindProperty("bankNameText").objectReferenceValue = modalBuilder.bankNameTmp;
+            so.FindProperty("accountNumText").objectReferenceValue = modalBuilder.accountNumTmp;
+            so.FindProperty("accountNameText").objectReferenceValue = modalBuilder.accountNameTmp;
+            so.FindProperty("transferContentText").objectReferenceValue = modalBuilder.transferContentTmp;
+            so.FindProperty("amountToPayText").objectReferenceValue = modalBuilder.amountToPayTmp;
+            so.FindProperty("timerCountdownText").objectReferenceValue = modalBuilder.timerCountdownTmp;
+
+            so.FindProperty("copyAccountNumBtn").objectReferenceValue = modalBuilder.copyAccountNumBtn;
+            so.FindProperty("copyContentBtn").objectReferenceValue = modalBuilder.copyContentBtn;
+            so.FindProperty("confirmPaymentBtn").objectReferenceValue = modalBuilder.confirmPaymentBtn;
+            so.FindProperty("closePaymentModalBtn").objectReferenceValue = modalBuilder.closePaymentModalBtn;
+
+            so.FindProperty("successToast").objectReferenceValue = successToastGo;
+            so.FindProperty("successToastDialog").objectReferenceValue = successDialogRt;
+            so.FindProperty("successMessageText").objectReferenceValue = successMsgTmp;
+            so.FindProperty("successOkButton").objectReferenceValue = successOkBtn;
+
+            so.FindProperty("copyToast").objectReferenceValue = copyToastGo;
+            so.FindProperty("copyToastText").objectReferenceValue = copyToastTmp;
+
+            so.ApplyModifiedProperties();
+
+            // Bind Cards at edit time
+            for (int i = 0; i < gemCardViews.Count; i++)
+            {
+                gemCardViews[i].Bind(gemPacks[i], controller.OnPackSelected);
+            }
+            for (int i = 0; i < coinCardViews.Count; i++)
+            {
+                coinCardViews[i].Bind(coinPacks[i], controller.OnPackSelected);
+            }
+            for (int i = 0; i < specialCardViews.Count; i++)
+            {
+                specialCardViews[i].Bind(specialPacks[i], controller.OnPackSelected);
+            }
+
+            // 12. Event System
+            new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+
+            // 13. Save Scene
+            string scenePath = "Assets/Luan/Scenes/NapTien.unity";
+            EditorSceneManager.SaveScene(scene, scenePath);
+            AssetDatabase.SaveAssets();
+            Debug.Log($"NapTien scene successfully created at: {scenePath}");
+        }
+
+        private static (Button, Image, TMP_Text) CreateCategoryTab(string name, Transform parent, Vector2 pos, string label, TMP_FontAsset font)
+        {
+            var tabGo = CreateUIObject(name, parent);
+            var tabRt = tabGo.GetComponent<RectTransform>();
+            tabRt.anchorMin = tabRt.anchorMax = new Vector2(0.5f, 0.5f);
+            tabRt.pivot = new Vector2(0.5f, 0.5f);
+            tabRt.anchoredPosition = pos;
+            tabRt.sizeDelta = new Vector2(300, 48);
+
+            var bgImg = tabGo.AddComponent<Image>();
+            bgImg.color = new Color(0.1f, 0.12f, 0.25f, 0.9f);
+            var btn = tabGo.AddComponent<Button>();
+            SetButtonColors(btn);
+
+            var textGo = CreateUIObject("Text", tabGo.transform);
+            SetStretch(textGo);
+            var tmp = textGo.AddComponent<TextMeshProUGUI>();
+            tmp.font = font;
+            tmp.fontSize = 22;
+            tmp.text = label;
+            tmp.color = new Color(0.8f, 0.9f, 1f, 1f);
+            tmp.alignment = TextAlignmentOptions.Center;
+
+            return (btn, bgImg, tmp);
+        }
+
+        private static NapTienCardView CreatePackCard(string name, Transform parent, Vector2 pos, TopUpPackData pack, TMP_FontAsset fontBangers, TMP_FontAsset fontSans, bool isLarge = false)
+        {
+            var cardGo = CreateUIObject(name, parent);
+            var cardRt = cardGo.GetComponent<RectTransform>();
+            cardRt.anchorMin = cardRt.anchorMax = new Vector2(0.5f, 0.5f);
+            cardRt.pivot = new Vector2(0.5f, 0.5f);
+            cardRt.anchoredPosition = pos;
+            cardRt.sizeDelta = isLarge ? new Vector2(440, 520) : new Vector2(440, 320);
+
+            var bgImg = cardGo.AddComponent<Image>();
+            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "card_pack_bg.png");
+            var cardFullBtn = cardGo.AddComponent<Button>();
+            SetButtonColors(cardFullBtn);
+
+            // Icon
+            var iconGo = CreateUIObject("PackIcon", cardGo.transform);
+            var iconRt = iconGo.GetComponent<RectTransform>();
+            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 0.5f);
+            iconRt.pivot = new Vector2(0.5f, 0.5f);
+            iconRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 35);
+            iconRt.sizeDelta = isLarge ? new Vector2(200, 200) : new Vector2(140, 140);
+            var iconImg = iconGo.AddComponent<Image>();
+            iconImg.sprite = pack.iconSprite;
+            iconImg.preserveAspect = true;
+
+            // Title
+            var titleGo = CreateUIObject("TitleText", cardGo.transform);
+            var titleRt = titleGo.GetComponent<RectTransform>();
+            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 1f);
+            titleRt.pivot = new Vector2(0.5f, 1f);
+            titleRt.anchoredPosition = new Vector2(0, -18);
+            titleRt.sizeDelta = new Vector2(400, 34);
+            var titleTMP = titleGo.AddComponent<TextMeshProUGUI>();
+            titleTMP.font = fontBangers != null ? fontBangers : fontSans;
+            titleTMP.fontSize = isLarge ? 26 : 22;
+            titleTMP.text = pack.title;
+            titleTMP.color = Color.white;
+            titleTMP.alignment = TextAlignmentOptions.Center;
+
+            // Amount / Value Text
+            var amountGo = CreateUIObject("AmountText", cardGo.transform);
+            var amountRt = amountGo.GetComponent<RectTransform>();
+            amountRt.anchorMin = amountRt.anchorMax = new Vector2(0.5f, 0.5f);
+            amountRt.pivot = new Vector2(0.5f, 0.5f);
+            amountRt.anchoredPosition = isLarge ? new Vector2(0, -75) : new Vector2(0, -48);
+            amountRt.sizeDelta = new Vector2(380, 36);
+            var amountTMP = amountGo.AddComponent<TextMeshProUGUI>();
+            amountTMP.font = fontBangers != null ? fontBangers : fontSans;
+            amountTMP.fontSize = isLarge ? 28 : 24;
+            amountTMP.color = pack.currencyType == CurrencyType.Coin ? new Color(1f, 0.9f, 0.2f, 1f) : new Color(0f, 1f, 0.95f, 1f);
+            string unit = pack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
+            amountTMP.text = $"{pack.mainAmount:N0} {unit}";
+            amountTMP.alignment = TextAlignmentOptions.Center;
+
+            // Bonus text
+            var bonusGo = CreateUIObject("BonusText", cardGo.transform);
+            var bonusRt = bonusGo.GetComponent<RectTransform>();
+            bonusRt.anchorMin = bonusRt.anchorMax = new Vector2(0.5f, 0.5f);
+            bonusRt.pivot = new Vector2(0.5f, 0.5f);
+            bonusRt.anchoredPosition = isLarge ? new Vector2(0, -112) : new Vector2(0, -74);
+            bonusRt.sizeDelta = new Vector2(300, 24);
+            var bonusTMP = bonusGo.AddComponent<TextMeshProUGUI>();
+            bonusTMP.font = fontSans;
+            bonusTMP.fontSize = 15;
+            bonusTMP.color = new Color(0.4f, 1f, 0.6f, 1f); // Neon Green
+            bonusTMP.text = pack.bonusAmount > 0 ? $"+{pack.bonusAmount:N0} Thưởng" : "";
+            bonusTMP.alignment = TextAlignmentOptions.Center;
+
+            // Price Tag Button
+            var priceBtnGo = CreateUIObject("PriceTagButton", cardGo.transform);
+            var priceBtnRt = priceBtnGo.GetComponent<RectTransform>();
+            priceBtnRt.anchorMin = priceBtnRt.anchorMax = new Vector2(0.5f, 0f);
+            priceBtnRt.pivot = new Vector2(0.5f, 0f);
+            priceBtnRt.anchoredPosition = new Vector2(0, 16);
+            priceBtnRt.sizeDelta = isLarge ? new Vector2(260, 56) : new Vector2(220, 50);
+            var priceBtnImg = priceBtnGo.AddComponent<Image>();
+            priceBtnImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_price_tag.png");
+            var priceBtn = priceBtnGo.AddComponent<Button>();
+            SetButtonColors(priceBtn);
+
+            var priceTextGo = CreateUIObject("PriceText", priceBtnGo.transform);
+            SetStretch(priceTextGo);
+            var priceTMP = priceTextGo.AddComponent<TextMeshProUGUI>();
+            priceTMP.font = fontBangers != null ? fontBangers : fontSans;
+            priceTMP.fontSize = 24;
+            priceTMP.color = Color.white;
+            priceTMP.text = $"{pack.priceVnd:N0} đ";
+            priceTMP.alignment = TextAlignmentOptions.Center;
+
+            // Badge Ribbon
+            var badgeGo = CreateUIObject("BadgeRibbon", cardGo.transform);
+            var badgeRt = badgeGo.GetComponent<RectTransform>();
+            badgeRt.anchorMin = badgeRt.anchorMax = new Vector2(1f, 1f);
+            badgeRt.pivot = new Vector2(1f, 1f);
+            badgeRt.anchoredPosition = new Vector2(8, 8);
+            badgeRt.sizeDelta = new Vector2(140, 36);
+            var badgeImg = badgeGo.AddComponent<Image>();
+            badgeImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "badge_bonus.png");
+
+            var badgeTextGo = CreateUIObject("BadgeText", badgeGo.transform);
+            SetStretch(badgeTextGo);
+            var badgeTMP = badgeTextGo.AddComponent<TextMeshProUGUI>();
+            badgeTMP.font = fontBangers != null ? fontBangers : fontSans;
+            badgeTMP.fontSize = 16;
+            badgeTMP.color = Color.white;
+            badgeTMP.text = pack.badgeText;
+            badgeTMP.alignment = TextAlignmentOptions.Center;
+
+            badgeGo.SetActive(!string.IsNullOrEmpty(pack.badgeText));
+
+            // Card View Component
+            var cardView = cardGo.AddComponent<NapTienCardView>();
+            var viewSo = new SerializedObject(cardView);
+            viewSo.FindProperty("bgImage").objectReferenceValue = bgImg;
+            viewSo.FindProperty("iconImage").objectReferenceValue = iconImg;
+            viewSo.FindProperty("titleText").objectReferenceValue = titleTMP;
+            viewSo.FindProperty("amountText").objectReferenceValue = amountTMP;
+            viewSo.FindProperty("bonusText").objectReferenceValue = bonusTMP;
+            viewSo.FindProperty("buyButton").objectReferenceValue = priceBtn;
+            viewSo.FindProperty("priceText").objectReferenceValue = priceTMP;
+            viewSo.FindProperty("badgeObj").objectReferenceValue = badgeGo;
+            viewSo.FindProperty("badgeText").objectReferenceValue = badgeTMP;
+            viewSo.FindProperty("cardFullButton").objectReferenceValue = cardFullBtn;
+            viewSo.ApplyModifiedProperties();
+
+            return cardView;
+        }
+
+        private struct ModalBuildResult
+        {
+            public GameObject modalGo;
+            public RectTransform dialogRt;
+            public Image packIconImg;
+            public TMP_Text packTitleTmp;
+            public TMP_Text packValueTmp;
+            public TMP_Text packPriceTmp;
+            public Button btnVietQR;
+            public Button btnZaloPay;
+            public Button btnMoMo;
+            public Image imgVietQRSelect;
+            public Image imgZaloPaySelect;
+            public Image imgMoMoSelect;
+            public Image qrImg;
+            public TMP_Text bankNameTmp;
+            public TMP_Text accountNumTmp;
+            public TMP_Text accountNameTmp;
+            public TMP_Text transferContentTmp;
+            public TMP_Text amountToPayTmp;
+            public TMP_Text timerCountdownTmp;
+            public Button copyAccountNumBtn;
+            public Button copyContentBtn;
+            public Button confirmPaymentBtn;
+            public Button closePaymentModalBtn;
+        }
+
+        private static ModalBuildResult BuildPaymentModal(Transform parent, TMP_FontAsset fontBangers, TMP_FontAsset fontSans)
+        {
+            var modalGo = CreateUIObject("PaymentModal", parent);
+            SetStretch(modalGo);
+            var overlayImg = modalGo.AddComponent<Image>();
+            overlayImg.color = new Color(0, 0, 0, 0.82f);
+
+            // Dialog Window
+            var dialogGo = CreateUIObject("DialogWindow", modalGo.transform);
+            var dialogRt = dialogGo.GetComponent<RectTransform>();
+            dialogRt.anchorMin = dialogRt.anchorMax = new Vector2(0.5f, 0.5f);
+            dialogRt.pivot = new Vector2(0.5f, 0.5f);
+            dialogRt.sizeDelta = new Vector2(860, 680);
+            var dialogImg = dialogGo.AddComponent<Image>();
+            dialogImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "modal_payment_bg.png");
+
+            // Header Title
+            var headTitleGo = CreateUIObject("HeaderTitle", dialogGo.transform);
+            var headRt = headTitleGo.GetComponent<RectTransform>();
+            headRt.anchorMin = new Vector2(0, 1);
+            headRt.anchorMax = new Vector2(1, 1);
+            headRt.pivot = new Vector2(0.5f, 1f);
+            headRt.anchoredPosition = new Vector2(0, -18);
+            headRt.sizeDelta = new Vector2(0, 48);
+            var headTmp = headTitleGo.AddComponent<TextMeshProUGUI>();
+            headTmp.font = fontBangers != null ? fontBangers : fontSans;
+            headTmp.fontSize = 32;
+            headTmp.text = "XÁC NHẬN THANH TOÁN QUÉT MÃ QR";
+            headTmp.color = new Color(0f, 1f, 0.95f, 1f);
+            headTmp.alignment = TextAlignmentOptions.Center;
+
+            // Close Button
+            var closeBtnGo = CreateUIObject("CloseButton", dialogGo.transform);
+            var closeRt = closeBtnGo.GetComponent<RectTransform>();
+            closeRt.anchorMin = closeRt.anchorMax = new Vector2(1, 1);
+            closeRt.pivot = new Vector2(1, 1);
+            closeRt.anchoredPosition = new Vector2(-22, -18);
+            closeRt.sizeDelta = new Vector2(44, 44);
+            var closeImg = closeBtnGo.AddComponent<Image>();
+            closeImg.color = new Color(0.9f, 0.2f, 0.4f, 0.9f);
+            var closeBtn = closeBtnGo.AddComponent<Button>();
+            SetButtonColors(closeBtn);
+
+            var closeTxtGo = CreateUIObject("X", closeBtnGo.transform);
+            SetStretch(closeTxtGo);
+            var closeTmp = closeTxtGo.AddComponent<TextMeshProUGUI>();
+            closeTmp.font = fontSans;
+            closeTmp.fontSize = 24;
+            closeTmp.text = "X";
+            closeTmp.color = Color.white;
+            closeTmp.alignment = TextAlignmentOptions.Center;
+
+            // Selected Pack Summary Box
+            var packBoxGo = CreateUIObject("PackSummaryBox", dialogGo.transform);
+            var packBoxRt = packBoxGo.GetComponent<RectTransform>();
+            packBoxRt.anchorMin = new Vector2(0, 1);
+            packBoxRt.anchorMax = new Vector2(1, 1);
+            packBoxRt.pivot = new Vector2(0.5f, 1f);
+            packBoxRt.anchoredPosition = new Vector2(0, -80);
+            packBoxRt.sizeDelta = new Vector2(-60, 90);
+            var packBoxImg = packBoxGo.AddComponent<Image>();
+            packBoxImg.color = new Color(0.12f, 0.16f, 0.32f, 0.85f);
+
+            var iconGo = CreateUIObject("PackIcon", packBoxGo.transform);
+            var iconRt = iconGo.GetComponent<RectTransform>();
+            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0, 0.5f);
+            iconRt.pivot = new Vector2(0.5f, 0.5f);
+            iconRt.anchoredPosition = new Vector2(55, 0);
+            iconRt.sizeDelta = new Vector2(70, 70);
+            var iconImg = iconGo.AddComponent<Image>();
+
+            var pTitleGo = CreateUIObject("PackTitle", packBoxGo.transform);
+            var pTitleRt = pTitleGo.GetComponent<RectTransform>();
+            pTitleRt.anchorMin = new Vector2(0, 0.5f);
+            pTitleRt.anchorMax = new Vector2(0.7f, 1f);
+            pTitleRt.offsetMin = new Vector2(105, 0);
+            pTitleRt.offsetMax = Vector2.zero;
+            var pTitleTmp = pTitleGo.AddComponent<TextMeshProUGUI>();
+            pTitleTmp.font = fontBangers != null ? fontBangers : fontSans;
+            pTitleTmp.fontSize = 26;
+            pTitleTmp.text = "Túi Kim Cương";
+            pTitleTmp.color = Color.white;
+            pTitleTmp.alignment = TextAlignmentOptions.MidlineLeft;
+
+            var pValGo = CreateUIObject("PackValue", packBoxGo.transform);
+            var pValRt = pValGo.GetComponent<RectTransform>();
+            pValRt.anchorMin = new Vector2(0, 0);
+            pValRt.anchorMax = new Vector2(0.7f, 0.5f);
+            pValRt.offsetMin = new Vector2(105, 0);
+            pValRt.offsetMax = Vector2.zero;
+            var pValTmp = pValGo.AddComponent<TextMeshProUGUI>();
+            pValTmp.font = fontSans;
+            pValTmp.fontSize = 18;
+            pValTmp.text = "+1,200 Kim Cương (+200 Thưởng)";
+            pValTmp.color = new Color(0f, 1f, 0.85f, 1f);
+            pValTmp.alignment = TextAlignmentOptions.MidlineLeft;
+
+            var pPriceGo = CreateUIObject("PackPrice", packBoxGo.transform);
+            var pPriceRt = pPriceGo.GetComponent<RectTransform>();
+            pPriceRt.anchorMin = new Vector2(0.7f, 0);
+            pPriceRt.anchorMax = new Vector2(1f, 1f);
+            pPriceRt.offsetMin = pPriceRt.offsetMax = Vector2.zero;
+            var pPriceTmp = pPriceGo.AddComponent<TextMeshProUGUI>();
+            pPriceTmp.font = fontBangers != null ? fontBangers : fontSans;
+            pPriceTmp.fontSize = 32;
+            pPriceTmp.text = "100.000 VNĐ";
+            pPriceTmp.color = new Color(1f, 0.85f, 0.2f, 1f);
+            pPriceTmp.alignment = TextAlignmentOptions.MidlineRight;
+
+            // Payment Channel Bar (3 Channels)
+            var channelBarGo = CreateUIObject("ChannelBar", dialogGo.transform);
+            var channelBarRt = channelBarGo.GetComponent<RectTransform>();
+            channelBarRt.anchorMin = new Vector2(0, 1);
+            channelBarRt.anchorMax = new Vector2(1, 1);
+            channelBarRt.pivot = new Vector2(0.5f, 1f);
+            channelBarRt.anchoredPosition = new Vector2(0, -185);
+            channelBarRt.sizeDelta = new Vector2(-60, 54);
+
+            var (btnVietQR, imgVietQRSelect) = CreateChannelTab("VietQRBtn", channelBarGo.transform, new Vector2(-260, 0), "VIETQR / NGÂN HÀNG", SpritesRoot + "icon_vietqr.png", fontBangers);
+            var (btnZaloPay, imgZaloPaySelect) = CreateChannelTab("ZaloPayBtn", channelBarGo.transform, new Vector2(0, 0), "VÍ ZALOPAY", SpritesRoot + "icon_zalopay.png", fontBangers);
+            var (btnMoMo, imgMoMoSelect) = CreateChannelTab("MoMoBtn", channelBarGo.transform, new Vector2(260, 0), "VÍ MOMO", SpritesRoot + "icon_momo.png", fontBangers);
+
+            // Left Side: QR View
+            var qrBoxGo = CreateUIObject("QRContainer", dialogGo.transform);
+            var qrBoxRt = qrBoxGo.GetComponent<RectTransform>();
+            qrBoxRt.anchorMin = qrBoxRt.anchorMax = new Vector2(0, 0.5f);
+            qrBoxRt.pivot = new Vector2(0, 0.5f);
+            qrBoxRt.anchoredPosition = new Vector2(50, -45);
+            qrBoxRt.sizeDelta = new Vector2(280, 310);
+            var qrBoxImg = qrBoxGo.AddComponent<Image>();
+            qrBoxImg.color = new Color(0.08f, 0.1f, 0.2f, 0.9f);
+
+            var qrGo = CreateUIObject("QRImage", qrBoxGo.transform);
+            var qrRt = qrGo.GetComponent<RectTransform>();
+            qrRt.anchorMin = qrRt.anchorMax = new Vector2(0.5f, 0.5f);
+            qrRt.pivot = new Vector2(0.5f, 0.5f);
+            qrRt.anchoredPosition = new Vector2(0, 20);
+            qrRt.sizeDelta = new Vector2(220, 220);
+            var qrImg = qrGo.AddComponent<Image>();
+            qrImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "sample_qr.png");
+
+            var timerGo = CreateUIObject("TimerText", qrBoxGo.transform);
+            var timerRt = timerGo.GetComponent<RectTransform>();
+            timerRt.anchorMin = new Vector2(0, 0);
+            timerRt.anchorMax = new Vector2(1, 0);
+            timerRt.pivot = new Vector2(0.5f, 0);
+            timerRt.anchoredPosition = new Vector2(0, 10);
+            timerRt.sizeDelta = new Vector2(0, 30);
+            var timerTmp = timerGo.AddComponent<TextMeshProUGUI>();
+            timerTmp.font = fontSans;
+            timerTmp.fontSize = 15;
+            timerTmp.text = "Hiệu lực: <color=#00FFE6>05:00</color>";
+            timerTmp.alignment = TextAlignmentOptions.Center;
+
+            // Right Side: Banking Details
+            var infoBoxGo = CreateUIObject("InfoContainer", dialogGo.transform);
+            var infoBoxRt = infoBoxGo.GetComponent<RectTransform>();
+            infoBoxRt.anchorMin = infoBoxRt.anchorMax = new Vector2(1, 0.5f);
+            infoBoxRt.pivot = new Vector2(1, 0.5f);
+            infoBoxRt.anchoredPosition = new Vector2(-45, -45);
+            infoBoxRt.sizeDelta = new Vector2(460, 310);
+
+            var (bankTmp, _) = CreateDetailRow("BankRow", infoBoxGo.transform, new Vector2(0, 120), "Ngân Hàng:", "MB Bank (Quân Đội)", fontSans, false);
+            var (accNumTmp, copyAccBtn) = CreateDetailRow("AccNumRow", infoBoxGo.transform, new Vector2(0, 65), "Số Tài Khoản:", "0988776655", fontSans, true);
+            var (accNameTmp, _) = CreateDetailRow("AccNameRow", infoBoxGo.transform, new Vector2(0, 10), "Chủ Tài Khoản:", "RHYTHM GAME STUDIO", fontSans, false);
+            var (amountPayTmp, _) = CreateDetailRow("AmountRow", infoBoxGo.transform, new Vector2(0, -45), "Số Tiền:", "100.000 đ", fontSans, false, valueColor: new Color(1f, 0.85f, 0.2f));
+            var (contentTmp, copyContentBtn) = CreateDetailRow("ContentRow", infoBoxGo.transform, new Vector2(0, -100), "Nội Dung CK:", "NAP100K 74892", fontSans, true, valueColor: new Color(0f, 1f, 0.95f));
+
+            // Bottom Confirm Button
+            var confirmBtnGo = CreateUIObject("ConfirmPaymentButton", dialogGo.transform);
+            var confirmRt = confirmBtnGo.GetComponent<RectTransform>();
+            confirmRt.anchorMin = confirmRt.anchorMax = new Vector2(0.5f, 0);
+            confirmRt.pivot = new Vector2(0.5f, 0);
+            confirmRt.anchoredPosition = new Vector2(0, 24);
+            confirmRt.sizeDelta = new Vector2(480, 56);
+            var confirmImg = confirmBtnGo.AddComponent<Image>();
+            confirmImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_price_tag.png");
+            var confirmBtn = confirmBtnGo.AddComponent<Button>();
+            SetButtonColors(confirmBtn);
+
+            var confirmTxtGo = CreateUIObject("Text", confirmBtnGo.transform);
+            SetStretch(confirmTxtGo);
+            var confirmTmp = confirmTxtGo.AddComponent<TextMeshProUGUI>();
+            confirmTmp.font = fontBangers != null ? fontBangers : fontSans;
+            confirmTmp.fontSize = 24;
+            confirmTmp.text = "XÁC NHẬN ĐÃ CHUYỂN KHOẢN (TEST)";
+            confirmTmp.color = Color.white;
+            confirmTmp.alignment = TextAlignmentOptions.Center;
+
+            return new ModalBuildResult
+            {
+                modalGo = modalGo,
+                dialogRt = dialogRt,
+                packIconImg = iconImg,
+                packTitleTmp = pTitleTmp,
+                packValueTmp = pValTmp,
+                packPriceTmp = pPriceTmp,
+                btnVietQR = btnVietQR,
+                btnZaloPay = btnZaloPay,
+                btnMoMo = btnMoMo,
+                imgVietQRSelect = imgVietQRSelect,
+                imgZaloPaySelect = imgZaloPaySelect,
+                imgMoMoSelect = imgMoMoSelect,
+                qrImg = qrImg,
+                bankNameTmp = bankTmp,
+                accountNumTmp = accNumTmp,
+                accountNameTmp = accNameTmp,
+                transferContentTmp = contentTmp,
+                amountToPayTmp = amountPayTmp,
+                timerCountdownTmp = timerTmp,
+                copyAccountNumBtn = copyAccBtn,
+                copyContentBtn = copyContentBtn,
+                confirmPaymentBtn = confirmBtn,
+                closePaymentModalBtn = closeBtn
+            };
+        }
+
+        private static (Button, Image) CreateChannelTab(string name, Transform parent, Vector2 pos, string label, string iconPath, TMP_FontAsset font)
+        {
+            var btnGo = CreateUIObject(name, parent);
+            var btnRt = btnGo.GetComponent<RectTransform>();
+            btnRt.anchorMin = btnRt.anchorMax = new Vector2(0.5f, 0.5f);
+            btnRt.pivot = new Vector2(0.5f, 0.5f);
+            btnRt.anchoredPosition = pos;
+            btnRt.sizeDelta = new Vector2(250, 48);
+
+            var bgImg = btnGo.AddComponent<Image>();
+            bgImg.color = new Color(0.1f, 0.15f, 0.3f, 0.95f);
+            var btn = btnGo.AddComponent<Button>();
+            SetButtonColors(btn);
+
+            // Channel Icon
+            var iconGo = CreateUIObject("Icon", btnGo.transform);
+            var iconRt = iconGo.GetComponent<RectTransform>();
+            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0, 0.5f);
+            iconRt.pivot = new Vector2(0.5f, 0.5f);
+            iconRt.anchoredPosition = new Vector2(26, 0);
+            iconRt.sizeDelta = new Vector2(36, 36);
+            var iconImg = iconGo.AddComponent<Image>();
+            iconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
+
+            var textGo = CreateUIObject("Text", btnGo.transform);
+            var textRt = textGo.GetComponent<RectTransform>();
+            textRt.anchorMin = new Vector2(0.24f, 0);
+            textRt.anchorMax = new Vector2(1f, 1f);
+            textRt.offsetMin = textRt.offsetMax = Vector2.zero;
+            var tmp = textGo.AddComponent<TextMeshProUGUI>();
+            tmp.font = font;
+            tmp.fontSize = 17;
+            tmp.text = label;
+            tmp.color = Color.white;
+            tmp.alignment = TextAlignmentOptions.MidlineLeft;
+
+            // Highlight border
+            var hlGo = CreateUIObject("HighlightBorder", btnGo.transform);
+            SetStretch(hlGo);
+            var hlImg = hlGo.AddComponent<Image>();
+            hlImg.color = new Color(0f, 1f, 0.9f, 0.35f);
+            hlGo.SetActive(false);
+
+            return (btn, hlImg);
+        }
+
+        private static (TMP_Text, Button) CreateDetailRow(string name, Transform parent, Vector2 pos, string label, string val, TMP_FontAsset font, bool hasCopy, Color? valueColor = null)
+        {
+            var rowGo = CreateUIObject(name, parent);
+            var rowRt = rowGo.GetComponent<RectTransform>();
+            rowRt.anchorMin = rowRt.anchorMax = new Vector2(0.5f, 0.5f);
+            rowRt.pivot = new Vector2(0.5f, 0.5f);
+            rowRt.anchoredPosition = pos;
+            rowRt.sizeDelta = new Vector2(460, 44);
+
+            var bg = rowGo.AddComponent<Image>();
+            bg.color = new Color(0.08f, 0.1f, 0.22f, 0.7f);
+
+            var labelGo = CreateUIObject("Label", rowGo.transform);
+            var labelRt = labelGo.GetComponent<RectTransform>();
+            labelRt.anchorMin = new Vector2(0, 0);
+            labelRt.anchorMax = new Vector2(0.35f, 1);
+            labelRt.offsetMin = new Vector2(12, 0);
+            labelRt.offsetMax = Vector2.zero;
+            var lblTmp = labelGo.AddComponent<TextMeshProUGUI>();
+            lblTmp.font = font;
+            lblTmp.fontSize = 16;
+            lblTmp.text = label;
+            lblTmp.color = new Color(0.7f, 0.75f, 0.9f, 1f);
+            lblTmp.alignment = TextAlignmentOptions.MidlineLeft;
+
+            var valGo = CreateUIObject("Value", rowGo.transform);
+            var valRt = valGo.GetComponent<RectTransform>();
+            valRt.anchorMin = new Vector2(0.36f, 0);
+            valRt.anchorMax = hasCopy ? new Vector2(0.8f, 1) : new Vector2(0.98f, 1);
+            valRt.offsetMin = valRt.offsetMax = Vector2.zero;
+            var valTmp = valGo.AddComponent<TextMeshProUGUI>();
+            valTmp.font = font;
+            valTmp.fontSize = 17;
+            valTmp.text = val;
+            valTmp.color = valueColor ?? Color.white;
+            valTmp.alignment = TextAlignmentOptions.MidlineLeft;
+
+            Button copyBtn = null;
+            if (hasCopy)
+            {
+                var copyGo = CreateUIObject("CopyBtn", rowGo.transform);
+                var copyRt = copyGo.GetComponent<RectTransform>();
+                copyRt.anchorMin = copyRt.anchorMax = new Vector2(1, 0.5f);
+                copyRt.pivot = new Vector2(1, 0.5f);
+                copyRt.anchoredPosition = new Vector2(-8, 0);
+                copyRt.sizeDelta = new Vector2(76, 32);
+                var copyImg = copyGo.AddComponent<Image>();
+                copyImg.color = new Color(0.15f, 0.45f, 0.8f, 0.9f);
+                copyBtn = copyGo.AddComponent<Button>();
+                SetButtonColors(copyBtn);
+
+                var cTxtGo = CreateUIObject("Txt", copyGo.transform);
+                SetStretch(cTxtGo);
+                var cTmp = cTxtGo.AddComponent<TextMeshProUGUI>();
+                cTmp.font = font;
+                cTmp.fontSize = 13;
+                cTmp.text = "Chép";
+                cTmp.color = Color.white;
+                cTmp.alignment = TextAlignmentOptions.Center;
+            }
+
+            return (valTmp, copyBtn);
+        }
+
+        private static (GameObject, RectTransform, TMP_Text, Button) BuildSuccessToast(Transform parent, TMP_FontAsset fontBangers, TMP_FontAsset fontSans)
+        {
+            var toastGo = CreateUIObject("SuccessPopup", parent);
+            SetStretch(toastGo);
+            var ovImg = toastGo.AddComponent<Image>();
+            ovImg.color = new Color(0, 0, 0, 0.75f);
+
+            var dialogGo = CreateUIObject("Dialog", toastGo.transform);
+            var dialogRt = dialogGo.GetComponent<RectTransform>();
+            dialogRt.anchorMin = dialogRt.anchorMax = new Vector2(0.5f, 0.5f);
+            dialogRt.pivot = new Vector2(0.5f, 0.5f);
+            dialogRt.sizeDelta = new Vector2(560, 320);
+            var dImg = dialogGo.AddComponent<Image>();
+            dImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "modal_payment_bg.png");
+
+            var titleGo = CreateUIObject("Title", dialogGo.transform);
+            var titleRt = titleGo.GetComponent<RectTransform>();
+            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 1f);
+            titleRt.pivot = new Vector2(0.5f, 1f);
+            titleRt.anchoredPosition = new Vector2(0, -28);
+            titleRt.sizeDelta = new Vector2(500, 48);
+            var titleTmp = titleGo.AddComponent<TextMeshProUGUI>();
+            titleTmp.font = fontBangers != null ? fontBangers : fontSans;
+            titleTmp.fontSize = 36;
+            titleTmp.text = "GIAO DỊCH THÀNH CÔNG!";
+            titleTmp.color = new Color(0.2f, 1f, 0.6f, 1f);
+            titleTmp.alignment = TextAlignmentOptions.Center;
+
+            var msgGo = CreateUIObject("Message", dialogGo.transform);
+            var msgRt = msgGo.GetComponent<RectTransform>();
+            msgRt.anchorMin = new Vector2(0.1f, 0.35f);
+            msgRt.anchorMax = new Vector2(0.9f, 0.75f);
+            msgRt.offsetMin = msgRt.offsetMax = Vector2.zero;
+            var msgTmp = msgGo.AddComponent<TextMeshProUGUI>();
+            msgTmp.font = fontSans;
+            msgTmp.fontSize = 20;
+            msgTmp.text = "Bạn đã nhận được Kim Cương!";
+            msgTmp.color = Color.white;
+            msgTmp.alignment = TextAlignmentOptions.Center;
+
+            var okBtnGo = CreateUIObject("OkButton", dialogGo.transform);
+            var okRt = okBtnGo.GetComponent<RectTransform>();
+            okRt.anchorMin = okRt.anchorMax = new Vector2(0.5f, 0f);
+            okRt.pivot = new Vector2(0.5f, 0f);
+            okRt.anchoredPosition = new Vector2(0, 24);
+            okRt.sizeDelta = new Vector2(220, 50);
+            var okImg = okBtnGo.AddComponent<Image>();
+            okImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_price_tag.png");
+            var okBtn = okBtnGo.AddComponent<Button>();
+            SetButtonColors(okBtn);
+
+            var okTxtGo = CreateUIObject("Txt", okBtnGo.transform);
+            SetStretch(okTxtGo);
+            var okTmp = okTxtGo.AddComponent<TextMeshProUGUI>();
+            okTmp.font = fontBangers != null ? fontBangers : fontSans;
+            okTmp.fontSize = 24;
+            okTmp.text = "XÁC NHẬN";
+            okTmp.color = Color.white;
+            okTmp.alignment = TextAlignmentOptions.Center;
+
+            return (toastGo, dialogRt, msgTmp, okBtn);
+        }
+
+        private static (GameObject, TMP_Text) BuildCopyToast(Transform parent, TMP_FontAsset font)
+        {
+            var toastGo = CreateUIObject("CopyToast", parent);
+            var toastRt = toastGo.GetComponent<RectTransform>();
+            toastRt.anchorMin = toastRt.anchorMax = new Vector2(0.5f, 0.15f);
+            toastRt.pivot = new Vector2(0.5f, 0.5f);
+            toastRt.sizeDelta = new Vector2(340, 50);
+            var img = toastGo.AddComponent<Image>();
+            img.color = new Color(0.05f, 0.2f, 0.35f, 0.95f);
+
+            var txtGo = CreateUIObject("Txt", toastGo.transform);
+            SetStretch(txtGo);
+            var tmp = txtGo.AddComponent<TextMeshProUGUI>();
+            tmp.font = font;
+            tmp.fontSize = 18;
+            tmp.text = "Đã sao chép!";
+            tmp.color = Color.white;
+            tmp.alignment = TextAlignmentOptions.Center;
+
+            return (toastGo, tmp);
+        }
+
+        private static TopUpPackData[] GetDefaultGemPacks()
+        {
+            return new TopUpPackData[]
+            {
+                new TopUpPackData { packId = "gem_10k",  title = "Túi Kim Cương Nhỏ",  mainAmount = 100,   bonusAmount = 10,   priceVnd = 10000,  badgeText = "+10%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier1.png") },
+                new TopUpPackData { packId = "gem_20k",  title = "Túi Kim Cương Vừa",  mainAmount = 220,   bonusAmount = 30,   priceVnd = 20000,  badgeText = "+15%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier2.png") },
+                new TopUpPackData { packId = "gem_50k",  title = "Rương Kim Cương",    mainAmount = 580,   bonusAmount = 100,  priceVnd = 50000,  badgeText = "PHỔ BIẾN",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier3.png") },
+                new TopUpPackData { packId = "gem_100k", title = "Hòm Kim Cương Lớn",  mainAmount = 1250,  bonusAmount = 250,  priceVnd = 100000, badgeText = "HOT DEAL",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier4.png") },
+                new TopUpPackData { packId = "gem_200k", title = "Kho Báu Kim Cương",  mainAmount = 2600,  bonusAmount = 600,  priceVnd = 200000, badgeText = "SIÊU LỜI",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier5.png") },
+                new TopUpPackData { packId = "gem_500k", title = "Vương Miện Kim Cương", mainAmount = 6800, bonusAmount = 2000, priceVnd = 500000, badgeText = "VIP KING",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier6.png") }
+            };
+        }
+
+        private static TopUpPackData[] GetDefaultCoinPacks()
+        {
+            return new TopUpPackData[]
+            {
+                new TopUpPackData { packId = "coin_10k",  title = "Túi Xu Đồng",      mainAmount = 10000,   bonusAmount = 0,      priceVnd = 10000,  badgeText = "",          currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier1.png") },
+                new TopUpPackData { packId = "coin_20k",  title = "Túi Xu Bạc",       mainAmount = 25000,   bonusAmount = 3000,   priceVnd = 20000,  badgeText = "+12%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier2.png") },
+                new TopUpPackData { packId = "coin_50k",  title = "Hộp Tiền Vàng",    mainAmount = 70000,   bonusAmount = 15000,  priceVnd = 50000,  badgeText = "BÁN CHẠY",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier3.png") },
+                new TopUpPackData { packId = "coin_100k", title = "Rương Tiền Vàng",  mainAmount = 150000,  bonusAmount = 40000,  priceVnd = 100000, badgeText = "HOT",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") },
+                new TopUpPackData { packId = "coin_200k", title = "Két Vàng Hoàng Gia", mainAmount = 350000, bonusAmount = 100000, priceVnd = 200000, badgeText = "+30%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") },
+                new TopUpPackData { packId = "coin_500k", title = "Kho Vàng Bất Tận", mainAmount = 1000000, bonusAmount = 350000, priceVnd = 500000, badgeText = "ĐẠI GIA",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") }
+            };
+        }
+
+        private static TopUpPackData[] GetDefaultSpecialPacks()
+        {
+            return new TopUpPackData[]
+            {
+                new TopUpPackData { packId = "pass_week",  title = "Thẻ Tuần Năng Động",     mainAmount = 650,  bonusAmount = 0,   priceVnd = 45000,  badgeText = "THẺ TUẦN",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_vip_pass.png") },
+                new TopUpPackData { packId = "pass_month", title = "Thẻ Tháng Siêu Cấp VIP", mainAmount = 4000, bonusAmount = 500, priceVnd = 129000, badgeText = "SIÊU GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_vip_pass.png") },
+                new TopUpPackData { packId = "pack_starter", title = "Gói Quà Khởi Đầu Tân Thủ", mainAmount = 500, bonusAmount = 50000, bonusTickets = 5, priceVnd = 29000, badgeText = "X3 GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_starter.png") }
+            };
+        }
+
+        private static void ConfigureAllSprites()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:Texture2D", new[] { SpritesRoot });
+            foreach (var guid in guids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var ti = AssetImporter.GetAtPath(path) as TextureImporter;
+                if (ti != null && ti.textureType != TextureImporterType.Sprite)
+                {
+                    ti.textureType = TextureImporterType.Sprite;
+                    ti.spriteImportMode = SpriteImportMode.Single;
+                    ti.alphaIsTransparency = true;
+                    ti.mipmapEnabled = false;
+                    ti.SaveAndReimport();
+                }
+            }
+        }
+
+        private static GameObject CreateUIObject(string name, Transform parent)
+        {
+            var go = new GameObject(name, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            return go;
+        }
+
+        private static void SetStretch(GameObject go)
+        {
+            var rt = go.GetComponent<RectTransform>();
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = rt.offsetMax = Vector2.zero;
+        }
+
+        private static void SetButtonColors(Button btn)
+        {
+            var cb = btn.colors;
+            cb.highlightedColor = new Color(1.15f, 1.15f, 1.15f, 1f);
+            cb.pressedColor = new Color(0.85f, 0.85f, 0.85f, 1f);
+            btn.colors = cb;
+        }
+
+        private static void SetArrayProperty(SerializedProperty prop, List<NapTienCardView> views)
+        {
+            prop.arraySize = views.Count;
+            for (int i = 0; i < views.Count; i++)
+            {
+                prop.GetArrayElementAtIndex(i).objectReferenceValue = views[i];
+            }
+        }
+    }
+}

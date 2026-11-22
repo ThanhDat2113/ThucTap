@@ -55,8 +55,8 @@ public class ShopController : MonoBehaviour
             categoryButtons[i].onClick.AddListener(() => { PlayClip(tabClip); ShowCategory(cat); });
         }
         buyButton.onClick.AddListener(BuySelected);
-        if (coinPlusButton != null) coinPlusButton.onClick.AddListener(() => ShowCategory(ShopCategory.CurrencyPacks));
-        if (gemPlusButton != null) gemPlusButton.onClick.AddListener(() => ShowCategory(ShopCategory.CurrencyPacks));
+        if (coinPlusButton != null) coinPlusButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("NapTien"));
+        if (gemPlusButton != null) gemPlusButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("NapTien"));
     }
 
     private void OnEnable() { Wallet.Changed += RefreshWallet; }
