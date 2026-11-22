@@ -616,8 +616,8 @@ namespace Luan.NapTien.Editor
             var auraRt = auraGo.GetComponent<RectTransform>();
             auraRt.anchorMin = auraRt.anchorMax = new Vector2(0.5f, 0.5f);
             auraRt.pivot = new Vector2(0.5f, 0.5f);
-            auraRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 32);
-            auraRt.sizeDelta = isLarge ? new Vector2(270, 270) : new Vector2(200, 200);
+            auraRt.anchoredPosition = isLarge ? new Vector2(0, 80) : new Vector2(0, 32);
+            auraRt.sizeDelta = isLarge ? new Vector2(290, 290) : new Vector2(220, 220);
             var auraImg = auraGo.AddComponent<Image>();
             string auraName = pack.currencyType == CurrencyType.Coin ? "glow_aura_gold.png" 
                 : (isLarge ? "glow_aura_purple.png" : "glow_aura_cyan.png");
@@ -629,26 +629,32 @@ namespace Luan.NapTien.Editor
             var iconRt = iconGo.GetComponent<RectTransform>();
             iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 0.5f);
             iconRt.pivot = new Vector2(0.5f, 0.5f);
-            iconRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 32);
-            iconRt.sizeDelta = isLarge ? new Vector2(210, 210) : new Vector2(145, 145);
+            iconRt.anchoredPosition = isLarge ? new Vector2(0, 80) : new Vector2(0, 32);
+            iconRt.sizeDelta = isLarge ? new Vector2(230, 230) : new Vector2(175, 175);
             var iconImg = iconGo.AddComponent<Image>();
             iconImg.sprite = pack.iconSprite;
             iconImg.preserveAspect = true;
             iconImg.raycastTarget = false;
 
-            // 6. Title
+            // 6. Title (Safe layout avoiding collision with BadgeRibbon)
             var titleGo = CreateUIObject("TitleText", cardGo.transform);
             var titleRt = titleGo.GetComponent<RectTransform>();
-            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 1f);
+            titleRt.anchorMin = new Vector2(0f, 1f);
+            titleRt.anchorMax = new Vector2(1f, 1f);
             titleRt.pivot = new Vector2(0.5f, 1f);
-            titleRt.anchoredPosition = new Vector2(0, -16);
-            titleRt.sizeDelta = new Vector2(390, 32);
+            bool hasBadge = !string.IsNullOrEmpty(pack.badgeText);
+            titleRt.offsetMin = new Vector2(18, -44);
+            titleRt.offsetMax = new Vector2(hasBadge ? -138 : -18, -14);
             var titleTMP = titleGo.AddComponent<TextMeshProUGUI>();
             titleTMP.font = fontBangers != null ? fontBangers : fontSans;
-            titleTMP.fontSize = isLarge ? 26 : 21;
+            titleTMP.fontSize = isLarge ? 26 : 22;
+            titleTMP.enableAutoSizing = true;
+            titleTMP.fontSizeMin = 14;
+            titleTMP.fontSizeMax = isLarge ? 26 : 22;
             titleTMP.text = pack.title;
             titleTMP.color = Color.white;
-            titleTMP.alignment = TextAlignmentOptions.Center;
+            titleTMP.alignment = hasBadge ? TextAlignmentOptions.MidlineLeft : TextAlignmentOptions.Center;
+            titleTMP.enableWordWrapping = false;
 
             // 7. Amount / Value Text
             var amountGo = CreateUIObject("AmountText", cardGo.transform);
@@ -1193,12 +1199,12 @@ namespace Luan.NapTien.Editor
         {
             return new TopUpPackData[]
             {
-                new TopUpPackData { packId = "gem_10k",  title = "Túi Kim Cương Nhỏ",  mainAmount = 100,   bonusAmount = 10,   priceVnd = 10000,  badgeText = "+10%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "02_Diamond.png") },
-                new TopUpPackData { packId = "gem_20k",  title = "Túi Kim Cương Vừa",  mainAmount = 220,   bonusAmount = 30,   priceVnd = 20000,  badgeText = "+15%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "02_Diamond.png") },
-                new TopUpPackData { packId = "gem_50k",  title = "Rương Pha Lê Hiếm",  mainAmount = 580,   bonusAmount = 100,  priceVnd = 50000,  badgeText = "PHỔ BIẾN",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "08_RareCrystal.png") },
-                new TopUpPackData { packId = "gem_100k", title = "Hòm Pha Lê Lớn",     mainAmount = 1250,  bonusAmount = 250,  priceVnd = 100000, badgeText = "HOT DEAL",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "08_RareCrystal.png") },
-                new TopUpPackData { packId = "gem_200k", title = "Kho Báu Hoàng Gia",  mainAmount = 2600,  bonusAmount = 600,  priceVnd = 200000, badgeText = "SIÊU LỜI",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") },
-                new TopUpPackData { packId = "gem_500k", title = "Đại Kho Báu Huyền Thoại", mainAmount = 6800, bonusAmount = 2000, priceVnd = 500000, badgeText = "VIP KING", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") }
+                new TopUpPackData { packId = "gem_10k",  title = "Túi Kim Cương Nhỏ",  mainAmount = 100,   bonusAmount = 10,   priceVnd = 10000,  badgeText = "+10%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier1.png") },
+                new TopUpPackData { packId = "gem_20k",  title = "Túi Kim Cương Vừa",  mainAmount = 220,   bonusAmount = 30,   priceVnd = 20000,  badgeText = "+15%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier2.png") },
+                new TopUpPackData { packId = "gem_50k",  title = "Rương Kim Cương",    mainAmount = 580,   bonusAmount = 100,  priceVnd = 50000,  badgeText = "PHỔ BIẾN",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier3.png") },
+                new TopUpPackData { packId = "gem_100k", title = "Hòm Kim Cương Lớn",  mainAmount = 1250,  bonusAmount = 250,  priceVnd = 100000, badgeText = "HOT DEAL",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier4.png") },
+                new TopUpPackData { packId = "gem_200k", title = "Kho Báu Kim Cương",  mainAmount = 2600,  bonusAmount = 600,  priceVnd = 200000, badgeText = "SIÊU LỜI",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier5.png") },
+                new TopUpPackData { packId = "gem_500k", title = "Vương Miện Kim Cương", mainAmount = 6800, bonusAmount = 2000, priceVnd = 500000, badgeText = "VIP KING", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier6.png") }
             };
         }
 
@@ -1206,12 +1212,12 @@ namespace Luan.NapTien.Editor
         {
             return new TopUpPackData[]
             {
-                new TopUpPackData { packId = "coin_10k",  title = "Túi Xu Đồng",        mainAmount = 10000,   bonusAmount = 0,      priceVnd = 10000,  badgeText = "",          currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "01_GoldSmall.png") },
-                new TopUpPackData { packId = "coin_20k",  title = "Túi Xu Bạc",         mainAmount = 25000,   bonusAmount = 3000,   priceVnd = 20000,  badgeText = "+12%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "01_GoldSmall.png") },
-                new TopUpPackData { packId = "coin_50k",  title = "Đống Vàng Thịnh Vượng", mainAmount = 70000, bonusAmount = 15000,  priceVnd = 50000,  badgeText = "BÁN CHẠY",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "09_GoldLarge.png") },
-                new TopUpPackData { packId = "coin_100k", title = "Rương Tiền Vàng",    mainAmount = 150000,  bonusAmount = 40000,  priceVnd = 100000, badgeText = "HOT",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "09_GoldLarge.png") },
-                new TopUpPackData { packId = "coin_200k", title = "Két Vàng Hoàng Gia",  mainAmount = 350000,  bonusAmount = 100000, priceVnd = 200000, badgeText = "+30%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") },
-                new TopUpPackData { packId = "coin_500k", title = "Kho Vàng Bất Tận",   mainAmount = 1000000, bonusAmount = 350000, priceVnd = 500000, badgeText = "ĐẠI GIA",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") }
+                new TopUpPackData { packId = "coin_10k",  title = "Túi Xu Đồng",        mainAmount = 10000,   bonusAmount = 0,      priceVnd = 10000,  badgeText = "",          currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier1.png") },
+                new TopUpPackData { packId = "coin_20k",  title = "Túi Xu Bạc",         mainAmount = 25000,   bonusAmount = 3000,   priceVnd = 20000,  badgeText = "+12%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier2.png") },
+                new TopUpPackData { packId = "coin_50k",  title = "Đống Vàng Thịnh Vượng", mainAmount = 70000, bonusAmount = 15000,  priceVnd = 50000,  badgeText = "BÁN CHẠY",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier3.png") },
+                new TopUpPackData { packId = "coin_100k", title = "Rương Tiền Vàng",    mainAmount = 150000,  bonusAmount = 40000,  priceVnd = 100000, badgeText = "HOT",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") },
+                new TopUpPackData { packId = "coin_200k", title = "Két Vàng Hoàng Gia",  mainAmount = 350000,  bonusAmount = 100000, priceVnd = 200000, badgeText = "+30%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier5.png") },
+                new TopUpPackData { packId = "coin_500k", title = "Kho Vàng Bất Tận",   mainAmount = 1000000, bonusAmount = 350000, priceVnd = 500000, badgeText = "ĐẠI GIA",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier6.png") }
             };
         }
 
@@ -1219,9 +1225,9 @@ namespace Luan.NapTien.Editor
         {
             return new TopUpPackData[]
             {
-                new TopUpPackData { packId = "pass_week",    title = "Vé Tuần Năng Động",         mainAmount = 650,  bonusAmount = 0,   priceVnd = 45000,  badgeText = "THẺ TUẦN",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "06_Ticket1.png") },
-                new TopUpPackData { packId = "pass_month",   title = "Vé Tháng Siêu Cấp VIP",     mainAmount = 4000, bonusAmount = 500, priceVnd = 129000, badgeText = "SIÊU GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "11_Ticket2.png") },
-                new TopUpPackData { packId = "pack_starter", title = "Gói Quà Khởi Đầu Tân Thủ", mainAmount = 500, bonusAmount = 50000, bonusTickets = 5, priceVnd = 29000, badgeText = "X3 GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") }
+                new TopUpPackData { packId = "pass_week",    title = "Vé Tuần Năng Động",         mainAmount = 650,  bonusAmount = 0,   priceVnd = 45000,  badgeText = "THẺ TUẦN",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_pass_week.png") },
+                new TopUpPackData { packId = "pass_month",   title = "Vé Tháng Siêu Cấp VIP",     mainAmount = 4000, bonusAmount = 500, priceVnd = 129000, badgeText = "SIÊU GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_pass_month.png") },
+                new TopUpPackData { packId = "pack_starter", title = "Gói Quà Khởi Đầu Tân Thủ", mainAmount = 500, bonusAmount = 50000, bonusTickets = 5, priceVnd = 29000, badgeText = "X3 GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_starter.png") }
             };
         }
 
