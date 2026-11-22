@@ -276,70 +276,54 @@ namespace Luan.NapTien.Editor
             var walletBoxRt = walletBoxGo.GetComponent<RectTransform>();
             walletBoxRt.anchorMin = walletBoxRt.anchorMax = new Vector2(1, 1);
             walletBoxRt.pivot = new Vector2(1, 1);
-            walletBoxRt.anchoredPosition = new Vector2(-40, -30);
-            walletBoxRt.sizeDelta = new Vector2(500, 60);
+            walletBoxRt.anchoredPosition = new Vector2(-40, -15);
+            walletBoxRt.sizeDelta = new Vector2(530, 95);
 
-            // Coin Bar
+            // Coin Bar (Exact Shop setup - coin icon is already part of bar_coin.png)
             var coinBarGo = CreateUIObject("CoinBar", walletBoxGo.transform);
             var coinBarRt = coinBarGo.GetComponent<RectTransform>();
-            coinBarRt.anchorMin = coinBarRt.anchorMax = new Vector2(0, 0.5f);
-            coinBarRt.pivot = new Vector2(0, 0.5f);
+            coinBarRt.anchorMin = coinBarRt.anchorMax = new Vector2(0, 1);
+            coinBarRt.pivot = new Vector2(0, 1);
             coinBarRt.anchoredPosition = new Vector2(0, 0);
-            coinBarRt.sizeDelta = new Vector2(230, 50);
+            coinBarRt.sizeDelta = new Vector2(251, 115);
             var coinBarImg = coinBarGo.AddComponent<Image>();
             coinBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_coin.png");
-
-            var coinIconGo = CreateUIObject("CoinIcon", coinBarGo.transform);
-            var coinIconRt = coinIconGo.GetComponent<RectTransform>();
-            coinIconRt.anchorMin = coinIconRt.anchorMax = new Vector2(0, 0.5f);
-            coinIconRt.pivot = new Vector2(0.5f, 0.5f);
-            coinIconRt.anchoredPosition = new Vector2(18, 0);
-            coinIconRt.sizeDelta = new Vector2(40, 40);
-            var coinIconImg = coinIconGo.AddComponent<Image>();
-            coinIconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "icon_coin.png");
+            coinBarImg.preserveAspect = true;
 
             var coinTextGo = CreateUIObject("CoinText", coinBarGo.transform);
             var coinTextRt = coinTextGo.GetComponent<RectTransform>();
-            coinTextRt.anchorMin = new Vector2(0.2f, 0);
-            coinTextRt.anchorMax = new Vector2(0.95f, 1);
+            coinTextRt.anchorMin = new Vector2(0.30f, 0.33f);
+            coinTextRt.anchorMax = new Vector2(0.94f, 0.77f);
             coinTextRt.offsetMin = coinTextRt.offsetMax = Vector2.zero;
             var coinTMP = coinTextGo.AddComponent<TextMeshProUGUI>();
             coinTMP.font = fontBangers != null ? fontBangers : fontSans;
-            coinTMP.fontSize = 24;
-            coinTMP.color = new Color(1f, 0.95f, 0.6f, 1f);
+            coinTMP.fontSize = 32;
+            coinTMP.color = Color.white;
             coinTMP.text = "10,000";
-            coinTMP.alignment = TextAlignmentOptions.MidlineRight;
+            coinTMP.alignment = TextAlignmentOptions.Center;
 
-            // Gem Bar
+            // Gem Bar (Exact Shop setup - gem icon is already part of bar_gem.png)
             var gemBarGo = CreateUIObject("GemBar", walletBoxGo.transform);
             var gemBarRt = gemBarGo.GetComponent<RectTransform>();
-            gemBarRt.anchorMin = gemBarRt.anchorMax = new Vector2(1, 0.5f);
-            gemBarRt.pivot = new Vector2(1, 0.5f);
-            gemBarRt.anchoredPosition = new Vector2(0, 0);
-            gemBarRt.sizeDelta = new Vector2(230, 50);
+            gemBarRt.anchorMin = gemBarRt.anchorMax = new Vector2(0, 1);
+            gemBarRt.pivot = new Vector2(0, 1);
+            gemBarRt.anchoredPosition = new Vector2(265, -1);
+            gemBarRt.sizeDelta = new Vector2(249, 113);
             var gemBarImg = gemBarGo.AddComponent<Image>();
             gemBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_gem.png");
-
-            var gemIconGo = CreateUIObject("GemIcon", gemBarGo.transform);
-            var gemIconRt = gemIconGo.GetComponent<RectTransform>();
-            gemIconRt.anchorMin = gemIconRt.anchorMax = new Vector2(0, 0.5f);
-            gemIconRt.pivot = new Vector2(0.5f, 0.5f);
-            gemIconRt.anchoredPosition = new Vector2(18, 0);
-            gemIconRt.sizeDelta = new Vector2(40, 40);
-            var gemIconImg = gemIconGo.AddComponent<Image>();
-            gemIconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "icon_gem.png");
+            gemBarImg.preserveAspect = true;
 
             var gemTextGo = CreateUIObject("GemText", gemBarGo.transform);
             var gemTextRt = gemTextGo.GetComponent<RectTransform>();
-            gemTextRt.anchorMin = new Vector2(0.2f, 0);
-            gemTextRt.anchorMax = new Vector2(0.95f, 1);
+            gemTextRt.anchorMin = new Vector2(0.34f, 0.20f);
+            gemTextRt.anchorMax = new Vector2(0.97f, 0.70f);
             gemTextRt.offsetMin = gemTextRt.offsetMax = Vector2.zero;
             var gemTMP = gemTextGo.AddComponent<TextMeshProUGUI>();
             gemTMP.font = fontBangers != null ? fontBangers : fontSans;
-            gemTMP.fontSize = 24;
-            gemTMP.color = new Color(0.6f, 1f, 1f, 1f);
+            gemTMP.fontSize = 32;
+            gemTMP.color = Color.white;
             gemTMP.text = "1,000";
-            gemTMP.alignment = TextAlignmentOptions.MidlineRight;
+            gemTMP.alignment = TextAlignmentOptions.Center;
 
             // 7. Category Tabs (Stylized Cyberpunk Frames like Story Mode / Free Play)
             var tabsBoxGo = CreateUIObject("CategoryTabs", canvasGo.transform);
