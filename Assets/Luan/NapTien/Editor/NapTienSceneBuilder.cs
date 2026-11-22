@@ -276,24 +276,24 @@ namespace Luan.NapTien.Editor
             var walletBoxRt = walletBoxGo.GetComponent<RectTransform>();
             walletBoxRt.anchorMin = walletBoxRt.anchorMax = new Vector2(1, 1);
             walletBoxRt.pivot = new Vector2(1, 1);
-            walletBoxRt.anchoredPosition = new Vector2(-40, -15);
-            walletBoxRt.sizeDelta = new Vector2(530, 95);
+            walletBoxRt.anchoredPosition = new Vector2(-40, -12);
+            walletBoxRt.sizeDelta = new Vector2(530, 140);
 
-            // Coin Bar (Exact Shop setup - coin icon is already part of bar_coin.png)
+            // Coin Bar (Balanced scale S = 0.76)
             var coinBarGo = CreateUIObject("CoinBar", walletBoxGo.transform);
             var coinBarRt = coinBarGo.GetComponent<RectTransform>();
             coinBarRt.anchorMin = coinBarRt.anchorMax = new Vector2(0, 1);
             coinBarRt.pivot = new Vector2(0, 1);
-            coinBarRt.anchoredPosition = new Vector2(0, 0);
-            coinBarRt.sizeDelta = new Vector2(251, 115);
+            coinBarRt.anchoredPosition = new Vector2(0, -15f);
+            coinBarRt.sizeDelta = new Vector2(239, 131);
             var coinBarImg = coinBarGo.AddComponent<Image>();
             coinBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_coin.png");
             coinBarImg.preserveAspect = true;
 
             var coinTextGo = CreateUIObject("CoinText", coinBarGo.transform);
             var coinTextRt = coinTextGo.GetComponent<RectTransform>();
-            coinTextRt.anchorMin = new Vector2(0.30f, 0.33f);
-            coinTextRt.anchorMax = new Vector2(0.94f, 0.77f);
+            coinTextRt.anchorMin = new Vector2(0.38f, 0.32f);
+            coinTextRt.anchorMax = new Vector2(0.96f, 0.81f);
             coinTextRt.offsetMin = coinTextRt.offsetMax = Vector2.zero;
             var coinTMP = coinTextGo.AddComponent<TextMeshProUGUI>();
             coinTMP.font = fontBangers != null ? fontBangers : fontSans;
@@ -302,12 +302,12 @@ namespace Luan.NapTien.Editor
             coinTMP.text = "10,000";
             coinTMP.alignment = TextAlignmentOptions.Center;
 
-            // Gem Bar (Exact Shop setup - gem icon is already part of bar_gem.png)
+            // Gem Bar (Balanced scale S = 0.76)
             var gemBarGo = CreateUIObject("GemBar", walletBoxGo.transform);
             var gemBarRt = gemBarGo.GetComponent<RectTransform>();
             gemBarRt.anchorMin = gemBarRt.anchorMax = new Vector2(0, 1);
             gemBarRt.pivot = new Vector2(0, 1);
-            gemBarRt.anchoredPosition = new Vector2(265, -1);
+            gemBarRt.anchoredPosition = new Vector2(255, -13f);
             gemBarRt.sizeDelta = new Vector2(249, 113);
             var gemBarImg = gemBarGo.AddComponent<Image>();
             gemBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_gem.png");
@@ -315,8 +315,8 @@ namespace Luan.NapTien.Editor
 
             var gemTextGo = CreateUIObject("GemText", gemBarGo.transform);
             var gemTextRt = gemTextGo.GetComponent<RectTransform>();
-            gemTextRt.anchorMin = new Vector2(0.34f, 0.20f);
-            gemTextRt.anchorMax = new Vector2(0.97f, 0.70f);
+            gemTextRt.anchorMin = new Vector2(0.38f, 0.20f);
+            gemTextRt.anchorMax = new Vector2(0.96f, 0.77f);
             gemTextRt.offsetMin = gemTextRt.offsetMax = Vector2.zero;
             var gemTMP = gemTextGo.AddComponent<TextMeshProUGUI>();
             gemTMP.font = fontBangers != null ? fontBangers : fontSans;
