@@ -91,6 +91,22 @@ public class SongListDecor : MonoBehaviour
     private void BuildEqualizer()
     {
         if (equalizer == null) return;
+        if (equalizer.childCount > 0)
+        {
+            bars.Clear();
+            for (int i = 0; i < equalizer.childCount; i++)
+            {
+                bars.Add((RectTransform)equalizer.GetChild(i));
+            }
+            if (bars.Count == barCount) return;
+            for (int i = equalizer.childCount - 1; i >= 0; i--)
+            {
+                if (Application.isPlaying) Destroy(equalizer.GetChild(i).gameObject);
+                else DestroyImmediate(equalizer.GetChild(i).gameObject);
+            }
+            bars.Clear();
+        }
+
         float w = equalizer.rect.width / barCount;
         for (int i = 0; i < barCount; i++)
         {

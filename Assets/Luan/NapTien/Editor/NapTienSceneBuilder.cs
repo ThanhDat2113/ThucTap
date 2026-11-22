@@ -14,6 +14,8 @@ namespace Luan.NapTien.Editor
         private const string SpritesRoot = "Assets/Luan/NapTien/Sprites/";
         private const string ShopSpritesRoot = "Assets/UI/Shop/Sprites/";
         private const string SongListSpritesRoot = "Assets/UI/SongList/Sprites/";
+        private const string GameplaySpritesRoot = "Assets/Thuan/UI/Gameplay/Sprites/";
+        private const string DailyCheckinSpritesRoot = "Assets/Thuan/UI/DailyCheckin/Sprites/";
         private const string ModularItemsRoot = "Assets/Luan/LuckyWheel/Sprites/ModularItems/";
 
         [MenuItem("Tools/Luan/Build NapTien Scene")]
@@ -49,7 +51,7 @@ namespace Luan.NapTien.Editor
             var fontBangers = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Thuan/UI/Fonts/Bangers SDF.asset");
             var fontSans = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
 
-            // 4. Background - Vibrant cyberpunk city without murky dark overlay
+            // 4. Background (Exact SongList Background)
             var bgGo = CreateUIObject("Background", canvasGo.transform);
             SetStretch(bgGo);
             var bgImg = bgGo.AddComponent<Image>();
@@ -57,24 +59,183 @@ namespace Luan.NapTien.Editor
             bgImg.preserveAspect = false;
             bgImg.color = Color.white;
 
-            // Subtle bottom gradient shadow to help bottom card readability without washing out city lights
-            var bottomGradGo = CreateUIObject("BottomGradient", canvasGo.transform);
-            var bottomGradRt = bottomGradGo.GetComponent<RectTransform>();
-            bottomGradRt.anchorMin = new Vector2(0, 0);
-            bottomGradRt.anchorMax = new Vector2(1, 0.25f);
-            bottomGradRt.offsetMin = bottomGradRt.offsetMax = Vector2.zero;
-            var bottomGradImg = bottomGradGo.AddComponent<Image>();
-            bottomGradImg.color = new Color(0.02f, 0.02f, 0.06f, 0.35f);
-            bottomGradImg.raycastTarget = false;
+            // 5. Decor Layer (Identical to SongListDecor: Ambient glows, stickers, particles, equalizer)
+            var decorGo = CreateUIObject("Decor", canvasGo.transform);
+            SetStretch(decorGo);
 
-            // 5. Ambient UI Particle System
-            var particlesGo = CreateUIObject("UIParticles", canvasGo.transform);
-            SetStretch(particlesGo);
-            var pSystem = particlesGo.AddComponent<UIParticleFloatingSystem>();
-            var pSo = new SerializedObject(pSystem);
-            pSo.FindProperty("particleSprite").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "fx_particle_sparkle.png");
-            pSo.FindProperty("particleCount").intValue = 32;
-            pSo.ApplyModifiedProperties();
+            // 5a. Rhythmic Ambient Glows
+            var glowsGo = CreateUIObject("Glows", decorGo.transform);
+            SetStretch(glowsGo);
+
+            var glowPinkGo = CreateUIObject("GlowPink", glowsGo.transform);
+            var glowPinkRt = glowPinkGo.GetComponent<RectTransform>();
+            glowPinkRt.anchoredPosition = new Vector2(-560, -120);
+            glowPinkRt.sizeDelta = new Vector2(1100, 1000);
+            var glowPinkImg = glowPinkGo.AddComponent<Image>();
+            glowPinkImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GameplaySpritesRoot + "glow_soft.png");
+            glowPinkImg.color = new Color(1f, 0.2f, 0.75f, 0.28f);
+            glowPinkImg.raycastTarget = false;
+
+            var glowCyanGo = CreateUIObject("GlowCyan", glowsGo.transform);
+            var glowCyanRt = glowCyanGo.GetComponent<RectTransform>();
+            glowCyanRt.anchoredPosition = new Vector2(600, -40);
+            glowCyanRt.sizeDelta = new Vector2(1100, 1000);
+            var glowCyanImg = glowCyanGo.AddComponent<Image>();
+            glowCyanImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GameplaySpritesRoot + "glow_soft.png");
+            glowCyanImg.color = new Color(0.2f, 0.8f, 1f, 0.25f);
+            glowCyanImg.raycastTarget = false;
+
+            var glowPurpleGo = CreateUIObject("GlowPurple", glowsGo.transform);
+            var glowPurpleRt = glowPurpleGo.GetComponent<RectTransform>();
+            glowPurpleRt.anchoredPosition = new Vector2(0, 430);
+            glowPurpleRt.sizeDelta = new Vector2(1600, 520);
+            var glowPurpleImg = glowPurpleGo.AddComponent<Image>();
+            glowPurpleImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GameplaySpritesRoot + "glow_soft.png");
+            glowPurpleImg.color = new Color(0.6f, 0.3f, 1f, 0.25f);
+            glowPurpleImg.raycastTarget = false;
+
+            // 5b. Floating Sparks Container
+            var sparksGo = CreateUIObject("Sparks", decorGo.transform);
+            SetStretch(sparksGo);
+
+            // 5c. Equalizer at bottom ("nhịp nhạc ở dưới")
+            var eqGo = CreateUIObject("Equalizer", decorGo.transform);
+            var eqRt = eqGo.GetComponent<RectTransform>();
+            eqRt.anchorMin = new Vector2(0, 0);
+            eqRt.anchorMax = new Vector2(1, 0);
+            eqRt.pivot = new Vector2(0.5f, 0);
+            eqRt.anchoredPosition = Vector2.zero;
+            eqRt.sizeDelta = new Vector2(0, 140);
+
+            // Pre-create 48 bars so they are immediately visible in Editor mode before Play!
+            int barCount = 48;
+            float totalWidth = 1920f;
+            float w = totalWidth / barCount;
+            Color barLeft = new Color(1f, 0.25f, 0.75f, 0.35f); // Hot Pink
+            Color barRight = new Color(0.25f, 0.85f, 1f, 0.35f); // Cyan
+            for (int i = 0; i < barCount; i++)
+            {
+                var barGo = CreateUIObject("Bar" + i, eqGo.transform);
+                var barRt = barGo.GetComponent<RectTransform>();
+                barRt.anchorMin = barRt.anchorMax = new Vector2(0f, 0f);
+                barRt.pivot = new Vector2(0.5f, 0f);
+                barRt.anchoredPosition = new Vector2(w * (i + 0.5f), 0f);
+                float initialHgt = Mathf.Lerp(12f, 75f, Mathf.PerlinNoise(i * 0.3f, 0.5f));
+                barRt.sizeDelta = new Vector2(w * 0.62f, initialHgt);
+                var barImg = barGo.AddComponent<Image>();
+                barImg.raycastTarget = false;
+                barImg.color = Color.Lerp(barLeft, barRight, barCount > 1 ? i / (float)(barCount - 1) : 0f);
+            }
+
+            // 5d. Stickers & Splatters
+            var splashTopGo = CreateUIObject("deco_splash_top", decorGo.transform);
+            var splashTopRt = splashTopGo.GetComponent<RectTransform>();
+            splashTopRt.anchoredPosition = new Vector2(470, 470);
+            splashTopRt.sizeDelta = new Vector2(190, 75);
+            var splashTopImg = splashTopGo.AddComponent<Image>();
+            splashTopImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(DailyCheckinSpritesRoot + "deco_splash.png");
+            splashTopImg.color = new Color(1f, 1f, 1f, 0.55f);
+            splashTopImg.raycastTarget = false;
+
+            var boltGo = CreateUIObject("deco_bolt", decorGo.transform);
+            var boltRt = boltGo.GetComponent<RectTransform>();
+            boltRt.anchoredPosition = new Vector2(-800, 330);
+            boltRt.sizeDelta = new Vector2(240, 140);
+            var boltImg = boltGo.AddComponent<Image>();
+            boltImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "deco_bolt.png");
+            boltImg.color = new Color(1f, 1f, 1f, 0.85f);
+            boltImg.raycastTarget = false;
+
+            var splashAGo = CreateUIObject("splash_a", decorGo.transform);
+            var splashARt = splashAGo.GetComponent<RectTransform>();
+            splashARt.anchoredPosition = new Vector2(-860, -420);
+            splashARt.sizeDelta = new Vector2(300, 170);
+            var splashAImg = splashAGo.AddComponent<Image>();
+            splashAImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "splash_a.png");
+            splashAImg.color = new Color(1f, 1f, 1f, 0.55f);
+            splashAImg.raycastTarget = false;
+
+            var splashBGo = CreateUIObject("splash_b", decorGo.transform);
+            var splashBRt = splashBGo.GetComponent<RectTransform>();
+            splashBRt.anchoredPosition = new Vector2(870, -400);
+            splashBRt.sizeDelta = new Vector2(240, 180);
+            var splashBImg = splashBGo.AddComponent<Image>();
+            splashBImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "splash_b.png");
+            splashBImg.color = new Color(1f, 1f, 1f, 0.55f);
+            splashBImg.raycastTarget = false;
+
+            var crownLeftGo = CreateUIObject("deco_crown_left", decorGo.transform);
+            var crownLeftRt = crownLeftGo.GetComponent<RectTransform>();
+            crownLeftRt.anchoredPosition = new Vector2(-850, -60);
+            crownLeftRt.sizeDelta = new Vector2(110, 105);
+            var crownLeftImg = crownLeftGo.AddComponent<Image>();
+            crownLeftImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "deco_crown.png");
+            crownLeftImg.color = new Color(1f, 1f, 1f, 0.35f);
+            crownLeftImg.raycastTarget = false;
+
+            var crownRightGo = CreateUIObject("deco_crown_right", decorGo.transform);
+            var crownRightRt = crownRightGo.GetComponent<RectTransform>();
+            crownRightRt.anchoredPosition = new Vector2(860, 40);
+            crownRightRt.sizeDelta = new Vector2(90, 86);
+            var crownRightImg = crownRightGo.AddComponent<Image>();
+            crownRightImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "deco_crown.png");
+            crownRightImg.color = new Color(1f, 1f, 1f, 0.30f);
+            crownRightImg.raycastTarget = false;
+
+            // Beaters (pulsing to beat)
+            var arrowsGo = CreateUIObject("deco_arrows", decorGo.transform);
+            var arrowsRt = arrowsGo.GetComponent<RectTransform>();
+            arrowsRt.anchoredPosition = new Vector2(820, 360);
+            arrowsRt.sizeDelta = new Vector2(260, 90);
+            var arrowsImg = arrowsGo.AddComponent<Image>();
+            arrowsImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "deco_arrows.png");
+            arrowsImg.color = new Color(1f, 1f, 1f, 0.85f);
+            arrowsImg.raycastTarget = false;
+
+            var crownTopGo = CreateUIObject("deco_crown_top", decorGo.transform);
+            var crownTopRt = crownTopGo.GetComponent<RectTransform>();
+            crownTopRt.anchoredPosition = new Vector2(330, 455);
+            crownTopRt.sizeDelta = new Vector2(84, 84);
+            var crownTopImg = crownTopGo.AddComponent<Image>();
+            crownTopImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "deco_crown_pink.png");
+            crownTopImg.color = new Color(1f, 1f, 1f, 0.90f);
+            crownTopImg.raycastTarget = false;
+
+            // Attach and wire SongListDecor
+            var sld = decorGo.AddComponent<SongListDecor>();
+            var sldSo = new SerializedObject(sld);
+            sldSo.FindProperty("bpm").floatValue = 110f;
+
+            var glowsProp = sldSo.FindProperty("glows");
+            glowsProp.arraySize = 3;
+            glowsProp.GetArrayElementAtIndex(0).objectReferenceValue = glowPinkImg;
+            glowsProp.GetArrayElementAtIndex(1).objectReferenceValue = glowCyanImg;
+            glowsProp.GetArrayElementAtIndex(2).objectReferenceValue = glowPurpleImg;
+
+            var floatersProp = sldSo.FindProperty("floaters");
+            floatersProp.arraySize = 6;
+            floatersProp.GetArrayElementAtIndex(0).objectReferenceValue = splashTopRt;
+            floatersProp.GetArrayElementAtIndex(1).objectReferenceValue = boltRt;
+            floatersProp.GetArrayElementAtIndex(2).objectReferenceValue = splashARt;
+            floatersProp.GetArrayElementAtIndex(3).objectReferenceValue = splashBRt;
+            floatersProp.GetArrayElementAtIndex(4).objectReferenceValue = crownLeftRt;
+            floatersProp.GetArrayElementAtIndex(5).objectReferenceValue = crownRightRt;
+
+            var beatersProp = sldSo.FindProperty("beaters");
+            beatersProp.arraySize = 2;
+            beatersProp.GetArrayElementAtIndex(0).objectReferenceValue = arrowsRt;
+            beatersProp.GetArrayElementAtIndex(1).objectReferenceValue = crownTopRt;
+
+            sldSo.FindProperty("particleArea").objectReferenceValue = sparksGo.GetComponent<RectTransform>();
+            sldSo.FindProperty("particleSprite").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(GameplaySpritesRoot + "glow_soft.png");
+            sldSo.FindProperty("particleCount").intValue = 28;
+
+            sldSo.FindProperty("equalizer").objectReferenceValue = eqRt;
+            sldSo.FindProperty("barCount").intValue = 48;
+            sldSo.FindProperty("barMaxHeight").floatValue = 110f;
+            sldSo.FindProperty("barLeft").colorValue = barLeft;
+            sldSo.FindProperty("barRight").colorValue = barRight;
+            sldSo.ApplyModifiedProperties();
 
             // 6. Header Bar
             var headerGo = CreateUIObject("HeaderBar", canvasGo.transform);
@@ -97,7 +258,7 @@ namespace Luan.NapTien.Editor
             var backBtn = backBtnGo.AddComponent<Button>();
             SetButtonColors(backBtn);
 
-            // Title Banner (Cyber stylized graffiti)
+            // Title Banner (Cyber graffiti style)
             var titleBoxGo = CreateUIObject("TitleContainer", headerGo.transform);
             var titleBoxRt = titleBoxGo.GetComponent<RectTransform>();
             titleBoxRt.anchorMin = titleBoxRt.anchorMax = new Vector2(0, 1);
@@ -197,26 +358,35 @@ namespace Luan.NapTien.Editor
             gemTMP.text = "1,000";
             gemTMP.alignment = TextAlignmentOptions.MidlineRight;
 
-            // 7. Category Tabs (Cyberpunk frames)
+            // 7. Category Tabs (Stylized Cyberpunk Frames like Story Mode / Free Play)
             var tabsBoxGo = CreateUIObject("CategoryTabs", canvasGo.transform);
             var tabsBoxRt = tabsBoxGo.GetComponent<RectTransform>();
             tabsBoxRt.anchorMin = tabsBoxRt.anchorMax = new Vector2(0.5f, 1f);
             tabsBoxRt.pivot = new Vector2(0.5f, 1f);
-            tabsBoxRt.anchoredPosition = new Vector2(0, -118);
+            tabsBoxRt.anchoredPosition = new Vector2(0, -114);
             tabsBoxRt.sizeDelta = new Vector2(980, 54);
 
             var (tabGemsBtn, tabGemsBg, tabGemsTxt) = CreateCategoryTab("Tab_Gems", tabsBoxGo.transform, new Vector2(-320, 0), "GÓI KIM CƯƠNG", fontBangers);
             var (tabCoinsBtn, tabCoinsBg, tabCoinsTxt) = CreateCategoryTab("Tab_Coins", tabsBoxGo.transform, new Vector2(0, 0), "GÓI TIỀN VÀNG", fontBangers);
             var (tabSpecialBtn, tabSpecialBg, tabSpecialTxt) = CreateCategoryTab("Tab_Special", tabsBoxGo.transform, new Vector2(320, 0), "ƯU ĐÃI ĐẶC BIỆT", fontBangers);
 
-            // 8. Pack Areas / Containers
+            // 8. Main UI Frame / Pack Areas (UI Background: 9-sliced panel_list with cyber paint borders)
             var packAreaGo = CreateUIObject("PackArea", canvasGo.transform);
             var packAreaRt = packAreaGo.GetComponent<RectTransform>();
             packAreaRt.anchorMin = new Vector2(0.5f, 0.5f);
             packAreaRt.anchorMax = new Vector2(0.5f, 0.5f);
             packAreaRt.pivot = new Vector2(0.5f, 0.5f);
             packAreaRt.anchoredPosition = new Vector2(0, -70);
-            packAreaRt.sizeDelta = new Vector2(1720, 780);
+            packAreaRt.sizeDelta = new Vector2(1700, 770);
+
+            // UI Background Panel (Exact panel_list from SongList screenshot)
+            var uiBgGo = CreateUIObject("UIBackground", packAreaGo.transform);
+            SetStretch(uiBgGo);
+            var uiBgImg = uiBgGo.AddComponent<Image>();
+            uiBgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "panel_list.png");
+            uiBgImg.type = Image.Type.Sliced;
+            uiBgImg.color = Color.white;
+            uiBgImg.raycastTarget = false;
 
             // A. Gems Container (2 rows x 3 columns)
             var gemsContainerGo = CreateUIObject("GemsContainer", packAreaGo.transform);
@@ -226,8 +396,8 @@ namespace Luan.NapTien.Editor
             var gemCardViews = new List<NapTienCardView>();
             Vector2[] gridPositions = new Vector2[]
             {
-                new Vector2(-540, 185),  new Vector2(0, 185),  new Vector2(540, 185),
-                new Vector2(-540, -185), new Vector2(0, -185), new Vector2(540, -185)
+                new Vector2(-520, 165),  new Vector2(0, 165),  new Vector2(520, 165),
+                new Vector2(-520, -170), new Vector2(0, -170), new Vector2(520, -170)
             };
 
             for (int i = 0; i < gemPacks.Length; i++)
@@ -256,7 +426,7 @@ namespace Luan.NapTien.Editor
             var specialCardViews = new List<NapTienCardView>();
             Vector2[] specialPositions = new Vector2[]
             {
-                new Vector2(-540, 0), new Vector2(0, 0), new Vector2(540, 0)
+                new Vector2(-520, 0), new Vector2(0, 0), new Vector2(520, 0)
             };
             for (int i = 0; i < specialPacks.Length; i++)
             {
@@ -395,7 +565,7 @@ namespace Luan.NapTien.Editor
             cardRt.anchorMin = cardRt.anchorMax = new Vector2(0.5f, 0.5f);
             cardRt.pivot = new Vector2(0.5f, 0.5f);
             cardRt.anchoredPosition = pos;
-            cardRt.sizeDelta = isLarge ? new Vector2(460, 530) : new Vector2(430, 325);
+            cardRt.sizeDelta = isLarge ? new Vector2(460, 530) : new Vector2(430, 315);
 
             // 1. Card Background
             var bgImg = cardGo.AddComponent<Image>();
@@ -432,8 +602,8 @@ namespace Luan.NapTien.Editor
             var auraRt = auraGo.GetComponent<RectTransform>();
             auraRt.anchorMin = auraRt.anchorMax = new Vector2(0.5f, 0.5f);
             auraRt.pivot = new Vector2(0.5f, 0.5f);
-            auraRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 35);
-            auraRt.sizeDelta = isLarge ? new Vector2(270, 270) : new Vector2(210, 210);
+            auraRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 32);
+            auraRt.sizeDelta = isLarge ? new Vector2(270, 270) : new Vector2(200, 200);
             var auraImg = auraGo.AddComponent<Image>();
             string auraName = pack.currencyType == CurrencyType.Coin ? "glow_aura_gold.png" 
                 : (isLarge ? "glow_aura_purple.png" : "glow_aura_cyan.png");
@@ -445,8 +615,8 @@ namespace Luan.NapTien.Editor
             var iconRt = iconGo.GetComponent<RectTransform>();
             iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 0.5f);
             iconRt.pivot = new Vector2(0.5f, 0.5f);
-            iconRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 35);
-            iconRt.sizeDelta = isLarge ? new Vector2(210, 210) : new Vector2(150, 150);
+            iconRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 32);
+            iconRt.sizeDelta = isLarge ? new Vector2(210, 210) : new Vector2(145, 145);
             var iconImg = iconGo.AddComponent<Image>();
             iconImg.sprite = pack.iconSprite;
             iconImg.preserveAspect = true;
@@ -457,8 +627,8 @@ namespace Luan.NapTien.Editor
             var titleRt = titleGo.GetComponent<RectTransform>();
             titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 1f);
             titleRt.pivot = new Vector2(0.5f, 1f);
-            titleRt.anchoredPosition = new Vector2(0, -18);
-            titleRt.sizeDelta = new Vector2(390, 34);
+            titleRt.anchoredPosition = new Vector2(0, -16);
+            titleRt.sizeDelta = new Vector2(390, 32);
             var titleTMP = titleGo.AddComponent<TextMeshProUGUI>();
             titleTMP.font = fontBangers != null ? fontBangers : fontSans;
             titleTMP.fontSize = isLarge ? 26 : 21;
@@ -501,7 +671,7 @@ namespace Luan.NapTien.Editor
             priceBtnRt.anchorMin = priceBtnRt.anchorMax = new Vector2(0.5f, 0f);
             priceBtnRt.pivot = new Vector2(0.5f, 0f);
             priceBtnRt.anchoredPosition = new Vector2(0, 16);
-            priceBtnRt.sizeDelta = isLarge ? new Vector2(270, 56) : new Vector2(230, 50);
+            priceBtnRt.sizeDelta = isLarge ? new Vector2(270, 56) : new Vector2(230, 48);
             var priceBtnImg = priceBtnGo.AddComponent<Image>();
             priceBtnImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_price_tag.png");
             var priceBtn = priceBtnGo.AddComponent<Button>();
