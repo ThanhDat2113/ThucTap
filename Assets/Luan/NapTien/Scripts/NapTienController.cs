@@ -180,6 +180,26 @@ namespace Luan.NapTien
 
             UpdateTabButtonVisuals();
 
+            // Kích hoạt hiệu ứng xuất hiện cascade giật cấp mượt mà
+            NapTienCardView[] activeCards = category switch
+            {
+                TopUpCategory.Gems => gemCardViews,
+                TopUpCategory.Coins => coinCardViews,
+                _ => specialCardViews
+            };
+
+            if (activeCards != null)
+            {
+                for (int i = 0; i < activeCards.Length; i++)
+                {
+                    if (activeCards[i] != null)
+                    {
+                        var anim = activeCards[i].GetComponent<UICardAnimation>();
+                        if (anim != null) anim.PlayCascadeAppear(i * 0.045f);
+                    }
+                }
+            }
+
             if (Luan.MainMenu.AudioManager.Instance != null)
             {
                 Luan.MainMenu.AudioManager.Instance.PlaySelectSound();

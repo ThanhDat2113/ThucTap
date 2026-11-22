@@ -14,6 +14,7 @@ namespace Luan.NapTien.Editor
         private const string SpritesRoot = "Assets/Luan/NapTien/Sprites/";
         private const string ShopSpritesRoot = "Assets/UI/Shop/Sprites/";
         private const string SongListSpritesRoot = "Assets/UI/SongList/Sprites/";
+        private const string ModularItemsRoot = "Assets/Luan/LuckyWheel/Sprites/ModularItems/";
 
         [MenuItem("Tools/Luan/Build NapTien Scene")]
         public static void Build()
@@ -48,22 +49,34 @@ namespace Luan.NapTien.Editor
             var fontBangers = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Thuan/UI/Fonts/Bangers SDF.asset");
             var fontSans = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
 
-            // 4. Background
+            // 4. Background - Vibrant cyberpunk city without murky dark overlay
             var bgGo = CreateUIObject("Background", canvasGo.transform);
             SetStretch(bgGo);
             var bgImg = bgGo.AddComponent<Image>();
             bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "bg_songlist.png");
             bgImg.preserveAspect = false;
-            bgImg.color = new Color(0.85f, 0.85f, 0.95f, 1f);
+            bgImg.color = Color.white;
 
-            // Vignette dark overlay
-            var vigGo = CreateUIObject("VignetteOverlay", canvasGo.transform);
-            SetStretch(vigGo);
-            var vigImg = vigGo.AddComponent<Image>();
-            vigImg.color = new Color(0.03f, 0.02f, 0.08f, 0.65f);
-            vigImg.raycastTarget = false;
+            // Subtle bottom gradient shadow to help bottom card readability without washing out city lights
+            var bottomGradGo = CreateUIObject("BottomGradient", canvasGo.transform);
+            var bottomGradRt = bottomGradGo.GetComponent<RectTransform>();
+            bottomGradRt.anchorMin = new Vector2(0, 0);
+            bottomGradRt.anchorMax = new Vector2(1, 0.25f);
+            bottomGradRt.offsetMin = bottomGradRt.offsetMax = Vector2.zero;
+            var bottomGradImg = bottomGradGo.AddComponent<Image>();
+            bottomGradImg.color = new Color(0.02f, 0.02f, 0.06f, 0.35f);
+            bottomGradImg.raycastTarget = false;
 
-            // 5. Header Bar
+            // 5. Ambient UI Particle System
+            var particlesGo = CreateUIObject("UIParticles", canvasGo.transform);
+            SetStretch(particlesGo);
+            var pSystem = particlesGo.AddComponent<UIParticleFloatingSystem>();
+            var pSo = new SerializedObject(pSystem);
+            pSo.FindProperty("particleSprite").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "fx_particle_sparkle.png");
+            pSo.FindProperty("particleCount").intValue = 32;
+            pSo.ApplyModifiedProperties();
+
+            // 6. Header Bar
             var headerGo = CreateUIObject("HeaderBar", canvasGo.transform);
             var headerRt = headerGo.GetComponent<RectTransform>();
             headerRt.anchorMin = new Vector2(0, 1);
@@ -84,36 +97,34 @@ namespace Luan.NapTien.Editor
             var backBtn = backBtnGo.AddComponent<Button>();
             SetButtonColors(backBtn);
 
-            // Title Container
+            // Title Banner (Cyber stylized graffiti)
             var titleBoxGo = CreateUIObject("TitleContainer", headerGo.transform);
             var titleBoxRt = titleBoxGo.GetComponent<RectTransform>();
             titleBoxRt.anchorMin = titleBoxRt.anchorMax = new Vector2(0, 1);
             titleBoxRt.pivot = new Vector2(0, 1);
-            titleBoxRt.anchoredPosition = new Vector2(130, -20);
-            titleBoxRt.sizeDelta = new Vector2(600, 80);
+            titleBoxRt.anchoredPosition = new Vector2(130, -18);
+            titleBoxRt.sizeDelta = new Vector2(620, 85);
 
-            var titleTextGo = CreateUIObject("TitleText", titleBoxGo.transform);
-            var titleTextRt = titleTextGo.GetComponent<RectTransform>();
-            titleTextRt.anchorMin = new Vector2(0, 0.4f);
-            titleTextRt.anchorMax = new Vector2(1, 1);
-            titleTextRt.offsetMin = titleTextRt.offsetMax = Vector2.zero;
-            var titleTMP = titleTextGo.AddComponent<TextMeshProUGUI>();
-            titleTMP.font = fontBangers != null ? fontBangers : fontSans;
-            titleTMP.text = "TIỆM NẠP TIỀN";
-            titleTMP.fontSize = 52;
-            titleTMP.color = new Color(0f, 1f, 0.95f, 1f); // Neon Cyan
-            titleTMP.alignment = TextAlignmentOptions.Left;
+            var titleBannerGo = CreateUIObject("TitleBanner", titleBoxGo.transform);
+            var bannerRt = titleBannerGo.GetComponent<RectTransform>();
+            bannerRt.anchorMin = bannerRt.anchorMax = new Vector2(0, 1);
+            bannerRt.pivot = new Vector2(0, 1);
+            bannerRt.anchoredPosition = new Vector2(0, 0);
+            bannerRt.sizeDelta = new Vector2(300, 68);
+            var bannerImg = titleBannerGo.AddComponent<Image>();
+            bannerImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "title_naptien_banner.png");
+            bannerImg.preserveAspect = true;
 
             var subtitleTextGo = CreateUIObject("SubtitleText", titleBoxGo.transform);
             var subRt = subtitleTextGo.GetComponent<RectTransform>();
             subRt.anchorMin = new Vector2(0, 0);
-            subRt.anchorMax = new Vector2(1, 0.4f);
+            subRt.anchorMax = new Vector2(1, 0.32f);
             subRt.offsetMin = subRt.offsetMax = Vector2.zero;
             var subTMP = subtitleTextGo.AddComponent<TextMeshProUGUI>();
             subTMP.font = fontSans;
             subTMP.text = "CỔNG NẠP KIM CƯƠNG & XU VÀNG CHÍNH HÃNG - NHẬN TỨC THÌ";
-            subTMP.fontSize = 16;
-            subTMP.color = new Color(0.7f, 0.75f, 0.9f, 0.85f);
+            subTMP.fontSize = 15;
+            subTMP.color = new Color(0.6f, 0.95f, 1f, 0.9f);
             subTMP.alignment = TextAlignmentOptions.Left;
 
             // Wallet Container at top right
@@ -186,19 +197,19 @@ namespace Luan.NapTien.Editor
             gemTMP.text = "1,000";
             gemTMP.alignment = TextAlignmentOptions.MidlineRight;
 
-            // 6. Category Tabs
+            // 7. Category Tabs (Cyberpunk frames)
             var tabsBoxGo = CreateUIObject("CategoryTabs", canvasGo.transform);
             var tabsBoxRt = tabsBoxGo.GetComponent<RectTransform>();
             tabsBoxRt.anchorMin = tabsBoxRt.anchorMax = new Vector2(0.5f, 1f);
             tabsBoxRt.pivot = new Vector2(0.5f, 1f);
             tabsBoxRt.anchoredPosition = new Vector2(0, -118);
-            tabsBoxRt.sizeDelta = new Vector2(960, 54);
+            tabsBoxRt.sizeDelta = new Vector2(980, 54);
 
             var (tabGemsBtn, tabGemsBg, tabGemsTxt) = CreateCategoryTab("Tab_Gems", tabsBoxGo.transform, new Vector2(-320, 0), "GÓI KIM CƯƠNG", fontBangers);
             var (tabCoinsBtn, tabCoinsBg, tabCoinsTxt) = CreateCategoryTab("Tab_Coins", tabsBoxGo.transform, new Vector2(0, 0), "GÓI TIỀN VÀNG", fontBangers);
             var (tabSpecialBtn, tabSpecialBg, tabSpecialTxt) = CreateCategoryTab("Tab_Special", tabsBoxGo.transform, new Vector2(320, 0), "ƯU ĐÃI ĐẶC BIỆT", fontBangers);
 
-            // 7. Pack Areas / Containers
+            // 8. Pack Areas / Containers
             var packAreaGo = CreateUIObject("PackArea", canvasGo.transform);
             var packAreaRt = packAreaGo.GetComponent<RectTransform>();
             packAreaRt.anchorMin = new Vector2(0.5f, 0.5f);
@@ -253,16 +264,16 @@ namespace Luan.NapTien.Editor
                 specialCardViews.Add(cardView);
             }
 
-            // 8. Payment Modal
+            // 9. Payment Modal
             var modalBuilder = BuildPaymentModal(canvasGo.transform, fontBangers, fontSans);
 
-            // 9. Success Toast
+            // 10. Success Toast
             var (successToastGo, successDialogRt, successMsgTmp, successOkBtn) = BuildSuccessToast(canvasGo.transform, fontBangers, fontSans);
 
-            // 10. Copy Toast
+            // 11. Copy Toast
             var (copyToastGo, copyToastTmp) = BuildCopyToast(canvasGo.transform, fontSans);
 
-            // 11. Wire Serialized Fields on Controller
+            // 12. Wire Serialized Fields on Controller
             var so = new SerializedObject(controller);
             so.FindProperty("backButton").objectReferenceValue = backBtn;
             so.FindProperty("returnSceneName").stringValue = "Thuan_Shop";
@@ -340,10 +351,10 @@ namespace Luan.NapTien.Editor
                 specialCardViews[i].Bind(specialPacks[i], controller.OnPackSelected);
             }
 
-            // 12. Event System
+            // 13. Event System
             new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
 
-            // 13. Save Scene
+            // 14. Save Scene
             string scenePath = "Assets/Luan/Scenes/NapTien.unity";
             EditorSceneManager.SaveScene(scene, scenePath);
             AssetDatabase.SaveAssets();
@@ -357,10 +368,11 @@ namespace Luan.NapTien.Editor
             tabRt.anchorMin = tabRt.anchorMax = new Vector2(0.5f, 0.5f);
             tabRt.pivot = new Vector2(0.5f, 0.5f);
             tabRt.anchoredPosition = pos;
-            tabRt.sizeDelta = new Vector2(300, 48);
+            tabRt.sizeDelta = new Vector2(300, 52);
 
             var bgImg = tabGo.AddComponent<Image>();
-            bgImg.color = new Color(0.1f, 0.12f, 0.25f, 0.9f);
+            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "tab_currency_selected.png");
+            bgImg.color = new Color(0.12f, 0.15f, 0.32f, 0.95f);
             var btn = tabGo.AddComponent<Button>();
             SetButtonColors(btn);
 
@@ -370,7 +382,7 @@ namespace Luan.NapTien.Editor
             tmp.font = font;
             tmp.fontSize = 22;
             tmp.text = label;
-            tmp.color = new Color(0.8f, 0.9f, 1f, 1f);
+            tmp.color = new Color(0.85f, 0.95f, 1f, 1f);
             tmp.alignment = TextAlignmentOptions.Center;
 
             return (btn, bgImg, tmp);
@@ -383,74 +395,113 @@ namespace Luan.NapTien.Editor
             cardRt.anchorMin = cardRt.anchorMax = new Vector2(0.5f, 0.5f);
             cardRt.pivot = new Vector2(0.5f, 0.5f);
             cardRt.anchoredPosition = pos;
-            cardRt.sizeDelta = isLarge ? new Vector2(440, 520) : new Vector2(440, 320);
+            cardRt.sizeDelta = isLarge ? new Vector2(460, 530) : new Vector2(430, 325);
 
+            // 1. Card Background
             var bgImg = cardGo.AddComponent<Image>();
-            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "card_pack_bg.png");
+            bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "card_cyber_panel.png");
             var cardFullBtn = cardGo.AddComponent<Button>();
             SetButtonColors(cardFullBtn);
 
-            // Icon
+            // 2. Hover Glowing Frame (Active on pointer hover)
+            var hoverGo = CreateUIObject("HoverFrame", cardGo.transform);
+            SetStretch(hoverGo);
+            var hoverImg = hoverGo.AddComponent<Image>();
+            hoverImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "card_cyber_frame_hover.png");
+            hoverImg.raycastTarget = false;
+            hoverGo.SetActive(false);
+
+            // 3. Shimmer Sweep Mask & Streak
+            var shimmerMaskGo = CreateUIObject("ShimmerMask", cardGo.transform);
+            SetStretch(shimmerMaskGo);
+            shimmerMaskGo.AddComponent<RectMask2D>();
+
+            var shimmerStreakGo = CreateUIObject("ShimmerStreak", shimmerMaskGo.transform);
+            var shimmerStreakRt = shimmerStreakGo.GetComponent<RectTransform>();
+            shimmerStreakRt.anchorMin = shimmerStreakRt.anchorMax = new Vector2(0.5f, 0.5f);
+            shimmerStreakRt.pivot = new Vector2(0.5f, 0.5f);
+            shimmerStreakRt.sizeDelta = isLarge ? new Vector2(160, 560) : new Vector2(130, 360);
+            shimmerStreakRt.anchoredPosition = new Vector2(-400, 0);
+            var shimmerImg = shimmerStreakGo.AddComponent<Image>();
+            shimmerImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "fx_shimmer_streak.png");
+            shimmerImg.raycastTarget = false;
+            shimmerStreakGo.SetActive(false);
+
+            // 4. Pedestal Aura Glow (behind the icon)
+            var auraGo = CreateUIObject("AuraGlow", cardGo.transform);
+            var auraRt = auraGo.GetComponent<RectTransform>();
+            auraRt.anchorMin = auraRt.anchorMax = new Vector2(0.5f, 0.5f);
+            auraRt.pivot = new Vector2(0.5f, 0.5f);
+            auraRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 35);
+            auraRt.sizeDelta = isLarge ? new Vector2(270, 270) : new Vector2(210, 210);
+            var auraImg = auraGo.AddComponent<Image>();
+            string auraName = pack.currencyType == CurrencyType.Coin ? "glow_aura_gold.png" 
+                : (isLarge ? "glow_aura_purple.png" : "glow_aura_cyan.png");
+            auraImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + auraName);
+            auraImg.raycastTarget = false;
+
+            // 5. Pack Icon (Floating bobbing)
             var iconGo = CreateUIObject("PackIcon", cardGo.transform);
             var iconRt = iconGo.GetComponent<RectTransform>();
             iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 0.5f);
             iconRt.pivot = new Vector2(0.5f, 0.5f);
             iconRt.anchoredPosition = isLarge ? new Vector2(0, 75) : new Vector2(0, 35);
-            iconRt.sizeDelta = isLarge ? new Vector2(200, 200) : new Vector2(140, 140);
+            iconRt.sizeDelta = isLarge ? new Vector2(210, 210) : new Vector2(150, 150);
             var iconImg = iconGo.AddComponent<Image>();
             iconImg.sprite = pack.iconSprite;
             iconImg.preserveAspect = true;
+            iconImg.raycastTarget = false;
 
-            // Title
+            // 6. Title
             var titleGo = CreateUIObject("TitleText", cardGo.transform);
             var titleRt = titleGo.GetComponent<RectTransform>();
             titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 1f);
             titleRt.pivot = new Vector2(0.5f, 1f);
             titleRt.anchoredPosition = new Vector2(0, -18);
-            titleRt.sizeDelta = new Vector2(400, 34);
+            titleRt.sizeDelta = new Vector2(390, 34);
             var titleTMP = titleGo.AddComponent<TextMeshProUGUI>();
             titleTMP.font = fontBangers != null ? fontBangers : fontSans;
-            titleTMP.fontSize = isLarge ? 26 : 22;
+            titleTMP.fontSize = isLarge ? 26 : 21;
             titleTMP.text = pack.title;
             titleTMP.color = Color.white;
             titleTMP.alignment = TextAlignmentOptions.Center;
 
-            // Amount / Value Text
+            // 7. Amount / Value Text
             var amountGo = CreateUIObject("AmountText", cardGo.transform);
             var amountRt = amountGo.GetComponent<RectTransform>();
             amountRt.anchorMin = amountRt.anchorMax = new Vector2(0.5f, 0.5f);
             amountRt.pivot = new Vector2(0.5f, 0.5f);
-            amountRt.anchoredPosition = isLarge ? new Vector2(0, -75) : new Vector2(0, -48);
+            amountRt.anchoredPosition = isLarge ? new Vector2(0, -78) : new Vector2(0, -50);
             amountRt.sizeDelta = new Vector2(380, 36);
             var amountTMP = amountGo.AddComponent<TextMeshProUGUI>();
             amountTMP.font = fontBangers != null ? fontBangers : fontSans;
-            amountTMP.fontSize = isLarge ? 28 : 24;
-            amountTMP.color = pack.currencyType == CurrencyType.Coin ? new Color(1f, 0.9f, 0.2f, 1f) : new Color(0f, 1f, 0.95f, 1f);
+            amountTMP.fontSize = isLarge ? 29 : 24;
+            amountTMP.color = pack.currencyType == CurrencyType.Coin ? new Color(1f, 0.92f, 0.25f, 1f) : new Color(0f, 1f, 0.95f, 1f);
             string unit = pack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
             amountTMP.text = $"{pack.mainAmount:N0} {unit}";
             amountTMP.alignment = TextAlignmentOptions.Center;
 
-            // Bonus text
+            // 8. Bonus text
             var bonusGo = CreateUIObject("BonusText", cardGo.transform);
             var bonusRt = bonusGo.GetComponent<RectTransform>();
             bonusRt.anchorMin = bonusRt.anchorMax = new Vector2(0.5f, 0.5f);
             bonusRt.pivot = new Vector2(0.5f, 0.5f);
-            bonusRt.anchoredPosition = isLarge ? new Vector2(0, -112) : new Vector2(0, -74);
+            bonusRt.anchoredPosition = isLarge ? new Vector2(0, -116) : new Vector2(0, -76);
             bonusRt.sizeDelta = new Vector2(300, 24);
             var bonusTMP = bonusGo.AddComponent<TextMeshProUGUI>();
             bonusTMP.font = fontSans;
             bonusTMP.fontSize = 15;
-            bonusTMP.color = new Color(0.4f, 1f, 0.6f, 1f); // Neon Green
+            bonusTMP.color = new Color(0.35f, 1f, 0.65f, 1f); // Neon Emerald Green
             bonusTMP.text = pack.bonusAmount > 0 ? $"+{pack.bonusAmount:N0} Thưởng" : "";
             bonusTMP.alignment = TextAlignmentOptions.Center;
 
-            // Price Tag Button
+            // 9. Price Tag Button
             var priceBtnGo = CreateUIObject("PriceTagButton", cardGo.transform);
             var priceBtnRt = priceBtnGo.GetComponent<RectTransform>();
             priceBtnRt.anchorMin = priceBtnRt.anchorMax = new Vector2(0.5f, 0f);
             priceBtnRt.pivot = new Vector2(0.5f, 0f);
             priceBtnRt.anchoredPosition = new Vector2(0, 16);
-            priceBtnRt.sizeDelta = isLarge ? new Vector2(260, 56) : new Vector2(220, 50);
+            priceBtnRt.sizeDelta = isLarge ? new Vector2(270, 56) : new Vector2(230, 50);
             var priceBtnImg = priceBtnGo.AddComponent<Image>();
             priceBtnImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_price_tag.png");
             var priceBtn = priceBtnGo.AddComponent<Button>();
@@ -465,12 +516,12 @@ namespace Luan.NapTien.Editor
             priceTMP.text = $"{pack.priceVnd:N0} đ";
             priceTMP.alignment = TextAlignmentOptions.Center;
 
-            // Badge Ribbon
+            // 10. Badge Ribbon
             var badgeGo = CreateUIObject("BadgeRibbon", cardGo.transform);
             var badgeRt = badgeGo.GetComponent<RectTransform>();
             badgeRt.anchorMin = badgeRt.anchorMax = new Vector2(1f, 1f);
             badgeRt.pivot = new Vector2(1f, 1f);
-            badgeRt.anchoredPosition = new Vector2(8, 8);
+            badgeRt.anchoredPosition = new Vector2(6, 6);
             badgeRt.sizeDelta = new Vector2(140, 36);
             var badgeImg = badgeGo.AddComponent<Image>();
             badgeImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "badge_bonus.png");
@@ -486,7 +537,19 @@ namespace Luan.NapTien.Editor
 
             badgeGo.SetActive(!string.IsNullOrEmpty(pack.badgeText));
 
-            // Card View Component
+            // 11. Attach UICardAnimation
+            var cardAnim = cardGo.AddComponent<UICardAnimation>();
+            var animSo = new SerializedObject(cardAnim);
+            animSo.FindProperty("iconTransform").objectReferenceValue = iconRt;
+            animSo.FindProperty("auraTransform").objectReferenceValue = auraRt;
+            animSo.FindProperty("hoverFrame").objectReferenceValue = hoverImg;
+            animSo.FindProperty("shimmerStreak").objectReferenceValue = shimmerStreakRt;
+            animSo.FindProperty("floatAmplitude").floatValue = 6.5f;
+            animSo.FindProperty("floatSpeed").floatValue = 2.4f;
+            animSo.FindProperty("auraPulseScale").floatValue = 0.12f;
+            animSo.ApplyModifiedProperties();
+
+            // 12. Card View Component
             var cardView = cardGo.AddComponent<NapTienCardView>();
             var viewSo = new SerializedObject(cardView);
             viewSo.FindProperty("bgImage").objectReferenceValue = bgImg;
@@ -536,31 +599,30 @@ namespace Luan.NapTien.Editor
             var modalGo = CreateUIObject("PaymentModal", parent);
             SetStretch(modalGo);
             var overlayImg = modalGo.AddComponent<Image>();
-            overlayImg.color = new Color(0, 0, 0, 0.82f);
+            overlayImg.color = new Color(0, 0, 0, 0.85f);
 
             // Dialog Window
             var dialogGo = CreateUIObject("DialogWindow", modalGo.transform);
             var dialogRt = dialogGo.GetComponent<RectTransform>();
             dialogRt.anchorMin = dialogRt.anchorMax = new Vector2(0.5f, 0.5f);
             dialogRt.pivot = new Vector2(0.5f, 0.5f);
-            dialogRt.sizeDelta = new Vector2(860, 680);
+            dialogRt.sizeDelta = new Vector2(880, 700);
             var dialogImg = dialogGo.AddComponent<Image>();
             dialogImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "modal_payment_bg.png");
 
             // Header Title
-            var headTitleGo = CreateUIObject("HeaderTitle", dialogGo.transform);
-            var headRt = headTitleGo.GetComponent<RectTransform>();
-            headRt.anchorMin = new Vector2(0, 1);
-            headRt.anchorMax = new Vector2(1, 1);
-            headRt.pivot = new Vector2(0.5f, 1f);
-            headRt.anchoredPosition = new Vector2(0, -18);
-            headRt.sizeDelta = new Vector2(0, 48);
-            var headTmp = headTitleGo.AddComponent<TextMeshProUGUI>();
-            headTmp.font = fontBangers != null ? fontBangers : fontSans;
-            headTmp.fontSize = 32;
-            headTmp.text = "XÁC NHẬN THANH TOÁN QUÉT MÃ QR";
-            headTmp.color = new Color(0f, 1f, 0.95f, 1f);
-            headTmp.alignment = TextAlignmentOptions.Center;
+            var headerTitleGo = CreateUIObject("HeaderTitle", dialogGo.transform);
+            var headerTitleRt = headerTitleGo.GetComponent<RectTransform>();
+            headerTitleRt.anchorMin = headerTitleRt.anchorMax = new Vector2(0.5f, 1f);
+            headerTitleRt.pivot = new Vector2(0.5f, 1f);
+            headerTitleRt.anchoredPosition = new Vector2(0, -22);
+            headerTitleRt.sizeDelta = new Vector2(500, 44);
+            var headerTitleTmp = headerTitleGo.AddComponent<TextMeshProUGUI>();
+            headerTitleTmp.font = fontBangers != null ? fontBangers : fontSans;
+            headerTitleTmp.fontSize = 32;
+            headerTitleTmp.text = "THANH TOÁN ĐƠN HÀNG";
+            headerTitleTmp.color = new Color(0f, 1f, 0.95f, 1f);
+            headerTitleTmp.alignment = TextAlignmentOptions.Center;
 
             // Close Button
             var closeBtnGo = CreateUIObject("CloseButton", dialogGo.transform);
@@ -568,136 +630,136 @@ namespace Luan.NapTien.Editor
             closeRt.anchorMin = closeRt.anchorMax = new Vector2(1, 1);
             closeRt.pivot = new Vector2(1, 1);
             closeRt.anchoredPosition = new Vector2(-22, -18);
-            closeRt.sizeDelta = new Vector2(44, 44);
+            closeRt.sizeDelta = new Vector2(46, 46);
             var closeImg = closeBtnGo.AddComponent<Image>();
-            closeImg.color = new Color(0.9f, 0.2f, 0.4f, 0.9f);
+            closeImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "btn_back_shop.png");
             var closeBtn = closeBtnGo.AddComponent<Button>();
             SetButtonColors(closeBtn);
 
-            var closeTxtGo = CreateUIObject("X", closeBtnGo.transform);
-            SetStretch(closeTxtGo);
-            var closeTmp = closeTxtGo.AddComponent<TextMeshProUGUI>();
-            closeTmp.font = fontSans;
-            closeTmp.fontSize = 24;
-            closeTmp.text = "X";
-            closeTmp.color = Color.white;
-            closeTmp.alignment = TextAlignmentOptions.Center;
+            // Left Side: Pack Summary Preview
+            var summaryGo = CreateUIObject("PackSummaryBox", dialogGo.transform);
+            var summaryRt = summaryGo.GetComponent<RectTransform>();
+            summaryRt.anchorMin = summaryRt.anchorMax = new Vector2(0, 0.5f);
+            summaryRt.pivot = new Vector2(0, 0.5f);
+            summaryRt.anchoredPosition = new Vector2(42, 20);
+            summaryRt.sizeDelta = new Vector2(300, 520);
+            var summaryBg = summaryGo.AddComponent<Image>();
+            summaryBg.color = new Color(0.08f, 0.1f, 0.22f, 0.75f);
 
-            // Selected Pack Summary Box
-            var packBoxGo = CreateUIObject("PackSummaryBox", dialogGo.transform);
-            var packBoxRt = packBoxGo.GetComponent<RectTransform>();
-            packBoxRt.anchorMin = new Vector2(0, 1);
-            packBoxRt.anchorMax = new Vector2(1, 1);
-            packBoxRt.pivot = new Vector2(0.5f, 1f);
-            packBoxRt.anchoredPosition = new Vector2(0, -80);
-            packBoxRt.sizeDelta = new Vector2(-60, 90);
-            var packBoxImg = packBoxGo.AddComponent<Image>();
-            packBoxImg.color = new Color(0.12f, 0.16f, 0.32f, 0.85f);
-
-            var iconGo = CreateUIObject("PackIcon", packBoxGo.transform);
+            var iconGo = CreateUIObject("PackIcon", summaryGo.transform);
             var iconRt = iconGo.GetComponent<RectTransform>();
-            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0, 0.5f);
-            iconRt.pivot = new Vector2(0.5f, 0.5f);
-            iconRt.anchoredPosition = new Vector2(55, 0);
-            iconRt.sizeDelta = new Vector2(70, 70);
+            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 1f);
+            iconRt.pivot = new Vector2(0.5f, 1f);
+            iconRt.anchoredPosition = new Vector2(0, -30);
+            iconRt.sizeDelta = new Vector2(170, 170);
             var iconImg = iconGo.AddComponent<Image>();
+            iconImg.preserveAspect = true;
 
-            var pTitleGo = CreateUIObject("PackTitle", packBoxGo.transform);
+            var pTitleGo = CreateUIObject("PackTitle", summaryGo.transform);
             var pTitleRt = pTitleGo.GetComponent<RectTransform>();
-            pTitleRt.anchorMin = new Vector2(0, 0.5f);
-            pTitleRt.anchorMax = new Vector2(0.7f, 1f);
-            pTitleRt.offsetMin = new Vector2(105, 0);
-            pTitleRt.offsetMax = Vector2.zero;
+            pTitleRt.anchorMin = pTitleRt.anchorMax = new Vector2(0.5f, 1f);
+            pTitleRt.pivot = new Vector2(0.5f, 1f);
+            pTitleRt.anchoredPosition = new Vector2(0, -210);
+            pTitleRt.sizeDelta = new Vector2(270, 36);
             var pTitleTmp = pTitleGo.AddComponent<TextMeshProUGUI>();
             pTitleTmp.font = fontBangers != null ? fontBangers : fontSans;
-            pTitleTmp.fontSize = 26;
-            pTitleTmp.text = "Túi Kim Cương";
+            pTitleTmp.fontSize = 24;
+            pTitleTmp.text = "Gói Kim Cương";
             pTitleTmp.color = Color.white;
-            pTitleTmp.alignment = TextAlignmentOptions.MidlineLeft;
+            pTitleTmp.alignment = TextAlignmentOptions.Center;
 
-            var pValGo = CreateUIObject("PackValue", packBoxGo.transform);
+            var pValGo = CreateUIObject("PackValue", summaryGo.transform);
             var pValRt = pValGo.GetComponent<RectTransform>();
-            pValRt.anchorMin = new Vector2(0, 0);
-            pValRt.anchorMax = new Vector2(0.7f, 0.5f);
-            pValRt.offsetMin = new Vector2(105, 0);
-            pValRt.offsetMax = Vector2.zero;
+            pValRt.anchorMin = pValRt.anchorMax = new Vector2(0.5f, 1f);
+            pValRt.pivot = new Vector2(0.5f, 1f);
+            pValRt.anchoredPosition = new Vector2(0, -248);
+            pValRt.sizeDelta = new Vector2(270, 32);
             var pValTmp = pValGo.AddComponent<TextMeshProUGUI>();
-            pValTmp.font = fontSans;
-            pValTmp.fontSize = 18;
-            pValTmp.text = "+1,200 Kim Cương (+200 Thưởng)";
-            pValTmp.color = new Color(0f, 1f, 0.85f, 1f);
-            pValTmp.alignment = TextAlignmentOptions.MidlineLeft;
+            pValTmp.font = fontBangers != null ? fontBangers : fontSans;
+            pValTmp.fontSize = 26;
+            pValTmp.text = "1,250 Kim Cương";
+            pValTmp.color = new Color(0f, 1f, 0.95f, 1f);
+            pValTmp.alignment = TextAlignmentOptions.Center;
 
-            var pPriceGo = CreateUIObject("PackPrice", packBoxGo.transform);
+            var pPriceGo = CreateUIObject("PackPrice", summaryGo.transform);
             var pPriceRt = pPriceGo.GetComponent<RectTransform>();
-            pPriceRt.anchorMin = new Vector2(0.7f, 0);
-            pPriceRt.anchorMax = new Vector2(1f, 1f);
-            pPriceRt.offsetMin = pPriceRt.offsetMax = Vector2.zero;
+            pPriceRt.anchorMin = pPriceRt.anchorMax = new Vector2(0.5f, 0f);
+            pPriceRt.pivot = new Vector2(0.5f, 0f);
+            pPriceRt.anchoredPosition = new Vector2(0, 30);
+            pPriceRt.sizeDelta = new Vector2(260, 50);
             var pPriceTmp = pPriceGo.AddComponent<TextMeshProUGUI>();
             pPriceTmp.font = fontBangers != null ? fontBangers : fontSans;
-            pPriceTmp.fontSize = 32;
-            pPriceTmp.text = "100.000 VNĐ";
-            pPriceTmp.color = new Color(1f, 0.85f, 0.2f, 1f);
-            pPriceTmp.alignment = TextAlignmentOptions.MidlineRight;
+            pPriceTmp.fontSize = 26;
+            pPriceTmp.text = "100,000 VNĐ";
+            pPriceTmp.color = new Color(1f, 0.92f, 0.3f, 1f);
+            pPriceTmp.alignment = TextAlignmentOptions.Center;
 
-            // Payment Channel Bar (3 Channels)
-            var channelBarGo = CreateUIObject("ChannelBar", dialogGo.transform);
-            var channelBarRt = channelBarGo.GetComponent<RectTransform>();
-            channelBarRt.anchorMin = new Vector2(0, 1);
-            channelBarRt.anchorMax = new Vector2(1, 1);
-            channelBarRt.pivot = new Vector2(0.5f, 1f);
-            channelBarRt.anchoredPosition = new Vector2(0, -185);
-            channelBarRt.sizeDelta = new Vector2(-60, 54);
+            // Right Side: Payment Info & QR
+            var rightBoxGo = CreateUIObject("PaymentRightBox", dialogGo.transform);
+            var rightBoxRt = rightBoxGo.GetComponent<RectTransform>();
+            rightBoxRt.anchorMin = rightBoxRt.anchorMax = new Vector2(1, 0.5f);
+            rightBoxRt.pivot = new Vector2(1, 0.5f);
+            rightBoxRt.anchoredPosition = new Vector2(-42, 20);
+            rightBoxRt.sizeDelta = new Vector2(470, 520);
 
-            var (btnVietQR, imgVietQRSelect) = CreateChannelTab("VietQRBtn", channelBarGo.transform, new Vector2(-260, 0), "VIETQR / NGÂN HÀNG", SpritesRoot + "icon_vietqr.png", fontBangers);
-            var (btnZaloPay, imgZaloPaySelect) = CreateChannelTab("ZaloPayBtn", channelBarGo.transform, new Vector2(0, 0), "VÍ ZALOPAY", SpritesRoot + "icon_zalopay.png", fontBangers);
-            var (btnMoMo, imgMoMoSelect) = CreateChannelTab("MoMoBtn", channelBarGo.transform, new Vector2(260, 0), "VÍ MOMO", SpritesRoot + "icon_momo.png", fontBangers);
+            // Channel Tabs
+            var channelsGo = CreateUIObject("ChannelsBar", rightBoxGo.transform);
+            var channelsRt = channelsGo.GetComponent<RectTransform>();
+            channelsRt.anchorMin = channelsRt.anchorMax = new Vector2(0.5f, 1f);
+            channelsRt.pivot = new Vector2(0.5f, 1f);
+            channelsRt.anchoredPosition = new Vector2(0, 0);
+            channelsRt.sizeDelta = new Vector2(470, 50);
 
-            // Left Side: QR View
-            var qrBoxGo = CreateUIObject("QRContainer", dialogGo.transform);
+            var (btnVietQR, imgVietQRSelect) = CreateChannelTab("Btn_VietQR", channelsGo.transform, new Vector2(-155, 0), "VietQR", SpritesRoot + "channel_vietqr.png", fontBangers);
+            var (btnZaloPay, imgZaloPaySelect) = CreateChannelTab("Btn_ZaloPay", channelsGo.transform, new Vector2(0, 0), "ZaloPay", SpritesRoot + "channel_zalopay.png", fontBangers);
+            var (btnMoMo, imgMoMoSelect) = CreateChannelTab("Btn_MoMo", channelsGo.transform, new Vector2(155, 0), "MoMo", SpritesRoot + "channel_momo.png", fontBangers);
+
+            // QR Code Box
+            var qrBoxGo = CreateUIObject("QRContainer", rightBoxGo.transform);
             var qrBoxRt = qrBoxGo.GetComponent<RectTransform>();
-            qrBoxRt.anchorMin = qrBoxRt.anchorMax = new Vector2(0, 0.5f);
-            qrBoxRt.pivot = new Vector2(0, 0.5f);
-            qrBoxRt.anchoredPosition = new Vector2(50, -45);
-            qrBoxRt.sizeDelta = new Vector2(280, 310);
-            var qrBoxImg = qrBoxGo.AddComponent<Image>();
-            qrBoxImg.color = new Color(0.08f, 0.1f, 0.2f, 0.9f);
+            qrBoxRt.anchorMin = qrBoxRt.anchorMax = new Vector2(0.5f, 1f);
+            qrBoxRt.pivot = new Vector2(0.5f, 1f);
+            qrBoxRt.anchoredPosition = new Vector2(0, -62);
+            qrBoxRt.sizeDelta = new Vector2(210, 210);
+            var qrBoxBg = qrBoxGo.AddComponent<Image>();
+            qrBoxBg.color = Color.white;
 
-            var qrGo = CreateUIObject("QRImage", qrBoxGo.transform);
-            var qrRt = qrGo.GetComponent<RectTransform>();
-            qrRt.anchorMin = qrRt.anchorMax = new Vector2(0.5f, 0.5f);
-            qrRt.pivot = new Vector2(0.5f, 0.5f);
-            qrRt.anchoredPosition = new Vector2(0, 20);
-            qrRt.sizeDelta = new Vector2(220, 220);
-            var qrImg = qrGo.AddComponent<Image>();
-            qrImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "sample_qr.png");
+            var qrImgGo = CreateUIObject("QRImage", qrBoxGo.transform);
+            var qrImgRt = qrImgGo.GetComponent<RectTransform>();
+            qrImgRt.anchorMin = qrImgRt.anchorMax = new Vector2(0.5f, 0.5f);
+            qrImgRt.pivot = new Vector2(0.5f, 0.5f);
+            qrImgRt.sizeDelta = new Vector2(195, 195);
+            var qrImg = qrImgGo.AddComponent<Image>();
+            qrImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "qr_mockup.png");
+            qrImg.preserveAspect = true;
 
-            var timerGo = CreateUIObject("TimerText", qrBoxGo.transform);
+            // Timer countdown
+            var timerGo = CreateUIObject("TimerText", rightBoxGo.transform);
             var timerRt = timerGo.GetComponent<RectTransform>();
-            timerRt.anchorMin = new Vector2(0, 0);
-            timerRt.anchorMax = new Vector2(1, 0);
-            timerRt.pivot = new Vector2(0.5f, 0);
-            timerRt.anchoredPosition = new Vector2(0, 10);
-            timerRt.sizeDelta = new Vector2(0, 30);
+            timerRt.anchorMin = timerRt.anchorMax = new Vector2(0.5f, 1f);
+            timerRt.pivot = new Vector2(0.5f, 1f);
+            timerRt.anchoredPosition = new Vector2(0, -282);
+            timerRt.sizeDelta = new Vector2(460, 26);
             var timerTmp = timerGo.AddComponent<TextMeshProUGUI>();
             timerTmp.font = fontSans;
             timerTmp.fontSize = 15;
-            timerTmp.text = "Hiệu lực: <color=#00FFE6>05:00</color>";
+            timerTmp.text = "Giao dịch hết hạn trong: 15:00";
+            timerTmp.color = new Color(1f, 0.85f, 0.4f, 1f);
             timerTmp.alignment = TextAlignmentOptions.Center;
 
-            // Right Side: Banking Details
-            var infoBoxGo = CreateUIObject("InfoContainer", dialogGo.transform);
+            // Detail Rows
+            var infoBoxGo = CreateUIObject("DetailRows", rightBoxGo.transform);
             var infoBoxRt = infoBoxGo.GetComponent<RectTransform>();
-            infoBoxRt.anchorMin = infoBoxRt.anchorMax = new Vector2(1, 0.5f);
-            infoBoxRt.pivot = new Vector2(1, 0.5f);
-            infoBoxRt.anchoredPosition = new Vector2(-45, -45);
-            infoBoxRt.sizeDelta = new Vector2(460, 310);
+            infoBoxRt.anchorMin = infoBoxRt.anchorMax = new Vector2(0.5f, 0f);
+            infoBoxRt.pivot = new Vector2(0.5f, 0f);
+            infoBoxRt.anchoredPosition = new Vector2(0, 8);
+            infoBoxRt.sizeDelta = new Vector2(460, 195);
 
-            var (bankTmp, _) = CreateDetailRow("BankRow", infoBoxGo.transform, new Vector2(0, 120), "Ngân Hàng:", "MB Bank (Quân Đội)", fontSans, false);
-            var (accNumTmp, copyAccBtn) = CreateDetailRow("AccNumRow", infoBoxGo.transform, new Vector2(0, 65), "Số Tài Khoản:", "0988776655", fontSans, true);
-            var (accNameTmp, _) = CreateDetailRow("AccNameRow", infoBoxGo.transform, new Vector2(0, 10), "Chủ Tài Khoản:", "RHYTHM GAME STUDIO", fontSans, false);
-            var (amountPayTmp, _) = CreateDetailRow("AmountRow", infoBoxGo.transform, new Vector2(0, -45), "Số Tiền:", "100.000 đ", fontSans, false, valueColor: new Color(1f, 0.85f, 0.2f));
-            var (contentTmp, copyContentBtn) = CreateDetailRow("ContentRow", infoBoxGo.transform, new Vector2(0, -100), "Nội Dung CK:", "NAP100K 74892", fontSans, true, valueColor: new Color(0f, 1f, 0.95f));
+            var (bankTmp, _) = CreateDetailRow("BankRow", infoBoxGo.transform, new Vector2(0, 80), "Ngân Hàng:", "MB Bank (Quân Đội)", fontSans, false);
+            var (accNumTmp, copyAccBtn) = CreateDetailRow("AccNumRow", infoBoxGo.transform, new Vector2(0, 32), "Số Tài Khoản:", "0987654321", fontSans, true);
+            var (accNameTmp, _) = CreateDetailRow("AccNameRow", infoBoxGo.transform, new Vector2(0, -16), "Chủ TK:", "NGUYEN VAN LUAN", fontSans, false);
+            var (amountPayTmp, _) = CreateDetailRow("AmountRow", infoBoxGo.transform, new Vector2(0, -64), "Số Tiền:", "100,000 đ", fontSans, false, valueColor: new Color(1f, 0.9f, 0.2f));
+            var (contentTmp, copyContentBtn) = CreateDetailRow("ContentRow", infoBoxGo.transform, new Vector2(0, -112), "Nội Dung CK:", "NAP100K 74892", fontSans, true, valueColor: new Color(0f, 1f, 0.95f));
 
             // Bottom Confirm Button
             var confirmBtnGo = CreateUIObject("ConfirmPaymentButton", dialogGo.transform);
@@ -755,7 +817,7 @@ namespace Luan.NapTien.Editor
             btnRt.anchorMin = btnRt.anchorMax = new Vector2(0.5f, 0.5f);
             btnRt.pivot = new Vector2(0.5f, 0.5f);
             btnRt.anchoredPosition = pos;
-            btnRt.sizeDelta = new Vector2(250, 48);
+            btnRt.sizeDelta = new Vector2(150, 44);
 
             var bgImg = btnGo.AddComponent<Image>();
             bgImg.color = new Color(0.1f, 0.15f, 0.3f, 0.95f);
@@ -767,19 +829,19 @@ namespace Luan.NapTien.Editor
             var iconRt = iconGo.GetComponent<RectTransform>();
             iconRt.anchorMin = iconRt.anchorMax = new Vector2(0, 0.5f);
             iconRt.pivot = new Vector2(0.5f, 0.5f);
-            iconRt.anchoredPosition = new Vector2(26, 0);
-            iconRt.sizeDelta = new Vector2(36, 36);
+            iconRt.anchoredPosition = new Vector2(22, 0);
+            iconRt.sizeDelta = new Vector2(30, 30);
             var iconImg = iconGo.AddComponent<Image>();
             iconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
 
             var textGo = CreateUIObject("Text", btnGo.transform);
             var textRt = textGo.GetComponent<RectTransform>();
-            textRt.anchorMin = new Vector2(0.24f, 0);
+            textRt.anchorMin = new Vector2(0.3f, 0);
             textRt.anchorMax = new Vector2(1f, 1f);
             textRt.offsetMin = textRt.offsetMax = Vector2.zero;
             var tmp = textGo.AddComponent<TextMeshProUGUI>();
             tmp.font = font;
-            tmp.fontSize = 17;
+            tmp.fontSize = 16;
             tmp.text = label;
             tmp.color = Color.white;
             tmp.alignment = TextAlignmentOptions.MidlineLeft;
@@ -801,7 +863,7 @@ namespace Luan.NapTien.Editor
             rowRt.anchorMin = rowRt.anchorMax = new Vector2(0.5f, 0.5f);
             rowRt.pivot = new Vector2(0.5f, 0.5f);
             rowRt.anchoredPosition = pos;
-            rowRt.sizeDelta = new Vector2(460, 44);
+            rowRt.sizeDelta = new Vector2(460, 40);
 
             var bg = rowGo.AddComponent<Image>();
             bg.color = new Color(0.08f, 0.1f, 0.22f, 0.7f);
@@ -814,7 +876,7 @@ namespace Luan.NapTien.Editor
             labelRt.offsetMax = Vector2.zero;
             var lblTmp = labelGo.AddComponent<TextMeshProUGUI>();
             lblTmp.font = font;
-            lblTmp.fontSize = 16;
+            lblTmp.fontSize = 15;
             lblTmp.text = label;
             lblTmp.color = new Color(0.7f, 0.75f, 0.9f, 1f);
             lblTmp.alignment = TextAlignmentOptions.MidlineLeft;
@@ -826,7 +888,7 @@ namespace Luan.NapTien.Editor
             valRt.offsetMin = valRt.offsetMax = Vector2.zero;
             var valTmp = valGo.AddComponent<TextMeshProUGUI>();
             valTmp.font = font;
-            valTmp.fontSize = 17;
+            valTmp.fontSize = 16;
             valTmp.text = val;
             valTmp.color = valueColor ?? Color.white;
             valTmp.alignment = TextAlignmentOptions.MidlineLeft;
@@ -839,7 +901,7 @@ namespace Luan.NapTien.Editor
                 copyRt.anchorMin = copyRt.anchorMax = new Vector2(1, 0.5f);
                 copyRt.pivot = new Vector2(1, 0.5f);
                 copyRt.anchoredPosition = new Vector2(-8, 0);
-                copyRt.sizeDelta = new Vector2(76, 32);
+                copyRt.sizeDelta = new Vector2(76, 30);
                 var copyImg = copyGo.AddComponent<Image>();
                 copyImg.color = new Color(0.15f, 0.45f, 0.8f, 0.9f);
                 copyBtn = copyGo.AddComponent<Button>();
@@ -947,12 +1009,12 @@ namespace Luan.NapTien.Editor
         {
             return new TopUpPackData[]
             {
-                new TopUpPackData { packId = "gem_10k",  title = "Túi Kim Cương Nhỏ",  mainAmount = 100,   bonusAmount = 10,   priceVnd = 10000,  badgeText = "+10%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier1.png") },
-                new TopUpPackData { packId = "gem_20k",  title = "Túi Kim Cương Vừa",  mainAmount = 220,   bonusAmount = 30,   priceVnd = 20000,  badgeText = "+15%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier2.png") },
-                new TopUpPackData { packId = "gem_50k",  title = "Rương Kim Cương",    mainAmount = 580,   bonusAmount = 100,  priceVnd = 50000,  badgeText = "PHỔ BIẾN",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier3.png") },
-                new TopUpPackData { packId = "gem_100k", title = "Hòm Kim Cương Lớn",  mainAmount = 1250,  bonusAmount = 250,  priceVnd = 100000, badgeText = "HOT DEAL",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier4.png") },
-                new TopUpPackData { packId = "gem_200k", title = "Kho Báu Kim Cương",  mainAmount = 2600,  bonusAmount = 600,  priceVnd = 200000, badgeText = "SIÊU LỜI",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier5.png") },
-                new TopUpPackData { packId = "gem_500k", title = "Vương Miện Kim Cương", mainAmount = 6800, bonusAmount = 2000, priceVnd = 500000, badgeText = "VIP KING",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier6.png") }
+                new TopUpPackData { packId = "gem_10k",  title = "Túi Kim Cương Nhỏ",  mainAmount = 100,   bonusAmount = 10,   priceVnd = 10000,  badgeText = "+10%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "02_Diamond.png") },
+                new TopUpPackData { packId = "gem_20k",  title = "Túi Kim Cương Vừa",  mainAmount = 220,   bonusAmount = 30,   priceVnd = 20000,  badgeText = "+15%",      currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "02_Diamond.png") },
+                new TopUpPackData { packId = "gem_50k",  title = "Rương Pha Lê Hiếm",  mainAmount = 580,   bonusAmount = 100,  priceVnd = 50000,  badgeText = "PHỔ BIẾN",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "08_RareCrystal.png") },
+                new TopUpPackData { packId = "gem_100k", title = "Hòm Pha Lê Lớn",     mainAmount = 1250,  bonusAmount = 250,  priceVnd = 100000, badgeText = "HOT DEAL",  currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "08_RareCrystal.png") },
+                new TopUpPackData { packId = "gem_200k", title = "Kho Báu Hoàng Gia",  mainAmount = 2600,  bonusAmount = 600,  priceVnd = 200000, badgeText = "SIÊU LỜI",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") },
+                new TopUpPackData { packId = "gem_500k", title = "Đại Kho Báu Huyền Thoại", mainAmount = 6800, bonusAmount = 2000, priceVnd = 500000, badgeText = "VIP KING", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") }
             };
         }
 
@@ -960,12 +1022,12 @@ namespace Luan.NapTien.Editor
         {
             return new TopUpPackData[]
             {
-                new TopUpPackData { packId = "coin_10k",  title = "Túi Xu Đồng",      mainAmount = 10000,   bonusAmount = 0,      priceVnd = 10000,  badgeText = "",          currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier1.png") },
-                new TopUpPackData { packId = "coin_20k",  title = "Túi Xu Bạc",       mainAmount = 25000,   bonusAmount = 3000,   priceVnd = 20000,  badgeText = "+12%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier2.png") },
-                new TopUpPackData { packId = "coin_50k",  title = "Hộp Tiền Vàng",    mainAmount = 70000,   bonusAmount = 15000,  priceVnd = 50000,  badgeText = "BÁN CHẠY",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier3.png") },
-                new TopUpPackData { packId = "coin_100k", title = "Rương Tiền Vàng",  mainAmount = 150000,  bonusAmount = 40000,  priceVnd = 100000, badgeText = "HOT",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") },
-                new TopUpPackData { packId = "coin_200k", title = "Két Vàng Hoàng Gia", mainAmount = 350000, bonusAmount = 100000, priceVnd = 200000, badgeText = "+30%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") },
-                new TopUpPackData { packId = "coin_500k", title = "Kho Vàng Bất Tận", mainAmount = 1000000, bonusAmount = 350000, priceVnd = 500000, badgeText = "ĐẠI GIA",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_coin_tier4.png") }
+                new TopUpPackData { packId = "coin_10k",  title = "Túi Xu Đồng",        mainAmount = 10000,   bonusAmount = 0,      priceVnd = 10000,  badgeText = "",          currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "01_GoldSmall.png") },
+                new TopUpPackData { packId = "coin_20k",  title = "Túi Xu Bạc",         mainAmount = 25000,   bonusAmount = 3000,   priceVnd = 20000,  badgeText = "+12%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "01_GoldSmall.png") },
+                new TopUpPackData { packId = "coin_50k",  title = "Đống Vàng Thịnh Vượng", mainAmount = 70000, bonusAmount = 15000,  priceVnd = 50000,  badgeText = "BÁN CHẠY",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "09_GoldLarge.png") },
+                new TopUpPackData { packId = "coin_100k", title = "Rương Tiền Vàng",    mainAmount = 150000,  bonusAmount = 40000,  priceVnd = 100000, badgeText = "HOT",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "09_GoldLarge.png") },
+                new TopUpPackData { packId = "coin_200k", title = "Két Vàng Hoàng Gia",  mainAmount = 350000,  bonusAmount = 100000, priceVnd = 200000, badgeText = "+30%",      currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") },
+                new TopUpPackData { packId = "coin_500k", title = "Kho Vàng Bất Tận",   mainAmount = 1000000, bonusAmount = 350000, priceVnd = 500000, badgeText = "ĐẠI GIA",  currencyType = CurrencyType.Coin, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") }
             };
         }
 
@@ -973,9 +1035,9 @@ namespace Luan.NapTien.Editor
         {
             return new TopUpPackData[]
             {
-                new TopUpPackData { packId = "pass_week",  title = "Thẻ Tuần Năng Động",     mainAmount = 650,  bonusAmount = 0,   priceVnd = 45000,  badgeText = "THẺ TUẦN",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_vip_pass.png") },
-                new TopUpPackData { packId = "pass_month", title = "Thẻ Tháng Siêu Cấp VIP", mainAmount = 4000, bonusAmount = 500, priceVnd = 129000, badgeText = "SIÊU GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_vip_pass.png") },
-                new TopUpPackData { packId = "pack_starter", title = "Gói Quà Khởi Đầu Tân Thủ", mainAmount = 500, bonusAmount = 50000, bonusTickets = 5, priceVnd = 29000, badgeText = "X3 GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_starter.png") }
+                new TopUpPackData { packId = "pass_week",    title = "Vé Tuần Năng Động",         mainAmount = 650,  bonusAmount = 0,   priceVnd = 45000,  badgeText = "THẺ TUẦN",   currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "06_Ticket1.png") },
+                new TopUpPackData { packId = "pass_month",   title = "Vé Tháng Siêu Cấp VIP",     mainAmount = 4000, bonusAmount = 500, priceVnd = 129000, badgeText = "SIÊU GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "11_Ticket2.png") },
+                new TopUpPackData { packId = "pack_starter", title = "Gói Quà Khởi Đầu Tân Thủ", mainAmount = 500, bonusAmount = 50000, bonusTickets = 5, priceVnd = 29000, badgeText = "X3 GIÁ TRỊ", currencyType = CurrencyType.Gem, iconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ModularItemsRoot + "05_PremiumChest.png") }
             };
         }
 
