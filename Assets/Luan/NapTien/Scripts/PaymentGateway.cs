@@ -42,25 +42,6 @@ namespace Luan.NapTien
         private bool _isPolling = false;
         private PaymentOrderInfo _currentOrder;
 
-        private void Update()
-        {
-            // Phím F8: Giả lập tín hiệu nhận tiền tự động (PAID) từ Ngân hàng / PayOS về game (0đ - không mất tiền)
-            if (Input.GetKeyDown(KeyCode.F8) && _currentOrder != null && _isPolling)
-            {
-                Debug.Log($"[PaymentGateway] F8 PRESSED -> SIMULATING AUTOMATIC PAID EVENT for Order {_currentOrder.orderCode}");
-                SimulatePaidSuccess();
-            }
-        }
-
-        public void SimulatePaidSuccess()
-        {
-            if (_currentOrder != null)
-            {
-                StopPolling();
-                OnPaymentSuccess?.Invoke(_currentOrder);
-            }
-        }
-
         public static Texture2D GenerateQRCode(string text, int width = 300, int height = 300)
         {
             if (string.IsNullOrEmpty(text)) return null;

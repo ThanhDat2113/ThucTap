@@ -511,6 +511,9 @@ namespace Luan.NapTien.Editor
 
             so.FindProperty("copyAccountNumBtn").objectReferenceValue = modalBuilder.copyAccountNumBtn;
             so.FindProperty("copyContentBtn").objectReferenceValue = modalBuilder.copyContentBtn;
+            so.FindProperty("paymentStatusPanel").objectReferenceValue = modalBuilder.paymentStatusPanel;
+            so.FindProperty("paymentStatusText").objectReferenceValue = modalBuilder.paymentStatusTmp;
+            so.FindProperty("paymentStatusBg").objectReferenceValue = modalBuilder.paymentStatusBg;
             so.FindProperty("confirmPaymentBtn").objectReferenceValue = modalBuilder.confirmPaymentBtn;
             so.FindProperty("closePaymentModalBtn").objectReferenceValue = modalBuilder.closePaymentModalBtn;
 
@@ -844,6 +847,9 @@ namespace Luan.NapTien.Editor
             public TMP_Text timerCountdownTmp;
             public Button copyAccountNumBtn;
             public Button copyContentBtn;
+            public GameObject paymentStatusPanel;
+            public TMP_Text paymentStatusTmp;
+            public Image paymentStatusBg;
             public Button confirmPaymentBtn;
             public Button closePaymentModalBtn;
         }
@@ -1286,31 +1292,30 @@ namespace Luan.NapTien.Editor
             noteTmp.alignment = TextAlignmentOptions.Center;
             noteTmp.raycastTarget = false;
 
-            // Bottom Confirm Button inside RightBox
-            var confirmBtnGo = CreateUIObject("ConfirmPaymentButton", rightBoxGo.transform);
-            var confirmRt = confirmBtnGo.GetComponent<RectTransform>();
-            confirmRt.anchorMin = confirmRt.anchorMax = new Vector2(0.5f, 0);
-            confirmRt.pivot = new Vector2(0.5f, 0);
-            confirmRt.anchoredPosition = new Vector2(0, 18);
-            confirmRt.sizeDelta = new Vector2(640, 52);
-            var confirmImg = confirmBtnGo.AddComponent<Image>();
-            confirmImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_confirm_comic.png");
-            confirmImg.type = Image.Type.Sliced;
-            var confirmBtn = confirmBtnGo.AddComponent<Button>();
-            SetButtonColors(confirmBtn);
+            // Bottom Payment Live Status Box inside RightBox (Replaces manual confirm button)
+            var statusPanelGo = CreateUIObject("PaymentStatusPanel", rightBoxGo.transform);
+            var statusRt = statusPanelGo.GetComponent<RectTransform>();
+            statusRt.anchorMin = statusRt.anchorMax = new Vector2(0.5f, 0);
+            statusRt.pivot = new Vector2(0.5f, 0);
+            statusRt.anchoredPosition = new Vector2(0, 18);
+            statusRt.sizeDelta = new Vector2(640, 54);
+            var statusBg = statusPanelGo.AddComponent<Image>();
+            statusBg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "detail_card_plate.png");
+            statusBg.type = Image.Type.Sliced;
+            statusBg.color = new Color(0.06f, 0.12f, 0.22f, 0.95f); // Deep Cyber Slate
 
-            var confirmTxtGo = CreateUIObject("Text", confirmBtnGo.transform);
-            SetStretch(confirmTxtGo);
-            var confirmTmp = confirmTxtGo.AddComponent<TextMeshProUGUI>();
-            confirmTmp.font = fontSans;
-            confirmTmp.fontStyle = FontStyles.Bold;
-            confirmTmp.fontSize = 20;
-            confirmTmp.text = "XÁC NHẬN ĐÃ CHUYỂN KHOẢN";
-            confirmTmp.color = Color.white;
-            confirmTmp.outlineColor = new Color(0.04f, 0.08f, 0.22f, 0.95f);
-            confirmTmp.outlineWidth = 0.2f;
-            confirmTmp.alignment = TextAlignmentOptions.Center;
-            confirmTmp.raycastTarget = false;
+            var statusTxtGo = CreateUIObject("StatusText", statusPanelGo.transform);
+            SetStretch(statusTxtGo);
+            var statusTmp = statusTxtGo.AddComponent<TextMeshProUGUI>();
+            statusTmp.font = fontSans;
+            statusTmp.fontStyle = FontStyles.Bold;
+            statusTmp.fontSize = 17;
+            statusTmp.text = "• ĐANG CHỜ THANH TOÁN (Chưa nhận tiền)...";
+            statusTmp.color = new Color(0f, 1f, 0.95f, 1f);
+            statusTmp.outlineColor = new Color(0.04f, 0.08f, 0.22f, 0.95f);
+            statusTmp.outlineWidth = 0.25f;
+            statusTmp.alignment = TextAlignmentOptions.Center;
+            statusTmp.raycastTarget = false;
 
             return new ModalBuildResult
             {
@@ -1343,7 +1348,10 @@ namespace Luan.NapTien.Editor
                 timerCountdownTmp = timerTmp,
                 copyAccountNumBtn = copyAccBtn,
                 copyContentBtn = copyContentBtn,
-                confirmPaymentBtn = confirmBtn,
+                paymentStatusPanel = statusPanelGo,
+                paymentStatusTmp = statusTmp,
+                paymentStatusBg = statusBg,
+                confirmPaymentBtn = null,
                 closePaymentModalBtn = closeBtn
             };
         }
