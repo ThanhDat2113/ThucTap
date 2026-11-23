@@ -109,6 +109,7 @@ namespace Luan.NapTien.Editor
             eqRt.sizeDelta = new Vector2(0, 140);
 
             // Pre-create 48 bars so they are immediately visible in Editor mode before Play!
+            // Uses normalized anchors (normX) so it automatically spans 100% of any screen width on mobile!
             int barCount = 48;
             float totalWidth = 1920f;
             float w = totalWidth / barCount;
@@ -118,9 +119,11 @@ namespace Luan.NapTien.Editor
             {
                 var barGo = CreateUIObject("Bar" + i, eqGo.transform);
                 var barRt = barGo.GetComponent<RectTransform>();
-                barRt.anchorMin = barRt.anchorMax = new Vector2(0f, 0f);
+                float normX = (i + 0.5f) / (float)barCount;
+                barRt.anchorMin = new Vector2(normX, 0f);
+                barRt.anchorMax = new Vector2(normX, 0f);
                 barRt.pivot = new Vector2(0.5f, 0f);
-                barRt.anchoredPosition = new Vector2(w * (i + 0.5f), 0f);
+                barRt.anchoredPosition = Vector2.zero;
                 float initialHgt = Mathf.Lerp(12f, 75f, Mathf.PerlinNoise(i * 0.3f, 0.5f));
                 barRt.sizeDelta = new Vector2(w * 0.62f, initialHgt);
                 var barImg = barGo.AddComponent<Image>();

@@ -43,6 +43,7 @@ public class SongListDecor : MonoBehaviour
     private Vector2[] floaterBase;
     private Vector3[] beaterBase;
     private float[] glowAlpha;
+    private float lastEqualizerWidth = -1f;
 
     private void Start()
     {
@@ -98,7 +99,11 @@ public class SongListDecor : MonoBehaviour
             {
                 bars.Add((RectTransform)equalizer.GetChild(i));
             }
-            if (bars.Count == barCount) return;
+            if (bars.Count == barCount)
+            {
+                LayoutEqualizerBars(equalizer.rect.width);
+                return;
+            }
             for (int i = equalizer.childCount - 1; i >= 0; i--)
             {
                 if (Application.isPlaying) Destroy(equalizer.GetChild(i).gameObject);
@@ -107,25 +112,58 @@ public class SongListDecor : MonoBehaviour
             bars.Clear();
         }
 
-        float w = equalizer.rect.width / barCount;
         for (int i = 0; i < barCount; i++)
         {
             var go = new GameObject("Bar" + i, typeof(RectTransform), typeof(Image));
             go.transform.SetParent(equalizer, false);
             var rt = (RectTransform)go.transform;
-            rt.anchorMin = rt.anchorMax = new Vector2(0f, 0f);
+            float normX = (i + 0.5f) / (float)barCount;
+            rt.anchorMin = rt.anchorMax = new Vector2(normX, 0f);
             rt.pivot = new Vector2(0.5f, 0f);
-            rt.anchoredPosition = new Vector2(w * (i + 0.5f), 0f);
-            rt.sizeDelta = new Vector2(w * 0.62f, 10f);
+            rt.anchoredPosition = Vector2.zero;
+            rt.sizeDelta = new Vector2(25f, 10f);
             var img = go.GetComponent<Image>();
             img.raycastTarget = false;
             img.color = Color.Lerp(barLeft, barRight, barCount > 1 ? i / (float)(barCount - 1) : 0f);
             bars.Add(rt);
         }
+
+        LayoutEqualizerBars(equalizer.rect.width);
+    }
+
+    private void LayoutEqualizerBars(float totalWidth)
+    {
+        if (bars == null || bars.Count == 0) return;
+        float actualWidth = totalWidth > 100f ? totalWidth : 1920f;
+        float slotW = actualWidth / bars.Count;
+        float barW = slotW * 0.62f;
+
+        for (int i = 0; i < bars.Count; i++)
+        {
+            if (bars[i] == null) continue;
+            float normX = (i + 0.5f) / (float)bars.Count;
+            bars[i].anchorMin = new Vector2(normX, 0f);
+            bars[i].anchorMax = new Vector2(normX, 0f);
+            bars[i].pivot = new Vector2(0.5f, 0f);
+            bars[i].anchoredPosition = Vector2.zero;
+            var s = bars[i].sizeDelta;
+            s.x = barW;
+            bars[i].sizeDelta = s;
+        }
     }
 
     private void Update()
     {
+        if (equalizer != null)
+        {
+            float curEqW = equalizer.rect.width;
+            if (curEqW > 50f && Mathf.Abs(curEqW - lastEqualizerWidth) > 1f)
+            {
+                lastEqualizerWidth = curEqW;
+                LayoutEqualizerBars(curEqW);
+            }
+        }
+
         float t = Time.unscaledTime;
         float dt = Time.unscaledDeltaTime;
         float beat = t * bpm / 60f;
