@@ -58,6 +58,7 @@ namespace Luan.NapTien.Editor
             bgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SongListSpritesRoot + "bg_songlist.png");
             bgImg.preserveAspect = false;
             bgImg.color = Color.white;
+            bgImg.raycastTarget = false;
 
             // 5. Decor Layer (Identical to SongListDecor: Ambient glows, stickers, particles, equalizer)
             var decorGo = CreateUIObject("Decor", canvasGo.transform);
@@ -259,36 +260,26 @@ namespace Luan.NapTien.Editor
             var backBtn = backBtnGo.AddComponent<Button>();
             SetButtonColors(backBtn);
 
-            // Title Logo: Authentic street-art graffiti logo matching SONG LIST and SHOP
-            var titleGo = CreateUIObject("TitleLogo", headerGo.transform);
-            var titleRt = titleGo.GetComponent<RectTransform>();
-            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0, 1);
-            titleRt.pivot = new Vector2(0, 1);
-            titleRt.anchoredPosition = new Vector2(265, -10);
-            titleRt.sizeDelta = new Vector2(360, 145);
-            var titleImg = titleGo.AddComponent<Image>();
-            titleImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "title_naptien_graffiti.png");
-            titleImg.preserveAspect = true;
-            titleImg.raycastTarget = false;
-
-            // Wallet Container at top right
+            // Wallet Container at top right (compact S = 0.62)
             var walletBoxGo = CreateUIObject("WalletContainer", headerGo.transform);
             var walletBoxRt = walletBoxGo.GetComponent<RectTransform>();
             walletBoxRt.anchorMin = walletBoxRt.anchorMax = new Vector2(1, 1);
             walletBoxRt.pivot = new Vector2(1, 1);
             walletBoxRt.anchoredPosition = new Vector2(-40, -12);
-            walletBoxRt.sizeDelta = new Vector2(530, 140);
+            walletBoxRt.sizeDelta = new Vector2(430, 110);
 
-            // Coin Bar (Balanced scale S = 0.76)
+            // Coin Bar (Balanced scale S = 0.62)
             var coinBarGo = CreateUIObject("CoinBar", walletBoxGo.transform);
             var coinBarRt = coinBarGo.GetComponent<RectTransform>();
             coinBarRt.anchorMin = coinBarRt.anchorMax = new Vector2(0, 1);
             coinBarRt.pivot = new Vector2(0, 1);
             coinBarRt.anchoredPosition = new Vector2(0, -15f);
-            coinBarRt.sizeDelta = new Vector2(239, 131);
+            coinBarRt.sizeDelta = new Vector2(195, 107);
             var coinBarImg = coinBarGo.AddComponent<Image>();
             coinBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_coin.png");
             coinBarImg.preserveAspect = true;
+            var coinBarBtn = coinBarGo.AddComponent<Button>();
+            SetButtonColors(coinBarBtn);
 
             var coinTextGo = CreateUIObject("CoinText", coinBarGo.transform);
             var coinTextRt = coinTextGo.GetComponent<RectTransform>();
@@ -297,21 +288,24 @@ namespace Luan.NapTien.Editor
             coinTextRt.offsetMin = coinTextRt.offsetMax = Vector2.zero;
             var coinTMP = coinTextGo.AddComponent<TextMeshProUGUI>();
             coinTMP.font = fontBangers != null ? fontBangers : fontSans;
-            coinTMP.fontSize = 32;
+            coinTMP.fontSize = 26;
             coinTMP.color = Color.white;
             coinTMP.text = "10,000";
             coinTMP.alignment = TextAlignmentOptions.Center;
+            coinTMP.raycastTarget = false;
 
-            // Gem Bar (Balanced scale S = 0.76)
+            // Gem Bar (Balanced scale S = 0.62)
             var gemBarGo = CreateUIObject("GemBar", walletBoxGo.transform);
             var gemBarRt = gemBarGo.GetComponent<RectTransform>();
             gemBarRt.anchorMin = gemBarRt.anchorMax = new Vector2(0, 1);
             gemBarRt.pivot = new Vector2(0, 1);
-            gemBarRt.anchoredPosition = new Vector2(255, -13f);
-            gemBarRt.sizeDelta = new Vector2(249, 113);
+            gemBarRt.anchoredPosition = new Vector2(210, -14f);
+            gemBarRt.sizeDelta = new Vector2(203, 92);
             var gemBarImg = gemBarGo.AddComponent<Image>();
             gemBarImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ShopSpritesRoot + "bar_gem.png");
             gemBarImg.preserveAspect = true;
+            var gemBarBtn = gemBarGo.AddComponent<Button>();
+            SetButtonColors(gemBarBtn);
 
             var gemTextGo = CreateUIObject("GemText", gemBarGo.transform);
             var gemTextRt = gemTextGo.GetComponent<RectTransform>();
@@ -320,10 +314,11 @@ namespace Luan.NapTien.Editor
             gemTextRt.offsetMin = gemTextRt.offsetMax = Vector2.zero;
             var gemTMP = gemTextGo.AddComponent<TextMeshProUGUI>();
             gemTMP.font = fontBangers != null ? fontBangers : fontSans;
-            gemTMP.fontSize = 32;
+            gemTMP.fontSize = 26;
             gemTMP.color = Color.white;
             gemTMP.text = "1,000";
             gemTMP.alignment = TextAlignmentOptions.Center;
+            gemTMP.raycastTarget = false;
 
             // 7. Category Tabs (Stylized Cyberpunk Frames with dedicated icons and clean neon borders)
             var tabsBoxGo = CreateUIObject("CategoryTabs", canvasGo.transform);
@@ -433,6 +428,8 @@ namespace Luan.NapTien.Editor
             so.FindProperty("returnSceneName").stringValue = "Thuan_Shop";
             so.FindProperty("coinText").objectReferenceValue = coinTMP;
             so.FindProperty("gemText").objectReferenceValue = gemTMP;
+            so.FindProperty("coinBarButton").objectReferenceValue = coinBarBtn;
+            so.FindProperty("gemBarButton").objectReferenceValue = gemBarBtn;
 
             so.FindProperty("tabGemsButton").objectReferenceValue = tabGemsBtn;
             so.FindProperty("tabCoinsButton").objectReferenceValue = tabCoinsBtn;
@@ -462,6 +459,10 @@ namespace Luan.NapTien.Editor
             SetArrayProperty(so.FindProperty("gemCardViews"), gemCardViews);
             SetArrayProperty(so.FindProperty("coinCardViews"), coinCardViews);
             SetArrayProperty(so.FindProperty("specialCardViews"), specialCardViews);
+
+            SetPacksArrayProperty(so.FindProperty("gemPacks"), gemPacks);
+            SetPacksArrayProperty(so.FindProperty("coinPacks"), coinPacks);
+            SetPacksArrayProperty(so.FindProperty("specialPacks"), specialPacks);
 
             so.FindProperty("paymentModal").objectReferenceValue = modalBuilder.modalGo;
             so.FindProperty("paymentModalDialog").objectReferenceValue = modalBuilder.dialogRt;
@@ -515,7 +516,12 @@ namespace Luan.NapTien.Editor
             }
 
             // 13. Event System
-            new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+            var eventSystemGo = new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+            var inputModule = eventSystemGo.GetComponent<InputSystemUIInputModule>();
+            if (inputModule != null)
+            {
+                inputModule.AssignDefaultActions();
+            }
 
             // 14. Save Scene
             string scenePath = "Assets/Luan/Scenes/NapTien.unity";
@@ -655,6 +661,7 @@ namespace Luan.NapTien.Editor
             titleTMP.color = Color.white;
             titleTMP.alignment = hasBadge ? TextAlignmentOptions.MidlineLeft : TextAlignmentOptions.Center;
             titleTMP.enableWordWrapping = false;
+            titleTMP.raycastTarget = false;
 
             // 7. Amount / Value Text
             var amountGo = CreateUIObject("AmountText", cardGo.transform);
@@ -670,6 +677,7 @@ namespace Luan.NapTien.Editor
             string unit = pack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
             amountTMP.text = $"{pack.mainAmount:N0} {unit}";
             amountTMP.alignment = TextAlignmentOptions.Center;
+            amountTMP.raycastTarget = false;
 
             // 8. Bonus text
             var bonusGo = CreateUIObject("BonusText", cardGo.transform);
@@ -684,6 +692,7 @@ namespace Luan.NapTien.Editor
             bonusTMP.color = new Color(0.35f, 1f, 0.65f, 1f); // Neon Emerald Green
             bonusTMP.text = pack.bonusAmount > 0 ? $"+{pack.bonusAmount:N0} Thưởng" : "";
             bonusTMP.alignment = TextAlignmentOptions.Center;
+            bonusTMP.raycastTarget = false;
 
             // 9. Price Tag Button
             var priceBtnGo = CreateUIObject("PriceTagButton", cardGo.transform);
@@ -705,6 +714,7 @@ namespace Luan.NapTien.Editor
             priceTMP.color = Color.white;
             priceTMP.text = $"{pack.priceVnd:N0} đ";
             priceTMP.alignment = TextAlignmentOptions.Center;
+            priceTMP.raycastTarget = false;
 
             // 10. Badge Ribbon
             var badgeGo = CreateUIObject("BadgeRibbon", cardGo.transform);
@@ -715,6 +725,7 @@ namespace Luan.NapTien.Editor
             badgeRt.sizeDelta = new Vector2(140, 36);
             var badgeImg = badgeGo.AddComponent<Image>();
             badgeImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "badge_bonus.png");
+            badgeImg.raycastTarget = false;
 
             var badgeTextGo = CreateUIObject("BadgeText", badgeGo.transform);
             SetStretch(badgeTextGo);
@@ -724,6 +735,7 @@ namespace Luan.NapTien.Editor
             badgeTMP.color = Color.white;
             badgeTMP.text = pack.badgeText;
             badgeTMP.alignment = TextAlignmentOptions.Center;
+            badgeTMP.raycastTarget = false;
 
             badgeGo.SetActive(!string.IsNullOrEmpty(pack.badgeText));
 
@@ -752,7 +764,24 @@ namespace Luan.NapTien.Editor
             viewSo.FindProperty("badgeObj").objectReferenceValue = badgeGo;
             viewSo.FindProperty("badgeText").objectReferenceValue = badgeTMP;
             viewSo.FindProperty("cardFullButton").objectReferenceValue = cardFullBtn;
+
+            var dataProp = viewSo.FindProperty("_data");
+            if (dataProp != null)
+            {
+                dataProp.FindPropertyRelative("packId").stringValue = pack.packId;
+                dataProp.FindPropertyRelative("title").stringValue = pack.title;
+                dataProp.FindPropertyRelative("mainAmount").intValue = pack.mainAmount;
+                dataProp.FindPropertyRelative("bonusAmount").intValue = pack.bonusAmount;
+                dataProp.FindPropertyRelative("priceVnd").intValue = pack.priceVnd;
+                dataProp.FindPropertyRelative("badgeText").stringValue = pack.badgeText;
+                dataProp.FindPropertyRelative("iconSprite").objectReferenceValue = pack.iconSprite;
+                dataProp.FindPropertyRelative("currencyType").enumValueIndex = (int)pack.currencyType;
+                dataProp.FindPropertyRelative("bonusTickets").intValue = pack.bonusTickets;
+            }
+
             viewSo.ApplyModifiedProperties();
+            cardView.SetDataOnly(pack);
+            EditorUtility.SetDirty(cardView);
 
             return cardView;
         }
@@ -1278,6 +1307,26 @@ namespace Luan.NapTien.Editor
             for (int i = 0; i < views.Count; i++)
             {
                 prop.GetArrayElementAtIndex(i).objectReferenceValue = views[i];
+            }
+        }
+
+        private static void SetPacksArrayProperty(SerializedProperty prop, TopUpPackData[] packs)
+        {
+            if (prop == null || packs == null) return;
+            prop.arraySize = packs.Length;
+            for (int i = 0; i < packs.Length; i++)
+            {
+                var element = prop.GetArrayElementAtIndex(i);
+                var p = packs[i];
+                element.FindPropertyRelative("packId").stringValue = p.packId;
+                element.FindPropertyRelative("title").stringValue = p.title;
+                element.FindPropertyRelative("mainAmount").intValue = p.mainAmount;
+                element.FindPropertyRelative("bonusAmount").intValue = p.bonusAmount;
+                element.FindPropertyRelative("priceVnd").intValue = p.priceVnd;
+                element.FindPropertyRelative("badgeText").stringValue = p.badgeText;
+                element.FindPropertyRelative("iconSprite").objectReferenceValue = p.iconSprite;
+                element.FindPropertyRelative("currencyType").enumValueIndex = (int)p.currencyType;
+                element.FindPropertyRelative("bonusTickets").intValue = p.bonusTickets;
             }
         }
     }

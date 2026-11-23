@@ -37,6 +37,8 @@ namespace Luan.NapTien
         [SerializeField] private string returnSceneName = "Thuan_Shop";
         [SerializeField] private TMP_Text coinText;
         [SerializeField] private TMP_Text gemText;
+        [SerializeField] private Button coinBarButton;
+        [SerializeField] private Button gemBarButton;
 
         [Header("--- Category Tabs ---")]
         [SerializeField] private Button tabGemsButton;
@@ -70,6 +72,11 @@ namespace Luan.NapTien
         [SerializeField] private NapTienCardView[] gemCardViews;
         [SerializeField] private NapTienCardView[] coinCardViews;
         [SerializeField] private NapTienCardView[] specialCardViews;
+
+        [Header("--- Pack Data (Serialized) ---")]
+        [SerializeField] private TopUpPackData[] gemPacks;
+        [SerializeField] private TopUpPackData[] coinPacks;
+        [SerializeField] private TopUpPackData[] specialPacks;
 
         [Header("--- Payment Modal ---")]
         [SerializeField] private GameObject paymentModal;
@@ -123,6 +130,9 @@ namespace Luan.NapTien
         {
             if (backButton != null) backButton.onClick.AddListener(OnBackClicked);
 
+            if (coinBarButton != null) coinBarButton.onClick.AddListener(() => SwitchCategory(TopUpCategory.Coins));
+            if (gemBarButton != null) gemBarButton.onClick.AddListener(() => SwitchCategory(TopUpCategory.Gems));
+
             if (tabGemsButton != null) tabGemsButton.onClick.AddListener(() => SwitchCategory(TopUpCategory.Gems));
             if (tabCoinsButton != null) tabCoinsButton.onClick.AddListener(() => SwitchCategory(TopUpCategory.Coins));
             if (tabSpecialButton != null) tabSpecialButton.onClick.AddListener(() => SwitchCategory(TopUpCategory.Special));
@@ -140,6 +150,29 @@ namespace Luan.NapTien
             if (paymentModal != null) paymentModal.SetActive(false);
             if (successToast != null) successToast.SetActive(false);
             if (copyToast != null) copyToast.SetActive(false);
+
+            BindAllCards();
+        }
+
+        private void BindAllCards()
+        {
+            InitCards(gemCardViews, gemPacks);
+            InitCards(coinCardViews, coinPacks);
+            InitCards(specialCardViews, specialPacks);
+        }
+
+        private void InitCards(NapTienCardView[] views, TopUpPackData[] packs)
+        {
+            if (views == null) return;
+            for (int i = 0; i < views.Length; i++)
+            {
+                if (views[i] == null) continue;
+                TopUpPackData pack = (packs != null && i < packs.Length) ? packs[i] : views[i].Data;
+                if (pack != null)
+                {
+                    views[i].Bind(pack, OnPackSelected);
+                }
+            }
         }
 
         private void OnEnable()

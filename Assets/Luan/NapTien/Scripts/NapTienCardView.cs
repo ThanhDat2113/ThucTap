@@ -23,10 +23,26 @@ namespace Luan.NapTien
         [Header("Card Button Overlay")]
         [SerializeField] private Button cardFullButton;
 
-        private TopUpPackData _data;
+        [Header("Data (Serialized)")]
+        [SerializeField] private TopUpPackData _data;
         private Action<TopUpPackData> _onSelected;
 
         public TopUpPackData Data => _data;
+
+        private void Awake()
+        {
+            if (buyButton != null)
+            {
+                buyButton.onClick.RemoveAllListeners();
+                buyButton.onClick.AddListener(OnClick);
+            }
+
+            if (cardFullButton != null)
+            {
+                cardFullButton.onClick.RemoveAllListeners();
+                cardFullButton.onClick.AddListener(OnClick);
+            }
+        }
 
         public void Bind(TopUpPackData data, Action<TopUpPackData> onSelected)
         {
@@ -85,9 +101,25 @@ namespace Luan.NapTien
             }
         }
 
+        public void SetDataOnly(TopUpPackData data)
+        {
+            _data = data;
+        }
+
         private void OnClick()
         {
-            _onSelected?.Invoke(_data);
+            if (_onSelected != null)
+            {
+                _onSelected.Invoke(_data);
+            }
+            else
+            {
+                var controller = GetComponentInParent<NapTienController>();
+                if (controller != null && _data != null)
+                {
+                    controller.OnPackSelected(_data);
+                }
+            }
         }
     }
 }
