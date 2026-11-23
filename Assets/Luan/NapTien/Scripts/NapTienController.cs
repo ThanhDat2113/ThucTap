@@ -84,18 +84,31 @@ namespace Luan.NapTien
         [SerializeField] private Image modalPackIcon;
         [SerializeField] private TMP_Text modalPackTitle;
         [SerializeField] private TMP_Text modalPackValue;
+        [SerializeField] private TMP_Text modalPackBonus;
         [SerializeField] private TMP_Text modalPackPrice;
 
         [Header("Payment Channel Buttons")]
         [SerializeField] private Button btnVietQR;
         [SerializeField] private Button btnZaloPay;
         [SerializeField] private Button btnMoMo;
+        [SerializeField] private Image bgVietQR;
+        [SerializeField] private Image bgZaloPay;
+        [SerializeField] private Image bgMoMo;
         [SerializeField] private Image imgVietQRSelect;
         [SerializeField] private Image imgZaloPaySelect;
         [SerializeField] private Image imgMoMoSelect;
 
+        [Header("Payment Channel Sprites")]
+        [SerializeField] private Sprite tabChannelNormal;
+        [SerializeField] private Sprite tabChannelActiveCyan;
+        [SerializeField] private Sprite tabChannelActiveBlue;
+        [SerializeField] private Sprite tabChannelActivePink;
+
         [Header("Payment Details & QR")]
         [SerializeField] private Image qrImage;
+        [SerializeField] private Sprite qrVietQRSprite;
+        [SerializeField] private Sprite qrZaloPaySprite;
+        [SerializeField] private Sprite qrMoMoSprite;
         [SerializeField] private TMP_Text bankNameText;
         [SerializeField] private TMP_Text accountNumText;
         [SerializeField] private TMP_Text accountNameText;
@@ -312,11 +325,24 @@ namespace Luan.NapTien
                 modalPackIcon.sprite = _selectedPack.iconSprite;
             }
             if (modalPackTitle != null) modalPackTitle.text = _selectedPack.title;
-            if (modalPackPrice != null) modalPackPrice.text = $"{_selectedPack.priceVnd:N0} VNĐ";
+            if (modalPackPrice != null) modalPackPrice.text = $"{_selectedPack.priceVnd:N0} đ";
 
-            if (modalPackValue != null)
+            string unit = _selectedPack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
+            if (modalPackBonus != null)
             {
-                string unit = _selectedPack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
+                if (modalPackValue != null) modalPackValue.text = $"+{_selectedPack.mainAmount:N0} {unit}";
+                if (_selectedPack.bonusAmount > 0)
+                {
+                    modalPackBonus.text = $"+{_selectedPack.bonusAmount:N0} Thưởng";
+                    modalPackBonus.gameObject.SetActive(true);
+                }
+                else
+                {
+                    modalPackBonus.gameObject.SetActive(false);
+                }
+            }
+            else if (modalPackValue != null)
+            {
                 if (_selectedPack.bonusAmount > 0)
                 {
                     modalPackValue.text = $"+{_selectedPack.mainAmount:N0} {unit} (+{_selectedPack.bonusAmount:N0} Thưởng)";
@@ -352,9 +378,22 @@ namespace Luan.NapTien
         {
             _currentPaymentChannel = channel;
 
+            // Tab Backgrounds & Highlights
+            if (bgVietQR != null) bgVietQR.sprite = channel == "VietQR" ? tabChannelActiveCyan : tabChannelNormal;
+            if (bgZaloPay != null) bgZaloPay.sprite = channel == "ZaloPay" ? tabChannelActiveBlue : tabChannelNormal;
+            if (bgMoMo != null) bgMoMo.sprite = channel == "MoMo" ? tabChannelActivePink : tabChannelNormal;
+
             if (imgVietQRSelect != null) imgVietQRSelect.gameObject.SetActive(channel == "VietQR");
             if (imgZaloPaySelect != null) imgZaloPaySelect.gameObject.SetActive(channel == "ZaloPay");
             if (imgMoMoSelect != null) imgMoMoSelect.gameObject.SetActive(channel == "MoMo");
+
+            // Dynamic QR Code per channel
+            if (qrImage != null)
+            {
+                if (channel == "VietQR" && qrVietQRSprite != null) qrImage.sprite = qrVietQRSprite;
+                else if (channel == "ZaloPay" && qrZaloPaySprite != null) qrImage.sprite = qrZaloPaySprite;
+                else if (channel == "MoMo" && qrMoMoSprite != null) qrImage.sprite = qrMoMoSprite;
+            }
 
             int randomOrderCode = UnityEngine.Random.Range(10000, 99999);
             string orderCodeStr = $"NAP{randomOrderCode}";
@@ -367,21 +406,21 @@ namespace Luan.NapTien
             if (channel == "VietQR")
             {
                 if (bankNameText != null) bankNameText.text = "MB Bank (Quân Đội)";
-                if (accountNumText != null) accountNumText.text = "0988776655";
+                if (accountNumText != null) accountNumText.text = "0988 776 655";
                 if (accountNameText != null) accountNameText.text = "RHYTHM GAME STUDIO";
                 if (transferContentText != null) transferContentText.text = orderCodeStr;
             }
             else if (channel == "ZaloPay")
             {
                 if (bankNameText != null) bankNameText.text = "Ví Điện Tử ZaloPay";
-                if (accountNumText != null) accountNumText.text = "0988776655";
+                if (accountNumText != null) accountNumText.text = "0988 776 655";
                 if (accountNameText != null) accountNameText.text = "RHYTHM GAME STUDIO";
                 if (transferContentText != null) transferContentText.text = $"ZLP {orderCodeStr}";
             }
             else // MoMo
             {
                 if (bankNameText != null) bankNameText.text = "Ví Điện Tử MoMo";
-                if (accountNumText != null) accountNumText.text = "0988776655";
+                if (accountNumText != null) accountNumText.text = "0988 776 655";
                 if (accountNameText != null) accountNameText.text = "RHYTHM GAME STUDIO";
                 if (transferContentText != null) transferContentText.text = $"MOM {orderCodeStr}";
             }
