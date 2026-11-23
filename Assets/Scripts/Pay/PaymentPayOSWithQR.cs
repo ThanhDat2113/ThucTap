@@ -10,9 +10,9 @@ using UnityEngine.Networking;
 public class PaymentPayOSWithQR : MonoBehaviour
 {
     public UniWebView webView;
-    public string xClientId = "ad0d17ea-12fb-4613-b0a1-81b866c84e80"; //lấy trên PayOS
-    public string xApiKey = "3c9e4f20-bb0f-44e4-8529-fa0d1d651e1a"; //lấy trên PayOS
-    public string checksumKey = "9cfbe621228779e04e3b820e30fb4c111fde875c57053f771b35192f57ba64c7"; //lấy trên PayOS
+    public string xClientId = "9ef74abb-a367-4c4b-bf11-bc3b2cc3352d"; //lấy trên PayOS
+    public string xApiKey = "62e00cca-ac73-416b-89cb-9b17469bd6b4"; //lấy trên PayOS
+    public string checksumKey = "d209d8b6e62a8f087a1d7bc52ff12251285559fec11baee27683ed9e281e7a41"; //lấy trên PayOS
     public string partnerCodeOptional;
 
     public int amount = 6000; //thay đổi số tiền cần thanh toán

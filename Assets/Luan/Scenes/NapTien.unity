@@ -33418,9 +33418,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00f7d7c46f325a46bdc86befb1eb1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Luan.NapTien.PaymentGateway
-  payOsClientId: ad0d17ea-12fb-4613-b0a1-81b866c84e80
-  payOsApiKey: 3c9e4f20-bb0f-44e4-8529-fa0d1d651e1a
-  payOsChecksumKey: 9cfbe621228779e04e3b820e30fb4c111fde875c57053f771b35192f57ba64c7
+  payOsClientId: 9ef74abb-a367-4c4b-bf11-bc3b2cc3352d
+  payOsApiKey: 62e00cca-ac73-416b-89cb-9b17469bd6b4
+  payOsChecksumKey: d209d8b6e62a8f087a1d7bc52ff12251285559fec11baee27683ed9e281e7a41
   zaloAppId: 554
   zaloKey1: 8NdU5pG5R2spGHGhyO99HN1OhD8IQJBn
   zaloKey2: uUfsWgfLkRLzq6W2uNXTCxrfxs51auny

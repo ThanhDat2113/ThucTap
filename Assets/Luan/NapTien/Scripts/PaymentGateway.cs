@@ -26,10 +26,10 @@ namespace Luan.NapTien
 
     public class PaymentGateway : MonoBehaviour
     {
-        [Header("--- PayOS Credentials (From Teacher Repo) ---")]
-        public string payOsClientId = "ad0d17ea-12fb-4613-b0a1-81b866c84e80";
-        public string payOsApiKey = "3c9e4f20-bb0f-44e4-8529-fa0d1d651e1a";
-        public string payOsChecksumKey = "9cfbe621228779e04e3b820e30fb4c111fde875c57053f771b35192f57ba64c7";
+        [Header("--- PayOS Credentials (User Account: VU PHAM LUAN) ---")]
+        public string payOsClientId = "9ef74abb-a367-4c4b-bf11-bc3b2cc3352d";
+        public string payOsApiKey = "62e00cca-ac73-416b-89cb-9b17469bd6b4";
+        public string payOsChecksumKey = "d209d8b6e62a8f087a1d7bc52ff12251285559fec11baee27683ed9e281e7a41";
 
         [Header("--- ZaloPay Credentials (From Teacher Repo) ---")]
         public string zaloAppId = "554";
@@ -93,22 +93,12 @@ namespace Luan.NapTien
             string initialDesc = $"NAP{initialCode % 100000:D5}";
             CreateOfflineFallback(channel, initialCode, amount, initialDesc, onReady);
 
-            if (channel == "VietQR")
-            {
-                StartCoroutine(CreatePayOSRoutine(amount, packTitle, onReady, onError));
-            }
-            else if (channel == "ZaloPay")
-            {
-                StartCoroutine(CreateZaloPayRoutine(amount, packTitle, onReady, onError));
-            }
-            else // MoMo
-            {
-                CreateMoMoPayment(amount, packTitle, onReady);
-            }
+            // PayOS creates real Napas VietQR that can be scanned by ANY Vietnamese bank app, MoMo, or ZaloPay
+            StartCoroutine(CreatePayOSRoutine(channel, amount, packTitle, onReady, onError));
         }
 
         #region --- PayOS Implementation ---
-        private IEnumerator CreatePayOSRoutine(int amount, string packTitle, Action<PaymentOrderInfo> onReady, Action<string> onError)
+        private IEnumerator CreatePayOSRoutine(string channel, int amount, string packTitle, Action<PaymentOrderInfo> onReady, Action<string> onError)
         {
             long orderCode = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             string description = $"NAP{orderCode % 100000:D5}";
@@ -149,16 +139,26 @@ namespace Luan.NapTien
                     var resp = JsonUtility.FromJson<PayOSResponse>(www.downloadHandler.text);
                     if (resp != null && resp.data != null && !string.IsNullOrEmpty(resp.data.qrCode))
                     {
+                        string bankTitle = channel switch
+                        {
+                            "ZaloPay" => "MB Bank (Quét bằng ZaloPay/Ngân Hàng)",
+                            "MoMo" => "MB Bank (Quét bằng MoMo/Ngân Hàng)",
+                            _ => "MB Bank (Quân Đội)"
+                        };
+                        string accNo = !string.IsNullOrEmpty(resp.data.accountNumber) ? resp.data.accountNumber : "VQRQANVZZ4922";
+                        string accNm = !string.IsNullOrEmpty(resp.data.accountName) ? resp.data.accountName : "VU PHAM LUAN";
+                        string tfContent = !string.IsNullOrEmpty(resp.data.description) ? resp.data.description : description;
+
                         var info = new PaymentOrderInfo
                         {
-                            channel = "VietQR",
+                            channel = channel,
                             orderCode = orderCode,
                             qrPayload = resp.data.qrCode,
                             qrTexture = GenerateQRCode(resp.data.qrCode, 320, 320),
-                            bankName = "MB Bank (Quân Đội)",
-                            accountNum = "0988 776 655",
-                            accountName = "RHYTHM GAME STUDIO",
-                            transferContent = description,
+                            bankName = bankTitle,
+                            accountNum = accNo,
+                            accountName = accNm,
+                            transferContent = tfContent,
                             amount = amount
                         };
                         _currentOrder = info;
@@ -171,7 +171,7 @@ namespace Luan.NapTien
 
             // Fallback gracefully to offline mode if server response was unsuccessful
             Debug.LogWarning("[PaymentGateway] PayOS online request timed out or returned error. Using authentic VietQR offline mode.");
-            CreateOfflineFallback("VietQR", orderCode, amount, description, onReady);
+            CreateOfflineFallback(channel, orderCode, amount, description, onReady);
         }
 
         private void StartPollingPayOS(long orderCode, PaymentOrderInfo order)
@@ -358,15 +358,22 @@ namespace Luan.NapTien
         private void CreateOfflineFallback(string channel, long orderCode, int amount, string desc, Action<PaymentOrderInfo> onReady)
         {
             string payload = $"00020101021238540010A000000727012600069704220112{orderCode}52046011530370454{amount}5802VN62140810{desc}6304";
+            string bankTitle = channel switch
+            {
+                "ZaloPay" => "MB Bank (Quét bằng ZaloPay/Ngân Hàng)",
+                "MoMo" => "MB Bank (Quét bằng MoMo/Ngân Hàng)",
+                _ => "MB Bank (Quân Đội)"
+            };
+
             var info = new PaymentOrderInfo
             {
                 channel = channel,
                 orderCode = orderCode,
                 qrPayload = payload,
                 qrTexture = GenerateQRCode(payload, 320, 320),
-                bankName = channel == "ZaloPay" ? "Ví Điện Tử ZaloPay" : (channel == "MoMo" ? "Ví Điện Tử MoMo" : "MB Bank (Quân Đội)"),
-                accountNum = "0988 776 655",
-                accountName = "RHYTHM GAME STUDIO",
+                bankName = bankTitle,
+                accountNum = "VQRQANVZZ4922",
+                accountName = "VU PHAM LUAN",
                 transferContent = desc,
                 amount = amount
             };
@@ -426,7 +433,15 @@ namespace Luan.NapTien
     public class PayOSData
     {
         public string id;
-        public string orderCode;
+        public string bin;
+        public string accountNumber;
+        public string accountName;
+        public int amount;
+        public string description;
+        public long orderCode;
+        public string currency;
+        public string paymentLinkId;
+        public string status;
         public string checkoutUrl;
         public string qrCode;
     }
