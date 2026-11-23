@@ -104,7 +104,9 @@ namespace Luan.NapTien
         [SerializeField] private Sprite tabChannelActiveBlue;
         [SerializeField] private Sprite tabChannelActivePink;
 
-        [Header("Payment Details & QR")]
+        [Header("--- Payment Details & QR ---")]
+        [SerializeField] private PaymentGateway paymentGateway;
+        [SerializeField] private RawImage qrRawImage;
         [SerializeField] private Image qrImage;
         [SerializeField] private Sprite qrVietQRSprite;
         [SerializeField] private Sprite qrZaloPaySprite;
@@ -164,7 +166,15 @@ namespace Luan.NapTien
             if (successToast != null) successToast.SetActive(false);
             if (copyToast != null) copyToast.SetActive(false);
 
+            if (paymentGateway == null) paymentGateway = GetComponent<PaymentGateway>() ?? gameObject.AddComponent<PaymentGateway>();
+            paymentGateway.OnPaymentSuccess += OnOnlinePaymentSuccess;
+
             BindAllCards();
+        }
+
+        private void OnDestroy()
+        {
+            if (paymentGateway != null) paymentGateway.OnPaymentSuccess -= OnOnlinePaymentSuccess;
         }
 
         private void BindAllCards()
@@ -367,6 +377,7 @@ namespace Luan.NapTien
         public void ClosePaymentModal()
         {
             StopTimer();
+            if (paymentGateway != null) paymentGateway.StopPolling();
             if (paymentModal != null) paymentModal.SetActive(false);
             if (Luan.MainMenu.AudioManager.Instance != null)
             {
@@ -387,48 +398,85 @@ namespace Luan.NapTien
             if (imgZaloPaySelect != null) imgZaloPaySelect.gameObject.SetActive(channel == "ZaloPay");
             if (imgMoMoSelect != null) imgMoMoSelect.gameObject.SetActive(channel == "MoMo");
 
-            // Dynamic QR Code per channel
-            if (qrImage != null)
-            {
-                if (channel == "VietQR" && qrVietQRSprite != null) qrImage.sprite = qrVietQRSprite;
-                else if (channel == "ZaloPay" && qrZaloPaySprite != null) qrImage.sprite = qrZaloPaySprite;
-                else if (channel == "MoMo" && qrMoMoSprite != null) qrImage.sprite = qrMoMoSprite;
-            }
-
-            int randomOrderCode = UnityEngine.Random.Range(10000, 99999);
-            string orderCodeStr = $"NAP{randomOrderCode}";
-
             if (amountToPayText != null && _selectedPack != null)
             {
                 amountToPayText.text = $"{_selectedPack.priceVnd:N0} đ";
             }
 
-            if (channel == "VietQR")
+            // Gọi PaymentGateway (Tích hợp PayOS & ZaloPay của thầy)
+            if (paymentGateway != null && _selectedPack != null)
             {
-                if (bankNameText != null) bankNameText.text = "MB Bank (Quân Đội)";
-                if (accountNumText != null) accountNumText.text = "0988 776 655";
-                if (accountNameText != null) accountNameText.text = "RHYTHM GAME STUDIO";
-                if (transferContentText != null) transferContentText.text = orderCodeStr;
-            }
-            else if (channel == "ZaloPay")
-            {
-                if (bankNameText != null) bankNameText.text = "Ví Điện Tử ZaloPay";
-                if (accountNumText != null) accountNumText.text = "0988 776 655";
-                if (accountNameText != null) accountNameText.text = "RHYTHM GAME STUDIO";
-                if (transferContentText != null) transferContentText.text = $"ZLP {orderCodeStr}";
-            }
-            else // MoMo
-            {
-                if (bankNameText != null) bankNameText.text = "Ví Điện Tử MoMo";
-                if (accountNumText != null) accountNumText.text = "0988 776 655";
-                if (accountNameText != null) accountNameText.text = "RHYTHM GAME STUDIO";
-                if (transferContentText != null) transferContentText.text = $"MOM {orderCodeStr}";
+                paymentGateway.CreatePayment(channel, _selectedPack.priceVnd, _selectedPack.title, (order) =>
+                {
+                    if (order == null) return;
+                    if (bankNameText != null) bankNameText.text = order.bankName;
+                    if (accountNumText != null) accountNumText.text = order.accountNum;
+                    if (accountNameText != null) accountNameText.text = order.accountName;
+                    if (transferContentText != null) transferContentText.text = order.transferContent;
+                    if (amountToPayText != null) amountToPayText.text = $"{order.amount:N0} đ";
+
+                    // Gán Texture QR Code tạo động từ ZXing
+                    if (qrRawImage != null && order.qrTexture != null)
+                    {
+                        qrRawImage.texture = order.qrTexture;
+                    }
+                    else if (qrImage != null && order.qrTexture != null)
+                    {
+                        qrImage.sprite = Sprite.Create(order.qrTexture, new Rect(0, 0, order.qrTexture.width, order.qrTexture.height), new Vector2(0.5f, 0.5f));
+                    }
+                });
             }
 
             if (Luan.MainMenu.AudioManager.Instance != null)
             {
                 Luan.MainMenu.AudioManager.Instance.PlaySelectSound();
             }
+        }
+
+        private void OnOnlinePaymentSuccess(PaymentOrderInfo order)
+        {
+            DeliverPackRewards(_selectedPack, "ONLINE");
+        }
+
+        private void DeliverPackRewards(TopUpPackData pack, string source)
+        {
+            if (pack == null) return;
+
+            int totalAmount = pack.mainAmount + pack.bonusAmount;
+
+            // Cộng tiền vào Wallet
+            Wallet.Add(pack.currencyType, totalAmount);
+
+            if (pack.bonusTickets > 0)
+            {
+                Wallet.AddTickets(pack.bonusTickets);
+            }
+
+            RefreshWallet();
+
+            // Phát âm thanh mua sắm thành công
+            if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayShopPurchase();
+            }
+
+            string unit = pack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
+            string msg = source == "ONLINE"
+                ? $"THANH TOÁN THÀNH CÔNG!\nBạn nhận được <color=#00FFE6>+{totalAmount:N0} {unit}</color>"
+                : $"NẠP THÀNH CÔNG!\nBạn nhận được <color=#00FFE6>+{totalAmount:N0} {unit}</color>";
+
+            if (pack.bonusTickets > 0)
+            {
+                msg += $" và <color=#FFD700>+{pack.bonusTickets} Vé Quay</color>";
+            }
+
+            ClosePaymentModal();
+            ShowSuccessToast(msg);
+        }
+
+        private void OnConfirmPaymentClicked()
+        {
+            DeliverPackRewards(_selectedPack, "TEST");
         }
 
         private void OnCopyAccountNumClicked()
@@ -465,38 +513,7 @@ namespace Luan.NapTien
             _copyToastRoutine = null;
         }
 
-        private void OnConfirmPaymentClicked()
-        {
-            if (_selectedPack == null) return;
 
-            int totalAmount = _selectedPack.mainAmount + _selectedPack.bonusAmount;
-
-            // Cộng tiền vào Wallet
-            Wallet.Add(_selectedPack.currencyType, totalAmount);
-
-            if (_selectedPack.bonusTickets > 0)
-            {
-                Wallet.AddTickets(_selectedPack.bonusTickets);
-            }
-
-            RefreshWallet();
-
-            // Phát âm thanh mua sắm thành công
-            if (Luan.MainMenu.AudioManager.Instance != null)
-            {
-                Luan.MainMenu.AudioManager.Instance.PlayShopPurchase();
-            }
-
-            string unit = _selectedPack.currencyType == CurrencyType.Coin ? "Vàng" : "Kim Cương";
-            string msg = $"NẠP THÀNH CÔNG!\nBạn nhận được <color=#00FFE6>+{totalAmount:N0} {unit}</color>";
-            if (_selectedPack.bonusTickets > 0)
-            {
-                msg += $" và <color=#FFD700>+{_selectedPack.bonusTickets} Vé Quay</color>";
-            }
-
-            ClosePaymentModal();
-            ShowSuccessToast(msg);
-        }
 
         private void ShowSuccessToast(string msg)
         {
