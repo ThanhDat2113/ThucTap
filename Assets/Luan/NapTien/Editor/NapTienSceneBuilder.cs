@@ -420,7 +420,7 @@ namespace Luan.NapTien.Editor
             var modalBuilder = BuildPaymentModal(canvasGo.transform, fontBangers, fontSans);
 
             // 10. Success Toast
-            var (successToastGo, successDialogRt, successMsgTmp, successOkBtn) = BuildSuccessToast(canvasGo.transform, fontBangers, fontSans);
+            var successToast = BuildSuccessToast(canvasGo.transform, fontBangers, fontSans);
 
             // 11. Copy Toast
             var (copyToastGo, copyToastTmp) = BuildCopyToast(canvasGo.transform, fontSans);
@@ -511,10 +511,19 @@ namespace Luan.NapTien.Editor
             so.FindProperty("confirmPaymentBtn").objectReferenceValue = modalBuilder.confirmPaymentBtn;
             so.FindProperty("closePaymentModalBtn").objectReferenceValue = modalBuilder.closePaymentModalBtn;
 
-            so.FindProperty("successToast").objectReferenceValue = successToastGo;
-            so.FindProperty("successToastDialog").objectReferenceValue = successDialogRt;
-            so.FindProperty("successMessageText").objectReferenceValue = successMsgTmp;
-            so.FindProperty("successOkButton").objectReferenceValue = successOkBtn;
+            so.FindProperty("successToast").objectReferenceValue = successToast.rootGo;
+            so.FindProperty("successToastDialog").objectReferenceValue = successToast.dialogRt;
+            so.FindProperty("successTitleText").objectReferenceValue = successToast.titleTmp;
+            so.FindProperty("successIcon").objectReferenceValue = successToast.iconImg;
+            so.FindProperty("successAura").objectReferenceValue = successToast.auraImg;
+            so.FindProperty("successPackNameText").objectReferenceValue = successToast.packNameTmp;
+            so.FindProperty("successAmountText").objectReferenceValue = successToast.amountTmp;
+            so.FindProperty("successBonusText").objectReferenceValue = successToast.bonusTmp;
+            so.FindProperty("successMessageText").objectReferenceValue = successToast.messageTmp;
+            so.FindProperty("successOkButton").objectReferenceValue = successToast.okBtn;
+            so.FindProperty("successOverlayButton").objectReferenceValue = successToast.overlayBtn;
+            so.FindProperty("auraCyan").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "glow_aura_cyan.png");
+            so.FindProperty("auraGold").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "glow_aura_gold.png");
 
             so.FindProperty("copyToast").objectReferenceValue = copyToastGo;
             so.FindProperty("copyToastText").objectReferenceValue = copyToastTmp;
@@ -536,12 +545,7 @@ namespace Luan.NapTien.Editor
             }
 
             // 13. Event System
-            var eventSystemGo = new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-            var inputModule = eventSystemGo.GetComponent<InputSystemUIInputModule>();
-            if (inputModule != null)
-            {
-                inputModule.AssignDefaultActions();
-            }
+            new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
 
             // 14. Save Scene
             string scenePath = "Assets/Luan/Scenes/NapTien.unity";
@@ -1373,68 +1377,197 @@ namespace Luan.NapTien.Editor
             return (valTmp, copyBtn);
         }
 
-        private static (GameObject, RectTransform, TMP_Text, Button) BuildSuccessToast(Transform parent, TMP_FontAsset fontBangers, TMP_FontAsset fontSans)
+        public struct SuccessToastRefs
+        {
+            public GameObject rootGo;
+            public RectTransform dialogRt;
+            public TMP_Text titleTmp;
+            public Image iconImg;
+            public Image auraImg;
+            public TMP_Text packNameTmp;
+            public TMP_Text amountTmp;
+            public TMP_Text bonusTmp;
+            public TMP_Text messageTmp;
+            public Button okBtn;
+            public Button overlayBtn;
+        }
+
+        private static SuccessToastRefs BuildSuccessToast(Transform parent, TMP_FontAsset fontBangers, TMP_FontAsset fontSans)
         {
             var toastGo = CreateUIObject("SuccessPopup", parent);
             SetStretch(toastGo);
             var ovImg = toastGo.AddComponent<Image>();
-            ovImg.color = new Color(0, 0, 0, 0.75f);
+            ovImg.color = new Color(0.015f, 0.008f, 0.05f, 0.88f);
+            var ovBtn = toastGo.AddComponent<Button>();
+            ovBtn.transition = Selectable.Transition.None;
 
             var dialogGo = CreateUIObject("Dialog", toastGo.transform);
             var dialogRt = dialogGo.GetComponent<RectTransform>();
             dialogRt.anchorMin = dialogRt.anchorMax = new Vector2(0.5f, 0.5f);
             dialogRt.pivot = new Vector2(0.5f, 0.5f);
-            dialogRt.sizeDelta = new Vector2(560, 320);
+            dialogRt.sizeDelta = new Vector2(800, 620);
             var dImg = dialogGo.AddComponent<Image>();
-            dImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "modal_payment_bg.png");
+            dImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Luan/LuckyWheel/Sprites/RewardPopupFrame_Neon.png");
+            dImg.color = Color.white;
 
+            // Title
             var titleGo = CreateUIObject("Title", dialogGo.transform);
             var titleRt = titleGo.GetComponent<RectTransform>();
-            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 1f);
-            titleRt.pivot = new Vector2(0.5f, 1f);
-            titleRt.anchoredPosition = new Vector2(0, -28);
-            titleRt.sizeDelta = new Vector2(500, 48);
+            titleRt.anchorMin = titleRt.anchorMax = new Vector2(0.5f, 0.5f);
+            titleRt.pivot = new Vector2(0.5f, 0.5f);
+            titleRt.anchoredPosition = new Vector2(0, 138);
+            titleRt.sizeDelta = new Vector2(560, 48);
             var titleTmp = titleGo.AddComponent<TextMeshProUGUI>();
             titleTmp.font = fontBangers != null ? fontBangers : fontSans;
-            titleTmp.fontSize = 36;
+            titleTmp.fontSize = 38;
             titleTmp.text = "GIAO DỊCH THÀNH CÔNG!";
-            titleTmp.color = new Color(0.2f, 1f, 0.6f, 1f);
+            titleTmp.color = new Color(0f, 1f, 0.9f, 1f);
             titleTmp.alignment = TextAlignmentOptions.Center;
 
+            // Subtitle
+            var subGo = CreateUIObject("Subtitle", dialogGo.transform);
+            var subRt = subGo.GetComponent<RectTransform>();
+            subRt.anchorMin = subRt.anchorMax = new Vector2(0.5f, 0.5f);
+            subRt.pivot = new Vector2(0.5f, 0.5f);
+            subRt.anchoredPosition = new Vector2(0, 102);
+            subRt.sizeDelta = new Vector2(500, 26);
+            var subTmp = subGo.AddComponent<TextMeshProUGUI>();
+            subTmp.font = fontBangers != null ? fontBangers : fontSans;
+            subTmp.fontSize = 16;
+            subTmp.text = "// GIAO DỊCH HOÀN TẤT //";
+            subTmp.color = new Color(1f, 0.23f, 0.63f, 1f);
+            subTmp.alignment = TextAlignmentOptions.Center;
+
+            // Item Aura / Glow
+            var auraGo = CreateUIObject("ItemAura", dialogGo.transform);
+            var auraRt = auraGo.GetComponent<RectTransform>();
+            auraRt.anchorMin = auraRt.anchorMax = new Vector2(0.5f, 0.5f);
+            auraRt.pivot = new Vector2(0.5f, 0.5f);
+            auraRt.anchoredPosition = new Vector2(0, 10);
+            auraRt.sizeDelta = new Vector2(180, 180);
+            var auraImg = auraGo.AddComponent<Image>();
+            auraImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "glow_aura_cyan.png");
+            auraImg.color = new Color(0f, 0.85f, 1f, 0.35f);
+            auraImg.raycastTarget = false;
+
+            // Item Frame
+            var itemFrameGo = CreateUIObject("ItemFrame", dialogGo.transform);
+            var itemFrameRt = itemFrameGo.GetComponent<RectTransform>();
+            itemFrameRt.anchorMin = itemFrameRt.anchorMax = new Vector2(0.5f, 0.5f);
+            itemFrameRt.pivot = new Vector2(0.5f, 0.5f);
+            itemFrameRt.anchoredPosition = new Vector2(0, 10);
+            itemFrameRt.sizeDelta = new Vector2(145, 145);
+            var itemFrameImg = itemFrameGo.AddComponent<Image>();
+            itemFrameImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Luan/LuckyWheel/Sprites/RewardItemFrame_Neon.png");
+            itemFrameImg.color = Color.white;
+            itemFrameImg.raycastTarget = false;
+
+            // Item Icon
+            var iconGo = CreateUIObject("ItemIcon", itemFrameGo.transform);
+            var iconRt = iconGo.GetComponent<RectTransform>();
+            iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 0.5f);
+            iconRt.pivot = new Vector2(0.5f, 0.5f);
+            iconRt.anchoredPosition = Vector2.zero;
+            iconRt.sizeDelta = new Vector2(100, 100);
+            var iconImg = iconGo.AddComponent<Image>();
+            iconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "pack_gem_tier2.png");
+            iconImg.preserveAspect = true;
+            iconImg.raycastTarget = false;
+
+            // Pack Name
+            var packNameGo = CreateUIObject("PackName", dialogGo.transform);
+            var packNameRt = packNameGo.GetComponent<RectTransform>();
+            packNameRt.anchorMin = packNameRt.anchorMax = new Vector2(0.5f, 0.5f);
+            packNameRt.pivot = new Vector2(0.5f, 0.5f);
+            packNameRt.anchoredPosition = new Vector2(0, -80);
+            packNameRt.sizeDelta = new Vector2(500, 32);
+            var packNameTmp = packNameGo.AddComponent<TextMeshProUGUI>();
+            packNameTmp.font = fontBangers != null ? fontBangers : fontSans;
+            packNameTmp.fontSize = 24;
+            packNameTmp.text = "TÚI KIM CƯƠNG VỪA";
+            packNameTmp.color = new Color(0.88f, 0.93f, 1f, 1f);
+            packNameTmp.alignment = TextAlignmentOptions.Center;
+
+            // Amount
+            var amtGo = CreateUIObject("Amount", dialogGo.transform);
+            var amtRt = amtGo.GetComponent<RectTransform>();
+            amtRt.anchorMin = amtRt.anchorMax = new Vector2(0.5f, 0.5f);
+            amtRt.pivot = new Vector2(0.5f, 0.5f);
+            amtRt.anchoredPosition = new Vector2(0, -118);
+            amtRt.sizeDelta = new Vector2(500, 48);
+            var amtTmp = amtGo.AddComponent<TextMeshProUGUI>();
+            amtTmp.font = fontBangers != null ? fontBangers : fontSans;
+            amtTmp.fontSize = 42;
+            amtTmp.text = "+250 KIM CƯƠNG";
+            amtTmp.color = new Color(0f, 1f, 0.9f, 1f);
+            amtTmp.alignment = TextAlignmentOptions.Center;
+
+            // Bonus text
+            var bonusGo = CreateUIObject("Bonus", dialogGo.transform);
+            var bonusRt = bonusGo.GetComponent<RectTransform>();
+            bonusRt.anchorMin = bonusRt.anchorMax = new Vector2(0.5f, 0.5f);
+            bonusRt.pivot = new Vector2(0.5f, 0.5f);
+            bonusRt.anchoredPosition = new Vector2(0, -156);
+            bonusRt.sizeDelta = new Vector2(500, 26);
+            var bonusTmp = bonusGo.AddComponent<TextMeshProUGUI>();
+            bonusTmp.font = fontBangers != null ? fontBangers : fontSans;
+            bonusTmp.fontSize = 18;
+            bonusTmp.text = "";
+            bonusTmp.color = new Color(1f, 0.85f, 0.1f, 1f);
+            bonusTmp.alignment = TextAlignmentOptions.Center;
+            bonusGo.SetActive(false);
+
+            // Message / Note
             var msgGo = CreateUIObject("Message", dialogGo.transform);
             var msgRt = msgGo.GetComponent<RectTransform>();
-            msgRt.anchorMin = new Vector2(0.1f, 0.35f);
-            msgRt.anchorMax = new Vector2(0.9f, 0.75f);
-            msgRt.offsetMin = msgRt.offsetMax = Vector2.zero;
+            msgRt.anchorMin = msgRt.anchorMax = new Vector2(0.5f, 0.5f);
+            msgRt.pivot = new Vector2(0.5f, 0.5f);
+            msgRt.anchoredPosition = new Vector2(0, -156);
+            msgRt.sizeDelta = new Vector2(500, 26);
             var msgTmp = msgGo.AddComponent<TextMeshProUGUI>();
             msgTmp.font = fontSans;
-            msgTmp.fontSize = 20;
-            msgTmp.text = "Bạn đã nhận được Kim Cương!";
-            msgTmp.color = Color.white;
+            msgTmp.fontSize = 17;
+            msgTmp.text = "Đã cộng trực tiếp vào ví tài khoản";
+            msgTmp.color = new Color(0.4f, 1f, 0.65f, 1f);
             msgTmp.alignment = TextAlignmentOptions.Center;
 
+            // Claim / Ok Button
             var okBtnGo = CreateUIObject("OkButton", dialogGo.transform);
             var okRt = okBtnGo.GetComponent<RectTransform>();
-            okRt.anchorMin = okRt.anchorMax = new Vector2(0.5f, 0f);
-            okRt.pivot = new Vector2(0.5f, 0f);
-            okRt.anchoredPosition = new Vector2(0, 24);
-            okRt.sizeDelta = new Vector2(220, 50);
+            okRt.anchorMin = okRt.anchorMax = new Vector2(0.5f, 0.5f);
+            okRt.pivot = new Vector2(0.5f, 0.5f);
+            okRt.anchoredPosition = new Vector2(0, -228);
+            okRt.sizeDelta = new Vector2(340, 76);
             var okImg = okBtnGo.AddComponent<Image>();
-            okImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "btn_confirm_pay.png");
-            okImg.type = Image.Type.Sliced;
+            okImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Luan/LuckyWheel/Sprites/RewardClaimButton_Neon.png");
             var okBtn = okBtnGo.AddComponent<Button>();
             SetButtonColors(okBtn);
 
             var okTxtGo = CreateUIObject("Txt", okBtnGo.transform);
             SetStretch(okTxtGo);
+            var okTxtRt = okTxtGo.GetComponent<RectTransform>();
+            okTxtRt.anchoredPosition = new Vector2(0, 2);
             var okTmp = okTxtGo.AddComponent<TextMeshProUGUI>();
             okTmp.font = fontBangers != null ? fontBangers : fontSans;
-            okTmp.fontSize = 24;
+            okTmp.fontSize = 30;
             okTmp.text = "XÁC NHẬN";
             okTmp.color = Color.white;
             okTmp.alignment = TextAlignmentOptions.Center;
 
-            return (toastGo, dialogRt, msgTmp, okBtn);
+            return new SuccessToastRefs
+            {
+                rootGo = toastGo,
+                dialogRt = dialogRt,
+                titleTmp = titleTmp,
+                iconImg = iconImg,
+                auraImg = auraImg,
+                packNameTmp = packNameTmp,
+                amountTmp = amtTmp,
+                bonusTmp = bonusTmp,
+                messageTmp = msgTmp,
+                okBtn = okBtn,
+                overlayBtn = ovBtn
+            };
         }
 
         private static (GameObject, TMP_Text) BuildCopyToast(Transform parent, TMP_FontAsset font)

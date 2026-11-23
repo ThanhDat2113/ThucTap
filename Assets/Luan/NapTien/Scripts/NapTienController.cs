@@ -126,8 +126,17 @@ namespace Luan.NapTien
         [Header("--- Success Notification / Toast ---")]
         [SerializeField] private GameObject successToast;
         [SerializeField] private RectTransform successToastDialog;
+        [SerializeField] private TMP_Text successTitleText;
+        [SerializeField] private Image successIcon;
+        [SerializeField] private Image successAura;
+        [SerializeField] private TMP_Text successPackNameText;
+        [SerializeField] private TMP_Text successAmountText;
+        [SerializeField] private TMP_Text successBonusText;
         [SerializeField] private TMP_Text successMessageText;
         [SerializeField] private Button successOkButton;
+        [SerializeField] private Button successOverlayButton;
+        [SerializeField] private Sprite auraCyan;
+        [SerializeField] private Sprite auraGold;
 
         [Header("--- Toast Copy ---")]
         [SerializeField] private GameObject copyToast;
@@ -161,6 +170,7 @@ namespace Luan.NapTien
             if (confirmPaymentBtn != null) confirmPaymentBtn.onClick.AddListener(OnConfirmPaymentClicked);
             if (closePaymentModalBtn != null) closePaymentModalBtn.onClick.AddListener(ClosePaymentModal);
             if (successOkButton != null) successOkButton.onClick.AddListener(CloseSuccessToast);
+            if (successOverlayButton != null) successOverlayButton.onClick.AddListener(CloseSuccessToast);
 
             if (paymentModal != null) paymentModal.SetActive(false);
             if (successToast != null) successToast.SetActive(false);
@@ -471,7 +481,7 @@ namespace Luan.NapTien
             }
 
             ClosePaymentModal();
-            ShowSuccessToast(msg);
+            ShowSuccessModal(pack, source);
         }
 
         private void OnConfirmPaymentClicked()
@@ -515,10 +525,75 @@ namespace Luan.NapTien
 
 
 
-        private void ShowSuccessToast(string msg)
+        public void ShowSuccessModal(TopUpPackData pack, string source = "")
         {
             if (successToast == null) return;
-            if (successMessageText != null) successMessageText.text = msg;
+
+            if (successTitleText != null)
+            {
+                successTitleText.text = "GIAO DỊCH THÀNH CÔNG!";
+            }
+
+            if (successIcon != null)
+            {
+                if (pack != null && pack.iconSprite != null)
+                {
+                    successIcon.sprite = pack.iconSprite;
+                    successIcon.enabled = true;
+                }
+            }
+
+            if (successAura != null)
+            {
+                if (pack != null && pack.currencyType == CurrencyType.Coin)
+                {
+                    if (auraGold != null) successAura.sprite = auraGold;
+                    successAura.color = new Color(1f, 0.85f, 0.2f, 0.35f);
+                }
+                else
+                {
+                    if (auraCyan != null) successAura.sprite = auraCyan;
+                    successAura.color = new Color(0f, 0.85f, 1f, 0.35f);
+                }
+            }
+
+            if (successPackNameText != null)
+            {
+                successPackNameText.text = pack != null && !string.IsNullOrEmpty(pack.title) ? pack.title.ToUpper() : "GÓI NẠP TIỀN";
+            }
+
+            if (successAmountText != null)
+            {
+                if (pack != null)
+                {
+                    int total = pack.mainAmount + pack.bonusAmount;
+                    string unit = pack.currencyType == CurrencyType.Coin ? "VÀNG" : "KIM CƯƠNG";
+                    string hexColor = pack.currencyType == CurrencyType.Coin ? "#FFD700" : "#00FFE6";
+                    successAmountText.text = $"<color={hexColor}>+{total:N0} {unit}</color>";
+                }
+                else
+                {
+                    successAmountText.text = string.Empty;
+                }
+            }
+
+            if (successBonusText != null)
+            {
+                if (pack != null && pack.bonusTickets > 0)
+                {
+                    successBonusText.gameObject.SetActive(true);
+                    successBonusText.text = $"<color=#FFD700>+{pack.bonusTickets} VÉ QUAY MAY MẮN</color>";
+                }
+                else
+                {
+                    successBonusText.gameObject.SetActive(false);
+                }
+            }
+
+            if (successMessageText != null)
+            {
+                successMessageText.text = "✓ Đã cộng trực tiếp vào ví của bạn";
+            }
 
             successToast.SetActive(true);
             if (successToastDialog != null)
@@ -528,6 +603,28 @@ namespace Luan.NapTien
 
             if (_toastRoutine != null) StopCoroutine(_toastRoutine);
             _toastRoutine = StartCoroutine(AutoCloseSuccessToastRoutine());
+        }
+
+        public void ShowSuccessToast(string msg)
+        {
+            if (_selectedPack != null)
+            {
+                ShowSuccessModal(_selectedPack);
+            }
+            else
+            {
+                if (successToast == null) return;
+                if (successMessageText != null) successMessageText.text = msg;
+
+                successToast.SetActive(true);
+                if (successToastDialog != null)
+                {
+                    StartCoroutine(PopDialogRoutine(successToastDialog));
+                }
+
+                if (_toastRoutine != null) StopCoroutine(_toastRoutine);
+                _toastRoutine = StartCoroutine(AutoCloseSuccessToastRoutine());
+            }
         }
 
         public void CloseSuccessToast()
@@ -542,7 +639,7 @@ namespace Luan.NapTien
 
         private IEnumerator AutoCloseSuccessToastRoutine()
         {
-            yield return new WaitForSecondsRealtime(3.5f);
+            yield return new WaitForSecondsRealtime(6f);
             if (successToast != null) successToast.SetActive(false);
             _toastRoutine = null;
         }
