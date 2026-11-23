@@ -454,6 +454,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92917643}
   m_Mesh: {fileID: 0}
+--- !u!1 &132922519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132922520}
+  m_Layer: 0
+  m_Name: BossPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &132922520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132922519}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0, z: -0, w: 0.8660254}
+  m_LocalPosition: {x: 12.3, y: 10.3, z: 7.1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &151321064
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +641,10 @@ PrefabInstance:
     - target: {fileID: 5587143041612084552, guid: f295e26211799284ca4b8b1460ceafbc, type: 3}
       propertyPath: m_Name
       value: Boss1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587143041612084552, guid: f295e26211799284ca4b8b1460ceafbc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6799179496873089108, guid: f295e26211799284ca4b8b1460ceafbc, type: 3}
       propertyPath: m_LocalScale.x
@@ -1952,6 +1987,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleHUD
   displayFont: {fileID: 11400000, guid: 173110cc9e4f96c4fa947e71af9bc0f1, type: 2}
   hudOrigin: {x: 40, y: 30}
+  showRank: 0
+  solidColorInFlow: 0
+  flowScoreColor: {r: 1, g: 0.43, b: 0.78, a: 1}
+  multiplierFontSize: 52
   smooth: 10
   trailDelay: 0.35
   lowHealth: 0.25
@@ -2116,6 +2155,7 @@ GameObject:
   - component: {fileID: 443643787}
   - component: {fileID: 443643786}
   - component: {fileID: 443643788}
+  - component: {fileID: 443643789}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -2480,8 +2520,24 @@ MonoBehaviour:
   allCharacters:
   - {fileID: 11400000, guid: ffb9d6b53cb9e6746a2a94cd6187e97b, type: 2}
   - {fileID: 11400000, guid: 7a34897d44822af49a8119a56d8b2acc, type: 2}
-  spawnPoint: {fileID: 2091361673}
+  - {fileID: 11400000, guid: 8cdaf22d7e9724c46a4ab4867421bfcd, type: 2}
+  - {fileID: 11400000, guid: ef4b42d93c3d7824fadf928c14110a8b, type: 2}
+  spawnPoint: {fileID: 888079951}
   spawnPointFallbackName: Main1
+--- !u!114 &443643789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443643774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4ed242055bf9b458dff33c665bd2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.OpponentCharacterApplier
+  spawnPoint: {fileID: 132922520}
+  spawnPointFallbackName: Main2
 --- !u!1 &446133510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,7 +3631,7 @@ MonoBehaviour:
   particleCount: 150
   particleColor: {r: 1, g: 0.9, b: 0.4, a: 0.9}
   speed: 20
-  flyDirection: {x: 0, y: 90, z: 0}
+  flyDirection: {x: 0, y: 45, z: 60}
   spawnOffset: {x: 0, y: 0, z: 0}
   lifetime: 5
   useNeonPalette: 1
@@ -4111,6 +4167,108 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &888079950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 888079951}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &888079951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888079950}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0, z: -0, w: 0.8660254}
+  m_LocalPosition: {x: -12.8, y: 10.3, z: 7.1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &920695016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920695018}
+  - component: {fileID: 920695017}
+  m_Layer: 0
+  m_Name: '[ChapterVideoBackgroundManager]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &920695017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920695016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a5f25ccf56b6a34397f32380039a707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Luan.Background.ChapterVideoBackgroundManager
+  chapterConfigs:
+  - chapterNumber: 1
+    chapterName: 'Chapter 1: Concrete Dreams'
+    noComboClip: {fileID: 32900000, guid: 550a651d70ea3e04f97eb88052c63529, type: 3}
+    comboClip: {fileID: 32900000, guid: 818db281fd0bbbd44903a1cdd180190e, type: 3}
+  - chapterNumber: 2
+    chapterName: 'Chapter 2: Club Null'
+    noComboClip: {fileID: 32900000, guid: b67d1f78fdd52e049bade4fb247e1e55, type: 3}
+    comboClip: {fileID: 32900000, guid: 28108429191f613479d6d23f1b216d61, type: 3}
+  - chapterNumber: 3
+    chapterName: "Chapter 3: S\xE2n Kh\u1EA5u \xC1nh Sao"
+    noComboClip: {fileID: 32900000, guid: c0e0c37f97bbf2448ae08fad08ba2bf3, type: 3}
+    comboClip: {fileID: 32900000, guid: 05057271a54fedb4799729a9f18683e7, type: 3}
+  - chapterNumber: 4
+    chapterName: "Chapter 4: X\u01B0\u1EDFng \xC2m Thanh"
+    noComboClip: {fileID: 32900000, guid: 4b83b06193f93d34da7618ce92431c01, type: 3}
+    comboClip: {fileID: 32900000, guid: 33aea84f485301a47a33b8a34805b1a9, type: 3}
+  comboThreshold: 50
+  comboTransitionDuration: 0.5
+  enableLoopSmoothing: 1
+  loopCrossfadeDuration: 0.35
+  loopPulseIntensity: 0.25
+  distance: 55
+  overscan: 1.12
+  brightness: 1
+  vignette: 0.12
+  editorTestChapter: 1
+--- !u!4 &920695018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920695016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &926877152
 GameObject:
   m_ObjectHideFlags: 0
@@ -7220,6 +7378,16 @@ MonoBehaviour:
     dialogueAsset: {fileID: 11400000, guid: 3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b, type: 2}
     opponentAvatar: {fileID: 21300000, guid: 5a4b7c8d9e0f1a2b3c4d5e6f708192a3, type: 3}
     defaultOpponentName: Nox
+  - chapterNumber: 3
+    chapterTitle: "\xC1nh \u0111\xE8n gi\u1EA3 t\u1EA1o"
+    dialogueAsset: {fileID: 11400000, guid: 912dafc993851d24aa41feecc2c16c12, type: 2}
+    opponentAvatar: {fileID: 21300000, guid: 495f1d4beb5d44f89b1018d394b71059, type: 3}
+    defaultOpponentName: Velvet
+  - chapterNumber: 4
+    chapterTitle: "Nh\u1ECBp tr\u1ED1ng th\xE9p"
+    dialogueAsset: {fileID: 11400000, guid: 730e83ac00170b74eba86832cc0d9632, type: 2}
+    opponentAvatar: {fileID: 21300000, guid: 978a0c4e84594b9eab27d098311d3dcd, type: 3}
+    defaultOpponentName: Brax
   dialogueDataAsset: {fileID: 11400000, guid: 74901fbc65f618a4ba121c2299d6d3e1, type: 2}
   dialogueLines:
   - speakerName: MAIN 1
@@ -8737,37 +8905,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086725112}
   m_CullTransparentMesh: 1
---- !u!1 &2091361672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2091361673}
-  m_Layer: 0
-  m_Name: PlayerSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2091361673
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091361672}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: 0, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: -12.8, y: 10.3, z: 7.1}
-  m_LocalScale: {x: 6, y: 6, z: 6}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122200921
 GameObject:
   m_ObjectHideFlags: 0
@@ -10230,4 +10367,6 @@ SceneRoots:
   - {fileID: 1038092023}
   - {fileID: 926877156}
   - {fileID: 302872367}
-  - {fileID: 2091361673}
+  - {fileID: 920695018}
+  - {fileID: 132922520}
+  - {fileID: 888079951}
