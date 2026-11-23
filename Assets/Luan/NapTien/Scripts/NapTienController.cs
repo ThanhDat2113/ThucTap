@@ -97,6 +97,9 @@ namespace Luan.NapTien
         [SerializeField] private Image imgVietQRSelect;
         [SerializeField] private Image imgZaloPaySelect;
         [SerializeField] private Image imgMoMoSelect;
+        [SerializeField] private TMP_Text txtVietQR;
+        [SerializeField] private TMP_Text txtZaloPay;
+        [SerializeField] private TMP_Text txtMoMo;
 
         [Header("Payment Channel Sprites")]
         [SerializeField] private Sprite tabChannelNormal;
@@ -407,6 +410,15 @@ namespace Luan.NapTien
             if (imgVietQRSelect != null) imgVietQRSelect.gameObject.SetActive(channel == "VietQR");
             if (imgZaloPaySelect != null) imgZaloPaySelect.gameObject.SetActive(channel == "ZaloPay");
             if (imgMoMoSelect != null) imgMoMoSelect.gameObject.SetActive(channel == "MoMo");
+
+            // Text colors: Active channel is bright white, inactive is readable light silver
+            var tVQR = txtVietQR != null ? txtVietQR : btnVietQR?.GetComponentInChildren<TMP_Text>();
+            var tZalo = txtZaloPay != null ? txtZaloPay : btnZaloPay?.GetComponentInChildren<TMP_Text>();
+            var tMoMo = txtMoMo != null ? txtMoMo : btnMoMo?.GetComponentInChildren<TMP_Text>();
+
+            if (tVQR != null) tVQR.color = (channel == "VietQR") ? Color.white : new Color(0.72f, 0.82f, 0.95f, 0.85f);
+            if (tZalo != null) tZalo.color = (channel == "ZaloPay") ? Color.white : new Color(0.72f, 0.82f, 0.95f, 0.85f);
+            if (tMoMo != null) tMoMo.color = (channel == "MoMo") ? Color.white : new Color(0.72f, 0.82f, 0.95f, 0.85f);
 
             if (amountToPayText != null && _selectedPack != null)
             {

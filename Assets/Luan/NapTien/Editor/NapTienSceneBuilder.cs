@@ -484,6 +484,9 @@ namespace Luan.NapTien.Editor
             so.FindProperty("imgVietQRSelect").objectReferenceValue = modalBuilder.imgVietQRSelect;
             so.FindProperty("imgZaloPaySelect").objectReferenceValue = modalBuilder.imgZaloPaySelect;
             so.FindProperty("imgMoMoSelect").objectReferenceValue = modalBuilder.imgMoMoSelect;
+            so.FindProperty("txtVietQR").objectReferenceValue = modalBuilder.txtVietQR;
+            so.FindProperty("txtZaloPay").objectReferenceValue = modalBuilder.txtZaloPay;
+            so.FindProperty("txtMoMo").objectReferenceValue = modalBuilder.txtMoMo;
 
             so.FindProperty("tabChannelNormal").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_chan_inactive.png");
             so.FindProperty("tabChannelActiveCyan").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_chan_active_cyan.png");
@@ -828,6 +831,9 @@ namespace Luan.NapTien.Editor
             public Image imgVietQRSelect;
             public Image imgZaloPaySelect;
             public Image imgMoMoSelect;
+            public TMP_Text txtVietQR;
+            public TMP_Text txtZaloPay;
+            public TMP_Text txtMoMo;
             public RawImage qrRawImg;
             public Image qrImg;
             public TMP_Text bankNameTmp;
@@ -1078,9 +1084,9 @@ namespace Luan.NapTien.Editor
 
             var tabChannelNormal = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "tab_chan_inactive.png");
 
-            var (btnVietQR, bgVietQR, imgVietQRSelect) = CreateChannelTab("Btn_VietQR", channelsGo.transform, new Vector2(-174, 0), "VIETQR", SpritesRoot + "icon_vietqr.png", tabChannelNormal, fontBangers);
-            var (btnZaloPay, bgZaloPay, imgZaloPaySelect) = CreateChannelTab("Btn_ZaloPay", channelsGo.transform, new Vector2(0, 0), "ZALOPAY", SpritesRoot + "icon_zalopay.png", tabChannelNormal, fontBangers);
-            var (btnMoMo, bgMoMo, imgMoMoSelect) = CreateChannelTab("Btn_MoMo", channelsGo.transform, new Vector2(174, 0), "MOMO", SpritesRoot + "icon_momo.png", tabChannelNormal, fontBangers);
+            var (btnVietQR, bgVietQR, imgVietQRSelect, txtVietQR) = CreateChannelTab("Btn_VietQR", channelsGo.transform, new Vector2(-172, 0), "VIETQR", SpritesRoot + "icon_vietqr.png", tabChannelNormal, fontSans);
+            var (btnZaloPay, bgZaloPay, imgZaloPaySelect, txtZaloPay) = CreateChannelTab("Btn_ZaloPay", channelsGo.transform, new Vector2(0, 0), "ZALOPAY", SpritesRoot + "icon_zalopay.png", tabChannelNormal, fontSans);
+            var (btnMoMo, bgMoMo, imgMoMoSelect, txtMoMo) = CreateChannelTab("Btn_MoMo", channelsGo.transform, new Vector2(172, 0), "MOMO", SpritesRoot + "icon_momo.png", tabChannelNormal, fontSans);
 
             // QR Cyber HUD Container (Replaces white grocery paper stand)
             var qrBoxGo = CreateUIObject("QRContainer", rightBoxGo.transform);
@@ -1101,9 +1107,10 @@ namespace Luan.NapTien.Editor
             standTitleRt.anchoredPosition = new Vector2(0, -9);
             standTitleRt.sizeDelta = new Vector2(250, 22);
             var standTitleTmp = standTitleGo.AddComponent<TextMeshProUGUI>();
-            standTitleTmp.font = fontBangers != null ? fontBangers : fontSans;
+            standTitleTmp.font = fontSans;
+            standTitleTmp.fontStyle = FontStyles.Bold;
             standTitleTmp.fontSize = 15;
-            standTitleTmp.text = "QUET MA THANH TOAN";
+            standTitleTmp.text = "QUÉT MÃ THANH TOÁN";
             standTitleTmp.color = new Color(0f, 0.95f, 1f, 1f);
             standTitleTmp.alignment = TextAlignmentOptions.Center;
             standTitleTmp.raycastTarget = false;
@@ -1147,25 +1154,28 @@ namespace Luan.NapTien.Editor
             var standSubBgRt = standSubBgGo.GetComponent<RectTransform>();
             standSubBgRt.anchorMin = standSubBgRt.anchorMax = new Vector2(0.5f, 0f);
             standSubBgRt.pivot = new Vector2(0.5f, 0f);
-            standSubBgRt.anchoredPosition = new Vector2(0, 6);
-            standSubBgRt.sizeDelta = new Vector2(256, 22);
+            standSubBgRt.anchoredPosition = new Vector2(0, 7);
+            standSubBgRt.sizeDelta = new Vector2(258, 24);
             var standSubBgImg = standSubBgGo.AddComponent<Image>();
-            standSubBgImg.color = new Color(0.02f, 0.05f, 0.14f, 0.92f);
+            standSubBgImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritesRoot + "qr_sub_pill.png");
+            standSubBgImg.type = Image.Type.Sliced;
+            standSubBgImg.color = Color.white;
             standSubBgImg.raycastTarget = false;
 
             var standSubGo = CreateUIObject("StandSub", qrBoxGo.transform);
             var standSubRt = standSubGo.GetComponent<RectTransform>();
             standSubRt.anchorMin = standSubRt.anchorMax = new Vector2(0.5f, 0f);
             standSubRt.pivot = new Vector2(0.5f, 0f);
-            standSubRt.anchoredPosition = new Vector2(0, 7);
-            standSubRt.sizeDelta = new Vector2(250, 20);
+            standSubRt.anchoredPosition = new Vector2(0, 8);
+            standSubRt.sizeDelta = new Vector2(256, 22);
             var standSubTmp = standSubGo.AddComponent<TextMeshProUGUI>();
             standSubTmp.font = fontSans;
             standSubTmp.fontStyle = FontStyles.Bold;
             standSubTmp.fontSize = 11.5f;
             standSubTmp.text = "Quét bằng App Ngân hàng hoặc Ví điện tử";
-            standSubTmp.color = new Color(0.2f, 0.95f, 1f, 1f);
+            standSubTmp.color = new Color(0.35f, 0.95f, 1f, 1f);
             standSubTmp.alignment = TextAlignmentOptions.Center;
+            standSubTmp.enableWordWrapping = false;
             standSubTmp.raycastTarget = false;
 
             // Timer countdown badge (Well spaced below QR container)
@@ -1246,6 +1256,9 @@ namespace Luan.NapTien.Editor
                 imgVietQRSelect = imgVietQRSelect,
                 imgZaloPaySelect = imgZaloPaySelect,
                 imgMoMoSelect = imgMoMoSelect,
+                txtVietQR = txtVietQR,
+                txtZaloPay = txtZaloPay,
+                txtMoMo = txtMoMo,
                 qrRawImg = qrRawImg,
                 qrImg = qrImg,
                 bankNameTmp = bankTmp,
@@ -1261,7 +1274,7 @@ namespace Luan.NapTien.Editor
             };
         }
 
-        private static (Button, Image, Image) CreateChannelTab(string name, Transform parent, Vector2 pos, string label, string iconPath, Sprite bgNormal, TMP_FontAsset font)
+        private static (Button, Image, Image, TMP_Text) CreateChannelTab(string name, Transform parent, Vector2 pos, string label, string iconPath, Sprite bgNormal, TMP_FontAsset font)
         {
             var btnGo = CreateUIObject(name, parent);
             var btnRt = btnGo.GetComponent<RectTransform>();
@@ -1277,27 +1290,30 @@ namespace Luan.NapTien.Editor
             var btn = btnGo.AddComponent<Button>();
             SetButtonColors(btn);
 
-            // Channel Icon
+            // Channel Icon (Official Brand Squircle Badge)
             var iconGo = CreateUIObject("Icon", btnGo.transform);
             var iconRt = iconGo.GetComponent<RectTransform>();
             iconRt.anchorMin = new Vector2(0, 0.5f);
             iconRt.anchorMax = new Vector2(0, 0.5f);
             iconRt.pivot = new Vector2(0.5f, 0.5f);
             iconRt.anchoredPosition = new Vector2(24, 0);
-            iconRt.sizeDelta = new Vector2(28, 28);
+            iconRt.sizeDelta = new Vector2(32, 32);
             var iconImg = iconGo.AddComponent<Image>();
             iconImg.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
             iconImg.preserveAspect = true;
             iconImg.raycastTarget = false;
 
+            // Channel Label (Bold modern sans, crisp and legible)
             var textGo = CreateUIObject("Text", btnGo.transform);
             var textRt = textGo.GetComponent<RectTransform>();
-            textRt.anchorMin = new Vector2(0.32f, 0);
-            textRt.anchorMax = new Vector2(1f, 1f);
-            textRt.offsetMin = textRt.offsetMax = Vector2.zero;
+            textRt.anchorMin = new Vector2(0, 0);
+            textRt.anchorMax = new Vector2(1, 1);
+            textRt.offsetMin = new Vector2(48, 0);
+            textRt.offsetMax = new Vector2(-6, 0);
             var tmp = textGo.AddComponent<TextMeshProUGUI>();
             tmp.font = font;
-            tmp.fontSize = 17;
+            tmp.fontStyle = FontStyles.Bold;
+            tmp.fontSize = 15.5f;
             tmp.text = label;
             tmp.color = Color.white;
             tmp.alignment = TextAlignmentOptions.MidlineLeft;
@@ -1307,11 +1323,11 @@ namespace Luan.NapTien.Editor
             var hlGo = CreateUIObject("HighlightBorder", btnGo.transform);
             SetStretch(hlGo);
             var hlImg = hlGo.AddComponent<Image>();
-            hlImg.color = new Color(0f, 1f, 0.9f, 0.15f);
+            hlImg.color = Color.clear;
             hlImg.raycastTarget = false;
             hlGo.SetActive(false);
 
-            return (btn, bgImg, hlImg);
+            return (btn, bgImg, hlImg, tmp);
         }
 
         private static (TMP_Text, Button) CreateDetailRow(
