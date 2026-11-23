@@ -1309,8 +1309,8 @@ namespace Luan.NapTien.Editor
             var statusTmp = statusTxtGo.AddComponent<TextMeshProUGUI>();
             statusTmp.font = fontSans;
             statusTmp.fontStyle = FontStyles.Bold;
-            statusTmp.fontSize = 17;
-            statusTmp.text = "• ĐANG CHỜ THANH TOÁN (Chưa nhận tiền)...";
+            statusTmp.fontSize = 18;
+            statusTmp.text = "ĐANG CHỜ THANH TOÁN...";
             statusTmp.color = new Color(0f, 1f, 0.95f, 1f);
             statusTmp.outlineColor = new Color(0.04f, 0.08f, 0.22f, 0.95f);
             statusTmp.outlineWidth = 0.25f;

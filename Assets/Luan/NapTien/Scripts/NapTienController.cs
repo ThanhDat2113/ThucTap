@@ -485,18 +485,11 @@ namespace Luan.NapTien
             {
                 if (paymentStatusText != null)
                 {
-                    string dots = new string('.', (step % 3) + 1);
-                    if ((step / 3) % 2 == 0)
-                    {
-                        paymentStatusText.text = $"<color=#00FFE6>• ĐANG CHỜ THANH TOÁN</color> <color=#FFD700><size=85%>[Chưa nhận tiền{dots}]</size></color>";
-                    }
-                    else
-                    {
-                        paymentStatusText.text = $"<color=#00FFE6>>> ĐANG KIỂM TRA MÁY CHỦ PAYOS{dots}</color>";
-                    }
+                    string dots = new string('.', (step % 6) + 1);
+                    paymentStatusText.text = $"<color=#00FFE6><b>ĐANG CHỜ THANH TOÁN{dots}</b></color>";
                 }
                 step++;
-                yield return new WaitForSecondsRealtime(0.7f);
+                yield return new WaitForSecondsRealtime(0.45f);
             }
         }
 
@@ -509,7 +502,7 @@ namespace Luan.NapTien
             }
             if (paymentStatusText != null)
             {
-                paymentStatusText.text = "<color=#00FF88><b>ĐÃ NHẬN TIỀN THÀNH CÔNG! ĐANG CỘNG KIM CƯƠNG...</b></color>";
+                paymentStatusText.text = "<color=#00FF88><b>ĐÃ THANH TOÁN THÀNH CÔNG</b></color>";
             }
         }
 
@@ -522,7 +515,7 @@ namespace Luan.NapTien
             }
             if (paymentStatusText != null)
             {
-                paymentStatusText.text = "<color=#FF4466><b>GIAO DỊCH ĐÃ HẾT HẠN (Chưa nhận được tiền)</b></color>";
+                paymentStatusText.text = "<color=#FF4466><b>GIAO DỊCH ĐÃ HẾT HẠN</b></color>";
             }
         }
         #endregion
