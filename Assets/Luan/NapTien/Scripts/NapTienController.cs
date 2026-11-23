@@ -667,7 +667,7 @@ namespace Luan.NapTien
                 int sec = remaining % 60;
                 if (timerCountdownText != null)
                 {
-                    timerCountdownText.text = $"Hiệu lực: <color=#00FFE6>{min:D2}:{sec:D2}</color>";
+                    timerCountdownText.text = $"<color=#FFD700>Hiệu lực:</color> <color=#00FFE6>{min:D2}:{sec:D2}</color>";
                 }
                 yield return new WaitForSecondsRealtime(1f);
                 remaining--;
