@@ -53,7 +53,7 @@ namespace RhythmGame
 
         void Start()
         {
-            input.OnRestartPressed += Restart;
+            input.OnRestartPressed += OnRestartPressed;
             if (healthSystem != null) healthSystem.OnHealthDepleted.AddListener(OnHealthDepleted);
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = Restart;
             if (GameSession.SelectedSong != null)
@@ -61,6 +61,17 @@ namespace RhythmGame
                 chart = GameSession.SelectedSong.GetChartForDifficulty(GameSession.SelectedDifficulty);
                 if (chart == null) chart = GameSession.SelectedSong.chart;
                 if (musicSource != null && GameSession.SelectedSong.clip != null) musicSource.clip = GameSession.SelectedSong.clip;
+            }
+
+            // Đồng bộ âm lượng nhạc gameplay từ Settings (SETTINGS_MUSIC_VOL)
+            if (musicSource != null)
+            {
+                float musicVol = PlayerPrefs.GetFloat("SETTINGS_MUSIC_VOL", 0.8f);
+                if (Luan.MainMenu.AudioManager.Instance != null)
+                    musicVol = Luan.MainMenu.AudioManager.Instance.MusicVolume;
+                else if (MusicManager.Instance != null)
+                    musicVol = MusicManager.Instance.Volume;
+                musicSource.volume = musicVol;
             }
             if (Luan.Dialogue.StoryDialogueManager.HasPendingDialogue() || StorySession.Active)
             {
@@ -92,19 +103,22 @@ namespace RhythmGame
         {
             if (Instance == this) Instance = null;
             if (PauseManager.Instance != null) PauseManager.Instance.RestartHandler = null;
-            if (input != null) input.OnRestartPressed -= Restart;
+            if (input != null) input.OnRestartPressed -= OnRestartPressed;
             if (healthSystem != null) healthSystem.OnHealthDepleted.RemoveListener(OnHealthDepleted);
+        }
+
+        void OnRestartPressed()
+        {
+            Restart();
         }
 
         public void Restart()
         {
-            // ★ Chặn khi dialogue cốt truyện đang chạy — chỉ StoryDialogueManager.StartGameplay()
-            //   được phép khởi động gameplay sau khi dialogue kết thúc.
-            if (StoryDialogueManager.Instance != null &&
-                StoryDialogueManager.Instance.IsPlaying)
+            // Reset trạng thái thoại sau trận và dọn sạch UI cũ để lượt chơi mới luôn có đầy đủ thoại thắng/thua
+            if (StoryDialogueManager.Instance != null)
             {
-                Debug.LogWarning("[GameManager] Restart() bị chặn — dialogue cốt truyện đang chạy.");
-                return;
+                StoryDialogueManager.Instance.ForceCloseDialogue();
+                StoryDialogueManager.Instance.ResetPostBattleState();
             }
 
             // Đang pause mà Restart (phím R hoặc nút trong menu pause) -> bỏ pause trước
@@ -113,6 +127,16 @@ namespace RhythmGame
 
             // Tắt nhạc nền scene trước (Song List / Menu) nếu SceneBackgroundMusic tự phát khi load scene
             if (MusicManager.Instance != null) MusicManager.Instance.StopMusic();
+
+            if (musicSource != null)
+            {
+                float musicVol = PlayerPrefs.GetFloat("SETTINGS_MUSIC_VOL", 0.8f);
+                if (Luan.MainMenu.AudioManager.Instance != null)
+                    musicVol = Luan.MainMenu.AudioManager.Instance.MusicVolume;
+                else if (MusicManager.Instance != null)
+                    musicVol = MusicManager.Instance.Volume;
+                musicSource.volume = musicVol;
+            }
 
             spawner.Begin(chart);
             SongTime = 0f;

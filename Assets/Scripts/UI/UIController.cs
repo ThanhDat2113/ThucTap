@@ -56,8 +56,22 @@ namespace RhythmGame
         float countdownPopTimer = 999f;
         Vector3 countdownBaseScale = Vector3.one;
 
+        void Awake()
+        {
+            if (messageText != null)
+            {
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
+            }
+        }
+
         void Start()
         {
+            if (messageText != null)
+            {
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
+            }
             gameManager.OnStateChanged += HandleStateChanged;
             judgement.OnJudged += HandleJudged;
             if (flowSystem != null)
@@ -84,32 +98,10 @@ namespace RhythmGame
 
         void HandleStateChanged(GameState state)
         {
-            switch (state)
+            if (messageText != null)
             {
-                case GameState.Finished:
-                    messageText.text = "XONG! Nhấn R để chơi lại";
-                    messageText.fontStyle = FontStyles.Normal;
-                    messageText.enableVertexGradient = false;
-                    messageText.color = Color.white;
-                    break;
-
-                case GameState.Failed:
-                    messageText.text = "GAME OVER";
-                    messageText.fontStyle = FontStyles.Bold;
-                    messageText.enableVertexGradient = true;
-                    messageText.colorGradient = new VertexGradient(
-                        new Color(0.95f, 0.25f, 0.25f),
-                        new Color(0.95f, 0.25f, 0.25f),
-                        new Color(1.00f, 0.60f, 0.60f),
-                        new Color(1.00f, 0.60f, 0.60f));
-                    break;
-
-                default:
-                    messageText.text = "";
-                    messageText.fontStyle = FontStyles.Normal;
-                    messageText.enableVertexGradient = false;
-                    messageText.color = Color.white;
-                    break;
+                messageText.text = "";
+                messageText.gameObject.SetActive(false);
             }
 
             if (state == GameState.Playing)

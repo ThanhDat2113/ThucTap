@@ -23,6 +23,10 @@ namespace Luan.Background
         [Header("Chapter Video Configs (1 - 4)")]
         [SerializeField] private List<ChapterVideoConfig> chapterConfigs = new List<ChapterVideoConfig>();
 
+        [Header("Material")]
+        [Tooltip("Material dùng ChapterBackgroundBlend.shader. Được gán cố định để tránh bị Unity strip shader khi build APK/Standalone.")]
+        [SerializeField] private Material baseBlendMaterial;
+
         [Header("Combo Threshold")]
         [Tooltip("Số combo bắt đầu chuyển sang video có combo (yêu cầu: > 50)")]
         [SerializeField] private int comboThreshold = 50;
@@ -59,7 +63,7 @@ namespace Luan.Background
         [Header("Editor Test")]
         [Tooltip("Khi Play trực tiếp từ GameplayScene trong Editor: 0 = Free Mode (mặc định), 1-4 = Test Chapter tương ứng")]
         [Range(0, 4)]
-        [SerializeField] private int editorTestChapter = 1;
+        [SerializeField] private int editorTestChapter = 0;
 
         // Runtime objects
         private Camera targetCamera;
@@ -67,6 +71,7 @@ namespace Luan.Background
         private MeshRenderer quadRenderer;
         private Material blendMaterial;
         private MaterialPropertyBlock propBlock;
+        private GameObject disabledOldQuad = null;
 
         private VideoPlayer playerNoCombo;
         private VideoPlayer playerCombo;
@@ -116,6 +121,13 @@ namespace Luan.Background
 
         public void PopulateDefaultConfigsIfEmpty()
         {
+#if UNITY_EDITOR
+            if (baseBlendMaterial == null)
+            {
+                baseBlendMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>("Assets/Luan/DiaLogTalkChapter/Materials/ChapterBackgroundBlend.mat");
+            }
+#endif
+
             if (chapterConfigs != null && chapterConfigs.Count >= 4) return;
 
             chapterConfigs = new List<ChapterVideoConfig>();
@@ -156,14 +168,14 @@ namespace Luan.Background
 
             if (activeChapter <= 0)
             {
-                // Free Mode: Giữ nguyên background mặc định, không can thiệp
+                // Free Mode: Giữ nguyên 100% background mặc định (WorldBackgroundSelector / Night Sky), tuyệt đối không can thiệp
                 isStoryActive = false;
                 if (quadObject != null) quadObject.SetActive(false);
-                Debug.Log("[ChapterVideoBackground] FREE MODE: Sử dụng background mặc định.");
+                Debug.Log("[ChapterVideoBackground] FREE MODE: Giữ nguyên background mặc định.");
                 return;
             }
 
-            // Chapter Mode (1 - 4): Khởi tạo background video cho chapter đó
+            // Chapter Mode (1 - 4): Kích hoạt video background cho Chapter đó
             isStoryActive = true;
             Debug.Log($"[ChapterVideoBackground] STORY MODE: Kích hoạt video background cho Chapter {activeChapter}.");
 
@@ -175,6 +187,17 @@ namespace Luan.Background
                 return;
             }
 
+            // Chỉ tạm thời tắt quad gradient cũ để video không bị đè (KHÔNG gọi selector.SetScene để không làm đổi note/line)
+            if (targetCamera != null)
+            {
+                Transform oldQuad = targetCamera.transform.Find("WorldBackgroundGradientPro");
+                if (oldQuad != null && oldQuad.gameObject.activeSelf)
+                {
+                    disabledOldQuad = oldQuad.gameObject;
+                    disabledOldQuad.SetActive(false);
+                }
+            }
+
             SetupVideoPlayers(cfg);
             SetupBackgroundQuad();
 
@@ -183,45 +206,41 @@ namespace Luan.Background
                 PauseManager.Instance.onPause.AddListener(OnGamePaused);
                 PauseManager.Instance.onResume.AddListener(OnGameResumed);
             }
-
-            // Nếu có WorldBackgroundGradientPro, ẩn quad của nó để tối ưu hiệu năng
-            if (defaultGradientPro != null)
-            {
-                Transform oldQuad = targetCamera != null ? targetCamera.transform.Find("WorldBackgroundGradientPro") : null;
-                if (oldQuad != null)
-                    oldQuad.gameObject.SetActive(false);
-            }
         }
 
         private int DetectActiveChapter()
         {
-            // 1. Vào từ Story Mode thật sự
+            // 1. Vào từ Story Mode thật sự (StorySession đang active)
             if (StorySession.Active && StorySession.Week != null && StorySession.Week.weekNumber > 0)
             {
                 return StorySession.Week.weekNumber;
             }
 
-            // 2. Vào từ Free Mode Song List (đã chọn bài nhưng StorySession không Active)
-            if (GameSession.SelectedSong != null && !StorySession.Active)
+            // 2. StoryDialogueManager đang mở dialogue chapter
+            if (StorySession.Active && Luan.Dialogue.StoryDialogueManager.Instance != null)
             {
-                return 0; // 0 = Free Mode
+                int ch = Luan.Dialogue.StoryDialogueManager.Instance.GetCurrentChapterNumber();
+                if (ch > 0) return ch;
             }
 
-            // 3. Test trực tiếp trong Unity Editor
-            if (Application.isEditor)
+            // 3. Nếu là Free Play (đã chọn bài hát từ Free Play song selection) -> luôn luôn là Free Mode (0)
+            if (GameSession.SelectedSong != null && !StorySession.Active)
             {
-                // Nếu developer đặt editorTestChapter = 0 -> test Free Mode trong Editor
-                if (editorTestChapter == 0)
-                    return 0;
+                return 0;
+            }
 
+            // 4. Test trực tiếp trong Unity Editor (khi play trực tiếp GameplayScene và không có StorySession)
+            if (Application.isEditor && !StorySession.Active)
+            {
                 if (Luan.Dialogue.StoryDialogueManager.Instance != null && Luan.Dialogue.StoryDialogueManager.Instance.TestInEditor)
                 {
                     return Luan.Dialogue.StoryDialogueManager.Instance.GetCurrentChapterNumber();
                 }
-                return editorTestChapter;
+                return editorTestChapter; // 0 = Free Mode, 1-4 = Chapter tương ứng
             }
 
-            return 0; // Mặc định Free Mode
+            // 5. Mặc định là Free Mode
+            return 0;
         }
 
         private ChapterVideoConfig GetConfigForChapter(int chapterNum)
@@ -235,20 +254,32 @@ namespace Luan.Background
             return null;
         }
 
+        private void ClearRenderTexture(RenderTexture rt, Color color)
+        {
+            if (rt == null) return;
+            RenderTexture prev = RenderTexture.active;
+            RenderTexture.active = rt;
+            GL.Clear(true, true, color);
+            RenderTexture.active = prev;
+        }
+
         private void SetupVideoPlayers(ChapterVideoConfig cfg)
         {
-            // Tạo RenderTextures 1920x1080
+            // Tạo RenderTextures 1920x1080 và xóa màu đen khởi tạo (tránh khung hình rác trên mobile)
             rtNoCombo = new RenderTexture(1920, 1080, 0, RenderTextureFormat.ARGB32);
             rtNoCombo.name = $"RT_NoCombo_Ch{activeChapter}";
             rtNoCombo.Create();
+            ClearRenderTexture(rtNoCombo, Color.black);
 
             rtCombo = new RenderTexture(1920, 1080, 0, RenderTextureFormat.ARGB32);
             rtCombo.name = $"RT_Combo_Ch{activeChapter}";
             rtCombo.Create();
+            ClearRenderTexture(rtCombo, Color.black);
 
             rtLoopSnap = new RenderTexture(1920, 1080, 0, RenderTextureFormat.ARGB32);
             rtLoopSnap.name = $"RT_LoopSnap_Ch{activeChapter}";
             rtLoopSnap.Create();
+            ClearRenderTexture(rtLoopSnap, Color.black);
 
             // Setup VideoPlayer No-Combo
             GameObject goNoCombo = new GameObject($"VP_NoCombo_Ch{activeChapter}");
@@ -261,10 +292,6 @@ namespace Luan.Background
             goCombo.transform.SetParent(transform, false);
             playerCombo = goCombo.AddComponent<VideoPlayer>();
             ConfigureVideoPlayer(playerCombo, cfg.comboClip != null ? cfg.comboClip : cfg.noComboClip, rtCombo);
-
-            // Bắt đầu phát cả 2 video đồng bộ
-            playerNoCombo.Play();
-            playerCombo.Play();
         }
 
         private void ConfigureVideoPlayer(VideoPlayer vp, VideoClip clip, RenderTexture targetRt)
@@ -275,6 +302,7 @@ namespace Luan.Background
             vp.targetTexture = targetRt;
             vp.isLooping = true;
             vp.skipOnDrop = true;
+            vp.waitForFirstFrame = true;
 
             // MUTE AUDIO HOÀN TOÀN
             vp.audioOutputMode = VideoAudioOutputMode.None;
@@ -282,6 +310,15 @@ namespace Luan.Background
             {
                 vp.EnableAudioTrack(i, false);
             }
+
+            vp.prepareCompleted += (source) =>
+            {
+                if (isStoryActive && source != null)
+                {
+                    source.Play();
+                }
+            };
+            vp.Prepare();
         }
 
         private void SetupBackgroundQuad()
@@ -304,22 +341,36 @@ namespace Luan.Background
             quadRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             quadRenderer.receiveShadows = false;
 
-            Shader shader = Shader.Find("Custom/ChapterBackgroundBlend");
-            if (shader == null)
+            // 1. Ưu tiên sử dụng Material asset được gán trong Inspector (để tránh bị Unity strip shader khi build)
+            if (baseBlendMaterial != null)
             {
-                Debug.LogWarning("[ChapterVideoBackground] Không tìm thấy shader 'Custom/ChapterBackgroundBlend', dùng fallback Unlit/Texture.");
-                shader = Shader.Find("Unlit/Texture");
+                blendMaterial = new Material(baseBlendMaterial);
+            }
+            else
+            {
+                Shader shader = Shader.Find("Custom/ChapterBackgroundBlend");
+                if (shader == null)
+                {
+                    shader = Shader.Find("Universal Render Pipeline/Unlit");
+                }
+                if (shader == null)
+                {
+                    shader = Shader.Find("Unlit/Texture");
+                }
+                blendMaterial = shader != null ? new Material(shader) : null;
             }
 
-            blendMaterial = new Material(shader);
-            blendMaterial.SetTexture("_MainTex", rtNoCombo);
-            blendMaterial.SetTexture("_ComboTex", rtCombo);
-            blendMaterial.SetTexture("_LoopTex", rtLoopSnap);
-            blendMaterial.SetFloat("_Blend", 0f);
-            blendMaterial.SetFloat("_LoopBlend", 0f);
-            blendMaterial.SetFloat("_LoopPulse", 0f);
-            blendMaterial.SetFloat("_Brightness", brightness);
-            blendMaterial.SetFloat("_Vignette", vignette);
+            if (blendMaterial != null)
+            {
+                blendMaterial.SetTexture("_MainTex", rtNoCombo);
+                blendMaterial.SetTexture("_ComboTex", rtCombo);
+                blendMaterial.SetTexture("_LoopTex", rtLoopSnap);
+                blendMaterial.SetFloat("_Blend", 0f);
+                blendMaterial.SetFloat("_LoopBlend", 0f);
+                blendMaterial.SetFloat("_LoopPulse", 0f);
+                blendMaterial.SetFloat("_Brightness", brightness);
+                blendMaterial.SetFloat("_Vignette", vignette);
+            }
 
             quadRenderer.sharedMaterial = blendMaterial;
         }
@@ -483,6 +534,12 @@ namespace Luan.Background
             if (quadObject != null)
             {
                 Destroy(quadObject);
+            }
+
+            if (disabledOldQuad != null)
+            {
+                disabledOldQuad.SetActive(true);
+                disabledOldQuad = null;
             }
         }
     }

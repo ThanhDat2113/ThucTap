@@ -26,6 +26,21 @@ namespace Luan.MainMenu
         private float _lastWidth;
         private float _lastHeight;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void EnforceLandscapeOrientationGlobal()
+        {
+#if UNITY_ANDROID || UNITY_IOS
+            // Tự động ép màn hình ngang cho toàn bộ game ngay từ trước khi load bất kỳ Scene nào
+            Screen.autorotateToPortrait = false;
+            Screen.autorotateToPortraitUpsideDown = false;
+            Screen.autorotateToLandscapeLeft = true;
+            Screen.autorotateToLandscapeRight = true;
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
+            Screen.orientation = ScreenOrientation.AutoRotation;
+            Debug.Log("[Orientation] Khóa cứng màn hình ngang (Landscape). Chặn hoàn toàn màn hình dọc (Portrait).");
+#endif
+        }
+
         private void Awake()
         {
             if (!lockAspectRatio)

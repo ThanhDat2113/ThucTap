@@ -2013,7 +2013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &433048013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4244,6 +4244,7 @@ MonoBehaviour:
     chapterName: "Chapter 4: X\u01B0\u1EDFng \xC2m Thanh"
     noComboClip: {fileID: 32900000, guid: 4b83b06193f93d34da7618ce92431c01, type: 3}
     comboClip: {fileID: 32900000, guid: 33aea84f485301a47a33b8a34805b1a9, type: 3}
+  baseBlendMaterial: {fileID: 2100000, guid: 8b7d41f92c234a6fb78041a9e34c22b1, type: 2}
   comboThreshold: 50
   comboTransitionDuration: 0.5
   enableLoopSmoothing: 1
@@ -4253,7 +4254,7 @@ MonoBehaviour:
   overscan: 1.12
   brightness: 1
   vignette: 0.12
-  editorTestChapter: 1
+  editorTestChapter: 0
 --- !u!4 &920695018
 Transform:
   m_ObjectHideFlags: 0

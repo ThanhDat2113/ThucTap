@@ -116,6 +116,7 @@ namespace Luan.MainMenu
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.autorotateToLandscapeLeft = true;
             Screen.autorotateToLandscapeRight = true;
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
             Screen.orientation = ScreenOrientation.AutoRotation;
 #endif
 

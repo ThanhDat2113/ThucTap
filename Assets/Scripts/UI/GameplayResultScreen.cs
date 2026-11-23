@@ -178,9 +178,11 @@ namespace RhythmGame
         {
             Debug.Log($"[GameplayResultScreen] State -> {state} (isShown={isShown})");
 
+            bool isStory = StorySession.Active || (Application.isEditor && GameSession.SelectedSong == null);
+
             if (state == GameState.Finished)
             {
-                if (StorySession.Active)
+                if (isStory)
                 {
                     var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
                     if (dlg != null && dlg.HasPendingPostBattleDialogue(true))
@@ -193,7 +195,7 @@ namespace RhythmGame
             }
             else if (state == GameState.Failed)
             {
-                if (StorySession.Active)
+                if (isStory)
                 {
                     var dlg = Luan.Dialogue.StoryDialogueManager.Instance;
                     if (dlg != null && dlg.HasPendingPostBattleDialogue(false))
@@ -270,6 +272,17 @@ namespace RhythmGame
 
             if (newBest) PlayerPrefs.SetInt(keyScore, score);
             PlayerPrefs.Save();
+
+            // Cập nhật tổng điểm thành tựu tài khoản (cộng dồn các bài Free Play & Story Chapters) và đồng bộ PlayFab
+            try
+            {
+                Luan.MainMenu.AccountScoreManager.OnSongCompleted(song, score, cleared);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning("[GameplayResultScreen] AccountScoreManager.OnSongCompleted error: " + ex.Message);
+            }
+
             return newBest;
         }
 
@@ -277,6 +290,12 @@ namespace RhythmGame
                          Grade grade, int perfect, int good, int bad, int miss, bool newBest)
         {
             Debug.Log("[GameplayResultScreen] Show() — hiển thị kết quả.");
+
+            // Đảm bảo đóng hoàn toàn thoại Story (nếu còn sót lại) để Result Screen luôn hiển thị rõ ràng trên cùng
+            if (Luan.Dialogue.StoryDialogueManager.Instance != null)
+            {
+                Luan.Dialogue.StoryDialogueManager.Instance.ForceCloseDialogue();
+            }
 
             if (PauseManager.Instance != null) PauseManager.Instance.HideForResult();
 
@@ -350,7 +369,12 @@ namespace RhythmGame
         private void OnRetryClicked()
         {
             Time.timeScale = 1f;
+            if (Luan.Dialogue.StoryDialogueManager.Instance != null)
+            {
+                Luan.Dialogue.StoryDialogueManager.Instance.ResetPostBattleState();
+            }
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
+            ForceHide();
             if (RetryRequested != null) { RetryRequested.Invoke(); return; }
             if (GameManager.Instance != null) GameManager.Instance.Restart();
         }
@@ -358,6 +382,7 @@ namespace RhythmGame
         private void OnContinueClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
             if (ContinueRequested != null) ContinueRequested.Invoke();
             ForceHide();
@@ -366,6 +391,7 @@ namespace RhythmGame
         private void OnMenuClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
             if (PauseManager.Instance != null) PauseManager.Instance.ShowAfterResult();
             StorySession.End();
             if (MenuRequested != null) { MenuRequested.Invoke(); return; }

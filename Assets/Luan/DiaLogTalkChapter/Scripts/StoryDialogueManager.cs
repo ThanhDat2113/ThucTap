@@ -109,6 +109,11 @@ namespace Luan.Dialogue
         public bool IsPlaying { get; private set; }
         public bool LastBattleWon { get; private set; } = true;
 
+        /// <summary>
+        /// Đánh dấu đang trong lượt chơi lại (Retry). Khi true, bỏ qua thoại thắng/thua sau trận và chuyển thẳng sang kết quả.
+        /// </summary>
+        public static bool IsRetrying { get; set; } = false;
+
         private bool hasCompletedDialogueThisSession = false;
         private bool hasCompletedPostBattleThisSession = false;
 
@@ -408,6 +413,9 @@ namespace Luan.Dialogue
 
         public static bool HasPendingDialogue()
         {
+            if (IsRetrying)
+                return false;
+
             if (Instance == null)
             {
                 Instance = FindFirstObjectByType<StoryDialogueManager>();
@@ -438,9 +446,6 @@ namespace Luan.Dialogue
 
         public bool HasPendingPostBattleDialogue(bool isWin)
         {
-            if (hasCompletedPostBattleThisSession)
-                return false;
-
             // Nếu người chơi vào từ Free Play -> Không chạy thoại sau trận
             if (!StorySession.Active && GameSession.SelectedSong != null)
                 return false;
@@ -450,6 +455,9 @@ namespace Luan.Dialogue
             if (GameSession.SelectedSong == null && Application.isEditor) isStory = true;
 
             if (!isStory) return false;
+
+            if (hasCompletedPostBattleThisSession)
+                return false;
 
             var post = GetPostBattleLines(isWin);
             return post != null && post.Count > 0;
@@ -462,6 +470,7 @@ namespace Luan.Dialogue
 
         public static void ResetSessionState()
         {
+            IsRetrying = false;
             if (Instance != null)
             {
                 Instance.hasCompletedDialogueThisSession = false;
@@ -865,6 +874,22 @@ namespace Luan.Dialogue
                     StartCoroutine(DelayedStartPostBattle(false));
                 }
             }
+        }
+
+        public void ResetPostBattleState()
+        {
+            hasCompletedPostBattleThisSession = false;
+            currentPhase = DialoguePhase.None;
+            IsPlaying = false;
+        }
+
+        public void ForceCloseDialogue()
+        {
+            IsPlaying = false;
+            currentPhase = DialoguePhase.None;
+            if (transitionRoutine != null) { StopCoroutine(transitionRoutine); transitionRoutine = null; }
+            if (typingRoutine != null) { StopCoroutine(typingRoutine); typingRoutine = null; }
+            HideAllUI();
         }
 
         private IEnumerator DelayedStartPostBattle(bool isWin)
@@ -1505,8 +1530,7 @@ namespace Luan.Dialogue
 
             if (currentIntroStep == IntroStep.StoryCardShowcase)
             {
-                if (nextClip != null && SFXManager.Instance != null)
-                    SFXManager.Instance.PlaySFX(nextClip);
+                PlayDialogSFX(nextClip);
 
                 if (transitionRoutine != null) StopCoroutine(transitionRoutine);
                 transitionRoutine = StartCoroutine(TransitionFromIntroToPreBattle());
@@ -1719,14 +1743,32 @@ namespace Luan.Dialogue
             target.localScale = baseScale;
         }
 
+        private void PlayDialogSFX(AudioClip clip)
+        {
+            if (clip == null)
+            {
+                if (Luan.MainMenu.AudioManager.Instance != null)
+                    clip = Luan.MainMenu.AudioManager.Instance.ButtonSelectClip;
+            }
+            if (clip == null) return;
+
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.PlaySFX(clip);
+            }
+            else if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlaySFX(clip);
+            }
+        }
+
         private IEnumerator TypewriterRoutine(string fullText)
         {
             isTyping = true;
             if (nextIndicator != null) nextIndicator.SetActive(false);
             if (dialogueText != null) dialogueText.text = "";
 
-            if (nextClip != null && SFXManager.Instance != null)
-                SFXManager.Instance.PlaySFX(nextClip);
+            PlayDialogSFX(nextClip);
 
             int totalChars = fullText.Length;
             for (int i = 0; i <= totalChars; i++)
@@ -1734,9 +1776,9 @@ namespace Luan.Dialogue
                 if (dialogueText != null)
                     dialogueText.text = fullText.Substring(0, i);
 
-                if (i % 2 == 0 && typewriterClip != null && SFXManager.Instance != null)
+                if (i % 2 == 0 && typewriterClip != null)
                 {
-                    SFXManager.Instance.PlaySFX(typewriterClip);
+                    PlayDialogSFX(typewriterClip);
                 }
 
                 yield return new WaitForSecondsRealtime(typingSpeed);
@@ -1784,8 +1826,7 @@ namespace Luan.Dialogue
 
         public void OnSkipClicked()
         {
-            if (skipClip != null && SFXManager.Instance != null)
-                SFXManager.Instance.PlaySFX(skipClip);
+            PlayDialogSFX(skipClip != null ? skipClip : (Luan.MainMenu.AudioManager.Instance != null ? Luan.MainMenu.AudioManager.Instance.ButtonCloseClip : null));
 
             if (currentPhase == DialoguePhase.IntroVideo)
             {
@@ -2246,8 +2287,7 @@ namespace Luan.Dialogue
         {
             if (currentPhase != DialoguePhase.Backstory) return;
 
-            if (nextClip != null && SFXManager.Instance != null)
-                SFXManager.Instance.PlaySFX(nextClip);
+            PlayDialogSFX(nextClip);
 
             if (currentBackstoryIndex == 0)
             {

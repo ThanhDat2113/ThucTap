@@ -172,6 +172,15 @@ namespace RhythmGame
             {
                 SongStats.SaveResult(songToSave, battleUI.playerScore, battleUI.playerMaxCombo, hitRatio);
                 Debug.Log($"[TurnResultPanel] Đã lưu thành tích: Song={songToSave.songName}, Score={battleUI.playerScore}, MaxCombo={battleUI.playerMaxCombo}, Accuracy={hitRatio * 100f:F1}%");
+
+                try
+                {
+                    Luan.MainMenu.AccountScoreManager.OnSongCompleted(songToSave, battleUI.playerScore, true);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning("[TurnResultPanel] AccountScoreManager.OnSongCompleted error: " + ex.Message);
+                }
             }
             else
             {
@@ -200,6 +209,10 @@ namespace RhythmGame
         void OnRetryClicked()
         {
             Time.timeScale = 1f;
+            if (Luan.Dialogue.StoryDialogueManager.Instance != null)
+            {
+                Luan.Dialogue.StoryDialogueManager.Instance.ResetPostBattleState();
+            }
             StartCoroutine(FadeAndRetry());
         }
 
@@ -213,6 +226,7 @@ namespace RhythmGame
         void OnConfirmClicked()
         {
             Time.timeScale = 1f;
+            Luan.Dialogue.StoryDialogueManager.IsRetrying = false;
             StartCoroutine(FadeAndGoToSongList());
         }
 
