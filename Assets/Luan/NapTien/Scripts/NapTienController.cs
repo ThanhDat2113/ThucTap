@@ -416,9 +416,9 @@ namespace Luan.NapTien
             var tZalo = txtZaloPay != null ? txtZaloPay : btnZaloPay?.GetComponentInChildren<TMP_Text>();
             var tMoMo = txtMoMo != null ? txtMoMo : btnMoMo?.GetComponentInChildren<TMP_Text>();
 
-            if (tVQR != null) tVQR.color = (channel == "VietQR") ? Color.white : new Color(0.72f, 0.82f, 0.95f, 0.85f);
-            if (tZalo != null) tZalo.color = (channel == "ZaloPay") ? Color.white : new Color(0.72f, 0.82f, 0.95f, 0.85f);
-            if (tMoMo != null) tMoMo.color = (channel == "MoMo") ? Color.white : new Color(0.72f, 0.82f, 0.95f, 0.85f);
+            if (tVQR != null) tVQR.color = (channel == "VietQR") ? Color.white : new Color(0.82f, 0.88f, 0.98f, 0.95f);
+            if (tZalo != null) tZalo.color = (channel == "ZaloPay") ? Color.white : new Color(0.82f, 0.88f, 0.98f, 0.95f);
+            if (tMoMo != null) tMoMo.color = (channel == "MoMo") ? Color.white : new Color(0.82f, 0.88f, 0.98f, 0.95f);
 
             if (amountToPayText != null && _selectedPack != null)
             {

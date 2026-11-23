@@ -89,6 +89,10 @@ namespace Luan.NapTien
         {
             StopPolling();
 
+            long initialCode = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            string initialDesc = $"NAP{initialCode % 100000:D5}";
+            CreateOfflineFallback(channel, initialCode, amount, initialDesc, onReady);
+
             if (channel == "VietQR")
             {
                 StartCoroutine(CreatePayOSRoutine(amount, packTitle, onReady, onError));
