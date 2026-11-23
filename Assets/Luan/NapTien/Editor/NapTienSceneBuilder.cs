@@ -1305,7 +1305,7 @@ namespace Luan.NapTien.Editor
             confirmTmp.font = fontSans;
             confirmTmp.fontStyle = FontStyles.Bold;
             confirmTmp.fontSize = 20;
-            confirmTmp.text = "XÁC NHẬN ĐÃ CHUYỂN KHOẢN (TEST)";
+            confirmTmp.text = "XÁC NHẬN ĐÃ CHUYỂN KHOẢN";
             confirmTmp.color = Color.white;
             confirmTmp.outlineColor = new Color(0.04f, 0.08f, 0.22f, 0.95f);
             confirmTmp.outlineWidth = 0.2f;

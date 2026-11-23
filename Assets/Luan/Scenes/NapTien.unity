@@ -27514,7 +27514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "X\xC1C NH\u1EACN \u0110\xC3 CHUY\u1EC2N KHO\u1EA2N (TEST)"
+  m_text: "X\xC1C NH\u1EACN \u0110\xC3 CHUY\u1EC2N KHO\u1EA2N"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 749962626}
