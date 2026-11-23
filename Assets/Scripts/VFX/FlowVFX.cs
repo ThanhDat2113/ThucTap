@@ -87,6 +87,10 @@ public class FlowVFX : MonoBehaviour
     private static readonly Color Cool = new Color(0.82f, 0.95f, 1f);
     private static readonly Color[] SprayColors = { Cyan, Pink, Purple, Blue, Magenta };
 
+    /// <summary>FlowSFX nghe hai sự kiện này để phát tiếng phóng / tiếng nổ pháo hoa đúng lúc.</summary>
+    public static event System.Action FireworkLaunched;
+    public static event System.Action FireworkExploded;
+
     private const int RingCount = 2;
     private const int PoolSize = 180;
     private const int SprayPool = 320;
@@ -466,6 +470,7 @@ public class FlowVFX : MonoBehaviour
                 if (r.delay > 0f) continue;
                 r.launched = true;
                 r.rt.gameObject.SetActive(true);
+                if (FireworkLaunched != null) FireworkLaunched();
             }
 
             r.vel.y -= RocketGravity * k * dt;
@@ -493,6 +498,7 @@ public class FlowVFX : MonoBehaviour
 
     private void Explode(Rocket r)
     {
+        if (FireworkExploded != null) FireworkExploded();
         float k = CanvasH / 1080f;
         Vector2 c = r.pos;
         if (showExplosionFlash)

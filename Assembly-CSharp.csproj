@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\Gameplay\CharacterController.cs" />
     <Compile Include="Assets\Luan\LuckyWheel\Scripts\LuckyWheelController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\SFX\FlowSFX.cs" />
     <Compile Include="Assets\Thuan\Scripts\Gameplay\HudDemoPlayer.cs" />
     <Compile Include="Assets\VFX\Background\BackgroundMountains.cs" />
     <Compile Include="Assets\VFX\World\WorldBackgroundGradientPro.cs" />
