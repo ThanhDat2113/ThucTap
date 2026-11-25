@@ -2944,6 +2944,64 @@ MonoBehaviour:
   holdTime: 0.35
   fadeTime: 0.15
   riseDistance: 0.25
+--- !u!1 &610815441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610815443}
+  - component: {fileID: 610815442}
+  m_Layer: 0
+  m_Name: FlowSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &610815442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610815441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c50c1738bc63d545ba4a7279d261f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlowSFX
+  flowSystem: {fileID: 1127100800}
+  masterVolume: 0.8
+  activateVolume: 1
+  fireworkVolume: 0.6
+  loopVolume: 0.25
+  endVolume: 0.7
+  useFireworkSounds: 1
+  useLoop: 0
+  useEndSound: 1
+  activateClip: {fileID: 0}
+  launchClip: {fileID: 0}
+  popClip: {fileID: 0}
+  loopClip: {fileID: 0}
+  endClip: {fileID: 0}
+--- !u!4 &610815443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610815441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.54434, y: 7.4273, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613070568
 GameObject:
   m_ObjectHideFlags: 0
@@ -4244,6 +4302,7 @@ MonoBehaviour:
     chapterName: "Chapter 4: X\u01B0\u1EDFng \xC2m Thanh"
     noComboClip: {fileID: 32900000, guid: 4b83b06193f93d34da7618ce92431c01, type: 3}
     comboClip: {fileID: 32900000, guid: 33aea84f485301a47a33b8a34805b1a9, type: 3}
+  baseBlendMaterial: {fileID: 0}
   comboThreshold: 50
   comboTransitionDuration: 0.5
   enableLoopSmoothing: 1
@@ -6261,9 +6320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayResultScreen
   displayFont: {fileID: 11400000, guid: fcced91df37638e44848537f96bc34a5, type: 2}
-  slamClip: {fileID: 0}
-  tickClip: {fileID: 0}
-  rankClip: {fileID: 0}
 --- !u!114 &1316782669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10370,3 +10426,4 @@ SceneRoots:
   - {fileID: 920695018}
   - {fileID: 132922520}
   - {fileID: 888079951}
+  - {fileID: 610815443}

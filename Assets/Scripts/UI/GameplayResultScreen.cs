@@ -32,6 +32,12 @@ namespace RhythmGame
         // ----- UI refs (dựng trong Awake) -----
         private RectTransform content;
         private Sprite stageBackground, clearLogoSprite, failedLogoSprite;
+        private Sprite characterSprite;            // cache sprite gốc của character
+        private Sprite characterFailSprite;        // sprite character khi thua
+        private Material grayMaterial;             // material grayscale khi thua
+        private Color bgBaseColor;                 // màu gốc background (cleared)
+        private static readonly Color FailTint = new Color(0.78f, 0.78f, 0.8f, 1f);
+
         private Image background, character, resultLogo, coverArt;
         private Image songPanel, statsPanel, rankPanel, scoreBar;
         private TMP_Text songText, artistText, difficultyText;
@@ -113,6 +119,8 @@ namespace RhythmGame
             stageBackground = Resources.Load<Sprite>("Result/result_stage_background");
             clearLogoSprite = Resources.Load<Sprite>("Result/stage_clear");
             failedLogoSprite = Resources.Load<Sprite>("Result/stage_failed");
+            characterFailSprite = Resources.Load<Sprite>("Result/stage_failed_character");   // ★
+            grayMaterial = Resources.Load<Material>("Result/UIGrayscale");                  // ★
             foreach (Sprite s in Resources.LoadAll<Sprite>("Result/result_assets"))
                 if (!sprites.ContainsKey(s.name)) sprites[s.name] = s;
 
@@ -412,6 +420,7 @@ namespace RhythmGame
             background.color = stageBackground != null
                 ? new Color(.67f, .67f, .72f, 1f)
                 : new Color(0.018f, 0.02f, 0.045f, 1f);
+            bgBaseColor = background.color;   // ★ lưu lại màu gốc
             background.preserveAspect = false;
 
             content = CreateNode("ResultContent", transform);
@@ -642,6 +651,7 @@ namespace RhythmGame
             foreach (var b in buttons) { b.localScale = Vector3.zero; SetButtonsInteractable(false); }
             ClearConfetti();
             ResetEffects();
+            ApplyMood(cleared);   // ★ đổi mood thắng/thua
 
             // 1. Background + speed lines
             StartCoroutine(SpeedLines(cleared));
@@ -1507,6 +1517,46 @@ namespace RhythmGame
         private static void Play(AudioClip clip)
         {
             if (clip != null && SFXManager.Instance != null) SFXManager.Instance.PlaySFX(clip);
+        }
+
+        /// <summary>
+        /// Đổi mood toàn màn hình: thắng = sáng/hồng, thua = xám/lạnh.
+        /// Xử lý character fail sprite, grayscale material, màu các panel, màu rank, vignette.
+        /// </summary>
+        private void ApplyMood(bool cleared)
+        {
+            // Cache sprite character gốc lần đầu
+            if (characterSprite == null) characterSprite = character.sprite;
+
+            // Character: đổi sang sprite fail nếu có, ngược lại giữ sprite gốc
+            bool hasFailArt = characterFailSprite != null;
+            character.sprite = (!cleared && hasFailArt) ? characterFailSprite : characterSprite;
+
+            // Grayscale material cho toàn bộ khối chính khi thua
+            Material gray = cleared ? null : grayMaterial;
+            foreach (var img in new[] { background, character, songPanel, statsPanel, scoreBar, rankPanel, coverArt })
+                if (img != null) img.material = gray;
+
+            // Màu panel
+            Color panel = cleared ? Color.white : FailTint;
+            background.color = cleared ? bgBaseColor : new Color(0.42f, 0.42f, 0.44f, background.color.a);
+            character.color = cleared
+                ? Color.white
+                : (hasFailArt ? new Color(0.85f, 0.85f, 0.85f, 1f) : new Color(0.7f, 0.7f, 0.72f, 1f));
+            character.rectTransform.localEulerAngles = Vector3.zero;
+            songPanel.color = panel;
+            statsPanel.color = panel;
+            scoreBar.color = panel;
+            rankPanel.color = cleared ? Color.white : new Color(0.45f, 0.45f, 0.48f, 1f);
+            if (coverArt != null) coverArt.color = cleared ? Color.white : new Color(0.8f, 0.8f, 0.8f, 1f);
+
+            // Rank: thua = đỏ, thắng = màu theo grade (đã set trong Show())
+            if (!cleared) rankText.color = Red;
+            rankText.rectTransform.localEulerAngles = Vector3.zero;
+
+            // Vignette: thua = đen, thắng = tắt
+            if (vignette != null)
+                vignette.color = cleared ? new Color(0.6f, 0f, 0.08f, 0f) : new Color(0f, 0f, 0f, 0f);
         }
 
         private static Color GradeColor(Grade grade)
