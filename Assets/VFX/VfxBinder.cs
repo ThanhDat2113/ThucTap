@@ -48,6 +48,7 @@ public class VfxBinder : MonoBehaviour
 
     void HandleJudged(Judgement j, int points, bool hit, NoteOwner owner)
     {
+        if (owner != NoteOwner.Player) return;
         if (judgementPopup) judgementPopup.Show(j);
     }
 }

@@ -83,6 +83,7 @@ namespace RhythmGame
 
             IsPlaying = true;
             KeepOnTop();
+            ApplyCountdownGradient();
         }
 
         /// <summary>
@@ -101,18 +102,24 @@ namespace RhythmGame
             Debug.Log("[SongIntroScreen] PlayStoryIntro: bắt đầu intro story mode.");
             IsPlaying = true;
             gameObject.SetActive(true);
+            ApplyCountdownGradient();
             KeepOnTop();
-            StartCoroutine(IntroSequence());
+            StartCoroutine(IntroSequence(skipStoryCheck: true));
         }
 
         private void Start()
         {
-            // Nếu Awake đã disable (Story Mode), Start không chạy. Nếu vẫn chạy -> chỉ auto-play khi IsPlaying.
-            if (!gameObject.activeInHierarchy || !IsPlaying) return;
+            // ★ STORY MODE: PlayStoryIntro() là chủ duy nhất của intro flow.
+            //   Start() KHÔNG được disable GameObject — làm vậy sẽ pause coroutine vừa start.
+            if (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue())
+            {
+                Debug.Log("[SongIntro] Start(): Story Mode — bỏ qua, chờ PlayStoryIntro() quản lý.");
+                return;
+            }
 
+            // Free Play: chạy intro bình thường
             StartCoroutine(IntroSequence());
         }
-
         private void OnDestroy()
         {
             if (Instance == this) Instance = null;
@@ -136,8 +143,15 @@ namespace RhythmGame
 
         // ---------------- Timeline ----------------
 
-        private IEnumerator IntroSequence()
+        private IEnumerator IntroSequence(bool skipStoryCheck = false)
         {
+            if (!skipStoryCheck && (StorySession.Active || Luan.Dialogue.StoryDialogueManager.HasPendingDialogue()))
+            {
+                IsPlaying = false;
+                gameObject.SetActive(false);
+                yield break;
+            }
+
             // Lay thong tin bai tu GameSession (Thuan.SongData, global namespace)
             var song = GameSession.SelectedSong;
             if (song == null)
@@ -327,7 +341,17 @@ namespace RhythmGame
             if (group != null) group.alpha = 1f;
             if (stage != null) SetScale(stage, StageScale());
 
+            // ★ Đảm bảo countdown text hiển thị (tránh bị ẩn bởi HideInfoElements hoặc vòng trước)
+            if (countdownText != null)
+            {
+                countdownText.gameObject.SetActive(true);
+                countdownText.enabled = true;
+                countdownText.alpha = 1f;
+                ApplyCountdownGradient();
+            }
+
             // Dem nguoc 3 2 1 -> GO! (SongIntroScreen quan ly countdown duy nhat)
+            ApplyCountdownGradient();
             float countdownRemaining = countdownSeconds;
             while (countdownRemaining > 0f)
             {
@@ -495,6 +519,18 @@ namespace RhythmGame
             if (cg != null) { cg.alpha = a; return; }
             var g = c.GetComponent<Graphic>();
             if (g != null) { var col = g.color; col.a = a; g.color = col; }
+        }
+
+        private void ApplyCountdownGradient()
+        {
+            if (countdownText == null) return;
+            countdownText.fontStyle = FontStyles.Bold;
+            countdownText.enableVertexGradient = true;
+            countdownText.colorGradient = new VertexGradient(
+                new Color(0.2f, 0.8f, 1f, 1f),
+                new Color(0.2f, 0.8f, 1f, 1f),
+                new Color(0.0f, 0.5f, 1f, 1f),
+                new Color(0.0f, 0.5f, 1f, 1f));
         }
     }
 }

@@ -184,7 +184,6 @@ namespace RhythmGame
             n.PlayHitEffect(Judgement.HoldComplete, n.transform.position);
             spawner.ReleaseNote(n);
             PlaySfx(Judgement.HoldComplete);
-            OnJudged?.Invoke(Judgement.HoldComplete, holdCompletePoints, true, n.Data.owner);
             healthSystem?.ApplyJudgement(Judgement.HoldComplete);
 
             _combo++;

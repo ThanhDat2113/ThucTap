@@ -59,8 +59,10 @@ namespace RhythmGame
                 cc.Initialize(js);
             }
 
-            // Wire OpponentAI (neu prefab co) voi he thong gameplay
+            // ★ Wire OpponentAI: ưu tiên prefab, fallback scene
             var ai = spawned.GetComponent<OpponentAI>();
+            if (ai == null) ai = FindFirstObjectByType<OpponentAI>();
+
             if (ai != null)
             {
                 ai.spawner = FindFirstObjectByType<NoteSpawner>();
@@ -72,6 +74,12 @@ namespace RhythmGame
                 // Dang ky voi GameManager de GameManager.co the bat/tat AI
                 var gm = FindFirstObjectByType<GameManager>();
                 if (gm != null) gm.opponentAI = ai;
+
+                Debug.Log($"[OpponentCharacterApplier] Wired OpponentAI '{ai.name}' → CC='{(cc != null ? cc.name : "NULL")}'");
+            }
+            else
+            {
+                Debug.LogError("[OpponentCharacterApplier] Không tìm thấy OpponentAI (prefab hoặc scene) — boss sẽ không nhảy.");
             }
 
             Debug.Log($"[OpponentCharacterApplier] Spawned opponent '{prefab.name}' for week {StorySession.Week.weekNumber} at {pos}");

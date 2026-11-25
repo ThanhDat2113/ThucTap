@@ -131,6 +131,8 @@ namespace RhythmGame
             {
                 CalculateMaxScores(gameManager.chart);
             }
+
+            ApplyCountdownGradient();
         }
 
         void OnDestroy()
@@ -347,6 +349,12 @@ namespace RhythmGame
 
         void Update()
         {
+            if (SongIntroScreen.Instance != null && SongIntroScreen.Instance.IsPlaying)
+            {
+                if (countdownText) countdownText.gameObject.SetActive(false);
+                return;
+            }
+
             bool counting = gameManager.State == GameState.Countdown;
             if (countdownText) countdownText.gameObject.SetActive(counting);
             if (counting && countdownText)
@@ -398,6 +406,18 @@ namespace RhythmGame
 
             opponentJudgementText.text = text;
             opponentJudgementText.color = color;
+        }
+
+        private void ApplyCountdownGradient()
+        {
+            if (countdownText == null) return;
+            countdownText.fontStyle = FontStyles.Bold;
+            countdownText.enableVertexGradient = true;
+            countdownText.colorGradient = new VertexGradient(
+                new Color(0.2f, 0.8f, 1f, 1f),
+                new Color(0.2f, 0.8f, 1f, 1f),
+                new Color(0.0f, 0.5f, 1f, 1f),
+                new Color(0.0f, 0.5f, 1f, 1f));
         }
     }
 }
