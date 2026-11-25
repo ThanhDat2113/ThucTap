@@ -24,10 +24,16 @@ namespace RhythmGame
         [Tooltip("Tên scene song list — nút MENU sẽ load scene này nếu không có ai subscribe MenuRequested")]
         [SerializeField] private string songListSceneName = "Thuan_SongList";
 
-        [Header("Âm thanh (tuỳ chọn — dùng cho animation)")]
+        [Header("Âm thanh (tuỳ chọn — override nếu muốn clip riêng, để trống sẽ load từ Resources/Result/SFX)")]
         [SerializeField] private AudioClip slamClip;
         [SerializeField] private AudioClip tickClip;
         [SerializeField] private AudioClip rankClip;
+
+        // SFX được load tự động — không cần kéo thả
+        private AudioClip sWhoosh, sSlamClear, sSlamFail, sTick, sRankStamp,
+                          sWinJingle, sFailJingle, sSparkle, sPop;
+        private AudioSource sfxMain, sfxTick;
+        private float tickPitch = 1f, tickRise = 0.15f;
 
         // ----- UI refs (dựng trong Awake) -----
         private RectTransform content;
@@ -126,6 +132,7 @@ namespace RhythmGame
 
             foreach (Transform child in transform) child.gameObject.SetActive(false);
             Build();
+            LoadSfx();                          // ★ thêm dòng này
 
             StartCoroutine(SubscribeWhenReady());
 
@@ -654,6 +661,7 @@ namespace RhythmGame
             ApplyMood(cleared);   // ★ đổi mood thắng/thua
 
             // 1. Background + speed lines
+            Sfx(sWhoosh, 0.6f);                              // ★ whoosh
             StartCoroutine(SpeedLines(cleared));
             yield return Tween(0.25f, k => SetA(background, k));
 
@@ -662,7 +670,7 @@ namespace RhythmGame
             StartCoroutine(AfterImages(character, new Vector2(-520f, 0f), 0.45f));
             StartCoroutine(FadeImage(raysBehindCharacter, cleared ? 0.35f : 0.12f, 0.6f));
             yield return Wait(0.12f);
-            Play(slamClip);
+            Sfx(cleared ? sSlamClear : sSlamFail, 0.75f);   // ★ slam clear/fail
             yield return Tween(0.28f, k =>
             {
                 var rt = resultLogo.rectTransform;
@@ -692,19 +700,22 @@ namespace RhythmGame
             {
                 StartCoroutine(Punch(values[i].rectTransform, 1.35f, 0.2f));
                 StartCoroutine(RowFlash(values[i].rectTransform.anchoredPosition.y));
+                tickPitch = 1f + i * 0.08f;                 // ★ pitch tăng dần mỗi dòng
                 yield return CountUp(values[i], stats[i], 0.28f);
             }
 
             // 5. Đếm điểm
             StartCoroutine(ScoreSparks(0.8f));
+            tickPitch = 1.4f; tickRise = 0.7f;              // ★ pitch cao + rise nhanh cho điểm
             yield return CountUp(scoreText, score, 0.8f);
+            tickRise = 0.15f;                                // reset
             StartCoroutine(Punch(scoreText.rectTransform, 1.25f, 0.25f));
             StartCoroutine(Shockwave(FxPos(scoreText.rectTransform), Yellow, 0.9f));
             if (shines.Count > 1) StartCoroutine(Shine(shines[1]));
 
             // 6. Đóng dấu RANK
             yield return Wait(skip ? 0f : 0.15f);
-            Play(rankClip);
+            Sfx(sRankStamp, 0.65f);                         // ★ rank stamp
             var rk = rankText.rectTransform;
             yield return Tween(0.3f, k =>
             {
@@ -722,6 +733,7 @@ namespace RhythmGame
             if (cleared) SpawnConfetti(70);
             if (newBest)
             {
+                Sfx(sSparkle, 0.35f, 0f, 1.25f);            // ★ sparkle khi new record
                 yield return Tween(0.25f, k =>
                 {
                     newBestText.alpha = k;
@@ -734,10 +746,14 @@ namespace RhythmGame
             {
                 if (!buttons[i].gameObject.activeSelf) continue;
                 StartCoroutine(PopButton(buttons[i]));
+                Sfx(sPop, 0.4f, 0f, 1f + i * 0.1f);         // ★ pop, pitch tăng nhẹ mỗi nút
                 yield return Wait(0.07f, true);
             }
             yield return Wait(0.25f, true);
             SetButtonsInteractable(true);
+
+            // ★ Jingle kết thúc sequence
+            Sfx(cleared ? sWinJingle : sFailJingle, 0.55f);
 
             // 8. Idle
             nextShine = Time.unscaledTime + 0.6f;
@@ -784,7 +800,12 @@ namespace RhythmGame
             {
                 e += Step();
                 int v = Mathf.RoundToInt(target * EaseOut(e / time));
-                if (v != last) { text.text = v.ToString("N0"); last = v; if (tickClip != null && Time.frameCount % 3 == 0) Play(tickClip); }
+                if (v != last)
+                {
+                    text.text = v.ToString("N0"); last = v;
+                    if (Time.frameCount % 4 == 0)
+                        Tick(tickPitch + tickRise * (e / time));   // ★ pitch tăng dần theo thời gian
+                }
                 yield return null;
             }
             text.text = target.ToString("N0");
@@ -1517,6 +1538,72 @@ namespace RhythmGame
         private static void Play(AudioClip clip)
         {
             if (clip != null && SFXManager.Instance != null) SFXManager.Instance.PlaySFX(clip);
+        }
+
+        // ==================================================================
+        //  SFX
+        // ==================================================================
+        private void LoadSfx()
+        {
+            AudioClip L(string n) => Resources.Load<AudioClip>("Result/SFX/" + n);
+
+            // Ưu tiên Resources, fallback về clip thủ công (nếu có)
+            sWhoosh     = L("res_whoosh");
+            sSlamClear  = L("res_slam_clear")  ?? slamClip;
+            sSlamFail   = L("res_slam_fail")   ?? slamClip;
+            sTick       = L("res_tick")        ?? tickClip;
+            sRankStamp  = L("res_rank_stamp")  ?? rankClip;
+            sWinJingle  = L("res_win_jingle");
+            sFailJingle = L("res_fail_jingle");
+            sSparkle    = L("res_sparkle");
+            sPop        = L("res_pop");
+
+            sfxMain = NewSource("SfxMain", false);
+            sfxTick = NewSource("SfxTick", false);
+
+            Debug.Log($"[GameplayResultScreen] SFX loaded: slam={(sSlamClear != null)} tick={(sTick != null)} rank={(sRankStamp != null)}");
+        }
+
+        private AudioSource NewSource(string name, bool loop)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(transform, false);
+            var src = go.AddComponent<AudioSource>();
+            src.playOnAwake = false;
+            src.loop = loop;
+            src.spatialBlend = 0f;
+            src.ignoreListenerPause = true;
+            return src;
+        }
+
+        private static float SfxVolume =>
+            SFXManager.Instance != null ? SFXManager.Instance.Volume : 1f;
+
+        private void Sfx(AudioClip clip, float volume, float delay = 0f, float pitch = 1f)
+        {
+            if (clip == null) return;
+            if (delay > 0f || !Mathf.Approximately(pitch, 1f))
+            {
+                StartCoroutine(SfxRoutine(clip, volume, delay, pitch));
+                return;
+            }
+            sfxMain.PlayOneShot(clip, volume * SfxVolume);
+        }
+
+        private IEnumerator SfxRoutine(AudioClip clip, float volume, float delay, float pitch)
+        {
+            if (delay > 0f) yield return new WaitForSecondsRealtime(delay);
+            var src = NewSource("Sfx_" + clip.name, false);
+            src.pitch = pitch;
+            src.PlayOneShot(clip, volume * SfxVolume);
+            Destroy(src.gameObject, clip.length / Mathf.Max(0.1f, pitch) + 0.2f);
+        }
+
+        private void Tick(float pitch)
+        {
+            if (sTick == null || sfxTick == null) return;
+            sfxTick.pitch = Mathf.Clamp(pitch, 0.5f, 3f);
+            sfxTick.PlayOneShot(sTick, 0.2f * SfxVolume);
         }
 
         /// <summary>

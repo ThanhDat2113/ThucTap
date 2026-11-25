@@ -4634,10 +4634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayResultScreen
   displayFont: {fileID: 11400000, guid: fcced91df37638e44848537f96bc34a5, type: 2}
-  clearClip: {fileID: 8300000, guid: 4845a284062150643af5fdefa576a089, type: 3}
-  failClip: {fileID: 8300000, guid: 0093005dba4d60548917f47e11cc23e6, type: 3}
-  tickClip: {fileID: 8300000, guid: 9c24357ca1a29cd459e404d3bcece398, type: 3}
-  rankClip: {fileID: 8300000, guid: 9c24357ca1a29cd459e404d3bcece398, type: 3}
 --- !u!114 &1036761114
 MonoBehaviour:
   m_ObjectHideFlags: 0
