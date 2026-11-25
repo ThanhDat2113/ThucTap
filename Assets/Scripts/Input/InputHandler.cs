@@ -41,7 +41,15 @@ namespace RhythmGame
         /// Nếu để trống, fallback về chia đều màn hình thành laneCount vùng.
         /// </summary>
         [Header("Touch / Receptor")]
+        [Tooltip("Kéo 4 Transform của 4 Receptor vào đây (mỗi receptor PHẢI có Collider2D).")]
         public Transform[] receptorTransforms;
+
+        [Tooltip("Chỉ collider trong layer này mới được tính là vùng bấm. Để 'Everything' = không lọc.")]
+        public LayerMask receptorLayer = ~0;
+
+        [Tooltip("Bật để in Console lane nào được nhấn — dùng debug vùng bấm.")]
+        public bool logTouches = false;
+
         [Tooltip("Radius vòng tròn xung quanh tia chạm để va chạm (pixel trên màn hình), dùng khi camera Perspective distort.")]
         public float touchRadiusPixels = 60f;
 
@@ -56,9 +64,30 @@ namespace RhythmGame
         private readonly Dictionary<int, int> touchFingerToLane = new Dictionary<int, int>();
         private int mouseHeldLane = -1;
 
+        private Collider2D[] cachedReceptorColliders;
+
         void Awake()
         {
             held = new bool[laneCount];
+            CacheReceptorColliders();
+        }
+
+        void CacheReceptorColliders()
+        {
+            int n = receptorTransforms != null ? receptorTransforms.Length : 0;
+            cachedReceptorColliders = new Collider2D[n];
+            for (int i = 0; i < n; i++)
+            {
+                if (receptorTransforms[i] == null) continue;
+                // Cho phép collider nằm trên chính receptor hoặc trên object con
+                var col = receptorTransforms[i].GetComponent<Collider2D>();
+                if (col == null) col = receptorTransforms[i].GetComponentInChildren<Collider2D>(true);
+                cachedReceptorColliders[i] = col;
+                if (col == null)
+                    Debug.LogWarning($"[InputHandler] Receptor lane {i} ('{receptorTransforms[i].name}') không có Collider2D — touch sẽ không hoạt động cho lane này.");
+                else if (col.isTrigger && !Physics2D.queriesHitTriggers)
+                    Debug.LogWarning($"[InputHandler] Receptor lane {i} có trigger collider nhưng Physics2D.queriesHitTriggers = false. Bật nó trong Project Settings → Physics 2D.");
+            }
         }
 
         void Update()
@@ -301,49 +330,48 @@ namespace RhythmGame
         /// </summary>
         int GetLaneFromScreenPos(Vector2 screenPos)
         {
-            if (receptorTransforms != null && receptorTransforms.Length > 0)
+            // Fallback: chưa set receptor -> chia đều màn hình (rộng hơn hình)
+            if (cachedReceptorColliders == null || cachedReceptorColliders.Length == 0)
             {
-                Camera cam = Camera.main;
-                if (cam == null) return -1;
-
-                Ray ray = cam.ScreenPointToRay(screenPos);
-
-                int bestLane = -1;
-                float bestDist = float.MaxValue;
-
-                // Chuyển touchRadiusPixels thành world distance gần đúng
-                float worldRadius = touchRadiusPixels / 100f;
-
-                for (int i = 0; i < receptorTransforms.Length; i++)
-                {
-                    if (receptorTransforms[i] == null) continue;
-
-                    var collider = receptorTransforms[i].GetComponent<Collider2D>();
-                    if (collider == null) continue;
-
-                    // Raycast từ camera qua vị trí chạm, chỉ kiểm tra va chạm với collider của receptor này
-                    RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
-                    if (hit.collider != null && hit.collider == collider)
-                    {
-                        // Tính khoảng cách từ điểm chạm đến tâm receptor trên màn hình để chọn receptor gần nhất
-                        Vector3 receptorScreenPos = cam.WorldToScreenPoint(receptorTransforms[i].position);
-                        float dist = Vector2.Distance(screenPos, receptorScreenPos);
-                        if (dist < bestDist)
-                        {
-                            bestDist = dist;
-                            bestLane = i;
-                        }
-                    }
-                }
-
-                return bestLane;
+                if (laneCount <= 0) return 0;
+                float zoneWidth = Screen.width / (float)laneCount;
+                int lane = Mathf.FloorToInt(screenPos.x / zoneWidth);
+                return Mathf.Clamp(lane, 0, laneCount - 1);
             }
 
-            // Fallback: chia đều màn hình
-            if (laneCount <= 0) return 0;
-            float zoneWidth = Screen.width / (float)laneCount;
-            int lane = Mathf.FloorToInt(screenPos.x / zoneWidth);
-            return Mathf.Clamp(lane, 0, laneCount - 1);
+            Camera cam = Camera.main;
+            if (cam == null) return -1;
+
+            // Ray từ camera xuyên qua vị trí chạm
+            Ray ray = cam.ScreenPointToRay(screenPos);
+
+            // Lấy TẤT CẢ collider trên tia (không chỉ collider đầu tiên)
+            RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(ray, Mathf.Infinity, receptorLayer);
+            if (hits == null || hits.Length == 0) return -1;
+
+            // Trong các hit, chọn receptor collider gần camera nhất
+            int bestLane = -1;
+            float bestDist = float.MaxValue;
+            foreach (var hit in hits)
+            {
+                if (hit.collider == null) continue;
+                for (int i = 0; i < cachedReceptorColliders.Length; i++)
+                {
+                    if (cachedReceptorColliders[i] == null) continue;
+                    if (hit.collider != cachedReceptorColliders[i]) continue;
+                    if (hit.distance < bestDist)
+                    {
+                        bestDist = hit.distance;
+                        bestLane = i;
+                    }
+                    break;
+                }
+            }
+
+            if (logTouches && bestLane >= 0)
+                Debug.Log($"[InputHandler] Touch {screenPos} -> lane {bestLane}");
+
+            return bestLane;
         }
     }
 }
