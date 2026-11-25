@@ -97,6 +97,9 @@ namespace Luan.NapTien
         [SerializeField] private Image imgVietQRSelect;
         [SerializeField] private Image imgZaloPaySelect;
         [SerializeField] private Image imgMoMoSelect;
+        [SerializeField] private TMP_Text txtVietQR;
+        [SerializeField] private TMP_Text txtZaloPay;
+        [SerializeField] private TMP_Text txtMoMo;
 
         [Header("Payment Channel Sprites")]
         [SerializeField] private Sprite tabChannelNormal;
@@ -123,11 +126,25 @@ namespace Luan.NapTien
         [SerializeField] private Button confirmPaymentBtn;
         [SerializeField] private Button closePaymentModalBtn;
 
+        [Header("--- Payment Live Status Box (Replaces manual button) ---")]
+        [SerializeField] private GameObject paymentStatusPanel;
+        [SerializeField] private TMP_Text paymentStatusText;
+        [SerializeField] private Image paymentStatusBg;
+
         [Header("--- Success Notification / Toast ---")]
         [SerializeField] private GameObject successToast;
         [SerializeField] private RectTransform successToastDialog;
+        [SerializeField] private TMP_Text successTitleText;
+        [SerializeField] private Image successIcon;
+        [SerializeField] private Image successAura;
+        [SerializeField] private TMP_Text successPackNameText;
+        [SerializeField] private TMP_Text successAmountText;
+        [SerializeField] private TMP_Text successBonusText;
         [SerializeField] private TMP_Text successMessageText;
         [SerializeField] private Button successOkButton;
+        [SerializeField] private Button successOverlayButton;
+        [SerializeField] private Sprite auraCyan;
+        [SerializeField] private Sprite auraGold;
 
         [Header("--- Toast Copy ---")]
         [SerializeField] private GameObject copyToast;
@@ -158,9 +175,10 @@ namespace Luan.NapTien
 
             if (copyAccountNumBtn != null) copyAccountNumBtn.onClick.AddListener(OnCopyAccountNumClicked);
             if (copyContentBtn != null) copyContentBtn.onClick.AddListener(OnCopyContentClicked);
-            if (confirmPaymentBtn != null) confirmPaymentBtn.onClick.AddListener(OnConfirmPaymentClicked);
+            // Manual confirm button removed: System relies 100% on PayOS API live payment detection
             if (closePaymentModalBtn != null) closePaymentModalBtn.onClick.AddListener(ClosePaymentModal);
             if (successOkButton != null) successOkButton.onClick.AddListener(CloseSuccessToast);
+            if (successOverlayButton != null) successOverlayButton.onClick.AddListener(CloseSuccessToast);
 
             if (paymentModal != null) paymentModal.SetActive(false);
             if (successToast != null) successToast.SetActive(false);
@@ -329,6 +347,7 @@ namespace Luan.NapTien
             if (paymentModal == null || _selectedPack == null) return;
 
             paymentModal.SetActive(true);
+            SetStatusWaiting();
 
             if (modalPackIcon != null && _selectedPack.iconSprite != null)
             {
@@ -377,6 +396,8 @@ namespace Luan.NapTien
         public void ClosePaymentModal()
         {
             StopTimer();
+            if (_statusAnimRoutine != null) { StopCoroutine(_statusAnimRoutine); _statusAnimRoutine = null; }
+            if (_onlineSuccessRoutine != null) { StopCoroutine(_onlineSuccessRoutine); _onlineSuccessRoutine = null; }
             if (paymentGateway != null) paymentGateway.StopPolling();
             if (paymentModal != null) paymentModal.SetActive(false);
             if (Luan.MainMenu.AudioManager.Instance != null)
@@ -397,6 +418,15 @@ namespace Luan.NapTien
             if (imgVietQRSelect != null) imgVietQRSelect.gameObject.SetActive(channel == "VietQR");
             if (imgZaloPaySelect != null) imgZaloPaySelect.gameObject.SetActive(channel == "ZaloPay");
             if (imgMoMoSelect != null) imgMoMoSelect.gameObject.SetActive(channel == "MoMo");
+
+            // Text colors: Active channel is bright white, inactive is readable light silver
+            var tVQR = txtVietQR != null ? txtVietQR : btnVietQR?.GetComponentInChildren<TMP_Text>();
+            var tZalo = txtZaloPay != null ? txtZaloPay : btnZaloPay?.GetComponentInChildren<TMP_Text>();
+            var tMoMo = txtMoMo != null ? txtMoMo : btnMoMo?.GetComponentInChildren<TMP_Text>();
+
+            if (tVQR != null) tVQR.color = (channel == "VietQR") ? Color.white : new Color(0.82f, 0.88f, 0.98f, 0.95f);
+            if (tZalo != null) tZalo.color = (channel == "ZaloPay") ? Color.white : new Color(0.82f, 0.88f, 0.98f, 0.95f);
+            if (tMoMo != null) tMoMo.color = (channel == "MoMo") ? Color.white : new Color(0.82f, 0.88f, 0.98f, 0.95f);
 
             if (amountToPayText != null && _selectedPack != null)
             {
@@ -433,9 +463,84 @@ namespace Luan.NapTien
             }
         }
 
+        #region --- Payment Live Status State Machine ---
+        private Coroutine _statusAnimRoutine;
+        private Coroutine _onlineSuccessRoutine;
+
+        private void SetStatusWaiting()
+        {
+            if (_statusAnimRoutine != null) StopCoroutine(_statusAnimRoutine);
+            _statusAnimRoutine = StartCoroutine(StatusWaitingAnimRoutine());
+        }
+
+        private IEnumerator StatusWaitingAnimRoutine()
+        {
+            if (paymentStatusBg != null)
+            {
+                paymentStatusBg.color = new Color(0.06f, 0.12f, 0.22f, 0.95f);
+            }
+
+            int step = 0;
+            while (true)
+            {
+                if (paymentStatusText != null)
+                {
+                    string dots = new string('.', (step % 6) + 1);
+                    paymentStatusText.text = $"<color=#00FFE6><b>ĐANG CHỜ THANH TOÁN{dots}</b></color>";
+                }
+                step++;
+                yield return new WaitForSecondsRealtime(0.45f);
+            }
+        }
+
+        private void SetStatusPaid()
+        {
+            if (_statusAnimRoutine != null) { StopCoroutine(_statusAnimRoutine); _statusAnimRoutine = null; }
+            if (paymentStatusBg != null)
+            {
+                paymentStatusBg.color = new Color(0.04f, 0.35f, 0.18f, 0.98f); // Radiant Emerald Green
+            }
+            if (paymentStatusText != null)
+            {
+                paymentStatusText.text = "<color=#00FF88><b>ĐÃ THANH TOÁN THÀNH CÔNG</b></color>";
+            }
+        }
+
+        private void SetStatusExpired()
+        {
+            if (_statusAnimRoutine != null) { StopCoroutine(_statusAnimRoutine); _statusAnimRoutine = null; }
+            if (paymentStatusBg != null)
+            {
+                paymentStatusBg.color = new Color(0.35f, 0.06f, 0.10f, 0.98f); // Crimson Red
+            }
+            if (paymentStatusText != null)
+            {
+                paymentStatusText.text = "<color=#FF4466><b>GIAO DỊCH ĐÃ HẾT HẠN</b></color>";
+            }
+        }
+        #endregion
+
         private void OnOnlinePaymentSuccess(PaymentOrderInfo order)
         {
+            if (_onlineSuccessRoutine != null) StopCoroutine(_onlineSuccessRoutine);
+            _onlineSuccessRoutine = StartCoroutine(OnlineSuccessTransitionRoutine(order));
+        }
+
+        private IEnumerator OnlineSuccessTransitionRoutine(PaymentOrderInfo order)
+        {
+            SetStatusPaid();
+            StopTimer();
+
+            if (Luan.MainMenu.AudioManager.Instance != null)
+            {
+                Luan.MainMenu.AudioManager.Instance.PlayShopPurchase();
+            }
+
+            // Đợi 1.2s để người dùng nhìn thấy rõ bảng trạng thái chuyển sang xanh lá "ĐÃ NHẬN TIỀN THÀNH CÔNG"
+            yield return new WaitForSecondsRealtime(1.2f);
+
             DeliverPackRewards(_selectedPack, "ONLINE");
+            _onlineSuccessRoutine = null;
         }
 
         private void DeliverPackRewards(TopUpPackData pack, string source)
@@ -471,7 +576,7 @@ namespace Luan.NapTien
             }
 
             ClosePaymentModal();
-            ShowSuccessToast(msg);
+            ShowSuccessModal(pack, source);
         }
 
         private void OnConfirmPaymentClicked()
@@ -515,10 +620,75 @@ namespace Luan.NapTien
 
 
 
-        private void ShowSuccessToast(string msg)
+        public void ShowSuccessModal(TopUpPackData pack, string source = "")
         {
             if (successToast == null) return;
-            if (successMessageText != null) successMessageText.text = msg;
+
+            if (successTitleText != null)
+            {
+                successTitleText.text = "GIAO DỊCH THÀNH CÔNG!";
+            }
+
+            if (successIcon != null)
+            {
+                if (pack != null && pack.iconSprite != null)
+                {
+                    successIcon.sprite = pack.iconSprite;
+                    successIcon.enabled = true;
+                }
+            }
+
+            if (successAura != null)
+            {
+                if (pack != null && pack.currencyType == CurrencyType.Coin)
+                {
+                    if (auraGold != null) successAura.sprite = auraGold;
+                    successAura.color = new Color(1f, 0.85f, 0.2f, 0.35f);
+                }
+                else
+                {
+                    if (auraCyan != null) successAura.sprite = auraCyan;
+                    successAura.color = new Color(0f, 0.85f, 1f, 0.35f);
+                }
+            }
+
+            if (successPackNameText != null)
+            {
+                successPackNameText.text = pack != null && !string.IsNullOrEmpty(pack.title) ? pack.title.ToUpper() : "GÓI NẠP TIỀN";
+            }
+
+            if (successAmountText != null)
+            {
+                if (pack != null)
+                {
+                    int total = pack.mainAmount + pack.bonusAmount;
+                    string unit = pack.currencyType == CurrencyType.Coin ? "VÀNG" : "KIM CƯƠNG";
+                    string hexColor = pack.currencyType == CurrencyType.Coin ? "#FFD700" : "#00FFE6";
+                    successAmountText.text = $"<color={hexColor}>+{total:N0} {unit}</color>";
+                }
+                else
+                {
+                    successAmountText.text = string.Empty;
+                }
+            }
+
+            if (successBonusText != null)
+            {
+                if (pack != null && pack.bonusTickets > 0)
+                {
+                    successBonusText.gameObject.SetActive(true);
+                    successBonusText.text = $"<color=#FFD700>+{pack.bonusTickets} VÉ QUAY MAY MẮN</color>";
+                }
+                else
+                {
+                    successBonusText.gameObject.SetActive(false);
+                }
+            }
+
+            if (successMessageText != null)
+            {
+                successMessageText.text = "✓ Đã cộng trực tiếp vào ví của bạn";
+            }
 
             successToast.SetActive(true);
             if (successToastDialog != null)
@@ -528,6 +698,28 @@ namespace Luan.NapTien
 
             if (_toastRoutine != null) StopCoroutine(_toastRoutine);
             _toastRoutine = StartCoroutine(AutoCloseSuccessToastRoutine());
+        }
+
+        public void ShowSuccessToast(string msg)
+        {
+            if (_selectedPack != null)
+            {
+                ShowSuccessModal(_selectedPack);
+            }
+            else
+            {
+                if (successToast == null) return;
+                if (successMessageText != null) successMessageText.text = msg;
+
+                successToast.SetActive(true);
+                if (successToastDialog != null)
+                {
+                    StartCoroutine(PopDialogRoutine(successToastDialog));
+                }
+
+                if (_toastRoutine != null) StopCoroutine(_toastRoutine);
+                _toastRoutine = StartCoroutine(AutoCloseSuccessToastRoutine());
+            }
         }
 
         public void CloseSuccessToast()
@@ -542,7 +734,7 @@ namespace Luan.NapTien
 
         private IEnumerator AutoCloseSuccessToastRoutine()
         {
-            yield return new WaitForSecondsRealtime(3.5f);
+            yield return new WaitForSecondsRealtime(6f);
             if (successToast != null) successToast.SetActive(false);
             _toastRoutine = null;
         }
@@ -570,12 +762,14 @@ namespace Luan.NapTien
                 int sec = remaining % 60;
                 if (timerCountdownText != null)
                 {
-                    timerCountdownText.text = $"Hiệu lực: <color=#00FFE6>{min:D2}:{sec:D2}</color>";
+                    timerCountdownText.text = $"<color=#FFD700>Hiệu lực:</color> <color=#00FFE6>{min:D2}:{sec:D2}</color>";
                 }
                 yield return new WaitForSecondsRealtime(1f);
                 remaining--;
             }
             if (timerCountdownText != null) timerCountdownText.text = "<color=#FF4444>Hết hạn</color>";
+            if (paymentGateway != null) paymentGateway.StopPolling();
+            SetStatusExpired();
         }
 
         private IEnumerator PopDialogRoutine(RectTransform target)
